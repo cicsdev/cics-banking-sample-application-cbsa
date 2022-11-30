@@ -24,7 +24,7 @@ These instructions detail the steps required to:
 
 ### Assumptions: 
 
--   A CICS region (running CIC TS 5.3 or later) is available, and the
+-   A CICS region (running CIC TS 5.4 or later) is available, and the
     CBSA base/COBOL installation has been performed.
 
 -   A Db2 subsystem (v12 or greater) is available.

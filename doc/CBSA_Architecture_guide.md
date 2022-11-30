@@ -30,7 +30,7 @@ The architecture diagram for base/COBOL looks as follows:
 
 The base/COBOL installation assumes that the installer has:
 
--   A CICS region (running CICS TS 5.3 or greater)
+-   A CICS region (running CICS TS 5.4 or greater)
 
 -   A Db2 subsystem (v12 or greater)
 

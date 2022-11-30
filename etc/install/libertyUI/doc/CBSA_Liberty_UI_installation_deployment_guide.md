@@ -9,7 +9,7 @@
 > This document is for the Liberty UI deployment/installation. It
 > assumes that the installer already has:
 
--   a CICS region (running CICS TS 5.3 or greater)
+-   a CICS region (running CICS TS 5.4 or greater)
 
 -   a Db2 subsystem (v12 or greater)
 
