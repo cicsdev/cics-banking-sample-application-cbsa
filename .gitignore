@@ -3,6 +3,7 @@
 *.jar
 *.war
 copyright.json
-**/bin
+**/src/webui/bin
 **/.vscode
 **/.idea
+**/.settings
