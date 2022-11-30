@@ -37,7 +37,7 @@ The fourth interface is the **Payment interface**:
 > ![Payment Landing Page](./doc/images/Architecture/Payment_Landing_page_small.jpg)
 </br>
 
-There is also a **RESTful API** please refer to the [CBSA RESTful API Guide](https://github.com/cicsdev/cics-banking-sample-application-cbsa/etc/usage/springBoot/doc/CBSA_Restful_API_guide.md) for more detailed information.
+There is also a **RESTful API** please refer to the [CBSA RESTful API Guide](https://github.com/cicsdev/cics-banking-sample-application-cbsa/tree/main/etc/usage/springBoot/doc/CBSA_Restful_API_guide.md) for more detailed information.
 </br>
 
 The interfaces are designed to exploit the underlying banking functionality, which includes functions to:
@@ -49,7 +49,7 @@ The interfaces are designed to exploit the underlying banking functionality, whi
 ## Architecture
 ![Payment and CS architecture diagram2](./doc/images/Architecture/Payment_and_Customer_Services_UI_CBSA_architecture_diagram2.jpg)
 
-> Please refer to the [Architecture documentation](https://github.com/cicsdev/cics-banking-sample-application-cbsa/doc/CBSA_Architecture_guide.md) for more detailed information.
+> Please refer to the [Architecture documentation](https://github.com/cicsdev/cics-banking-sample-application-cbsa/tree/main/doc/CBSA_Architecture_guide.md) for more detailed information.
 
 ## Requirements
 - An existing CICS TS region running at V5.4 or later
@@ -63,7 +63,7 @@ The interfaces are designed to exploit the underlying banking functionality, whi
 
 ## Downloading
 - Clone the repository using your IDEs support, such as the Eclipse Git plugin
-- **or**, download the sample as a [ZIP](https://github.com/cicsdev/cics-banking-sample-application-cbsa/archive/main.zip) and the follow the installation instructions (see Installing).
+- **or**, download the sample as a [ZIP] from the release page and then follow the installation instructions (see Installing).
 
 >*Tip: Eclipse Git provides an 'Import existing Projects' check-box when cloning a repository.*
 
