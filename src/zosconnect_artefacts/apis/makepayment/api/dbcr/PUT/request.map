@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping"
+	domainID="com.ibm.msl.mapping.xml"
+	domainIDExtension="zosconnect"
+	targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/PUT"
+	version="8.0.5.0"
+	xmlns:map="http://www.ibm.com/zosConnect/2.0/mapping/PUT"
+	jsonWrapped="false"
+	 
+	>
+
+	<inlinedXMLSchema targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/PUT"><![CDATA[
+
+	<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/PUT" xmlns:tns="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/PUT">
+  <xsd:element name="PAYDBCR" type="tns:PAYDBCR"/>
+  <xsd:complexType name="PAYDBCR">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="COMM_ACCNO">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="8"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="COMM_AMT">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:decimal">
+            <xsd:minInclusive value="-9999999999.99"/>
+            <xsd:maxInclusive value="9999999999.99"/>
+            <xsd:fractionDigits value="2"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="COMM_SORTC">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:integer">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="999999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="COMM_AV_BAL">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:decimal">
+            <xsd:minInclusive value="-9999999999.99"/>
+            <xsd:maxInclusive value="9999999999.99"/>
+            <xsd:fractionDigits value="2"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="COMM_ACT_BAL">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:decimal">
+            <xsd:minInclusive value="-9999999999.99"/>
+            <xsd:maxInclusive value="9999999999.99"/>
+            <xsd:fractionDigits value="2"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="COMM_ORIGIN" type="tns:COMM_ORIGIN"/>
+      <xsd:element minOccurs="0" name="COMM_SUCCESS">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="COMM_FAIL_CODE">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="COMM_ORIGIN">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="COMM_APPLID">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="8"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="COMM_USERID">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="8"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="COMM_FACILITY_NAME">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="8"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="COMM_NETWRK_ID">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="8"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="COMM_FACILTYPE">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:integer">
+            <xsd:minInclusive value="-99999999"/>
+            <xsd:maxInclusive value="99999999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="FILL_0">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+
+	]]></inlinedXMLSchema>
+
+	<inlinedXMLSchema targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/HTTP/input/PUT"><![CDATA[
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+      targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/HTTP/input/PUT"
+      xmlns:body="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/PUT"
+      xmlns:tns="http://www.ibm.com/zosConnect/2.0/mapping/HTTP/input/PUT">
+
+      <xsd:import namespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/PUT" schemaLocation="../schema_0.xsd"/>
+
+      <xsd:element name="HTTPRequest" type="tns:HTTPRequestType"/>
+
+      <xsd:complexType name="HTTPRequestType">
+        <xsd:sequence>
+          <xsd:element name="Headers" type="tns:HeadersType"/>
+          <xsd:element name="PathParameters" type="tns:PathParametersType"/>
+          <xsd:element name="QueryParameters" type="tns:QueryParametersType"/>
+          <xsd:element name="Body" type="tns:BodyType"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="HeadersType">
+        <xsd:sequence>
+        	<xsd:element maxOccurs="1" minOccurs="0" name="Authorization" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="PathParametersType">
+        <xsd:sequence>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="QueryParametersType">
+        <xsd:sequence>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="BodyType">
+        <xsd:sequence>
+          <xsd:element ref="body:PAYDBCR"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+
+	]]></inlinedXMLSchema>
+
+    <input inlinedXMLSchema="true" path="../schema_1.xsd" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/HTTP/input/PUT" var="rootInput"/>
+    <output inlinedXMLSchema="true" path="../schema_0.xsd" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/PUT" var="rootOutput"/>
+    <namespaces>
+        <namespace kind="supplement" prefix="in" uri="http://www.ibm.com/zosConnect/2.0/mapping/HTTP/input/PUT"/>
+        <namespace kind="supplement" prefix="out" uri="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/PUT"/>
+    </namespaces>
+    <mappingDeclaration name="PUT.dbcr">
+        <input namespace="http://www.ibm.com/zosConnect/2.0/mapping/HTTP/input/PUT" path="$rootInput/HTTPRequest"/>
+        <output namespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/PUT" path="$rootOutput/PAYDBCR"/>
+        <passthrough>
+            <input path="Body/PAYDBCR"/>
+            <output path="."/>
+            <updates>
+            </updates>
+        </passthrough>
+    </mappingDeclaration>
+
+</mappingRoot>

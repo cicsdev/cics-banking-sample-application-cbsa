@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="zosconnect" jsonWrapped="false" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/GET" version="8.0.5.0" xmlns:map="http://www.ibm.com/zosConnect/2.0/mapping/GET">
+    <inlinedXMLSchema targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/GET"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/GET" xmlns:tns="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/GET">   
+  <xsd:element name="INQCUSTZ" type="tns:INQCUSTZ"/>   
+  <xsd:complexType name="INQCUSTZ">   
+    <xsd:sequence>   
+      <xsd:element minOccurs="0" name="INQCUST_EYE">   
+        <xsd:simpleType>   
+          <xsd:restriction base="xsd:string">   
+            <xsd:maxLength value="4"/>   
+          </xsd:restriction>   
+        </xsd:simpleType>   
+      </xsd:element>   
+      <xsd:element minOccurs="0" name="INQCUST_SCODE">   
+        <xsd:simpleType>   
+          <xsd:restriction base="xsd:string">   
+            <xsd:maxLength value="6"/>   
+          </xsd:restriction>   
+        </xsd:simpleType>   
+      </xsd:element>   
+      <xsd:element minOccurs="0" name="INQCUST_CUSTNO">   
+        <xsd:simpleType>   
+          <xsd:restriction base="xsd:integer">   
+            <xsd:minInclusive value="0"/>   
+            <xsd:maxInclusive value="9999999999"/>   
+          </xsd:restriction>   
+        </xsd:simpleType>   
+      </xsd:element>   
+      <xsd:element minOccurs="0" name="INQCUST_NAME">   
+        <xsd:simpleType>   
+          <xsd:restriction base="xsd:string">   
+            <xsd:maxLength value="60"/>   
+          </xsd:restriction>   
+        </xsd:simpleType>   
+      </xsd:element>   
+      <xsd:element minOccurs="0" name="INQCUST_ADDR">   
+        <xsd:simpleType>   
+          <xsd:restriction base="xsd:string">   
+            <xsd:maxLength value="160"/>   
+          </xsd:restriction>   
+        </xsd:simpleType>   
+      </xsd:element>   
+      <xsd:element minOccurs="0" name="INQCUST_DOB" type="tns:INQCUST_DOB"/>   
+      <xsd:element minOccurs="0" name="INQCUST_CREDIT_SCORE">   
+        <xsd:simpleType>   
+          <xsd:restriction base="xsd:integer">   
+            <xsd:minInclusive value="0"/>   
+            <xsd:maxInclusive value="999"/>   
+          </xsd:restriction>   
+        </xsd:simpleType>   
+      </xsd:element>   
+      <xsd:element minOccurs="0" name="INQCUST_CS_REVIEW_DT" type="tns:INQCUST_CS_REVIEW_DT"/>   
+      <xsd:element minOccurs="0" name="INQCUST_INQ_SUCCESS">   
+        <xsd:simpleType>   
+          <xsd:restriction base="xsd:string">   
+            <xsd:maxLength value="1"/>   
+          </xsd:restriction>   
+        </xsd:simpleType>   
+      </xsd:element>   
+      <xsd:element minOccurs="0" name="INQCUST_INQ_FAIL_CD">   
+        <xsd:simpleType>   
+          <xsd:restriction base="xsd:string">   
+            <xsd:maxLength value="1"/>   
+          </xsd:restriction>   
+        </xsd:simpleType>   
+      </xsd:element>   
+      <xsd:element minOccurs="0" name="INQCUST_PCB_POINTER">   
+        <xsd:simpleType>   
+          <xsd:restriction base="xsd:string">   
+            <xsd:maxLength value="4"/>   
+          </xsd:restriction>   
+        </xsd:simpleType>   
+      </xsd:element>   
+    </xsd:sequence>   
+  </xsd:complexType>   
+  <xsd:complexType name="INQCUST_DOB">   
+    <xsd:sequence>   
+      <xsd:element minOccurs="0" name="INQCUST_DOB_DD">   
+        <xsd:simpleType>   
+          <xsd:restriction base="xsd:integer">   
+            <xsd:minInclusive value="0"/>   
+            <xsd:maxInclusive value="99"/>   
+          </xsd:restriction>   
+        </xsd:simpleType>   
+      </xsd:element>   
+      <xsd:element minOccurs="0" name="INQCUST_DOB_MM">   
+        <xsd:simpleType>   
+          <xsd:restriction base="xsd:integer">   
+            <xsd:minInclusive value="0"/>   
+            <xsd:maxInclusive value="99"/>   
+          </xsd:restriction>   
+        </xsd:simpleType>   
+      </xsd:element>   
+      <xsd:element minOccurs="0" name="INQCUST_DOB_YYYY">   
+        <xsd:simpleType>   
+          <xsd:restriction base="xsd:integer">   
+            <xsd:minInclusive value="0"/>   
+            <xsd:maxInclusive value="9999"/>   
+          </xsd:restriction>   
+        </xsd:simpleType>   
+      </xsd:element>   
+    </xsd:sequence>   
+  </xsd:complexType>   
+  <xsd:complexType name="INQCUST_CS_REVIEW_DT">   
+    <xsd:sequence>   
+      <xsd:element minOccurs="0" name="INQCUST_CS_REVIEW_DD">   
+        <xsd:simpleType>   
+          <xsd:restriction base="xsd:integer">   
+            <xsd:minInclusive value="0"/>   
+            <xsd:maxInclusive value="99"/>   
+          </xsd:restriction>   
+        </xsd:simpleType>   
+      </xsd:element>   
+      <xsd:element minOccurs="0" name="INQCUST_CS_REVIEW_MM">   
+        <xsd:simpleType>   
+          <xsd:restriction base="xsd:integer">   
+            <xsd:minInclusive value="0"/>   
+            <xsd:maxInclusive value="99"/>   
+          </xsd:restriction>   
+        </xsd:simpleType>   
+      </xsd:element>   
+      <xsd:element minOccurs="0" name="INQCUST_CS_REVIEW_YYYY">   
+        <xsd:simpleType>   
+          <xsd:restriction base="xsd:integer">   
+            <xsd:minInclusive value="0"/>   
+            <xsd:maxInclusive value="9999"/>   
+          </xsd:restriction>   
+        </xsd:simpleType>   
+      </xsd:element>   
+    </xsd:sequence>   
+  </xsd:complexType>   
+</xsd:schema>]]></inlinedXMLSchema>
+    <inlinedXMLSchema targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/HTTP/input/GET"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/HTTP/input/GET" xmlns:body="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/GET" xmlns:tns="http://www.ibm.com/zosConnect/2.0/mapping/HTTP/input/GET">   
+   
+      <xsd:import namespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/GET" schemaLocation="../schema_0.xsd"/>   
+   
+      <xsd:element name="HTTPRequest" type="tns:HTTPRequestType"/>   
+   
+      <xsd:complexType name="HTTPRequestType">   
+        <xsd:sequence>   
+          <xsd:element name="Headers" type="tns:HeadersType"/>   
+          <xsd:element name="PathParameters" type="tns:PathParametersType"/>   
+          <xsd:element name="QueryParameters" type="tns:QueryParametersType"/>   
+          <xsd:element name="Body" type="tns:BodyType"/>   
+        </xsd:sequence>   
+      </xsd:complexType>   
+   
+      <xsd:complexType name="HeadersType">   
+        <xsd:sequence>   
+        	<xsd:element maxOccurs="1" minOccurs="0" name="Authorization" type="xsd:string"/>   
+        </xsd:sequence>   
+      </xsd:complexType>   
+   
+      <xsd:complexType name="PathParametersType">   
+        <xsd:sequence>   
+            <xsd:element maxOccurs="1" minOccurs="1" name="custno" type="xsd:string">  
+        <xsd:annotation/>  
+      </xsd:element>   
+        </xsd:sequence>   
+      </xsd:complexType>   
+   
+      <xsd:complexType name="QueryParametersType">   
+        <xsd:sequence>   
+        </xsd:sequence>   
+      </xsd:complexType>   
+   
+      <xsd:complexType name="BodyType">   
+        <xsd:sequence>   
+          <xsd:element ref="body:INQCUSTZ"/>   
+        </xsd:sequence>   
+      </xsd:complexType>   
+    </xsd:schema>]]></inlinedXMLSchema>
+    <input inlinedXMLSchema="true" path="../schema_1.xsd" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/HTTP/input/GET" var="rootInput"/>
+    <output inlinedXMLSchema="true" path="../schema_0.xsd" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/GET" var="rootOutput"/>
+    <namespaces>
+        <namespace kind="supplement" prefix="in" uri="http://www.ibm.com/zosConnect/2.0/mapping/HTTP/input/GET"/>
+        <namespace kind="supplement" prefix="out" uri="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/GET"/>
+    </namespaces>
+    <mappingDeclaration name="GET.enquiry.{custno}">
+        <input namespace="http://www.ibm.com/zosConnect/2.0/mapping/HTTP/input/GET" path="$rootInput/HTTPRequest"/>
+        <output namespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/GET" path="$rootOutput/INQCUSTZ"/>
+        <passthrough>
+            <input path="Body/INQCUSTZ"/>
+            <output path="."/>
+            <updates>
+                <move>
+                    <input httpIn="path" path="PathParameters/custno" shape="1" xsdBuiltInOrDerivedSimpleType="http://www.w3.org/2001/XMLSchema:string"/>
+                    <output httpIn="body" path="INQCUST_CUSTNO" shape="1,2" xsdBuiltInOrDerivedSimpleType="http://www.w3.org/2001/XMLSchema:integer"/>
+                </move>
+            </updates>
+        </passthrough>
+    </mappingDeclaration>
+</mappingRoot>

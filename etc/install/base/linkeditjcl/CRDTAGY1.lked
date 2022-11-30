@@ -1,0 +1,10 @@
+* Licensed Materials - Property of IBM
+*
+* (c) Copyright IBM Corp. 2017,2020.
+*
+* US Government Users Restricted Rights - Use, duplication or 
+* disclosure restricted by GSA ADP Schedule Contract 
+* with IBM Corp.
+    INCLUDE CBSAMOD(CRDTAGY1)
+    ENTRY CRDTAGY1
+    NAME CRDTAGY1(R)

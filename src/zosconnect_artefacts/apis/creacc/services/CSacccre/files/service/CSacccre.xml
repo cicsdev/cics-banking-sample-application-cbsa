@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+
+        Copyright contributors to the CICS Banking Sample Application (CBSA) project
+
+-->
+<service xmlns:ns2="http://www.ibm.com/ims/Transaction">
+    <shallow>true</shallow>
+    <serviceName>CSacccre</serviceName>
+    <serviceType>ims-rest</serviceType>
+    <resourceType>TRAN</resourceType>
+    <status>1</status>
+    <conversionType>3</conversionType>
+    <dataProtocol>0</dataProtocol>
+    <serviceInputInterface>
+        <metadataName>CREACC.si</metadataName>
+        <serviceInterface>
+            <interface>
+                <segment segmentName="COMMAREA">
+                    <interfaceField included="Y" fieldName="CREACC">
+                        <field included="Y" fieldName="COMM_EYECATCHER"/>
+                        <field included="Y" fieldName="COMM_CUSTNO"/>
+                        <field included="Y" fieldName="COMM_KEY">
+                            <field included="Y" fieldName="COMM_SORTCODE"/>
+                            <field included="Y" fieldName="COMM_NUMBER"/>
+                        </field>
+                        <field included="Y" fieldName="COMM_ACC_TYPE"/>
+                        <field included="Y" fieldName="COMM_INT_RT"/>
+                        <field included="Y" fieldName="COMM_OPENED"/>
+                        <field included="N" fieldName="COMM_OPENED_GROUP">
+                            <field included="N" fieldName="COMM_OPENED_DAY"/>
+                            <field included="N" fieldName="COMM_OPENED_MONTH"/>
+                            <field included="N" fieldName="COMM_OPENED_YEAR"/>
+                        </field>
+                        <field included="Y" fieldName="COMM_OVERDR_LIM"/>
+                        <field included="Y" fieldName="COMM_LAST_STMT_DT"/>
+                        <field included="N" fieldName="COMM_LAST_STMNT_GROUP">
+                            <field included="N" fieldName="COMM_LASTST_DAY"/>
+                            <field included="N" fieldName="COMM_LASTST_MONTH"/>
+                            <field included="N" fieldName="COMM_LASTST_YEAR"/>
+                        </field>
+                        <field included="Y" fieldName="COMM_NEXT_STMT_DT"/>
+                        <field included="N" fieldName="COMM_NEXT_STMNT_GROUP">
+                            <field included="N" fieldName="COMM_NEXTST_DAY"/>
+                            <field included="N" fieldName="COMM_NEXTST_MONTH"/>
+                            <field included="N" fieldName="COMM_NEXTST_YEAR"/>
+                        </field>
+                        <field included="Y" fieldName="COMM_AVAIL_BAL"/>
+                        <field included="Y" fieldName="COMM_ACT_BAL"/>
+                        <field included="Y" fieldName="COMM_SUCCESS"/>
+                        <field included="Y" fieldName="COMM_FAIL_CODE"/>
+                    </interfaceField>
+                </segment>
+            </interface>
+        </serviceInterface>
+        <version>0</version>
+    </serviceInputInterface>
+    <serviceOutputInterface>
+        <metadataName>CREACC.si</metadataName>
+        <serviceInterface>
+            <interface>
+                <segment segmentName="COMMAREA">
+                    <interfaceField included="Y" fieldName="CREACC">
+                        <field included="Y" fieldName="COMM_EYECATCHER"/>
+                        <field included="Y" fieldName="COMM_CUSTNO"/>
+                        <field included="Y" fieldName="COMM_KEY">
+                            <field included="Y" fieldName="COMM_SORTCODE"/>
+                            <field included="Y" fieldName="COMM_NUMBER"/>
+                        </field>
+                        <field included="Y" fieldName="COMM_ACC_TYPE"/>
+                        <field included="Y" fieldName="COMM_INT_RT"/>
+                        <field included="Y" fieldName="COMM_OPENED"/>
+                        <field included="N" fieldName="COMM_OPENED_GROUP">
+                            <field included="N" fieldName="COMM_OPENED_DAY"/>
+                            <field included="N" fieldName="COMM_OPENED_MONTH"/>
+                            <field included="N" fieldName="COMM_OPENED_YEAR"/>
+                        </field>
+                        <field included="Y" fieldName="COMM_OVERDR_LIM"/>
+                        <field included="Y" fieldName="COMM_LAST_STMT_DT"/>
+                        <field included="N" fieldName="COMM_LAST_STMNT_GROUP">
+                            <field included="N" fieldName="COMM_LASTST_DAY"/>
+                            <field included="N" fieldName="COMM_LASTST_MONTH"/>
+                            <field included="N" fieldName="COMM_LASTST_YEAR"/>
+                        </field>
+                        <field included="Y" fieldName="COMM_NEXT_STMT_DT"/>
+                        <field included="N" fieldName="COMM_NEXT_STMNT_GROUP">
+                            <field included="N" fieldName="COMM_NEXTST_DAY"/>
+                            <field included="N" fieldName="COMM_NEXTST_MONTH"/>
+                            <field included="N" fieldName="COMM_NEXTST_YEAR"/>
+                        </field>
+                        <field included="Y" fieldName="COMM_AVAIL_BAL"/>
+                        <field included="Y" fieldName="COMM_ACT_BAL"/>
+                        <field included="Y" fieldName="COMM_SUCCESS"/>
+                        <field included="Y" fieldName="COMM_FAIL_CODE"/>
+                    </interfaceField>
+                </segment>
+            </interface>
+        </serviceInterface>
+        <version>0</version>
+    </serviceOutputInterface>
+    <applicationDataStructureType>Block</applicationDataStructureType>
+    <messageVisitorRuntimeType>CICS_COMMAREA</messageVisitorRuntimeType>
+    <ccsid>IBM037</ccsid>
+    <totalExecCount>0</totalExecCount>
+    <failedCount>0</failedCount>
+    <trancodeOverride>CREACC</trancodeOverride>
+    <trimOutputLeadingWhitespace>false</trimOutputLeadingWhitespace>
+    <trimOutputTrailingWhitespace>true</trimOutputTrailingWhitespace>
+    <escapeOutputControlCharacters>false</escapeOutputControlCharacters>
+    <initializeInputFields>false</initializeInputFields>
+    <omitOutputFieldsByValue>false</omitOutputFieldsByValue>
+    <omitOutputFieldsByValueByte>0x00</omitOutputFieldsByValueByte>
+    <omitOutputEmptyTags>false</omitOutputEmptyTags>
+    <enforceMinArrayOccurrence>false</enforceMinArrayOccurrence>
+    <enforceMinArrayOccurrenceResponse>false</enforceMinArrayOccurrenceResponse>
+    <ldsStartsWithLLZZTRANCODE>false</ldsStartsWithLLZZTRANCODE>
+    <ldsStartsWithLLZZ>false</ldsStartsWithLLZZ>
+</service>

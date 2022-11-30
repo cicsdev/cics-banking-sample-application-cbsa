@@ -1,0 +1,53 @@
+{
+  "type" : "object",
+  "properties" : {
+    "DELCUS" : {
+      "type" : "object",
+      "properties" : {
+        "COMM_EYE" : {
+          "maxLength" : 4,
+          "type" : "string"
+        },
+        "COMM_SCODE" : {
+          "maxLength" : 6,
+          "type" : "string"
+        },
+        "COMM_CUSTNO" : {
+          "maxLength" : 10,
+          "type" : "string"
+        },
+        "COMM_NAME" : {
+          "maxLength" : 60,
+          "type" : "string"
+        },
+        "COMM_ADDR" : {
+          "maxLength" : 160,
+          "type" : "string"
+        },
+        "COMM_DOB" : {
+          "minimum" : 0,
+          "maximum" : 99999999,
+          "type" : "integer"
+        },
+        "COMM_CREDIT_SCORE" : {
+          "minimum" : 0,
+          "maximum" : 999,
+          "type" : "integer"
+        },
+        "COMM_CS_REVIEW_DATE" : {
+          "minimum" : 0,
+          "maximum" : 99999999,
+          "type" : "integer"
+        },
+        "COMM_DEL_SUCCESS" : {
+          "maxLength" : 1,
+          "type" : "string"
+        },
+        "COMM_DEL_FAIL_CD" : {
+          "maxLength" : 1,
+          "type" : "string"
+        }
+      }
+    }
+  }
+}

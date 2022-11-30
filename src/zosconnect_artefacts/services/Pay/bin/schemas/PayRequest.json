@@ -1,0 +1,78 @@
+{
+  "type" : "object",
+  "properties" : {
+    "PAYDBCR" : {
+      "type" : "object",
+      "properties" : {
+        "COMM_ACCNO" : {
+          "maxLength" : 8,
+          "type" : "string"
+        },
+        "COMM_AMT" : {
+          "multipleOf" : 0.01,
+          "minimum" : -9999999999.99,
+          "maximum" : 9999999999.99,
+          "type" : "number",
+          "format" : "decimal"
+        },
+        "COMM_SORTC" : {
+          "minimum" : 0,
+          "maximum" : 999999,
+          "type" : "integer"
+        },
+        "COMM_AV_BAL" : {
+          "multipleOf" : 0.01,
+          "minimum" : -9999999999.99,
+          "maximum" : 9999999999.99,
+          "type" : "number",
+          "format" : "decimal"
+        },
+        "COMM_ACT_BAL" : {
+          "multipleOf" : 0.01,
+          "minimum" : -9999999999.99,
+          "maximum" : 9999999999.99,
+          "type" : "number",
+          "format" : "decimal"
+        },
+        "COMM_ORIGIN" : {
+          "type" : "object",
+          "properties" : {
+            "COMM_APPLID" : {
+              "maxLength" : 8,
+              "type" : "string"
+            },
+            "COMM_USERID" : {
+              "maxLength" : 8,
+              "type" : "string"
+            },
+            "COMM_FACILITY_NAME" : {
+              "maxLength" : 8,
+              "type" : "string"
+            },
+            "COMM_NETWRK_ID" : {
+              "maxLength" : 8,
+              "type" : "string"
+            },
+            "COMM_FACILTYPE" : {
+              "minimum" : -99999999,
+              "maximum" : 99999999,
+              "type" : "integer"
+            },
+            "FILL_0" : {
+              "maxLength" : 4,
+              "type" : "string"
+            }
+          }
+        },
+        "COMM_SUCCESS" : {
+          "maxLength" : 1,
+          "type" : "string"
+        },
+        "COMM_FAIL_CODE" : {
+          "maxLength" : 1,
+          "type" : "string"
+        }
+      }
+    }
+  }
+}

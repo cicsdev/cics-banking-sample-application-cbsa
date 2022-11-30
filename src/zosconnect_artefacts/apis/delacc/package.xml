@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+
+        Copyright contributors to the CICS Banking Sample Application (CBSA) project
+
+-->
+<zosConnectApi xmlns="http://www.ibm.com/zosConnect/2.0/zosConnectApi" id="delacc">
+    <apiSpec title="delacc" basePath="/delacc" description="Deletes an account on the CSaccdel Service" version="1.0.0">
+        <path relativePath="/remove/{accno}">
+            <method type="DELETE" zosConnectServiceRef="CSaccdel" httpXformFile="api/remove/{accno}/DELETE/mapping.xml" operationId="deleteCSaccdel"></method>
+        </path>
+        <apiDoc docType="SWAGGER">api-docs/swagger.json</apiDoc>
+    </apiSpec>
+</zosConnectApi>

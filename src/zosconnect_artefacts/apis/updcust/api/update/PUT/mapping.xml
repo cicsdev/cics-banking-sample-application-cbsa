@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+
+        Copyright contributors to the CICS Banking Sample Application (CBSA) project
+
+-->
+<ns2:ZosConnectServiceMapping xmlns:ns2="http://www.ibm.com/zosConnect/2.0/zosConnectServiceMapping" mappingSpecVersion="1.0">
+    <mappingContext basePath="/updcust" relativePath="/update" method="PUT" serviceName="CScustupd" defaultResponseCode="200"/>
+    <responseMessages code="200" description="OK"/>
+</ns2:ZosConnectServiceMapping>

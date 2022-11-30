@@ -1,0 +1,160 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "Creates a customer on the CScustcre Service",
+    "version" : "1.0.0",
+    "title" : "crecust"
+  },
+  "host" : "localhost:8080",
+  "basePath" : "/crecust",
+  "schemes" : [ "https", "http" ],
+  "consumes" : [ "application/json" ],
+  "produces" : [ "application/json" ],
+  "paths" : {
+    "/insert" : {
+      "post" : {
+        "tags" : [ "crecust" ],
+        "operationId" : "postCScustcre",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "postCScustcre_request",
+          "description" : "request body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/postCScustcre_request"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/postCScustcre_response_200"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "postCScustcre_request" : {
+      "type" : "object",
+      "properties" : {
+        "CRECUST" : {
+          "type" : "object",
+          "properties" : {
+            "COMM_EYECATCHER" : {
+              "type" : "string",
+              "maxLength" : 4
+            },
+            "COMM_KEY" : {
+              "type" : "object",
+              "properties" : {
+                "COMM_SORTCODE" : {
+                  "type" : "integer",
+                  "minimum" : 0,
+                  "maximum" : 999999
+                },
+                "COMM_NUMBER" : {
+                  "type" : "integer",
+                  "minimum" : 0,
+                  "maximum" : 9999999999
+                }
+              }
+            },
+            "COMM_NAME" : {
+              "type" : "string",
+              "maxLength" : 60
+            },
+            "COMM_ADDRESS" : {
+              "type" : "string",
+              "maxLength" : 160
+            },
+            "COMM_DATE_OF_BIRTH" : {
+              "type" : "integer",
+              "minimum" : 0,
+              "maximum" : 99999999
+            },
+            "COMM_CREDIT_SCORE" : {
+              "type" : "integer",
+              "minimum" : 0,
+              "maximum" : 999
+            },
+            "COMM_CS_REVIEW_DATE" : {
+              "type" : "integer",
+              "minimum" : 0,
+              "maximum" : 99999999
+            },
+            "COMM_SUCCESS" : {
+              "type" : "string",
+              "maxLength" : 1
+            },
+            "COMM_FAIL_CODE" : {
+              "type" : "string",
+              "maxLength" : 1
+            }
+          }
+        }
+      }
+    },
+    "postCScustcre_response_200" : {
+      "type" : "object",
+      "properties" : {
+        "CRECUST" : {
+          "type" : "object",
+          "properties" : {
+            "COMM_EYECATCHER" : {
+              "type" : "string",
+              "maxLength" : 4
+            },
+            "COMM_KEY" : {
+              "type" : "object",
+              "properties" : {
+                "COMM_SORTCODE" : {
+                  "type" : "integer",
+                  "minimum" : 0,
+                  "maximum" : 999999
+                },
+                "COMM_NUMBER" : {
+                  "type" : "integer",
+                  "minimum" : 0,
+                  "maximum" : 9999999999
+                }
+              }
+            },
+            "COMM_NAME" : {
+              "type" : "string",
+              "maxLength" : 60
+            },
+            "COMM_ADDRESS" : {
+              "type" : "string",
+              "maxLength" : 160
+            },
+            "COMM_DATE_OF_BIRTH" : {
+              "type" : "integer",
+              "minimum" : 0,
+              "maximum" : 99999999
+            },
+            "COMM_CREDIT_SCORE" : {
+              "type" : "integer",
+              "minimum" : 0,
+              "maximum" : 999
+            },
+            "COMM_CS_REVIEW_DATE" : {
+              "type" : "integer",
+              "minimum" : 0,
+              "maximum" : 99999999
+            },
+            "COMM_SUCCESS" : {
+              "type" : "string",
+              "maxLength" : 1
+            },
+            "COMM_FAIL_CODE" : {
+              "type" : "string",
+              "maxLength" : 1
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+
+        Copyright contributors to the CICS Banking Sample Application (CBSA) project
+
+-->
+<zosConnectApi xmlns="http://www.ibm.com/zosConnect/2.0/zosConnectApi" id="inqcustz">
+    <apiSpec title="inqcustz" basePath="/inqcustz" description="enquiry about a customer on the CScustenq service" version="1.0.0">
+        <path relativePath="/enquiry/{custno}">
+            <method type="GET" zosConnectServiceRef="CScustenq" httpXformFile="api/enquiry/{custno}/GET/mapping.xml" operationId="getCScustenq"></method>
+        </path>
+        <apiDoc docType="SWAGGER">api-docs/swagger.json</apiDoc>
+    </apiSpec>
+</zosConnectApi>

@@ -1,0 +1,88 @@
+{
+  "type" : "object",
+  "properties" : {
+    "INQCUSTZ" : {
+      "type" : "object",
+      "properties" : {
+        "INQCUST_EYE" : {
+          "maxLength" : 4,
+          "type" : "string"
+        },
+        "INQCUST_SCODE" : {
+          "maxLength" : 6,
+          "type" : "string"
+        },
+        "INQCUST_CUSTNO" : {
+          "minimum" : 0,
+          "maximum" : 9999999999,
+          "type" : "integer"
+        },
+        "INQCUST_NAME" : {
+          "maxLength" : 60,
+          "type" : "string"
+        },
+        "INQCUST_ADDR" : {
+          "maxLength" : 160,
+          "type" : "string"
+        },
+        "INQCUST_DOB" : {
+          "type" : "object",
+          "properties" : {
+            "INQCUST_DOB_DD" : {
+              "minimum" : 0,
+              "maximum" : 99,
+              "type" : "integer"
+            },
+            "INQCUST_DOB_MM" : {
+              "minimum" : 0,
+              "maximum" : 99,
+              "type" : "integer"
+            },
+            "INQCUST_DOB_YYYY" : {
+              "minimum" : 0,
+              "maximum" : 9999,
+              "type" : "integer"
+            }
+          }
+        },
+        "INQCUST_CREDIT_SCORE" : {
+          "minimum" : 0,
+          "maximum" : 999,
+          "type" : "integer"
+        },
+        "INQCUST_CS_REVIEW_DT" : {
+          "type" : "object",
+          "properties" : {
+            "INQCUST_CS_REVIEW_DD" : {
+              "minimum" : 0,
+              "maximum" : 99,
+              "type" : "integer"
+            },
+            "INQCUST_CS_REVIEW_MM" : {
+              "minimum" : 0,
+              "maximum" : 99,
+              "type" : "integer"
+            },
+            "INQCUST_CS_REVIEW_YYYY" : {
+              "minimum" : 0,
+              "maximum" : 9999,
+              "type" : "integer"
+            }
+          }
+        },
+        "INQCUST_INQ_SUCCESS" : {
+          "maxLength" : 1,
+          "type" : "string"
+        },
+        "INQCUST_INQ_FAIL_CD" : {
+          "maxLength" : 1,
+          "type" : "string"
+        },
+        "INQCUST_PCB_POINTER" : {
+          "maxLength" : 4,
+          "type" : "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+<!--                                                                 -->
+<!--  Copyright contributors to the CICS Banking Sample Application (CBSA) project-->
+<!--                                                                 -->
+<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+<ns2:message xmlns:ns2="http://www.ibm.com/ims/Transaction" transactionCode="" messageName="CREACC" direction="0" serviceType="CICS_COMM_AREA">
+    <message id="1" name="CREACC">
+        <segment id="1" name="COMMAREA" originalName="COMMAREA">
+            <field name="CREACC" originalName="CREACC" included="Y" path="CREACC">
+                <startPos>1</startPos>
+                <bytes>100</bytes>
+                <maxBytes>100</maxBytes>
+                <applicationDatatype datatype="STRUCT"/>
+                <field name="COMM_EYECATCHER" originalName="COMM_EYECATCHER" included="Y" path="CREACC.COMM_EYECATCHER">
+                    <startPos>1</startPos>
+                    <bytes>4</bytes>
+                    <maxBytes>4</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+                <field name="COMM_CUSTNO" originalName="COMM_CUSTNO" included="Y" path="CREACC.COMM_CUSTNO">
+                    <startPos>5</startPos>
+                    <bytes>10</bytes>
+                    <maxBytes>10</maxBytes>
+                    <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                        <typeConverter>ZONEDDECIMAL</typeConverter>
+                    </marshaller>
+                    <applicationDatatype datatype="DECIMAL" precision="10" scale="0"/>
+                </field>
+                <field name="COMM_KEY" originalName="COMM_KEY" included="Y" path="CREACC.COMM_KEY">
+                    <startPos>15</startPos>
+                    <bytes>14</bytes>
+                    <maxBytes>14</maxBytes>
+                    <applicationDatatype datatype="STRUCT"/>
+                    <field name="COMM_SORTCODE" originalName="COMM_SORTCODE" included="Y" path="CREACC.COMM_KEY.COMM_SORTCODE">
+                        <startPos>15</startPos>
+                        <bytes>6</bytes>
+                        <maxBytes>6</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="6" scale="0"/>
+                    </field>
+                    <field name="COMM_NUMBER" originalName="COMM_NUMBER" included="Y" path="CREACC.COMM_KEY.COMM_NUMBER">
+                        <startPos>21</startPos>
+                        <bytes>8</bytes>
+                        <maxBytes>8</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="8" scale="0"/>
+                    </field>
+                </field>
+                <field name="COMM_ACC_TYPE" originalName="COMM_ACC_TYPE" included="Y" path="CREACC.COMM_ACC_TYPE">
+                    <startPos>29</startPos>
+                    <bytes>8</bytes>
+                    <maxBytes>8</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+                <field name="COMM_INT_RT" originalName="COMM_INT_RT" included="Y" path="CREACC.COMM_INT_RT">
+                    <startPos>37</startPos>
+                    <bytes>6</bytes>
+                    <maxBytes>6</maxBytes>
+                    <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                        <typeConverter>ZONEDDECIMAL</typeConverter>
+                    </marshaller>
+                    <applicationDatatype datatype="DECIMAL" precision="6" scale="2"/>
+                </field>
+                <field name="COMM_OPENED" originalName="COMM_OPENED" included="Y" path="CREACC.COMM_OPENED">
+                    <startPos>43</startPos>
+                    <bytes>8</bytes>
+                    <maxBytes>8</maxBytes>
+                    <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                        <typeConverter>ZONEDDECIMAL</typeConverter>
+                    </marshaller>
+                    <applicationDatatype datatype="DECIMAL" precision="8" scale="0"/>
+                </field>
+                <field name="COMM_OPENED_GROUP" originalName="COMM_OPENED_GROUP" included="N" path="CREACC.COMM_OPENED_GROUP" redefines="COMM_OPENED">
+                    <startPos>43</startPos>
+                    <bytes>8</bytes>
+                    <maxBytes>8</maxBytes>
+                    <applicationDatatype datatype="STRUCT"/>
+                    <field name="COMM_OPENED_DAY" originalName="COMM_OPENED_DAY" included="N" path="CREACC.COMM_OPENED_GROUP.COMM_OPENED_DAY">
+                        <startPos>43</startPos>
+                        <bytes>2</bytes>
+                        <maxBytes>2</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
+                    </field>
+                    <field name="COMM_OPENED_MONTH" originalName="COMM_OPENED_MONTH" included="N" path="CREACC.COMM_OPENED_GROUP.COMM_OPENED_MONTH">
+                        <startPos>45</startPos>
+                        <bytes>2</bytes>
+                        <maxBytes>2</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
+                    </field>
+                    <field name="COMM_OPENED_YEAR" originalName="COMM_OPENED_YEAR" included="N" path="CREACC.COMM_OPENED_GROUP.COMM_OPENED_YEAR">
+                        <startPos>47</startPos>
+                        <bytes>4</bytes>
+                        <maxBytes>4</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="4" scale="0"/>
+                    </field>
+                </field>
+                <field name="COMM_OVERDR_LIM" originalName="COMM_OVERDR_LIM" included="Y" path="CREACC.COMM_OVERDR_LIM">
+                    <startPos>51</startPos>
+                    <bytes>8</bytes>
+                    <maxBytes>8</maxBytes>
+                    <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                        <typeConverter>ZONEDDECIMAL</typeConverter>
+                    </marshaller>
+                    <applicationDatatype datatype="DECIMAL" precision="8" scale="0"/>
+                </field>
+                <field name="COMM_LAST_STMT_DT" originalName="COMM_LAST_STMT_DT" included="Y" path="CREACC.COMM_LAST_STMT_DT">
+                    <startPos>59</startPos>
+                    <bytes>8</bytes>
+                    <maxBytes>8</maxBytes>
+                    <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                        <typeConverter>ZONEDDECIMAL</typeConverter>
+                    </marshaller>
+                    <applicationDatatype datatype="DECIMAL" precision="8" scale="0"/>
+                </field>
+                <field name="COMM_LAST_STMNT_GROUP" originalName="COMM_LAST_STMNT_GROUP" included="N" path="CREACC.COMM_LAST_STMNT_GROUP" redefines="COMM_LAST_STMT_DT">
+                    <startPos>59</startPos>
+                    <bytes>8</bytes>
+                    <maxBytes>8</maxBytes>
+                    <applicationDatatype datatype="STRUCT"/>
+                    <field name="COMM_LASTST_DAY" originalName="COMM_LASTST_DAY" included="N" path="CREACC.COMM_LAST_STMNT_GROUP.COMM_LASTST_DAY">
+                        <startPos>59</startPos>
+                        <bytes>2</bytes>
+                        <maxBytes>2</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
+                    </field>
+                    <field name="COMM_LASTST_MONTH" originalName="COMM_LASTST_MONTH" included="N" path="CREACC.COMM_LAST_STMNT_GROUP.COMM_LASTST_MONTH">
+                        <startPos>61</startPos>
+                        <bytes>2</bytes>
+                        <maxBytes>2</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
+                    </field>
+                    <field name="COMM_LASTST_YEAR" originalName="COMM_LASTST_YEAR" included="N" path="CREACC.COMM_LAST_STMNT_GROUP.COMM_LASTST_YEAR">
+                        <startPos>63</startPos>
+                        <bytes>4</bytes>
+                        <maxBytes>4</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="4" scale="0"/>
+                    </field>
+                </field>
+                <field name="COMM_NEXT_STMT_DT" originalName="COMM_NEXT_STMT_DT" included="Y" path="CREACC.COMM_NEXT_STMT_DT">
+                    <startPos>67</startPos>
+                    <bytes>8</bytes>
+                    <maxBytes>8</maxBytes>
+                    <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                        <typeConverter>ZONEDDECIMAL</typeConverter>
+                    </marshaller>
+                    <applicationDatatype datatype="DECIMAL" precision="8" scale="0"/>
+                </field>
+                <field name="COMM_NEXT_STMNT_GROUP" originalName="COMM_NEXT_STMNT_GROUP" included="N" path="CREACC.COMM_NEXT_STMNT_GROUP" redefines="COMM_NEXT_STMT_DT">
+                    <startPos>67</startPos>
+                    <bytes>8</bytes>
+                    <maxBytes>8</maxBytes>
+                    <applicationDatatype datatype="STRUCT"/>
+                    <field name="COMM_NEXTST_DAY" originalName="COMM_NEXTST_DAY" included="N" path="CREACC.COMM_NEXT_STMNT_GROUP.COMM_NEXTST_DAY">
+                        <startPos>67</startPos>
+                        <bytes>2</bytes>
+                        <maxBytes>2</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
+                    </field>
+                    <field name="COMM_NEXTST_MONTH" originalName="COMM_NEXTST_MONTH" included="N" path="CREACC.COMM_NEXT_STMNT_GROUP.COMM_NEXTST_MONTH">
+                        <startPos>69</startPos>
+                        <bytes>2</bytes>
+                        <maxBytes>2</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
+                    </field>
+                    <field name="COMM_NEXTST_YEAR" originalName="COMM_NEXTST_YEAR" included="N" path="CREACC.COMM_NEXT_STMNT_GROUP.COMM_NEXTST_YEAR">
+                        <startPos>71</startPos>
+                        <bytes>4</bytes>
+                        <maxBytes>4</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="4" scale="0"/>
+                    </field>
+                </field>
+                <field name="COMM_AVAIL_BAL" originalName="COMM_AVAIL_BAL" included="Y" path="CREACC.COMM_AVAIL_BAL">
+                    <startPos>75</startPos>
+                    <bytes>12</bytes>
+                    <maxBytes>12</maxBytes>
+                    <marshaller isSigned="Y" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                        <typeConverter>ZONEDDECIMAL</typeConverter>
+                    </marshaller>
+                    <applicationDatatype datatype="DECIMAL" precision="12" scale="2"/>
+                </field>
+                <field name="COMM_ACT_BAL" originalName="COMM_ACT_BAL" included="Y" path="CREACC.COMM_ACT_BAL">
+                    <startPos>87</startPos>
+                    <bytes>12</bytes>
+                    <maxBytes>12</maxBytes>
+                    <marshaller isSigned="Y" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                        <typeConverter>ZONEDDECIMAL</typeConverter>
+                    </marshaller>
+                    <applicationDatatype datatype="DECIMAL" precision="12" scale="2"/>
+                </field>
+                <field name="COMM_SUCCESS" originalName="COMM_SUCCESS" included="Y" path="CREACC.COMM_SUCCESS">
+                    <startPos>99</startPos>
+                    <bytes>1</bytes>
+                    <maxBytes>1</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+                <field name="COMM_FAIL_CODE" originalName="COMM_FAIL_CODE" included="Y" path="CREACC.COMM_FAIL_CODE">
+                    <startPos>100</startPos>
+                    <bytes>1</bytes>
+                    <maxBytes>1</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+            </field>
+        </segment>
+    </message>
+</ns2:message>

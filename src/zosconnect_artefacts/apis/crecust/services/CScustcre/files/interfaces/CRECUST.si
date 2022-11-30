@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+<!--                                                                 -->
+<!--  Copyright contributors to the CICS Banking Sample Application (CBSA) project-->
+<!--                                                                 -->
+<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+<ns2:message xmlns:ns2="http://www.ibm.com/ims/Transaction" transactionCode="" messageName="CRECUST" direction="0" serviceType="CICS_COMM_AREA">
+    <message id="1" name="CRECUST">
+        <segment id="1" name="COMMAREA" originalName="COMMAREA">
+            <field name="CRECUST" originalName="CRECUST" included="Y" path="CRECUST">
+                <startPos>1</startPos>
+                <bytes>261</bytes>
+                <maxBytes>261</maxBytes>
+                <applicationDatatype datatype="STRUCT"/>
+                <field name="COMM_EYECATCHER" originalName="COMM_EYECATCHER" included="Y" path="CRECUST.COMM_EYECATCHER">
+                    <startPos>1</startPos>
+                    <bytes>4</bytes>
+                    <maxBytes>4</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+                <field name="COMM_KEY" originalName="COMM_KEY" included="Y" path="CRECUST.COMM_KEY">
+                    <startPos>5</startPos>
+                    <bytes>16</bytes>
+                    <maxBytes>16</maxBytes>
+                    <applicationDatatype datatype="STRUCT"/>
+                    <field name="COMM_SORTCODE" originalName="COMM_SORTCODE" included="Y" path="CRECUST.COMM_KEY.COMM_SORTCODE">
+                        <startPos>5</startPos>
+                        <bytes>6</bytes>
+                        <maxBytes>6</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="6" scale="0"/>
+                    </field>
+                    <field name="COMM_NUMBER" originalName="COMM_NUMBER" included="Y" path="CRECUST.COMM_KEY.COMM_NUMBER">
+                        <startPos>11</startPos>
+                        <bytes>10</bytes>
+                        <maxBytes>10</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="10" scale="0"/>
+                    </field>
+                </field>
+                <field name="COMM_NAME" originalName="COMM_NAME" included="Y" path="CRECUST.COMM_NAME">
+                    <startPos>21</startPos>
+                    <bytes>60</bytes>
+                    <maxBytes>60</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+                <field name="COMM_ADDRESS" originalName="COMM_ADDRESS" included="Y" path="CRECUST.COMM_ADDRESS">
+                    <startPos>81</startPos>
+                    <bytes>160</bytes>
+                    <maxBytes>160</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+                <field name="COMM_DATE_OF_BIRTH" originalName="COMM_DATE_OF_BIRTH" included="Y" path="CRECUST.COMM_DATE_OF_BIRTH">
+                    <startPos>241</startPos>
+                    <bytes>8</bytes>
+                    <maxBytes>8</maxBytes>
+                    <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                        <typeConverter>ZONEDDECIMAL</typeConverter>
+                    </marshaller>
+                    <applicationDatatype datatype="DECIMAL" precision="8" scale="0"/>
+                </field>
+                <field name="COMM_DOB_GROUP" originalName="COMM_DOB_GROUP" included="N" path="CRECUST.COMM_DOB_GROUP" redefines="COMM_DATE_OF_BIRTH">
+                    <startPos>241</startPos>
+                    <bytes>8</bytes>
+                    <maxBytes>8</maxBytes>
+                    <applicationDatatype datatype="STRUCT"/>
+                    <field name="COMM_BIRTH_DAY" originalName="COMM_BIRTH_DAY" included="N" path="CRECUST.COMM_DOB_GROUP.COMM_BIRTH_DAY">
+                        <startPos>241</startPos>
+                        <bytes>2</bytes>
+                        <maxBytes>2</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
+                    </field>
+                    <field name="COMM_BIRTH_MONTH" originalName="COMM_BIRTH_MONTH" included="N" path="CRECUST.COMM_DOB_GROUP.COMM_BIRTH_MONTH">
+                        <startPos>243</startPos>
+                        <bytes>2</bytes>
+                        <maxBytes>2</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
+                    </field>
+                    <field name="COMM_BIRTH_YEAR" originalName="COMM_BIRTH_YEAR" included="N" path="CRECUST.COMM_DOB_GROUP.COMM_BIRTH_YEAR">
+                        <startPos>245</startPos>
+                        <bytes>4</bytes>
+                        <maxBytes>4</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="4" scale="0"/>
+                    </field>
+                </field>
+                <field name="COMM_CREDIT_SCORE" originalName="COMM_CREDIT_SCORE" included="Y" path="CRECUST.COMM_CREDIT_SCORE">
+                    <startPos>249</startPos>
+                    <bytes>3</bytes>
+                    <maxBytes>3</maxBytes>
+                    <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                        <typeConverter>ZONEDDECIMAL</typeConverter>
+                    </marshaller>
+                    <applicationDatatype datatype="DECIMAL" precision="3" scale="0"/>
+                </field>
+                <field name="COMM_CS_REVIEW_DATE" originalName="COMM_CS_REVIEW_DATE" included="Y" path="CRECUST.COMM_CS_REVIEW_DATE">
+                    <startPos>252</startPos>
+                    <bytes>8</bytes>
+                    <maxBytes>8</maxBytes>
+                    <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                        <typeConverter>ZONEDDECIMAL</typeConverter>
+                    </marshaller>
+                    <applicationDatatype datatype="DECIMAL" precision="8" scale="0"/>
+                </field>
+                <field name="COMM_CS_REVIEW_DATE_GROUP" originalName="COMM_CS_REVIEW_DATE_GROUP" included="N" path="CRECUST.COMM_CS_REVIEW_DATE_GROUP" redefines="COMM_CS_REVIEW_DATE">
+                    <startPos>252</startPos>
+                    <bytes>8</bytes>
+                    <maxBytes>8</maxBytes>
+                    <applicationDatatype datatype="STRUCT"/>
+                    <field name="COMM_CS_REVIEW_DD" originalName="COMM_CS_REVIEW_DD" included="N" path="CRECUST.COMM_CS_REVIEW_DATE_GROUP.COMM_CS_REVIEW_DD">
+                        <startPos>252</startPos>
+                        <bytes>2</bytes>
+                        <maxBytes>2</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
+                    </field>
+                    <field name="COMM_CS_REVIEW_MM" originalName="COMM_CS_REVIEW_MM" included="N" path="CRECUST.COMM_CS_REVIEW_DATE_GROUP.COMM_CS_REVIEW_MM">
+                        <startPos>254</startPos>
+                        <bytes>2</bytes>
+                        <maxBytes>2</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
+                    </field>
+                    <field name="COMM_CS_REVIEW_YYYY" originalName="COMM_CS_REVIEW_YYYY" included="N" path="CRECUST.COMM_CS_REVIEW_DATE_GROUP.COMM_CS_REVIEW_YYYY">
+                        <startPos>256</startPos>
+                        <bytes>4</bytes>
+                        <maxBytes>4</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="4" scale="0"/>
+                    </field>
+                </field>
+                <field name="COMM_SUCCESS" originalName="COMM_SUCCESS" included="Y" path="CRECUST.COMM_SUCCESS">
+                    <startPos>260</startPos>
+                    <bytes>1</bytes>
+                    <maxBytes>1</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+                <field name="COMM_FAIL_CODE" originalName="COMM_FAIL_CODE" included="Y" path="CRECUST.COMM_FAIL_CODE">
+                    <startPos>261</startPos>
+                    <bytes>1</bytes>
+                    <maxBytes>1</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+            </field>
+        </segment>
+    </message>
+</ns2:message>

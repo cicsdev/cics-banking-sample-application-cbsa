@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+
+        Copyright contributors to the CICS Banking Sample Application (CBSA) project
+
+-->
+<zosConnectApi xmlns="http://www.ibm.com/zosConnect/2.0/zosConnectApi" id="creacc">
+    <apiSpec title="creacc" basePath="/creacc" description="Creates an account on the CSacccre Service" version="1.0.0">
+        <path relativePath="/insert">
+            <method type="POST" zosConnectServiceRef="CSacccre" httpXformFile="api/insert/POST/mapping.xml" operationId="postCSacccre"></method>
+        </path>
+        <apiDoc docType="SWAGGER">api-docs/swagger.json</apiDoc>
+    </apiSpec>
+</zosConnectApi>

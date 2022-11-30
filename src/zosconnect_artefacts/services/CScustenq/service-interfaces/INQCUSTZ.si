@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+<!--                                                                 -->
+<!--  Copyright contributors to the CICS Banking Sample Application (CBSA) project-->
+<!--                                                                 -->
+<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+<ns2:message xmlns:ns2="http://www.ibm.com/ims/Transaction" transactionCode="" messageName="INQCUSTZ" direction="0" serviceType="CICS_COMM_AREA">
+    <message id="1" name="INQCUSTZ">
+        <segment id="1" name="COMMAREA" originalName="COMMAREA">
+            <field name="INQCUSTZ" originalName="INQCUSTZ" included="Y" path="INQCUSTZ">
+                <startPos>1</startPos>
+                <bytes>265</bytes>
+                <maxBytes>265</maxBytes>
+                <applicationDatatype datatype="STRUCT"/>
+                <field name="INQCUST_EYE" originalName="INQCUST_EYE" included="Y" path="INQCUSTZ.INQCUST_EYE">
+                    <startPos>1</startPos>
+                    <bytes>4</bytes>
+                    <maxBytes>4</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+                <field name="INQCUST_SCODE" originalName="INQCUST_SCODE" included="Y" path="INQCUSTZ.INQCUST_SCODE">
+                    <startPos>5</startPos>
+                    <bytes>6</bytes>
+                    <maxBytes>6</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+                <field name="INQCUST_CUSTNO" originalName="INQCUST_CUSTNO" included="Y" path="INQCUSTZ.INQCUST_CUSTNO">
+                    <startPos>11</startPos>
+                    <bytes>10</bytes>
+                    <maxBytes>10</maxBytes>
+                    <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                        <typeConverter>ZONEDDECIMAL</typeConverter>
+                    </marshaller>
+                    <applicationDatatype datatype="DECIMAL" precision="10" scale="0"/>
+                </field>
+                <field name="INQCUST_NAME" originalName="INQCUST_NAME" included="Y" path="INQCUSTZ.INQCUST_NAME">
+                    <startPos>21</startPos>
+                    <bytes>60</bytes>
+                    <maxBytes>60</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+                <field name="INQCUST_ADDR" originalName="INQCUST_ADDR" included="Y" path="INQCUSTZ.INQCUST_ADDR">
+                    <startPos>81</startPos>
+                    <bytes>160</bytes>
+                    <maxBytes>160</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+                <field name="INQCUST_DOB" originalName="INQCUST_DOB" included="Y" path="INQCUSTZ.INQCUST_DOB">
+                    <startPos>241</startPos>
+                    <bytes>8</bytes>
+                    <maxBytes>8</maxBytes>
+                    <applicationDatatype datatype="STRUCT"/>
+                    <field name="INQCUST_DOB_DD" originalName="INQCUST_DOB_DD" included="Y" path="INQCUSTZ.INQCUST_DOB.INQCUST_DOB_DD">
+                        <startPos>241</startPos>
+                        <bytes>2</bytes>
+                        <maxBytes>2</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
+                    </field>
+                    <field name="INQCUST_DOB_MM" originalName="INQCUST_DOB_MM" included="Y" path="INQCUSTZ.INQCUST_DOB.INQCUST_DOB_MM">
+                        <startPos>243</startPos>
+                        <bytes>2</bytes>
+                        <maxBytes>2</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
+                    </field>
+                    <field name="INQCUST_DOB_YYYY" originalName="INQCUST_DOB_YYYY" included="Y" path="INQCUSTZ.INQCUST_DOB.INQCUST_DOB_YYYY">
+                        <startPos>245</startPos>
+                        <bytes>4</bytes>
+                        <maxBytes>4</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="4" scale="0"/>
+                    </field>
+                </field>
+                <field name="INQCUST_CREDIT_SCORE" originalName="INQCUST_CREDIT_SCORE" included="Y" path="INQCUSTZ.INQCUST_CREDIT_SCORE">
+                    <startPos>249</startPos>
+                    <bytes>3</bytes>
+                    <maxBytes>3</maxBytes>
+                    <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                        <typeConverter>ZONEDDECIMAL</typeConverter>
+                    </marshaller>
+                    <applicationDatatype datatype="DECIMAL" precision="3" scale="0"/>
+                </field>
+                <field name="INQCUST_CS_REVIEW_DT" originalName="INQCUST_CS_REVIEW_DT" included="Y" path="INQCUSTZ.INQCUST_CS_REVIEW_DT">
+                    <startPos>252</startPos>
+                    <bytes>8</bytes>
+                    <maxBytes>8</maxBytes>
+                    <applicationDatatype datatype="STRUCT"/>
+                    <field name="INQCUST_CS_REVIEW_DD" originalName="INQCUST_CS_REVIEW_DD" included="Y" path="INQCUSTZ.INQCUST_CS_REVIEW_DT.INQCUST_CS_REVIEW_DD">
+                        <startPos>252</startPos>
+                        <bytes>2</bytes>
+                        <maxBytes>2</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
+                    </field>
+                    <field name="INQCUST_CS_REVIEW_MM" originalName="INQCUST_CS_REVIEW_MM" included="Y" path="INQCUSTZ.INQCUST_CS_REVIEW_DT.INQCUST_CS_REVIEW_MM">
+                        <startPos>254</startPos>
+                        <bytes>2</bytes>
+                        <maxBytes>2</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
+                    </field>
+                    <field name="INQCUST_CS_REVIEW_YYYY" originalName="INQCUST_CS_REVIEW_YYYY" included="Y" path="INQCUSTZ.INQCUST_CS_REVIEW_DT.INQCUST_CS_REVIEW_YYYY">
+                        <startPos>256</startPos>
+                        <bytes>4</bytes>
+                        <maxBytes>4</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="4" scale="0"/>
+                    </field>
+                </field>
+                <field name="INQCUST_INQ_SUCCESS" originalName="INQCUST_INQ_SUCCESS" included="Y" path="INQCUSTZ.INQCUST_INQ_SUCCESS">
+                    <startPos>260</startPos>
+                    <bytes>1</bytes>
+                    <maxBytes>1</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+                <field name="INQCUST_INQ_FAIL_CD" originalName="INQCUST_INQ_FAIL_CD" included="Y" path="INQCUSTZ.INQCUST_INQ_FAIL_CD">
+                    <startPos>261</startPos>
+                    <bytes>1</bytes>
+                    <maxBytes>1</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+                <field name="INQCUST_PCB_POINTER" originalName="INQCUST_PCB_POINTER" included="Y" path="INQCUSTZ.INQCUST_PCB_POINTER">
+                    <startPos>262</startPos>
+                    <bytes>4</bytes>
+                    <maxBytes>4</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+            </field>
+        </segment>
+    </message>
+</ns2:message>

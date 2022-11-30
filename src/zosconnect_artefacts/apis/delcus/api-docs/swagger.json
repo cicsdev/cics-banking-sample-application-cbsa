@@ -1,0 +1,153 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "Deletes a customer and their accounts on the CScustdel Service",
+    "version" : "1.0.0",
+    "title" : "delcus"
+  },
+  "host" : "localhost:8080",
+  "basePath" : "/delcus",
+  "schemes" : [ "https", "http" ],
+  "consumes" : [ "application/json" ],
+  "produces" : [ "application/json" ],
+  "paths" : {
+    "/remove/{custno}" : {
+      "delete" : {
+        "tags" : [ "delcus" ],
+        "operationId" : "deleteCScustdel",
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "custno",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "maxLength" : 10
+        }, {
+          "in" : "body",
+          "name" : "deleteCScustdel_request",
+          "description" : "request body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/deleteCScustdel_request"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/deleteCScustdel_response_200"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "deleteCScustdel_request" : {
+      "type" : "object",
+      "properties" : {
+        "DELCUS" : {
+          "type" : "object",
+          "properties" : {
+            "COMM_EYE" : {
+              "type" : "string",
+              "maxLength" : 4
+            },
+            "COMM_SCODE" : {
+              "type" : "string",
+              "maxLength" : 6
+            },
+            "COMM_NAME" : {
+              "type" : "string",
+              "maxLength" : 60
+            },
+            "COMM_ADDR" : {
+              "type" : "string",
+              "maxLength" : 160
+            },
+            "COMM_DOB" : {
+              "type" : "integer",
+              "minimum" : 0,
+              "maximum" : 99999999
+            },
+            "COMM_CREDIT_SCORE" : {
+              "type" : "integer",
+              "minimum" : 0,
+              "maximum" : 999
+            },
+            "COMM_CS_REVIEW_DATE" : {
+              "type" : "integer",
+              "minimum" : 0,
+              "maximum" : 99999999
+            },
+            "COMM_DEL_SUCCESS" : {
+              "type" : "string",
+              "maxLength" : 1
+            },
+            "COMM_DEL_FAIL_CD" : {
+              "type" : "string",
+              "maxLength" : 1
+            }
+          }
+        }
+      }
+    },
+    "deleteCScustdel_response_200" : {
+      "type" : "object",
+      "properties" : {
+        "DELCUS" : {
+          "type" : "object",
+          "properties" : {
+            "COMM_EYE" : {
+              "type" : "string",
+              "maxLength" : 4
+            },
+            "COMM_SCODE" : {
+              "type" : "string",
+              "maxLength" : 6
+            },
+            "COMM_CUSTNO" : {
+              "type" : "string",
+              "maxLength" : 10
+            },
+            "COMM_NAME" : {
+              "type" : "string",
+              "maxLength" : 60
+            },
+            "COMM_ADDR" : {
+              "type" : "string",
+              "maxLength" : 160
+            },
+            "COMM_DOB" : {
+              "type" : "integer",
+              "minimum" : 0,
+              "maximum" : 99999999
+            },
+            "COMM_CREDIT_SCORE" : {
+              "type" : "integer",
+              "minimum" : 0,
+              "maximum" : 999
+            },
+            "COMM_CS_REVIEW_DATE" : {
+              "type" : "integer",
+              "minimum" : 0,
+              "maximum" : 99999999
+            },
+            "COMM_DEL_SUCCESS" : {
+              "type" : "string",
+              "maxLength" : 1
+            },
+            "COMM_DEL_FAIL_CD" : {
+              "type" : "string",
+              "maxLength" : 1
+            }
+          }
+        }
+      }
+    }
+  }
+}

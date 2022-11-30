@@ -1,0 +1,60 @@
+{
+  "type" : "object",
+  "properties" : {
+    "CRECUST" : {
+      "type" : "object",
+      "properties" : {
+        "COMM_EYECATCHER" : {
+          "maxLength" : 4,
+          "type" : "string"
+        },
+        "COMM_KEY" : {
+          "type" : "object",
+          "properties" : {
+            "COMM_SORTCODE" : {
+              "minimum" : 0,
+              "maximum" : 999999,
+              "type" : "integer"
+            },
+            "COMM_NUMBER" : {
+              "minimum" : 0,
+              "maximum" : 9999999999,
+              "type" : "integer"
+            }
+          }
+        },
+        "COMM_NAME" : {
+          "maxLength" : 60,
+          "type" : "string"
+        },
+        "COMM_ADDRESS" : {
+          "maxLength" : 160,
+          "type" : "string"
+        },
+        "COMM_DATE_OF_BIRTH" : {
+          "minimum" : 0,
+          "maximum" : 99999999,
+          "type" : "integer"
+        },
+        "COMM_CREDIT_SCORE" : {
+          "minimum" : 0,
+          "maximum" : 999,
+          "type" : "integer"
+        },
+        "COMM_CS_REVIEW_DATE" : {
+          "minimum" : 0,
+          "maximum" : 99999999,
+          "type" : "integer"
+        },
+        "COMM_SUCCESS" : {
+          "maxLength" : 1,
+          "type" : "string"
+        },
+        "COMM_FAIL_CODE" : {
+          "maxLength" : 1,
+          "type" : "string"
+        }
+      }
+    }
+  }
+}

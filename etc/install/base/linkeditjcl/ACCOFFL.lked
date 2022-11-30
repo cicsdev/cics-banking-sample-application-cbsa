@@ -1,0 +1,11 @@
+* Licensed Materials - Property of IBM
+*
+* (c) Copyright IBM Corp. 2019,2020.
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract
+* with IBM Corp.
+    INCLUDE CBSAMOD(ACCOFFL)
+    INCLUDE SYSLIB(DSNELI)
+    ENTRY ACCOFFL
+    NAME ACCOFFL(R)

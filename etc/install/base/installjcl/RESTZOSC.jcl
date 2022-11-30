@@ -1,0 +1,12 @@
+//RESTZOSC JOB ,,CLASS=A,MSGCLASS=H,
+//  NOTIFY=&SYSUID,
+//  MSGLEVEL=(1,1),REGION=0M
+//* Copyright contributors to the CICS Banking Sample Application 
+//* (CBSA) project     
+//*
+//STEP0001 EXEC PGM=IKJEFT01,TIME=1440,REGION=0M
+//SYSTSPRT DD DUMMY
+//SYSTSIN  DD *
+CONSOLE NAME(MV1) SYSCMD(-
+S ZOSCSRV)
+//*

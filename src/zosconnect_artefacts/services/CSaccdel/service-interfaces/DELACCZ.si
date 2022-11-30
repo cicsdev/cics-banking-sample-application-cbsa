@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+<!--                                                                 -->
+<!--  Copyright contributors to the CICS Banking Sample Application (CBSA) project-->
+<!--                                                                 -->
+<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+<ns2:message xmlns:ns2="http://www.ibm.com/ims/Transaction" transactionCode="" messageName="DELACCZ" direction="0" serviceType="CICS_COMM_AREA">
+    <message id="1" name="DELACCZ">
+        <segment id="1" name="COMMAREA" originalName="COMMAREA">
+            <field name="DELACC_COMMAREA" originalName="DELACC_COMMAREA" included="Y" path="DELACC_COMMAREA">
+                <startPos>1</startPos>
+                <bytes>122</bytes>
+                <maxBytes>122</maxBytes>
+                <applicationDatatype datatype="STRUCT"/>
+                <field name="DELACC_EYE" originalName="DELACC_EYE" included="Y" path="DELACC_COMMAREA.DELACC_EYE">
+                    <startPos>1</startPos>
+                    <bytes>4</bytes>
+                    <maxBytes>4</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+                <field name="DELACC_CUSTNO" originalName="DELACC_CUSTNO" included="Y" path="DELACC_COMMAREA.DELACC_CUSTNO">
+                    <startPos>5</startPos>
+                    <bytes>10</bytes>
+                    <maxBytes>10</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+                <field name="DELACC_SCODE" originalName="DELACC_SCODE" included="Y" path="DELACC_COMMAREA.DELACC_SCODE">
+                    <startPos>15</startPos>
+                    <bytes>6</bytes>
+                    <maxBytes>6</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+                <field name="DELACC_ACCNO" originalName="DELACC_ACCNO" included="Y" path="DELACC_COMMAREA.DELACC_ACCNO">
+                    <startPos>21</startPos>
+                    <bytes>8</bytes>
+                    <maxBytes>8</maxBytes>
+                    <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                        <typeConverter>ZONEDDECIMAL</typeConverter>
+                    </marshaller>
+                    <applicationDatatype datatype="DECIMAL" precision="8" scale="0"/>
+                </field>
+                <field name="DELACC_ACC_TYPE" originalName="DELACC_ACC_TYPE" included="Y" path="DELACC_COMMAREA.DELACC_ACC_TYPE">
+                    <startPos>29</startPos>
+                    <bytes>8</bytes>
+                    <maxBytes>8</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+                <field name="DELACC_INT_RATE" originalName="DELACC_INT_RATE" included="Y" path="DELACC_COMMAREA.DELACC_INT_RATE">
+                    <startPos>37</startPos>
+                    <bytes>6</bytes>
+                    <maxBytes>6</maxBytes>
+                    <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                        <typeConverter>ZONEDDECIMAL</typeConverter>
+                    </marshaller>
+                    <applicationDatatype datatype="DECIMAL" precision="6" scale="2"/>
+                </field>
+                <field name="DELACC_OPENED" originalName="DELACC_OPENED" included="Y" path="DELACC_COMMAREA.DELACC_OPENED">
+                    <startPos>43</startPos>
+                    <bytes>8</bytes>
+                    <maxBytes>8</maxBytes>
+                    <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                        <typeConverter>ZONEDDECIMAL</typeConverter>
+                    </marshaller>
+                    <applicationDatatype datatype="DECIMAL" precision="8" scale="0"/>
+                </field>
+                <field name="DELACC_OPENED_GROUP" originalName="DELACC_OPENED_GROUP" included="N" path="DELACC_COMMAREA.DELACC_OPENED_GROUP" redefines="DELACC_OPENED">
+                    <startPos>43</startPos>
+                    <bytes>8</bytes>
+                    <maxBytes>8</maxBytes>
+                    <applicationDatatype datatype="STRUCT"/>
+                    <field name="DELACC_OPENED_DAY" originalName="DELACC_OPENED_DAY" included="N" path="DELACC_COMMAREA.DELACC_OPENED_GROUP.DELACC_OPENED_DAY">
+                        <startPos>43</startPos>
+                        <bytes>2</bytes>
+                        <maxBytes>2</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
+                    </field>
+                    <field name="DELACC_OPENED_MONTH" originalName="DELACC_OPENED_MONTH" included="N" path="DELACC_COMMAREA.DELACC_OPENED_GROUP.DELACC_OPENED_MONTH">
+                        <startPos>45</startPos>
+                        <bytes>2</bytes>
+                        <maxBytes>2</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
+                    </field>
+                    <field name="DELACC_OPENED_YEAR" originalName="DELACC_OPENED_YEAR" included="N" path="DELACC_COMMAREA.DELACC_OPENED_GROUP.DELACC_OPENED_YEAR">
+                        <startPos>47</startPos>
+                        <bytes>4</bytes>
+                        <maxBytes>4</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="4" scale="0"/>
+                    </field>
+                </field>
+                <field name="DELACC_OVERDRAFT" originalName="DELACC_OVERDRAFT" included="Y" path="DELACC_COMMAREA.DELACC_OVERDRAFT">
+                    <startPos>51</startPos>
+                    <bytes>8</bytes>
+                    <maxBytes>8</maxBytes>
+                    <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                        <typeConverter>ZONEDDECIMAL</typeConverter>
+                    </marshaller>
+                    <applicationDatatype datatype="DECIMAL" precision="8" scale="0"/>
+                </field>
+                <field name="DELACC_LAST_STMT_DT" originalName="DELACC_LAST_STMT_DT" included="Y" path="DELACC_COMMAREA.DELACC_LAST_STMT_DT">
+                    <startPos>59</startPos>
+                    <bytes>8</bytes>
+                    <maxBytes>8</maxBytes>
+                    <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                        <typeConverter>ZONEDDECIMAL</typeConverter>
+                    </marshaller>
+                    <applicationDatatype datatype="DECIMAL" precision="8" scale="0"/>
+                </field>
+                <field name="DELACC_LAST_STMT_GROUP" originalName="DELACC_LAST_STMT_GROUP" included="N" path="DELACC_COMMAREA.DELACC_LAST_STMT_GROUP" redefines="DELACC_LAST_STMT_DT">
+                    <startPos>59</startPos>
+                    <bytes>8</bytes>
+                    <maxBytes>8</maxBytes>
+                    <applicationDatatype datatype="STRUCT"/>
+                    <field name="DELACC_LAST_STMT_DAY" originalName="DELACC_LAST_STMT_DAY" included="N" path="DELACC_COMMAREA.DELACC_LAST_STMT_GROUP.DELACC_LAST_STMT_DAY">
+                        <startPos>59</startPos>
+                        <bytes>2</bytes>
+                        <maxBytes>2</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
+                    </field>
+                    <field name="DELACC_LAST_STMT_MONTH" originalName="DELACC_LAST_STMT_MONTH" included="N" path="DELACC_COMMAREA.DELACC_LAST_STMT_GROUP.DELACC_LAST_STMT_MONTH">
+                        <startPos>61</startPos>
+                        <bytes>2</bytes>
+                        <maxBytes>2</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
+                    </field>
+                    <field name="DELACC_LAST_STMT_YEAR" originalName="DELACC_LAST_STMT_YEAR" included="N" path="DELACC_COMMAREA.DELACC_LAST_STMT_GROUP.DELACC_LAST_STMT_YEAR">
+                        <startPos>63</startPos>
+                        <bytes>4</bytes>
+                        <maxBytes>4</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="4" scale="0"/>
+                    </field>
+                </field>
+                <field name="DELACC_NEXT_STMT_DT" originalName="DELACC_NEXT_STMT_DT" included="Y" path="DELACC_COMMAREA.DELACC_NEXT_STMT_DT">
+                    <startPos>67</startPos>
+                    <bytes>8</bytes>
+                    <maxBytes>8</maxBytes>
+                    <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                        <typeConverter>ZONEDDECIMAL</typeConverter>
+                    </marshaller>
+                    <applicationDatatype datatype="DECIMAL" precision="8" scale="0"/>
+                </field>
+                <field name="DELACC_NEXT_STMT_GROUP" originalName="DELACC_NEXT_STMT_GROUP" included="N" path="DELACC_COMMAREA.DELACC_NEXT_STMT_GROUP" redefines="DELACC_NEXT_STMT_DT">
+                    <startPos>67</startPos>
+                    <bytes>8</bytes>
+                    <maxBytes>8</maxBytes>
+                    <applicationDatatype datatype="STRUCT"/>
+                    <field name="DELACC_NEXT_STMT_DAY" originalName="DELACC_NEXT_STMT_DAY" included="N" path="DELACC_COMMAREA.DELACC_NEXT_STMT_GROUP.DELACC_NEXT_STMT_DAY">
+                        <startPos>67</startPos>
+                        <bytes>2</bytes>
+                        <maxBytes>2</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
+                    </field>
+                    <field name="DELACC_NEXT_STMT_MONTH" originalName="DELACC_NEXT_STMT_MONTH" included="N" path="DELACC_COMMAREA.DELACC_NEXT_STMT_GROUP.DELACC_NEXT_STMT_MONTH">
+                        <startPos>69</startPos>
+                        <bytes>2</bytes>
+                        <maxBytes>2</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
+                    </field>
+                    <field name="DELACC_NEXT_STMT_YEAR" originalName="DELACC_NEXT_STMT_YEAR" included="N" path="DELACC_COMMAREA.DELACC_NEXT_STMT_GROUP.DELACC_NEXT_STMT_YEAR">
+                        <startPos>71</startPos>
+                        <bytes>4</bytes>
+                        <maxBytes>4</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="4" scale="0"/>
+                    </field>
+                </field>
+                <field name="DELACC_AVAIL_BAL" originalName="DELACC_AVAIL_BAL" included="Y" path="DELACC_COMMAREA.DELACC_AVAIL_BAL">
+                    <startPos>75</startPos>
+                    <bytes>12</bytes>
+                    <maxBytes>12</maxBytes>
+                    <marshaller isSigned="Y" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                        <typeConverter>ZONEDDECIMAL</typeConverter>
+                    </marshaller>
+                    <applicationDatatype datatype="DECIMAL" precision="12" scale="2"/>
+                </field>
+                <field name="DELACC_ACTUAL_BAL" originalName="DELACC_ACTUAL_BAL" included="Y" path="DELACC_COMMAREA.DELACC_ACTUAL_BAL">
+                    <startPos>87</startPos>
+                    <bytes>12</bytes>
+                    <maxBytes>12</maxBytes>
+                    <marshaller isSigned="Y" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                        <typeConverter>ZONEDDECIMAL</typeConverter>
+                    </marshaller>
+                    <applicationDatatype datatype="DECIMAL" precision="12" scale="2"/>
+                </field>
+                <field name="DELACC_SUCCESS" originalName="DELACC_SUCCESS" included="Y" path="DELACC_COMMAREA.DELACC_SUCCESS">
+                    <startPos>99</startPos>
+                    <bytes>1</bytes>
+                    <maxBytes>1</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+                <field name="DELACC_FAIL_CD" originalName="DELACC_FAIL_CD" included="Y" path="DELACC_COMMAREA.DELACC_FAIL_CD">
+                    <startPos>100</startPos>
+                    <bytes>1</bytes>
+                    <maxBytes>1</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+                <field name="DELACC_DEL_SUCCESS" originalName="DELACC_DEL_SUCCESS" included="Y" path="DELACC_COMMAREA.DELACC_DEL_SUCCESS">
+                    <startPos>101</startPos>
+                    <bytes>1</bytes>
+                    <maxBytes>1</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+                <field name="DELACC_DEL_FAIL_CD" originalName="DELACC_DEL_FAIL_CD" included="Y" path="DELACC_COMMAREA.DELACC_DEL_FAIL_CD">
+                    <startPos>102</startPos>
+                    <bytes>1</bytes>
+                    <maxBytes>1</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+                <field name="DELACC_DEL_APPLID" originalName="DELACC_DEL_APPLID" included="Y" path="DELACC_COMMAREA.DELACC_DEL_APPLID">
+                    <startPos>103</startPos>
+                    <bytes>8</bytes>
+                    <maxBytes>8</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+                <field name="DELACC_DEL_PCB1" originalName="DELACC_DEL_PCB1" included="Y" path="DELACC_COMMAREA.DELACC_DEL_PCB1">
+                    <startPos>111</startPos>
+                    <bytes>4</bytes>
+                    <maxBytes>4</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+                <field name="DELACC_DEL_PCB2" originalName="DELACC_DEL_PCB2" included="Y" path="DELACC_COMMAREA.DELACC_DEL_PCB2">
+                    <startPos>115</startPos>
+                    <bytes>4</bytes>
+                    <maxBytes>4</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+                <field name="DELACC_DEL_PCB3" originalName="DELACC_DEL_PCB3" included="Y" path="DELACC_COMMAREA.DELACC_DEL_PCB3">
+                    <startPos>119</startPos>
+                    <bytes>4</bytes>
+                    <maxBytes>4</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+            </field>
+        </segment>
+    </message>
+</ns2:message>
