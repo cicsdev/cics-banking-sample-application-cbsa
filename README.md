@@ -52,7 +52,7 @@ The interfaces are designed to exploit the underlying banking functionality, whi
 > Please refer to the [Architecture documentation](https://github.com/cicsdev/cics-banking-sample-application-cbsa/doc/CBSA_Architecture_guide.md) for more detailed information.
 
 ## Requirements
-- An existing CICS TS region running at V5.3 or later
+- An existing CICS TS region running at V5.4 or later
 - A Db2 subsystem (V12 or later)
 - A Liberty JVM server in CICS (set up and configured during the installation process)
 - Java 8 or later
@@ -74,18 +74,18 @@ Installation instructions:
 </br>
 
 Installation of CBSA is split into 3 parts :
-  1. The base COBOL(BMS) installation, this is mandatory and should be installed first. See the [base COBOL installation documentation.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/etc/install/base/doc/CBSA_base_cobol_installation_instructions.md) 
-  2. The Liberty UI installation, this is optional, requires a JVM server to be running in the CICS region (this gets set up as part of installation process). See [the Liberty UI installation documentation.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/etc/install/libertyUI/doc/CBSA_Liberty_UI_installation_deployment_guide.md)
-  3. The Customer Service and Payment interface installation (also optional). See [deploying the Payment and Customer Services documentation.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/etc/install/springBootUI/doc/CBSA_Deploying_the_Payment_Customer_Services_Springboot_apps.md)
+  1. The base COBOL(BMS) installation, this is mandatory and should be installed first. See the [base COBOL installation documentation.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/tree/main/etc/install/base/doc/CBSA_base_cobol_installation_instructions.md) 
+  2. The Liberty UI installation, this is optional, requires a JVM server to be running in the CICS region (this gets set up as part of installation process). See [the Liberty UI installation documentation.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/tree/main/etc/install/libertyUI/doc/CBSA_Liberty_UI_installation_deployment_guide.md)
+  3. The Customer Service and Payment interface installation (also optional). See [deploying the Payment and Customer Services documentation.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/tree/main/etc/install/springBootUI/doc/CBSA_Deploying_the_Payment_Customer_Services_Springboot_apps.md)
 
 ## Usage
 Various user guides are provided:
 
-  1. For the base/COBOL(BMS) interface please refer to the [CBSA BMS User Guide.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/etc/usage/base/doc/CBSA_BMS_User_Guide.md)
-  2. For the Liberty UI please refer to the [CBSA Liberty UI User Guide.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/etc/usage/libertyUI/doc/CBSA_Liberty_UI_User_Guide.md)
-  3. For the Customer Services interface please refer to the [CBSA Customer Service User Interface User Guide.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/etc/usage/springBoot/doc/CBSA_Customer_Services_Interface_User_Guide.md)
-  4. For the Payment interface please refer to the [CBSA Payment Interface User Guide.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/etc/usage/springBoot/doc/CBSA_Payment_Interface_User_Guide.md)
-  5. For the RESTful API guide please refer to the [CBSA RESTful Api Guide.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/etc/usage/springBoot/doc/CBSA_Restful_API_guide.md)
+  1. For the base/COBOL(BMS) interface please refer to the [CBSA BMS User Guide.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/tree/main/etc/usage/base/doc/CBSA_BMS_User_Guide.md)
+  2. For the Liberty UI please refer to the [CBSA Liberty UI User Guide.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/tree/main/etc/usage/libertyUI/doc/CBSA_Liberty_UI_User_Guide.md)
+  3. For the Customer Services interface please refer to the [CBSA Customer Service User Interface User Guide.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/tree/main/etc/usage/springBoot/doc/CBSA_Customer_Services_Interface_User_Guide.md)
+  4. For the Payment interface please refer to the [CBSA Payment Interface User Guide.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/tree/main/etc/usage/springBoot/doc/CBSA_Payment_Interface_User_Guide.md)
+  5. For the RESTful API guide please refer to the [CBSA RESTful Api Guide.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/tree/main/etc/usage/springBoot/doc/CBSA_Restful_API_guide.md)
 
 
 ## Contributors
