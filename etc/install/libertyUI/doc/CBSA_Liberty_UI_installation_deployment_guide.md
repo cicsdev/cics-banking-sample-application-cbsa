@@ -17,7 +17,7 @@
 
 > These instructions detail the steps required to:
 
-1.  Create an authorise a JVM profile.
+1.  Create and authorise a JVM profile.
 
 2.  Define the JVM CICS resources.
 
