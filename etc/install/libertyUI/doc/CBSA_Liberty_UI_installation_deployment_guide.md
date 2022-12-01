@@ -151,7 +151,7 @@ If you have already installed the Liberty UI, you can skip this step.
 >>
 >> -Dcom.ibm.cics.jvmserver.wlp.server.http.**port=19080**
 >>
->> **Please note**: You should verify the location of the jdbc driver and
+>> **Please note**: You should verify the location of the JDBC driver and
 >> amend the location (above) according to your own site installation
 >> location.
 >> Port **19080** is used in these instructions, you may wish to utilise a
@@ -244,9 +244,9 @@ Start the command prompt.
 
 Change directory to the cics-banking-sample-application-cbsa/src/webui/ folder
 
-At this point we are missing two JARs, ibm record generator and jzos. 
+At this point we are missing the JARs for the IBM Record Generator(IRG) and the IBM JZOS toolkit. 
 
-You will need to go to the following URL to download record generator:
+You will need to go to the following URL to download the Record Generator:
 
 > https://ibm.github.io/mainframe-downloads/IBM-Record-Generator-for-Java.html
 
@@ -254,7 +254,7 @@ Issue the following command from the command line:
 
 mvn install:install-file -Dfile="*download location*/ibm-recgen/ibm-recgen.jar" -DgroupId=ibm.recgen -DartifactId=ibm-recgen -Dversion=1.0.0 -Dpackaging=jar
 
-Then you need to goto your installation of java, typically this can be found in:
+Then you need to goto your installation of Java, typically this can be found in:
 
 > /usr/lpp/java/lib/ext
 
@@ -281,7 +281,7 @@ Copy the war file from the two target directories into the dropins directory.
 >
 > [http://*your-chosen-host-name*:*your-chosen-port-number*/com.ibm.cics.cip.bank.LibertyAPI.webUI/](http://your-chosen-host-name:your-chosen-port-number/com.ibm.cics.cip.bank.LibertyAPI.webUI/)
 >
-> **Please note** that on some lesser powered machines, it may take up
+> **Please note** that on lower powered machines, it may take up
 > to 5 minutes for the JVM server to restart.
 >
 > Once the JVM server has restarted you should be presented with the
