@@ -58,7 +58,7 @@ The interfaces are designed to exploit the underlying banking functionality, whi
 - Java 8 or later
 - Apache Maven on the workstation (to utilise the Customer Services and Payment interfaces)
 - Various VSAM files (set up and configured during the installation process)
-- A zOS Connect EE server (if the RESTful API or the Customer Services or Payment interfaces are required)
+- A zOS Connect server (if the RESTful API or the Customer Services or Payment interfaces are required)
 
 
 ## Downloading

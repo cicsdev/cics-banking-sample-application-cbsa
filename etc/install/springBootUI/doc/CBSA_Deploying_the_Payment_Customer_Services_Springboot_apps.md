@@ -10,7 +10,7 @@ and running.
 
 These instructions detail the steps required to:
 
-1.  Set up the port for the zOS Connect EE server.
+1.  Set up the port for the zOS Connect server.
 
 2.  Install Maven.
 
@@ -29,7 +29,7 @@ These instructions detail the steps required to:
 
 -   A Db2 subsystem (v12 or greater) is available.
 
--   A zOS Connect EE server is available - set up as part of the
+-   A zOS Connect server is available - set up as part of the
     base/COBOL install.
 
 -   A Liberty JVM is running inside of the CICS region - this is set up
@@ -49,10 +49,10 @@ For architecture information please refer to the GitHub repo:
 
 ##
  
-## Changing the port to match z/OS Connect EE:
+## Changing the port to match z/OS Connect:
 
 The Spring Boot applications run inside a WebSphere Liberty Profile JVM
-server inside CICS, but also communicate with z/OS Connect EE. It is
+server inside CICS, but also communicate with z/OS Connect. It is
 important to make sure that the connection information to the zOS
 Connect EE server is correct. As a default, these are set to port 30701
 and host localhost, if you utilised a different port number or hostname
@@ -61,9 +61,9 @@ then please substitute the default values with yours.
 
 Should you need to change these, they are configured in the following files, which can be found on the repo at:
 
-> cicsdev/cics-banking-sample-application-cbsa/src/Z-OS-Connect-EE-Customer-Services-Interface/src/main/java/com/ibm/cics/cip/bank/springboot/customerservices/**ConnectionInfo.java**
+> cicsdev/cics-banking-sample-application-cbsa/src/Z-OS-Connect-Customer-Services-Interface/src/main/java/com/ibm/cics/cip/bank/springboot/customerservices/**ConnectionInfo.java**
 
-> cicsdev/cics-banking-sample-application-cbsa/src/Z-OS-Connect-EE-Payment-Interface/src/main/java/com/ibm/cics/cip/bank/springboot/paymentinterface/**ConnectionInfo.java**
+> cicsdev/cics-banking-sample-application-cbsa/src/Z-OS-Connect-Payment-Interface/src/main/java/com/ibm/cics/cip/bank/springboot/paymentinterface/**ConnectionInfo.java**
 
 
 Both need to be changed and both currently contain the following lines.
@@ -83,7 +83,7 @@ management tool which is provided by Apache.
 
 Start the command prompt.
 
-Change directory to the Z-OS-Connect-EE-Customer-Services-Interface folder in cics-banking-sample-application-cbsa/src/
+Change directory to the Z-OS-Connect-Customer-Services-Interface folder in cics-banking-sample-application-cbsa/src/
 
 This creates a folder called target, and inside of target is a .war file.
 
@@ -111,7 +111,7 @@ Issue the following Maven command:
 
 This creates a folder called target, and inside of target is a .war file.
 
-Change directory to the Z-OS-Connect-EE-Payment-Interface folder in cics-banking-sample-application-cbsa/src/
+Change directory to the Z-OS-Connect-Payment-Interface folder in cics-banking-sample-application-cbsa/src/
 
 Issue the following Maven command:
 

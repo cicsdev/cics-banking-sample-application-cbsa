@@ -1,4 +1,4 @@
-# Payments Interface panel utilising Z/OS Connect EE
+# Payments Interface panel utilising Z/OS Connect
 
 The project is written in Java with Spring Boot, with Thymeleaf templates powering the web pages.
 

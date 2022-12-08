@@ -1,4 +1,4 @@
-# Payments interface and customer services panel utilising Zos Connect EE
+# Payments interface and customer services panel utilising Zos Connect
 
 Accessed from the services panel(*/services*).
 The project is written in Java with Spring Boot, with Thymeleaf templates powering the web pages.

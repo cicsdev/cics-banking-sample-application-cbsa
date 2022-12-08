@@ -4,9 +4,7 @@
         Copyright contributors to the CICS Banking Sample Application (CBSA) project
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -15,11 +13,11 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ibm.cics.cip.bank.springboot</groupId>
-	<artifactId>customerservices</artifactId>
-	<version>1.0</version>
+	<artifactId>paymentinterface</artifactId>
+	<version>1.1</version>
 	<packaging>war</packaging>
-	<name>customerservices</name>
-	<description>Springboot project utilising Z/OS Connect EE</description>
+	<name>paymentinterface</name>
+	<description>Springboot project utilising Z/OS Connect</description>
 	<properties>
 		<java.version>8</java.version>
 	</properties>
@@ -37,13 +35,14 @@
 			<artifactId>jackson-core</artifactId>
 			<scope>compile</scope>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<scope>compile</scope>
                         <version>2.13.4.2</version>
 		</dependency>
+
 
 		<dependency>
 			  <groupId>io.projectreactor.netty</groupId>
@@ -56,12 +55,13 @@
 			  <artifactId>reactor-netty-core</artifactId>
 			  <version>1.1.0</version>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 			<scope>provided</scope>
-		</dependency>
+			</dependency>
+			
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -77,8 +77,8 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
-			<optional>true</optional>
 			<scope>compile</scope>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -113,17 +113,28 @@
 				<groupId>com.ibm.cics</groupId>
 				<artifactId>cics-bundle-maven-plugin</artifactId>
 				<version>1.0.2</version>
+				<extensions>true</extensions>
 				<executions>
 					<execution>
 						<goals>
 							<goal>bundle-war</goal>
+							<!-- <goal>deploy</goal> -->
 						</goals>
 						<configuration>
+							<classifier>cics-bundle</classifier>
 							<jvmserver>CBSAWLP</jvmserver>
+							<url>http://winmvsda.hursley.ibm.com:8086</url>
+							<username>${cics-user-id}</username>
+							<password>${cics-password}</password>
+							<bunddef>ZCEEPI</bunddef>
+							<csdgroup>BAR</csdgroup>
+							<cicsplex>CICSEX56</cicsplex>
+							<region>IYCWEMW2</region>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
 		</plugins>
 	</build>
+
 </project>
