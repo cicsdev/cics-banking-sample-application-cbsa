@@ -54,7 +54,7 @@ For architecture information please refer to the GitHub repo:
 The Spring Boot applications run inside a WebSphere Liberty Profile JVM
 server inside CICS, but also communicate with z/OS Connect. It is
 important to make sure that the connection information to the zOS
-Connect EE server is correct. As a default, these are set to port 30701
+Connect server is correct. As a default, these are set to port 30701
 and host localhost, if you utilised a different port number or hostname
 during the zOS Connect EE setup (as part of the base/COBOL installation)
 then please substitute the default values with yours.

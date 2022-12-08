@@ -4,7 +4,7 @@
 
 The Payment interface is a SpringBoot application, which can drive
 back-end banking data, via a series of RESTful API calls, made to a zOS
-Connect EE server, which in turn, routes the requests to a CICS region.
+Connect server, which in turn, routes the requests to a CICS region.
 
 Please refer to the GitHub repo:
 
