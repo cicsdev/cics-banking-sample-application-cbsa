@@ -1,3 +1,8 @@
+/*
+ *
+ *    Copyright IBM Corp. 2022
+ *
+ */
 package com.ibm.cics.cip.bankliberty.webui.dataAccess;
 
 
@@ -23,13 +28,11 @@ import com.ibm.json.java.JSONObject;
 
 
 public class CustomerList {
-	/**
-*   Copyright contributors to the CICS Banking Sample Application (CBSA) project
-	 *
-	 */
 
     static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
+      "Copyright IBM Corp. 2022";
+
+
 
 	private List<Customer> customerList = new ArrayList<Customer>();
 

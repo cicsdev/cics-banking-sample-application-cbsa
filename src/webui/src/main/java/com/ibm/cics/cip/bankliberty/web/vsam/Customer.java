@@ -1,3 +1,8 @@
+/*
+ *
+ *    Copyright IBM Corp. 2022
+ *
+ */
 package com.ibm.cics.cip.bankliberty.web.vsam;
 
 import java.io.IOException;
@@ -42,15 +47,13 @@ import com.ibm.cics.server.ResourceUnavailableException;
 import com.ibm.json.java.JSONObject;
 
 public class Customer {
-	/**
-*   Copyright contributors to the CICS Banking Sample Application (CBSA) project
-	 *
-	 */
 
     static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
+      "Copyright IBM Corp. 2022";
+
+	
 	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.web.vsam");
-	// </copyright>
+
 
 	// String ACCOUNT_EYECATCHER             CHAR(4),
 	private 	String 		customer_number;

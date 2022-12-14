@@ -1,3 +1,8 @@
+/*
+ *
+ *    Copyright IBM Corp. 2022
+ *
+ */
 
 
 package com.ibm.cics.cip.bankliberty.web.db2;
@@ -20,13 +25,12 @@ import com.ibm.cics.server.Task;
 
 public class Account extends HBankDataAccess{
 
-	/**
-*   Copyright contributors to the CICS Banking Sample Application (CBSA) project
-	 *
-	 */
-
     static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
+      "Copyright IBM Corp. 2022";
+
+
+
+
 	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.web.db2");
 	// </copyright>
 
