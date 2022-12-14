@@ -1,6 +1,7 @@
 /*
  *
- *    Copyright contributors to the CICS Banking Sample Application (CBSA) project
+ *    Copyright IBM Corp. 2022
+ *
  *
  */
 package com.ibm.cics.cip.bank.springboot.paymentinterface;
@@ -10,7 +11,8 @@ import com.beust.jcommander.Parameter;
 public class ConnectionInfo {
 
     static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
+      "Copyright IBM Corp. 2022";
+
 
     @Parameter(names = {"--port", "-p"}, description = "Port to connect with")
     private static int port = 30701;

@@ -1,6 +1,7 @@
 /*
  *
- *    Copyright contributors to the CICS Banking Sample Application (CBSA) project
+ *    Copyright IBM Corp. 2022
+ *
  *
  * Copyright 2007-present the original author or authors.
  *
@@ -24,7 +25,8 @@ import java.util.Properties;
 public class MavenWrapperDownloader {
 
     static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
+      "Copyright IBM Corp. 2022";
+
 
     private static final String WRAPPER_VERSION = "0.5.6";
     /**
