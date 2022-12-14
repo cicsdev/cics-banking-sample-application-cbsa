@@ -1,9 +1,10 @@
-       CBL SQL
       ******************************************************************
       *                                                                *
-      *  Copyright contributors to the CICS Banking Sample Application *
-      * (CBSA) project                                                 *
+      *  Copyright IBM Corp. 2022                                      *
       *                                                                *
+      ******************************************************************
+       CBL SQL
+
       ******************************************************************
 
       ******************************************************************
@@ -66,9 +67,7 @@
       *****************************************************************
        WORKING-STORAGE SECTION.
       * Copyright statement as a literal to go into the load module
-       77 FILLER PIC X(34) VALUE 'Copyright contributors to the CICS'. 
-       77 FILLER PIC X(34) VALUE 'Banking Sample Application (CBSA)'. 
-       77 FILLER PIC X(8)  VALUE ' project'. 
+       77 FILLER PIC X(24) VALUE 'Copyright IBM Corp. 2022'. 
 
 
 
