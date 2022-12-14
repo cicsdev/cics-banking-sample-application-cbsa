@@ -1,8 +1,10 @@
+//*********************************************************************
+//*                                                                   *
+//*   Copyright IBM Corp. 2022                                        *
+//*                                                                   *
+//*********************************************************************
 //DB2BIND JOB 'DB2',NOTIFY=&SYSUID,CLASS=A,MSGCLASS=H,
-//          MSGLEVEL=(1,1),REGION=4M
-//*
-//* Copyright contributors to the CICS Banking Sample Application 
-//* (CBSA) project     
+//          MSGLEVEL=(1,1),REGION=4M   
 //*
 //*
 //* Please change @DB2_HLQ@  to DSNC10.DBCG

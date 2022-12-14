@@ -1,8 +1,10 @@
+//*********************************************************************
+//*                                                                   *
+//*   Copyright IBM Corp. 2022                                        *
+//*                                                                   *
+//*********************************************************************
 //CRETB03 JOB 'DB2',NOTIFY=&SYSUID,CLASS=A,MSGCLASS=H,
 //          MSGLEVEL=(1,1),REGION=4M
-//* Copyright contributors to the CICS Banking Sample Application 
-//* (CBSA) project     
-//*
 //*
 //JCLLIB  JCLLIB ORDER=DSNC10.PROCLIB
 //JOBLIB  DD  DISP=SHR,DSN=DSNC10.SDSNLOAD
