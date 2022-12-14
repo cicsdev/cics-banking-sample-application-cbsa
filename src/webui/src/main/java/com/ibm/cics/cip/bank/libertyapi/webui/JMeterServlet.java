@@ -63,8 +63,6 @@ public class JMeterServlet extends VaadinServlet {
     static final String COPYRIGHT =
       "Copyright IBM Corp. 2022";
 
-    static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
 
         private static final long serialVersionUID = -5874716650679865909L;
 
@@ -87,8 +85,6 @@ public class JMeterServlet extends VaadinServlet {
     static final String COPYRIGHT =
       "Copyright IBM Corp. 2022";
 
-    static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
 
         private static final long serialVersionUID = 4596901275146146127L;
 

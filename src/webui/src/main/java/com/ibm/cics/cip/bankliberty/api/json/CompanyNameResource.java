@@ -46,8 +46,6 @@ public class CompanyNameResource{
 	static String companyNameString = null;
 	
 
-    static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
 	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.api.json.CompanyNameResource");
 	// </copyright>
 
