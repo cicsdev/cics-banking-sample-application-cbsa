@@ -1,8 +1,11 @@
+//*********************************************************************
+//*                                                                   *
+//*   Copyright IBM Corp. 2022                                        *
+//*                                                                   *
+//*********************************************************************
 //SHUTCICS JOB ,,CLASS=A,MSGCLASS=H,
 //  NOTIFY=&SYSUID,
-//  MSGLEVEL=(1,1),REGION=0M
-//* Copyright contributors to the CICS Banking Sample Application 
-//* (CBSA) project     
+//  MSGLEVEL=(1,1),REGION=0M  
 //*
 //STEP0001 EXEC PGM=IKJEFT01,TIME=1440,REGION=0M
 //SYSTSPRT DD DUMMY

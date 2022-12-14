@@ -1,8 +1,10 @@
+//*********************************************************************
+//*                                                                   *
+//*   Copyright IBM Corp. 2022                                        *
+//*                                                                   *
+//*********************************************************************
 //CRELIBS JOB ,,NOTIFY=&SYSUID.     
-//* Copyright contributors to the CICS Banking Sample Application 
-//* (CBSA) project     
 //*
-//*                                    00010003
 // JCLLIB ORDER=CBSA.JCL.INSTALL                                        00020000
 //IEFBR14 EXEC PGM=IEFBR14                                              00030000
 // INCLUDE MEMBER=CREDB2L                                               00040003

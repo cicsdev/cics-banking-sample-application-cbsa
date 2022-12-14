@@ -1,9 +1,11 @@
+//*********************************************************************
+//*                                                                   *
+//*   Copyright IBM Corp. 2022                                        *
+//*                                                                   *
+//*********************************************************************
 //BANKDATA JOB 'DB2',NOTIFY=&SYSUID,CLASS=A,MSGCLASS=H,
 //          MSGLEVEL=(1,1),REGION=4M
 //*
-//*
-//* Copyright contributors to the CICS Banking Sample Application 
-//* (CBSA) project     
 //*
 //*
 //* Change @BANK_PREFIX@ to be CBSA.CICSBSA

@@ -1,10 +1,11 @@
+//*********************************************************************
+//*                                                                   *
+//*   Copyright IBM Corp. 2022                                        *
+//*                                                                   *
+//*********************************************************************
 //HBANKCSD JOB ,,CLASS=A,MSGCLASS=H,
 //  NOTIFY=&SYSUID,
 //  MSGLEVEL=(1,1)
-//*
-//* Copyright contributors to the CICS Banking Sample Application 
-//* (CBSA) project     
-//*
 //*
 //* Please change @CICS_PREFIX@ to DFH560.CICS
 //*  - to the prefix for CICS system datasets

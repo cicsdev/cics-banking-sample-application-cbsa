@@ -1,6 +1,8 @@
-//*
-//* Copyright contributors to the CICS Banking Sample Application 
-//* (CBSA) project     
+//*********************************************************************
+//*                                                                   *
+//*   Copyright IBM Corp. 2022                                        *
+//*                                                                   *
+//*********************************************************************
 //*
 //*CREDB2L JOB ,,CLASS=A,MSGCLASS=H,                                    00000103
 //*  NOTIFY=&SYSUID,                                                    00000203

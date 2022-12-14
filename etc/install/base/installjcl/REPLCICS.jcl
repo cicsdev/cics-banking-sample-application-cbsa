@@ -1,8 +1,11 @@
+//*********************************************************************
+//*                                                                   *
+//*   Copyright IBM Corp. 2022                                        *
+//*                                                                   *
+//*********************************************************************
 //REPLCICS JOB ,,CLASS=A,MSGCLASS=H,
 //  NOTIFY=&SYSUID,
 //  MSGLEVEL=(1,1),REGION=0M
-//* Copyright contributors to the CICS Banking Sample Application 
-//* (CBSA) project     
 //*
 //JOBSTEP  EXEC  PGM=IEBCOPY
 //SYSPRINT DD  SYSOUT=H

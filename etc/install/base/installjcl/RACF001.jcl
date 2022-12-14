@@ -1,8 +1,11 @@
+//*********************************************************************
+//*                                                                   *
+//*   Copyright IBM Corp. 2022                                        *
+//*                                                                   *
+//*********************************************************************
 //RACF001 JOB ,,CLASS=A,MSGCLASS=H,
 //  NOTIFY=&SYSUID,
 //  MSGLEVEL=(1,1)
-//* Copyright contributors to the CICS Banking Sample Application 
-//* (CBSA) project     
 //*
 //TSO     EXEC PGM=IKJEFT01,DYNAMNBR=20,REGION=0M
 //SYSTSPRT DD SYSOUT=*
