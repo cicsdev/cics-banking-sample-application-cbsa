@@ -1,6 +1,7 @@
 /*
  *
- *    Copyright contributors to the CICS Banking Sample Application (CBSA) project
+ *    Copyright IBM Corp. 2022
+ *
  *
  */
 package com.ibm.cics.cip.bank.libertyapi.webui;
@@ -29,7 +30,8 @@ import com.vaadin.ui.UI;
 public class Com_ibm_cics_cip_bank_libertyapi_webuiUI extends UI {
 
     static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
+      "Copyright IBM Corp. 2022";
+
 
 
 	@WebServlet(value = "/*", asyncSupported = true)
@@ -37,7 +39,8 @@ public class Com_ibm_cics_cip_bank_libertyapi_webuiUI extends UI {
 	public static class Servlet extends JMeterServlet{
 
     static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
+      "Copyright IBM Corp. 2022";
+
 
 	}
 

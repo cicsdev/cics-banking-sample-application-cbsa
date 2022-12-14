@@ -1,6 +1,7 @@
 /*
  *
- *    Copyright contributors to the CICS Banking Sample Application (CBSA) project
+ *    Copyright IBM Corp. 2022
+ *
  *
  */
 package com.ibm.cics.cip.bank.libertyapi.webui;
@@ -21,7 +22,8 @@ import com.vaadin.ui.Component;
 public class JMeterServlet extends VaadinServlet {
 
     static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
+      "Copyright IBM Corp. 2022";
+
 
     private static final long serialVersionUID = 898354532369443197L;
 
@@ -59,6 +61,9 @@ public class JMeterServlet extends VaadinServlet {
     public static class JMeterService extends VaadinServletService {
 
     static final String COPYRIGHT =
+      "Copyright IBM Corp. 2022";
+
+    static final String COPYRIGHT =
       "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
 
         private static final long serialVersionUID = -5874716650679865909L;
@@ -78,6 +83,9 @@ public class JMeterServlet extends VaadinServlet {
     }
 
     public static class JMeterSession extends VaadinSession {
+
+    static final String COPYRIGHT =
+      "Copyright IBM Corp. 2022";
 
     static final String COPYRIGHT =
       "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";

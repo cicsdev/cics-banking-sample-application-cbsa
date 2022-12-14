@@ -1,6 +1,7 @@
 /*
  *
- *    Copyright contributors to the CICS Banking Sample Application (CBSA) project
+ *    Copyright IBM Corp. 2022
+ *
  *
  */
 
@@ -38,7 +39,8 @@ import com.vaadin.ui.ComboBox;
 public class AccountUI extends VerticalLayout{
 
     static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
+      "Copyright IBM Corp. 2022";
+
 
 	private static final long serialVersionUID = 1L;
 	private Account a;

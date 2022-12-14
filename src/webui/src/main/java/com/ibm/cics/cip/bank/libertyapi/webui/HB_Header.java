@@ -1,6 +1,7 @@
 /*
  *
- *    Copyright contributors to the CICS Banking Sample Application (CBSA) project
+ *    Copyright IBM Corp. 2022
+ *
  *
  */
 
@@ -29,7 +30,8 @@ import com.vaadin.ui.Button.ClickEvent;
 public class HB_Header extends HorizontalLayout{
 
     static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
+      "Copyright IBM Corp. 2022";
+
 
 	private static final long serialVersionUID = -5542630839520498092L;
 	Button back;
