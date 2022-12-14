@@ -1,7 +1,7 @@
       ******************************************************************
       *                                                                *
-      *  Copyright contributors to the CICS Banking Sample Application *
-      * (CBSA) project                                                 *
+      *  Copyright IBM Corp. 2022                                      *
+      *                                                                *
       *                                                                *
       ******************************************************************
           03 NUMBER-OF-ACCOUNTS        PIC S9(8) BINARY.

@@ -1,7 +1,7 @@
       ******************************************************************
       *                                                                *
-      *  Copyright contributors to the CICS Banking Sample Application *
-      * (CBSA) project                                                 *
+      *  Copyright IBM Corp. 2022                                      *
+      *                                                                *
       *                                                                *
       ******************************************************************
            03 CONTROL-CUSTOMER-COUNT PIC 9(10) PACKED-DECIMAL.
