@@ -1,6 +1,7 @@
 /*
  *
- *    Copyright contributors to the CICS Banking Sample Application (CBSA) project
+ *    Copyright IBM Corp. 2022
+ *
  *
  */
 package com.ibm.cics.cip.bank.springboot.paymentinterface.jsonclasses.paymentinterface;
@@ -12,7 +13,7 @@ import com.ibm.cics.cip.bank.springboot.paymentinterface.JsonPropertyNamingStrat
 public class DbcrJson {
 
     static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
+      "Copyright IBM Corp. 2022";
 
     private String COMM_ACCNO;
     private float COMM_AMT;

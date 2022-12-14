@@ -1,6 +1,7 @@
 /*
  *
- *    Copyright contributors to the CICS Banking Sample Application (CBSA) project
+ *    Copyright IBM Corp. 2022
+ *
  *
  */
 package com.ibm.cics.cip.bank.springboot.paymentinterface;
@@ -13,7 +14,8 @@ import com.fasterxml.jackson.databind.introspect.AnnotatedMethod;
 public class JsonPropertyNamingStrategy extends PropertyNamingStrategy {
 
     static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
+      "Copyright IBM Corp. 2022";
+
 
     /**
      *
