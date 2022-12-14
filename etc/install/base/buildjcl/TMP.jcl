@@ -1,6 +1,9 @@
+//*********************************************************************
+//*                                                                   *
+//*   Copyright IBM Corp. 2022                                        *
+//*                                                                   *
+//*********************************************************************
 //TMP       JOB ,CLASS=A,MSGCLASS=H,NOTIFY=&SYSUID
-//* Copyright contributors to the CICS Banking Sample Application 
-//* (CBSA) project     
 //*
 //*CICS   PROC MEMBER=
 //COBOL  EXEC PGM=IGYCRCTL,REGION=0M,

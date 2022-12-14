@@ -1,6 +1,9 @@
+//*********************************************************************
+//*                                                                   *
+//*   Copyright IBM Corp. 2022                                        *
+//*                                                                   *
+//*********************************************************************
 //PLOP1 JOB ,CLASS=A,MSGCLASS=A,NOTIFY=&SYSUID,TYPRUN=SCAN
-//* Copyright contributors to the CICS Banking Sample Application 
-//* (CBSA) project     
 //*
 // JCLLIB ORDER=CBSA.CICSBSA.BUILDJCL
 //*

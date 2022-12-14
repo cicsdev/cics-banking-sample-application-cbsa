@@ -1,6 +1,9 @@
+//*********************************************************************
+//*                                                                   *
+//*   Copyright IBM Corp. 2022                                        *
+//*                                                                   *
+//*********************************************************************
 //TEST JOB ,CLASS=A,MSGCLASS=A,NOTIFY=&SYSUID
-//* Copyright contributors to the CICS Banking Sample Application 
-//* (CBSA) project     
 //*
 // JCLLIB ORDER=CBSA.CICSBSA.BUILDJCL
 //*
