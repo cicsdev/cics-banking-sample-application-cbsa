@@ -1,6 +1,7 @@
 /*
  *
- *    Copyright contributors to the CICS Banking Sample Application (CBSA) project
+ *    Copyright IBM Corp. 2022
+ *
  *
  */
 package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.updateaccount;
@@ -13,7 +14,8 @@ import com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.createaccou
 public class UpdaccJson {
 
     static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
+      "Copyright IBM Corp. 2022";
+
 
     private String COMM_EYE;
     private String COMM_CUSTNO;

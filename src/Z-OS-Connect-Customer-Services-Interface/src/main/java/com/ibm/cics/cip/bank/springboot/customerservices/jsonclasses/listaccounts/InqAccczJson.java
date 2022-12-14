@@ -1,6 +1,7 @@
 /*
  *
- *    Copyright contributors to the CICS Banking Sample Application (CBSA) project
+ *    Copyright IBM Corp. 2022
+ *
  *
  */
 package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.listaccounts;
@@ -14,7 +15,8 @@ import com.ibm.cics.cip.bank.springboot.customerservices.JsonPropertyNamingStrat
 public class InqAccczJson {
 
     static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
+      "Copyright IBM Corp. 2022";
+
 
     private int COMM_FAIL_CODE;
     private int CUSTOMER_NUMBER;
