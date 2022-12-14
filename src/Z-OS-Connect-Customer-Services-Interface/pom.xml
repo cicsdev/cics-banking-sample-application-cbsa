@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-        Copyright contributors to the CICS Banking Sample Application (CBSA) project
+        Copyright IBM Corp. 2022
+
 
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
