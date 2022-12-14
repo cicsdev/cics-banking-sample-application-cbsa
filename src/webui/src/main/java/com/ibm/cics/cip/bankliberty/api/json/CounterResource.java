@@ -1,3 +1,8 @@
+/*
+ *
+ *    Copyright IBM Corp. 2022
+ *
+ */
 
 
 package com.ibm.cics.cip.bankliberty.api.json;
@@ -36,17 +41,16 @@ import com.ibm.json.java.JSONObject;
 @Path("/counter")
 public class CounterResource extends HBankDataAccess{
 
+    static final String COPYRIGHT =
+      "Copyright IBM Corp. 2022";
+
 	/**
 	 * This class describes the methods of the CounterResource. NamedCounters are not supported in jCICS, so we jCICS LINK to COBOL programs
 	 * 
 	 */
 
-	/**
-*   Copyright contributors to the CICS Banking Sample Application (CBSA) project
-	 *
-	 */ 
-    static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
+
+
 	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.api.json");
 	// </copyright>
 	

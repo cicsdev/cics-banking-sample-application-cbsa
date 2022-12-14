@@ -1,3 +1,8 @@
+/*
+ *
+ *    Copyright IBM Corp. 2022
+ *
+ */
 package com.ibm.cics.cip.bankliberty.api.json;
 
 import java.io.IOException;
@@ -22,13 +27,13 @@ import com.ibm.cics.server.Task;
  * 
  */
 
-/**
- * Copyright contributors to the CICS Banking Sample Application (CBSA) project
- *
- */
 
 
 public class HBankDataAccess {
+
+    static final String COPYRIGHT =
+      "Copyright IBM Corp. 2022";
+
 	private 	DataSource 	ds;
 	protected 	Connection	conn = null;
 	static int connectionCount = 0;
@@ -36,8 +41,7 @@ public class HBankDataAccess {
 	@SuppressWarnings("rawtypes")
 	static Hashtable cornedBeef = null;
 	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.api.json");
-    static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
+
 
 	public HBankDataAccess()
 	{

@@ -1,3 +1,8 @@
+/*
+ *
+ *    Copyright IBM Corp. 2022
+ *
+ */
 
 
 package com.ibm.cics.cip.bankliberty.api.json;
@@ -31,18 +36,13 @@ import com.ibm.json.java.JSONObject;
  * 
  */
 
-/**
- * Copyright contributors to the CICS Banking Sample Application (CBSA) project
- *
- */
-
 @Path("/account")
 public class AccountsResource extends HBankDataAccess{
 
     static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
+      "Copyright IBM Corp. 2022";
+
 	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.api.json");
-	// </copyright>
 
 
 

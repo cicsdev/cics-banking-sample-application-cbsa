@@ -1,3 +1,8 @@
+/*
+ *
+ *    Copyright IBM Corp. 2022
+ *
+ */
 package com.ibm.cics.cip.bankliberty.api.json;
 
 import java.sql.Date;
@@ -28,15 +33,14 @@ import com.ibm.cics.server.ChildResponse.CompletionStatus;
  * 
  */
 
-/**
- * Copyright contributors to the CICS Banking Sample Application (CBSA) project
- *
- */
+
 
 public class CreditScoreCICS540 {
-	
+
     static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
+      "Copyright IBM Corp. 2022";
+	
+
 	public static CustomerJSON populateCreditScoreAndReviewDate(CustomerJSON customer)
 	{
 		

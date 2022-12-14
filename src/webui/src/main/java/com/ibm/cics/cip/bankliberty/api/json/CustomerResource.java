@@ -1,3 +1,8 @@
+/*
+ *
+ *    Copyright IBM Corp. 2022
+ *
+ */
 
 package com.ibm.cics.cip.bankliberty.api.json;
 
@@ -26,18 +31,14 @@ import com.ibm.json.java.JSONObject;
 @Path("/customer")
 public class CustomerResource{
 
+    static final String COPYRIGHT =
+      "Copyright IBM Corp. 2022";
+
 	/**
 	 * This class describes the methods of the Customer Resource
 	 * 
 	 */
 
-	/**
-*   Copyright contributors to the CICS Banking Sample Application (CBSA) project
-	 *
-	 */ 
-    static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
-	// </copyright>
 
 	static String sortcode = null;
 

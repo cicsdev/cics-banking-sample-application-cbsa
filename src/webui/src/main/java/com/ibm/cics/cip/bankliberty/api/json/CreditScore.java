@@ -1,3 +1,8 @@
+/*
+ *
+ *    Copyright IBM Corp. 2022
+ *
+ */
 package com.ibm.cics.cip.bankliberty.api.json;
 
 import java.io.IOException;
@@ -12,15 +17,14 @@ import java.util.logging.Logger;
  * 
  */
 
-/**
- * Copyright contributors to the CICS Banking Sample Application (CBSA) project
- *
- */
 
 
 public class CreditScore {
+
     static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
+      "Copyright IBM Corp. 2022";
+
+
 	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.api.json");
 	public static CustomerJSON populateCreditScoreAndReviewDate(CustomerJSON customer)
 	{
