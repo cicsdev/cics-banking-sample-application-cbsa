@@ -1,6 +1,7 @@
 /*
  *
- *    Copyright contributors to the CICS Banking Sample Application (CBSA) project
+ *    Copyright IBM Corp. 2022
+ *
  *
  */
 package com.ibm.cics.cip.bank.springboot.customerservices;
@@ -10,13 +11,13 @@ import com.beust.jcommander.Parameter;
 public class ConnectionInfo {
 
     static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
+      "Copyright IBM Corp. 2022";
+
 
     @Parameter(names = {"--port", "-p"}, description = "Port to connect with")
     private static int port = 30701;
 
     @Parameter(names = {"--address", "--url", "-a", "-u"}, description = "Address to use")
-//    private static String address = "nazare-cbsa-test1.fyre.ibm.com";
     private static String address = "localhost";
 
     public static String getAddressAndPort() {
