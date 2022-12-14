@@ -1,6 +1,7 @@
 /*
  *
- *    Copyright contributors to the CICS Banking Sample Application (CBSA) project
+ *    Copyright IBM Corp. 2022
+ *
  *
  */
 package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.customerenquiry;
@@ -11,8 +12,9 @@ import javax.validation.constraints.Size;
 public class CustomerEnquiryForm {
 
     static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
-    
+      "Copyright IBM Corp. 2022";
+
+   
     @NotNull
     @Size(min=1, max=10)
     private String custNumber;

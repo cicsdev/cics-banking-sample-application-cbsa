@@ -1,6 +1,7 @@
 /*
  *
- *    Copyright contributors to the CICS Banking Sample Application (CBSA) project
+ *    Copyright IBM Corp. 2022
+ *
  *
  */
 package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.deleteaccount;
@@ -13,7 +14,8 @@ import com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.createaccou
 public class DelaccJson {
 
     static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
+      "Copyright IBM Corp. 2022";
+
     
     private String DELACC_SUCCESS;
     private String DELACC_LAST_STMT_DT;
