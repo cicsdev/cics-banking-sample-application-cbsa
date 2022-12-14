@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 <!--                                                                 -->
-<!--  Copyright contributors to the CICS Banking Sample Application (CBSA) project-->
+<!--  Copyright IBM Corp. 2022                                       -->
+<!--                                                                 -->
 <!--                                                                 -->
 <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 <ns2:message xmlns:ns2="http://www.ibm.com/ims/Transaction" transactionCode="" messageName="UPDCUST" direction="0" serviceType="CICS_COMM_AREA">
