@@ -1,7 +1,7 @@
       ******************************************************************
       *                                                                *
-      *  Copyright contributors to the CICS Banking Sample Application *
-      * (CBSA) project                                                 *
+      *  Copyright IBM Corp. 2022                                      *
+      *                                                                *
       *                                                                *
       ******************************************************************
            EXEC SQL DECLARE STTESTER.CONTROL TABLE
