@@ -1,3 +1,8 @@
+/*
+ *
+ *    Copyright IBM Corp. 2022
+ *
+ */
 package com.ibm.cics.cip.bankliberty.api.json;
 
 
@@ -10,14 +15,14 @@ import javax.ws.rs.FormParam;
  * This class describes the parts of the TransferLocal record in JSON format
  */
 
-/**
- * Copyright contributors to the CICS Banking Sample Application (CBSA) project
- *
- */
+
 
 public class TransferLocalJSON extends DebitCreditAccountJSON{
+
     static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
+      "Copyright IBM Corp. 2022";
+
+
 
 
 	@FormParam("targetAccount")

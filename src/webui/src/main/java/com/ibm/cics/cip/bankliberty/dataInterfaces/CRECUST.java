@@ -1,6 +1,7 @@
 /*
  *
- *    Copyright contributors to the CICS Banking Sample Application (CBSA) project
+ *    Copyright IBM Corp. 2022
+ *
  *
  */
 package com.ibm.cics.cip.bankliberty.dataInterfaces;
@@ -11,7 +12,8 @@ import com.ibm.jzos.fields.*;
 public class CRECUST {
 
     static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
+      "Copyright IBM Corp. 2022";
+
 
 	protected static CobolDatatypeFactory factory = new CobolDatatypeFactory();
 	static { factory.setStringTrimDefault(false); } 

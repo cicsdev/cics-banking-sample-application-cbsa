@@ -1,3 +1,8 @@
+/*
+ *
+ *    Copyright IBM Corp. 2022
+ *
+ */
 package com.ibm.cics.cip.bankliberty.api.json;
 
 import java.math.BigDecimal;
@@ -9,15 +14,14 @@ import javax.ws.rs.FormParam;
  * This class describes the parts of the ProcessedTransactionDebitCreditJSON record, used by ProcessedTransaction, in JSON format
  */
 
-/**
- * Copyright contributors to the CICS Banking Sample Application (CBSA) project
- *
- */
 
 
 public class ProcessedTransactionDebitCreditJSON extends ProcessedTransactionJSON{
+
     static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
+      "Copyright IBM Corp. 2022";
+
+
 	
 	@NotNull
 	@FormParam("amount")

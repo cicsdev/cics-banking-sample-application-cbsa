@@ -1,12 +1,13 @@
+/*
+ *
+ *    Copyright IBM Corp. 2022
+ *
+ */
 /**
  * This class describes the methods of the SortCode Resource
  * 
  */
 
-/**
- * Copyright contributors to the CICS Banking Sample Application (CBSA) project
- *
- */
 
 package com.ibm.cics.cip.bankliberty.api.json;
 
@@ -38,8 +39,11 @@ import com.ibm.json.java.JSONObject;
 
 @Path("/sortCode")
 public class SortCodeResource{
+
     static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
+      "Copyright IBM Corp. 2022";
+
+
 	static String sortCodeString = null;
 
 	@GET

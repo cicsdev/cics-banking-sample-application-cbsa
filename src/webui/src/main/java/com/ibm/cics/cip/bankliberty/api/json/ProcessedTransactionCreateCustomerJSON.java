@@ -1,3 +1,8 @@
+/*
+ *
+ *    Copyright IBM Corp. 2022
+ *
+ */
 package com.ibm.cics.cip.bankliberty.api.json;
 
 import java.sql.Date;
@@ -10,15 +15,13 @@ import javax.ws.rs.FormParam;
  * This class describes the parts of the ProcessedTransactionCreateCustomerJSON record, used by ProcessedTransaction, in JSON format
  */
 
-/**
- * Copyright contributors to the CICS Banking Sample Application (CBSA) project
- *
- */
 
 
 public class ProcessedTransactionCreateCustomerJSON extends ProcessedTransactionJSON{
+
     static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
+      "Copyright IBM Corp. 2022";
+
 	
 	@NotNull
 	@FormParam("customerName")

@@ -1,3 +1,8 @@
+/*
+ *
+ *    Copyright IBM Corp. 2022
+ *
+ */
 
 
 package com.ibm.cics.cip.bankliberty.api.json;
@@ -26,16 +31,15 @@ import com.ibm.json.java.JSONObject;
  * 
  */
 
-/**
- * Copyright contributors to the CICS Banking Sample Application (CBSA) project
- *
- */
+
 
 @Path("/processedTransaction")
 public class ProcessedTransactionResource{
 
     static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
+      "Copyright IBM Corp. 2022";
+
+
 	@SuppressWarnings("deprecation")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
