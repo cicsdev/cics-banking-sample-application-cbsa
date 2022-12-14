@@ -1,10 +1,9 @@
+      ******************************************************************
+      *                                                                *
+      *  Copyright IBM Corp. 2022                                      *
+      *                                                                *
+      ******************************************************************
        CBL CICS('SP,EDF')
-      ******************************************************************
-      *                                                                *
-      *  Copyright contributors to the CICS Banking Sample Application *
-      * (CBSA) project                                                 *
-      *                                                                *
-      ******************************************************************
 
       ******************************************************************
       * This program takes customer number as input
@@ -36,10 +35,7 @@
 
        WORKING-STORAGE SECTION.
       * Copyright statement as a literal to go into the load module
-       77 FILLER PIC X(34) VALUE 'Copyright contributors to the CICS'. 
-       77 FILLER PIC X(34) VALUE 'Banking Sample Application (CBSA)'. 
-       77 FILLER PIC X(8)  VALUE ' project'. 
-
+       77 FILLER PIC X(24) VALUE 'Copyright IBM Corp. 2022'. 
 
        77 SYSIDERR-RETRY               PIC 999.
        77 INQCUST-RETRY                PIC 9999.
