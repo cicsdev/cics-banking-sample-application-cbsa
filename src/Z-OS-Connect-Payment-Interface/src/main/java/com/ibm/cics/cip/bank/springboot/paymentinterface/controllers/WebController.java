@@ -140,8 +140,6 @@ class InsufficientFundsException extends Exception {
     static final String COPYRIGHT =
       "Copyright IBM Corp. 2022";
 
-    static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
 
     /**
      *
@@ -158,8 +156,6 @@ class InvalidAccountTypeException extends Exception {
     static final String COPYRIGHT =
       "Copyright IBM Corp. 2022";
 
-    static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
 
     /**
      *
@@ -177,8 +173,6 @@ class TooManyAccountsException extends Exception {
     static final String COPYRIGHT =
       "Copyright IBM Corp. 2022";
 
-    static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
 
     /**
      *
@@ -195,8 +189,7 @@ class ItemNotFoundException extends Exception {
     static final String COPYRIGHT =
       "Copyright IBM Corp. 2022";
 
-    static final String COPYRIGHT =
-      "Copyright contributors to the CICS Banking Sample Application (CBSA) project.";
+
 
     /**
      *
