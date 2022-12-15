@@ -1,8 +1,5 @@
 /*
  *
- *    Copyright IBM Corp. 2022
- *
- *
  * Copyright 2007-present the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +20,6 @@ import java.nio.channels.*;
 import java.util.Properties;
 
 public class MavenWrapperDownloader {
-
-    static final String COPYRIGHT =
-      "Copyright IBM Corp. 2022";
 
 
     private static final String WRAPPER_VERSION = "0.5.6";
