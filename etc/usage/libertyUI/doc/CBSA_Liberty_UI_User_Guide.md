@@ -14,7 +14,7 @@ Access to the Liberty UI is via a web browser. The exact URL will depend
 upon the host name and the port number chosen during installation. It
 will look something like this:
 
-[http://*your-allocated-host-name*:*your-port-number*/com.ibm.cics.cip.bank.LibertyAPI.webUI/](http://your-allocated-host-name:your-port-number/com.ibm.cics.cip.bank.LibertyAPI.webUI/)
+[http://*your-allocated-host-name*:*your-port-number*/com.ibm.cics.cip.bank.LibertyAPI.webUI/](http://your-allocated-host-name:your-port-number/webUI/)
 
 #### CICS Bank Sample Application Main Menu:
 

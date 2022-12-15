@@ -553,7 +553,7 @@ public class Account extends HBankDataAccess{
 		Long accountNumber =0L;
 		String controlString = sortcode.toString() + "-" + "ACCOUNT-LAST";
 		String sql = "SELECT * from CONTROL where CONTROL_NAME = ?";
-		logger.fine("About to do SELECT <" + sql + ">");
+		logger.fine("About to do SELECT <" + sql + ">" + " " + controlString);
 
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -565,7 +565,7 @@ public class Account extends HBankDataAccess{
 				rs.close();
 			}
 		} catch (SQLException e) {
-			logger.severe("Error accessing Control Table " + e.getLocalizedMessage());
+			logger.severe("Error accessing Control Table for SELECT " + e.getLocalizedMessage());
 			logger.exiting(this.getClass().getName(),"createAccount(AccountJSON account, Integer sortcode, boolean use NamedCounter)",null);
 			try {
 				Task.getTask().rollback();
@@ -720,7 +720,7 @@ public class Account extends HBankDataAccess{
 				rs.next();
 				String sqlUpdate = "UPDATE CONTROL "+
 						"SET"+
-						" CONTROL_VALUE_NUM = '?"+
+						" CONTROL_VALUE_NUM = ?"+
 						" WHERE CONTROL_NAME = ?";
 
 				logger.fine("About to execute update SQL <" + sqlUpdate + ">");
@@ -729,7 +729,7 @@ public class Account extends HBankDataAccess{
 				stmt.setString(2, controlString);
 				stmt.execute();
 			} catch (SQLException e) {
-				logger.severe("Error accessing Control Table " + e.getLocalizedMessage());
+				logger.severe("Error accessing Control Table for UPDATE" + e.getLocalizedMessage());
 				logger.exiting(this.getClass().getName(),"createAccount(AccountJSON account, Integer sortcode, boolean use NamedCounter)",null);
 				try {
 					Task.getTask().rollback();
