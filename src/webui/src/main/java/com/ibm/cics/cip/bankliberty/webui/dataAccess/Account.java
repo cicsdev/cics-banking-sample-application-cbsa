@@ -12,14 +12,11 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+
+
 import java.util.Calendar;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.sql.DataSource;
 import javax.ws.rs.core.Response;
 
@@ -176,7 +173,7 @@ public class Account {
 		if(next_statement == null){
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(opened);
-			cal.add(cal.DATE, +7);
+			cal.add(Calendar.DATE, +7);
 			this.next_statement =  new Date(cal.getTime().getTime());
 		}
 		else{

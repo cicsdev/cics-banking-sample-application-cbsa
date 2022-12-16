@@ -238,8 +238,15 @@ public class ProcessedTransaction extends HBankDataAccess{
 					String nextStatementYYYY      = temp[i].getDescription().substring(30,34);
 
 					temp[i].setAccount_type(deletedAccountType);
-					Date lastStatementDate = new Date(new Integer(lastStatementYYYY).intValue() - 1900, new Integer(lastStatementMM).intValue() -1, new Integer(lastStatementDD).intValue());
-					Date nextStatementDate = new Date(new Integer(nextStatementYYYY).intValue() - 1900, new Integer(nextStatementMM).intValue() -1, new Integer(nextStatementDD).intValue());
+					Calendar myCalendar = Calendar.getInstance();
+					myCalendar.set(Calendar.YEAR, (new Integer(lastStatementYYYY).intValue() - 1900));
+					myCalendar.set(Calendar.MONTH, (new Integer(lastStatementMM).intValue() -1));
+					myCalendar.set(Calendar.DAY_OF_MONTH, new Integer(lastStatementDD).intValue());
+					Date lastStatementDate = new Date(myCalendar.getTimeInMillis());
+					myCalendar.set(Calendar.YEAR, (new Integer(nextStatementYYYY).intValue() - 1900));
+					myCalendar.set(Calendar.MONTH, (new Integer(nextStatementMM).intValue() -1));
+					myCalendar.set(Calendar.DAY_OF_MONTH, new Integer(nextStatementDD).intValue());
+					Date nextStatementDate = new Date(myCalendar.getTimeInMillis());
 					temp[i].setLast_statement(lastStatementDate);
 					temp[i].setNext_statement(nextStatementDate);
 					temp[i].setCustomer(deletedAccountCustomer);
@@ -256,8 +263,15 @@ public class ProcessedTransaction extends HBankDataAccess{
 					String nextStatementYYYY      = temp[i].getDescription().substring(30,34);
 
 					temp[i].setAccount_type(createdAccountType);
-					Date lastStatementDate = new Date(new Integer(lastStatementYYYY).intValue() - 1900, new Integer(lastStatementMM).intValue() -1, new Integer(lastStatementDD).intValue());
-					Date nextStatementDate = new Date(new Integer(nextStatementYYYY).intValue() - 1900, new Integer(nextStatementMM).intValue() -1, new Integer(nextStatementDD).intValue());
+					Calendar myCalendar = Calendar.getInstance();
+					myCalendar.set(Calendar.YEAR, (new Integer(lastStatementYYYY).intValue() - 1900));
+					myCalendar.set(Calendar.MONTH, (new Integer(lastStatementMM).intValue() -1));
+					myCalendar.set(Calendar.DAY_OF_MONTH, new Integer(lastStatementDD).intValue());
+					Date lastStatementDate = new Date(myCalendar.getTimeInMillis());
+					myCalendar.set(Calendar.YEAR, (new Integer(nextStatementYYYY).intValue() - 1900));
+					myCalendar.set(Calendar.MONTH, (new Integer(nextStatementMM).intValue() -1));
+					myCalendar.set(Calendar.DAY_OF_MONTH, new Integer(nextStatementDD).intValue());
+					Date nextStatementDate = new Date(myCalendar.getTimeInMillis());
 					temp[i].setLast_statement(lastStatementDate);
 					temp[i].setNext_statement(nextStatementDate);
 					temp[i].setCustomer(createdAccountCustomer);
@@ -271,7 +285,11 @@ public class ProcessedTransaction extends HBankDataAccess{
 					String dateOfBirthDD        = temp[i].getDescription().substring(30,32);
 					String dateOfBirthMM        = temp[i].getDescription().substring(33,35);
 					String dateOfBirthYYYY      = temp[i].getDescription().substring(36,40);
-					Date dateOfBirth = new Date(new Integer(dateOfBirthYYYY).intValue() - 1900, new Integer(dateOfBirthMM).intValue() -1, new Integer(dateOfBirthDD).intValue());
+					Calendar myCalendar = Calendar.getInstance();
+					myCalendar.set(Calendar.YEAR, (new Integer(dateOfBirthYYYY).intValue() - 1900));
+					myCalendar.set(Calendar.MONTH, (new Integer(dateOfBirthMM).intValue() -1));
+					myCalendar.set(Calendar.DAY_OF_MONTH, new Integer(dateOfBirthDD).intValue());
+					Date dateOfBirth = new Date(myCalendar.getTimeInMillis());					
 					temp[i].setDateOfBirth(dateOfBirth);
 					temp[i].setCustomer(deletedCustomerNumber);
 				}
@@ -284,7 +302,11 @@ public class ProcessedTransaction extends HBankDataAccess{
 					String dateOfBirthDD        = temp[i].getDescription().substring(30,32);
 					String dateOfBirthMM        = temp[i].getDescription().substring(33,35);
 					String dateOfBirthYYYY      = temp[i].getDescription().substring(36,40);
-					Date dateOfBirth = new Date(new Integer(dateOfBirthYYYY).intValue() - 1900, new Integer(dateOfBirthMM).intValue() -1, new Integer(dateOfBirthDD).intValue());
+					Calendar myCalendar = Calendar.getInstance();
+					myCalendar.set(Calendar.YEAR, (new Integer(dateOfBirthYYYY).intValue() - 1900));
+					myCalendar.set(Calendar.MONTH, (new Integer(dateOfBirthMM).intValue() -1));
+					myCalendar.set(Calendar.DAY_OF_MONTH, new Integer(dateOfBirthDD).intValue());
+					Date dateOfBirth = new Date(myCalendar.getTimeInMillis());
 					temp[i].setDateOfBirth(dateOfBirth);
 					temp[i].setCustomer(createdCustomerNumber);
 				}

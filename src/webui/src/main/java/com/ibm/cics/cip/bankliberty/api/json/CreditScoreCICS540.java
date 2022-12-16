@@ -105,14 +105,17 @@ public class CreditScoreCICS540 {
 
 			CRECUST myCRECUST = new CRECUST();
 			myCRECUST.setCommAddress(customer.getCustomerAddress());
-			myCRECUST.setCommBirthDay(customer.getDateOfBirth().getDate());
-			myCRECUST.setCommBirthMonth(customer.getDateOfBirth().getMonth() + 1);
-			myCRECUST.setCommBirthYear(customer.getDateOfBirth().getYear() + 1900);
+			Calendar myCalendar = Calendar.getInstance();
+			myCalendar.setTime(customer.getDateOfBirth());
+			myCRECUST.setCommBirthDay(myCalendar.get(Calendar.DAY_OF_MONTH));
+			myCRECUST.setCommBirthMonth(myCalendar.get(Calendar.MONTH) + 1);
+			myCRECUST.setCommBirthYear(myCalendar.get(Calendar.YEAR) + 1900);
 			myCRECUST.setCommName(customer.getCustomerName());
 			myCRECUST.setCommNumber(new Long(customer.getId()));
-			myCRECUST.setCommCsReviewDd(customer.getReviewDate().getDate());
-			myCRECUST.setCommCsReviewMm( customer.getReviewDate().getMonth() + 1);
-			myCRECUST.setCommCsReviewYyyy(customer.getReviewDate().getYear() + 1900);
+			myCalendar.setTime(customer.getReviewDate());
+			myCRECUST.setCommCsReviewDd(myCalendar.get(Calendar.DAY_OF_MONTH));
+			myCRECUST.setCommCsReviewMm(myCalendar.get(Calendar.MONTH) + 1);
+			myCRECUST.setCommCsReviewYyyy(myCalendar.get(Calendar.YEAR) + 1900);
 			myCRECUST.setCommSortcode(new Integer(customer.getSortCode()));
 
 			try {

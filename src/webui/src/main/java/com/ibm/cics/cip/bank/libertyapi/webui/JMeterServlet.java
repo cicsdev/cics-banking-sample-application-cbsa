@@ -92,7 +92,8 @@ public class JMeterServlet extends VaadinServlet {
             super(service);
         }
 
-        @Override
+		@SuppressWarnings("deprecation")
+		@Override
         public String createConnectorId(ClientConnector connector) {
         	//Create a connector ID
             if (connector instanceof Component) {

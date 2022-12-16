@@ -7,6 +7,7 @@
 package com.ibm.cics.cip.bankliberty.api.json;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -265,7 +266,6 @@ public class CustomerResource{
 	public Response getCustomerInternal(@PathParam("id") Long id) {
 		logger.entering(this.getClass().getName(),"getCustomerInternal for customerNumber " + id);
 		Integer sortCode = this.getSortCode();
-		Long id_safe = id;
 
 
 		JSONObject response = new JSONObject();
@@ -502,15 +502,17 @@ public class CustomerResource{
 			response.put("address", vsamCustomers[i].getAddress().trim());
 
 			String dateOfBirth = new String();
-			Integer dobDD = new Integer(vsamCustomers[i].getDob().getDay());
+			Calendar dobCalendar = Calendar.getInstance();
+			dobCalendar.setTime(vsamCustomers[i].getDob());
+			Integer dobDD = new Integer(dobCalendar.get(Calendar.DAY_OF_MONTH));
 			dateOfBirth = dateOfBirth.concat(dobDD.toString());
 			dateOfBirth = dateOfBirth.concat("-");
 
-			Integer dobMM = new Integer(vsamCustomers[i].getDob().getMonth()+1);
+			Integer dobMM = new Integer(dobCalendar.get(Calendar.MONTH) + 1);
 			dateOfBirth = dateOfBirth.concat(dobMM.toString());
 			dateOfBirth = dateOfBirth.concat("-");
 
-			Integer dobYYYY = new Integer(vsamCustomers[i].getDob().getYear()+1900);
+			Integer dobYYYY = new Integer(dobCalendar.get(Calendar.YEAR)+1900);
 			dateOfBirth = dateOfBirth.concat(dobYYYY.toString());
 
 			response.put("Date of Birth",dateOfBirth);
@@ -554,15 +556,17 @@ public class CustomerResource{
 			response.put("address", vsamCustomers[i].getAddress().trim());
 
 			String dateOfBirth = new String();
-			Integer dobDD = new Integer(vsamCustomers[i].getDob().getDay());
+			Calendar myCalendar = Calendar.getInstance();
+			myCalendar.setTime(vsamCustomers[i].getDob());
+			Integer dobDD = new Integer(myCalendar.get(Calendar.DAY_OF_MONTH));
 			dateOfBirth = dateOfBirth.concat(dobDD.toString());
 			dateOfBirth = dateOfBirth.concat("-");
 
-			Integer dobMM = new Integer(vsamCustomers[i].getDob().getMonth()+1);
+			Integer dobMM = new Integer(myCalendar.get(Calendar.MONTH) +1);
 			dateOfBirth = dateOfBirth.concat(dobMM.toString());
 			dateOfBirth = dateOfBirth.concat("-");
 
-			Integer dobYYYY = new Integer(vsamCustomers[i].getDob().getYear()+1900);
+			Integer dobYYYY = new Integer(myCalendar.get(Calendar.YEAR) + 1900);
 			dateOfBirth = dateOfBirth.concat(dobYYYY.toString());
 
 			response.put("Date of Birth",dateOfBirth);
@@ -573,7 +577,6 @@ public class CustomerResource{
 		return Response.status(200).entity(allCustomers.toString()).build();	
 	}
 
-	@SuppressWarnings("deprecation")
 	@GET
 	@Path("/all/age/{age}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -608,17 +611,19 @@ public class CustomerResource{
 			response.put("address", vsamCustomers[i].getAddress().trim());
 
 			String dateOfBirth = new String();
-			Integer dobDD = new Integer(vsamCustomers[i].getDob().getDay());
+			Calendar myCalendar = Calendar.getInstance();
+			myCalendar.setTime(vsamCustomers[i].getDob());
+			Integer dobDD = new Integer(myCalendar.get(Calendar.DAY_OF_MONTH));
 			dateOfBirth = dateOfBirth.concat(dobDD.toString());
 			dateOfBirth = dateOfBirth.concat("-");
 
-			Integer dobMM = new Integer(vsamCustomers[i].getDob().getMonth()+1);
+			Integer dobMM = new Integer(myCalendar.get(Calendar.MONTH) +1);
 			dateOfBirth = dateOfBirth.concat(dobMM.toString());
 			dateOfBirth = dateOfBirth.concat("-");
 
-			Integer dobYYYY = new Integer(vsamCustomers[i].getDob().getYear()+1900);
+			Integer dobYYYY = new Integer(myCalendar.get(Calendar.YEAR) + 1900);
 			dateOfBirth = dateOfBirth.concat(dobYYYY.toString());
-
+			
 			response.put("Date of Birth",dateOfBirth);
 			allCustomers.add(response);
 		}

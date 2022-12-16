@@ -125,7 +125,6 @@ public class CustomerList {
 	}
 
 
-	@SuppressWarnings("unused")
 	public void doGet(int limit, int offset, String filter) throws ServletException, IOException {
 		
 		//TEST.out.println("TEST - Doing get with filter offset and limit");

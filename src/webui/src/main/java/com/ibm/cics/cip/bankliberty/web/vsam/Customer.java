@@ -95,6 +95,7 @@ public class Customer {
 			for (int i=10;this.customer_number.length()<10;i--)
 			{
 				this.customer_number = "0" + this.customer_number;
+				
 			}
 		}
 		return this.customer_number;
@@ -1410,9 +1411,19 @@ public class Customer {
 				temp[stored].setCustomer_number(new Long(myCustomer.getCustomerNumber()).toString());
 				temp[stored].setName(myCustomer.getCustomerName());
 				temp[stored].setSortcode(new Integer(myCustomer.getCustomerSortcode()).toString());
-				temp[stored].setDob(new Date(myCustomer.getCustomerBirthYear() - 1900, myCustomer.getCustomerBirthMonth() - 1, myCustomer.getCustomerBirthDay()));
+				Calendar dobCalendar = Calendar.getInstance();
+				dobCalendar.set(Calendar.YEAR,myCustomer.getCustomerBirthYear() - 1900);
+				dobCalendar.set(Calendar.MONTH,myCustomer.getCustomerBirthMonth() - 1);
+				dobCalendar.set(Calendar.DAY_OF_MONTH,myCustomer.getCustomerBirthDay());
+				Date dobDate = new Date(dobCalendar.getTimeInMillis());
+				temp[stored].setDob(dobDate);
 				temp[stored].setCreditScore(new Integer(myCustomer.getCustomerCreditScore()).toString());
-				temp[stored].setReviewDate(new Date(myCustomer.getCustomerCsReviewYear() - 1900, myCustomer.getCustomerCsReviewMonth() - 1, myCustomer.getCustomerCsReviewDay()));
+				Calendar reviewCalendar = Calendar.getInstance();
+				reviewCalendar.set(Calendar.YEAR,myCustomer.getCustomerCsReviewYear() - 1900);
+				reviewCalendar.set(Calendar.MONTH,myCustomer.getCustomerCsReviewMonth() - 1);
+				reviewCalendar.set(Calendar.DAY_OF_MONTH,myCustomer.getCustomerCsReviewDay());
+				Date reviewDate = new Date(reviewCalendar.getTimeInMillis());
+				temp[stored].setReviewDate(reviewDate);
 				temp[stored].printCustomerDetails();
 				stored++;
 			}
@@ -1649,10 +1660,18 @@ public class Customer {
 					temp[stored].setCustomer_number(new Long(myCustomer.getCustomerNumber()).toString());
 					temp[stored].setName(myCustomer.getCustomerName());
 					temp[stored].setSortcode(new Integer(myCustomer.getCustomerSortcode()).toString());
-					Date dob = new Date(myCustomer.getCustomerBirthYear() - 1900, myCustomer.getCustomerBirthMonth() - 1, myCustomer.getCustomerBirthDay());
+					Calendar dobCalendar = Calendar.getInstance();
+					dobCalendar.set(Calendar.YEAR, myCustomer.getCustomerBirthYear() - 1900);
+					dobCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth() - 1);
+					dobCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerBirthDay());
+					Date dob = new Date(dobCalendar.getTimeInMillis());
 					temp[stored].setDob(dob);
 					temp[stored].setCreditScore(Integer.toString(myCustomer.getCustomerCreditScore()));
-					Date csReviewDate = new Date(myCustomer.getCustomerCsReviewYear() - 1900, myCustomer.getCustomerCsReviewMonth() - 1, myCustomer.getCustomerCsReviewDay());
+					Calendar csReviewCalendar = Calendar.getInstance();
+					csReviewCalendar.set(Calendar.YEAR, myCustomer.getCustomerCsReviewYear() - 1900);
+					csReviewCalendar.set(Calendar.MONTH, myCustomer.getCustomerCsReviewMonth() - 1);
+					csReviewCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerCsReviewDay());
+					Date csReviewDate = new Date(csReviewCalendar.getTimeInMillis());
 					temp[stored].setReviewDate(csReviewDate);
 					stored++;
 				}
@@ -1909,11 +1928,19 @@ public class Customer {
 					temp[stored].setCustomer_number(new Long(myCustomer.getCustomerNumber()).toString());
 					temp[stored].setName(myCustomer.getCustomerName());
 					temp[stored].setSortcode(new Integer(myCustomer.getCustomerSortcode()).toString());
-					Date dob = new Date(myCustomer.getCustomerBirthYear() - 1900, myCustomer.getCustomerBirthMonth() - 1, myCustomer.getCustomerBirthDay());
+					Calendar dobCalendar = Calendar.getInstance();
+					dobCalendar.set(Calendar.YEAR, myCustomer.getCustomerBirthYear() - 1900);
+					dobCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth() - 1);
+					dobCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerBirthDay());
+					Date dob = new Date(dobCalendar.getTimeInMillis());
 					temp[stored].setDob(dob);
 					temp[stored].setCreditScore(Integer.toString(myCustomer.getCustomerCreditScore()));
-					Date reviewDate = new Date(myCustomer.getCustomerCsReviewYear() - 1900, myCustomer.getCustomerCsReviewMonth() - 1,  myCustomer.getCustomerBirthDay());
-					temp[stored].setReviewDate(reviewDate);
+					Calendar csReviewCalendar = Calendar.getInstance();
+					csReviewCalendar.set(Calendar.YEAR, myCustomer.getCustomerCsReviewYear() - 1900);
+					csReviewCalendar.set(Calendar.MONTH, myCustomer.getCustomerCsReviewMonth() - 1);
+					csReviewCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerCsReviewDay());
+					Date csReviewDate = new Date(csReviewCalendar.getTimeInMillis());
+					temp[stored].setReviewDate(csReviewDate);
 					stored++;
 				}
 			}
@@ -2436,10 +2463,19 @@ public class Customer {
 			temp[j].setCustomer_number(new Long(myCustomer.getCustomerNumber()).toString());
 			temp[j].setName(myCustomer.getCustomerName());
 			temp[j].setSortcode(new Integer(myCustomer.getCustomerSortcode()).toString());
-			Date dob = new Date(myCustomer.getCustomerBirthYear() - 1900, myCustomer.getCustomerBirthMonth() - 1, myCustomer.getCustomerBirthDay());
+			Calendar dobCalendar = Calendar.getInstance();
+			dobCalendar.set(Calendar.YEAR, myCustomer.getCustomerBirthYear() - 1900);
+			dobCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth() - 1);
+			dobCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerBirthDay());
+			Date dob = new Date(dobCalendar.getTimeInMillis());
 			temp[j].setDob(dob);
 			temp[j].setCreditScore(Integer.toString(myCustomer.getCustomerCreditScore()));
-			temp[j].setReviewDate(new Date(myCustomer.getCustomerCsReviewYear() - 1900, myCustomer.getCustomerCsReviewMonth() - 1, myCustomer.getCustomerCsReviewDay()));
+			Calendar csReviewCalendar = Calendar.getInstance();
+			csReviewCalendar.set(Calendar.YEAR, myCustomer.getCustomerCsReviewYear() - 1900);
+			csReviewCalendar.set(Calendar.MONTH, myCustomer.getCustomerCsReviewMonth() - 1);
+			csReviewCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerCsReviewDay());
+			Date csReviewDate = new Date(csReviewCalendar.getTimeInMillis());
+			temp[j].setReviewDate(csReviewDate);
 			if(temp[j].getAddress().contains(town))
 			{
 				i++;
@@ -2653,10 +2689,19 @@ public class Customer {
 			temp[j].setCustomer_number(new Long(myCustomer.getCustomerNumber()).toString());
 			temp[j].setName(myCustomer.getCustomerName());
 			temp[j].setSortcode(new Integer(myCustomer.getCustomerSortcode()).toString());
-			Date dob = new Date(myCustomer.getCustomerBirthYear() - 1900, myCustomer.getCustomerBirthMonth() - 1, myCustomer.getCustomerBirthDay());
+			Calendar dobCalendar = Calendar.getInstance();
+			dobCalendar.set(Calendar.YEAR, myCustomer.getCustomerBirthYear() - 1900);
+			dobCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth() - 1);
+			dobCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerBirthDay());
+			Date dob = new Date(dobCalendar.getTimeInMillis());
 			temp[j].setDob(dob);
 			temp[j].setCreditScore(Integer.toString(myCustomer.getCustomerCreditScore()));
-			temp[j].setReviewDate(new Date(myCustomer.getCustomerCsReviewYear() - 1900, myCustomer.getCustomerCsReviewMonth() - 1, myCustomer.getCustomerCsReviewDay()));
+			Calendar csReviewCalendar = Calendar.getInstance();
+			csReviewCalendar.set(Calendar.YEAR, myCustomer.getCustomerCsReviewYear() - 1900);
+			csReviewCalendar.set(Calendar.MONTH, myCustomer.getCustomerCsReviewMonth() - 1);
+			csReviewCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerCsReviewDay());
+			Date csReviewDate = new Date(csReviewCalendar.getTimeInMillis());
+			temp[j].setReviewDate(csReviewDate);
 			if(temp[j].getName().contains(surname))
 			{
 				i++;
@@ -2872,10 +2917,19 @@ public class Customer {
 			temp[j].setCustomer_number(new Long(myCustomer.getCustomerNumber()).toString());
 			temp[j].setName(myCustomer.getCustomerName());
 			temp[j].setSortcode(new Integer(myCustomer.getCustomerSortcode()).toString());
-			Date dob = new Date(myCustomer.getCustomerBirthYear() - 1900, myCustomer.getCustomerBirthMonth() - 1, myCustomer.getCustomerBirthDay());
+			Calendar dobCalendar = Calendar.getInstance();
+			dobCalendar.set(Calendar.YEAR, myCustomer.getCustomerBirthYear() - 1900);
+			dobCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth() - 1);
+			dobCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerBirthDay());
+			Date dob = new Date(dobCalendar.getTimeInMillis());
 			temp[j].setDob(dob);
 			temp[j].setCreditScore(Integer.toString(myCustomer.getCustomerCreditScore()));
-			temp[j].setReviewDate(new Date(myCustomer.getCustomerCsReviewYear() - 1900, myCustomer.getCustomerCsReviewMonth() - 1, myCustomer.getCustomerCsReviewDay()));
+			Calendar csReviewCalendar = Calendar.getInstance();
+			csReviewCalendar.set(Calendar.YEAR, myCustomer.getCustomerCsReviewYear() - 1900);
+			csReviewCalendar.set(Calendar.MONTH, myCustomer.getCustomerCsReviewMonth() - 1);
+			csReviewCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerCsReviewDay());
+			Date csReviewDate = new Date(csReviewCalendar.getTimeInMillis());
+			temp[j].setReviewDate(csReviewDate);
 			if(customerAgeInYears(today,dob) == age)
 			{
 				i++;
@@ -2934,17 +2988,20 @@ public class Customer {
 
 	int customerAgeInYears(Date now, Date dob)
 	{
+		Calendar nowCalendar = Calendar.getInstance();
+		Calendar birthCalendar = Calendar.getInstance();
+		birthCalendar.setTime(dob);
 		int age = 0;
-		int years = now.getYear() - dob.getYear();
+		int years = (nowCalendar.get(Calendar.YEAR) + 1900) - (birthCalendar.get(Calendar.YEAR) + 1900);
 		age = years;
-		if (dob.getMonth() > now.getMonth())
+		if (birthCalendar.get(Calendar.MONTH) > nowCalendar.get(Calendar.MONTH))
 		{
 			age=age--;
 			return age;
 		}
-		if(dob.getMonth() == now.getMonth())
+		if(birthCalendar.get(Calendar.MONTH) == nowCalendar.get(Calendar.MONTH))
 		{
-			if (dob.getDay() > now.getDay())
+			if (birthCalendar.get(Calendar.DAY_OF_MONTH) > nowCalendar.get(Calendar.DAY_OF_MONTH))
 			{
 				age=age--;
 				return age;

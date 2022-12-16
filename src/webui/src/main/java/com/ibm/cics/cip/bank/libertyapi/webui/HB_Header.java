@@ -37,13 +37,11 @@ public class HB_Header extends HorizontalLayout{
 	Button back;
 	Label label;
 
-	@SuppressWarnings("unused")
 	public HB_Header(UI ui, String name){
 		setup();
 		this.setComponentAlignment(label, Alignment.MIDDLE_CENTER);
 	}
 
-	@SuppressWarnings("unused")
 	public HB_Header(final UI ui, String name, final Welcome wlc){
 		setupBack();
 		setup();
@@ -58,7 +56,6 @@ public class HB_Header extends HorizontalLayout{
 		});
 	}
 
-	@SuppressWarnings("unused")
 	public HB_Header(final UI ui, String name, final Com_ibm_cics_cip_bank_libertyapi_webuiUI exit){
 		setupBack();
 		setup();
@@ -76,7 +73,6 @@ public class HB_Header extends HorizontalLayout{
 
 
 
-	@SuppressWarnings("unused")
 	public HB_Header(final UI ui, String name, final Acc_list acc_list){
 		setupBack();
 		setup();
