@@ -2,4 +2,4 @@
 *.class
 *.jar
 *.war
-
+appscan-config.xml
