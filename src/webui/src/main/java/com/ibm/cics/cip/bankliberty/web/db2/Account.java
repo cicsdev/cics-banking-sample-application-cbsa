@@ -840,7 +840,7 @@ public class Account extends HBankDataAccess{
 		Account temp = this.getAccount(new Integer(this.getAccount_number()).intValue(), new Integer(this.getSortcode()).intValue());
 		if(temp == null)
 		{
-			logger.warning("Unable to find account " + temp.getAccount_number());
+			logger.warning("Unable to find account " + this.getAccount_number());
 			logger.exiting(this.getClass().getName(),"debitCredit(BigDecimal apiAmount)",false);
 			return false;
 		}

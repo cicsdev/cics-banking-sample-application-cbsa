@@ -57,7 +57,7 @@ public class CreditScoreCICS540 {
 		Channel myCreditScoreChannel = null;
 
 		try {
-			myCreditScoreChannel = Task.getTask().createChannel("CREDSCORECHANNEL");
+			myCreditScoreChannel = Task.getTask().createChannel("CIPCREDCHANN");
 		} catch (ChannelErrorException e1) {
 			e1.printStackTrace();
 		}
@@ -65,6 +65,7 @@ public class CreditScoreCICS540 {
 		String[] transactionID = new String[creditAgencyCount];
 		String[] containerID = new String[creditAgencyCount];
 		Future<ChildResponse>[] children = new Future[creditAgencyCount];
+//		Object[] children = new Object[creditAgencyCount];
 		int creditScoreTotal = 0;
 
 		AsyncService asService = new AsyncServiceImpl();

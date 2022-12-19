@@ -209,7 +209,7 @@ public class CustomerUI extends VerticalLayout{
 
 	private void setFields(Customer cust){
 		//Set each component's value to the relevant value held in the 'cust' object 
-		cust.showInfo();
+//		cust.showInfo();
 		cusNumT.setValue(cust.getCustomer_number());
 		sCodeT.setValue(cust.getSortcode());
 		cusAddressT.setValue(cust.getAddress().trim());
@@ -328,7 +328,7 @@ public class CustomerUI extends VerticalLayout{
 					cusAddressT.getValue().replaceAll("\n", ""),
 					new java.sql.Date(cusDoBT.getValue().getTime()));
 
-			newCust.showInfo();
+//			newCust.showInfo();
 			
 			//add customer to the database
 			temp = newCust.addToDB();

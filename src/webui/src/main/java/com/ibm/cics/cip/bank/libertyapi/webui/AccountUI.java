@@ -385,13 +385,15 @@ public class AccountUI extends VerticalLayout{
 
 	private boolean validateSimple(){
 		//Checks customer number, sort code, type, interest, overdraft and balance fields are populated
+		Long tempL = 0L;
+		BigDecimal tempBD = new BigDecimal(0);
 		if(cusNumT.getValue().isEmpty())
 		{
 			return false;
 		}
 		try
 		{
-			Long temp = new Long(cusNumT.getValue());
+			tempL = new Long(cusNumT.getValue());
 		}
 		catch(NumberFormatException e)
 		{
@@ -413,8 +415,8 @@ public class AccountUI extends VerticalLayout{
 		}
 		try
 		{
-			BigDecimal temp = new BigDecimal(interestT.getValue());
-			if(temp.doubleValue() < 0)
+			tempBD = new BigDecimal(interestT.getValue());
+			if(tempBD.doubleValue() < 0)
 			{
 				return false;
 			}
