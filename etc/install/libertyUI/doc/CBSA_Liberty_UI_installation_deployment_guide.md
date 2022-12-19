@@ -21,11 +21,9 @@
 
 2.  Define the JVM CICS resources.
 
-3.  Create a dropins directory.
+3.  Edit the server.xml with the appropriate properties.
 
-4.  Edit the server.xml with the appropriate properties.
-
-5.  Deploy the Liberty UI application.
+4.  Deploy the Liberty UI application.
 
 ### Assumptions: 
 
@@ -181,37 +179,22 @@ If you have already installed the Liberty UI, you can skip this step.
 2.  Add the group CBSAWLP to a list installed on a cold start, for
     example CICSTS55.
 
-3.  Add the group DFH\$WU to a list installed on a cold start.
-
-4.  Restart the CICS region with a *cold* or *initial* start.
-
-5.  Create and install this and it will create a JVM server. It may take
+3.  Create and install this and it will create a JVM server. It may take
     a few minutes to become enabled.
 
 > This will create a server.xml file in
 >
 > /u/cicsuser/CICSTS55/CICSTS55/CBSAWLP/wlp/usr/servers/defaultServer/
 
-## 
 
-## Create a "dropins" directory:
-
-1.  In UNIX Systems Services create a directory called "dropins" in the
-    Liberty workspace.
-
-> /u/cicsuser/CICSTS55/CICSTS55/CBSAWLP/wlp/usr/servers/defaultServer/defaultServer/dropins
->
-> ![dropins start](../doc/images/LibertyUIinstall/LibertyUI_dropins_START.jpg)
->
-
-## 
+##
 
 ## Edit server.xml:
 
-1.  Edit server.xml so that the attribute dropinsEnabled is set to true.
+1.  Edit server.xml so that the application "webUI" is defined.
 
-> \<applicationMonitor dropins=\"dropins\" dropinsEnabled=\"true\"
-> pollingRate=\"5s\" updateTrigger=\"disabled\"/\>
+> \<webApplication location=\"webui-1.0.war\"/\>
+
 
 2.  Add the following attribute to the **properties.db2.jcc** element:
 
@@ -268,9 +251,9 @@ Issue the following Maven command:
 
 ## 
 
-## Export to dropins directory:
+## Export to apps directory:
 
-Copy the war file from the two target directories into the dropins directory. 
+Copy the war file from the target directory into the apps directory. 
 
 ## 
 

@@ -16,7 +16,7 @@ These instructions detail the steps required to:
 
 3.  Package up the application with Maven.
 
-4.  Copy the WAR file to the dropins directory.
+4.  Copy the WAR file to the apps directory.
 
 5.  Update the JVM Server.
 
@@ -119,9 +119,9 @@ Issue the following Maven command:
 
 ## 
 
-## Export to dropins directory:
+## Export to apps directory:
 
-Copy the war file from the two target directories into the dropins directory. 
+Copy the war file from the two target directories into the apps directory. 
 
 ##
 
@@ -151,6 +151,11 @@ In the \<featureManager\> section, add support for Spring Boot by adding
 this line
 
 > \<feature\>springBoot-2.0\</feature\>
+
+Add the two applications by adding these lines:
+
+>    \<webApplication location=\"customerservices-1.0.war\"/\>
+>    \<webApplication location=\"paymentinterface-1.1.war\"/\>
 
 Restart the JVM server to allow these new changes to come into effect.
 
