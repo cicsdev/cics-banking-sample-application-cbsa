@@ -6,7 +6,9 @@
 package com.ibm.cics.cip.bankliberty.api.json;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Future;
 
@@ -64,7 +66,8 @@ public class CreditScoreCICS540 {
 
 		String[] transactionID = new String[creditAgencyCount];
 		String[] containerID = new String[creditAgencyCount];
-		Future<ChildResponse>[] children = new Future[creditAgencyCount];
+//		Future<ChildResponse>[] children = new Future[creditAgencyCount];
+		List<ChildResponse> children = new ArrayList<ChildResponse>();
 //		Object[] children = new Object[creditAgencyCount];
 		int creditScoreTotal = 0;
 
@@ -135,7 +138,7 @@ public class CreditScoreCICS540 {
 			}
 
 			try {
-				children[i] = asService.runTransactionId(transactionID[i],myCreditScoreChannel);
+				children.add((ChildResponse) asService.runTransactionId(transactionID[i],myCreditScoreChannel));
 			} catch (InvalidRequestException e) {
 				e.printStackTrace();
 			} catch (InvalidTransactionIdException e) {
@@ -178,7 +181,7 @@ public class CreditScoreCICS540 {
 				{
 					try 
 					{
-						if(anyOneWillDo.equals(children[j]))
+						if(anyOneWillDo.equals(children.get(j)))
 						{
 							myContainer = responseChannel.getContainer(containerID[j]);
 							byte[] myContainerBytes = myContainer.get();
