@@ -137,7 +137,7 @@ public class Customer {
 			try {
 				myCustomer = JSONObject.parse(myCustomerString);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				myCustomerResponse.close();
  				return false;
 			}
 
@@ -151,8 +151,10 @@ public class Customer {
 		}
 		else
 		{
+			myCustomerResponse.close();
 			return false;
 		}
+		myCustomerResponse.close();
 		return true;
 	}
 
@@ -170,8 +172,8 @@ public class Customer {
 			try {
 				myCustomer = JSONObject.parse(myCustomerString);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				myCustomerResponse.close();
 				return false;
 			}
 
@@ -187,8 +189,10 @@ public class Customer {
 		}
 		else
 		{
+			myCustomerResponse.close();
 			return false;
 		}
+		myCustomerResponse.close();
 		return true;	
 	}
 
@@ -214,6 +218,7 @@ public class Customer {
 				myCustomer = JSONObject.parse(myCustomerString);
 			} catch (IOException e) {
 				e.printStackTrace();
+				myCustomerResponse.close();
 				return "-1";
 			}
 
@@ -223,14 +228,14 @@ public class Customer {
 			this.setSortcode((String) myCustomer.get("sortCode"));
 		
 			String customerNoString = (String) myCustomer.get("id");
-		//	this.setCreditScore((String) myCustomer.get("customerCreditScore"));
-		//	this.setCreditScoreReviewDate(sortOutDate((String) myCustomer.get("customerCreditScoreReviewDate")));
 			this.setCustomer_number(customerNoString);
+			myCustomerResponse.close();
 			return  customerNoString;
 		}
 		else
 		{
 			System.err.println(myCustomerResponse.getStatus() + " " + myCustomerResponse.getEntity().toString());
+			myCustomerResponse.close();
 			return "-1";
 		}
 	}
@@ -255,8 +260,8 @@ public class Customer {
 			try {
 				myCustomer = JSONObject.parse(myCustomerString);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				myCustomerResponse.close();
 				return false;
 			}
 
@@ -267,11 +272,10 @@ public class Customer {
 			this.setAddress((String) myCustomer.get("customerAddress"));
 			this.setName((String) myCustomer.get("customerName"));
 			this.setSortcode((String) myCustomer.get("sortCode")); 	
-			//this.setCreditScore((String) myCustomer.get("customerCreditScore"));
-			//this.setCreditScoreReviewDate(sortOutDate((String) myCustomer.get("customerCreditScoreReviewDate")));
-
+			myCustomerResponse.close();
 			return true;
 		}
+		myCustomerResponse.close();
 		return false;
 	}
 

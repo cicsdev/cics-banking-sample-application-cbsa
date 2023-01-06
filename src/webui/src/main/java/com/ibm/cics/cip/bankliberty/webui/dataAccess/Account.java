@@ -10,14 +10,12 @@ package com.ibm.cics.cip.bankliberty.webui.dataAccess;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.sql.Connection;
 import java.sql.Date;
 
 
 
 import java.util.Calendar;
 
-import javax.sql.DataSource;
 import javax.ws.rs.core.Response;
 
 import com.ibm.cics.cip.bankliberty.api.json.AccountJSON;
@@ -33,9 +31,7 @@ public class Account {
 
 	
 
-	// String ACCOUNT_EYECATCHER             CHAR(4),
-	private 	DataSource 	ds;
-	private 	Connection	conn;
+
 	private 	String 		customer_number;
 	private 	String 		sortcode;              
 	private 	String 		account_number;
@@ -267,8 +263,9 @@ public class Account {
 			try {
 				myAccountsJSON = JSONObject.parse(myAccountsString);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+
 				e.printStackTrace();
+				myAccountsResponse.close();
 				return false;
 			}
 
@@ -294,6 +291,7 @@ public class Account {
 			this.type = (String) myAccount.get("accountType");
 			return true;
 		}
+		myAccountsResponse.close();
 		return false;
 	}
 
@@ -319,8 +317,8 @@ public class Account {
 			try {
 				myAccountsJSON = JSONObject.parse(myAccountsString);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				myAccountsResponse.close();
 				return -1;
 			}
 
@@ -344,6 +342,7 @@ public class Account {
 			this.overdraft_limit = new Long((Long) myAccount.get("overdraft")).intValue();
 			this.sortcode = (String) myAccount.get("sortCode");
 			this.type = (String) myAccount.get("accountType");
+			myAccountsResponse.close();
 			return new Integer(this.account_number).intValue();
 		}
 		return -1;
@@ -362,8 +361,8 @@ public class Account {
 			try {
 				myAccountsJSON = JSONObject.parse(myAccountsString);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				myAccountsResponse.close();
 				return false;
 			}
 
@@ -387,8 +386,10 @@ public class Account {
 			this.overdraft_limit = new Long((Long) myAccount.get("overdraft")).intValue();
 			this.sortcode = (String) myAccount.get("sortCode");
 			this.type = (String) myAccount.get("accountType");
+			myAccountsResponse.close();
 			return true;
 		}
+		myAccountsResponse.close();
 		return false;
 
 
