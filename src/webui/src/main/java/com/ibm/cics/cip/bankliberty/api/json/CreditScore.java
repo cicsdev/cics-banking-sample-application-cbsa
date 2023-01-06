@@ -52,7 +52,6 @@ public class CreditScore {
 			nowMs = nowMs + (1000L * 60L * 60L * 24L * next21Days);
 			customer.setReviewDate(new Date(nowMs));
 		}
-
 		logger.exiting("CreditScore","populateCreditScoreAndReviewDate(CustomerJSON customer)",customer);
 		return customer;
 	}

@@ -77,8 +77,28 @@ public class ProcessedTransaction extends HBankDataAccess{
 
 	private Date dateOfBirth;
 
-	private     int maximum_retries = 100, totalSleep = 3000;
+	
 
+	private 	String 		target_account_number;
+	private 	String 		target_sortcode;
+	private 	String 		type;
+	private 	String 		reference;
+
+
+
+	private String timeString;
+
+
+
+	private String dateString;
+
+
+
+	private String taskRef;
+
+
+
+	private String customerDOBString;
 
 
 	public void setDateOfBirth(Date dateOfBirth) {
@@ -117,10 +137,6 @@ public class ProcessedTransaction extends HBankDataAccess{
 
 
 
-	private 	String 		target_account_number;
-	private 	String 		target_sortcode;
-	private 	String 		type;
-	private 	String 		reference;
 	public String getTarget_sortcode() {
 		return target_sortcode;
 	}
@@ -141,6 +157,9 @@ public class ProcessedTransaction extends HBankDataAccess{
 	public ProcessedTransaction()
 	{
 		sortOutLogging();
+		timeString = "";
+		dateString = "";
+		taskRef="";
 	}
 
 
@@ -202,8 +221,8 @@ public class ProcessedTransaction extends HBankDataAccess{
 		String sql = "SELECT * from (SELECT p.*,row_number() over() as rn from PROCTRAN as p where PROCTRAN_SORTCODE like '" + sortCodeString + "' ORDER BY PROCTRAN_DATE ASC, PROCTRAN_TIME ASC) as col where rn between " 	+ offset+1 + " and " + ((limit+offset));
 		logger.fine("About to issue query SQL <" + sql + ">");
 
-		try {
-			PreparedStatement stmt = conn.prepareStatement(sql);
+		try (PreparedStatement stmt = conn.prepareStatement(sql);)
+		{
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) 
 			{
@@ -423,43 +442,11 @@ public class ProcessedTransaction extends HBankDataAccess{
 
 
 
-	@SuppressWarnings("deprecation")
+	
 	public boolean writeDebit(String accountNumber, String sortcode, BigDecimal amount2) {
 		logger.entering(this.getClass().getName(),"writeDebit(String accountNumber, String sortcode, BigDecimal amount2)");
 
-		long now = Calendar.getInstance().getTimeInMillis();
-		Date timestamp = new Date(now);
-		Time time = new Time(now);
-		String timeString = "";
-		StringBuffer myStringBuffer = new StringBuffer(new Integer(time.getHours()).toString());
-		for(int z = myStringBuffer.length(); z < 2;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		timeString = timeString.concat(myStringBuffer.toString());
-		myStringBuffer = new StringBuffer(new Integer(time.getMinutes()).toString());
-		for(int z = myStringBuffer.length(); z < 2;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		timeString = timeString.concat(myStringBuffer.toString());
-		myStringBuffer = new StringBuffer(new Integer(time.getSeconds()).toString());
-		for(int z = myStringBuffer.length(); z < 2;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		timeString = timeString.concat(myStringBuffer.toString());
-
-
-		myStringBuffer = new StringBuffer(new Integer(Task.getTask().getTaskNumber()).toString());
-		for(int z = myStringBuffer.length(); z < 12;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		String taskRef = myStringBuffer.toString();
-
-
-
+		sortOutDateTimeTaskString();
 
 		openConnection();
 
@@ -476,7 +463,7 @@ public class ProcessedTransaction extends HBankDataAccess{
 				"VALUES ('" + PROCTRAN.PROC_TRAN_VALID + "'"+
 				",'" + sortcode + "'" +
 				",'" + String.format("%08d",Integer.parseInt(accountNumber)) + "'" +
-				",'" + timestamp.toString() + "'" +
+				",'" + dateString + "'" +
 				",'" + timeString + "'" +
 				",'" + taskRef + "'" +
 				","  + "'" + PROCTRAN.PROC_TY_DEBIT + "'" + 
@@ -484,8 +471,8 @@ public class ProcessedTransaction extends HBankDataAccess{
 				"," + amount2 + "" + 
 				")";
 		logger.fine("About to insert record SQL <" + sqlInsert + ">");
-		try {
-			PreparedStatement stmt = conn.prepareStatement(sqlInsert);
+		try (PreparedStatement stmt = conn.prepareStatement(sqlInsert);)
+		{
 			stmt.executeUpdate();
 		}
 		catch(SQLException e)
@@ -498,41 +485,10 @@ public class ProcessedTransaction extends HBankDataAccess{
 		return true;
 	}
 
-	@SuppressWarnings("deprecation")
+	
 	public boolean writeCredit(String accountNumber, String sortcode, BigDecimal amount2) {
 		logger.entering(this.getClass().getName(),"writeCredit(String accountNumber, String sortcode, BigDecimal amount2)",false);
-		long now = Calendar.getInstance().getTimeInMillis();
-		Date timestamp = new Date(now);
-		Time time = new Time(now);
-		String timeString = "";
-		StringBuffer myStringBuffer = new StringBuffer(new Integer(time.getHours()).toString());
-		for(int z = myStringBuffer.length(); z < 2;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		timeString = timeString.concat(myStringBuffer.toString());
-		myStringBuffer = new StringBuffer(new Integer(time.getMinutes()).toString());
-		for(int z = myStringBuffer.length(); z < 2;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		timeString = timeString.concat(myStringBuffer.toString());
-		myStringBuffer = new StringBuffer(new Integer(time.getSeconds()).toString());
-		for(int z = myStringBuffer.length(); z < 2;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		timeString = timeString.concat(myStringBuffer.toString());
-
-
-		myStringBuffer = new StringBuffer(new Integer(Task.getTask().getTaskNumber()).toString());
-		for(int z = myStringBuffer.length(); z < 12;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		String taskRef = myStringBuffer.toString();
-
-
+		sortOutDateTimeTaskString();
 
 
 		openConnection();
@@ -550,7 +506,7 @@ public class ProcessedTransaction extends HBankDataAccess{
 				"VALUES ('" + PROCTRAN.PROC_TRAN_VALID + "'"+
 				",'" + sortcode + "'" +
 				",'" + String.format("%08d",Integer.parseInt(accountNumber)) + "'" +
-				",'" + timestamp.toString() + "'" +
+				",'" + dateString + "'" +
 				",'" + timeString + "'" +
 				",'" + taskRef + "'" +
 				","  + "'" + PROCTRAN.PROC_TY_CREDIT + "'" + 
@@ -558,8 +514,9 @@ public class ProcessedTransaction extends HBankDataAccess{
 				"," + amount2 + "" + 
 				")";
 		logger.fine("About to insert record SQL <" + sqlInsert + ">");
-		try {
-			PreparedStatement stmt = conn.prepareStatement(sqlInsert);
+		try (PreparedStatement stmt = conn.prepareStatement(sqlInsert);)
+		{
+			
 			stmt.executeUpdate();
 		}
 		catch(SQLException e)
@@ -573,32 +530,11 @@ public class ProcessedTransaction extends HBankDataAccess{
 	}
 
 
-	@SuppressWarnings("deprecation")
+	
 	public boolean writeTransferLocal(String sortCode2, String account_number2, BigDecimal amount2,	String target_account_number2) {
 		logger.entering(this.getClass().getName(),"writeTransferLocal(String sortCode2, String account_number2, BigDecimal amount2,	String target_account_number2)");
 
-		long now = Calendar.getInstance().getTimeInMillis();
-		Date timestamp = new Date(now);
-		Time time = new Time(now);
-		String timeString = "";
-		StringBuffer myStringBuffer = new StringBuffer(new Integer(time.getHours()).toString());
-		for(int z = myStringBuffer.length(); z < 2;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		timeString = timeString.concat(myStringBuffer.toString());
-		myStringBuffer = new StringBuffer(new Integer(time.getMinutes()).toString());
-		for(int z = myStringBuffer.length(); z < 2;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		timeString = timeString.concat(myStringBuffer.toString());
-		myStringBuffer = new StringBuffer(new Integer(time.getSeconds()).toString());
-		for(int z = myStringBuffer.length(); z < 2;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		timeString = timeString.concat(myStringBuffer.toString());
+		sortOutDateTimeTaskString();
 
 
 
@@ -607,7 +543,7 @@ public class ProcessedTransaction extends HBankDataAccess{
 		String transferDescription = "";
 		transferDescription = transferDescription + PROCTRAN.PROC_TRAN_DESC_XFR_FLAG;
 		transferDescription = transferDescription.concat("                  ");
-		myStringBuffer = new StringBuffer(sortCode2);
+		StringBuffer myStringBuffer = new StringBuffer(sortCode2);
 		for(int z = myStringBuffer.length(); z < 6;z++)
 		{
 			myStringBuffer = myStringBuffer.insert(0, "0");	
@@ -619,19 +555,6 @@ public class ProcessedTransaction extends HBankDataAccess{
 			myStringBuffer = myStringBuffer.insert(0, "0");	
 		}
 		transferDescription = transferDescription.concat(myStringBuffer.toString());
-
-
-
-
-
-		myStringBuffer = new StringBuffer(new Integer(Task.getTask().getTaskNumber()).toString());
-		for(int z = myStringBuffer.length(); z < 12;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		String taskRef = myStringBuffer.toString();
-
-
 
 
 		openConnection();
@@ -649,7 +572,7 @@ public class ProcessedTransaction extends HBankDataAccess{
 				"VALUES ('" + PROCTRAN.PROC_TRAN_VALID + "'"+
 				",'" + sortCode2 + "'" +
 				",'" + String.format("%08d",Integer.parseInt(account_number2)) + "'" +
-				",'" + timestamp.toString() + "'" +
+				",'" + dateString + "'" +
 				",'" + timeString + "'" +
 				",'" + taskRef + "'" +
 				","  + "'" + PROCTRAN.PROC_TY_TRANSFER + "'" + 
@@ -658,8 +581,8 @@ public class ProcessedTransaction extends HBankDataAccess{
 				")";
 		logger.fine("About to insert record SQL <" + sqlInsert + ">");
 
-		try {
-			PreparedStatement stmt = conn.prepareStatement(sqlInsert);
+		try (PreparedStatement stmt = conn.prepareStatement(sqlInsert);)
+		{
 			stmt.executeUpdate();
 		}
 		catch(SQLException e)
@@ -673,36 +596,14 @@ public class ProcessedTransaction extends HBankDataAccess{
 	}
 
 
-	@SuppressWarnings("deprecation")
+	
 	public boolean writeDeleteCustomer(String sortCode2, String accountNumber, double amount_which_will_be_zero, Date customerDOB, String customerName, String customerNumber) {
 		logger.entering(this.getClass().getName(),"writeDeleteCustomer(String sortCode2, String accountNumber, double amount_which_will_be_zero, Date customerDOB, String customerName, String customerNumber)");
 
-		long now = Calendar.getInstance().getTimeInMillis();
-		Date timestamp = new Date(now);
-		Time time = new Time(now);
-
-		String timeString = "";
-		StringBuffer myStringBuffer = new StringBuffer(new Integer(time.getHours()).toString());
-		for(int z = myStringBuffer.length(); z < 2;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		timeString = timeString.concat(myStringBuffer.toString());
-		myStringBuffer = new StringBuffer(new Integer(time.getMinutes()).toString());
-		for(int z = myStringBuffer.length(); z < 2;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		timeString = timeString.concat(myStringBuffer.toString());
-		myStringBuffer = new StringBuffer(new Integer(time.getSeconds()).toString());
-		for(int z = myStringBuffer.length(); z < 2;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		timeString = timeString.concat(myStringBuffer.toString());
-
+		sortOutDateTimeTaskString();
+		customerDOBString = sortOutCustomerDOB(customerDOB);
 		String deleteCustomerDescription = "";
-		myStringBuffer = new StringBuffer(sortCode2);
+		StringBuffer myStringBuffer = new StringBuffer(sortCode2);
 		for(int z = myStringBuffer.length(); z < 6;z++)
 		{
 			myStringBuffer = myStringBuffer.insert(0, "0");	
@@ -721,39 +622,8 @@ public class ProcessedTransaction extends HBankDataAccess{
 		}
 		deleteCustomerDescription = deleteCustomerDescription.concat(myStringBuffer.substring(0,14).toString());
 
-		int dobYYYY = customerDOB.getYear() + 1900;
-		int dobMM   = customerDOB.getMonth() + 1;
-		int dobDD   = customerDOB.getDate();
-		String customerDOBString = new String();
-		myStringBuffer = new StringBuffer(new Integer(dobDD).toString());
-		for(int z = myStringBuffer.length(); z < 2;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		customerDOBString = customerDOBString + myStringBuffer.toString();
-		customerDOBString = customerDOBString + "-";
-		myStringBuffer = new StringBuffer(new Integer(dobMM).toString());
-		for(int z = myStringBuffer.length(); z < 2;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		customerDOBString = customerDOBString + myStringBuffer.toString();
-		customerDOBString = customerDOBString + "-";
-		myStringBuffer = new StringBuffer(new Integer(dobYYYY).toString());
-		for(int z = myStringBuffer.length(); z < 4;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		customerDOBString = customerDOBString + myStringBuffer.toString();
-
 		deleteCustomerDescription = deleteCustomerDescription + customerDOBString;		
 
-		myStringBuffer = new StringBuffer(new Integer(Task.getTask().getTaskNumber()).toString());
-		for(int z = myStringBuffer.length(); z < 12;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		String taskRef = myStringBuffer.toString();
 
 		openConnection();
 
@@ -770,7 +640,7 @@ public class ProcessedTransaction extends HBankDataAccess{
 				"VALUES ('" + PROCTRAN.PROC_TRAN_VALID + "'"+
 				",'" + sortCode2 + "'" +
 				",'" + String.format("%08d",Integer.parseInt(accountNumber)) + "'" +
-				",'" + timestamp.toString() + "'" +
+				",'" + dateString + "'" +
 				",'" + timeString + "'" +
 				",'" + taskRef + "'" +
 				","  + "'" + PROCTRAN.PROC_TY_WEB_DELETE_CUSTOMER + "'" + 
@@ -780,8 +650,8 @@ public class ProcessedTransaction extends HBankDataAccess{
 
 		logger.fine("About to insert record SQL <" + sqlInsert + ">");
 
-		try {
-			PreparedStatement stmt = conn.prepareStatement(sqlInsert);
+		try (PreparedStatement stmt = conn.prepareStatement(sqlInsert);)
+		{
 			stmt.executeUpdate();
 		}
 		catch(SQLException e)
@@ -795,35 +665,12 @@ public class ProcessedTransaction extends HBankDataAccess{
 	}
 
 
-	@SuppressWarnings("deprecation")
+	
 	public boolean writeCreateCustomer(String sortCode2, String accountNumber, double amount_which_will_be_zero, Date customerDOB, String customerName, String customerNumber) {
 		logger.entering(this.getClass().getName(),"writeCreateCustomer(String sortCode2, String accountNumber, double amount_which_will_be_zero, Date customerDOB, String customerName, String customerNumber)");
-		long now = Calendar.getInstance().getTimeInMillis();
-		Date timestamp = new Date(now);
-		Time time = new Time(now);
-
-		String timeString = "";
-		StringBuffer myStringBuffer = new StringBuffer(new Integer(time.getHours()).toString());
-		for(int z = myStringBuffer.length(); z < 2;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		timeString = timeString.concat(myStringBuffer.toString());
-		myStringBuffer = new StringBuffer(new Integer(time.getMinutes()).toString());
-		for(int z = myStringBuffer.length(); z < 2;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		timeString = timeString.concat(myStringBuffer.toString());
-		myStringBuffer = new StringBuffer(new Integer(time.getSeconds()).toString());
-		for(int z = myStringBuffer.length(); z < 2;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		timeString = timeString.concat(myStringBuffer.toString());
-
+		sortOutDateTimeTaskString();
 		String createCustomerDescription = "";
-		myStringBuffer = new StringBuffer(sortCode2);
+		StringBuffer myStringBuffer = new StringBuffer(sortCode2);
 		for(int z = myStringBuffer.length(); z < 6;z++)
 		{
 			myStringBuffer = myStringBuffer.insert(0, "0");	
@@ -842,30 +689,7 @@ public class ProcessedTransaction extends HBankDataAccess{
 		}
 		createCustomerDescription = createCustomerDescription.concat(myStringBuffer.substring(0,14).toString());
 
-		int dobYYYY = customerDOB.getYear() + 1900;
-		int dobMM   = customerDOB.getMonth() + 1;
-		int dobDD   = customerDOB.getDate();
-		String customerDOBString = new String();
-		myStringBuffer = new StringBuffer(new Integer(dobDD).toString());
-		for(int z = myStringBuffer.length(); z < 2;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		customerDOBString = customerDOBString + myStringBuffer.toString();
-		customerDOBString = customerDOBString + "-";
-		myStringBuffer = new StringBuffer(new Integer(dobMM).toString());
-		for(int z = myStringBuffer.length(); z < 2;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		customerDOBString = customerDOBString + myStringBuffer.toString();
-		customerDOBString = customerDOBString + "-";
-		myStringBuffer = new StringBuffer(new Integer(dobYYYY).toString());
-		for(int z = myStringBuffer.length(); z < 4;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		customerDOBString = customerDOBString + myStringBuffer.toString();
+		String customerDOBString = sortOutCustomerDOB(customerDOB);
 
 		createCustomerDescription = createCustomerDescription + customerDOBString;		
 
@@ -894,7 +718,7 @@ public class ProcessedTransaction extends HBankDataAccess{
 				"VALUES ('" + PROCTRAN.PROC_TRAN_VALID + "'"+
 				",'" + sortCode2 + "'" +
 				",'" + String.format("%08d",Integer.parseInt(accountNumber)) + "'" +
-				",'" + timestamp.toString() + "'" +
+				",'" + dateString + "'" +
 				",'" + timeString + "'" +
 				",'" + taskRef + "'" +
 				","  + "'" + PROCTRAN.PROC_TY_WEB_CREATE_CUSTOMER + "'" + 
@@ -904,12 +728,13 @@ public class ProcessedTransaction extends HBankDataAccess{
 
 		logger.fine("About to insert record SQL <" + sqlInsert + ">");
 
-		try {
-			PreparedStatement stmt = conn.prepareStatement(sqlInsert);
+		try (PreparedStatement stmt = conn.prepareStatement(sqlInsert);)
+		{
 			stmt.executeUpdate();
 		}
 		catch(SQLException e)
 		{
+			
 			logger.severe(e.getLocalizedMessage());
 			logger.exiting(this.getClass().getName(),"writeCreateCustomer(String sortCode2, String accountNumber, double amount_which_will_be_zero, Date customerDOB, String customerName, String customerNumber)",false);
 			return false;
@@ -919,18 +744,23 @@ public class ProcessedTransaction extends HBankDataAccess{
 	}
 
 
-	@SuppressWarnings("deprecation")
+
 	public boolean writeDeleteAccount(String sortCode2, String accountNumber, BigDecimal actualBalance,	Date lastStatement, Date nextStatement, String customerNumber, String accountType) {
 		logger.entering(this.getClass().getName(),"writeDeleteAccount(String sortCode2, String accountNumber, BigDecimal actualBalance,	Date lastStatement, Date nextStatement, String customerNumber, String accountType)");
 
 		PROCTRAN myPROCTRAN = new PROCTRAN();
 
-		myPROCTRAN.setProcDescDelaccLastDd(lastStatement.getDate());
-		myPROCTRAN.setProcDescDelaccLastMm(lastStatement.getMonth() + 1);
-		myPROCTRAN.setProcDescDelaccLastYyyy(lastStatement.getYear() + 1900);
-		myPROCTRAN.setProcDescDelaccNextDd(nextStatement.getDate());
-		myPROCTRAN.setProcDescDelaccNextMm(nextStatement.getMonth() + 1);
-		myPROCTRAN.setProcDescDelaccNextYyyy(nextStatement.getYear() + 1900);
+		Calendar myCalendar = Calendar.getInstance();
+		myCalendar.setTime(lastStatement);
+		
+		myPROCTRAN.setProcDescDelaccLastDd(myCalendar.get(Calendar.DATE));
+		myPROCTRAN.setProcDescDelaccLastMm(myCalendar.get(Calendar.MONTH) + 1);
+		myPROCTRAN.setProcDescDelaccLastYyyy(myCalendar.get(Calendar.YEAR));
+		
+		myCalendar.setTime(nextStatement);
+		myPROCTRAN.setProcDescDelaccNextDd(myCalendar.get(Calendar.DATE));
+		myPROCTRAN.setProcDescDelaccNextMm(myCalendar.get(Calendar.MONTH) + 1);
+		myPROCTRAN.setProcDescDelaccNextYyyy(myCalendar.get(Calendar.YEAR));
 		myPROCTRAN.setProcDescDelaccAcctype(accountType);
 		myPROCTRAN.setProcDescDelaccCustomer(new Integer(customerNumber).intValue());
 		myPROCTRAN.setProcDescDelaccFooter(PROCTRAN.PROC_DESC_DELACC_FLAG);
@@ -938,38 +768,7 @@ public class ProcessedTransaction extends HBankDataAccess{
 		String description = myPROCTRAN.getProcTranDesc();
 
 
-
-		long now = Calendar.getInstance().getTimeInMillis();
-		Date timestamp = new Date(now);
-		Time time = new Time(now);
-
-		String timeString = "";
-		StringBuffer myStringBuffer = new StringBuffer(new Integer(time.getHours()).toString());
-		for(int z = myStringBuffer.length(); z < 2;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		timeString = timeString.concat(myStringBuffer.toString());
-		myStringBuffer = new StringBuffer(new Integer(time.getMinutes()).toString());
-		for(int z = myStringBuffer.length(); z < 2;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		timeString = timeString.concat(myStringBuffer.toString());
-		myStringBuffer = new StringBuffer(new Integer(time.getSeconds()).toString());
-		for(int z = myStringBuffer.length(); z < 2;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		timeString = timeString.concat(myStringBuffer.toString());
-
-		myStringBuffer = new StringBuffer(new Integer(Task.getTask().getTaskNumber()).toString());
-		for(int z = myStringBuffer.length(); z < 12;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		String taskRef = myStringBuffer.toString();
-
+		sortOutDateTimeTaskString();
 
 
 
@@ -988,7 +787,7 @@ public class ProcessedTransaction extends HBankDataAccess{
 				"VALUES ('" + PROCTRAN.PROC_TRAN_VALID + "'"+
 				",'" + sortCode2 + "'" +
 				",'" + String.format("%08d",Integer.parseInt(accountNumber)) + "'" +
-				",'" + timestamp.toString() + "'" +
+				",'" + dateString + "'" +
 				",'" + timeString + "'" +
 				",'" + taskRef + "'" +
 				","  + "'" + PROCTRAN.PROC_TY_WEB_DELETE_ACCOUNT + "'" + 
@@ -997,8 +796,8 @@ public class ProcessedTransaction extends HBankDataAccess{
 				")";
 
 		logger.fine("About to insert record SQL <" + sqlInsert + ">");
-		try {
-			PreparedStatement stmt = conn.prepareStatement(sqlInsert);
+		try (PreparedStatement stmt = conn.prepareStatement(sqlInsert);)
+		{
 			stmt.executeUpdate();
 		}
 		catch(SQLException e)
@@ -1017,51 +816,26 @@ public class ProcessedTransaction extends HBankDataAccess{
 	}
 
 
-	@SuppressWarnings("deprecation")
+
 	public boolean writeCreateAccount(String sortCode2, String accountNumber, BigDecimal actualBalance,	Date lastStatement, Date nextStatement, String customerNumber, String accountType) {
 		logger.entering(this.getClass().getName(),"writeCreateAccount(String sortCode2, String accountNumber, BigDecimal actualBalance,	Date lastStatement, Date nextStatement, String customerNumber, String accountType)");
-		long now = Calendar.getInstance().getTimeInMillis();
-		Date timestamp = new Date(now);
-		Time time = new Time(now);
 
-		String timeString = "";
-		StringBuffer myStringBuffer = new StringBuffer(new Integer(time.getHours()).toString());
-		for(int z = myStringBuffer.length(); z < 2;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		timeString = timeString.concat(myStringBuffer.toString());
-		myStringBuffer = new StringBuffer(new Integer(time.getMinutes()).toString());
-		for(int z = myStringBuffer.length(); z < 2;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		timeString = timeString.concat(myStringBuffer.toString());
-		myStringBuffer = new StringBuffer(new Integer(time.getSeconds()).toString());
-		for(int z = myStringBuffer.length(); z < 2;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		timeString = timeString.concat(myStringBuffer.toString());
-
-		myStringBuffer = new StringBuffer(new Integer(Task.getTask().getTaskNumber()).toString());
-		for(int z = myStringBuffer.length(); z < 12;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		String taskRef = myStringBuffer.toString();
-
-
-
+		sortOutDateTimeTaskString();
 
 		PROCTRAN myPROCTRAN = new PROCTRAN();
+		
+		Calendar myCalendar = Calendar.getInstance();
+		myCalendar.setTime(lastStatement);
+		
+		myPROCTRAN.setProcDescDelaccLastDd(myCalendar.get(Calendar.DATE));
+		myPROCTRAN.setProcDescDelaccLastMm(myCalendar.get(Calendar.MONTH) + 1);
+		myPROCTRAN.setProcDescDelaccLastYyyy(myCalendar.get(Calendar.YEAR));
+		
+		myCalendar.setTime(nextStatement);
+		myPROCTRAN.setProcDescDelaccNextDd(myCalendar.get(Calendar.DATE));
+		myPROCTRAN.setProcDescDelaccNextMm(myCalendar.get(Calendar.MONTH) + 1);
+		myPROCTRAN.setProcDescDelaccNextYyyy(myCalendar.get(Calendar.YEAR));
 
-		myPROCTRAN.setProcDescCreaccLastDd(lastStatement.getDate());
-		myPROCTRAN.setProcDescCreaccLastMm(lastStatement.getMonth() + 1);
-		myPROCTRAN.setProcDescCreaccLastYyyy(lastStatement.getYear() + 1900);
-		myPROCTRAN.setProcDescCreaccNextDd(nextStatement.getDate());
-		myPROCTRAN.setProcDescCreaccNextMm(nextStatement.getMonth() + 1);
-		myPROCTRAN.setProcDescCreaccNextYyyy(nextStatement.getYear() + 1900);
 		myPROCTRAN.setProcDescCreaccAcctype(accountType);
 		myPROCTRAN.setProcDescCreaccCustomer(new Integer(customerNumber).intValue());
 		myPROCTRAN.setProcDescCreaccFooter(PROCTRAN.PROC_DESC_CREACC_FLAG);
@@ -1087,7 +861,7 @@ public class ProcessedTransaction extends HBankDataAccess{
 				"VALUES ('" + PROCTRAN.PROC_TRAN_VALID + "'"+
 				",'" + sortCode2 + "'" +
 				",'" + String.format("%08d",Integer.parseInt(accountNumber)) + "'" +
-				",'" + timestamp.toString() + "'" +
+				",'" + dateString + "'" +
 				",'" + timeString + "'" +
 				",'" + taskRef + "'" +
 				","  + "'" + PROCTRAN.PROC_TY_WEB_CREATE_ACCOUNT + "'" + 
@@ -1095,8 +869,8 @@ public class ProcessedTransaction extends HBankDataAccess{
 				"," + actualBalance.setScale(2,RoundingMode.HALF_UP) + "" + 
 				")";
 		logger.fine("About to insert record SQL <" + sqlInsert + ">");
-		try {
-			PreparedStatement stmt = conn.prepareStatement(sqlInsert);
+		try (PreparedStatement stmt = conn.prepareStatement(sqlInsert);)
+		{
 			stmt.executeUpdate();
 		}
 		catch(SQLException e)
@@ -1117,6 +891,86 @@ public class ProcessedTransaction extends HBankDataAccess{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void sortOutDateTimeTaskString()
+	{
+		Calendar now = Calendar.getInstance();
+		StringBuffer myStringBuffer = new StringBuffer(new Integer(now.get(Calendar.HOUR_OF_DAY)));
+		for(int z = myStringBuffer.length(); z < 2;z++)
+		{
+			myStringBuffer = myStringBuffer.insert(0, "0");	
+		}
+		timeString = timeString.concat(myStringBuffer.toString());
+		myStringBuffer = new StringBuffer(new Integer(now.get(Calendar.MINUTE)));
+		for(int z = myStringBuffer.length(); z < 2;z++)
+		{
+			myStringBuffer = myStringBuffer.insert(0, "0");	
+		}
+		timeString = timeString.concat(myStringBuffer.toString());
+		myStringBuffer = new StringBuffer(new Integer(now.get(Calendar.SECOND)));
+		for(int z = myStringBuffer.length(); z < 2;z++)
+		{
+			myStringBuffer = myStringBuffer.insert(0, "0");	
+		}
+		timeString = timeString.concat(myStringBuffer.toString());
+
+		myStringBuffer = new StringBuffer(new Integer(now.get(Calendar.DATE)));
+		for(int z = myStringBuffer.length(); z < 2;z++)
+		{
+			myStringBuffer = myStringBuffer.insert(0, "0");	
+		}
+		dateString = timeString.concat(myStringBuffer.toString());
+
+		myStringBuffer = new StringBuffer(new Integer(now.get(Calendar.MONTH)+1));
+		for(int z = myStringBuffer.length(); z < 2;z++)
+		{
+			myStringBuffer = myStringBuffer.insert(0, "0");	
+		}
+		dateString = timeString.concat(myStringBuffer.toString());
+		
+		myStringBuffer = new StringBuffer(new Integer(now.get(Calendar.YEAR)));
+		for(int z = myStringBuffer.length(); z < 4;z++)
+		{
+			myStringBuffer = myStringBuffer.insert(0, "0");	
+		}
+		dateString = timeString.concat(myStringBuffer.toString());
+
+		myStringBuffer = new StringBuffer(new Integer(Task.getTask().getTaskNumber()).toString());
+		for(int z = myStringBuffer.length(); z < 12;z++)
+		{
+			myStringBuffer = myStringBuffer.insert(0, "0");	
+		}
+		taskRef = myStringBuffer.toString();
+		return;
+	}
+	
+	String sortOutCustomerDOB(Date customerDOB)
+	{
+		Calendar myCalendar = Calendar.getInstance();
+		myCalendar.setTime(customerDOB);
+		customerDOBString = new String();
+		StringBuffer myStringBuffer = new StringBuffer(new Integer(myCalendar.get(Calendar.DATE)));
+		for(int z = myStringBuffer.length(); z < 2;z++)
+		{
+			myStringBuffer = myStringBuffer.insert(0, "0");	
+		}
+		customerDOBString = customerDOBString + myStringBuffer.toString();
+		customerDOBString = customerDOBString + "-";
+		myStringBuffer = new StringBuffer(new Integer(myCalendar.get(Calendar.MONTH)+1));
+		for(int z = myStringBuffer.length(); z < 2;z++)
+		{
+			myStringBuffer = myStringBuffer.insert(0, "0");	
+		}
+		customerDOBString = customerDOBString + myStringBuffer.toString();
+		customerDOBString = customerDOBString + "-";
+		myStringBuffer = new StringBuffer(new Integer(myCalendar.get(Calendar.YEAR)));
+		for(int z = myStringBuffer.length(); z < 4;z++)
+		{
+			myStringBuffer = myStringBuffer.insert(0, "0");	
+		}
+		customerDOBString = customerDOBString + myStringBuffer.toString();
+		return customerDOBString;
 	}
 
 }

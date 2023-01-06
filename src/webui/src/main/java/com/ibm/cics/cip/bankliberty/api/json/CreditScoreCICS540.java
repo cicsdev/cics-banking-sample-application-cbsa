@@ -42,6 +42,7 @@ public class CreditScoreCICS540 {
     static final String COPYRIGHT =
       "Copyright IBM Corp. 2022";
 	
+	
 
 	public static CustomerJSON populateCreditScoreAndReviewDate(CustomerJSON customer)
 	{
@@ -67,7 +68,7 @@ public class CreditScoreCICS540 {
 		String[] transactionID = new String[creditAgencyCount];
 		String[] containerID = new String[creditAgencyCount];
 //		Future<ChildResponse>[] children = new Future[creditAgencyCount];
-		List<ChildResponse> children = new ArrayList<ChildResponse>();
+		List<Future<ChildResponse>> children = new ArrayList<Future<ChildResponse>>();
 //		Object[] children = new Object[creditAgencyCount];
 		int creditScoreTotal = 0;
 
@@ -113,13 +114,13 @@ public class CreditScoreCICS540 {
 			myCalendar.setTime(customer.getDateOfBirth());
 			myCRECUST.setCommBirthDay(myCalendar.get(Calendar.DAY_OF_MONTH));
 			myCRECUST.setCommBirthMonth(myCalendar.get(Calendar.MONTH) + 1);
-			myCRECUST.setCommBirthYear(myCalendar.get(Calendar.YEAR) + 1900);
+			myCRECUST.setCommBirthYear(myCalendar.get(Calendar.YEAR));
 			myCRECUST.setCommName(customer.getCustomerName());
 			myCRECUST.setCommNumber(new Long(customer.getId()));
 			myCalendar.setTime(customer.getReviewDate());
 			myCRECUST.setCommCsReviewDd(myCalendar.get(Calendar.DAY_OF_MONTH));
 			myCRECUST.setCommCsReviewMm(myCalendar.get(Calendar.MONTH) + 1);
-			myCRECUST.setCommCsReviewYyyy(myCalendar.get(Calendar.YEAR) + 1900);
+			myCRECUST.setCommCsReviewYyyy(myCalendar.get(Calendar.YEAR));
 			myCRECUST.setCommSortcode(new Integer(customer.getSortCode()));
 
 			try {
@@ -138,7 +139,7 @@ public class CreditScoreCICS540 {
 			}
 
 			try {
-				children.add((ChildResponse) asService.runTransactionId(transactionID[i],myCreditScoreChannel));
+				children.add(asService.runTransactionId(transactionID[i],myCreditScoreChannel));
 			} catch (InvalidRequestException e) {
 				e.printStackTrace();
 			} catch (InvalidTransactionIdException e) {
@@ -161,7 +162,8 @@ public class CreditScoreCICS540 {
 		catch(InterruptedException e)
 		{}
 		
-		for(int i = 0; i < creditAgencyCount;)
+		int completedRequests = 0;
+		while(completedRequests < creditAgencyCount)
 		{
 			ChildResponse anyOneWillDo = null;
 			try {
@@ -188,7 +190,7 @@ public class CreditScoreCICS540 {
 							CRECUST myCRECUST = new CRECUST(myContainerBytes);
 							creditScoreTotal = creditScoreTotal + myCRECUST.getCommCreditScore();
 							foundIt = true;
-							i++;
+							completedRequests++;
 						}
 					}
 					catch(ContainerErrorException e)
@@ -211,21 +213,12 @@ public class CreditScoreCICS540 {
 				System.err.println("One of the agencies didn't work");
 				creditAgencyCount--;
 			}
-			try {
-				Thread.sleep(3000);
-			}
-			catch (InterruptedException e) {
-			}
-
 		}
 
 
+
 		int creditScoreAverage = creditScoreTotal / creditAgencyCount;
-//.out.println("Credit score average = " + creditScoreAverage);
-//.out.println("Credit score total = " + creditScoreTotal);
 		customer.setCreditScore(new Integer(creditScoreAverage).toString());
-//.out.println("Customer Credit Score is " + customer.getCreditScore());
-//.out.println("Customer Review Date is " + customer.getReviewDate());
 		return customer;
 	}
 	

@@ -100,7 +100,10 @@ public class CustomerResource{
 		com.ibm.cics.cip.bankliberty.web.vsam.Customer vsamCustomer = new com.ibm.cics.cip.bankliberty.web.vsam.Customer();
 
 		customer.setSortCode(this.getSortCode().toString());
+		
+
 		vsamCustomer = vsamCustomer.createCustomer(customer, this.getSortCode(),false);
+
 
 		if (vsamCustomer == null) 
 		{
@@ -111,6 +114,7 @@ public class CustomerResource{
 			logger.exiting(this.getClass().getName(), "createCustomerInternal() exiting",myResponse);
 			return myResponse;
 		}
+
 
 
 		response.put("id", vsamCustomer.getCustomer_number());
@@ -127,7 +131,7 @@ public class CustomerResource{
 		myCreatedCustomer.setCustomerName(vsamCustomer.getName());
 		myCreatedCustomer.setSortCode(vsamCustomer.getSortcode());
 		myCreatedCustomer.setCustomerNumber(vsamCustomer.getCustomer_number());
-
+		
 		Response writeCreateCustomerResponse = myProcessedTransactionResource.writeCreateCustomerInternal(myCreatedCustomer);
 		if(writeCreateCustomerResponse == null || writeCreateCustomerResponse.getStatus() != 200)
 		{
@@ -512,7 +516,7 @@ public class CustomerResource{
 			dateOfBirth = dateOfBirth.concat(dobMM.toString());
 			dateOfBirth = dateOfBirth.concat("-");
 
-			Integer dobYYYY = new Integer(dobCalendar.get(Calendar.YEAR)+1900);
+			Integer dobYYYY = new Integer(dobCalendar.get(Calendar.YEAR));
 			dateOfBirth = dateOfBirth.concat(dobYYYY.toString());
 
 			response.put("Date of Birth",dateOfBirth);
