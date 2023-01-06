@@ -345,6 +345,7 @@ public class Account {
 			myAccountsResponse.close();
 			return new Integer(this.account_number).intValue();
 		}
+		myAccountsResponse.close();
 		return -1;
 	}
 	public boolean inDB(){

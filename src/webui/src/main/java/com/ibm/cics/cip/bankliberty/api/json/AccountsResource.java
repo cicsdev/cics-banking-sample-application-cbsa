@@ -176,7 +176,7 @@ public class AccountsResource extends HBankDataAccess{
 
 
 		CustomerResource myCustomer = new CustomerResource();
-		Response customerResponse = myCustomer.getCustomerInternal(customerNumberLong.longValue());
+		Response customerResponse = myCustomer.getCustomerInternal(customerNumberLong);
 		// Customer number cannot be found
 		if(customerResponse.getStatus() != 200)
 		{
@@ -249,9 +249,9 @@ public class AccountsResource extends HBankDataAccess{
 			response.put("id", db2Account.getAccount_number());
 			response.put("customerNumber", db2Account.getCustomer_number());
 			response.put("accountType", db2Account.getType().trim());
-			response.put("availableBalance", new BigDecimal(db2Account.getAvailable_balance()).setScale(2,RoundingMode.HALF_UP));
-			response.put("actualBalance", new BigDecimal(db2Account.getActual_balance()).setScale(2,RoundingMode.HALF_UP));
-			response.put("interestRate", new BigDecimal(db2Account.getInterest_rate()).setScale(2,RoundingMode.HALF_UP));
+			response.put("availableBalance",  BigDecimal.valueOf(db2Account.getAvailable_balance()));
+			response.put("actualBalance", BigDecimal.valueOf(db2Account.getActual_balance()));
+			response.put("interestRate", BigDecimal.valueOf(db2Account.getInterest_rate()));
 			response.put("overdraft", db2Account.getOverdraft_limit());
 			response.put("lastStatementDate", db2Account.getLast_statement().toString().trim());
 			response.put("nextStatementDate", db2Account.getNext_statement().toString().trim());
@@ -266,7 +266,7 @@ public class AccountsResource extends HBankDataAccess{
 			myProctranAccount.setLastStatement(db2Account.getLast_statement());
 			myProctranAccount.setNextStatement(db2Account.getNext_statement());
 			myProctranAccount.setType(db2Account.getType());
-			myProctranAccount.setActualBalance(new BigDecimal(db2Account.getActual_balance()).setScale(2,RoundingMode.HALF_UP));
+			myProctranAccount.setActualBalance(BigDecimal.valueOf(db2Account.getActual_balance()));
 
 
 
@@ -365,9 +365,9 @@ public class AccountsResource extends HBankDataAccess{
 				account.put("id", myAccounts[i].getAccount_number());
 				account.put("customerNumber", myAccounts[i].getCustomer_number());
 				account.put("accountType", myAccounts[i].getType().trim());
-				account.put("availableBalance", new BigDecimal(myAccounts[i].getAvailable_balance()).setScale(2,RoundingMode.HALF_UP));
-				account.put("actualBalance", new BigDecimal(myAccounts[i].getActual_balance()).setScale(2,RoundingMode.HALF_UP));
-				account.put("interestRate", new BigDecimal(myAccounts[i].getInterest_rate()).setScale(2,RoundingMode.HALF_UP));
+				account.put("availableBalance", BigDecimal.valueOf(myAccounts[i].getAvailable_balance()).setScale(2,RoundingMode.HALF_UP));
+				account.put("actualBalance", BigDecimal.valueOf(myAccounts[i].getActual_balance()).setScale(2,RoundingMode.HALF_UP));
+				account.put("interestRate", BigDecimal.valueOf(myAccounts[i].getInterest_rate()).setScale(2,RoundingMode.HALF_UP));
 				account.put("overdraft", myAccounts[i].getOverdraft_limit());
 				account.put("lastStatementDate", myAccounts[i].getLast_statement().toString().trim());
 				account.put("nextStatementDate", myAccounts[i].getNext_statement().toString().trim());
@@ -428,9 +428,9 @@ public class AccountsResource extends HBankDataAccess{
 			response.put("id", db2Account.getAccount_number());
 			response.put("customerNumber", db2Account.getCustomer_number());
 			response.put("accountType", db2Account.getType().trim());
-			response.put("availableBalance", new BigDecimal(db2Account.getAvailable_balance()).setScale(2,RoundingMode.HALF_UP));
-			response.put("actualBalance", new BigDecimal(db2Account.getActual_balance()).setScale(2,RoundingMode.HALF_UP));
-			response.put("interestRate", new BigDecimal(db2Account.getInterest_rate()).setScale(2,RoundingMode.HALF_UP));
+			response.put("availableBalance", BigDecimal.valueOf(db2Account.getAvailable_balance()));
+			response.put("actualBalance", BigDecimal.valueOf(db2Account.getActual_balance()));
+			response.put("interestRate", BigDecimal.valueOf(db2Account.getInterest_rate()));
 			response.put("overdraft", db2Account.getOverdraft_limit());
 			response.put("lastStatementDate", db2Account.getLast_statement().toString().trim());
 			response.put("nextStatementDate", db2Account.getNext_statement().toString().trim());
@@ -449,9 +449,9 @@ public class AccountsResource extends HBankDataAccess{
 					response.put("id", db2Account.getAccount_number());
 					response.put("customerNumber", db2Account.getCustomer_number());
 					response.put("accountType", db2Account.getType().trim());
-					response.put("availableBalance", new BigDecimal(db2Account.getAvailable_balance()).setScale(2,RoundingMode.HALF_UP));
-					response.put("actualBalance", new BigDecimal(db2Account.getActual_balance()).setScale(2,RoundingMode.HALF_UP));
-					response.put("interestRate", new BigDecimal(db2Account.getInterest_rate()).setScale(2,RoundingMode.HALF_UP));
+					response.put("availableBalance", BigDecimal.valueOf(db2Account.getAvailable_balance()));
+					response.put("actualBalance", BigDecimal.valueOf(db2Account.getActual_balance()));
+					response.put("interestRate", BigDecimal.valueOf(db2Account.getInterest_rate()));
 					response.put("overdraft", db2Account.getOverdraft_limit());
 					response.put("lastStatementDate", db2Account.getLast_statement().toString().trim());
 					response.put("nextStatementDate", db2Account.getNext_statement().toString().trim());
@@ -558,9 +558,9 @@ public class AccountsResource extends HBankDataAccess{
 			account.put("id", myAccounts[i].getAccount_number());
 			account.put("customerNumber", myAccounts[i].getCustomer_number());
 			account.put("accountType", myAccounts[i].getType());
-			account.put("availableBalance", new BigDecimal(myAccounts[i].getAvailable_balance()).setScale(2,RoundingMode.HALF_UP));
-			account.put("actualBalance", new BigDecimal(myAccounts[i].getActual_balance()).setScale(2,RoundingMode.HALF_UP));
-			account.put("interestRate", new BigDecimal(myAccounts[i].getInterest_rate()).setScale(2,RoundingMode.HALF_UP));
+			account.put("availableBalance", BigDecimal.valueOf(myAccounts[i].getAvailable_balance()));
+			account.put("actualBalance", BigDecimal.valueOf(myAccounts[i].getActual_balance()));
+			account.put("interestRate", BigDecimal.valueOf(myAccounts[i].getInterest_rate()));
 			account.put("overdraft", myAccounts[i].getOverdraft_limit());
 			account.put("lastStatementDate", myAccounts[i].getLast_statement().toString());
 			account.put("nextStatementDate", myAccounts[i].getNext_statement().toString());
@@ -693,9 +693,9 @@ public class AccountsResource extends HBankDataAccess{
 				response.put("id", db2Account.getAccount_number());
 				response.put("customerNumber",db2Account.getCustomer_number());
 				response.put("accountType", db2Account.getType().trim());
-				response.put("availableBalance", new BigDecimal(db2Account.getAvailable_balance()).setScale(2,RoundingMode.HALF_UP));
-				response.put("actualBalance", new BigDecimal(db2Account.getActual_balance()).setScale(2,RoundingMode.HALF_UP));
-				response.put("interestRate", new BigDecimal(db2Account.getInterest_rate()).setScale(2,RoundingMode.HALF_UP));				
+				response.put("availableBalance", BigDecimal.valueOf(db2Account.getAvailable_balance()));
+				response.put("actualBalance", BigDecimal.valueOf(db2Account.getActual_balance()));
+				response.put("interestRate", BigDecimal.valueOf(db2Account.getInterest_rate()));				
 				response.put("overdraft", db2Account.getOverdraft_limit());
 				response.put("lastStatementDate", db2Account.getLast_statement().toString());
 				response.put("nextStatementDate", db2Account.getNext_statement().toString());
@@ -904,9 +904,10 @@ public class AccountsResource extends HBankDataAccess{
 			return myResponse;
 		}
 
-		BigDecimal amount = new BigDecimal(transferLocal.getAmount().doubleValue());
+		BigDecimal amount = transferLocal.getAmount();
 		amount = amount.setScale(2,RoundingMode.HALF_UP);
-		BigDecimal negativeAmount = new BigDecimal(amount.doubleValue() * -1.0);
+		BigDecimal negativeAmount = amount;
+		negativeAmount = negativeAmount.multiply(BigDecimal.valueOf(-1));
 		negativeAmount = negativeAmount.setScale(2,RoundingMode.HALF_UP);
 
 		Long sortCode = new Long(this.getSortCode().longValue());
@@ -991,9 +992,9 @@ public class AccountsResource extends HBankDataAccess{
 
 		response.put("sortCode", db2Account.getSortcode().trim());
 		response.put("id", db2Account.getAccount_number());
-		response.put("availableBalance", new BigDecimal(db2Account.getAvailable_balance()).setScale(2,RoundingMode.HALF_UP));
-		response.put("actualBalance", new BigDecimal(db2Account.getActual_balance()).setScale(2,RoundingMode.HALF_UP));
-		response.put("interestRate", new BigDecimal(db2Account.getInterest_rate()).setScale(2,RoundingMode.HALF_UP));
+		response.put("availableBalance", BigDecimal.valueOf(db2Account.getAvailable_balance()));
+		response.put("actualBalance", BigDecimal.valueOf(db2Account.getActual_balance()));
+		response.put("interestRate", BigDecimal.valueOf(db2Account.getInterest_rate()));
 
 		myResponse = Response.status(200).entity(response.toString()).build();
 		logger.exiting(this.getClass().getName(),"transferLocalInternal(String accountNumber, TransferLocalJSON transferLocal)",myResponse);
@@ -1007,7 +1008,7 @@ public class AccountsResource extends HBankDataAccess{
 		Response myResponse = null;
 		JSONObject response = new JSONObject();
 
-		if (debitAccount) apiAmount = apiAmount.multiply(new BigDecimal(-1));
+		if (debitAccount) apiAmount = apiAmount.multiply(BigDecimal.valueOf(-1));
 
 
 		com.ibm.cics.cip.bankliberty.web.db2.Account db2Account  = new  com.ibm.cics.cip.bankliberty.web.db2.Account();
@@ -1060,9 +1061,9 @@ public class AccountsResource extends HBankDataAccess{
 
 		response.put("sortCode", db2Account.getSortcode().trim());
 		response.put("id", db2Account.getAccount_number());
-		response.put("availableBalance", new BigDecimal(db2Account.getAvailable_balance()).setScale(2,RoundingMode.HALF_UP));
-		response.put("actualBalance", new BigDecimal(db2Account.getActual_balance()).setScale(2,RoundingMode.HALF_UP));
-		response.put("interestRate", new BigDecimal(db2Account.getInterest_rate()).setScale(2,RoundingMode.HALF_UP));
+		response.put("availableBalance", BigDecimal.valueOf(db2Account.getAvailable_balance()));
+		response.put("actualBalance", BigDecimal.valueOf(db2Account.getActual_balance()));
+		response.put("interestRate", BigDecimal.valueOf(db2Account.getInterest_rate()));
 		myResponse = Response.status(200).entity(response.toString()).build();
 		logger.exiting(this.getClass().getName(),"debitCreditAccount(Long sortCode, String accountNumber, BigDecimal apiAmount, boolean debitAccount)",myResponse);
 		return myResponse;
@@ -1100,9 +1101,9 @@ public class AccountsResource extends HBankDataAccess{
 			response.put("id",db2Account.getAccount_number());
 			response.put("customerNumber", db2Account.getCustomer_number());
 			response.put("accountType", db2Account.getType().trim());
-			response.put("availableBalance", new BigDecimal(db2Account.getAvailable_balance()).setScale(2,RoundingMode.HALF_UP));
-			response.put("actualBalance", new BigDecimal(db2Account.getActual_balance()).setScale(2,RoundingMode.HALF_UP));
-			response.put("interestRate", new BigDecimal(db2Account.getInterest_rate()).setScale(2,RoundingMode.HALF_UP));
+			response.put("availableBalance", BigDecimal.valueOf(db2Account.getAvailable_balance()));
+			response.put("actualBalance", BigDecimal.valueOf(db2Account.getActual_balance()));
+			response.put("interestRate", BigDecimal.valueOf(db2Account.getInterest_rate()));
 			response.put("overdraft", db2Account.getOverdraft_limit());
 			response.put("lastStatementDate", db2Account.getLast_statement().toString().trim());
 			response.put("nextStatementDate", db2Account.getNext_statement().toString().trim());
@@ -1117,7 +1118,7 @@ public class AccountsResource extends HBankDataAccess{
 			myDeletedAccount.setSortCode(db2Account.getSortcode());
 			myDeletedAccount.setNextStatement(db2Account.getNext_statement());
 			myDeletedAccount.setLastStatement(db2Account.getLast_statement());
-			myDeletedAccount.setActualBalance(new BigDecimal(db2Account.getActual_balance()));
+			myDeletedAccount.setActualBalance(BigDecimal.valueOf(db2Account.getActual_balance()));
 
 
 			Response deletedAccountResponse = myProcessedTransactionResource.writeDeleteAccountInternal(myDeletedAccount);
@@ -1233,9 +1234,9 @@ public class AccountsResource extends HBankDataAccess{
 				account.put("id", myAccounts[i].getAccount_number());
 				account.put("customerNumber", myAccounts[i].getCustomer_number());
 				account.put("accountType", myAccounts[i].getType().trim());
-				account.put("availableBalance", new BigDecimal(myAccounts[i].getAvailable_balance()).setScale(2,RoundingMode.HALF_UP));
-				account.put("actualBalance", new BigDecimal(myAccounts[i].getActual_balance()).setScale(2,RoundingMode.HALF_UP));
-				account.put("interestRate", new BigDecimal(myAccounts[i].getInterest_rate()).setScale(2,RoundingMode.HALF_UP));
+				account.put("availableBalance", BigDecimal.valueOf(myAccounts[i].getAvailable_balance()));
+				account.put("actualBalance", BigDecimal.valueOf(myAccounts[i].getActual_balance()));
+				account.put("interestRate", BigDecimal.valueOf(myAccounts[i].getInterest_rate()));
 				account.put("overdraft", myAccounts[i].getOverdraft_limit());
 				account.put("lastStatementDate", myAccounts[i].getLast_statement().toString().trim());
 				account.put("nextStatementDate", myAccounts[i].getNext_statement().toString().trim());
@@ -1374,9 +1375,9 @@ public class AccountsResource extends HBankDataAccess{
 				account.put("id", myAccounts[i].getAccount_number());
 				account.put("customerNumber", myAccounts[i].getCustomer_number());
 				account.put("accountType", myAccounts[i].getType().trim());
-				account.put("availableBalance", new BigDecimal(myAccounts[i].getAvailable_balance()).setScale(2,RoundingMode.HALF_UP));
-				account.put("actualBalance", new BigDecimal(myAccounts[i].getActual_balance()).setScale(2,RoundingMode.HALF_UP));
-				account.put("interestRate", new BigDecimal(myAccounts[i].getInterest_rate()).setScale(2,RoundingMode.HALF_UP));
+				account.put("availableBalance", BigDecimal.valueOf(myAccounts[i].getAvailable_balance()));
+				account.put("actualBalance", BigDecimal.valueOf(myAccounts[i].getActual_balance()));
+				account.put("interestRate", BigDecimal.valueOf(myAccounts[i].getInterest_rate()));
 				account.put("overdraft", myAccounts[i].getOverdraft_limit());
 				account.put("lastStatementDate", myAccounts[i].getLast_statement().toString().trim());
 				account.put("nextStatementDate", myAccounts[i].getNext_statement().toString().trim());

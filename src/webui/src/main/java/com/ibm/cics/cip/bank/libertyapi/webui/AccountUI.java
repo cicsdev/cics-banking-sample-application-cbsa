@@ -108,7 +108,7 @@ public class AccountUI extends VerticalLayout{
 		cusNumT.setValue(acc.getCustomer_number());
 		cusNumT.setEnabled(false);
 
-		//Textfield shoiwng sortcode
+		//Textfield showing sortcode
 		sCodeT = new TextField("Sortcode");
 		sCodeT.setValue(getSortcode());
 		sCodeT.setEnabled(false);
@@ -349,7 +349,7 @@ public class AccountUI extends VerticalLayout{
 			Account newAcc = new Account(cusNumT.getValue(), sCodeT.getValue(), String.format("%08d",temp), 
 					typeT.getValue().toString(), tempBD, new Date(), 
 					Integer.valueOf(overdraftT.getValue()), null, null, 
-					new BigDecimal(Double.valueOf(balanceT.getValue())), new BigDecimal(Double.valueOf(balanceT.getValue())));
+					new BigDecimal(balanceT.getValue()), new BigDecimal(balanceT.getValue()));
 			//			newAcc.showInfo();
 			
 			//Add the new account to the database
@@ -371,7 +371,7 @@ public class AccountUI extends VerticalLayout{
 		BigDecimal temp = a.getInterest_rate().setScale(2,RoundingMode.HALF_UP);
 		a.setInterest_rate(temp);
 		a.setOverdraft_limit(Integer.valueOf(overdraftT.getValue()));
-		a.setActual_balance(new BigDecimal(Double.valueOf(balanceT.getValue())));
+		a.setActual_balance(new BigDecimal(balanceT.getValue()));
 		a.setSortcode(sCodeT.getValue());
 		if(a.updateThis())
 		{
