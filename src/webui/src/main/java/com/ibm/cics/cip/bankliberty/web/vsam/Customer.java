@@ -233,10 +233,14 @@ public class Customer {
 					try {
 						logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
 						Thread.sleep(3000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
+					} 
+					catch (InterruptedException e) 
+					{
 						e.printStackTrace();
-					} 					try {
+						Thread.currentThread().interrupt();
+						e.printStackTrace();
+					}
+					try {
 						KeyedFileBrowse myKeyedFileBrowse =	customerFile.startBrowse(key);
 						myKeyedFileBrowse.previous(holder, keyHolder);
 						myKeyedFileBrowse.end();
@@ -319,7 +323,11 @@ public class Customer {
 					try {
 						logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
 						Thread.sleep(3000);
-					} catch (InterruptedException e) {
+					} 
+					catch (InterruptedException e) 
+					{
+						e.printStackTrace();
+						Thread.currentThread().interrupt();
 					} 
 					try {
 						customerFile.read(key, holder);
@@ -429,7 +437,11 @@ public class Customer {
 				try {
 					logger.fine("About to sleep for " + totalSleep + " milliseconds");
 					Thread.sleep(3000);
-				}  catch (InterruptedException e) {
+				}  
+				catch (InterruptedException e) 
+				{
+					e.printStackTrace();
+					Thread.currentThread().interrupt();
 				} 				try {
 					customerFileBrowse = customerFile.startBrowse(key);
 					success = true;
@@ -486,11 +498,17 @@ public class Customer {
 				boolean success;
 				for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 				{
-					try {
+					try 
+					{
 						logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
 						Thread.sleep(3000);
-					} catch (InterruptedException e) {
-					}					try {
+					}
+					catch (InterruptedException e) 
+					{
+						e.printStackTrace();
+						Thread.currentThread().interrupt();
+					}
+					try {
 						customerFileBrowse.next(holder, keyHolder);
 						success = true;
 
@@ -560,8 +578,11 @@ public class Customer {
 				try {
 					logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
 					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					// 
+				}
+				catch (InterruptedException e) 
+				{
+					e.printStackTrace();
+					Thread.currentThread().interrupt(); 
 				} 
 				try {
 					customerFileBrowse.end();
@@ -675,9 +696,14 @@ public class Customer {
 				try {
 					logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
 					Thread.sleep(3000);
-				} catch (InterruptedException e) {
+				} 
+				catch (InterruptedException e) 
+				{
+					e.printStackTrace();
+					Thread.currentThread().interrupt();
 				}
-				try {
+				try 
+				{
 					customerFile.readForUpdate(key, holder);
 					myCustomer = new CUSTOMER(holder.getValue());
 					myCustomer.setCustomerAddress(customer.getCustomerAddress());
@@ -686,8 +712,9 @@ public class Customer {
 					myCustomer = new CUSTOMER(holder.getValue());
 					success = true;
 
-				} catch (NoSpaceException | DuplicateRecordException | DuplicateKeyException | ChangedException | LoadingException | RecordBusyException | LockedException | IOErrorException | LengthErrorException | FileDisabledException | NotOpenException | LogicException | InvalidRequestException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
-						e3) {
+				}
+				catch (NoSpaceException | DuplicateRecordException | DuplicateKeyException | ChangedException | LoadingException | RecordBusyException | LockedException | IOErrorException | LengthErrorException | FileDisabledException | NotOpenException | LogicException | InvalidRequestException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException 	e3) 
+				{
 					logger.severe("Error updating CUSTOMER file, " + e3.getLocalizedMessage());
 					logger.exiting(this.getClass().getName(),"updateCustomer(CustomerJSON customer)",null);
 					return null;
@@ -803,12 +830,15 @@ public class Customer {
 				boolean success;
 				for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 				{
-					try {
+					try 
+					{
 						logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
 						Thread.sleep(3000);
 					}
 					catch (InterruptedException e) 
 					{
+						e.printStackTrace();
+						Thread.currentThread().interrupt();
 					}
 					try {
 						myKeyedFileBrowse =	customerFile.startBrowse(key);
@@ -897,6 +927,8 @@ public class Customer {
 					}
 					catch (InterruptedException e) 
 					{
+						e.printStackTrace();
+						Thread.currentThread().interrupt();
 					}
 					try {
 						customerFile.readForUpdate(key, holder);
@@ -1224,7 +1256,10 @@ public class Customer {
 					logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
 					Thread.sleep(3000);
 				}
-				catch (InterruptedException e) {
+				catch (InterruptedException e) 
+				{
+					e.printStackTrace();
+					Thread.currentThread().interrupt();
 				}
 				try {
 					customerFile.write(key, myCustomer.getByteBuffer());
@@ -1350,8 +1385,11 @@ public class Customer {
 					logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
 					Thread.sleep(3000);
 				}
-				 catch (InterruptedException e) {
-					}
+				catch (InterruptedException e) 
+				{
+					e.printStackTrace();
+					Thread.currentThread().interrupt();
+				}
 				try {
 					customerFileBrowse = customerFile.startBrowse(key);
 					success = true;
@@ -1411,8 +1449,11 @@ public class Customer {
 						logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
 						Thread.sleep(3000);
 					}
-						 catch (InterruptedException e) {
-							}
+					 catch (InterruptedException e) 
+					{
+							e.printStackTrace();
+							Thread.currentThread().interrupt();
+					}
 					try {
 						customerFileBrowse.next(holder, keyHolder);
 						success = true;
@@ -1425,6 +1466,7 @@ public class Customer {
 					}
 					catch (InvalidSystemIdException e4)
 					{
+						// This indicates that the other system is not available yet. So we continue to wait.
 					}
 					catch (EndOfFileException e4)
 					{
@@ -1484,8 +1526,11 @@ public class Customer {
 					logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
 					Thread.sleep(3000);
 				}
-					 catch (InterruptedException e) {
-						}
+				catch (InterruptedException e) 
+				{
+					e.printStackTrace();
+					Thread.currentThread().interrupt();
+				}
 				try {
 					customerFileBrowse.end();
 					success = true;
@@ -1592,8 +1637,11 @@ public class Customer {
 					logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
 					Thread.sleep(3000);
 				}
-					 catch (InterruptedException e) {
-						}
+				catch (InterruptedException e) 
+				{
+					e.printStackTrace();
+					Thread.currentThread().interrupt();
+				}
 				try {
 					customerFileBrowse = customerFile.startBrowse(key);
 					success = true;
@@ -1653,8 +1701,11 @@ public class Customer {
 						logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
 						Thread.sleep(3000);
 					}
-					 catch (InterruptedException e) {
-						}
+					catch (InterruptedException e) 
+					{
+						e.printStackTrace();
+						Thread.currentThread().interrupt();
+					}
 					try {
 						customerFileBrowse.next(holder, keyHolder);
 						success = true;
@@ -1734,8 +1785,11 @@ public class Customer {
 					Thread.sleep(3000);
 				}
 
-				 catch (InterruptedException e) {
-					}
+				catch (InterruptedException e) 
+				{
+					e.printStackTrace();
+					Thread.currentThread().interrupt();
+				}
 				try {
 					customerFileBrowse.end();
 					success = true;
@@ -1862,8 +1916,11 @@ public class Customer {
 					logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
 					Thread.sleep(3000);
 				}
-				 catch (InterruptedException e) {
-					}
+				catch (InterruptedException e) 
+				{
+					e.printStackTrace();
+					Thread.currentThread().interrupt();
+				}
 				try {
 
 					customerFileBrowse = customerFile.startBrowse(key);
@@ -1924,8 +1981,11 @@ public class Customer {
 						logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
 						Thread.sleep(3000);
 					}
-					 catch (InterruptedException e) {
-						}
+					catch (InterruptedException e) 
+					{
+						e.printStackTrace();
+						Thread.currentThread().interrupt();
+					}
 					try {
 						customerFileBrowse.next(holder, keyHolder);
 						success = true;
@@ -2001,8 +2061,11 @@ public class Customer {
 					logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
 					Thread.sleep(3000);
 				}
-				 catch (InterruptedException e) {
-					}
+				catch (InterruptedException e) 
+				{
+					e.printStackTrace();
+					Thread.currentThread().interrupt();
+				}
 				try {
 					customerFileBrowse.end();
 					success = true;
@@ -2078,8 +2141,11 @@ public class Customer {
 					logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
 					Thread.sleep(3000);
 				}
-				 catch (InterruptedException e) {
-					}
+				catch (InterruptedException e) 
+				{
+					e.printStackTrace();
+					Thread.currentThread().interrupt();
+				}
 				try {
 					customerFile.read(key, holder);
 					success = true;
@@ -2182,8 +2248,11 @@ public class Customer {
 
 
 
-				 catch (InterruptedException e) {
-					}
+				catch (InterruptedException e) 
+				{
+					e.printStackTrace();
+					Thread.currentThread().interrupt();
+				}
 				try {
 					customerFileBrowse = customerFile.startBrowse(key);
 					success = true;
@@ -2243,8 +2312,11 @@ public class Customer {
 						logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
 						Thread.sleep(3000);
 					}
-					 catch (InterruptedException e) {
-						}
+					catch (InterruptedException e) 
+					{
+						e.printStackTrace();
+						Thread.currentThread().interrupt();
+					}
 					try {
 						customerFileBrowse.next(holder, keyHolder);
 						success = true;
@@ -2302,7 +2374,11 @@ public class Customer {
 				try {
 					logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
 					Thread.sleep(3000);
-				} catch (InterruptedException e) {
+				} 
+				catch (InterruptedException e) 
+				{
+					e.printStackTrace();
+					Thread.currentThread().interrupt();
 				} 
 				try {
 					customerFileBrowse.end();
@@ -2404,8 +2480,14 @@ public class Customer {
 				try {
 					logger.fine("About to sleep for " + totalSleep + " milliseconds");
 					Thread.sleep(3000);
-				}  catch (InterruptedException e) {
-				} 				try {
+				}  
+				catch (InterruptedException e) 
+				{
+					e.printStackTrace();
+					Thread.currentThread().interrupt();
+				}
+				try 
+				{
 					customerFileBrowse = customerFile.startBrowse(key);
 					success = true;
 
@@ -2464,8 +2546,13 @@ public class Customer {
 					try {
 						logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
 						Thread.sleep(3000);
-					} catch (InterruptedException e) {
-					}					try {
+					} 
+					catch (InterruptedException e) 
+					{
+						e.printStackTrace();
+						Thread.currentThread().interrupt();
+					}
+					try {
 						customerFileBrowse.next(holder, keyHolder);
 						success = true;
 
@@ -2536,8 +2623,11 @@ public class Customer {
 				try {
 					logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
 					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
+				} 
+				catch (InterruptedException e) 
+				{
+					e.printStackTrace();
+					Thread.currentThread().interrupt();
 				} 
 				try {
 					customerFileBrowse.end();
@@ -2630,8 +2720,14 @@ public class Customer {
 				try {
 					logger.fine("About to sleep for " + totalSleep + " milliseconds");
 					Thread.sleep(3000);
-				}  catch (InterruptedException e) {
-				} 				try {
+				}  
+				catch (InterruptedException e) 
+				{
+					e.printStackTrace();
+					Thread.currentThread().interrupt();
+				} 				
+				try 
+				{
 					customerFileBrowse = customerFile.startBrowse(key);
 					success = true;
 
@@ -2690,8 +2786,13 @@ public class Customer {
 					try {
 						logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
 						Thread.sleep(3000);
-					} catch (InterruptedException e) {
-					}					try {
+					} 
+					catch (InterruptedException e) 
+					{
+						e.printStackTrace();
+						Thread.currentThread().interrupt();
+					}
+					try {
 						customerFileBrowse.next(holder, keyHolder);
 						success = true;
 
@@ -2762,8 +2863,11 @@ public class Customer {
 				try {
 					logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
 					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
+				} 
+				catch (InterruptedException e) 
+				{
+					e.printStackTrace();
+					Thread.currentThread().interrupt();
 				} 
 				try {
 					customerFileBrowse.end();
@@ -2856,8 +2960,13 @@ public class Customer {
 				try {
 					logger.fine("About to sleep for " + totalSleep + " milliseconds");
 					Thread.sleep(3000);
-				}  catch (InterruptedException e) {
-				} 				try {
+				}  
+				catch (InterruptedException e) 
+				{
+					e.printStackTrace();
+					Thread.currentThread().interrupt();
+				}
+				try {
 					customerFileBrowse = customerFile.startBrowse(key);
 					success = true;
 
@@ -2918,8 +3027,14 @@ public class Customer {
 					try {
 						logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
 						Thread.sleep(3000);
-					} catch (InterruptedException e) {
-					}					try {
+					} 
+					catch (InterruptedException e) 
+					{
+						e.printStackTrace();
+						Thread.currentThread().interrupt();
+					}
+					try 
+					{
 						customerFileBrowse.next(holder, keyHolder);
 						success = true;
 
@@ -2990,8 +3105,11 @@ public class Customer {
 				try {
 					logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
 					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
+				} 
+				catch (InterruptedException e) 
+				{
+					e.printStackTrace();
+					Thread.currentThread().interrupt();
 				} 
 				try {
 					customerFileBrowse.end();

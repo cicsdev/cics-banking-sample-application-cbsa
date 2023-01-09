@@ -123,44 +123,24 @@ public class CreditScoreCICS540 {
 			myCRECUST.setCommCsReviewYyyy(myCalendar.get(Calendar.YEAR));
 			myCRECUST.setCommSortcode(new Integer(customer.getSortCode()));
 
-			try {
+			try 
+			{
 				Container myContainer = myCreditScoreChannel.createContainer(containerID[i]);
 				myContainer.put(myCRECUST.getByteBuffer());
-			} catch (ContainerErrorException e1) {
+			}
+			catch (ContainerErrorException | ChannelErrorException | InvalidRequestException | CCSIDErrorException | CodePageErrorException e1) {
 				e1.printStackTrace();
-			} catch (ChannelErrorException e1) {
-				e1.printStackTrace();
-			} catch (InvalidRequestException e) {
-				e.printStackTrace();
-			} catch (CCSIDErrorException e) {
-				e.printStackTrace();
-			} catch (CodePageErrorException e) {
-				e.printStackTrace();
 			}
 
-			try {
+			try 
+			{
 				children.add(asService.runTransactionId(transactionID[i],myCreditScoreChannel));
-			} catch (InvalidRequestException e) {
+			} 
+			catch (InvalidRequestException | InvalidTransactionIdException | NotAuthorisedException | ResourceDisabledException | ChannelErrorException e) {
 				e.printStackTrace();
-			} catch (InvalidTransactionIdException e) {
-				e.printStackTrace();
-			} catch (NotAuthorisedException e) {
-				e.printStackTrace();
-			} catch (ResourceDisabledException e) {
-				e.printStackTrace();
-			} catch (ChannelErrorException e) {
-				e.printStackTrace();
-			}
+			} 
 		}
 
-
-
-		//* Wait three seconds */
-		try {
-			Thread.sleep(3000);
-		}
-		catch(InterruptedException e)
-		{}
 		
 		int completedRequests = 0;
 		while(completedRequests < creditAgencyCount)
