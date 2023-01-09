@@ -61,7 +61,7 @@ public class AccountList {
 			// AND ACCOUNT_AVAILABLE_BALANCE <= 33558.0
 
 			String operator = filter.substring(31,32);
-			BigDecimal balance = new BigDecimal(filter.substring(34));
+			BigDecimal balance = BigDecimal.valueOf(new Double(filter.substring(34)));
 
 			myAccountsResponse = myAccountsResource.getAccountsByBalanceWithOffsetAndLimitExternal(balance,operator,null,null,true);
 
@@ -176,7 +176,7 @@ public class AccountList {
 			//("We are filtering by balance");
 			//.out.println(filter);
 			String operator = filter.substring(31,32);
-			BigDecimal balance = new BigDecimal(filter.substring(34));
+			BigDecimal balance = BigDecimal.valueOf(new Double(filter.substring(34)));
 
 			myAccountsResponse = myAccountsResource.getAccountsByBalanceWithOffsetAndLimitExternal(balance,operator, offset, limit,false);
 
@@ -204,9 +204,9 @@ public class AccountList {
 						String id = (String)myAccount.get("id");
 						String customerNumberString = (String) myAccount.get("customerNumber");
 					
-						BigDecimal actual_balance = new BigDecimal((Double) myAccount.get("actualBalance")).setScale(2,RoundingMode.HALF_UP);
-						BigDecimal available_balance = new BigDecimal((Double) myAccount.get("availableBalance")).setScale(2,RoundingMode.HALF_UP);
-						BigDecimal interest_rate = new BigDecimal((Double) myAccount.get("interestRate")).setScale(2,RoundingMode.HALF_UP);
+						BigDecimal actual_balance = BigDecimal.valueOf((Double) myAccount.get("actualBalance")).setScale(2,RoundingMode.HALF_UP);
+						BigDecimal available_balance = BigDecimal.valueOf((Double) myAccount.get("availableBalance")).setScale(2,RoundingMode.HALF_UP);
+						BigDecimal interest_rate = BigDecimal.valueOf((Double) myAccount.get("interestRate")).setScale(2,RoundingMode.HALF_UP);
 						Long overdraft = (Long) myAccount.get("overdraft");
 						String sortCode = (String) myAccount.get("sortCode");
 						String type = (String) myAccount.get("accountType");
@@ -258,9 +258,9 @@ public class AccountList {
 				Date dateOpened = sortOutDate((String) myAccount.get("dateOpened"));
 				String id = (String)myAccount.get("id");
 				String customerNumber = (String) myAccount.get("customerNumber");
-				BigDecimal actual_balance = new BigDecimal((Double) myAccount.get("actualBalance")).setScale(2,RoundingMode.HALF_UP);
-				BigDecimal available_balance = new BigDecimal((Double) myAccount.get("availableBalance")).setScale(2,RoundingMode.HALF_UP);
-				BigDecimal interest_rate = new BigDecimal((Double) myAccount.get("interestRate")).setScale(2,RoundingMode.HALF_UP);
+				BigDecimal actual_balance = BigDecimal.valueOf((Double) myAccount.get("actualBalance")).setScale(2,RoundingMode.HALF_UP);
+				BigDecimal available_balance = BigDecimal.valueOf((Double) myAccount.get("availableBalance")).setScale(2,RoundingMode.HALF_UP);
+				BigDecimal interest_rate = BigDecimal.valueOf((Double) myAccount.get("interestRate")).setScale(2,RoundingMode.HALF_UP);
 				Long overdraft = (Long) myAccount.get("overdraft");
 				String sortCode = (String) myAccount.get("sortCode");
 				String type = (String) myAccount.get("accountType");
@@ -322,9 +322,9 @@ public class AccountList {
 							Date dateOpened = sortOutDate((String) myAccount.get("dateOpened"));
 							String id = (String)myAccount.get("id");
 							String customerNumberString = (String) myAccountsJSON.get("customerNumber");
-							BigDecimal actual_balance = new BigDecimal((Double) myAccount.get("actualBalance")).setScale(2,RoundingMode.HALF_UP);
-							BigDecimal available_balance = new BigDecimal((Double) myAccount.get("availableBalance")).setScale(2,RoundingMode.HALF_UP);
-							BigDecimal interest_rate = new BigDecimal((Double) myAccount.get("interestRate")).setScale(2,RoundingMode.HALF_UP);
+							BigDecimal actual_balance = BigDecimal.valueOf((Double) myAccount.get("actualBalance")).setScale(2,RoundingMode.HALF_UP);
+							BigDecimal available_balance = BigDecimal.valueOf((Double) myAccount.get("availableBalance")).setScale(2,RoundingMode.HALF_UP);
+							BigDecimal interest_rate = BigDecimal.valueOf((Double) myAccount.get("interestRate")).setScale(2,RoundingMode.HALF_UP);
 							Long overdraft = (Long) myAccount.get("overdraft");
 							String sortCode = (String) myAccount.get("sortCode");
 							String type = (String) myAccount.get("accountType");
@@ -377,9 +377,9 @@ public class AccountList {
 					Date dateOpened = sortOutDate((String) myAccount.get("dateOpened"));
 					String id = (String)myAccount.get("id");
 					String customerNumber = (String) myAccount.get("customerNumber");
-					BigDecimal actual_balance = new BigDecimal((Double) myAccount.get("actualBalance")).setScale(2,RoundingMode.HALF_UP);
-					BigDecimal available_balance = new BigDecimal((Double) myAccount.get("availableBalance")).setScale(2,RoundingMode.HALF_UP);
-					BigDecimal interest_rate = new BigDecimal((Double) myAccount.get("interestRate")).setScale(2,RoundingMode.HALF_UP);
+					BigDecimal actual_balance = BigDecimal.valueOf((Double) myAccount.get("actualBalance")).setScale(2,RoundingMode.HALF_UP);
+					BigDecimal available_balance = BigDecimal.valueOf((Double) myAccount.get("availableBalance")).setScale(2,RoundingMode.HALF_UP);
+					BigDecimal interest_rate = BigDecimal.valueOf((Double) myAccount.get("interestRate")).setScale(2,RoundingMode.HALF_UP);
 					Long overdraft = (Long) myAccount.get("overdraft");
 					String sortCode = (String) myAccount.get("sortCode");
 					String type = (String) myAccount.get("accountType");

@@ -84,7 +84,7 @@ public class ProcessedTransactionResource{
 			JSONObject proctran = new JSONObject();
 			proctran.put("sortCode", processedTransactions[i].getSortcode());
 			proctran.put("accountNumber", processedTransactions[i].getAccount_number());
-			proctran.put("amount", new BigDecimal(processedTransactions[i].getAmount()).setScale(2,RoundingMode.HALF_UP));
+			proctran.put("amount", BigDecimal.valueOf(processedTransactions[i].getAmount()).setScale(2,RoundingMode.HALF_UP));
 			DateFormat myDateFormat = DateFormat.getDateInstance();
 			proctran.put("timestamp", myDateFormat.format(processedTransactions[i].getTransactionDate()));
 			proctran.put("description", processedTransactions[i].getDescription().trim());
@@ -140,7 +140,7 @@ public class ProcessedTransactionResource{
 			DateFormat myDateFormat = DateFormat.getDateInstance();
 			proctran.put("sortCode", processedTransactions[i].getSortcode());
 			proctran.put("accountNumber", processedTransactions[i].getAccount_number());
-			proctran.put("amount", new BigDecimal(processedTransactions[i].getAmount()).setScale(2,RoundingMode.HALF_UP));
+			proctran.put("amount", BigDecimal.valueOf(processedTransactions[i].getAmount()).setScale(2,RoundingMode.HALF_UP));
 			proctran.put("timestamp", myDateFormat.format(processedTransactions[i].getTransactionDate()));
 			proctran.put("description", processedTransactions[i].getDescription().trim());
 			proctran.put("type", processedTransactions[i].getType());

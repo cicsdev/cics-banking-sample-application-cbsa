@@ -371,7 +371,7 @@ public class AccountUI extends VerticalLayout{
 		BigDecimal temp = a.getInterest_rate().setScale(2,RoundingMode.HALF_UP);
 		a.setInterest_rate(temp);
 		a.setOverdraft_limit(Integer.valueOf(overdraftT.getValue()));
-		a.setActual_balance(new BigDecimal(balanceT.getValue()));
+		a.setActual_balance(BigDecimal. valueOf(Double.valueOf(balanceT.getValue())));
 		a.setSortcode(sCodeT.getValue());
 		if(a.updateThis())
 		{
