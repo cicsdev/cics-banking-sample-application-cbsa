@@ -1403,16 +1403,7 @@ public class AccountsResource extends HBankDataAccess{
 
 	}
 
-	private void sortOutLogging()
-	{
-		try {
-			LogManager.getLogManager().readConfiguration();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+
 
 
 

@@ -286,16 +286,7 @@ public class CounterResource extends HBankDataAccess{
 		}
 
 	}
-	private void sortOutLogging()
-	{
-		try {
-			LogManager.getLogManager().readConfiguration();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+
 
 
 }

@@ -1188,17 +1188,4 @@ public class Account extends HBankDataAccess{
 		logger.exiting(this.getClass().getName(), "getAccountsByBalanceCountOnly(Integer sortCode2, BigDecimal balance, boolean lessThan, Integer offset, Integer limit)",accountCount);
 		return accountCount;
 	}
-
-	private void sortOutLogging()
-	{
-		try {
-			LogManager.getLogManager().readConfiguration();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 }

@@ -48,7 +48,7 @@ public class CreditScore {
 			Calendar calendar = Calendar.getInstance();
 			long nowMs = calendar.getTimeInMillis();
 			int next21Days = new Random(calendar.getTimeInMillis()).nextInt(20);
-			next21Days = next21Days++;
+			next21Days++;
 			nowMs = nowMs + (1000L * 60L * 60L * 24L * next21Days);
 			customer.setReviewDate(new Date(nowMs));
 		}

@@ -167,7 +167,7 @@ public class HBankDataAccess {
 			Task.getTask().abend("HDB2");
 		} 
 	}
-	private void sortOutLogging()
+	protected void sortOutLogging()
 	{
 		try {
 			LogManager.getLogManager().readConfiguration();

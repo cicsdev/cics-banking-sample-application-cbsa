@@ -882,16 +882,7 @@ public class ProcessedTransaction extends HBankDataAccess{
 		logger.exiting(this.getClass().getName(),"writeCreateAccount(String sortCode2, String accountNumber, BigDecimal actualBalance,	Date lastStatement, Date nextStatement, String customerNumber, String accountType)",true);
 		return true;		
 	}
-	private void sortOutLogging()
-	{
-		try {
-			LogManager.getLogManager().readConfiguration();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+
 	
 	private void sortOutDateTimeTaskString()
 	{

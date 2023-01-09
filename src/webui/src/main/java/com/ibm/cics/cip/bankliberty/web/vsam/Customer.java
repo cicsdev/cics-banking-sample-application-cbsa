@@ -3034,14 +3034,14 @@ public class Customer {
 		age = years;
 		if (birthCalendar.get(Calendar.MONTH) > nowCalendar.get(Calendar.MONTH))
 		{
-			age=age--;
+			age--;
 			return age;
 		}
 		if(birthCalendar.get(Calendar.MONTH) == nowCalendar.get(Calendar.MONTH))
 		{
 			if (birthCalendar.get(Calendar.DAY_OF_MONTH) > nowCalendar.get(Calendar.DAY_OF_MONTH))
 			{
-				age=age--;
+				age--;
 				return age;
 			}
 			
