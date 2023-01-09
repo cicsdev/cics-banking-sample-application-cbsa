@@ -932,7 +932,7 @@ public class Account extends HBankDataAccess{
 		openConnection();
 		Account[] temp = new Account[250000];
 		int i = 0;
-		StringBuffer myStringBuffer = new StringBuffer(new Integer(sortCode2).toString());
+		StringBuffer myStringBuffer = new StringBuffer(sortCode2);
 		for(int z = myStringBuffer.length(); z < 6;z++)
 		{
 			myStringBuffer = myStringBuffer.insert(0, "0");	
@@ -993,7 +993,7 @@ public class Account extends HBankDataAccess{
 		openConnection();
 		Account[] temp = new Account[limit];
 		int i = 0, retrieved = 0;
-		StringBuffer myStringBuffer = new StringBuffer(new Integer(sortCode).toString());
+		StringBuffer myStringBuffer = new StringBuffer(sortCode);
 		for(int z = myStringBuffer.length(); z < 6;z++)
 		{
 			myStringBuffer = myStringBuffer.insert(0, "0");	
@@ -1044,7 +1044,7 @@ public class Account extends HBankDataAccess{
 		openConnection();
 		Account[] temp = new Account[250000];
 		int i = 0;
-		StringBuffer myStringBuffer = new StringBuffer(new Integer(sortCode2).toString());
+		StringBuffer myStringBuffer = new StringBuffer(sortCode2);
 		for(int z = myStringBuffer.length(); z < 6;z++)
 		{
 			myStringBuffer = myStringBuffer.insert(0, "0");	
@@ -1110,7 +1110,7 @@ public class Account extends HBankDataAccess{
 
 		openConnection();
 		int accountCount = 0;
-		StringBuffer myStringBuffer = new StringBuffer(new Integer(sortCode2).toString());
+		StringBuffer myStringBuffer = new StringBuffer(sortCode2);
 		for(int z = myStringBuffer.length(); z < 6;z++)
 		{
 			myStringBuffer = myStringBuffer.insert(0, "0");	
@@ -1147,7 +1147,7 @@ public class Account extends HBankDataAccess{
 
 		int accountCount = 0;
 		openConnection();
-		StringBuffer myStringBuffer = new StringBuffer(new Integer(sortCode2).toString());
+		StringBuffer myStringBuffer = new StringBuffer(sortCode2);
 		for(int z = myStringBuffer.length(); z < 6;z++)
 		{
 			myStringBuffer = myStringBuffer.insert(0, "0");	

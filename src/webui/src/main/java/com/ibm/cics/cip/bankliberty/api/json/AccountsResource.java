@@ -510,7 +510,7 @@ public class AccountsResource extends HBankDataAccess{
 
 
 		CustomerResource myCustomer = new CustomerResource();
-		Response customerResponse = myCustomer.getCustomerInternal(customerNumber.longValue());
+		Response customerResponse = myCustomer.getCustomerInternal(customerNumber);
 
 		if(customerResponse.getStatus() != 200)
 		{
@@ -884,7 +884,7 @@ public class AccountsResource extends HBankDataAccess{
 		//* The amount MUST be positive
 		JSONObject response = new JSONObject();
 
-		if(new Integer(accountNumber).intValue() == new Integer(transferLocal.getTargetAccount().intValue()))
+		if(new Integer(accountNumber).equals(new Integer(transferLocal.getTargetAccount())))
 		{
 			JSONObject error = new JSONObject();
 			error.put("errorMessage", "Source and target accounts must be different");

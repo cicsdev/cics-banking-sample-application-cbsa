@@ -344,12 +344,12 @@ public class AccountUI extends VerticalLayout{
 		//if required fields are all populated
 		if(validateSimple()){
 			int temp = 0;
-			BigDecimal tempBD = new BigDecimal(interestT.getValue()).setScale(2,RoundingMode.HALF_UP);
+			BigDecimal tempBD = BigDecimal.valueOf(new Double(interestT.getValue()));
 			//Create a new account object
 			Account newAcc = new Account(cusNumT.getValue(), sCodeT.getValue(), String.format("%08d",temp), 
 					typeT.getValue().toString(), tempBD, new Date(), 
 					Integer.valueOf(overdraftT.getValue()), null, null, 
-					new BigDecimal(balanceT.getValue()), new BigDecimal(balanceT.getValue()));
+					BigDecimal.valueOf(new Double(balanceT.getValue())), BigDecimal.valueOf(new Double(balanceT.getValue())));
 			//			newAcc.showInfo();
 			
 			//Add the new account to the database
@@ -367,11 +367,11 @@ public class AccountUI extends VerticalLayout{
 	//edit account "a"
 	private boolean editAccount(){
 		a.setType(typeT.getValue().toString());
-		a.setInterest_rate(new BigDecimal(Double.valueOf(interestT.getValue())));
+		a.setInterest_rate(BigDecimal.valueOf(new Double(interestT.getValue())));
 		BigDecimal temp = a.getInterest_rate().setScale(2,RoundingMode.HALF_UP);
 		a.setInterest_rate(temp);
 		a.setOverdraft_limit(Integer.valueOf(overdraftT.getValue()));
-		a.setActual_balance(BigDecimal. valueOf(Double.valueOf(balanceT.getValue())));
+		a.setActual_balance(BigDecimal.valueOf(Double.valueOf(balanceT.getValue())));
 		a.setSortcode(sCodeT.getValue());
 		if(a.updateThis())
 		{
@@ -386,7 +386,7 @@ public class AccountUI extends VerticalLayout{
 	private boolean validateSimple(){
 		//Checks customer number, sort code, type, interest, overdraft and balance fields are populated
 		Long tempL = 0L;
-		BigDecimal tempBD = new BigDecimal(0);
+		BigDecimal tempBD = BigDecimal.valueOf(0);
 		if(cusNumT.getValue().isEmpty())
 		{
 			return false;
@@ -415,7 +415,7 @@ public class AccountUI extends VerticalLayout{
 		}
 		try
 		{
-			tempBD = new BigDecimal(interestT.getValue());
+			tempBD = BigDecimal.valueOf(new Double(interestT.getValue()));
 			if(tempBD.doubleValue() < 0)
 			{
 				return false;

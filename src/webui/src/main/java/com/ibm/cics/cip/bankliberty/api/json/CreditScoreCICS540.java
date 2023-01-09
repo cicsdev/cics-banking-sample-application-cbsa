@@ -173,7 +173,8 @@ public class CreditScoreCICS540 {
 			} catch (NotFoundException e1) {
 				e1.printStackTrace();
 			}
-			if(anyOneWillDo.getCompletionStatus().equals(CompletionStatus.NORMAL))
+
+			if(anyOneWillDo != null && anyOneWillDo.getCompletionStatus().equals(CompletionStatus.NORMAL))
 			{
 				Channel responseChannel = anyOneWillDo.getChannel();
 				customer.setCreditScore("123");
@@ -193,15 +194,16 @@ public class CreditScoreCICS540 {
 							completedRequests++;
 						}
 					}
-					catch(ContainerErrorException e)
-					{
-					} catch (ChannelErrorException e) {
+					catch (ChannelErrorException e) {
 						e.printStackTrace();
 						Task.getTask().abend("CRDT");
 					} catch (CCSIDErrorException e) {
 						e.printStackTrace();
 						Task.getTask().abend("CRDT");
 					} catch (CodePageErrorException e) {
+						e.printStackTrace();
+						Task.getTask().abend("CRDT");
+					} catch (ContainerErrorException e) {
 						e.printStackTrace();
 						Task.getTask().abend("CRDT");
 					}

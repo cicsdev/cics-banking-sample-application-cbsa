@@ -286,7 +286,7 @@ public class CustomerResource{
 
 
 		com.ibm.cics.cip.bankliberty.web.vsam.Customer vsamCustomer = new com.ibm.cics.cip.bankliberty.web.vsam.Customer();
-		vsamCustomer = vsamCustomer.getCustomer(new Long(id).longValue(), sortCode.intValue());
+		vsamCustomer = vsamCustomer.getCustomer(new Long(id), sortCode.intValue());
 		if(vsamCustomer != null)
 		{
 			response.put("sortCode", vsamCustomer.getSortcode().trim());
@@ -407,7 +407,7 @@ public class CustomerResource{
 
 		com.ibm.cics.cip.bankliberty.web.vsam.Customer vsamCustomer = new com.ibm.cics.cip.bankliberty.web.vsam.Customer();
 
-		vsamCustomer = vsamCustomer.deleteCustomer(new Long(id).longValue(), sortCode.intValue());
+		vsamCustomer = vsamCustomer.deleteCustomer(new Long(id), sortCode);
 
 		if(vsamCustomer != null)
 		{

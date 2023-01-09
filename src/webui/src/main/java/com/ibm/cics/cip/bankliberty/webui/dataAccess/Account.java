@@ -238,7 +238,7 @@ public class Account {
 			this.actual_balance = BigDecimal.valueOf((Double) myAccount.get("actualBalance")).setScale(2,RoundingMode.HALF_UP);
 			this.available_balance = BigDecimal.valueOf((Double) myAccount.get("availableBalance")).setScale(2,RoundingMode.HALF_UP);
 			this.interest_rate = BigDecimal.valueOf((Double) myAccount.get("interestRate")).setScale(2,RoundingMode.HALF_UP);
-			this.overdraft_limit = new Long((Long) myAccount.get("overdraft")).intValue();
+			this.overdraft_limit = Integer.valueOf((String)myAccount.get("overdraft"));
 			this.sortcode = (String) myAccount.get("sortCode");
 			this.type = (String) myAccount.get("accountType");
 		}
@@ -286,7 +286,7 @@ public class Account {
 			this.actual_balance = BigDecimal.valueOf((Double) myAccount.get("actualBalance")).setScale(2,RoundingMode.HALF_UP);
 			this.available_balance = BigDecimal.valueOf((Double) myAccount.get("availableBalance")).setScale(2,RoundingMode.HALF_UP);
 			this.interest_rate = BigDecimal.valueOf((Double) myAccount.get("interestRate")).setScale(2,RoundingMode.HALF_UP);
-			this.overdraft_limit = new Long((Long) myAccount.get("overdraft")).intValue();
+			this.overdraft_limit = Integer.valueOf((String)myAccount.get("overdraft"));
 			this.sortcode = (String) myAccount.get("sortCode");
 			this.type = (String) myAccount.get("accountType");
 			return true;
@@ -339,7 +339,7 @@ public class Account {
 			this.actual_balance = BigDecimal.valueOf((Double) myAccount.get("actualBalance")).setScale(2,RoundingMode.HALF_UP);
 			this.available_balance = BigDecimal.valueOf((Double) myAccount.get("availableBalance")).setScale(2,RoundingMode.HALF_UP);
 			this.interest_rate = BigDecimal.valueOf((Double) myAccount.get("interestRate")).setScale(2,RoundingMode.HALF_UP);
-			this.overdraft_limit = new Long((Long) myAccount.get("overdraft")).intValue();
+			this.overdraft_limit = Integer.valueOf((String)myAccount.get("overdraft"));
 			this.sortcode = (String) myAccount.get("sortCode");
 			this.type = (String) myAccount.get("accountType");
 			myAccountsResponse.close();
@@ -384,7 +384,7 @@ public class Account {
 			this.actual_balance = BigDecimal.valueOf((Double) myAccount.get("actualBalance")).setScale(2,RoundingMode.HALF_UP);
 			this.available_balance = BigDecimal.valueOf((Double) myAccount.get("availableBalance")).setScale(2,RoundingMode.HALF_UP);
 			this.interest_rate = BigDecimal.valueOf((Double) myAccount.get("interestRate")).setScale(2,RoundingMode.HALF_UP);
-			this.overdraft_limit = new Long((Long) myAccount.get("overdraft")).intValue();
+			this.overdraft_limit = Integer.valueOf((String)myAccount.get("overdraft"));
 			this.sortcode = (String) myAccount.get("sortCode");
 			this.type = (String) myAccount.get("accountType");
 			myAccountsResponse.close();
