@@ -662,35 +662,7 @@ public class Account extends HBankDataAccess{
 		}
 		String customerNumberString = myStringBuffer.toString();
 
-		String sqlInsert = "INSERT INTO ACCOUNT "+
-				"(ACCOUNT_EYECATCHER," +
-				"ACCOUNT_CUSTOMER_NUMBER,"+
-				"ACCOUNT_SORTCODE," +
-				"ACCOUNT_NUMBER," +
-				"ACCOUNT_TYPE," +
-				"ACCOUNT_INTEREST_RATE," +
-				"ACCOUNT_OPENED,"+
-				"ACCOUNT_OVERDRAFT_LIMIT,"+
-				"ACCOUNT_LAST_STATEMENT,"+
-				"ACCOUNT_NEXT_STATEMENT,"+
-				"ACCOUNT_AVAILABLE_BALANCE,"+
-				"ACCOUNT_ACTUAL_BALANCE"+
-				") " +
-				"VALUES ('ACCT'"+
-				",?" +
-				",?" +
-				",?" +
-				",?" +
-				",?" + 
-				",?" +
-				// no quotes for overdraft as it is an integer
-				",?" + 
-				",?" +
-				",?" +
-				// no quotes for balances as they are numbers
-				"," + 0.00 + "" +
-				"," + 0.00 + "" +
-				")";
+		String sqlInsert = "INSERT INTO ACCOUNT (ACCOUNT_EYECATCHER, ACCOUNT_CUSTOMER_NUMBER, ACCOUNT_SORTCODE, ACCOUNT_NUMBER, ACCOUNT_TYPE, ACCOUNT_INTEREST_RATE, ACCOUNT_OPENED, ACCOUNT_OVERDRAFT_LIMIT, ACCOUNT_LAST_STATEMENT, ACCOUNT_NEXT_STATEMENT, ACCOUNT_AVAILABLE_BALANCE, ACCOUNT_ACTUAL_BALANCE) VALUES ('ACCT',?,?,?,?,?,?,?,?,?,0.00,0.00)";
 		logger.fine("About to insert record SQL <" + sqlInsert + ">");
 		controlString = sortcode.toString() + "-" + "ACCOUNT-LAST";
 		sqlControl = "SELECT * from CONTROL where CONTROL_NAME LIKE '" + controlString + "'";
@@ -1064,8 +1036,7 @@ public class Account extends HBankDataAccess{
 
 		sql = sql.concat(" , ACCOUNT_ACTUAL_BALANCE DESC)");
 
-		sql = sql.concat(" as col where rn between ?"
-				+  " and " + ((limit+offset) -1));
+		sql = sql.concat(" as col where rn between ? and ?");
 
 
 
@@ -1075,6 +1046,7 @@ public class Account extends HBankDataAccess{
 			stmt.setString(1, sortCodeString);
 			stmt.setBigDecimal(2, balance);
 			stmt.setInt(3, offset);
+			stmt.setInt(4, ((limit+offset) -1));
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) 
 			{
