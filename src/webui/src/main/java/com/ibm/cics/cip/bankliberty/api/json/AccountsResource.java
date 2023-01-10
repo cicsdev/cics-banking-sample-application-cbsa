@@ -884,7 +884,7 @@ public class AccountsResource extends HBankDataAccess{
 		//* The amount MUST be positive
 		JSONObject response = new JSONObject();
 
-		if(new Integer(accountNumber).equals(new Integer(transferLocal.getTargetAccount())))
+		if(new Integer(accountNumber).equals(transferLocal.getTargetAccount()))
 		{
 			JSONObject error = new JSONObject();
 			error.put("errorMessage", "Source and target accounts must be different");
