@@ -56,6 +56,10 @@ public class AccList extends VerticalLayout{
 	int cur = 1;
 	int next;
 
+	private static String accountNumberFilter = " AND ACCOUNT_NUMBER = ";
+	private static String customerNumberFilter = " AND ACCOUNT_CUSTOMER_NUMBER = ";
+	private static String customerNumberFormat = "%010d";
+	private static String accountNumberFormat = "%08d";
 
 	public AccList(UI ui,  Welcome back)
 	{
@@ -159,8 +163,7 @@ public class AccList extends VerticalLayout{
 				}
 				else
 				{
-					int curNext = cur;
-					for(curNext = cur; curNext < next; curNext++)
+					for(int curNext = cur; curNext < next; curNext++)
 					{
 						offset += limit;
 					}
@@ -231,7 +234,7 @@ public class AccList extends VerticalLayout{
 					{
 						offset=0;
 					}
-					//("Go back a page: offset from UI should now be " + offset);
+					// Go back a page
 					createAccList(filter);
 				}
 			}
@@ -253,7 +256,7 @@ public class AccList extends VerticalLayout{
 					if(offset < 0){
 						offset = 0;
 					}
-					//("Go back 10 pages: offset from UI should now be " + offset);
+					// Go back 10 pages
 					createAccList(filter);
 				}
 			}
@@ -272,7 +275,7 @@ public class AccList extends VerticalLayout{
 			public void buttonClick(ClickEvent event) {
 				if(cur < next){
 					offset += limit;
-					//("Go forward a page: offset from UI should now be " + offset);
+					//Go forward a page
 					createAccList(filter);
 				}
 			}
@@ -291,7 +294,7 @@ public class AccList extends VerticalLayout{
 			public void buttonClick(ClickEvent event) {
 				if((cur+10) < next){
 					offset += limit*10;
-					//("Go forward 10 pages: offset from UI should now be " + offset);
+					//Go forward 10 pages
 					createAccList(filter);
 				}
 			}
@@ -316,7 +319,7 @@ public class AccList extends VerticalLayout{
 		//Add head and vl containers to the UI
 		this.addComponent(head);
 		this.addComponent(vl);
-		String filter = " AND ACCOUNT_CUSTOMER_NUMBER = " + String.format("%010d",Integer.valueOf(customer.getCustomer_number())) + "";
+		String filter = customerNumberFilter + String.format(customerNumberFormat,Integer.valueOf(customer.getCustomer_number())) + "";
 		createAccList(filter);
 		logger.exiting(this.getClass().getName(),"Acc_list(UI ui, String string, welcome back, Customer customer) for customer " + customer.getName());
 
@@ -375,7 +378,8 @@ public class AccList extends VerticalLayout{
 
 			public void valueChange(ValueChangeEvent event) {
 				//If lt (<) selected, set mt (>) to false
-				if(lt.getValue()){
+				if(Boolean.TRUE.equals(lt.getValue()))
+				{
 					mt.setValue(false);
 				}
 			}
@@ -388,7 +392,8 @@ public class AccList extends VerticalLayout{
 
 			public void valueChange(ValueChangeEvent event) {
 				//If mt (>) selected, set lt (<) to false
-				if(mt.getValue()){
+				if(Boolean.TRUE.equals(mt.getValue()))
+				{
 					lt.setValue(false);
 				}
 			}
@@ -406,21 +411,21 @@ public class AccList extends VerticalLayout{
 				//Set the filter value
 				if(!cusNumT.getValue().isEmpty() && !accNumT.getValue().isEmpty()){
 					//use account number
-					filter = " AND ACCOUNT_NUMBER = "+String.format("%08d",Integer.valueOf(accNumT.getValue()));
+					filter = accountNumberFilter+String.format(accountNumberFormat,Integer.valueOf(accNumT.getValue()));
 				}
 				if(!cusNumT.getValue().isEmpty()){
 					//use customer number
-					filter = " AND ACCOUNT_CUSTOMER_NUMBER = "+String.format("%010d",Long.valueOf(cusNumT.getValue()));
+					filter = customerNumberFilter+String.format(customerNumberFormat,Long.valueOf(cusNumT.getValue()));
 				}
 				if(!accNumT.getValue().isEmpty()){
 					//use account number
-					filter = " AND ACCOUNT_NUMBER = "+String.format("%08d",Integer.valueOf(accNumT.getValue()));
+					filter = accountNumberFilter+String.format(accountNumberFormat,Integer.valueOf(accNumT.getValue()));
 				}
-				if(lt.getValue()){
+				if(Boolean.TRUE.equals(lt.getValue())){
 					//use balance < than selected
 					filter = " AND ACCOUNT_AVAILABLE_BALANCE <= "+balance.getValue();
 				}
-				if(mt.getValue()){
+				if(Boolean.TRUE.equals(mt.getValue())){
 					//use balance > than selected
 					filter = " AND ACCOUNT_AVAILABLE_BALANCE >= "+balance.getValue();
 				}
@@ -491,7 +496,7 @@ public class AccList extends VerticalLayout{
 			private static final long serialVersionUID = -5604047422477446846L;
 			//If lt (<) selected then mt (>) set to false
 			public void valueChange(ValueChangeEvent event) {
-				if(lt.getValue()){
+				if(Boolean.TRUE.equals(lt.getValue())){
 					mt.setValue(false);
 				}
 			}
@@ -500,7 +505,7 @@ public class AccList extends VerticalLayout{
 			private static final long serialVersionUID = -1045075489262886096L;
 			//If mt (>) selected then lt (<) set to false
 			public void valueChange(ValueChangeEvent event) {
-				if(mt.getValue()){
+				if(Boolean.TRUE.equals(mt.getValue())){
 					lt.setValue(false);
 				}
 			}
@@ -515,21 +520,21 @@ public class AccList extends VerticalLayout{
 				filter = "";
 				if(!cusNumT.getValue().isEmpty() && !accNumT.getValue().isEmpty()){
 					//Use account number
-					filter = " AND ACCOUNT_NUMBER = "+String.format("%08d",Integer.valueOf(accNumT.getValue()));
+					filter = accountNumberFilter+String.format(accountNumberFormat,Integer.valueOf(accNumT.getValue()));
 				}
 				else if(!cusNumT.getValue().isEmpty()){
 					//Use customer number
-					filter = " AND ACCOUNT_CUSTOMER_NUMBER = "+String.format("%010d",Integer.valueOf(cusNumT.getValue()));
+					filter = customerNumberFilter+String.format(customerNumberFormat,Integer.valueOf(cusNumT.getValue()));
 				}
 				else if(!accNumT.getValue().isEmpty()){
 					//Use account number
-					filter = " AND ACCOUNT_NUMBER = "+String.format("%08d",Integer.valueOf(accNumT.getValue()));
+					filter = accountNumberFilter+String.format(accountNumberFormat,Integer.valueOf(accNumT.getValue()));
 				}
-				if(lt.getValue()){
+				if(Boolean.TRUE.equals(lt.getValue())){
 					//where account balance < input balance
 					filter = " AND ACCOUNT_AVAILABLE_BALANCE <= "+balance.getValue();
 				}
-				if(mt.getValue()){
+				if(Boolean.TRUE.equals(mt.getValue())){
 					//where account balance > input balance
 					filter = " AND ACCOUNT_AVAILABLE_BALANCE >= "+balance.getValue();
 				}
