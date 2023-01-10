@@ -33,7 +33,7 @@ import com.vaadin.ui.CheckBox;
 
 
 
-public class Acc_list extends VerticalLayout{
+public class AccList extends VerticalLayout{
 
     static final String COPYRIGHT =
       "Copyright IBM Corp. 2022";
@@ -57,7 +57,7 @@ public class Acc_list extends VerticalLayout{
 	int next;
 
 
-	public Acc_list(UI ui,  Welcome back)
+	public AccList(UI ui,  Welcome back)
 	{
 		sortOutLogging();
 		logger.entering(this.getClass().getName(),"Acc_list(UI ui,  welcome back)");
@@ -191,7 +191,7 @@ public class Acc_list extends VerticalLayout{
 
 	}
 	
-	public Acc_list(UI ui, String string, Welcome back, Customer customer) {
+	public AccList(UI ui, String string, Welcome back, Customer customer) {
 		sortOutLogging();
 		logger.entering(this.getClass().getName(),"Acc_list(UI ui, String string, welcome back, Customer customer) for customer " + customer.getName());
 		this.ui = ui;

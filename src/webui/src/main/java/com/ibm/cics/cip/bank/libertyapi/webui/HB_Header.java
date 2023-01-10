@@ -75,7 +75,7 @@ public class HB_Header extends HorizontalLayout{
 
 
 
-	public HB_Header(final UI ui, String name, final Acc_list acc_list){
+	public HB_Header(final UI ui, String name, final AccList acc_list){
 		setupBack();
 		setup();
 

@@ -181,7 +181,7 @@ public class Welcome extends VerticalLayout{
 					case 0: // Account List
 						try
 						{
-							ui.setContent(new Acc_list(ui, cur));
+							ui.setContent(new AccList(ui, cur));
 						}
 						catch(NumberFormatException nfe)
 						{
@@ -194,7 +194,7 @@ public class Welcome extends VerticalLayout{
 					case 2: // Customer List
 						try
 						{
-							ui.setContent(new Cust_List(ui, user, cur));
+							ui.setContent(new CustList(ui, user, cur));
 						}
 						catch(NumberFormatException nfe)
 						{

@@ -40,7 +40,7 @@ import com.vaadin.ui.Button.ClickEvent;
 
 
 
-public class Cust_List extends VerticalLayout{
+public class CustList extends VerticalLayout{
 
     static final String COPYRIGHT =
       "Copyright IBM Corp. 2022";
@@ -67,7 +67,7 @@ public class Cust_List extends VerticalLayout{
 	int cur = 1;
 	int next;
 
-	public Cust_List(UI ui, String user, Welcome back)
+	public CustList(UI ui, String user, Welcome back)
 	{
 		sortOutLogging();
 		this.ui = ui;
@@ -345,7 +345,7 @@ public class Cust_List extends VerticalLayout{
 				private static final long serialVersionUID = 3139185739387258242L;
 
 				public void buttonClick(ClickEvent event) {
-					ui.setContent(new Acc_list(ui, "test", new Welcome(ui, "Welcome"),cList.getCustomer(temp)));
+					ui.setContent(new AccList(ui, "test", new Welcome(ui, "Welcome"),cList.getCustomer(temp)));
 				}
 			});
 			edit.addClickListener(new Button.ClickListener() {
