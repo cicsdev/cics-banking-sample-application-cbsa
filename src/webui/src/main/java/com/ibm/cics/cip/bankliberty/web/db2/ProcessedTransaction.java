@@ -218,13 +218,14 @@ public class ProcessedTransaction extends HBankDataAccess{
 
 
 		openConnection();
-		String sql = "SELECT * from (SELECT p.*,row_number() over() as rn from PROCTRAN as p where PROCTRAN_SORTCODE like '" + sortCodeString + "' ORDER BY PROCTRAN_DATE ASC, PROCTRAN_TIME ASC) as col where rn between ? and ?";
+		String sql = "SELECT * from (SELECT p.*,row_number() over() as rn from PROCTRAN as p where PROCTRAN_SORTCODE like ? ORDER BY PROCTRAN_DATE ASC, PROCTRAN_TIME ASC) as col where rn between ? and ?";
 		logger.fine("About to issue query SQL <" + sql + ">");
 
 		try (PreparedStatement stmt = conn.prepareStatement(sql);)
 		{
-			stmt.setInt(1, offset+1);
-			stmt.setInt(2, (limit+offset));
+			stmt.setString(1,sortCodeString);
+			stmt.setInt(2, offset+1);
+			stmt.setInt(3, (limit+offset));
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) 
 			{
