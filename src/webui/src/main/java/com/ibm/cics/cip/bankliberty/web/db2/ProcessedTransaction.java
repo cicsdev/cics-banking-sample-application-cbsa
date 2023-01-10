@@ -69,7 +69,7 @@ public class ProcessedTransaction extends HBankDataAccess{
 	private 	String 		account_number;
 	private 	String 		account_type;
 	private 	Date  		last_statement, next_statement;
-	private     boolean     transfer = false;
+	private     boolean     moneyTransfer = false;
 	private 	String 		description;
 	private 	Date 		transactionDate;
 	private	 	double 		amount;
@@ -429,12 +429,12 @@ public class ProcessedTransaction extends HBankDataAccess{
 
 
 	public boolean isTransfer() {
-		return transfer;
+		return moneyTransfer;
 	}
 
 
-	public void setTransfer(boolean transfer) {
-		this.transfer = transfer;
+	public void setTransfer(boolean moneyTransfer) {
+		this.moneyTransfer = moneyTransfer;
 	}
 
 

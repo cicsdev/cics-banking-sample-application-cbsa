@@ -108,14 +108,7 @@ public class CustomerControl {
 	protected Long lastCustomerNumber;
 	protected String customerControlSuccessFlag;
 	protected String customerControlFailCode;
-	protected String filler_1;
-	protected String filler_2;
-	protected Integer filler_3;
-	protected Integer filler_4;
-	protected Integer filler_5;
-	protected Long filler_6;
-	protected String filler_7;
-	protected String filler_8;
+
 
 
 	public CustomerControl (byte[] buffer) {
@@ -244,124 +237,6 @@ public class CustomerControl {
 		this.customerControlFailCode = customerControlFailCode;
 	}
 
-	public String getFiller_1() {
-		if (filler_1 == null) {
-			filler_1 = FILLER_1.getString(_byteBuffer);
-		}
-		return filler_1;
-	}
-
-	public void setFiller_1(String filler_1) {
-		if (FILLER_1.equals(this.filler_1, filler_1)) {
-			return;
-		}
-		FILLER_1.putString(filler_1, _byteBuffer);
-		this.filler_1 = filler_1;
-	}
-
-	public String getFiller_2() {
-		if (filler_2 == null) {
-			filler_2 = FILLER_2.getString(_byteBuffer);
-		}
-		return filler_2;
-	}
-
-	public void setFiller_2(String filler_2) {
-		if (FILLER_2.equals(this.filler_2, filler_2)) {
-			return;
-		}
-		FILLER_2.putString(filler_2, _byteBuffer);
-		this.filler_2 = filler_2;
-	}
-
-	public int getFiller_3() {
-		if (filler_3 == null) {
-			filler_3 = new Integer(FILLER_3.getInt(_byteBuffer));
-		}
-		return filler_3.intValue();
-	}
-
-	public void setFiller_3(int filler_3) {
-		if (FILLER_3.equals(this.filler_3, filler_3)) {
-			return;
-		}
-		FILLER_3.putInt(filler_3, _byteBuffer);
-		this.filler_3 = new Integer(filler_3);
-	}
-
-	public int getFiller_4() {
-		if (filler_4 == null) {
-			filler_4 = new Integer(FILLER_4.getInt(_byteBuffer));
-		}
-		return filler_4.intValue();
-	}
-
-	public void setFiller_4(int filler_4) {
-		if (FILLER_4.equals(this.filler_4, filler_4)) {
-			return;
-		}
-		FILLER_4.putInt(filler_4, _byteBuffer);
-		this.filler_4 = new Integer(filler_4);
-	}
-
-	public int getFiller_5() {
-		if (filler_5 == null) {
-			filler_5 = new Integer(FILLER_5.getInt(_byteBuffer));
-		}
-		return filler_5.intValue();
-	}
-
-	public void setFiller_5(int filler_5) {
-		if (FILLER_5.equals(this.filler_5, filler_5)) {
-			return;
-		}
-		FILLER_5.putInt(filler_5, _byteBuffer);
-		this.filler_5 = new Integer(filler_5);
-	}
-
-	public long getFiller_6() {
-		if (filler_6 == null) {
-			filler_6 = new Long(FILLER_6.getLong(_byteBuffer));
-		}
-		return filler_6.longValue();
-	}
-
-	public void setFiller_6(long filler_6) {
-		if (FILLER_6.equals(this.filler_6, filler_6)) {
-			return;
-		}
-		FILLER_6.putLong(filler_6, _byteBuffer);
-		this.filler_6 = new Long(filler_6);
-	}
-
-	public String getFiller_7() {
-		if (filler_7 == null) {
-			filler_7 = FILLER_7.getString(_byteBuffer);
-		}
-		return filler_7;
-	}
-
-	public void setFiller_7(String filler_7) {
-		if (FILLER_7.equals(this.filler_7, filler_7)) {
-			return;
-		}
-		FILLER_7.putString(filler_7, _byteBuffer);
-		this.filler_7 = filler_7;
-	}
-
-	public String getFiller_8() {
-		if (filler_8 == null) {
-			filler_8 = FILLER_8.getString(_byteBuffer);
-		}
-		return filler_8;
-	}
-
-	public void setFiller_8(String filler_8) {
-		if (FILLER_8.equals(this.filler_8, filler_8)) {
-			return;
-		}
-		FILLER_8.putString(filler_8, _byteBuffer);
-		this.filler_8 = filler_8;
-	}
+	
 
 }
