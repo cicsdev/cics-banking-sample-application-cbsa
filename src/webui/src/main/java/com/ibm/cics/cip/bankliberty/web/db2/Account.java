@@ -1088,10 +1088,11 @@ public class Account extends HBankDataAccess{
 			myStringBuffer = myStringBuffer.insert(0, "0");	
 		}
 		String sortCodeString = myStringBuffer.toString();
-		String sql = "SELECT COUNT(*) as ACCOUNT_COUNT from ACCOUNT where ACCOUNT_EYECATCHER LIKE 'ACCT' AND ACCOUNT_SORTCODE like '"+ sortCodeString +"'";
+		String sql = "SELECT COUNT(*) as ACCOUNT_COUNT from ACCOUNT where ACCOUNT_EYECATCHER LIKE 'ACCT' AND ACCOUNT_SORTCODE like ?";
 		logger.fine("About to issue query SQL <" + sql + ">");
 		try (PreparedStatement stmt = conn.prepareStatement(sql);)
 		{
+			stmt.setString(1, sortCodeString);
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next())
 			{

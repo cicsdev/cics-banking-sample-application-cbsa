@@ -218,11 +218,13 @@ public class ProcessedTransaction extends HBankDataAccess{
 
 
 		openConnection();
-		String sql = "SELECT * from (SELECT p.*,row_number() over() as rn from PROCTRAN as p where PROCTRAN_SORTCODE like '" + sortCodeString + "' ORDER BY PROCTRAN_DATE ASC, PROCTRAN_TIME ASC) as col where rn between " 	+ offset+1 + " and " + ((limit+offset));
+		String sql = "SELECT * from (SELECT p.*,row_number() over() as rn from PROCTRAN as p where PROCTRAN_SORTCODE like '" + sortCodeString + "' ORDER BY PROCTRAN_DATE ASC, PROCTRAN_TIME ASC) as col where rn between ? and ?";
 		logger.fine("About to issue query SQL <" + sql + ">");
 
 		try (PreparedStatement stmt = conn.prepareStatement(sql);)
 		{
+			stmt.setInt(1, offset+1);
+			stmt.setInt(2, (limit+offset));
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) 
 			{
@@ -460,19 +462,19 @@ public class ProcessedTransaction extends HBankDataAccess{
 				+ "PROCTRAN_TYPE, "
 				+ "PROCTRAN_DESC, "
 				+ "PROCTRAN_AMOUNT) " +
-				"VALUES ('" + PROCTRAN.PROC_TRAN_VALID + "'"+
-				",'" + sortcode + "'" +
-				",'" + String.format("%08d",Integer.parseInt(accountNumber)) + "'" +
-				",'" + dateString + "'" +
-				",'" + timeString + "'" +
-				",'" + taskRef + "'" +
-				","  + "'" + PROCTRAN.PROC_TY_DEBIT + "'" + 
-				",'" + "INTERNET WTHDRW" + "'" +
-				"," + amount2 + "" + 
-				")";
+				"VALUES (?,?,?,?,?,?,?" +
+				",'" + "'INTERNET WTHDRW',?)";
 		logger.fine("About to insert record SQL <" + sqlInsert + ">");
 		try (PreparedStatement stmt = conn.prepareStatement(sqlInsert);)
 		{
+			stmt.setString(1, PROCTRAN.PROC_TRAN_VALID);
+			stmt.setString(2, sortcode);
+			stmt.setString(3, String.format("%08d",Integer.parseInt(accountNumber)));
+			stmt.setString(4, dateString);
+			stmt.setString(5, timeString);
+			stmt.setString(6, taskRef);
+			stmt.setString(7, PROCTRAN.PROC_TY_DEBIT);
+			stmt.setBigDecimal(8, amount2);
 			stmt.executeUpdate();
 		}
 		catch(SQLException e)
@@ -503,20 +505,19 @@ public class ProcessedTransaction extends HBankDataAccess{
 				+ "PROCTRAN_TYPE, "
 				+ "PROCTRAN_DESC, "
 				+ "PROCTRAN_AMOUNT) " +
-				"VALUES ('" + PROCTRAN.PROC_TRAN_VALID + "'"+
-				",'" + sortcode + "'" +
-				",'" + String.format("%08d",Integer.parseInt(accountNumber)) + "'" +
-				",'" + dateString + "'" +
-				",'" + timeString + "'" +
-				",'" + taskRef + "'" +
-				","  + "'" + PROCTRAN.PROC_TY_CREDIT + "'" + 
-				",'" + "INTERNET RECVED" + "'" +
-				"," + amount2 + "" + 
-				")";
+				"VALUES (?,?,?,?,?,?,?"+
+				",'INTERNET RECVED',?)";
 		logger.fine("About to insert record SQL <" + sqlInsert + ">");
 		try (PreparedStatement stmt = conn.prepareStatement(sqlInsert);)
 		{
-			
+			stmt.setString(1,PROCTRAN.PROC_TRAN_VALID);
+			stmt.setString(2,sortcode);
+			stmt.setString(3, String.format("%08d",Integer.parseInt(accountNumber)));
+			stmt.setString(4,dateString);
+			stmt.setString(5,timeString);
+			stmt.setString(6,taskRef);
+			stmt.setString(7,PROCTRAN.PROC_TY_CREDIT);
+			stmt.setBigDecimal(8, amount2);
 			stmt.executeUpdate();
 		}
 		catch(SQLException e)
@@ -569,20 +570,21 @@ public class ProcessedTransaction extends HBankDataAccess{
 				+ "PROCTRAN_TYPE, "
 				+ "PROCTRAN_DESC, "
 				+ "PROCTRAN_AMOUNT) " +
-				"VALUES ('" + PROCTRAN.PROC_TRAN_VALID + "'"+
-				",'" + sortCode2 + "'" +
-				",'" + String.format("%08d",Integer.parseInt(account_number2)) + "'" +
-				",'" + dateString + "'" +
-				",'" + timeString + "'" +
-				",'" + taskRef + "'" +
-				","  + "'" + PROCTRAN.PROC_TY_TRANSFER + "'" + 
-				",'" + transferDescription + "'" +
-				"," + amount2 + "" + 
-				")";
+				"VALUES (?,?,?,?,?,?,?,?,?)";
 		logger.fine("About to insert record SQL <" + sqlInsert + ">");
 
 		try (PreparedStatement stmt = conn.prepareStatement(sqlInsert);)
 		{
+			stmt.setString(1, PROCTRAN.PROC_TRAN_VALID);
+			stmt.setString(2, sortCode2);
+			stmt.setString(3, String.format("%08d",Integer.parseInt(account_number2)));
+			stmt.setString(4,dateString);
+			stmt.setString(5,timeString);
+			stmt.setString(6,taskRef);
+			stmt.setString(7,PROCTRAN.PROC_TY_TRANSFER);
+			stmt.setString(8, transferDescription);
+			stmt.setBigDecimal(9, amount2);
+			
 			stmt.executeUpdate();
 		}
 		catch(SQLException e)
@@ -637,21 +639,21 @@ public class ProcessedTransaction extends HBankDataAccess{
 				+ "PROCTRAN_TYPE, "
 				+ "PROCTRAN_DESC, "
 				+ "PROCTRAN_AMOUNT) " +
-				"VALUES ('" + PROCTRAN.PROC_TRAN_VALID + "'"+
-				",'" + sortCode2 + "'" +
-				",'" + String.format("%08d",Integer.parseInt(accountNumber)) + "'" +
-				",'" + dateString + "'" +
-				",'" + timeString + "'" +
-				",'" + taskRef + "'" +
-				","  + "'" + PROCTRAN.PROC_TY_WEB_DELETE_CUSTOMER + "'" + 
-				",'" + deleteCustomerDescription + "'" +
-				"," + amount_which_will_be_zero + "" + 
-				")";
+				"VALUES (?,?,?,?,?,?,?,?,?)";
 
 		logger.fine("About to insert record SQL <" + sqlInsert + ">");
 
 		try (PreparedStatement stmt = conn.prepareStatement(sqlInsert);)
 		{
+			stmt.setString(1, PROCTRAN.PROC_TRAN_VALID);
+			stmt.setString(2, sortCode2);
+			stmt.setString(3, String.format("%08d",Integer.parseInt(accountNumber)));
+			stmt.setString(4,dateString);
+			stmt.setString(5,timeString);
+			stmt.setString(6,taskRef);
+			stmt.setString(7,PROCTRAN.PROC_TY_WEB_DELETE_CUSTOMER);
+			stmt.setString(8,deleteCustomerDescription);
+			stmt.setDouble(9, amount_which_will_be_zero);
 			stmt.executeUpdate();
 		}
 		catch(SQLException e)
@@ -715,21 +717,21 @@ public class ProcessedTransaction extends HBankDataAccess{
 				+ "PROCTRAN_TYPE, "
 				+ "PROCTRAN_DESC, "
 				+ "PROCTRAN_AMOUNT) " +
-				"VALUES ('" + PROCTRAN.PROC_TRAN_VALID + "'"+
-				",'" + sortCode2 + "'" +
-				",'" + String.format("%08d",Integer.parseInt(accountNumber)) + "'" +
-				",'" + dateString + "'" +
-				",'" + timeString + "'" +
-				",'" + taskRef + "'" +
-				","  + "'" + PROCTRAN.PROC_TY_WEB_CREATE_CUSTOMER + "'" + 
-				",'" + createCustomerDescription + "'" +
-				"," + amount_which_will_be_zero + "" + 
-				")";
+				"VALUES (?,?,?,?,?,?,?,?,?)";
 
 		logger.fine("About to insert record SQL <" + sqlInsert + ">");
 
 		try (PreparedStatement stmt = conn.prepareStatement(sqlInsert);)
 		{
+			stmt.setString(1, PROCTRAN.PROC_TRAN_VALID);
+			stmt.setString(2, sortCode2);
+			stmt.setString(3, String.format("%08d",Integer.parseInt(accountNumber)));
+			stmt.setString(4,dateString);
+			stmt.setString(5,timeString);
+			stmt.setString(6,taskRef);
+			stmt.setString(7,PROCTRAN.PROC_TY_WEB_CREATE_CUSTOMER);
+			stmt.setString(8,createCustomerDescription);
+			stmt.setDouble(9, amount_which_will_be_zero);
 			stmt.executeUpdate();
 		}
 		catch(SQLException e)
@@ -784,20 +786,20 @@ public class ProcessedTransaction extends HBankDataAccess{
 				+ "PROCTRAN_TYPE, "
 				+ "PROCTRAN_DESC, "
 				+ "PROCTRAN_AMOUNT) " +
-				"VALUES ('" + PROCTRAN.PROC_TRAN_VALID + "'"+
-				",'" + sortCode2 + "'" +
-				",'" + String.format("%08d",Integer.parseInt(accountNumber)) + "'" +
-				",'" + dateString + "'" +
-				",'" + timeString + "'" +
-				",'" + taskRef + "'" +
-				","  + "'" + PROCTRAN.PROC_TY_WEB_DELETE_ACCOUNT + "'" + 
-				",'" + description + "'" +
-				"," + actualBalance.setScale(2,RoundingMode.HALF_UP) + "" + 
-				")";
+				"VALUES (?,?,?,?,?,?,?,?,?)";
 
 		logger.fine("About to insert record SQL <" + sqlInsert + ">");
 		try (PreparedStatement stmt = conn.prepareStatement(sqlInsert);)
 		{
+			stmt.setString(1, PROCTRAN.PROC_TRAN_VALID);
+			stmt.setString(2, sortCode2);
+			stmt.setString(3, String.format("%08d",Integer.parseInt(accountNumber)));
+			stmt.setString(4,dateString);
+			stmt.setString(5,timeString);
+			stmt.setString(6,taskRef);
+			stmt.setString(7,PROCTRAN.PROC_TY_WEB_DELETE_ACCOUNT);
+			stmt.setString(8,description);
+			stmt.setBigDecimal(9,actualBalance.setScale(2,RoundingMode.HALF_UP));
 			stmt.executeUpdate();
 		}
 		catch(SQLException e)
@@ -858,19 +860,19 @@ public class ProcessedTransaction extends HBankDataAccess{
 				+ "PROCTRAN_TYPE, "
 				+ "PROCTRAN_DESC, "
 				+ "PROCTRAN_AMOUNT) " +
-				"VALUES ('" + PROCTRAN.PROC_TRAN_VALID + "'"+
-				",'" + sortCode2 + "'" +
-				",'" + String.format("%08d",Integer.parseInt(accountNumber)) + "'" +
-				",'" + dateString + "'" +
-				",'" + timeString + "'" +
-				",'" + taskRef + "'" +
-				","  + "'" + PROCTRAN.PROC_TY_WEB_CREATE_ACCOUNT + "'" + 
-				",'" + description + "'" +
-				"," + actualBalance.setScale(2,RoundingMode.HALF_UP) + "" + 
-				")";
+				"VALUES (?,?,?,?,?,?,?,?,?)";
 		logger.fine("About to insert record SQL <" + sqlInsert + ">");
 		try (PreparedStatement stmt = conn.prepareStatement(sqlInsert);)
 		{
+			stmt.setString(1, PROCTRAN.PROC_TRAN_VALID);
+			stmt.setString(2, sortCode2);
+			stmt.setString(3, String.format("%08d",Integer.parseInt(accountNumber)));
+			stmt.setString(4,dateString);
+			stmt.setString(5,timeString);
+			stmt.setString(6,taskRef);
+			stmt.setString(7,PROCTRAN.PROC_TY_WEB_CREATE_ACCOUNT);
+			stmt.setString(8,description);
+			stmt.setBigDecimal(9,actualBalance.setScale(2,RoundingMode.HALF_UP));
 			stmt.executeUpdate();
 		}
 		catch(SQLException e)
