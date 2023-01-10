@@ -52,6 +52,12 @@ public class AccountUI extends VerticalLayout{
 	private ComboBox typeT; private TextField interestT;
 	private TextField overdraftT; private TextField balanceT;
 	private static String sortcode;
+	private static String typeCurrent = "CURRENT";
+	private static String typeISA = "ISA";
+	private static String typeLoan = "LOAN";
+	private static String typeMortgage = "MORTGAGE";
+	private static String typeSaving = "SAVING";
+	
 
 	public AccountUI(UI ui, String user, Welcome back){
 		//Create a new account		
@@ -126,11 +132,11 @@ public class AccountUI extends VerticalLayout{
 
 		//Set the account type
 		typeT = new ComboBox("Type");
-		typeT.addItem("CURRENT");
-		typeT.addItem("ISA");
-		typeT.addItem("LOAN");
-		typeT.addItem("MORTGAGE");
-		typeT.addItem("SAVING");
+		typeT.addItem(typeCurrent);
+		typeT.addItem(typeISA);
+		typeT.addItem(typeLoan);
+		typeT.addItem(typeMortgage);
+		typeT.addItem(typeSaving);
 		typeT.setValue(acc.getType());
 		typeT.setNullSelectionAllowed(false);
 		
@@ -183,7 +189,7 @@ public class AccountUI extends VerticalLayout{
 			private static final long serialVersionUID = 3760485465663201508L;
 
 			public void buttonClick(ClickEvent event) {
-				if(edit == false){
+				if(!edit){
 					//Creating an account
 					String temp = createNewAccount();
 					if(temp.startsWith("-1"))
@@ -262,12 +268,12 @@ public class AccountUI extends VerticalLayout{
 
 		///Create combobox with type options and set the type to 'CURRENT'		
 		typeT = new ComboBox("Type");
-		typeT.addItem("CURRENT");
-		typeT.addItem("ISA");
-		typeT.addItem("LOAN");
-		typeT.addItem("MORTGAGE");
-		typeT.addItem("SAVING");
-		typeT.setValue("CURRENT");
+		typeT.addItem(typeCurrent);
+		typeT.addItem(typeISA);
+		typeT.addItem(typeLoan);
+		typeT.addItem(typeMortgage);
+		typeT.addItem(typeSaving);
+		typeT.setValue(typeCurrent);
 		typeT.setNullSelectionAllowed(false);
 		
 		//Create interest textfield and set to '0.00'	
@@ -299,7 +305,7 @@ public class AccountUI extends VerticalLayout{
 
 		submit.addClickListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
-				if(edit == false){
+				if(!edit){
 					String temp = createNewAccount();
 					if(temp.startsWith("-1"))
 					{
@@ -373,14 +379,7 @@ public class AccountUI extends VerticalLayout{
 		a.setOverdraft_limit(Integer.valueOf(overdraftT.getValue()));
 		a.setActual_balance(BigDecimal.valueOf(Double.valueOf(balanceT.getValue())));
 		a.setSortcode(sCodeT.getValue());
-		if(a.updateThis())
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return a.updateThis();
 	}
 
 	private boolean validateSimple(){

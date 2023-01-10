@@ -611,19 +611,18 @@ public class AccList extends VerticalLayout{
 			HorizontalLayout hl_buttons = new HorizontalLayout();
 			hl_buttons.setWidth("100%");
 			
-//			Button transfer = new Button("Transfer");
 			
 			//Create new buttons with labels 'edit' and 'delete'
 			Button edit = new Button("Edit");
 			Button delete = new Button("Delete");
 			
-//			hl_buttons.addComponent(transfer);
+
 			
 			//Add buttons to container "hl_buttons"
 			hl_buttons.addComponent(edit);
 			hl_buttons.addComponent(delete);
 			
-//			hl_buttons.setExpandRatio(transfer, 0.4f);
+
 			hl_buttons.setExpandRatio(edit, 0.2f);
 			hl_buttons.setExpandRatio(delete, 0.4f);
 			
@@ -650,31 +649,15 @@ public class AccList extends VerticalLayout{
 				private static final long serialVersionUID = -7523168693466039285L;
 				//Set UI to account UI
 				public void buttonClick(ClickEvent event) {
-					//("About to delete from DB");
 					alist.getAccount(temp).deleteFromDB();
-					//("The delete didItWork says " + didItWork);
-					//("About to create acclist with filter " + filter);
+
 					offset = 0;
 					limit = 50;
 					createAccList(filter);
-					//("Back from create acclist with filter " + filter);
+
 				}
 			});
 			
-//			transfer.addClickListener(new Button.ClickListener() {
-//				/**
-//				 * 
-//				 */
-//				private static final long serialVersionUID = 2178931372114325791L;
-//
-//				/**
-//				 * 
-//				 */
-//
-//				public void buttonClick(ClickEvent event) {
-//					ui.setContent(new TransferUI(ui, "test", new welcome(ui, "welcome"),aList.getAccount(temp)));
-//				}
-//			});
 
 			
 		}
