@@ -45,12 +45,14 @@ public class AccountUI extends VerticalLayout{
 	private static final long serialVersionUID = 1L;
 	private Account a;
 	private UI ui;
-	private VerticalLayout vl = new VerticalLayout();
 	private Boolean edit = false;
 	private TextField accNumT; 
-	private TextField cusNumT; private TextField sCodeT;
-	private ComboBox typeT; private TextField interestT;
-	private TextField overdraftT; private TextField balanceT;
+	private TextField cusNumT; 
+	private TextField sCodeT;
+	private ComboBox typeT; 
+	private TextField interestT;
+	private TextField overdraftT; 
+	private TextField balanceT;
 	private static String sortcode;
 	private static String typeCurrent = "CURRENT";
 	private static String typeISA = "ISA";
@@ -390,7 +392,7 @@ public class AccountUI extends VerticalLayout{
 		}
 		try
 		{
-			Long tempL = new Long(cusNumT.getValue());
+			Long.parseLong(cusNumT.getValue());
 		}
 		catch(NumberFormatException e)
 		{
@@ -429,8 +431,7 @@ public class AccountUI extends VerticalLayout{
 		}
 		try
 		{
-			Integer temp = new Integer(overdraftT.getValue());
-			if(temp.intValue() < 0)
+			if(Integer.parseInt(overdraftT.getValue()) < 0)
 			{
 				return false;
 			}
@@ -440,11 +441,7 @@ public class AccountUI extends VerticalLayout{
 			return false;
 		}
 
-		if(balanceT.getValue().isEmpty())
-		{
-			return false;
-		}
-		return true;
+		return !(balanceT.getValue().isEmpty());
 	}
 	
 	//Get sortcode
