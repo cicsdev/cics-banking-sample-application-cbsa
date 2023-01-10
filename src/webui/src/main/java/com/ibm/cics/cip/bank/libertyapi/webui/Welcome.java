@@ -204,6 +204,7 @@ public class Welcome extends VerticalLayout{
 					case 3: // Create Customer
 						ui.setContent(new CustomerUI(ui, user, cur));
 						break;
+					default:
 					}
 				}
 			});
