@@ -159,22 +159,22 @@ public class HBankDataAccess {
 					this.conn = ds.getConnection();
 				}
 			}
-		} catch (NamingException e) {
-			logger.severe(e.getMessage());
-			Task.getTask().abend("HDB2");
-		} catch (SQLException e) {
+		} 
+		catch (NamingException | SQLException e) 
+		{
 			logger.severe(e.getMessage());
 			Task.getTask().abend("HDB2");
 		} 
 	}
 	protected void sortOutLogging()
 	{
-		try {
+		try 
+		{
 			LogManager.getLogManager().readConfiguration();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		} 
+		catch (SecurityException | IOException e) 
+		{
+			logger.severe(e.toString());
 		}
 	}
 }

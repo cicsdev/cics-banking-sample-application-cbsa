@@ -10,6 +10,8 @@ package com.ibm.cics.cip.bank.libertyapi.webui;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 import javax.ws.rs.core.Response;
 
@@ -49,6 +51,7 @@ public class Welcome extends VerticalLayout{
 	 * This screen's UI
 	 */
 	private static final long serialVersionUID = 1L;
+	private static Logger logger = Logger.getLogger("com.example.com_ibm_cics_cip_bank_libertyapi_webui.Welcome");
 	// overall ui, needed to change content view
 	private UI ui;
 
@@ -88,7 +91,7 @@ public class Welcome extends VerticalLayout{
 			}
 			catch (IOException e) {
 				//Set welcome message to use just user name
-				e.printStackTrace();
+				logger.severe(e.toString());
 				welcomeText = new Label("Welcome to CICS Bank Sample Application " + user +"!");
 			}
 
@@ -211,6 +214,16 @@ public class Welcome extends VerticalLayout{
 	}
 		
 
-	
+	private void sortOutLogging()
+	{
+		try 
+		{
+			LogManager.getLogManager().readConfiguration();
+		} 
+		catch (SecurityException | IOException e)
+		{
+			logger.severe(e.toString());
+		} 
+	}
 
 }

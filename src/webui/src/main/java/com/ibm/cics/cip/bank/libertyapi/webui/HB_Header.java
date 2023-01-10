@@ -8,6 +8,8 @@
 package com.ibm.cics.cip.bank.libertyapi.webui;
 
 import java.io.IOException;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 import javax.ws.rs.core.Response;
 
@@ -32,7 +34,7 @@ public class HB_Header extends HorizontalLayout{
     static final String COPYRIGHT =
       "Copyright IBM Corp. 2022";
 
-
+    private static Logger logger = Logger.getLogger("com.example.com_ibm_cics_cip_bank_libertyapi_webui.HB_Header");
 	private static final long serialVersionUID = -5542630839520498092L;
 	Button back;
 	Label label;
@@ -87,7 +89,9 @@ public class HB_Header extends HorizontalLayout{
 		});
 	}
 
-	private void setup(){
+	private void setup()
+	{
+		sortOutLogging();
 		this.setWidth("100%");
 		this.setHeight("100px");
 		//this.addStyleName("header");
@@ -112,7 +116,7 @@ public class HB_Header extends HorizontalLayout{
 			}
 			catch (IOException e) {
 				//Else set the label to the default "CICS Bank Sample Application"
-				e.printStackTrace();
+				logger.severe(e.toString());
 				label = new Label("CICS Bank Sample Application");
 			}
 
@@ -135,6 +139,17 @@ public class HB_Header extends HorizontalLayout{
 		back = new Button("<---");
 		this.addComponent(back);
 		this.setComponentAlignment(back, Alignment.MIDDLE_LEFT);
+	}
+	private void sortOutLogging()
+	{
+		try 
+		{
+			LogManager.getLogManager().readConfiguration();
+		} 
+		catch (SecurityException | IOException e)
+		{
+			logger.severe(e.toString());
+		} 
 	}
 
 }

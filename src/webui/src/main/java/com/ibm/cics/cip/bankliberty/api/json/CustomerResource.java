@@ -257,7 +257,6 @@ public class CustomerResource{
 		} catch (Exception ex) {
 			// Log the exception
 			logger.warning("Exception in getCustomerExternal "+ ex );
-			ex.printStackTrace();
 		}
 		logger.exiting(this.getClass().getName(),"getCustomerExternal",null);
 
@@ -378,7 +377,6 @@ public class CustomerResource{
 					Task.getTask().rollback();
 				} catch (InvalidRequestException e) {
 					System.err.println("rollback failed " + e.toString());
-					e.printStackTrace();
 				}
 				Response myResponse = Response.status(404).entity(response.toString()).build();
 				logger.warning("Customer: deleteAccount: Failed to delete account, not found for customer " + id + " in deleteCustomerInternal()");
@@ -395,7 +393,6 @@ public class CustomerResource{
 					Task.getTask().rollback();
 				} catch (InvalidRequestException e) {
 					System.err.println("rollback failed " + e.toString());
-					e.printStackTrace();
 				}
 				Response myResponse = Response.status(deleteAccountResponse.getStatus()).entity(response.toString()).build();
 				logger.exiting(this.getClass().getName(), "deleteCustomerInternal() exiting",myResponse);
@@ -843,13 +840,13 @@ public class CustomerResource{
 
 	private void sortOutLogging()
 	{
-		try {
+		try 
+		{
 			LogManager.getLogManager().readConfiguration();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		} 
+		catch (SecurityException | IOException e) 
+		{
+			logger.severe(e.toString());
 		}
 	}
-
 }

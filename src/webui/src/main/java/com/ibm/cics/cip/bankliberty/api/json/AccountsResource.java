@@ -1138,11 +1138,14 @@ public class AccountsResource extends HBankDataAccess{
 		}
 		else
 		{
-			try {
+			try 
+			{
 				logger.warning("Accounts: deleteAccount: Failed to find account " + accountNumber);
 				Task.getTask().rollback();
-			} catch (InvalidRequestException e) {
-				e.printStackTrace();
+			} 
+			catch (InvalidRequestException e) 
+			{
+				logger.severe(e.toString());
 			}
 			response.put("errorMessage","Account " + accountNumber + " not found");
 			myResponse = Response.status(404).entity(response.toString()).build();

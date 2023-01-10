@@ -236,9 +236,8 @@ public class Customer {
 					} 
 					catch (InterruptedException e) 
 					{
-						e.printStackTrace();
+						logger.warning(e.toString());
 						Thread.currentThread().interrupt();
-						e.printStackTrace();
 					}
 					try {
 						KeyedFileBrowse myKeyedFileBrowse =	customerFile.startBrowse(key);
@@ -326,7 +325,7 @@ public class Customer {
 					} 
 					catch (InterruptedException e) 
 					{
-						e.printStackTrace();
+						logger.warning(e.toString());
 						Thread.currentThread().interrupt();
 					} 
 					try {
@@ -440,9 +439,10 @@ public class Customer {
 				}  
 				catch (InterruptedException e) 
 				{
-					e.printStackTrace();
+					logger.warning(e.toString());
 					Thread.currentThread().interrupt();
-				} 				try {
+				} 
+				try {
 					customerFileBrowse = customerFile.startBrowse(key);
 					success = true;
 
@@ -505,7 +505,7 @@ public class Customer {
 					}
 					catch (InterruptedException e) 
 					{
-						e.printStackTrace();
+						logger.warning(e.toString());
 						Thread.currentThread().interrupt();
 					}
 					try {
@@ -581,7 +581,7 @@ public class Customer {
 				}
 				catch (InterruptedException e) 
 				{
-					e.printStackTrace();
+					logger.warning(e.toString());
 					Thread.currentThread().interrupt(); 
 				} 
 				try {
@@ -699,7 +699,7 @@ public class Customer {
 				} 
 				catch (InterruptedException e) 
 				{
-					e.printStackTrace();
+					logger.warning(e.toString());
 					Thread.currentThread().interrupt();
 				}
 				try 
@@ -837,7 +837,7 @@ public class Customer {
 					}
 					catch (InterruptedException e) 
 					{
-						e.printStackTrace();
+						logger.warning(e.toString());
 						Thread.currentThread().interrupt();
 					}
 					try {
@@ -927,7 +927,7 @@ public class Customer {
 					}
 					catch (InterruptedException e) 
 					{
-						e.printStackTrace();
+						logger.warning(e.toString());
 						Thread.currentThread().interrupt();
 					}
 					try {
@@ -1258,7 +1258,7 @@ public class Customer {
 				}
 				catch (InterruptedException e) 
 				{
-					e.printStackTrace();
+					logger.warning(e.toString());
 					Thread.currentThread().interrupt();
 				}
 				try {
@@ -1387,7 +1387,7 @@ public class Customer {
 				}
 				catch (InterruptedException e) 
 				{
-					e.printStackTrace();
+					logger.warning(e.toString());
 					Thread.currentThread().interrupt();
 				}
 				try {
@@ -1451,8 +1451,8 @@ public class Customer {
 					}
 					 catch (InterruptedException e) 
 					{
-							e.printStackTrace();
-							Thread.currentThread().interrupt();
+						 logger.warning(e.toString());
+						 Thread.currentThread().interrupt();
 					}
 					try {
 						customerFileBrowse.next(holder, keyHolder);
@@ -1528,7 +1528,7 @@ public class Customer {
 				}
 				catch (InterruptedException e) 
 				{
-					e.printStackTrace();
+					logger.warning(e.toString());
 					Thread.currentThread().interrupt();
 				}
 				try {
@@ -1639,7 +1639,7 @@ public class Customer {
 				}
 				catch (InterruptedException e) 
 				{
-					e.printStackTrace();
+					logger.warning(e.toString());
 					Thread.currentThread().interrupt();
 				}
 				try {
@@ -1703,7 +1703,7 @@ public class Customer {
 					}
 					catch (InterruptedException e) 
 					{
-						e.printStackTrace();
+						logger.warning(e.toString());
 						Thread.currentThread().interrupt();
 					}
 					try {
@@ -1787,7 +1787,7 @@ public class Customer {
 
 				catch (InterruptedException e) 
 				{
-					e.printStackTrace();
+					logger.warning(e.toString());
 					Thread.currentThread().interrupt();
 				}
 				try {
@@ -1918,7 +1918,7 @@ public class Customer {
 				}
 				catch (InterruptedException e) 
 				{
-					e.printStackTrace();
+					logger.warning(e.toString());
 					Thread.currentThread().interrupt();
 				}
 				try {
@@ -1983,7 +1983,7 @@ public class Customer {
 					}
 					catch (InterruptedException e) 
 					{
-						e.printStackTrace();
+						logger.warning(e.toString());
 						Thread.currentThread().interrupt();
 					}
 					try {
@@ -2063,7 +2063,7 @@ public class Customer {
 				}
 				catch (InterruptedException e) 
 				{
-					e.printStackTrace();
+					logger.warning(e.toString());
 					Thread.currentThread().interrupt();
 				}
 				try {
@@ -2143,7 +2143,7 @@ public class Customer {
 				}
 				catch (InterruptedException e) 
 				{
-					e.printStackTrace();
+					logger.warning(e.toString());
 					Thread.currentThread().interrupt();
 				}
 				try {
@@ -2250,7 +2250,7 @@ public class Customer {
 
 				catch (InterruptedException e) 
 				{
-					e.printStackTrace();
+					logger.warning(e.toString());
 					Thread.currentThread().interrupt();
 				}
 				try {
@@ -2314,7 +2314,7 @@ public class Customer {
 					}
 					catch (InterruptedException e) 
 					{
-						e.printStackTrace();
+						logger.warning(e.toString());
 						Thread.currentThread().interrupt();
 					}
 					try {
@@ -2377,7 +2377,7 @@ public class Customer {
 				} 
 				catch (InterruptedException e) 
 				{
-					e.printStackTrace();
+					logger.warning(e.toString());
 					Thread.currentThread().interrupt();
 				} 
 				try {
@@ -2412,12 +2412,9 @@ public class Customer {
 	{
 		try {
 			LogManager.getLogManager().readConfiguration();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (SecurityException | IOException e) 
+		{
+			logger.severe(e.toString());
 		}
 	}
 	public Customer[] getCustomersByTown(String town) {
@@ -2483,7 +2480,7 @@ public class Customer {
 				}  
 				catch (InterruptedException e) 
 				{
-					e.printStackTrace();
+					logger.warning(e.toString());
 					Thread.currentThread().interrupt();
 				}
 				try 
@@ -2549,7 +2546,7 @@ public class Customer {
 					} 
 					catch (InterruptedException e) 
 					{
-						e.printStackTrace();
+						logger.warning(e.toString());
 						Thread.currentThread().interrupt();
 					}
 					try {
@@ -2626,7 +2623,7 @@ public class Customer {
 				} 
 				catch (InterruptedException e) 
 				{
-					e.printStackTrace();
+					logger.warning(e.toString());
 					Thread.currentThread().interrupt();
 				} 
 				try {
@@ -2723,7 +2720,7 @@ public class Customer {
 				}  
 				catch (InterruptedException e) 
 				{
-					e.printStackTrace();
+					logger.warning(e.toString());
 					Thread.currentThread().interrupt();
 				} 				
 				try 
@@ -2789,7 +2786,7 @@ public class Customer {
 					} 
 					catch (InterruptedException e) 
 					{
-						e.printStackTrace();
+						logger.warning(e.toString());
 						Thread.currentThread().interrupt();
 					}
 					try {
@@ -2866,7 +2863,7 @@ public class Customer {
 				} 
 				catch (InterruptedException e) 
 				{
-					e.printStackTrace();
+					logger.warning(e.toString());
 					Thread.currentThread().interrupt();
 				} 
 				try {
@@ -2963,7 +2960,7 @@ public class Customer {
 				}  
 				catch (InterruptedException e) 
 				{
-					e.printStackTrace();
+					logger.warning(e.toString());
 					Thread.currentThread().interrupt();
 				}
 				try {
@@ -3030,7 +3027,7 @@ public class Customer {
 					} 
 					catch (InterruptedException e) 
 					{
-						e.printStackTrace();
+						logger.warning(e.toString());
 						Thread.currentThread().interrupt();
 					}
 					try 
@@ -3108,7 +3105,7 @@ public class Customer {
 				} 
 				catch (InterruptedException e) 
 				{
-					e.printStackTrace();
+					logger.warning(e.toString());
 					Thread.currentThread().interrupt();
 				} 
 				try {

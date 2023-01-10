@@ -11,6 +11,10 @@
 
 package com.ibm.cics.cip.bankliberty.api.json;
 
+import java.io.IOException;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
 import javax.ws.rs.GET;
 
 import javax.ws.rs.Path;
@@ -42,6 +46,13 @@ public class SortCodeResource{
 
     static final String COPYRIGHT =
       "Copyright IBM Corp. 2022";
+    
+    private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.api.json");
+    
+    public SortCodeResource()
+    {
+    	sortOutLogging();
+    }
 
 
 	static String sortCodeString = null;
@@ -65,8 +76,7 @@ public class SortCodeResource{
 					| InvalidSystemIdException | NotAuthorisedException
 					| InvalidProgramIdException | RolledBackException
 					| TerminalException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.severe(e.toString());
 			}
 
 			GetSortCode myGetSortCodeData = new GetSortCode(sortCodeBytes);
@@ -82,5 +92,15 @@ public class SortCodeResource{
 				.entity(response.toString())
 				.build();
 	}
-
+	private static void sortOutLogging()
+	{
+		try 
+		{
+			LogManager.getLogManager().readConfiguration();
+		} 
+		catch (SecurityException | IOException e) 
+		{
+			logger.severe(e.toString());
+		} 
+	}
 }

@@ -8,6 +8,8 @@ package com.ibm.cics.cip.bankliberty.webui.dataAccess;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -30,6 +32,8 @@ public class AccountList {
 
     static final String COPYRIGHT =
       "Copyright IBM Corp. 2022";
+    
+    private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.webui.dataAccess");
 
 
 
@@ -76,8 +80,9 @@ public class AccountList {
 					this.count = (int) accountCount;
 
 				}
-				catch (IOException e) {
-					e.printStackTrace();
+				catch (IOException e) 
+				{
+					logger.severe(e.toString());
 				}
 			}
 			else
@@ -125,7 +130,7 @@ public class AccountList {
 					this.count = (int) accountCount;
 					//("Account_customer_number has " + accountCount + " accounts");
 				} catch (IOException e) {
-					e.printStackTrace();
+					logger.severe(e.toString());
 				}
 			}
 			else
@@ -147,8 +152,9 @@ public class AccountList {
 					myAccountsJSON = JSONObject.parse(myAccountsString);
 					long accountCount = (Long) myAccountsJSON.get("numberOfAccounts");
 					this.count = (int) accountCount;
-				} catch (IOException e) {
-					e.printStackTrace();
+				} catch (IOException e) 
+				{
+					logger.severe(e.toString());
 				}
 			}
 		}
@@ -229,8 +235,7 @@ public class AccountList {
 					}
 
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					logger.severe(e.toString());
 				}
 			}
 		}
@@ -347,9 +352,10 @@ public class AccountList {
 						}
 					}
 
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				} 
+				catch (IOException e) 
+				{
+					logger.severe(e.toString());
 				}
 			}
 		}
@@ -415,7 +421,9 @@ public class AccountList {
 	public int size(){
 		return this.accountList.size();
 	}
-	public AccountList(){
+	public AccountList()
+	{
+		sortOutLogging();
 		setSortcode();
 	}
 
@@ -450,6 +458,17 @@ public class AccountList {
 
 		Date sortedOutDate = new Date(year.intValue() - 1900,month.intValue() - 1, day.intValue());
 		return sortedOutDate;
+	}
+	private static void sortOutLogging()
+	{
+		try 
+		{
+			LogManager.getLogManager().readConfiguration();
+		} 
+		catch (SecurityException | IOException e) 
+		{
+			logger.severe(e.toString());
+		} 
 	}
 
 }

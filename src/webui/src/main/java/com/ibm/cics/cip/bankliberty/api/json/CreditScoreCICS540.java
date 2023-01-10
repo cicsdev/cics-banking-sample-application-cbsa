@@ -5,12 +5,15 @@
  */
 package com.ibm.cics.cip.bankliberty.api.json;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Future;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 import com.ibm.cics.cip.bankliberty.dataInterfaces.CRECUST;
 import com.ibm.cics.server.AsyncService;
@@ -42,10 +45,11 @@ public class CreditScoreCICS540 {
     static final String COPYRIGHT =
       "Copyright IBM Corp. 2022";
 	
-	
+    private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.api.json");
 
 	public static CustomerJSON populateCreditScoreAndReviewDate(CustomerJSON customer)
 	{
+		sortOutLogging();
 		
 		int creditAgencyCount = 5;
 
@@ -61,8 +65,10 @@ public class CreditScoreCICS540 {
 
 		try {
 			myCreditScoreChannel = Task.getTask().createChannel("CIPCREDCHANN");
-		} catch (ChannelErrorException e1) {
-			e1.printStackTrace();
+		} 
+		catch (ChannelErrorException e1) 
+		{
+			logger.severe(e1.toString());
 		}
 
 		String[] transactionID = new String[creditAgencyCount];
@@ -128,8 +134,9 @@ public class CreditScoreCICS540 {
 				Container myContainer = myCreditScoreChannel.createContainer(containerID[i]);
 				myContainer.put(myCRECUST.getByteBuffer());
 			}
-			catch (ContainerErrorException | ChannelErrorException | InvalidRequestException | CCSIDErrorException | CodePageErrorException e1) {
-				e1.printStackTrace();
+			catch (ContainerErrorException | ChannelErrorException | InvalidRequestException | CCSIDErrorException | CodePageErrorException e1) 
+			{
+				logger.severe(e1.toString());
 			}
 
 			try 
@@ -137,7 +144,7 @@ public class CreditScoreCICS540 {
 				children.add(asService.runTransactionId(transactionID[i],myCreditScoreChannel));
 			} 
 			catch (InvalidRequestException | InvalidTransactionIdException | NotAuthorisedException | ResourceDisabledException | ChannelErrorException e) {
-				e.printStackTrace();
+				logger.severe(e.toString());
 			} 
 		}
 
@@ -148,11 +155,10 @@ public class CreditScoreCICS540 {
 			ChildResponse anyOneWillDo = null;
 			try {
 				anyOneWillDo = asService.getAny();
-			} catch (InvalidRequestException e1) {
-				e1.printStackTrace();
-			} catch (NotFoundException e1) {
-				e1.printStackTrace();
-			}
+			} catch (InvalidRequestException | NotFoundException e1) 
+			{
+				logger.severe(e1.toString());
+			} 
 
 			if(anyOneWillDo != null && anyOneWillDo.getCompletionStatus().equals(CompletionStatus.NORMAL))
 			{
@@ -174,17 +180,9 @@ public class CreditScoreCICS540 {
 							completedRequests++;
 						}
 					}
-					catch (ChannelErrorException e) {
-						e.printStackTrace();
-						Task.getTask().abend("CRDT");
-					} catch (CCSIDErrorException e) {
-						e.printStackTrace();
-						Task.getTask().abend("CRDT");
-					} catch (CodePageErrorException e) {
-						e.printStackTrace();
-						Task.getTask().abend("CRDT");
-					} catch (ContainerErrorException e) {
-						e.printStackTrace();
+					catch (ChannelErrorException | CCSIDErrorException | CodePageErrorException | ContainerErrorException e) 
+					{
+						logger.severe(e.toString());
 						Task.getTask().abend("CRDT");
 					}
 				}
@@ -204,6 +202,16 @@ public class CreditScoreCICS540 {
 		return customer;
 	}
 	
-
+	private static void sortOutLogging()
+	{
+		try 
+		{
+			LogManager.getLogManager().readConfiguration();
+		} 
+		catch (SecurityException | IOException e) 
+		{
+			logger.severe(e.toString());
+		} 
+	}
 
 }

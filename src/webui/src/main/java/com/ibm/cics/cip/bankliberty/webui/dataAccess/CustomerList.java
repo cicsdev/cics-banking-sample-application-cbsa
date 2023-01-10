@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 
@@ -31,6 +33,8 @@ public class CustomerList {
 
     static final String COPYRIGHT =
       "Copyright IBM Corp. 2022";
+    
+    private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.webui.dataAccess");
 
 
 
@@ -66,12 +70,15 @@ public class CustomerList {
 			myCustomerResponse = myCustomerResource.getCustomersByNameExternal(customerNameFilter,0,0,true);
 			String myCustomersString = myCustomerResponse.getEntity().toString();
 			JSONObject myCustomersJSON;
-			try {
+			try 
+			{
 				myCustomersJSON = JSONObject.parse(myCustomersString);
 				long customerCount = (Long) myCustomersJSON.get("numberOfCustomers");
 				this.count = (int)customerCount;
-			} catch (IOException e) {
-				e.printStackTrace();
+			} 
+			catch (IOException e) 
+			{
+				logger.severe(e.toString());
 			}
 		}
 
@@ -86,7 +93,8 @@ public class CustomerList {
 			JSONObject myCustomerJSON;
 			if(myCustomerResponse.getStatus() == 200)
 			{
-				try {
+				try 
+				{
 					myCustomerJSON = JSONObject.parse(myCustomersString);
 					Date myDate = sortOutDate((String)myCustomerJSON.get("dateOfBirth"));
 					String id = (String)myCustomerJSON.get("id");
@@ -94,8 +102,10 @@ public class CustomerList {
 					{
 						this.count = 1;
 					}
-				} catch (IOException e) {
-					e.printStackTrace();
+				} 
+				catch (IOException e) 
+				{
+					logger.severe(e.toString());
 				}
 			}
 			else this.count= 0;
@@ -109,12 +119,15 @@ public class CustomerList {
 			if(myCustomerResponse.getStatus() == 200)
 			{
 				JSONObject myCustomersJSON;
-				try {
+				try 
+				{
 					myCustomersJSON = JSONObject.parse(myCustomersString);
 					long customerCount = (Long) myCustomersJSON.get("numberOfCustomers");
 					this.count = (int)customerCount;
-				} catch (IOException e) {
-					e.printStackTrace();
+				} 
+				catch (IOException e) 
+				{
+					logger.severe(e.toString());
 				}
 			}
 			else
@@ -179,9 +192,10 @@ public class CustomerList {
 				{
 					System.err.println(myCustomerResponse.getStatus() + " " + myCustomerResponse.getEntity().toString());
 				}
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			} 
+			catch (IOException e1) 
+			{
+				logger.severe(e1.toString());
 			}
 		}
 		if(filter.startsWith(" AND CUSTOMER_NUMBER = "))
@@ -208,8 +222,10 @@ public class CustomerList {
 							(String)myCustomerJSON.get("customerName"),(String)myCustomerJSON.get("customerAddress"), dateOfBirth, (String)myCustomerJSON.get("customerCreditScore"), creditScoreReviewDate);
 
 					this.customerList.add(myListCustomer);
-				} catch (IOException e) {
-					e.printStackTrace();
+				} 
+				catch (IOException e) 
+				{
+					logger.severe(e.toString());
 				}
 			}
 			else this.count = 0;
@@ -246,9 +262,10 @@ public class CustomerList {
 						
 						this.customerList.add(myListCustomer);
 					}
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				} 
+				catch (IOException e1) 
+				{
+					logger.severe(e1.toString());
 				}
 				
 			}
@@ -289,7 +306,9 @@ public class CustomerList {
 	public int size(){
 		return this.customerList.size();
 	}
-	public CustomerList(){
+	public CustomerList()
+	{
+		sortOutLogging();
 		setSortcode();
 	}
 
@@ -308,6 +327,16 @@ public class CustomerList {
 		return customerList;
 	}
 
-
+	private static void sortOutLogging()
+	{
+		try 
+		{
+			LogManager.getLogManager().readConfiguration();
+		} 
+		catch (SecurityException | IOException e) 
+		{
+			logger.severe(e.toString());
+		} 
+	}
 
 }

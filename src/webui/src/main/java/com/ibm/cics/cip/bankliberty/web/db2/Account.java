@@ -256,8 +256,9 @@ public class Account extends HBankDataAccess{
 			stmt.setString(8, this.account_number);
 			stmt.setString(9,this.sortcode);
 			stmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException e) 
+		{
+			logger.severe(e.toString());
 		}
 	}
 
@@ -574,8 +575,7 @@ public class Account extends HBankDataAccess{
 			try {
 				Task.getTask().rollback();
 			} catch (InvalidRequestException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				logger.severe(e1.toString());
 			}
 			return null;
 		}
@@ -713,8 +713,7 @@ public class Account extends HBankDataAccess{
 				try {
 					Task.getTask().rollback();
 				} catch (InvalidRequestException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					logger.severe(e1.toString());
 				}
 				return null;
 			}			
@@ -730,8 +729,7 @@ public class Account extends HBankDataAccess{
 			try {
 				Task.getTask().rollback();
 			} catch (InvalidRequestException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				logger.severe(e1.toString());
 			}
 			logger.severe("SQL statement #" + sqlInsert + "# had error " + e.getErrorCode());
 			logger.severe(e.getLocalizedMessage());

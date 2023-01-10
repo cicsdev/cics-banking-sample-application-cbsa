@@ -15,6 +15,8 @@ import java.sql.Date;
 
 
 import java.util.Calendar;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 import javax.ws.rs.core.Response;
 
@@ -29,6 +31,7 @@ public class Account {
     static final String COPYRIGHT =
       "Copyright IBM Corp. 2022";
 
+    private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.webui.dataAccess");
 	
 
 
@@ -47,7 +50,7 @@ public class Account {
 
 	public Account()
 	{
-
+		sortOutLogging();
 	}
 
 	public Account (String c_n, String sc, String a_n, String type, BigDecimal i_r, Date opened, int o_l, Date l_s, Date n_s, BigDecimal av_b, BigDecimal ac_b) {
@@ -213,11 +216,13 @@ public class Account {
 		if(myAccountsResponse.getStatus() == 200)
 		{
 			myAccountsString = myAccountsResponse.getEntity().toString();
-			try {
+			try 
+			{
 				myAccountsJSON = JSONObject.parse(myAccountsString);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			}
+			catch (IOException e) 
+			{
+				logger.severe(e.toString());
 				return false;
 			}
 
@@ -260,11 +265,14 @@ public class Account {
 		if(myAccountsResponse.getStatus() == 200)
 		{
 			myAccountsString = myAccountsResponse.getEntity().toString();
-			try {
+			try 
+			{
 				myAccountsJSON = JSONObject.parse(myAccountsString);
-			} catch (IOException e) {
+			} 
+			catch (IOException e) 
+			{
 
-				e.printStackTrace();
+				logger.severe(e.toString());
 				myAccountsResponse.close();
 				return false;
 			}
@@ -314,10 +322,13 @@ public class Account {
 		if(myAccountsResponse.getStatus() == 201)
 		{
 			myAccountsString = myAccountsResponse.getEntity().toString();
-			try {
+			try 
+			{
 				myAccountsJSON = JSONObject.parse(myAccountsString);
-			} catch (IOException e) {
-				e.printStackTrace();
+			}
+			catch (IOException e) 
+			{
+				logger.severe(e.toString());
 				myAccountsResponse.close();
 				return -1;
 			}
@@ -362,7 +373,7 @@ public class Account {
 			try {
 				myAccountsJSON = JSONObject.parse(myAccountsString);
 			} catch (IOException e) {
-				e.printStackTrace();
+				logger.severe(e.toString());
 				myAccountsResponse.close();
 				return false;
 			}
@@ -408,5 +419,17 @@ public class Account {
 
 		Date sortedOutDate = new Date(year.intValue() - 1900,month.intValue() - 1, day.intValue());
 		return sortedOutDate;
+	}
+	
+	private static void sortOutLogging()
+	{
+		try 
+		{
+			LogManager.getLogManager().readConfiguration();
+		} 
+		catch (SecurityException | IOException e) 
+		{
+			logger.severe(e.toString());
+		} 
 	}
 }

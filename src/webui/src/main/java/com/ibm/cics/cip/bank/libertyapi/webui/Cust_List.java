@@ -8,6 +8,8 @@ package com.ibm.cics.cip.bank.libertyapi.webui;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
@@ -49,6 +51,7 @@ public class Cust_List extends VerticalLayout{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static Logger logger = Logger.getLogger("com.example.com_ibm_cics_cip_bank_libertyapi_webui.Cust_list");
 	private CustomerList cList = new CustomerList();
 	private UI ui;
 	private int limit = 50;
@@ -64,7 +67,9 @@ public class Cust_List extends VerticalLayout{
 	int cur = 1;
 	int next;
 
-	public Cust_List(UI ui, String user, Welcome back){
+	public Cust_List(UI ui, String user, Welcome back)
+	{
+		sortOutLogging();
 		this.ui = ui;
 		HB_Header header = new HB_Header(ui, "Welcome", back);
 		this.addComponent(header);
@@ -285,12 +290,10 @@ public class Cust_List extends VerticalLayout{
 			}
 //			next = (int)Math.ceil((cList.getCount(filter)/limit))+1; 
 
-		} catch (ServletException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		} 
+		catch (ServletException | IOException e1) 
+		{
+			logger.severe(e1.toString());
 		}
 		for(int i = 0; i<this.cList.size(); i++){
 			HorizontalLayout hl = new HorizontalLayout();
@@ -370,6 +373,16 @@ public class Cust_List extends VerticalLayout{
 
 		}
 	}
-
+	private void sortOutLogging()
+	{
+		try 
+		{
+			LogManager.getLogManager().readConfiguration();
+		} 
+		catch (SecurityException | IOException e)
+		{
+			logger.severe(e.toString());
+		} 
+	}
 
 }

@@ -7,6 +7,8 @@ package com.ibm.cics.cip.bankliberty.webui.dataAccess;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 import javax.ws.rs.core.Response;
 
@@ -18,6 +20,8 @@ public class Customer {
 
     static final String COPYRIGHT =
       "Copyright IBM Corp. 2022";
+    
+    private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.webui.dataAccess");
 
 
 
@@ -38,7 +42,9 @@ public class Customer {
 	
 	
 	//NEW CUSTOMER
-	public Customer (String customer_number, String sortCode, String name, String address, Date dob) {
+	public Customer (String customer_number, String sortCode, String name, String address, Date dob) 
+	{
+		sortOutLogging();
 		editingCustomer = false;
 		setCustomer_number(customer_number);
 		setSortcode(sortCode);
@@ -48,7 +54,9 @@ public class Customer {
 	}
 	
 	//EDITING CUSTOMER
-	public Customer (String customer_number, String sortCode, String name, String address, Date dob, String creditScore, Date creditScoreReviewDate) {
+	public Customer (String customer_number, String sortCode, String name, String address, Date dob, String creditScore, Date creditScoreReviewDate) 
+	{
+		sortOutLogging();
 		editingCustomer = true;
 		setCustomer_number(customer_number);
 		setSortcode(sortCode);
@@ -169,10 +177,13 @@ public class Customer {
 		if(myCustomerResponse.getStatus() == 200)
 		{
 			myCustomerString = myCustomerResponse.getEntity().toString();
-			try {
+			try 
+			{
 				myCustomer = JSONObject.parse(myCustomerString);
-			} catch (IOException e) {
-				e.printStackTrace();
+			} 
+			catch (IOException e) 
+			{
+					logger.severe(e.toString());
 				myCustomerResponse.close();
 				return false;
 			}
@@ -217,7 +228,7 @@ public class Customer {
 			try {
 				myCustomer = JSONObject.parse(myCustomerString);
 			} catch (IOException e) {
-				e.printStackTrace();
+				logger.severe(e.toString());
 				myCustomerResponse.close();
 				return "-1";
 			}
@@ -260,7 +271,7 @@ public class Customer {
 			try {
 				myCustomer = JSONObject.parse(myCustomerString);
 			} catch (IOException e) {
-				e.printStackTrace();
+				logger.severe(e.toString());
 				myCustomerResponse.close();
 				return false;
 			}
@@ -323,6 +334,18 @@ public class Customer {
 			System.out.println("Customer cs review date - "+ this.getCreditScoreReviewDate().toString());
 			System.out.println("Customer is being edited");
 		}
+	}
+	
+	private static void sortOutLogging()
+	{
+		try 
+		{
+			LogManager.getLogManager().readConfiguration();
+		} 
+		catch (SecurityException | IOException e) 
+		{
+			logger.severe(e.toString());
+		} 
 	}
 
 

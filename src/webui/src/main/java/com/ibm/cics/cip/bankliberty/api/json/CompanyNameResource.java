@@ -103,15 +103,14 @@ public class CompanyNameResource{
 
 	private void sortOutLogging()
 	{
-		try {
+		try 
+		{
 			LogManager.getLogManager().readConfiguration();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} 
+		catch (SecurityException | IOException e) 
+		{
+			logger.severe(e.toString());
+		} 
 	}
 
 }

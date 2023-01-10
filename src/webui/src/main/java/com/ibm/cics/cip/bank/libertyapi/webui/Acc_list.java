@@ -57,7 +57,8 @@ public class Acc_list extends VerticalLayout{
 	int next;
 
 
-	public Acc_list(UI ui,  Welcome back){
+	public Acc_list(UI ui,  Welcome back)
+	{
 		sortOutLogging();
 		logger.entering(this.getClass().getName(),"Acc_list(UI ui,  welcome back)");
 		this.ui = ui;
@@ -583,10 +584,10 @@ public class Acc_list extends VerticalLayout{
 			cur = ((offset/limit)+1);
 
 			next = cur + limit;
-		} catch (ServletException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
+		}
+		catch (ServletException | IOException e1) 
+		{
+			logger.severe(e1.toString());
 		}
 		for( int i = 0; i<this.aList.size(); i++){
 			HorizontalLayout hl = new HorizontalLayout();
@@ -680,14 +681,13 @@ public class Acc_list extends VerticalLayout{
 		
 	private void sortOutLogging()
 	{
-		try {
+		try 
+		{
 			LogManager.getLogManager().readConfiguration();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} 
+		catch (SecurityException | IOException e)
+		{
+			logger.severe(e.toString());
+		} 
 	}
 }

@@ -57,13 +57,14 @@ public class CreditScore {
 	}
 	private static void sortOutLogging()
 	{
-		try {
+		try 
+		{
 			LogManager.getLogManager().readConfiguration();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		} 
+		catch (SecurityException | IOException e) 
+		{
+			logger.severe(e.toString());
+		} 
 	}
 
 }
