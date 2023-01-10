@@ -43,7 +43,7 @@ public class AccountUI extends VerticalLayout{
 
 
 	private static final long serialVersionUID = 1L;
-	private Account a;
+	private transient Account a;
 	private UI ui;
 	private Boolean edit = false;
 	private TextField accNumT; 
@@ -59,6 +59,7 @@ public class AccountUI extends VerticalLayout{
 	private static String typeLoan = "LOAN";
 	private static String typeMortgage = "MORTGAGE";
 	private static String typeSaving = "SAVING";
+	private String editingString = "Editing account " ;
 	
 
 	public AccountUI(UI ui, String user, Welcome back){
@@ -207,11 +208,11 @@ public class AccountUI extends VerticalLayout{
 					//Editing an account	
 					if(!editAccount())
 					{
-						event.getButton().setCaption("Editing account " + a.getAccount_number() + " failed");
+						event.getButton().setCaption(editingString + a.getAccount_number() + " failed");
 					}
 					else
 					{
-						event.getButton().setCaption("Editing account " + a.getAccount_number() + " successful");
+						event.getButton().setCaption(editingString + a.getAccount_number() + " successful");
 					}
 				}
 			}
@@ -322,11 +323,11 @@ public class AccountUI extends VerticalLayout{
 
 					if(!editAccount())
 					{
-						event.getButton().setCaption("Editing account " + a.getAccount_number() + " failed");
+						event.getButton().setCaption(editingString + a.getAccount_number() + " failed");
 					}
 					else
 					{
-						event.getButton().setCaption("Editing account " + a.getAccount_number() + " successful");
+						event.getButton().setCaption(editingString + a.getAccount_number() + " successful");
 					}
 
 				}
@@ -445,7 +446,7 @@ public class AccountUI extends VerticalLayout{
 	}
 	
 	//Get sortcode
-	private String getSortcode(){
+	private static String getSortcode(){
 		if(sortcode == null)
 		{
 			SortCodeResource mySortCodeResource = new SortCodeResource();
@@ -455,7 +456,7 @@ public class AccountUI extends VerticalLayout{
 		return sortcode;
 	}
 	//Set sortcode
-	private void setSortcode(){
+	private static void setSortcode(){
 		if(sortcode == null)
 		{
 			SortCodeResource mySortCodeResource = new SortCodeResource();

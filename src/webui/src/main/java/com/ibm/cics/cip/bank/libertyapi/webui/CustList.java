@@ -52,7 +52,7 @@ public class CustList extends VerticalLayout{
 	 */
 	private static final long serialVersionUID = 1L;
 	private static Logger logger = Logger.getLogger("com.example.com_ibm_cics_cip_bank_libertyapi_webui.Cust_list");
-	private CustomerList cList = new CustomerList();
+	private transient CustomerList cList = new CustomerList();
 	private UI ui;
 	private int limit = 50;
 	private int offset = 0;
@@ -66,12 +66,13 @@ public class CustList extends VerticalLayout{
 	String filter = "";
 	int cur = 1;
 	int next;
+	private String welcome="Welcome";
 
 	public CustList(UI ui, String user, Welcome back)
 	{
 		sortOutLogging();
 		this.ui = ui;
-		HB_Header header = new HB_Header(ui, "Welcome", back);
+		HB_Header header = new HB_Header(ui, welcome, back);
 		this.addComponent(header);
 		this.setExpandRatio(header, 0.1f);
 		createSearch();
@@ -345,7 +346,7 @@ public class CustList extends VerticalLayout{
 				private static final long serialVersionUID = 3139185739387258242L;
 
 				public void buttonClick(ClickEvent event) {
-					ui.setContent(new AccList(ui, "test", new Welcome(ui, "Welcome"),cList.getCustomer(temp)));
+					ui.setContent(new AccList(ui, "test", new Welcome(ui, welcome),cList.getCustomer(temp)));
 				}
 			});
 			edit.addClickListener(new Button.ClickListener() {
@@ -355,7 +356,7 @@ public class CustList extends VerticalLayout{
 				private static final long serialVersionUID = -4092770723316728200L;
 
 				public void buttonClick(ClickEvent event) {
-					ui.setContent(new CustomerUI(ui, "test", new Welcome(ui, "Welcome"), cList.getCustomer(temp)));
+					ui.setContent(new CustomerUI(ui, "test", new Welcome(ui, welcome), cList.getCustomer(temp)));
 				}
 			});
 			delete.addClickListener(new Button.ClickListener() {

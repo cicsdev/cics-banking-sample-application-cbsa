@@ -41,7 +41,7 @@ public class AccList extends VerticalLayout{
 
 	private static final long serialVersionUID = 1L;
 	private static Logger logger = Logger.getLogger("com.example.com_ibm_cics_cip_bank_libertyapi_webui.Acc_list");
-	private AccountList aList = new AccountList();
+	private transient AccountList aList = new AccountList();
 	private UI ui;
 	private int limit = 50;
 	private int offset = 0;

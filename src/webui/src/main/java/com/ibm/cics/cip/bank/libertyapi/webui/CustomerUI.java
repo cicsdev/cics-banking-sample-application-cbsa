@@ -42,7 +42,7 @@ public class CustomerUI extends VerticalLayout{
 
 
 	private static final long serialVersionUID = 1L;
-	private Customer c;
+	private transient Customer c;
 	private UI ui;
 	private VerticalLayout vl = new VerticalLayout();
 	private Boolean edit = false;
@@ -54,6 +54,7 @@ public class CustomerUI extends VerticalLayout{
 	private TextField cusCreditScoreT;
 	private DateField cusCreditScoreReviewDateT;
 	private static String sortcode;
+	private static String editing = "Editing customer ";
 
 
 	public CustomerUI(UI ui, String user, Welcome back){
@@ -187,11 +188,11 @@ public class CustomerUI extends VerticalLayout{
 					//if editing a customer
 					if(!editCustomer())
 					{
-						event.getButton().setCaption("Editing customer " + c.getCustomer_number() + " failed");
+						event.getButton().setCaption(editing + c.getCustomer_number() + " failed");
 					}
 					else
 					{
-						event.getButton().setCaption("Editing customer " + c.getCustomer_number() + " successful");
+						event.getButton().setCaption(editing + c.getCustomer_number() + " successful");
 					}
 				}
 			}
@@ -297,11 +298,11 @@ public class CustomerUI extends VerticalLayout{
 				else{
 					if(!editCustomer())
 					{
-						event.getButton().setCaption("Editing customer " + c.getCustomer_number() + " failed");
+						event.getButton().setCaption(editing + c.getCustomer_number() + " failed");
 					}
 					else
 					{
-						event.getButton().setCaption("Editing customer " + c.getCustomer_number() + " successful");
+						event.getButton().setCaption(editing + c.getCustomer_number() + " successful");
 					}
 				}
 			}
@@ -382,7 +383,7 @@ public class CustomerUI extends VerticalLayout{
 	}
 	
 	///get sortcode
-	private String getSortcode(){
+	private static String getSortcode(){
 		if(sortcode == null)
 		{
 			setSortcode();
@@ -391,7 +392,7 @@ public class CustomerUI extends VerticalLayout{
 	}
 
 	//set sortcode
-	private void setSortcode(){
+	private static void setSortcode(){
 		if(sortcode == null)
 		{
 			SortCodeResource mySortCodeResource = new SortCodeResource();
