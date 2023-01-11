@@ -294,11 +294,7 @@ public class CustomerList {
 		return sortedOutDate;
 	}
 
-	@SuppressWarnings("unused")
-	private String getSortCode() {
-		// TODO Auto-generated method stub
-		return sortcode;
-	}
+
 
 	public Customer getCustomer(int i){
 		return this.customerList.get(i);

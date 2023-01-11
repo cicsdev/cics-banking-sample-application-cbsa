@@ -104,7 +104,6 @@ public class AccountList {
 			myAccountsResponse = myAccountsResource.getAccountExternal(accountNumberFilterLong);
 			if(myAccountsResponse.getStatus() == 200)
 			{
-				// TODO check response, what if there is no account at all?
 				this.count = 1;
 			}
 			else
@@ -192,7 +191,6 @@ public class AccountList {
 
 			if(myAccountsResponse.getStatus() == 200)
 			{
-				// TODO what if the customer is not found,or there is no accounts for the customer, or the thing just fails?
 				try {
 					myAccountsJSON = JSONObject.parse(myAccountsString);
 					long accountCount = (Long) myAccountsJSON.get("numberOfAccounts");
@@ -254,7 +252,6 @@ public class AccountList {
 			{
 				myAccountsString = myAccountsResponse.getEntity().toString();
 				myAccountsJSON = JSONObject.parse(myAccountsString);
-				// TODO check response, what if there is no account at all?
 				this.count = 1;
 				JSONObject myAccount = (JSONObject) myAccountsJSON;
 

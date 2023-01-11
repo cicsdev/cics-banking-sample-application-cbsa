@@ -49,6 +49,23 @@ public class CounterResource extends HBankDataAccess{
 	 * 
 	 */
 
+    private static final String NEWACCNO = "NEWACCNO";
+    private static final String NEWCUSNO = "NEWCUSNO";
+    
+    private static final String JSON_ERROR_MSG = "errorMessage";
+    private static final String JSON_SUCCESS = "success";
+    private static final String JSON_ACCOUNT_NUMBER = "accountNumber";
+    private static final String JSON_CUSTOMER_NUMBER = "customerNumber";
+    
+    private static final String GET_ACCOUNT_COUNTER = "getAccountCounter()";
+    private static final String GET_CUSTOMER_COUNTER = "getCustomerCounter()";
+    private static final String INCREMENT_CUSTOMER_COUNTER = "incrementCustomerCounter()";
+    private static final String INCREMENT_ACCOUNT_COUNTER = "incrementAccountCounter()";
+    private static final String DECREMENT_CUSTOMER_COUNTER = "decrementCustomerCounter()";
+    private static final String DECREMENT_ACCOUNT_COUNTER = "decrementAccountCounter()";
+    
+    private static final String NEW_ACCNO_PREFIX = "Account number from NEWACCNO is ";
+    private static final String NEW_CUSNO_PREFIX = "Customer number from NEWCUSNO is ";
 
 
 	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.api.json");
@@ -64,13 +81,13 @@ public class CounterResource extends HBankDataAccess{
 	@Path("/account")
 	@Produces("application/json")
 	public Response getAccountCounter() {
-		logger.entering(this.getClass().getName(), "getAccountCounter()");
+		logger.entering(this.getClass().getName(), GET_ACCOUNT_COUNTER);
 		JSONObject response = new JSONObject();
 		Response myResponse = null;
 
 
 		Program NEWACCNO_Program = new Program();
-		NEWACCNO_Program.setName("NEWACCNO");
+		NEWACCNO_Program.setName(NEWACCNO);
 
 		NewAccountNumber myNEWACCNO = new NewAccountNumber();
 
@@ -79,17 +96,19 @@ public class CounterResource extends HBankDataAccess{
 		try {
 			NEWACCNO_Program.link(data);
 			myNEWACCNO = new NewAccountNumber(data);
-			logger.fine("Account number from NEWACCNO is " + myNEWACCNO.getAccountNumber());
-			response.put("accountNumber", myNEWACCNO.getAccountNumber());
+			logger.fine(NEW_ACCNO_PREFIX + myNEWACCNO.getAccountNumber());
+			response.put(JSON_ACCOUNT_NUMBER, myNEWACCNO.getAccountNumber());
+			response.put(JSON_SUCCESS, "Y");
 			myResponse = Response.status(200).entity(response.toString()).build();
-			logger.exiting(this.getClass().getName(), "getAccountCounter()",myResponse);
+			logger.exiting(this.getClass().getName(), GET_ACCOUNT_COUNTER,myResponse);
 			return myResponse;
 		} catch (InvalidRequestException | LengthErrorException | InvalidSystemIdException | NotAuthorisedException
 				| InvalidProgramIdException | RolledBackException | TerminalException e) {
 			logger.severe(e.getLocalizedMessage());
-			response.put("errorMessage", e.toString());
+			response.put(JSON_ERROR_MSG, e.toString());
+			response.put(JSON_SUCCESS, "N");
 			myResponse = Response.status(500).entity(response.toString()).build();
-			logger.exiting(this.getClass().getName(), "getAccountCounter()",myResponse);
+			logger.exiting(this.getClass().getName(), GET_ACCOUNT_COUNTER,myResponse);
 			return myResponse;
 		}
 	}
@@ -98,14 +117,14 @@ public class CounterResource extends HBankDataAccess{
 	@Path("/customer")
 	@Produces("application/json")
 	public Response getCustomerCounter() {
-		logger.entering(this.getClass().getName(), "getCustomerCounter()");
+		logger.entering(this.getClass().getName(), GET_CUSTOMER_COUNTER);
 
 		JSONObject response = new JSONObject();
 		Response myResponse = null;
 
 
 		Program NEWCUSNO_Program = new Program();
-		NEWCUSNO_Program.setName("NEWCUSNO");
+		NEWCUSNO_Program.setName(NEWCUSNO);
 
 		NewCustomerNumber myNEWCUSNO = new NewCustomerNumber();
 
@@ -114,19 +133,19 @@ public class CounterResource extends HBankDataAccess{
 		try {
 			NEWCUSNO_Program.link(data);
 			myNEWCUSNO = new NewCustomerNumber(data);
-			logger.fine("Customer number from NEWCUSNO is " + myNEWCUSNO.getCustomerNumber());
-			response.put("customerNumber", myNEWCUSNO.getCustomerNumber());
-			response.put("success", "Y");
+			logger.fine(NEW_CUSNO_PREFIX + myNEWCUSNO.getCustomerNumber());
+			response.put(JSON_CUSTOMER_NUMBER, myNEWCUSNO.getCustomerNumber());
+			response.put(JSON_SUCCESS, "Y");
 			myResponse = Response.status(200).entity(response.toString()).build();
-			logger.exiting(this.getClass().getName(), "getCustomerCounter()",myResponse);
+			logger.exiting(this.getClass().getName(), GET_CUSTOMER_COUNTER,myResponse);
 			return myResponse;
 		} catch (InvalidRequestException | LengthErrorException | InvalidSystemIdException | NotAuthorisedException
 				| InvalidProgramIdException | RolledBackException | TerminalException e) {
 			logger.severe(e.getLocalizedMessage());
-			response.put("errorMessage", e.toString());
-			response.put("success", "N");
+			response.put(JSON_ERROR_MSG, e.toString());
+			response.put(JSON_SUCCESS, "N");
 			myResponse = Response.status(500).entity(response.toString()).build();
-			logger.exiting(this.getClass().getName(), "getCustomerCounter()",myResponse);
+			logger.exiting(this.getClass().getName(), GET_CUSTOMER_COUNTER,myResponse);
 			return myResponse;
 		}
 	}
@@ -135,14 +154,14 @@ public class CounterResource extends HBankDataAccess{
 	@Path("/customer")
 	@Produces("application/json")
 	public Response incrementCustomerCounter() {
-		logger.entering(this.getClass().getName(), "incrementCustomerCounter()");
+		logger.entering(this.getClass().getName(), INCREMENT_CUSTOMER_COUNTER);
 		Response myResponse = null;
 
 		JSONObject response = new JSONObject();
 
 
 		Program NEWCUSNO_Program = new Program();
-		NEWCUSNO_Program.setName("NEWCUSNO");
+		NEWCUSNO_Program.setName(NEWCUSNO);
 
 		NewCustomerNumber myNEWCUSNO = new NewCustomerNumber();
 
@@ -152,19 +171,19 @@ public class CounterResource extends HBankDataAccess{
 			NEWCUSNO_Program.link(data);
 			myNEWCUSNO = new NewCustomerNumber(data);
 
-			logger.fine("Customer number from NEWCUSNO is " + myNEWCUSNO.getCustomerNumber());
-			response.put("customerNumber", myNEWCUSNO.getCustomerNumber());
-			response.put("success", "Y");
+			logger.fine(NEW_CUSNO_PREFIX + myNEWCUSNO.getCustomerNumber());
+			response.put(JSON_CUSTOMER_NUMBER, myNEWCUSNO.getCustomerNumber());
+			response.put(JSON_SUCCESS, "Y");
 			myResponse = Response.status(200).entity(response.toString()).build(); 
-			logger.exiting(this.getClass().getName(), "incrementCustomerCounter()",myResponse);
+			logger.exiting(this.getClass().getName(), INCREMENT_CUSTOMER_COUNTER,myResponse);
 			return myResponse;
 		} catch (InvalidRequestException | LengthErrorException | InvalidSystemIdException | NotAuthorisedException
 				| InvalidProgramIdException | RolledBackException | TerminalException e) {
 			logger.severe(e.getLocalizedMessage());
-			response.put("errorMessage", e.toString());
-			response.put("success", "N");
+			response.put(JSON_ERROR_MSG, e.toString());
+			response.put(JSON_SUCCESS, "N");
 			myResponse = Response.status(500).entity(response.toString()).build(); 
-			logger.exiting(this.getClass().getName(), "incrementCustomerCounter()",myResponse);
+			logger.exiting(this.getClass().getName(), INCREMENT_CUSTOMER_COUNTER,myResponse);
 			return myResponse;
 		}
 	}
@@ -173,14 +192,14 @@ public class CounterResource extends HBankDataAccess{
 	@Path("/customer")
 	@Produces("application/json")
 	public Response decrementCustomerCounter() {
-		logger.entering(this.getClass().getName(), "decrementCustomerCounter()");
+		logger.entering(this.getClass().getName(), DECREMENT_CUSTOMER_COUNTER);
 		Response myResponse = null;
 
 		JSONObject response = new JSONObject();
 
 
 		Program NEWCUSNO_Program = new Program();
-		NEWCUSNO_Program.setName("NEWCUSNO");
+		NEWCUSNO_Program.setName(NEWCUSNO);
 
 		NewCustomerNumber myNEWCUSNO = new NewCustomerNumber();
 
@@ -193,19 +212,19 @@ public class CounterResource extends HBankDataAccess{
 			myNEWCUSNO.setNewcusnoFunction("R");
 			NEWCUSNO_Program.link(data);
 
-			logger.fine("Customer number from NEWCUSNO is " + myNEWCUSNO.getCustomerNumber());
-			response.put("customerNumber", myNEWCUSNO.getCustomerNumber());
-			response.put("success", "Y");
+			logger.fine(NEW_CUSNO_PREFIX + myNEWCUSNO.getCustomerNumber());
+			response.put(JSON_CUSTOMER_NUMBER, myNEWCUSNO.getCustomerNumber());
+			response.put(JSON_SUCCESS, "Y");
 			myResponse = Response.status(200).entity(response.toString()).build(); 
-			logger.exiting(this.getClass().getName(), "decrementCustomerCounter()",myResponse);
+			logger.exiting(this.getClass().getName(), DECREMENT_CUSTOMER_COUNTER,myResponse);
 			return myResponse;
 		} catch (InvalidRequestException | LengthErrorException | InvalidSystemIdException | NotAuthorisedException
 				| InvalidProgramIdException | RolledBackException | TerminalException e) {
 			logger.severe(e.getLocalizedMessage());
-			response.put("errorMessage", e.toString());
-			response.put("success", "N");
+			response.put(JSON_ERROR_MSG, e.toString());
+			response.put(JSON_SUCCESS, "N");
 			myResponse = Response.status(500).entity(response.toString()).build(); 
-			logger.exiting(this.getClass().getName(), "decrementCustomerCounter()",myResponse);
+			logger.exiting(this.getClass().getName(), DECREMENT_CUSTOMER_COUNTER,myResponse);
 			return myResponse;
 		}
 
@@ -216,12 +235,12 @@ public class CounterResource extends HBankDataAccess{
 	@Produces("application/json")
 	public Response incrementAccountCounter() {
 
-		logger.entering(this.getClass().getName(), "incrementAccountCounter()");
+		logger.entering(this.getClass().getName(), INCREMENT_ACCOUNT_COUNTER);
 		Response myResponse = null;
 		JSONObject response = new JSONObject();
 
 		Program NEWACCNO_Program = new Program();
-		NEWACCNO_Program.setName("NEWACCNO");
+		NEWACCNO_Program.setName(NEWACCNO);
 
 		NewAccountNumber myNEWACCNO = new NewAccountNumber();
 
@@ -230,19 +249,19 @@ public class CounterResource extends HBankDataAccess{
 		try {
 			NEWACCNO_Program.link(data);
 			myNEWACCNO = new NewAccountNumber(data);
-			logger.fine("Account number from NEWACCNO is " + myNEWACCNO.getAccountNumber());
-			response.put("accountNumber", myNEWACCNO.getAccountNumber());
-			response.put("success", "Y");
+			logger.fine(NEW_ACCNO_PREFIX + myNEWACCNO.getAccountNumber());
+			response.put(JSON_ACCOUNT_NUMBER, myNEWACCNO.getAccountNumber());
+			response.put(JSON_SUCCESS, "Y");
 			myResponse = Response.status(200).entity(response.toString()).build(); 
-			logger.exiting(this.getClass().getName(), "incrementAccountCounter()",myResponse);
+			logger.exiting(this.getClass().getName(), INCREMENT_ACCOUNT_COUNTER,myResponse);
 			return myResponse;
 		} catch (InvalidRequestException | LengthErrorException | InvalidSystemIdException | NotAuthorisedException
 				| InvalidProgramIdException | RolledBackException | TerminalException e) {
 			logger.severe(e.getLocalizedMessage());
-			response.put("errorMessage", e.toString());
-			response.put("success", "N");
+			response.put(JSON_ERROR_MSG, e.toString());
+			response.put(JSON_SUCCESS, "N");
 			myResponse = Response.status(500).entity(response.toString()).build(); 
-			logger.exiting(this.getClass().getName(), "incrementAccountCounter()",myResponse);
+			logger.exiting(this.getClass().getName(), INCREMENT_ACCOUNT_COUNTER,myResponse);
 			return myResponse;
 		}
 	}
@@ -251,12 +270,12 @@ public class CounterResource extends HBankDataAccess{
 	@Path("/account")
 	@Produces("application/json")
 	public Response decrementAccountCounter() {
-		logger.entering(this.getClass().getName(), "decrementAccountCounter()");
+		logger.entering(this.getClass().getName(), DECREMENT_ACCOUNT_COUNTER);
 		Response myResponse = null;
 		JSONObject response = new JSONObject();
 
 		Program NEWACCNO_Program = new Program();
-		NEWACCNO_Program.setName("NEWACCNO");
+		NEWACCNO_Program.setName(NEWACCNO);
 
 		NewAccountNumber myNEWACCNO = new NewAccountNumber();
 
@@ -269,19 +288,19 @@ public class CounterResource extends HBankDataAccess{
 			myNEWACCNO.setNewaccnoFunction("R");
 			NEWACCNO_Program.link(data);
 
-			logger.fine("Account number from NEWACCNO is " + myNEWACCNO.getAccountNumber());
-			response.put("accountNumber", myNEWACCNO.getAccountNumber());
-			response.put("success", "Y");
+			logger.fine(NEW_ACCNO_PREFIX + myNEWACCNO.getAccountNumber());
+			response.put(JSON_ACCOUNT_NUMBER, myNEWACCNO.getAccountNumber());
+			response.put(JSON_SUCCESS, "Y");
 			myResponse = Response.status(200).entity(response.toString()).build();
-			logger.exiting(this.getClass().getName(), "decrementAccountCounter()",myResponse);
+			logger.exiting(this.getClass().getName(), DECREMENT_ACCOUNT_COUNTER,myResponse);
 			return myResponse;
 		} catch (InvalidRequestException | LengthErrorException | InvalidSystemIdException | NotAuthorisedException
 				| InvalidProgramIdException | RolledBackException | TerminalException e) {
 			logger.severe(e.getLocalizedMessage());
-			response.put("errorMessage", e.toString());
-			response.put("success", "N");
+			response.put(JSON_ERROR_MSG, e.toString());
+			response.put(JSON_SUCCESS, "N");
 			myResponse = Response.status(500).entity(response.toString()).build();
-			logger.exiting(this.getClass().getName(), "decrementAccountCounter()",myResponse);
+			logger.exiting(this.getClass().getName(), DECREMENT_ACCOUNT_COUNTER,myResponse);
 			return myResponse;
 		}
 

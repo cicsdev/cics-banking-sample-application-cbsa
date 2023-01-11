@@ -44,55 +44,55 @@ public class AccountsResource extends HBankDataAccess{
 
 	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.api.json");
 	
-	private static final String notSupported = " is not supported.";
-	private static final String errorMsg = "errorMessage";
-	private static final String accTypeString = "Account type ";
-	private static final String createAccountInternal = "createAccountInternal(AccountJSON account)";
-	private static final String createAccountExternal = "createAccountExternal(AccountJSON account)";
-	private static final String getAccountInternal = "getAccountInternal(Long accountNumber)";
-	private static final String getAccountsByCustomerNumberInternal = "getAccountsByCustomerInternal(Long customerNumber, boolean countOnly)";
-	private static final String updateAccountInternal = "updateAccountInternal(Long id, AccountJSON account)";
-	private static final String debitAccountInternal = "debitAccountInternal(String accountNumber, DebitCreditAccountJSON dbcr)";
-	private static final String creditAccountInternal = "creditAccountInternal(String accountNumber, DebitCreditAccountJSON dbcr)";
-	private static final String transferLocalInternal = "transferLocalInternal(String accountNumber, TransferLocalJSON transferLocal)";
-	private static final String debitCreditAccount = "debitCreditAccount(Long sortCode, String accountNumber, BigDecimal apiAmount, boolean debitAccount)";
-	private static final String deleteAccount = "deleteAccountInternal(Long accountNumber)";
-	private static final String getAccountsByBalanceWithOffsetAndLimitInternal = "getAccountsByBalanceWithOffsetAndLimitInternal(BigDecimal balance, String operator, Integer offset, Integer limit, Boolean countOnly";
+	private static final String NOT_SUPPORTED = " is not supported.";
+	private static final String ERROR_MSG = "errorMessage";
+	private static final String ACC_TYPE_STRING = "Account type ";
+	private static final String CREATE_ACCOUNT_INTERNAL = "createAccountInternal(AccountJSON account)";
+	private static final String CREATE_ACCOUNT_EXTERNAL = "createAccountExternal(AccountJSON account)";
+	private static final String GET_ACCOUNT_INTERNAL = "getAccountInternal(Long accountNumber)";
+	private static final String GET_ACCOUNTS_BY_CUSTOMER_INTERNAL = "getAccountsByCustomerInternal(Long customerNumber, boolean countOnly)";
+	private static final String UPDATE_ACCOUNT_INTERNAL = "updateAccountInternal(Long id, AccountJSON account)";
+	private static final String DEBIT_ACCOUNT_INTERNAL = "debitAccountInternal(String accountNumber, DebitCreditAccountJSON dbcr)";
+	private static final String CREDIT_ACCOUNT_INTERNAL = "creditAccountInternal(String accountNumber, DebitCreditAccountJSON dbcr)";
+	private static final String TRANSFER_LOCAL_INTERNAL = "transferLocalInternal(String accountNumber, TransferLocalJSON transferLocal)";
+	private static final String DEBIT_CREDIT_ACCOUNT = "debitCreditAccount(Long sortCode, String accountNumber, BigDecimal apiAmount, boolean debitAccount)";
+	private static final String DELETE_ACCOUNT = "deleteAccountInternal(Long accountNumber)";
+	private static final String GET_ACCOUNTS_BY_BALANCE_WITH_OFFSET_AND_LIMIT_INTERNAL = "getAccountsByBalanceWithOffsetAndLimitInternal(BigDecimal balance, String operator, Integer offset, Integer limit, Boolean countOnly";
 	
-	private static final String classNameMsg = " in com.ibm.cics.cip.bankliberty.web.db2.Account";
+	private static final String CLASS_NAME_MSG = " in com.ibm.cics.cip.bankliberty.web.db2.Account";
 	
-	private static final String interestRateLessThanZero = "Interest rate cannot be greater than 9999.99%.";
-	private static final String interestRateTooHigh = "Interest rate cannot be greater than 9999.99%.";
-	private static final String getAccountsExternal = "getAccountsExternal(Boolean countOnly)";
-	private static final String getAccountsInternal = "getAccountsInternal(Boolean countOnly)";
-	private static final String notValidForThisBank =  "not valid for this bank (";
-	private static final String sortCodeLiteral = "Sortcode ";
-	private static final String accountLiteral = "Account ";
-	private static final String cannotBeFound = " cannot be found.";
-	private static final String cannotBeAccessed = " cannot be accessed.";
-	private static final String customerNumberLiteral = "Customer number ";
-	private static final String failedToRead = "Failed to read account ";
-	private static final String proctranWriteFailure = "Failed to write to PROCTRAN data store";
-	private static final String db2ReadFailure = "Unable to access Db2 account store";
-	private static final String accountCreateFailure = "Failed to create account in com.ibm.cics.cip.bankliberty.web.db2.Account";
-	private static final String inDebitAccount = " in debitAccount ";
-	private static final String inCreditAccount = " in creditAccount ";
-	private static final String needDifferentAccounts = "Source and target accounts must be different";
-	private static final String sourceAccountNumber = "Source account number ";
-	private static final String targetAccountNumber = "Target account number ";
+	private static final String INTEREST_RATE_LESS_THAN_ZERO = "Interest rate cannot be greater than 9999.99%.";
+	private static final String INTEREST_RATE_TOO_HIGH = "Interest rate cannot be greater than 9999.99%.";
+	private static final String GET_ACCOUNTS_EXTERNAL = "getAccountsExternal(Boolean countOnly)";
+	private static final String GET_ACCOUNTS_INTERNAL = "getAccountsInternal(Boolean countOnly)";
+	private static final String NOT_VALID_FOR_THIS_BANK =  "not valid for this bank (";
+	private static final String SORT_CODE_LITERAL = "Sortcode ";
+	private static final String ACCOUNT_LITERAL = "Account ";
+	private static final String CANNOT_BE_FOUND = " cannot be found.";
+	private static final String CANNOT_BE_ACCESSED = " cannot be accessed.";
+	private static final String CUSTOMER_NUMBER_LITERAL = "Customer number ";
+	private static final String FAILED_TO_READ = "Failed to read account ";
+	private static final String PROCTRAN_WRITE_FAILURE = "Failed to write to PROCTRAN data store";
+	private static final String DB2_READ_FAILURE = "Unable to access Db2 account store";
+	private static final String ACCOUNT_CREATE_FAILURE = "Failed to create account in com.ibm.cics.cip.bankliberty.web.db2.Account";
+	private static final String IN_DEBIT_ACCOUNT = " in debitAccount ";
+	private static final String IN_CREDIT_ACCOUNT = " in creditAccount ";
+	private static final String NEED_DIFFERENT_ACCOUNTS = "Source and target accounts must be different";
+	private static final String SOURCE_ACCOUNT_NUMBER = "Source account number ";
+	private static final String TARGET_ACCOUNT_NUMBER = "Target account number ";
 	
-	private static final String jsonNumberOfAccounts = "numberOfAccounts";
-	private static final String jsonSortCode = "sortCode";
-	private static final String jsonCustomerNumber = "customerNumber";
-	private static final String jsonAccountType = "accountType";
-	private static final String jsonAvailableBalance = "availableBalance";
-	private static final String jsonActualBalance = "actualBalance";
-	private static final String jsonInterestRate = "interestRate";
-	private static final String jsonOverdraft = "overdraft";
-	private static final String jsonLastStatementDate = "lastStatementDate";
-	private static final String jsonNextStatementDate = "nextStatementDate";
-	private static final String jsonDateOpened = "dateOpened";
-	private static final String jsonAccounts = "accounts";
+	private static final String JSON_NUMBER_OF_ACCOUNTS = "numberOfAccounts";
+	private static final String JSON_SORT_CODE = "sortCode";
+	private static final String JSON_CUSTOMER_NUMBER = "customerNumber";
+	private static final String JSON_ACCOUNT_TYPE = "accountType";
+	private static final String JSON_AVAILABLE_BALANCE = "availableBalance";
+	private static final String JSON_ACTUAL_BALANCE = "actualBalance";
+	private static final String JSON_INTEREST_RATE = "interestRate";
+	private static final String JSON_OVERDRAFT = "overdraft";
+	private static final String JSON_LAST_STATEMENT_DATE = "lastStatementDate";
+	private static final String JSON_NEXT_STATEMENT_DATE = "nextStatementDate";
+	private static final String JSON_DATE_OPENED = "dateOpened";
+	private static final String JSON_ACCOUNTS = "accounts";
 	
 
 
@@ -112,13 +112,13 @@ public class AccountsResource extends HBankDataAccess{
 	public Response createAccountExternal(
 			AccountJSON account) {
 		/** This method is called from OUTSIDE Liberty. We need to know in order to keep track of DB2 connections */
-		logger.entering(this.getClass().getName(),createAccountExternal + " for account " + account.toString());
+		logger.entering(this.getClass().getName(),CREATE_ACCOUNT_EXTERNAL + " for account " + account.toString());
 
 		Response myResponse = createAccountInternal(account);
 
 		HBankDataAccess myHBankDataAccess = new HBankDataAccess();
 		myHBankDataAccess.terminate();
-		logger.exiting(this.getClass().getName(),createAccountExternal,myResponse);
+		logger.exiting(this.getClass().getName(),CREATE_ACCOUNT_EXTERNAL,myResponse);
 		return myResponse;
 
 	}
@@ -126,16 +126,16 @@ public class AccountsResource extends HBankDataAccess{
 	public Response createAccountInternal(
 			/** Internal methods can be called by either the external methods, or another part of Liberty */
 			AccountJSON account) {
-		logger.entering(this.getClass().getName(),createAccountInternal + " for account " + account.toString());
+		logger.entering(this.getClass().getName(),CREATE_ACCOUNT_INTERNAL + " for account " + account.toString());
 		Response myResponse = null;
 		/* Only ISA, LOAN, CURRENT, MORTGAGE and SAVING are valid account types */
 		if(!account.validateType(account.getAccountType().trim()))
 		{
 			JSONObject error = new JSONObject();
-			error.put(errorMsg, accTypeString + account.getAccountType() + notSupported);
-			logger.warning(accTypeString + account.getAccountType() + notSupported);
+			error.put(ERROR_MSG, ACC_TYPE_STRING + account.getAccountType() + NOT_SUPPORTED);
+			logger.warning(ACC_TYPE_STRING + account.getAccountType() + NOT_SUPPORTED);
 			myResponse = Response.status(400).entity(error.toString()).build();
-			logger.exiting(this.getClass().getName(),createAccountInternal ,myResponse);
+			logger.exiting(this.getClass().getName(),CREATE_ACCOUNT_INTERNAL ,myResponse);
 			return myResponse;
 
 		}
@@ -143,10 +143,10 @@ public class AccountsResource extends HBankDataAccess{
 		if(account.getInterestRate().doubleValue() < 0.00)
 		{
 			JSONObject error = new JSONObject();
-			error.put(errorMsg, interestRateLessThanZero);
-			logger.warning(interestRateLessThanZero);
+			error.put(ERROR_MSG, INTEREST_RATE_LESS_THAN_ZERO);
+			logger.warning(INTEREST_RATE_LESS_THAN_ZERO);
 			myResponse = Response.status(400).entity(error.toString()).build();
-			logger.exiting(this.getClass().getName(),createAccountInternal ,myResponse);
+			logger.exiting(this.getClass().getName(),CREATE_ACCOUNT_INTERNAL ,myResponse);
 			return myResponse;
 		}
 
@@ -154,10 +154,10 @@ public class AccountsResource extends HBankDataAccess{
 		if(account.getInterestRate().doubleValue() > 9999.99)
 		{
 			JSONObject error = new JSONObject();
-			error.put(errorMsg, interestRateTooHigh);
-			logger.warning(interestRateTooHigh);
+			error.put(ERROR_MSG, INTEREST_RATE_TOO_HIGH);
+			logger.warning(INTEREST_RATE_TOO_HIGH);
 			myResponse = Response.status(400).entity(error.toString()).build();
-			logger.exiting(this.getClass().getName(),createAccountInternal ,myResponse);
+			logger.exiting(this.getClass().getName(),CREATE_ACCOUNT_INTERNAL ,myResponse);
 			return myResponse;
 		}
 
@@ -166,10 +166,10 @@ public class AccountsResource extends HBankDataAccess{
 		if(myInterestRate.scale() > 2)
 		{
 			JSONObject error = new JSONObject();
-			error.put(errorMsg, "Interest rate cannot have more than 2 decimal places. " + myInterestRate.toPlainString());
+			error.put(ERROR_MSG, "Interest rate cannot have more than 2 decimal places. " + myInterestRate.toPlainString());
 			logger.warning("Interest rate cannot have more than 2 decimal places."  + myInterestRate.toPlainString());
 			myResponse = Response.status(400).entity(error.toString()).build();
-			logger.exiting(this.getClass().getName(),createAccountInternal ,myResponse);
+			logger.exiting(this.getClass().getName(),CREATE_ACCOUNT_INTERNAL ,myResponse);
 			return myResponse;			
 		}
 
@@ -177,10 +177,10 @@ public class AccountsResource extends HBankDataAccess{
 		if(account.getOverdraft().intValue() < 0)
 		{
 			JSONObject error = new JSONObject();
-			error.put(errorMsg, "Overdraft limit cannot be less than zero.");
+			error.put(ERROR_MSG, "Overdraft limit cannot be less than zero.");
 			logger.warning("Overdraft limit cannot be less than zero.");
 			myResponse = Response.status(400).entity(error.toString()).build();
-			logger.exiting(this.getClass().getName(),createAccountInternal ,myResponse);
+			logger.exiting(this.getClass().getName(),CREATE_ACCOUNT_INTERNAL ,myResponse);
 			return myResponse;			
 		}
 
@@ -189,10 +189,10 @@ public class AccountsResource extends HBankDataAccess{
 		if(customerNumberLong.longValue() < 1)
 		{
 			JSONObject error = new JSONObject();
-			error.put(errorMsg, "Customer number cannot be less than one.");
+			error.put(ERROR_MSG, "Customer number cannot be less than one.");
 			logger.warning("Customer number cannot be less than one.");
 			myResponse = Response.status(400).entity(error.toString()).build();
-			logger.exiting(this.getClass().getName(),createAccountInternal ,myResponse);
+			logger.exiting(this.getClass().getName(),CREATE_ACCOUNT_INTERNAL ,myResponse);
 			return myResponse;
 		}
 		
@@ -200,10 +200,10 @@ public class AccountsResource extends HBankDataAccess{
 		if(customerNumberLong.longValue() == 9999999999L)
 		{
 			JSONObject error = new JSONObject();
-			error.put(errorMsg, "Customer number cannot be 9,999,999,999.");
+			error.put(ERROR_MSG, "Customer number cannot be 9,999,999,999.");
 			logger.warning("Customer number cannot be 9,999,999,999.");
 			myResponse = Response.status(400).entity(error.toString()).build();
-			logger.exiting(this.getClass().getName(),createAccountInternal ,myResponse);
+			logger.exiting(this.getClass().getName(),CREATE_ACCOUNT_INTERNAL ,myResponse);
 			return myResponse;
 		}
 		
@@ -214,10 +214,10 @@ public class AccountsResource extends HBankDataAccess{
 		if(inputSortCode.intValue() != thisSortCode.intValue())
 		{
 			JSONObject error = new JSONObject();
-			error.put(errorMsg, sortCodeLiteral+  inputSortCode + notValidForThisBank + thisSortCode + ")");
-			logger.warning(sortCodeLiteral+  inputSortCode + notValidForThisBank + thisSortCode + ")");
+			error.put(ERROR_MSG, SORT_CODE_LITERAL+  inputSortCode + NOT_VALID_FOR_THIS_BANK + thisSortCode + ")");
+			logger.warning(SORT_CODE_LITERAL+  inputSortCode + NOT_VALID_FOR_THIS_BANK + thisSortCode + ")");
 			myResponse = Response.status(400).entity(error.toString()).build();
-			logger.exiting(this.getClass().getName(),createAccountInternal ,myResponse);
+			logger.exiting(this.getClass().getName(),CREATE_ACCOUNT_INTERNAL ,myResponse);
 			return myResponse;
 		}
 
@@ -231,10 +231,10 @@ public class AccountsResource extends HBankDataAccess{
 		if(customerResponse.getStatus() != 200)
 		{
 			JSONObject error = new JSONObject();
-			error.put(errorMsg, customerNumberLiteral + customerNumberLong.longValue() + cannotBeFound);
-			logger.warning(customerNumberLiteral + customerNumberLong.longValue() + cannotBeFound);
+			error.put(ERROR_MSG, CUSTOMER_NUMBER_LITERAL + customerNumberLong.longValue() + CANNOT_BE_FOUND);
+			logger.warning(CUSTOMER_NUMBER_LITERAL + customerNumberLong.longValue() + CANNOT_BE_FOUND);
 			myResponse = Response.status(404).entity(error.toString()).build();
-			logger.exiting(this.getClass().getName(),createAccountInternal ,myResponse);
+			logger.exiting(this.getClass().getName(),CREATE_ACCOUNT_INTERNAL ,myResponse);
 			return myResponse;
 
 		}
@@ -251,17 +251,17 @@ public class AccountsResource extends HBankDataAccess{
 				if(accountsOfThisCustomer.getStatus() == 404)
 				{
 					JSONObject error = new JSONObject();
-					error.put(errorMsg, customerNumberLiteral + customerNumberLong.longValue() + cannotBeFound);
-					logger.warning(customerNumberLiteral + customerNumberLong.longValue() + cannotBeFound);
+					error.put(ERROR_MSG, CUSTOMER_NUMBER_LITERAL + customerNumberLong.longValue() + CANNOT_BE_FOUND);
+					logger.warning(CUSTOMER_NUMBER_LITERAL + customerNumberLong.longValue() + CANNOT_BE_FOUND);
 					myResponse = Response.status(404).entity(error.toString()).build();
-					logger.exiting(this.getClass().getName(),createAccountInternal ,myResponse);
+					logger.exiting(this.getClass().getName(),CREATE_ACCOUNT_INTERNAL ,myResponse);
 					return myResponse;
 				}
 				JSONObject error = new JSONObject();
-				error.put(errorMsg, customerNumberLiteral + customerNumberLong.longValue() + cannotBeAccessed);
-				logger.severe(customerNumberLiteral + customerNumberLong.longValue() + cannotBeAccessed);
+				error.put(ERROR_MSG, CUSTOMER_NUMBER_LITERAL + customerNumberLong.longValue() + CANNOT_BE_ACCESSED);
+				logger.severe(CUSTOMER_NUMBER_LITERAL + customerNumberLong.longValue() + CANNOT_BE_ACCESSED);
 				myResponse = Response.status(accountsOfThisCustomer.getStatus()).entity(error.toString()).build();
-				logger.exiting(this.getClass().getName(),createAccountInternal ,myResponse);
+				logger.exiting(this.getClass().getName(),CREATE_ACCOUNT_INTERNAL ,myResponse);
 				return myResponse;
 
 			}
@@ -269,23 +269,23 @@ public class AccountsResource extends HBankDataAccess{
 			myAccountsJSON = JSONObject.parse(accountsOfThisCustomerString);
 		} catch (IOException e) {
 			JSONObject error = new JSONObject();
-			error.put(errorMsg,"Failed to retrieve customer number " + customerNumberLong + " " + e.getLocalizedMessage());
+			error.put(ERROR_MSG,"Failed to retrieve customer number " + customerNumberLong + " " + e.getLocalizedMessage());
 			logger.severe("Failed to retrieve customer number " + customerNumberLong + " " + e.getLocalizedMessage());
 			myResponse = Response.status(500).entity(error.toString()).build();
-			logger.exiting(this.getClass().getName(),createAccountInternal ,myResponse);
+			logger.exiting(this.getClass().getName(),CREATE_ACCOUNT_INTERNAL ,myResponse);
 			return myResponse;
 		}
-		long accountCount = (Long) myAccountsJSON.get(jsonNumberOfAccounts);
+		long accountCount = (Long) myAccountsJSON.get(JSON_NUMBER_OF_ACCOUNTS);
 
 		// Does the customer have ten or more accounts?
 
 		if(accountCount >= 10)
 		{
 			JSONObject error = new JSONObject();
-			error.put(errorMsg, customerNumberLiteral + customerNumberLong.longValue() + " cannot have more than ten accounts.");
-			logger.warning(customerNumberLiteral + customerNumberLong.longValue() + " cannot have more than ten accounts.");
+			error.put(ERROR_MSG, CUSTOMER_NUMBER_LITERAL + customerNumberLong.longValue() + " cannot have more than ten accounts.");
+			logger.warning(CUSTOMER_NUMBER_LITERAL + customerNumberLong.longValue() + " cannot have more than ten accounts.");
 			myResponse = Response.status(400).entity(error.toString()).build();
-			logger.exiting(this.getClass().getName(),createAccountInternal ,myResponse);
+			logger.exiting(this.getClass().getName(),CREATE_ACCOUNT_INTERNAL ,myResponse);
 			return myResponse;
 		}
 
@@ -295,17 +295,17 @@ public class AccountsResource extends HBankDataAccess{
 		//Add data to JSONObject
 		if(db2Account != null)
 		{
-			response.put(jsonSortCode, db2Account.getSortcode().trim());
+			response.put(JSON_SORT_CODE, db2Account.getSortcode().trim());
 			response.put("id", db2Account.getAccount_number());
-			response.put(jsonCustomerNumber, db2Account.getCustomer_number());
-			response.put(jsonAccountType, db2Account.getType().trim());
-			response.put(jsonAvailableBalance,  BigDecimal.valueOf(db2Account.getAvailable_balance()));
-			response.put(jsonActualBalance, BigDecimal.valueOf(db2Account.getActual_balance()));
-			response.put(jsonInterestRate, BigDecimal.valueOf(db2Account.getInterest_rate()));
-			response.put(jsonOverdraft, db2Account.getOverdraft_limit());
-			response.put(jsonLastStatementDate, db2Account.getLast_statement().toString().trim());
-			response.put(jsonNextStatementDate, db2Account.getNext_statement().toString().trim());
-			response.put(jsonDateOpened, db2Account.getOpened().toString().trim());
+			response.put(JSON_CUSTOMER_NUMBER, db2Account.getCustomer_number());
+			response.put(JSON_ACCOUNT_TYPE, db2Account.getType().trim());
+			response.put(JSON_AVAILABLE_BALANCE,  BigDecimal.valueOf(db2Account.getAvailable_balance()));
+			response.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(db2Account.getActual_balance()));
+			response.put(JSON_INTEREST_RATE, BigDecimal.valueOf(db2Account.getInterest_rate()));
+			response.put(JSON_OVERDRAFT, db2Account.getOverdraft_limit());
+			response.put(JSON_LAST_STATEMENT_DATE, db2Account.getLast_statement().toString().trim());
+			response.put(JSON_NEXT_STATEMENT_DATE, db2Account.getNext_statement().toString().trim());
+			response.put(JSON_DATE_OPENED, db2Account.getOpened().toString().trim());
 
 			//Create a new ProcessedTransactionAccount and set credentials
 			ProcessedTransactionResource myProcessedTransactionResource = new ProcessedTransactionResource();
@@ -324,15 +324,15 @@ public class AccountsResource extends HBankDataAccess{
 			if(writeCreateAccountResponse == null || writeCreateAccountResponse.getStatus() != 200)
 			{
 				JSONObject error = new JSONObject();
-				error.put(errorMsg, proctranWriteFailure);
+				error.put(ERROR_MSG, PROCTRAN_WRITE_FAILURE);
 				try {
-					logger.severe("Accounts: createAccount: " +proctranWriteFailure);
+					logger.severe("Accounts: createAccount: " +PROCTRAN_WRITE_FAILURE);
 					Task.getTask().rollback();
 				} catch (InvalidRequestException e) {
 				}
-				logger.severe(accountCreateFailure);
+				logger.severe(ACCOUNT_CREATE_FAILURE);
 				myResponse = Response.status(500).entity(error.toString()).build();
-				logger.exiting(this.getClass().getName(),createAccountInternal ,myResponse);
+				logger.exiting(this.getClass().getName(),CREATE_ACCOUNT_INTERNAL ,myResponse);
 				return myResponse;
 			}
 
@@ -340,15 +340,15 @@ public class AccountsResource extends HBankDataAccess{
 		else
 		{
 			JSONObject error = new JSONObject();
-			error.put(errorMsg, accountCreateFailure);
-			logger.severe(accountCreateFailure);
+			error.put(ERROR_MSG, ACCOUNT_CREATE_FAILURE);
+			logger.severe(ACCOUNT_CREATE_FAILURE);
 			myResponse = Response.status(500).entity(error.toString()).build();
-			logger.exiting(this.getClass().getName(),createAccountInternal ,myResponse);
+			logger.exiting(this.getClass().getName(),CREATE_ACCOUNT_INTERNAL ,myResponse);
 			return myResponse;
 		}
 
 		myResponse = Response.status(201).entity(response.toString()).build();
-		logger.exiting(this.getClass().getName(),createAccountInternal ,myResponse);
+		logger.exiting(this.getClass().getName(),CREATE_ACCOUNT_INTERNAL ,myResponse);
 		return myResponse;
 
 	}
@@ -358,7 +358,7 @@ public class AccountsResource extends HBankDataAccess{
 	public Response getAccountsExternal(@QueryParam("countOnly") Boolean countOnly)
 	{
 		/** This will list all accounts. The countOnly boolean indicates that we just want the number of accounts, not every  single account */
-		logger.entering(this.getClass().getName(),getAccountsExternal);
+		logger.entering(this.getClass().getName(),GET_ACCOUNTS_EXTERNAL);
 		boolean countOnlyReal;
 		if(countOnly != null)
 		{
@@ -371,7 +371,7 @@ public class AccountsResource extends HBankDataAccess{
 		Response myResponse = getAccountsInternal(countOnlyReal); 
 		HBankDataAccess myHBankDataAccess = new HBankDataAccess();
 		myHBankDataAccess.terminate();
-		logger.exiting(this.getClass().getName(),getAccountsExternal,myResponse);
+		logger.exiting(this.getClass().getName(),GET_ACCOUNTS_EXTERNAL,myResponse);
 		return myResponse;
 	}
 
@@ -379,7 +379,7 @@ public class AccountsResource extends HBankDataAccess{
 
 	public Response getAccountsInternal(boolean countOnly) {
 		/** This will list all accounts. The countOnly boolean indicates that we just want the number of accounts, not every  single account */
-		logger.entering(this.getClass().getName(),getAccountsInternal);
+		logger.entering(this.getClass().getName(),GET_ACCOUNTS_INTERNAL);
 		com.ibm.cics.cip.bankliberty.web.db2.Account db2Account = null;
 		JSONObject response = new JSONObject();
 		Response myResponse = null;
@@ -400,10 +400,10 @@ public class AccountsResource extends HBankDataAccess{
 			//If cannot find any accounts
 			if(myAccounts == null)
 			{
-				response.put(errorMsg,"Accounts cannot be accessed in com.ibm.cics.cip.bankliberty.web.db2.Account");
+				response.put(ERROR_MSG,"Accounts cannot be accessed in com.ibm.cics.cip.bankliberty.web.db2.Account");
 				logger.severe("Accounts cannot be accessed in com.ibm.cics.cip.bankliberty.web.db2.Account");
 				myResponse = Response.status(500).entity(response.toString()).build();
-				logger.exiting(this.getClass().getName(),getAccountsInternal,myResponse);
+				logger.exiting(this.getClass().getName(),GET_ACCOUNTS_INTERNAL,myResponse);
 				return myResponse;
 			}
 			accounts = new JSONArray(myAccounts.length);
@@ -411,17 +411,17 @@ public class AccountsResource extends HBankDataAccess{
 			for(int i = 0;i < myAccounts.length;i++)
 			{
 				JSONObject account = new JSONObject();
-				account.put(jsonSortCode, myAccounts[i].getSortcode().trim());
+				account.put(JSON_SORT_CODE, myAccounts[i].getSortcode().trim());
 				account.put("id", myAccounts[i].getAccount_number());
-				account.put(jsonCustomerNumber, myAccounts[i].getCustomer_number());
-				account.put(jsonAccountType, myAccounts[i].getType().trim());
-				account.put(jsonAvailableBalance, BigDecimal.valueOf(myAccounts[i].getAvailable_balance()).setScale(2,RoundingMode.HALF_UP));
-				account.put(jsonActualBalance, BigDecimal.valueOf(myAccounts[i].getActual_balance()).setScale(2,RoundingMode.HALF_UP));
-				account.put(jsonInterestRate, BigDecimal.valueOf(myAccounts[i].getInterest_rate()).setScale(2,RoundingMode.HALF_UP));
-				account.put(jsonOverdraft, myAccounts[i].getOverdraft_limit());
-				account.put(jsonLastStatementDate, myAccounts[i].getLast_statement().toString().trim());
-				account.put(jsonNextStatementDate, myAccounts[i].getNext_statement().toString().trim());
-				account.put(jsonDateOpened, myAccounts[i].getOpened().toString());
+				account.put(JSON_CUSTOMER_NUMBER, myAccounts[i].getCustomer_number());
+				account.put(JSON_ACCOUNT_TYPE, myAccounts[i].getType().trim());
+				account.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(myAccounts[i].getAvailable_balance()).setScale(2,RoundingMode.HALF_UP));
+				account.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(myAccounts[i].getActual_balance()).setScale(2,RoundingMode.HALF_UP));
+				account.put(JSON_INTEREST_RATE, BigDecimal.valueOf(myAccounts[i].getInterest_rate()).setScale(2,RoundingMode.HALF_UP));
+				account.put(JSON_OVERDRAFT, myAccounts[i].getOverdraft_limit());
+				account.put(JSON_LAST_STATEMENT_DATE, myAccounts[i].getLast_statement().toString().trim());
+				account.put(JSON_NEXT_STATEMENT_DATE, myAccounts[i].getNext_statement().toString().trim());
+				account.put(JSON_DATE_OPENED, myAccounts[i].getOpened().toString());
 
 				accounts.add(account);
 			}
@@ -432,13 +432,13 @@ public class AccountsResource extends HBankDataAccess{
 		 * Parse returned data and return to calling method
 		 */
 
-		response.put(jsonNumberOfAccounts, numberOfAccounts);
+		response.put(JSON_NUMBER_OF_ACCOUNTS, numberOfAccounts);
 		if(accounts != null)
 		{
-			response.put(jsonAccounts, accounts);
+			response.put(JSON_ACCOUNTS, accounts);
 		}
 		myResponse = Response.status(200).entity(response.toString()).build();
-		logger.exiting(this.getClass().getName(),getAccountsInternal,myResponse);
+		logger.exiting(this.getClass().getName(),GET_ACCOUNTS_INTERNAL,myResponse);
 		return myResponse;
 	}
 
@@ -461,7 +461,7 @@ public class AccountsResource extends HBankDataAccess{
 
 	public Response getAccountInternal(Long accountNumber) {
 		/** This will list one single account of the specified number. */
-		logger.entering(this.getClass().getName(),getAccountInternal);
+		logger.entering(this.getClass().getName(),GET_ACCOUNT_INTERNAL);
 		Response myResponse = null;
 		JSONObject response = new JSONObject();
 
@@ -474,17 +474,17 @@ public class AccountsResource extends HBankDataAccess{
 		if(db2Account != null)
 		{
 			
-			response.put(jsonSortCode, db2Account.getSortcode().trim());
+			response.put(JSON_SORT_CODE, db2Account.getSortcode().trim());
 			response.put("id", db2Account.getAccount_number());
-			response.put(jsonCustomerNumber, db2Account.getCustomer_number());
-			response.put(jsonAccountType, db2Account.getType().trim());
-			response.put(jsonAvailableBalance, BigDecimal.valueOf(db2Account.getAvailable_balance()));
-			response.put(jsonActualBalance, BigDecimal.valueOf(db2Account.getActual_balance()));
-			response.put(jsonInterestRate, BigDecimal.valueOf(db2Account.getInterest_rate()));
-			response.put(jsonOverdraft, db2Account.getOverdraft_limit());
-			response.put(jsonLastStatementDate, db2Account.getLast_statement().toString().trim());
-			response.put(jsonNextStatementDate, db2Account.getNext_statement().toString().trim());
-			response.put(jsonDateOpened, db2Account.getOpened().toString().trim());
+			response.put(JSON_CUSTOMER_NUMBER, db2Account.getCustomer_number());
+			response.put(JSON_ACCOUNT_TYPE, db2Account.getType().trim());
+			response.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(db2Account.getAvailable_balance()));
+			response.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(db2Account.getActual_balance()));
+			response.put(JSON_INTEREST_RATE, BigDecimal.valueOf(db2Account.getInterest_rate()));
+			response.put(JSON_OVERDRAFT, db2Account.getOverdraft_limit());
+			response.put(JSON_LAST_STATEMENT_DATE, db2Account.getLast_statement().toString().trim());
+			response.put(JSON_NEXT_STATEMENT_DATE, db2Account.getNext_statement().toString().trim());
+			response.put(JSON_DATE_OPENED, db2Account.getOpened().toString().trim());
 		}
 		else
 		{
@@ -495,32 +495,32 @@ public class AccountsResource extends HBankDataAccess{
 				db2Account = db2Account.getAccount(id_safe.intValue(), sortCode);
 				if(db2Account != null)
 				{
-					response.put(jsonSortCode, db2Account.getSortcode().trim());
+					response.put(JSON_SORT_CODE, db2Account.getSortcode().trim());
 					response.put("id", db2Account.getAccount_number());
-					response.put(jsonCustomerNumber, db2Account.getCustomer_number());
-					response.put(jsonAccountType, db2Account.getType().trim());
-					response.put(jsonAvailableBalance, BigDecimal.valueOf(db2Account.getAvailable_balance()));
-					response.put(jsonActualBalance, BigDecimal.valueOf(db2Account.getActual_balance()));
-					response.put(jsonInterestRate, BigDecimal.valueOf(db2Account.getInterest_rate()));
-					response.put(jsonOverdraft, db2Account.getOverdraft_limit());
-					response.put(jsonLastStatementDate, db2Account.getLast_statement().toString().trim());
-					response.put(jsonNextStatementDate, db2Account.getNext_statement().toString().trim());
-					response.put(jsonDateOpened, db2Account.getOpened().toString().trim());
+					response.put(JSON_CUSTOMER_NUMBER, db2Account.getCustomer_number());
+					response.put(JSON_ACCOUNT_TYPE, db2Account.getType().trim());
+					response.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(db2Account.getAvailable_balance()));
+					response.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(db2Account.getActual_balance()));
+					response.put(JSON_INTEREST_RATE, BigDecimal.valueOf(db2Account.getInterest_rate()));
+					response.put(JSON_OVERDRAFT, db2Account.getOverdraft_limit());
+					response.put(JSON_LAST_STATEMENT_DATE, db2Account.getLast_statement().toString().trim());
+					response.put(JSON_NEXT_STATEMENT_DATE, db2Account.getNext_statement().toString().trim());
+					response.put(JSON_DATE_OPENED, db2Account.getOpened().toString().trim());
 				}
 				//* There exists a possibility that the last account has been deleted. In which case we try once the old fashioned way
 			}
 			if(db2Account == null)
 			{
-				response.put(errorMsg,accountLiteral + accountNumber + " not found in com.ibm.cics.cip.bankliberty.web.db2.Account");
-				logger.warning(accountLiteral + accountNumber + " not found in com.ibm.cics.cip.bankliberty.web.db2.Account");
+				response.put(ERROR_MSG,ACCOUNT_LITERAL + accountNumber + " not found in com.ibm.cics.cip.bankliberty.web.db2.Account");
+				logger.warning(ACCOUNT_LITERAL + accountNumber + " not found in com.ibm.cics.cip.bankliberty.web.db2.Account");
 				myResponse = Response.status(404).entity(response.toString()).build();
-				logger.exiting(this.getClass().getName(),getAccountInternal,myResponse);
+				logger.exiting(this.getClass().getName(),GET_ACCOUNT_INTERNAL,myResponse);
 				return myResponse;
 			}
 		}
 
 		myResponse = Response.status(200).entity(response.toString()).build();
-		logger.exiting(this.getClass().getName(),getAccountInternal,myResponse);
+		logger.exiting(this.getClass().getName(),GET_ACCOUNT_INTERNAL,myResponse);
 
 		return myResponse;
 	}
@@ -529,7 +529,7 @@ public class AccountsResource extends HBankDataAccess{
 	@GET
 	@Path("/retrieveByCustomerNumber/{customerNumber}")
 	@Produces("application/json")
-	public Response getAccountsByCustomerExternal(@PathParam(jsonCustomerNumber) Long customerNumber, @QueryParam("countOnly") Boolean countOnly) {
+	public Response getAccountsByCustomerExternal(@PathParam(JSON_CUSTOMER_NUMBER) Long customerNumber, @QueryParam("countOnly") Boolean countOnly) {
 		/** This will list accounts owned by a specified customer */
 		logger.entering(this.getClass().getName(),"getAccountsByCustomerExternal(Long customerNumber, Boolean countOnly)");
 		boolean countOnlyReal;
@@ -548,8 +548,8 @@ public class AccountsResource extends HBankDataAccess{
 		return myResponse;
 	}
 
-	public Response getAccountsByCustomerInternal(@PathParam(jsonCustomerNumber) Long customerNumber,boolean countOnly) {
-		logger.entering(this.getClass().getName(),getAccountsByCustomerNumberInternal);
+	public Response getAccountsByCustomerInternal(@PathParam(JSON_CUSTOMER_NUMBER) Long customerNumber,boolean countOnly) {
+		logger.entering(this.getClass().getName(),GET_ACCOUNTS_BY_CUSTOMER_INTERNAL);
 
 		JSONArray accounts = null;
 		Response myResponse = null;
@@ -568,19 +568,19 @@ public class AccountsResource extends HBankDataAccess{
 			{
 				//If cannot find response "CustomerResponse" then error 404 returned
 				JSONObject error = new JSONObject();
-				error.put(errorMsg, customerNumberLiteral + customerNumber.longValue() + cannotBeFound);
-				logger.severe(customerNumberLiteral + customerNumber.longValue() + cannotBeFound);
+				error.put(ERROR_MSG, CUSTOMER_NUMBER_LITERAL + customerNumber.longValue() + CANNOT_BE_FOUND);
+				logger.severe(CUSTOMER_NUMBER_LITERAL + customerNumber.longValue() + CANNOT_BE_FOUND);
 				myResponse = Response.status(404).entity(error.toString()).build(); 
-				logger.exiting(this.getClass().getName(),getAccountsByCustomerNumberInternal,myResponse);
+				logger.exiting(this.getClass().getName(),GET_ACCOUNTS_BY_CUSTOMER_INTERNAL,myResponse);
 				return myResponse;
 			}
 			else
 			{
 				JSONObject error = new JSONObject();
-				error.put(errorMsg, customerNumberLiteral + customerNumber.longValue() + " cannot be accessed. " + customerResponse.toString());
-				logger.severe(customerNumberLiteral + customerNumber.longValue() + " cannot be accessed. " + customerResponse.toString());
+				error.put(ERROR_MSG, CUSTOMER_NUMBER_LITERAL + customerNumber.longValue() + " cannot be accessed. " + customerResponse.toString());
+				logger.severe(CUSTOMER_NUMBER_LITERAL + customerNumber.longValue() + " cannot be accessed. " + customerResponse.toString());
 				myResponse = Response.status(customerResponse.getStatus()).entity(error.toString()).build(); 
-				logger.exiting(this.getClass().getName(),getAccountsByCustomerNumberInternal,myResponse);
+				logger.exiting(this.getClass().getName(),GET_ACCOUNTS_BY_CUSTOMER_INTERNAL,myResponse);
 				return myResponse;
 			}
 		}
@@ -591,10 +591,10 @@ public class AccountsResource extends HBankDataAccess{
 		if(myAccounts == null)
 		{
 			JSONObject error = new JSONObject();
-			error.put(errorMsg, "Accounts cannot be accessed for customer " + customerNumber.longValue() + classNameMsg);
-			logger.severe("Accounts cannot be accessed for customer " + customerNumber.longValue() + classNameMsg);
+			error.put(ERROR_MSG, "Accounts cannot be accessed for customer " + customerNumber.longValue() + CLASS_NAME_MSG);
+			logger.severe("Accounts cannot be accessed for customer " + customerNumber.longValue() + CLASS_NAME_MSG);
 			myResponse = Response.status(500).entity(error.toString()).build(); 
-			logger.exiting(this.getClass().getName(),getAccountsByCustomerNumberInternal,myResponse);
+			logger.exiting(this.getClass().getName(),GET_ACCOUNTS_BY_CUSTOMER_INTERNAL,myResponse);
 			return myResponse;	
 		}
 
@@ -604,17 +604,17 @@ public class AccountsResource extends HBankDataAccess{
 
 
 			JSONObject account = new JSONObject();
-			account.put(jsonSortCode, myAccounts[i].getSortcode());
+			account.put(JSON_SORT_CODE, myAccounts[i].getSortcode());
 			account.put("id", myAccounts[i].getAccount_number());
-			account.put(jsonCustomerNumber, myAccounts[i].getCustomer_number());
-			account.put(jsonAccountType, myAccounts[i].getType());
-			account.put(jsonAvailableBalance, BigDecimal.valueOf(myAccounts[i].getAvailable_balance()));
-			account.put(jsonActualBalance, BigDecimal.valueOf(myAccounts[i].getActual_balance()));
-			account.put(jsonInterestRate, BigDecimal.valueOf(myAccounts[i].getInterest_rate()));
-			account.put(jsonOverdraft, myAccounts[i].getOverdraft_limit());
-			account.put(jsonLastStatementDate, myAccounts[i].getLast_statement().toString());
-			account.put(jsonNextStatementDate, myAccounts[i].getNext_statement().toString());
-			account.put(jsonDateOpened, myAccounts[i].getOpened().toString());
+			account.put(JSON_CUSTOMER_NUMBER, myAccounts[i].getCustomer_number());
+			account.put(JSON_ACCOUNT_TYPE, myAccounts[i].getType());
+			account.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(myAccounts[i].getAvailable_balance()));
+			account.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(myAccounts[i].getActual_balance()));
+			account.put(JSON_INTEREST_RATE, BigDecimal.valueOf(myAccounts[i].getInterest_rate()));
+			account.put(JSON_OVERDRAFT, myAccounts[i].getOverdraft_limit());
+			account.put(JSON_LAST_STATEMENT_DATE, myAccounts[i].getLast_statement().toString());
+			account.put(JSON_NEXT_STATEMENT_DATE, myAccounts[i].getNext_statement().toString());
+			account.put(JSON_DATE_OPENED, myAccounts[i].getOpened().toString());
 
 			accounts.add(account);
 		}
@@ -623,13 +623,13 @@ public class AccountsResource extends HBankDataAccess{
 		{
 			customerNumberString = "0" + customerNumberString;
 		}
-		response.put(jsonCustomerNumber, customerNumberString);
-		response.put(jsonNumberOfAccounts, numberOfAccounts);
-		response.put(jsonAccounts, accounts);
+		response.put(JSON_CUSTOMER_NUMBER, customerNumberString);
+		response.put(JSON_NUMBER_OF_ACCOUNTS, numberOfAccounts);
+		response.put(JSON_ACCOUNTS, accounts);
 
 
 		myResponse = Response.status(200).entity(response.toString()).build(); 
-		logger.exiting(this.getClass().getName(),getAccountsByCustomerNumberInternal,myResponse);
+		logger.exiting(this.getClass().getName(),GET_ACCOUNTS_BY_CUSTOMER_INTERNAL,myResponse);
 		return myResponse;
 
 
@@ -664,7 +664,7 @@ public class AccountsResource extends HBankDataAccess{
 			Long id,
 			AccountJSON account) {
 		/** Update the account specified by "id" with the JSON in AccountJSON. This is for interest rates, types and overdraft limits, not balances */
-		logger.entering(this.getClass().getName(),updateAccountInternal);
+		logger.entering(this.getClass().getName(),UPDATE_ACCOUNT_INTERNAL);
 		JSONObject response = new JSONObject();
 		Response myResponse = null;
 
@@ -673,10 +673,10 @@ public class AccountsResource extends HBankDataAccess{
 			//If account type invalid
 		{
 			JSONObject error = new JSONObject();
-			error.put(errorMsg, accTypeString + account.getAccountType() + notSupported);
-			logger.warning(accTypeString + account.getAccountType() + notSupported);
+			error.put(ERROR_MSG, ACC_TYPE_STRING + account.getAccountType() + NOT_SUPPORTED);
+			logger.warning(ACC_TYPE_STRING + account.getAccountType() + NOT_SUPPORTED);
 			myResponse = Response.status(400).entity(error.toString()).build(); 
-			logger.exiting(this.getClass().getName(),updateAccountInternal,myResponse);
+			logger.exiting(this.getClass().getName(),UPDATE_ACCOUNT_INTERNAL,myResponse);
 			return myResponse;
 		}
 
@@ -684,10 +684,10 @@ public class AccountsResource extends HBankDataAccess{
 		{
 			//If interest rate < 0
 			JSONObject error = new JSONObject();
-			error.put(errorMsg, interestRateLessThanZero);
-			logger.warning(interestRateLessThanZero);
+			error.put(ERROR_MSG, INTEREST_RATE_LESS_THAN_ZERO);
+			logger.warning(INTEREST_RATE_LESS_THAN_ZERO);
 			myResponse = Response.status(400).entity(error.toString()).build(); 
-			logger.exiting(this.getClass().getName(),updateAccountInternal,myResponse);
+			logger.exiting(this.getClass().getName(),UPDATE_ACCOUNT_INTERNAL,myResponse);
 			return myResponse;
 		}
 
@@ -695,10 +695,10 @@ public class AccountsResource extends HBankDataAccess{
 		{
 			//If interest rate > 9999.99
 			JSONObject error = new JSONObject();
-			error.put(errorMsg, interestRateTooHigh);
-			logger.warning(interestRateTooHigh);
+			error.put(ERROR_MSG, INTEREST_RATE_TOO_HIGH);
+			logger.warning(INTEREST_RATE_TOO_HIGH);
 			myResponse = Response.status(400).entity(error.toString()).build(); 
-			logger.exiting(this.getClass().getName(),updateAccountInternal,myResponse);
+			logger.exiting(this.getClass().getName(),UPDATE_ACCOUNT_INTERNAL,myResponse);
 			return myResponse;
 
 		}
@@ -708,10 +708,10 @@ public class AccountsResource extends HBankDataAccess{
 			//Interest rate more than 2dp
 		{
 			JSONObject error = new JSONObject();
-			error.put(errorMsg, "Interest rate cannot have more than 2 decimal places. " + myInterestRate.toPlainString());
+			error.put(ERROR_MSG, "Interest rate cannot have more than 2 decimal places. " + myInterestRate.toPlainString());
 			logger.warning("Interest rate cannot have more than 2 decimal places."  + myInterestRate.toPlainString());
 			myResponse = Response.status(400).entity(error.toString()).build(); 
-			logger.exiting(this.getClass().getName(),updateAccountInternal,myResponse);
+			logger.exiting(this.getClass().getName(),UPDATE_ACCOUNT_INTERNAL,myResponse);
 			return myResponse;
 		}
 
@@ -722,10 +722,10 @@ public class AccountsResource extends HBankDataAccess{
 			//Invalid sortcode
 		{
 			JSONObject error = new JSONObject();
-			error.put(errorMsg, sortCodeLiteral+  inputSortCode + notValidForThisBank + thisSortCode + ")");
-			logger.warning(sortCodeLiteral+  inputSortCode + notValidForThisBank + thisSortCode + ")");
+			error.put(ERROR_MSG, SORT_CODE_LITERAL+  inputSortCode + NOT_VALID_FOR_THIS_BANK + thisSortCode + ")");
+			logger.warning(SORT_CODE_LITERAL+  inputSortCode + NOT_VALID_FOR_THIS_BANK + thisSortCode + ")");
 			myResponse = Response.status(400).entity(error.toString()).build(); 
-			logger.exiting(this.getClass().getName(),updateAccountInternal,myResponse);
+			logger.exiting(this.getClass().getName(),UPDATE_ACCOUNT_INTERNAL,myResponse);
 			return myResponse;
 		}
 
@@ -739,40 +739,40 @@ public class AccountsResource extends HBankDataAccess{
 			db2Account = db2Account.updateAccount(account);
 			if(db2Account != null)
 			{
-				response.put(jsonSortCode, db2Account.getSortcode().trim());
+				response.put(JSON_SORT_CODE, db2Account.getSortcode().trim());
 				response.put("id", db2Account.getAccount_number());
-				response.put(jsonCustomerNumber,db2Account.getCustomer_number());
-				response.put(jsonAccountType, db2Account.getType().trim());
-				response.put(jsonAvailableBalance, BigDecimal.valueOf(db2Account.getAvailable_balance()));
-				response.put(jsonActualBalance, BigDecimal.valueOf(db2Account.getActual_balance()));
-				response.put(jsonInterestRate, BigDecimal.valueOf(db2Account.getInterest_rate()));				
-				response.put(jsonOverdraft, db2Account.getOverdraft_limit());
-				response.put(jsonLastStatementDate, db2Account.getLast_statement().toString());
-				response.put(jsonNextStatementDate, db2Account.getNext_statement().toString());
-				response.put(jsonDateOpened, db2Account.getOpened().toString().trim());
+				response.put(JSON_CUSTOMER_NUMBER,db2Account.getCustomer_number());
+				response.put(JSON_ACCOUNT_TYPE, db2Account.getType().trim());
+				response.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(db2Account.getAvailable_balance()));
+				response.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(db2Account.getActual_balance()));
+				response.put(JSON_INTEREST_RATE, BigDecimal.valueOf(db2Account.getInterest_rate()));				
+				response.put(JSON_OVERDRAFT, db2Account.getOverdraft_limit());
+				response.put(JSON_LAST_STATEMENT_DATE, db2Account.getLast_statement().toString());
+				response.put(JSON_NEXT_STATEMENT_DATE, db2Account.getNext_statement().toString());
+				response.put(JSON_DATE_OPENED, db2Account.getOpened().toString().trim());
 			}
 			else
 			{
 				JSONObject error = new JSONObject();
-				error.put(errorMsg, "Failed to update account in com.ibm.cics.cip.bankliberty.web.db2.Account");
+				error.put(ERROR_MSG, "Failed to update account in com.ibm.cics.cip.bankliberty.web.db2.Account");
 				logger.severe("Failed to update account in com.ibm.cics.cip.bankliberty.web.db2.Account");
 				myResponse = Response.status(500).entity(error.toString()).build(); 
-				logger.exiting(this.getClass().getName(),updateAccountInternal,myResponse);
+				logger.exiting(this.getClass().getName(),UPDATE_ACCOUNT_INTERNAL,myResponse);
 				return myResponse;
 			}
 		}
 		else
 		{
 			JSONObject error = new JSONObject();
-			error.put(errorMsg, failedToRead + account.getId() + " in " + this.getClass().toString());
+			error.put(ERROR_MSG, FAILED_TO_READ + account.getId() + " in " + this.getClass().toString());
 
-			logger.warning(failedToRead + account.getId() + classNameMsg);
+			logger.warning(FAILED_TO_READ + account.getId() + CLASS_NAME_MSG);
 			myResponse = Response.status(404).entity(error.toString()).build(); 
-			logger.exiting(this.getClass().getName(),updateAccountInternal,myResponse);
+			logger.exiting(this.getClass().getName(),UPDATE_ACCOUNT_INTERNAL,myResponse);
 			return myResponse;
 		}
 		myResponse = Response.status(200).entity(response.toString()).build(); 
-		logger.exiting(this.getClass().getName(),updateAccountInternal,myResponse);
+		logger.exiting(this.getClass().getName(),UPDATE_ACCOUNT_INTERNAL,myResponse);
 
 		return myResponse;
 	}
@@ -799,7 +799,7 @@ public class AccountsResource extends HBankDataAccess{
 	public Response debitAccountInternal(String accountNumber,
 			DebitCreditAccountJSON dbcr) {
 		// we use this to subtract money from an account		
-		logger.entering(this.getClass().getName(),debitAccountInternal);
+		logger.entering(this.getClass().getName(),DEBIT_ACCOUNT_INTERNAL);
 		Response myResponse = null;
 
 		AccountsResource checkAccount = new AccountsResource();
@@ -810,22 +810,22 @@ public class AccountsResource extends HBankDataAccess{
 			if(checkAccountResponse.getStatus() == 404)
 			{
 				JSONObject error = new JSONObject();
-				error.put(errorMsg, failedToRead + accountNumber + inDebitAccount + this.getClass().toString());
-				logger.warning(failedToRead + accountNumber + inDebitAccount + this.getClass().toString());
+				error.put(ERROR_MSG, FAILED_TO_READ + accountNumber + IN_DEBIT_ACCOUNT + this.getClass().toString());
+				logger.warning(FAILED_TO_READ + accountNumber + IN_DEBIT_ACCOUNT + this.getClass().toString());
 				myResponse = Response.status(404).entity(error.toString()).build();
-				logger.exiting(this.getClass().getName(),debitAccountInternal,myResponse);
+				logger.exiting(this.getClass().getName(),DEBIT_ACCOUNT_INTERNAL,myResponse);
 				return myResponse;
 			}
 			JSONObject error = new JSONObject();
-			error.put(errorMsg, failedToRead + accountNumber + inDebitAccount + this.getClass().toString());
-			logger.severe(failedToRead + accountNumber + inDebitAccount + this.getClass().toString());
+			error.put(ERROR_MSG, FAILED_TO_READ + accountNumber + IN_DEBIT_ACCOUNT + this.getClass().toString());
+			logger.severe(FAILED_TO_READ + accountNumber + IN_DEBIT_ACCOUNT + this.getClass().toString());
 			myResponse = Response.status(checkAccountResponse.getStatus()).entity(error.toString()).build();
-			logger.exiting(this.getClass().getName(),debitAccountInternal,myResponse);
+			logger.exiting(this.getClass().getName(),DEBIT_ACCOUNT_INTERNAL,myResponse);
 			return myResponse;
 		}
 		Long sortcode = new Long(this.getSortCode().longValue());
 		myResponse = debitCreditAccount(sortcode, accountNumber, dbcr.getAmount(), true);
-		logger.exiting(this.getClass().getName(),debitAccountInternal,myResponse);
+		logger.exiting(this.getClass().getName(),DEBIT_ACCOUNT_INTERNAL,myResponse);
 		return myResponse;
 	}
 
@@ -847,7 +847,7 @@ public class AccountsResource extends HBankDataAccess{
 	public Response creditAccountInternal(@PathParam("id") String accountNumber,
 			DebitCreditAccountJSON dbcr) {
 		// we use this to add money to an account		
-		logger.entering(this.getClass().getName(),creditAccountInternal);
+		logger.entering(this.getClass().getName(),CREDIT_ACCOUNT_INTERNAL);
 		Response myResponse = null;
 
 		AccountsResource checkAccount = new AccountsResource();
@@ -858,23 +858,23 @@ public class AccountsResource extends HBankDataAccess{
 			if(checkAccountResponse.getStatus() == 404)
 			{
 				JSONObject error = new JSONObject();
-				error.put(errorMsg, failedToRead + accountNumber + inCreditAccount + this.getClass().toString());
-				logger.warning(failedToRead + accountNumber + inCreditAccount + this.getClass().toString());
+				error.put(ERROR_MSG, FAILED_TO_READ + accountNumber + IN_CREDIT_ACCOUNT + this.getClass().toString());
+				logger.warning(FAILED_TO_READ + accountNumber + IN_CREDIT_ACCOUNT + this.getClass().toString());
 				myResponse = Response.status(404).entity(error.toString()).build(); 
-				logger.exiting(this.getClass().getName(),creditAccountInternal,myResponse);
+				logger.exiting(this.getClass().getName(),CREDIT_ACCOUNT_INTERNAL,myResponse);
 				return myResponse;
 			}
 			JSONObject error = new JSONObject();
-			error.put(errorMsg, failedToRead + accountNumber + inCreditAccount + this.getClass().toString());
-			logger.severe(failedToRead + accountNumber + inCreditAccount + this.getClass().toString());
+			error.put(ERROR_MSG, FAILED_TO_READ + accountNumber + IN_CREDIT_ACCOUNT + this.getClass().toString());
+			logger.severe(FAILED_TO_READ + accountNumber + IN_CREDIT_ACCOUNT + this.getClass().toString());
 			myResponse = Response.status(checkAccountResponse.getStatus()).entity(error.toString()).build(); 
-			logger.exiting(this.getClass().getName(),creditAccountInternal,myResponse);
+			logger.exiting(this.getClass().getName(),CREDIT_ACCOUNT_INTERNAL,myResponse);
 			return myResponse;
 		}
 
 		Long sortcode = new Long(this.getSortCode().longValue());
 		myResponse = debitCreditAccount(sortcode, accountNumber, dbcr.getAmount(), false); 
-		logger.exiting(this.getClass().getName(),creditAccountInternal,myResponse);
+		logger.exiting(this.getClass().getName(),CREDIT_ACCOUNT_INTERNAL,myResponse);
 		return myResponse;
 	}
 
@@ -927,7 +927,7 @@ public class AccountsResource extends HBankDataAccess{
 	public Response transferLocalInternal(@PathParam("id") String accountNumber,
 			TransferLocalJSON transferLocal) {
 		// we use this to move money between two accounts at the same bank		
-		logger.entering(this.getClass().getName(),transferLocalInternal);
+		logger.entering(this.getClass().getName(),TRANSFER_LOCAL_INTERNAL);
 		Response myResponse = null;
 
 		//* We are transferring money from account "id" at this bank, to another account at this bank
@@ -937,20 +937,20 @@ public class AccountsResource extends HBankDataAccess{
 		if(new Integer(accountNumber).equals(transferLocal.getTargetAccount()))
 		{
 			JSONObject error = new JSONObject();
-			error.put(errorMsg, needDifferentAccounts);
-			logger.warning(needDifferentAccounts);
+			error.put(ERROR_MSG, NEED_DIFFERENT_ACCOUNTS);
+			logger.warning(NEED_DIFFERENT_ACCOUNTS);
 			myResponse = Response.status(400).entity(error.toString()).build(); 
-			logger.exiting(this.getClass().getName(),transferLocalInternal,myResponse);
+			logger.exiting(this.getClass().getName(),TRANSFER_LOCAL_INTERNAL,myResponse);
 			return myResponse;
 		}
 
 		if(transferLocal.getAmount().doubleValue() <= 0.00)
 		{
 			JSONObject error = new JSONObject();
-			error.put(errorMsg, "Amount to transfer must be positive");
-			logger.warning(needDifferentAccounts);
+			error.put(ERROR_MSG, "Amount to transfer must be positive");
+			logger.warning(NEED_DIFFERENT_ACCOUNTS);
 			myResponse = Response.status(400).entity(error.toString()).build(); 
-			logger.exiting(this.getClass().getName(),transferLocalInternal,myResponse);
+			logger.exiting(this.getClass().getName(),TRANSFER_LOCAL_INTERNAL,myResponse);
 			return myResponse;
 		}
 
@@ -970,20 +970,20 @@ public class AccountsResource extends HBankDataAccess{
 		if(checkAccountResponse.getStatus() == 404)
 		{
 			JSONObject error = new JSONObject();
-			error.put(errorMsg, sourceAccountNumber + accountNumber + cannotBeFound);
-			logger.warning(sourceAccountNumber + accountNumber + cannotBeFound);
+			error.put(ERROR_MSG, SOURCE_ACCOUNT_NUMBER + accountNumber + CANNOT_BE_FOUND);
+			logger.warning(SOURCE_ACCOUNT_NUMBER + accountNumber + CANNOT_BE_FOUND);
 			myResponse = Response.status(404).entity(error.toString()).build(); 
-			logger.exiting(this.getClass().getName(),transferLocalInternal,myResponse);
+			logger.exiting(this.getClass().getName(),TRANSFER_LOCAL_INTERNAL,myResponse);
 			return myResponse;
 		}
 
 		if(checkAccountResponse.getStatus() != 200)
 		{
 			JSONObject error = new JSONObject();
-			error.put(errorMsg, sourceAccountNumber + accountNumber + cannotBeAccessed);
-			logger.warning(sourceAccountNumber + accountNumber + cannotBeAccessed);
+			error.put(ERROR_MSG, SOURCE_ACCOUNT_NUMBER + accountNumber + CANNOT_BE_ACCESSED);
+			logger.warning(SOURCE_ACCOUNT_NUMBER + accountNumber + CANNOT_BE_ACCESSED);
 			myResponse = Response.status(checkAccountResponse.getStatus()).entity(error.toString()).build(); 
-			logger.exiting(this.getClass().getName(),transferLocalInternal,myResponse);
+			logger.exiting(this.getClass().getName(),TRANSFER_LOCAL_INTERNAL,myResponse);
 			return myResponse;
 		}
 		checkAccountResponse = checkAccount.getAccountInternal(new Long(transferLocal.getTargetAccount()));
@@ -991,19 +991,19 @@ public class AccountsResource extends HBankDataAccess{
 		if(checkAccountResponse.getStatus() == 404)
 		{
 			JSONObject error = new JSONObject();
-			error.put(errorMsg, targetAccountNumber + transferLocal.getTargetAccount() + cannotBeFound);
-			logger.warning(targetAccountNumber + accountNumber + cannotBeFound);
+			error.put(ERROR_MSG, TARGET_ACCOUNT_NUMBER + transferLocal.getTargetAccount() + CANNOT_BE_FOUND);
+			logger.warning(TARGET_ACCOUNT_NUMBER + accountNumber + CANNOT_BE_FOUND);
 			myResponse = Response.status(404).entity(error.toString()).build(); 
-			logger.exiting(this.getClass().getName(),transferLocalInternal,myResponse);
+			logger.exiting(this.getClass().getName(),TRANSFER_LOCAL_INTERNAL,myResponse);
 			return myResponse;
 		}
 		if(checkAccountResponse.getStatus() != 200)
 		{
 			JSONObject error = new JSONObject();
-			error.put(errorMsg, targetAccountNumber + transferLocal.getTargetAccount() + cannotBeAccessed);
-			logger.severe(targetAccountNumber + accountNumber + cannotBeAccessed);
+			error.put(ERROR_MSG, TARGET_ACCOUNT_NUMBER + transferLocal.getTargetAccount() + CANNOT_BE_ACCESSED);
+			logger.severe(TARGET_ACCOUNT_NUMBER + accountNumber + CANNOT_BE_ACCESSED);
 			myResponse = Response.status(404).entity(error.toString()).build(); 
-			logger.exiting(this.getClass().getName(),transferLocalInternal,myResponse);
+			logger.exiting(this.getClass().getName(),TRANSFER_LOCAL_INTERNAL,myResponse);
 			return myResponse;
 		}
 
@@ -1028,33 +1028,33 @@ public class AccountsResource extends HBankDataAccess{
 		if(writeTransferResponse == null || writeTransferResponse.getStatus() != 200)
 		{
 			JSONObject error = new JSONObject();
-			error.put(errorMsg, proctranWriteFailure);
-			logger.severe("Accounts: transferLocal: " +proctranWriteFailure);
+			error.put(ERROR_MSG, PROCTRAN_WRITE_FAILURE);
+			logger.severe("Accounts: transferLocal: " +PROCTRAN_WRITE_FAILURE);
 			try {
 				Task.getTask().rollback();
 			} catch (InvalidRequestException e) {
 			}
 			myResponse = Response.status(500).entity(error.toString()).build();
-			logger.exiting(this.getClass().getName(),transferLocalInternal,myResponse);
+			logger.exiting(this.getClass().getName(),TRANSFER_LOCAL_INTERNAL,myResponse);
 			return myResponse;
 		}
 
 
-		response.put(jsonSortCode, db2Account.getSortcode().trim());
+		response.put(JSON_SORT_CODE, db2Account.getSortcode().trim());
 		response.put("id", db2Account.getAccount_number());
-		response.put(jsonAvailableBalance, BigDecimal.valueOf(db2Account.getAvailable_balance()));
-		response.put(jsonActualBalance, BigDecimal.valueOf(db2Account.getActual_balance()));
-		response.put(jsonInterestRate, BigDecimal.valueOf(db2Account.getInterest_rate()));
+		response.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(db2Account.getAvailable_balance()));
+		response.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(db2Account.getActual_balance()));
+		response.put(JSON_INTEREST_RATE, BigDecimal.valueOf(db2Account.getInterest_rate()));
 
 		myResponse = Response.status(200).entity(response.toString()).build();
-		logger.exiting(this.getClass().getName(),transferLocalInternal,myResponse);
+		logger.exiting(this.getClass().getName(),TRANSFER_LOCAL_INTERNAL,myResponse);
 		return myResponse;
 	}
 
 
 	private Response debitCreditAccount(Long sortCode, String accountNumber, BigDecimal apiAmount, boolean debitAccount) {
 		// This method does both debit AND credit, controlled by the boolean
-		logger.entering(this.getClass().getName(),debitCreditAccount);
+		logger.entering(this.getClass().getName(),DEBIT_CREDIT_ACCOUNT);
 		Response myResponse = null;
 		JSONObject response = new JSONObject();
 
@@ -1069,18 +1069,18 @@ public class AccountsResource extends HBankDataAccess{
 			JSONObject error = new JSONObject();
 			if(apiAmount.doubleValue() < 0)
 			{
-				error.put(errorMsg, "Failed to debit account " + accountNumber + classNameMsg);
-				logger.severe("Failed to debit account " + accountNumber + classNameMsg);
+				error.put(ERROR_MSG, "Failed to debit account " + accountNumber + CLASS_NAME_MSG);
+				logger.severe("Failed to debit account " + accountNumber + CLASS_NAME_MSG);
 				myResponse = Response.status(500).entity(error.toString()).build(); 
-				logger.exiting(this.getClass().getName(),debitCreditAccount,myResponse);
+				logger.exiting(this.getClass().getName(),DEBIT_CREDIT_ACCOUNT,myResponse);
 				return myResponse;
 			}
 			else
 			{
-				error.put(errorMsg, "Failed to credit account " + accountNumber + classNameMsg);
-				logger.severe("Failed to credit account " + accountNumber + classNameMsg);
+				error.put(ERROR_MSG, "Failed to credit account " + accountNumber + CLASS_NAME_MSG);
+				logger.severe("Failed to credit account " + accountNumber + CLASS_NAME_MSG);
 				myResponse = Response.status(500).entity(error.toString()).build(); 
-				logger.exiting(this.getClass().getName(),debitCreditAccount,myResponse);
+				logger.exiting(this.getClass().getName(),DEBIT_CREDIT_ACCOUNT,myResponse);
 				return myResponse;
 			}
 		}
@@ -1098,24 +1098,24 @@ public class AccountsResource extends HBankDataAccess{
 		{
 
 			JSONObject error = new JSONObject();
-			error.put(errorMsg, proctranWriteFailure);
-			logger.severe(proctranWriteFailure);
+			error.put(ERROR_MSG, PROCTRAN_WRITE_FAILURE);
+			logger.severe(PROCTRAN_WRITE_FAILURE);
 			try {
 				Task.getTask().rollback();
 			} catch (InvalidRequestException e) {
 			}
 			myResponse = Response.status(500).entity(error.toString()).build(); 
-			logger.exiting(this.getClass().getName(),debitCreditAccount,myResponse);
+			logger.exiting(this.getClass().getName(),DEBIT_CREDIT_ACCOUNT,myResponse);
 			return myResponse;
 		}
 
-		response.put(jsonSortCode, db2Account.getSortcode().trim());
+		response.put(JSON_SORT_CODE, db2Account.getSortcode().trim());
 		response.put("id", db2Account.getAccount_number());
-		response.put(jsonAvailableBalance, BigDecimal.valueOf(db2Account.getAvailable_balance()));
-		response.put(jsonActualBalance, BigDecimal.valueOf(db2Account.getActual_balance()));
-		response.put(jsonInterestRate, BigDecimal.valueOf(db2Account.getInterest_rate()));
+		response.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(db2Account.getAvailable_balance()));
+		response.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(db2Account.getActual_balance()));
+		response.put(JSON_INTEREST_RATE, BigDecimal.valueOf(db2Account.getInterest_rate()));
 		myResponse = Response.status(200).entity(response.toString()).build();
-		logger.exiting(this.getClass().getName(),debitCreditAccount,myResponse);
+		logger.exiting(this.getClass().getName(),DEBIT_CREDIT_ACCOUNT,myResponse);
 		return myResponse;
 	}
 
@@ -1134,7 +1134,7 @@ public class AccountsResource extends HBankDataAccess{
 
 
 	public Response deleteAccountInternal(Long accountNumber) {
-		logger.entering(this.getClass().getName(),deleteAccount);
+		logger.entering(this.getClass().getName(),DELETE_ACCOUNT);
 		Response myResponse = null;
 
 
@@ -1147,17 +1147,17 @@ public class AccountsResource extends HBankDataAccess{
 		db2Account = db2Account.deleteAccount(accountNumber.intValue(), sortCode.intValue());
 		if(db2Account != null)
 		{
-			response.put(jsonSortCode, db2Account.getSortcode().trim());
+			response.put(JSON_SORT_CODE, db2Account.getSortcode().trim());
 			response.put("id",db2Account.getAccount_number());
-			response.put(jsonCustomerNumber, db2Account.getCustomer_number());
-			response.put(jsonAccountType, db2Account.getType().trim());
-			response.put(jsonAvailableBalance, BigDecimal.valueOf(db2Account.getAvailable_balance()));
-			response.put(jsonActualBalance, BigDecimal.valueOf(db2Account.getActual_balance()));
-			response.put(jsonInterestRate, BigDecimal.valueOf(db2Account.getInterest_rate()));
-			response.put(jsonOverdraft, db2Account.getOverdraft_limit());
-			response.put(jsonLastStatementDate, db2Account.getLast_statement().toString().trim());
-			response.put(jsonNextStatementDate, db2Account.getNext_statement().toString().trim());
-			response.put(jsonDateOpened, db2Account.getOpened().toString().trim());
+			response.put(JSON_CUSTOMER_NUMBER, db2Account.getCustomer_number());
+			response.put(JSON_ACCOUNT_TYPE, db2Account.getType().trim());
+			response.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(db2Account.getAvailable_balance()));
+			response.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(db2Account.getActual_balance()));
+			response.put(JSON_INTEREST_RATE, BigDecimal.valueOf(db2Account.getInterest_rate()));
+			response.put(JSON_OVERDRAFT, db2Account.getOverdraft_limit());
+			response.put(JSON_LAST_STATEMENT_DATE, db2Account.getLast_statement().toString().trim());
+			response.put(JSON_NEXT_STATEMENT_DATE, db2Account.getNext_statement().toString().trim());
+			response.put(JSON_DATE_OPENED, db2Account.getOpened().toString().trim());
 
 			ProcessedTransactionResource myProcessedTransactionResource = new ProcessedTransactionResource();
 
@@ -1175,14 +1175,14 @@ public class AccountsResource extends HBankDataAccess{
 			if(deletedAccountResponse == null || deletedAccountResponse.getStatus() != 200)
 			{
 				JSONObject error = new JSONObject();
-				error.put(errorMsg, proctranWriteFailure);
-				logger.severe(proctranWriteFailure);
+				error.put(ERROR_MSG, PROCTRAN_WRITE_FAILURE);
+				logger.severe(PROCTRAN_WRITE_FAILURE);
 				try {
 					Task.getTask().rollback();
 				} catch (InvalidRequestException e) {
 				}
 				myResponse = Response.status(500).entity(error.toString()).build();
-				logger.exiting(this.getClass().getName(),deleteAccount,myResponse);
+				logger.exiting(this.getClass().getName(),DELETE_ACCOUNT,myResponse);
 				return myResponse;
 			}
 		}
@@ -1197,9 +1197,9 @@ public class AccountsResource extends HBankDataAccess{
 			{
 				logger.severe(e.toString());
 			}
-			response.put(errorMsg,accountLiteral + accountNumber + " not found");
+			response.put(ERROR_MSG,ACCOUNT_LITERAL + accountNumber + " not found");
 			myResponse = Response.status(404).entity(response.toString()).build();
-			logger.exiting(this.getClass().getName(),deleteAccount,myResponse);
+			logger.exiting(this.getClass().getName(),DELETE_ACCOUNT,myResponse);
 			return myResponse;
 		}
 		/*
@@ -1209,7 +1209,7 @@ public class AccountsResource extends HBankDataAccess{
 
 
 		myResponse = Response.status(200).entity(response.toString()).build();
-		logger.exiting(this.getClass().getName(),deleteAccount,myResponse);
+		logger.exiting(this.getClass().getName(),DELETE_ACCOUNT,myResponse);
 		return myResponse;
 
 	}
@@ -1272,7 +1272,7 @@ public class AccountsResource extends HBankDataAccess{
 			myAccounts = db2Account.getAccounts(sortCode,limit,offset);
 			if(myAccounts == null)
 			{
-				response.put(errorMsg,"Accounts cannot be accessed");
+				response.put(ERROR_MSG,"Accounts cannot be accessed");
 				logger.severe("Accounts cannot be accessed");
 				myResponse = Response.status(500).entity(response.toString()).build();
 				logger.exiting(this.getClass().getName(), "getAccountsInternal(Integer limit, Integer offset,boolean countOnly)",myResponse);
@@ -1283,17 +1283,17 @@ public class AccountsResource extends HBankDataAccess{
 			for(int i = 0;i < myAccounts.length;i++)
 			{
 				JSONObject account = new JSONObject();
-				account.put(jsonSortCode, myAccounts[i].getSortcode().trim());
+				account.put(JSON_SORT_CODE, myAccounts[i].getSortcode().trim());
 				account.put("id", myAccounts[i].getAccount_number());
-				account.put(jsonCustomerNumber, myAccounts[i].getCustomer_number());
-				account.put(jsonAccountType, myAccounts[i].getType().trim());
-				account.put(jsonAvailableBalance, BigDecimal.valueOf(myAccounts[i].getAvailable_balance()));
-				account.put(jsonActualBalance, BigDecimal.valueOf(myAccounts[i].getActual_balance()));
-				account.put(jsonInterestRate, BigDecimal.valueOf(myAccounts[i].getInterest_rate()));
-				account.put(jsonOverdraft, myAccounts[i].getOverdraft_limit());
-				account.put(jsonLastStatementDate, myAccounts[i].getLast_statement().toString().trim());
-				account.put(jsonNextStatementDate, myAccounts[i].getNext_statement().toString().trim());
-				account.put(jsonDateOpened, myAccounts[i].getOpened().toString());
+				account.put(JSON_CUSTOMER_NUMBER, myAccounts[i].getCustomer_number());
+				account.put(JSON_ACCOUNT_TYPE, myAccounts[i].getType().trim());
+				account.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(myAccounts[i].getAvailable_balance()));
+				account.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(myAccounts[i].getActual_balance()));
+				account.put(JSON_INTEREST_RATE, BigDecimal.valueOf(myAccounts[i].getInterest_rate()));
+				account.put(JSON_OVERDRAFT, myAccounts[i].getOverdraft_limit());
+				account.put(JSON_LAST_STATEMENT_DATE, myAccounts[i].getLast_statement().toString().trim());
+				account.put(JSON_NEXT_STATEMENT_DATE, myAccounts[i].getNext_statement().toString().trim());
+				account.put(JSON_DATE_OPENED, myAccounts[i].getOpened().toString());
 
 				accounts.add(account);
 
@@ -1304,13 +1304,13 @@ public class AccountsResource extends HBankDataAccess{
 		 * Parse returned data and return to calling method
 		 */
 
-		response.put(jsonNumberOfAccounts, numberOfAccounts);
+		response.put(JSON_NUMBER_OF_ACCOUNTS, numberOfAccounts);
 		if(accounts != null)
 		{
-			response.put(jsonAccounts, accounts);
+			response.put(JSON_ACCOUNTS, accounts);
 		}
 		myResponse = Response.status(200).entity(response.toString()).build(); 
-		logger.exiting(this.getClass().getName(),deleteAccount,myResponse);
+		logger.exiting(this.getClass().getName(),DELETE_ACCOUNT,myResponse);
 		return myResponse;
 	}
 
@@ -1337,7 +1337,7 @@ public class AccountsResource extends HBankDataAccess{
 	public Response getAccountsByBalanceWithOffsetAndLimitInternal(@QueryParam("balance") BigDecimal balance, @QueryParam("operator") String operator, @QueryParam("offset") Integer offset, @QueryParam("limit") Integer limit,boolean countOnly)	
 	{
 		// return only accounts with a certain balance
-		logger.entering(this.getClass().getName(),getAccountsByBalanceWithOffsetAndLimitInternal);
+		logger.entering(this.getClass().getName(),GET_ACCOUNTS_BY_BALANCE_WITH_OFFSET_AND_LIMIT_INTERNAL);
 		Response myResponse = null;
 		boolean lessThan;
 		if(operator.startsWith("<"))
@@ -1353,9 +1353,9 @@ public class AccountsResource extends HBankDataAccess{
 			else
 			{
 				JSONObject error = new JSONObject();
-				error.put(errorMsg, "Invalid operator, '" + operator + "' only <= or >= allowed");
+				error.put(ERROR_MSG, "Invalid operator, '" + operator + "' only <= or >= allowed");
 				logger.warning("Invalid operator, '" + operator + "' only <= or >= allowed");
-				logger.exiting(this.getClass().getName(),getAccountsByBalanceWithOffsetAndLimitInternal,myResponse);
+				logger.exiting(this.getClass().getName(),GET_ACCOUNTS_BY_BALANCE_WITH_OFFSET_AND_LIMIT_INTERNAL,myResponse);
 				myResponse = Response.status(400).entity(error.toString()).build();
 				return myResponse;
 			}
@@ -1393,9 +1393,9 @@ public class AccountsResource extends HBankDataAccess{
 			if(numberOfAccounts == -1)
 			{
 				JSONObject error = new JSONObject();
-				error.put(errorMsg, db2ReadFailure);
-				logger.severe(db2ReadFailure);
-				logger.exiting(this.getClass().getName(),getAccountsByBalanceWithOffsetAndLimitInternal,myResponse);
+				error.put(ERROR_MSG, DB2_READ_FAILURE);
+				logger.severe(DB2_READ_FAILURE);
+				logger.exiting(this.getClass().getName(),GET_ACCOUNTS_BY_BALANCE_WITH_OFFSET_AND_LIMIT_INTERNAL,myResponse);
 				myResponse = Response.status(500).entity(error.toString()).build();
 				return myResponse;
 			}
@@ -1411,9 +1411,9 @@ public class AccountsResource extends HBankDataAccess{
 			if(myAccounts == null)
 			{
 				JSONObject error = new JSONObject();
-				error.put(errorMsg, db2ReadFailure);
-				logger.severe(db2ReadFailure);
-				logger.exiting(this.getClass().getName(),getAccountsByBalanceWithOffsetAndLimitInternal,myResponse);
+				error.put(ERROR_MSG, DB2_READ_FAILURE);
+				logger.severe(DB2_READ_FAILURE);
+				logger.exiting(this.getClass().getName(),GET_ACCOUNTS_BY_BALANCE_WITH_OFFSET_AND_LIMIT_INTERNAL,myResponse);
 				myResponse = Response.status(500).entity(error.toString()).build();
 				return myResponse;
 			}
@@ -1424,17 +1424,17 @@ public class AccountsResource extends HBankDataAccess{
 			for(int i = 0;i < myAccounts.length;i++)
 			{
 				JSONObject account = new JSONObject();
-				account.put(jsonSortCode, myAccounts[i].getSortcode().trim());
+				account.put(JSON_SORT_CODE, myAccounts[i].getSortcode().trim());
 				account.put("id", myAccounts[i].getAccount_number());
-				account.put(jsonCustomerNumber, myAccounts[i].getCustomer_number());
-				account.put(jsonAccountType, myAccounts[i].getType().trim());
-				account.put(jsonAvailableBalance, BigDecimal.valueOf(myAccounts[i].getAvailable_balance()));
-				account.put(jsonActualBalance, BigDecimal.valueOf(myAccounts[i].getActual_balance()));
-				account.put(jsonInterestRate, BigDecimal.valueOf(myAccounts[i].getInterest_rate()));
-				account.put(jsonOverdraft, myAccounts[i].getOverdraft_limit());
-				account.put(jsonLastStatementDate, myAccounts[i].getLast_statement().toString().trim());
-				account.put(jsonNextStatementDate, myAccounts[i].getNext_statement().toString().trim());
-				account.put(jsonDateOpened, myAccounts[i].getOpened().toString());
+				account.put(JSON_CUSTOMER_NUMBER, myAccounts[i].getCustomer_number());
+				account.put(JSON_ACCOUNT_TYPE, myAccounts[i].getType().trim());
+				account.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(myAccounts[i].getAvailable_balance()));
+				account.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(myAccounts[i].getActual_balance()));
+				account.put(JSON_INTEREST_RATE, BigDecimal.valueOf(myAccounts[i].getInterest_rate()));
+				account.put(JSON_OVERDRAFT, myAccounts[i].getOverdraft_limit());
+				account.put(JSON_LAST_STATEMENT_DATE, myAccounts[i].getLast_statement().toString().trim());
+				account.put(JSON_NEXT_STATEMENT_DATE, myAccounts[i].getNext_statement().toString().trim());
+				account.put(JSON_DATE_OPENED, myAccounts[i].getOpened().toString());
 
 				accounts.add(account);
 
@@ -1447,10 +1447,10 @@ public class AccountsResource extends HBankDataAccess{
 		 * Parse returned data and return to calling method
 		 */
 
-		response.put(jsonNumberOfAccounts, numberOfAccounts);
-		response.put(jsonAccounts, accounts);
+		response.put(JSON_NUMBER_OF_ACCOUNTS, numberOfAccounts);
+		response.put(JSON_ACCOUNTS, accounts);
 		myResponse = Response.status(200).entity(response.toString()).build(); 
-		logger.exiting(this.getClass().getName(),getAccountsByBalanceWithOffsetAndLimitInternal,myResponse);
+		logger.exiting(this.getClass().getName(),GET_ACCOUNTS_BY_BALANCE_WITH_OFFSET_AND_LIMIT_INTERNAL,myResponse);
 		return myResponse;
 
 
