@@ -25,6 +25,9 @@ public class HB_Footer extends HorizontalLayout {
 	private static final long serialVersionUID = -3638937118776518241L;
 
 	public HB_Footer(){
+		/** 
+		 * We do not use the footer but it is available if required
+		 */
 		
 	}
 

@@ -56,6 +56,7 @@ public class Welcome extends VerticalLayout{
 	private UI ui;
 
 	public Welcome(UI ui, String user){
+		sortOutLogging();
 		this.ui = ui;
 		// create an add header
 		HB_Header header = new HB_Header(ui, "welcome");

@@ -325,8 +325,8 @@ public class CustomerUI extends VerticalLayout{
 			Customer newCust;
 			//create a new customer
 			newCust = new Customer("0",sCodeT.getValue(),
-					cusNameT.getValue().replaceAll("\n", ""),
-					cusAddressT.getValue().replaceAll("\n", ""),
+					cusNameT.getValue().replace("\n", ""),
+					cusAddressT.getValue().replace("\n", ""),
 					new java.sql.Date(cusDoBT.getValue().getTime()));
 
 //			newCust.showInfo();
@@ -346,8 +346,8 @@ public class CustomerUI extends VerticalLayout{
 	}
 
 	private boolean editCustomer(){
-		c.setName(cusNameT.getValue().replaceAll("\n", ""));
-		c.setAddress(cusAddressT.getValue().replaceAll("\n", ""));
+		c.setName(cusNameT.getValue().replace("\n", ""));
+		c.setAddress(cusAddressT.getValue().replace("\n", ""));
 
 
 		if(c.updateThis())
