@@ -48,6 +48,10 @@ public class CompanyNameResource{
 
 	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.api.json.CompanyNameResource");
 	// </copyright>
+	
+	private static final String getCompanyName = "getCompanyName()";
+	private static final String errorMsgPrefix = "CompanyNameResource.getCompanyName() has experienced error ";
+	private static final String errorMsgSuffix = " linking to program GETCOMPY";
 
 
 	public CompanyNameResource()
@@ -57,7 +61,7 @@ public class CompanyNameResource{
 	@GET
 	@Produces("application/json")
 	public Response getCompanyName() {
-		logger.entering(this.getClass().getName(), "getCompanyName()");
+		logger.entering(this.getClass().getName(), getCompanyName);
 // We cache the company name as a static variable. If not set, we jCICS LINK to a COBOL program to go get it
 		if(companyNameString == null)
 		{
@@ -71,22 +75,22 @@ public class CompanyNameResource{
 			try {
 				GETCOMPY.link(companyNameBytes);
 				GetCompany myGetCompanyData = new GetCompany(companyNameBytes);
-				companyNameString = myGetCompanyData.getCompanyName().trim();
+				CompanyNameResource.setCompanyName(myGetCompanyData.getCompanyName().trim());
 			} catch (InvalidRequestException | LengthErrorException
 					| InvalidSystemIdException | NotAuthorisedException
 					| InvalidProgramIdException | RolledBackException
 					| TerminalException e) {
 				Response myResponse = Response.status(500)
-						.entity("CompanyNameResource.getCompanyName() has experienced error " + e.toString() + " linking to program GETCOMPY")
+						.entity(errorMsgPrefix + e.toString() + errorMsgSuffix)
 						.build();
-				logger.warning("CompanyNameResource.getCompanyName() has experienced error " + e.toString() + " linking to program GETCOMPY");
-				logger.exiting(this.getClass().getName(),  "getCompanyName()",myResponse);
+				logger.warning(errorMsgPrefix + e.toString() + errorMsgSuffix);
+				logger.exiting(this.getClass().getName(),  getCompanyName,myResponse);
 				return myResponse;
 			}
 			catch (AbendException e) {
-				logger.severe("CompanyNameResource.getCompanyName() has experienced abend " + e.toString() + " linking to program GETCOMPY");
-				Response myResponse = Response.status(500).entity("CompanyNameResource.getCompanyName() has experienced error " + e.toString() + " linking to program GETCOMPY").build();
-				logger.exiting(this.getClass().getName(),  "getCompanyName()",myResponse);
+				logger.severe("CompanyNameResource.getCompanyName() has experienced abend " + e.toString() + errorMsgSuffix);
+				Response myResponse = Response.status(500).entity(errorMsgPrefix + e.toString() + errorMsgSuffix).build();
+				logger.exiting(this.getClass().getName(),  getCompanyName,myResponse);
 				return myResponse;
 			}
 
@@ -96,7 +100,7 @@ public class CompanyNameResource{
 		response.put("companyName", companyNameString);
 		
 		Response myResponse = Response.status(200).entity(response.toString()).build();
-		logger.exiting(this.getClass().getName(), "getCompanyName()",myResponse);
+		logger.exiting(this.getClass().getName(), getCompanyName,myResponse);
 
 		return myResponse;
 	}
@@ -111,6 +115,11 @@ public class CompanyNameResource{
 		{
 			logger.severe(e.toString());
 		} 
+	}
+	
+	private static void setCompanyName(String companyName)
+	{
+		companyNameString = companyName;
 	}
 
 }
