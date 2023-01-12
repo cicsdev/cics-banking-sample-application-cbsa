@@ -19,10 +19,8 @@ import java.util.Date;
 
 import javax.ws.rs.core.Response;
 
-import com.ibm.cics.cip.bankliberty.webui.dataAccess.Account;
 import com.ibm.cics.cip.bankliberty.api.json.SortCodeResource;
-
-
+import com.ibm.cics.cip.bankliberty.webui.data_access.Account;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 
@@ -98,7 +96,7 @@ public class AccountUI extends VerticalLayout{
 		this.addComponent(title);
 
 		accNumT = new TextField("Account Number");
-		accNumT.setValue(acc.getAccount_number());
+		accNumT.setValue(acc.getAccountNumber());
 		accNumT.setEnabled(false);
 
 		//Create a new container and scale - components can be added to it using cusNumL.addComponent()
@@ -109,12 +107,12 @@ public class AccountUI extends VerticalLayout{
 
 		//Textfield showing account number
 		accNumT = new TextField("Account Number");
-		accNumT.setValue(acc.getAccount_number());
+		accNumT.setValue(acc.getAccountNumber());
 		accNumT.setEnabled(false);
 
 		//Textfield showing customer number
 		cusNumT = new TextField("Customer Number");
-		cusNumT.setValue(acc.getCustomer_number());
+		cusNumT.setValue(acc.getCustomerNumber());
 		cusNumT.setEnabled(false);
 
 		//Textfield showing sortcode
@@ -145,7 +143,7 @@ public class AccountUI extends VerticalLayout{
 		
 		//Set interest rate
 		interestT = new TextField("Interest");
-		interestT.setValue(acc.getInterest_rate().setScale(2,RoundingMode.HALF_UP).toString());
+		interestT.setValue(acc.getInterestRate().setScale(2,RoundingMode.HALF_UP).toString());
 		
 		//Add to container and align
 		typeL.addComponent(typeT);
@@ -208,11 +206,11 @@ public class AccountUI extends VerticalLayout{
 					//Editing an account	
 					if(!editAccount())
 					{
-						event.getButton().setCaption(editingString + a.getAccount_number() + " failed");
+						event.getButton().setCaption(editingString + a.getAccountNumber() + " failed");
 					}
 					else
 					{
-						event.getButton().setCaption(editingString + a.getAccount_number() + " successful");
+						event.getButton().setCaption(editingString + a.getAccountNumber() + " successful");
 					}
 				}
 			}
@@ -236,12 +234,12 @@ public class AccountUI extends VerticalLayout{
 	private void setFields(Account acc){
 		//Set values for the fields by using acc
 		//		acc.showInfo();
-		cusNumT.setValue(acc.getCustomer_number());
+		cusNumT.setValue(acc.getCustomerNumber());
 		sCodeT.setValue(acc.getSortcode());
 		typeT.setValue(acc.getType().trim());
-		interestT.setValue(String.valueOf(acc.getInterest_rate().setScale(2,RoundingMode.HALF_UP)));
-		overdraftT.setValue(String.valueOf(acc.getOverdraft_limit()));
-		balanceT.setValue(String.valueOf(acc.getActual_balance().setScale(2,RoundingMode.HALF_UP)));
+		interestT.setValue(String.valueOf(acc.getInterestRate().setScale(2,RoundingMode.HALF_UP)));
+		overdraftT.setValue(String.valueOf(acc.getOverdraftLimit()));
+		balanceT.setValue(String.valueOf(acc.getActualBalance().setScale(2,RoundingMode.HALF_UP)));
 	}
 
 	@SuppressWarnings("serial")
@@ -323,11 +321,11 @@ public class AccountUI extends VerticalLayout{
 
 					if(!editAccount())
 					{
-						event.getButton().setCaption(editingString + a.getAccount_number() + " failed");
+						event.getButton().setCaption(editingString + a.getAccountNumber() + " failed");
 					}
 					else
 					{
-						event.getButton().setCaption(editingString + a.getAccount_number() + " successful");
+						event.getButton().setCaption(editingString + a.getAccountNumber() + " successful");
 					}
 
 				}
@@ -357,7 +355,7 @@ public class AccountUI extends VerticalLayout{
 			//Create a new account object
 			Account newAcc = new Account(cusNumT.getValue(), sCodeT.getValue(), String.format("%08d",temp), 
 					typeT.getValue().toString(), tempBD, new Date(), 
-					Integer.valueOf(overdraftT.getValue()), null, null, 
+					Integer.valueOf(overdraftT.getValue()),  
 					BigDecimal.valueOf(new Double(balanceT.getValue())), BigDecimal.valueOf(new Double(balanceT.getValue())));
 			//			newAcc.showInfo();
 			
@@ -365,7 +363,7 @@ public class AccountUI extends VerticalLayout{
 			temp = newAcc.addToDB();
 			//Check that the account is now in the database
 			if(newAcc.inDB()){
-				return newAcc.getAccount_number();
+				return newAcc.getAccountNumber();
 			}else{
 				return "-1";
 			}
@@ -376,11 +374,11 @@ public class AccountUI extends VerticalLayout{
 	//edit account "a"
 	private boolean editAccount(){
 		a.setType(typeT.getValue().toString());
-		a.setInterest_rate(BigDecimal.valueOf(new Double(interestT.getValue())));
-		BigDecimal temp = a.getInterest_rate().setScale(2,RoundingMode.HALF_UP);
-		a.setInterest_rate(temp);
-		a.setOverdraft_limit(Integer.valueOf(overdraftT.getValue()));
-		a.setActual_balance(BigDecimal.valueOf(Double.valueOf(balanceT.getValue())));
+		a.setInterestRate(BigDecimal.valueOf(new Double(interestT.getValue())));
+		BigDecimal temp = a.getInterestRate().setScale(2,RoundingMode.HALF_UP);
+		a.setInterestRate(temp);
+		a.setOverdraftLimit(Integer.valueOf(overdraftT.getValue()));
+		a.setActualBalance(BigDecimal.valueOf(Double.valueOf(balanceT.getValue())));
 		a.setSortcode(sCodeT.getValue());
 		return a.updateThis();
 	}

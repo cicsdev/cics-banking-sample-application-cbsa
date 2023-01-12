@@ -3,7 +3,7 @@
  *    Copyright IBM Corp. 2022
  *
  */
-package com.ibm.cics.cip.bankliberty.webui.dataAccess;
+package com.ibm.cics.cip.bankliberty.webui.data_access;
 
 
 
@@ -19,11 +19,9 @@ import javax.servlet.ServletException;
 
 import javax.ws.rs.core.Response;
 
-import com.ibm.cics.cip.bankliberty.webui.dataAccess.Customer;
-
 import com.ibm.cics.cip.bankliberty.api.json.CustomerResource;
 import com.ibm.cics.cip.bankliberty.api.json.SortCodeResource;
-
+import com.ibm.cics.cip.bankliberty.webui.data_access.Customer;
 import com.ibm.json.java.JSONArray;
 import com.ibm.json.java.JSONObject;
 

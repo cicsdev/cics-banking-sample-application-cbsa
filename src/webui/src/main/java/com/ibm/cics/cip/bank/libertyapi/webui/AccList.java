@@ -13,8 +13,8 @@ import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 
-import com.ibm.cics.cip.bankliberty.webui.dataAccess.AccountList;
-import com.ibm.cics.cip.bankliberty.webui.dataAccess.Customer;
+import com.ibm.cics.cip.bankliberty.webui.data_access.AccountList;
+import com.ibm.cics.cip.bankliberty.webui.data_access.Customer;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
@@ -598,10 +598,10 @@ public class AccList extends VerticalLayout{
 			HorizontalLayout hl = new HorizontalLayout();
 			hl.setWidth("100%");
 			
-			final Label accNumb = new Label(this.aList.getAccount(i).getAccount_number());
-			Label cusNumb = new Label(this.aList.getAccount(i).getCustomer_number());
-			Label avb = new Label(String.valueOf(this.aList.getAccount(i).getAvailable_balance()));
-			Label acb = new Label(String.valueOf(this.aList.getAccount(i).getActual_balance()));
+			final Label accNumb = new Label(this.aList.getAccount(i).getAccountNumber());
+			Label cusNumb = new Label(this.aList.getAccount(i).getCustomerNumber());
+			Label avb = new Label(String.valueOf(this.aList.getAccount(i).getAvailableBalance()));
+			Label acb = new Label(String.valueOf(this.aList.getAccount(i).getActualBalance()));
 			hl.addComponent(accNumb);
 			hl.addComponent(cusNumb);
 			hl.addComponent(avb);

@@ -12,11 +12,8 @@ import java.util.Calendar;
 
 import javax.ws.rs.core.Response;
 
-import com.ibm.cics.cip.bankliberty.webui.dataAccess.Customer;
 import com.ibm.cics.cip.bankliberty.api.json.SortCodeResource;
-
-
-
+import com.ibm.cics.cip.bankliberty.webui.data_access.Customer;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 

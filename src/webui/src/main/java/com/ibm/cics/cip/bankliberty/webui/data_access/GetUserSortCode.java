@@ -3,7 +3,7 @@
  *    Copyright IBM Corp. 2022
  *
  */
-package com.ibm.cics.cip.bankliberty.webui.dataAccess;
+package com.ibm.cics.cip.bankliberty.webui.data_access;
 
 import com.ibm.jzos.fields.*;
 

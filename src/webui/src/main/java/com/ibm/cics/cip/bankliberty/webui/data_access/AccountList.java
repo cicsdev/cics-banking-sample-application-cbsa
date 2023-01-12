@@ -3,7 +3,7 @@
  *    Copyright IBM Corp. 2022
  *
  */
-package com.ibm.cics.cip.bankliberty.webui.dataAccess;
+package com.ibm.cics.cip.bankliberty.webui.data_access;
 
 
 import java.util.ArrayList;
@@ -20,10 +20,9 @@ import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.ws.rs.core.Response;
 
-import com.ibm.cics.cip.bankliberty.webui.dataAccess.Account;
-
 import com.ibm.cics.cip.bankliberty.api.json.AccountsResource;
 import com.ibm.cics.cip.bankliberty.api.json.SortCodeResource;
+import com.ibm.cics.cip.bankliberty.webui.data_access.Account;
 import com.ibm.json.java.JSONArray;
 import com.ibm.json.java.JSONObject;
 
@@ -217,15 +216,15 @@ public class AccountList {
 
 
 						Account myListAccount = new Account();
-						myListAccount.setAccount_number(id);
-						myListAccount.setActual_balance(actual_balance.setScale(2,RoundingMode.HALF_UP));
-						myListAccount.setAvailable_balance(available_balance.setScale(2,RoundingMode.HALF_UP));
-						myListAccount.setCustomer_number(customerNumberString);
-						myListAccount.setInterest_rate(interest_rate.setScale(2,RoundingMode.HALF_UP));
-						myListAccount.setLast_statement(lastStatement);
-						myListAccount.setNext_statement(nextStatement);
+						myListAccount.setAccountNumber(id);
+						myListAccount.setActualBalance(actual_balance.setScale(2,RoundingMode.HALF_UP));
+						myListAccount.setAvailableBalance(available_balance.setScale(2,RoundingMode.HALF_UP));
+						myListAccount.setCustomerNumber(customerNumberString);
+						myListAccount.setInterestRate(interest_rate.setScale(2,RoundingMode.HALF_UP));
+						myListAccount.setLastStatement(lastStatement);
+						myListAccount.setNextStatement(nextStatement);
 						myListAccount.setOpened(dateOpened);
-						myListAccount.setOverdraft_limit(overdraft.intValue());
+						myListAccount.setOverdraftLimit(overdraft.intValue());
 						myListAccount.setSortcode(sortCode);
 						myListAccount.setType(type);
 
@@ -269,15 +268,15 @@ public class AccountList {
 
 
 				Account myListAccount = new Account();
-				myListAccount.setAccount_number(id);
-				myListAccount.setActual_balance(actual_balance.setScale(2,RoundingMode.HALF_UP));
-				myListAccount.setAvailable_balance(available_balance.setScale(2,RoundingMode.HALF_UP));
-				myListAccount.setCustomer_number(customerNumber);
-				myListAccount.setInterest_rate(interest_rate.setScale(2,RoundingMode.HALF_UP));
-				myListAccount.setLast_statement(lastStatement);
-				myListAccount.setNext_statement(nextStatement);
+				myListAccount.setAccountNumber(id);
+				myListAccount.setActualBalance(actual_balance.setScale(2,RoundingMode.HALF_UP));
+				myListAccount.setAvailableBalance(available_balance.setScale(2,RoundingMode.HALF_UP));
+				myListAccount.setCustomerNumber(customerNumber);
+				myListAccount.setInterestRate(interest_rate.setScale(2,RoundingMode.HALF_UP));
+				myListAccount.setLastStatement(lastStatement);
+				myListAccount.setNextStatement(nextStatement);
 				myListAccount.setOpened(dateOpened);
-				myListAccount.setOverdraft_limit(overdraft.intValue());
+				myListAccount.setOverdraftLimit(overdraft.intValue());
 				myListAccount.setSortcode(sortCode);
 				myListAccount.setType(type);
 
@@ -333,15 +332,15 @@ public class AccountList {
 
 
 							Account myListAccount = new Account();
-							myListAccount.setAccount_number(id);
-							myListAccount.setActual_balance(actual_balance.setScale(2,RoundingMode.HALF_UP));
-							myListAccount.setAvailable_balance(available_balance.setScale(2,RoundingMode.HALF_UP));
-							myListAccount.setCustomer_number(customerNumberString);
-							myListAccount.setInterest_rate(interest_rate.setScale(2,RoundingMode.HALF_UP));
-							myListAccount.setLast_statement(lastStatement);
-							myListAccount.setNext_statement(nextStatement);
+							myListAccount.setAccountNumber(id);
+							myListAccount.setActualBalance(actual_balance.setScale(2,RoundingMode.HALF_UP));
+							myListAccount.setAvailableBalance(available_balance.setScale(2,RoundingMode.HALF_UP));
+							myListAccount.setCustomerNumber(customerNumberString);
+							myListAccount.setInterestRate(interest_rate.setScale(2,RoundingMode.HALF_UP));
+							myListAccount.setLastStatement(lastStatement);
+							myListAccount.setNextStatement(nextStatement);
 							myListAccount.setOpened(dateOpened);
-							myListAccount.setOverdraft_limit(overdraft.intValue());
+							myListAccount.setOverdraftLimit(overdraft.intValue());
 							myListAccount.setSortcode(sortCode);
 							myListAccount.setType(type);
 
@@ -389,15 +388,15 @@ public class AccountList {
 
 
 					Account myListAccount = new Account();
-					myListAccount.setAccount_number(id);
-					myListAccount.setActual_balance(actual_balance.setScale(2,RoundingMode.HALF_UP));
-					myListAccount.setAvailable_balance(available_balance.setScale(2,RoundingMode.HALF_UP));
-					myListAccount.setCustomer_number(customerNumber);
-					myListAccount.setInterest_rate(interest_rate.setScale(2,RoundingMode.HALF_UP));
-					myListAccount.setLast_statement(lastStatement);
-					myListAccount.setNext_statement(nextStatement);
+					myListAccount.setAccountNumber(id);
+					myListAccount.setActualBalance(actual_balance.setScale(2,RoundingMode.HALF_UP));
+					myListAccount.setAvailableBalance(available_balance.setScale(2,RoundingMode.HALF_UP));
+					myListAccount.setCustomerNumber(customerNumber);
+					myListAccount.setInterestRate(interest_rate.setScale(2,RoundingMode.HALF_UP));
+					myListAccount.setLastStatement(lastStatement);
+					myListAccount.setNextStatement(nextStatement);
 					myListAccount.setOpened(dateOpened);
-					myListAccount.setOverdraft_limit(overdraft.intValue());
+					myListAccount.setOverdraftLimit(overdraft.intValue());
 					myListAccount.setSortcode(sortCode);
 					myListAccount.setType(type);
 

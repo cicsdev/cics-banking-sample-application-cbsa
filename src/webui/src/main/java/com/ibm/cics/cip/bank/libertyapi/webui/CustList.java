@@ -14,8 +14,7 @@ import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 
-
-import com.ibm.cics.cip.bankliberty.webui.dataAccess.CustomerList;
+import com.ibm.cics.cip.bankliberty.webui.data_access.CustomerList;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.HorizontalLayout;

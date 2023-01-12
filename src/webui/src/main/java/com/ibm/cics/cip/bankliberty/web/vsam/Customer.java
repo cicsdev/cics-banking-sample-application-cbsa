@@ -595,7 +595,7 @@ public class Customer {
 		} catch (LogicException | InvalidRequestException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
 				| NotOpenException e) {
-			logger.severe("ERROR_END_BROWSE "  + e.getLocalizedMessage());
+			logger.severe(ERROR_END_BROWSE  + e.getLocalizedMessage());
 			logger.exiting(this.getClass().getName(),GET_CUSTOMERS,null);
 			return null;
 		}
@@ -1542,7 +1542,7 @@ public class Customer {
 		} catch (LogicException | InvalidRequestException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
 				| NotOpenException e) {
-			logger.severe("ERROR_END_BROWSE "  + e.getLocalizedMessage());
+			logger.severe(ERROR_END_BROWSE  + e.getLocalizedMessage());
 			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_WITH_OFFSET_AND_LIMIT,null);
 			return null;
 		}
@@ -1800,7 +1800,7 @@ public class Customer {
 		} catch (LogicException | InvalidRequestException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
 				| NotOpenException e) {
-			logger.severe("ERROR_END_BROWSE "  + e.getLocalizedMessage());
+			logger.severe(ERROR_END_BROWSE  + e.getLocalizedMessage());
 			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_WITH_OFFSET_AND_LIMIT,null);
 			return null;
 		}
@@ -2077,7 +2077,7 @@ public class Customer {
 		} catch (LogicException | InvalidRequestException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
 				| NotOpenException e) {
-			logger.severe("ERROR_END_BROWSE "  + e.getLocalizedMessage());
+			logger.severe(ERROR_END_BROWSE  + e.getLocalizedMessage());
 			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME,null);
 			return null;
 		}
@@ -2391,7 +2391,7 @@ public class Customer {
 		} catch (LogicException | InvalidRequestException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
 				| NotOpenException e) {
-			logger.severe("ERROR_END_BROWSE "  + e.getLocalizedMessage());
+			logger.severe(ERROR_END_BROWSE  + e.getLocalizedMessage());
 			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_COUNT_ONLY,-1L);
 			return -1L;
 		}
@@ -2637,7 +2637,7 @@ public class Customer {
 		} catch (LogicException | InvalidRequestException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
 				| NotOpenException e) {
-			logger.severe("ERROR_END_BROWSE "  + e.getLocalizedMessage());
+			logger.severe(ERROR_END_BROWSE  + e.getLocalizedMessage());
 			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_TOWN,null);
 			return null;
 		}
@@ -2877,7 +2877,7 @@ public class Customer {
 		} catch (LogicException | InvalidRequestException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
 				| NotOpenException e) {
-			logger.severe("ERROR_END_BROWSE "  + e.getLocalizedMessage());
+			logger.severe(ERROR_END_BROWSE  + e.getLocalizedMessage());
 			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_SURNAME,null);
 			return null;
 		}
@@ -3119,7 +3119,7 @@ public class Customer {
 		} catch (LogicException | InvalidRequestException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
 				| NotOpenException e) {
-			logger.severe("ERROR_END_BROWSE "  + e.getLocalizedMessage());
+			logger.severe(ERROR_END_BROWSE  + e.getLocalizedMessage());
 			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_AGE,null);
 			return null;
 		}
