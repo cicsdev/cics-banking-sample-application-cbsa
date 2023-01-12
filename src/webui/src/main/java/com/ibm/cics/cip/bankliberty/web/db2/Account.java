@@ -673,6 +673,7 @@ public class Account extends HBankDataAccess{
 					}
 				}
 			}
+			break;
 		default:
 			nextMonthInMs = 1000L * 60L * 60L * 24L * 31L;
 			break;

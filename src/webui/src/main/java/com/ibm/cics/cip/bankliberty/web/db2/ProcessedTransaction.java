@@ -39,7 +39,7 @@ public class ProcessedTransaction extends HBankDataAccess{
 	private static final String WRITE_DELETE_ACCOUNT = "writeDeleteAccount(String sortCode2, String accountNumber, BigDecimal actualBalance, Date lastStatement, Date nextStatement, String customerNumber, String accountType)";
 	private static final String WRITE_CREATE_ACCOUNT = "writeCreateAccount(String sortCode2, String accountNumber, BigDecimal actualBalance, Date lastStatement, Date nextStatement, String customerNumber, String accountType)";
 	
-	private static final String sqlInsert =  "INSERT INTO PROCTRAN (PROCTRAN_EYECATCHER, PROCTRAN_SORTCODE, PROCTRAN_NUMBER, PROCTRAN_DATE, PROCTRAN_TIME, PROCTRAN_REF, PROCTRAN_TYPE, PROCTRAN_DESC, PROCTRAN_AMOUNT) VALUES (?,?,?,?,?,?,?,?,?)";
+	private static final String SQL_INSERT =  "INSERT INTO PROCTRAN (PROCTRAN_EYECATCHER, PROCTRAN_SORTCODE, PROCTRAN_NUMBER, PROCTRAN_DATE, PROCTRAN_TIME, PROCTRAN_REF, PROCTRAN_TYPE, PROCTRAN_DESC, PROCTRAN_AMOUNT) VALUES (?,?,?,?,?,?,?,?,?)";
 
 
 	public static final String BRANCH_CREATE_ACCOUNT = PROCTRAN.PROC_TY_BRANCH_CREATE_ACCOUNT;
@@ -463,8 +463,8 @@ public class ProcessedTransaction extends HBankDataAccess{
 
 		openConnection();
 
-		logger.fine(ABOUT_TO_INSERT + sqlInsert + ">");
-		try (PreparedStatement stmt = conn.prepareStatement(sqlInsert);)
+		logger.fine(ABOUT_TO_INSERT + SQL_INSERT + ">");
+		try (PreparedStatement stmt = conn.prepareStatement(SQL_INSERT);)
 		{
 			stmt.setString(1, PROCTRAN.PROC_TRAN_VALID);
 			stmt.setString(2, sortcode);
@@ -495,8 +495,8 @@ public class ProcessedTransaction extends HBankDataAccess{
 
 		openConnection();
 
-		logger.fine(ABOUT_TO_INSERT + sqlInsert + ">");
-		try (PreparedStatement stmt = conn.prepareStatement(sqlInsert);)
+		logger.fine(ABOUT_TO_INSERT + SQL_INSERT + ">");
+		try (PreparedStatement stmt = conn.prepareStatement(SQL_INSERT);)
 		{
 			stmt.setString(1,PROCTRAN.PROC_TRAN_VALID);
 			stmt.setString(2,sortcode);
@@ -549,9 +549,9 @@ public class ProcessedTransaction extends HBankDataAccess{
 
 		openConnection();
 
-		logger.fine(ABOUT_TO_INSERT + sqlInsert + ">");
+		logger.fine(ABOUT_TO_INSERT + SQL_INSERT + ">");
 
-		try (PreparedStatement stmt = conn.prepareStatement(sqlInsert);)
+		try (PreparedStatement stmt = conn.prepareStatement(SQL_INSERT);)
 		{
 			stmt.setString(1, PROCTRAN.PROC_TRAN_VALID);
 			stmt.setString(2, sortCode2);
@@ -607,9 +607,9 @@ public class ProcessedTransaction extends HBankDataAccess{
 
 		openConnection();
 
-		logger.fine(ABOUT_TO_INSERT + sqlInsert + ">");
+		logger.fine(ABOUT_TO_INSERT + SQL_INSERT + ">");
 
-		try (PreparedStatement stmt = conn.prepareStatement(sqlInsert);)
+		try (PreparedStatement stmt = conn.prepareStatement(SQL_INSERT);)
 		{
 			stmt.setString(1, PROCTRAN.PROC_TRAN_VALID);
 			stmt.setString(2, sortCode2);
@@ -673,9 +673,9 @@ public class ProcessedTransaction extends HBankDataAccess{
 
 		openConnection();
 
-		logger.fine(ABOUT_TO_INSERT + sqlInsert + ">");
+		logger.fine(ABOUT_TO_INSERT + SQL_INSERT + ">");
 
-		try (PreparedStatement stmt = conn.prepareStatement(sqlInsert);)
+		try (PreparedStatement stmt = conn.prepareStatement(SQL_INSERT);)
 		{
 			stmt.setString(1, PROCTRAN.PROC_TRAN_VALID);
 			stmt.setString(2, sortCode2);
@@ -702,7 +702,7 @@ public class ProcessedTransaction extends HBankDataAccess{
 
 
 	public boolean writeDeleteAccount(String sortCode2, String accountNumber, BigDecimal actualBalance,	Date lastStatement, Date nextStatement, String customerNumber, String accountType) {
-		logger.entering(this.getClass().getName(),WRITE_DELETE_CUSTOMER);
+		logger.entering(this.getClass().getName(),WRITE_DELETE_ACCOUNT);
 
 		PROCTRAN myPROCTRAN = new PROCTRAN();
 
@@ -730,8 +730,8 @@ public class ProcessedTransaction extends HBankDataAccess{
 
 		openConnection();
 
-		logger.fine(ABOUT_TO_INSERT + sqlInsert + ">");
-		try (PreparedStatement stmt = conn.prepareStatement(sqlInsert);)
+		logger.fine(ABOUT_TO_INSERT + SQL_INSERT + ">");
+		try (PreparedStatement stmt = conn.prepareStatement(SQL_INSERT);)
 		{
 			stmt.setString(1, PROCTRAN.PROC_TRAN_VALID);
 			stmt.setString(2, sortCode2);
@@ -747,10 +747,10 @@ public class ProcessedTransaction extends HBankDataAccess{
 		catch(SQLException e)
 		{
 			logger.severe(e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),WRITE_DELETE_CUSTOMER,false);
+			logger.exiting(this.getClass().getName(),WRITE_DELETE_ACCOUNT,false);
 			return false;
 		}
-		logger.exiting(this.getClass().getName(),WRITE_DELETE_CUSTOMER,true);
+		logger.exiting(this.getClass().getName(),WRITE_DELETE_ACCOUNT,true);
 		return true;	
 	}
 
@@ -793,8 +793,8 @@ public class ProcessedTransaction extends HBankDataAccess{
 		openConnection();
 
 
-		logger.fine(ABOUT_TO_INSERT + sqlInsert + ">");
-		try (PreparedStatement stmt = conn.prepareStatement(sqlInsert);)
+		logger.fine(ABOUT_TO_INSERT + SQL_INSERT + ">");
+		try (PreparedStatement stmt = conn.prepareStatement(SQL_INSERT);)
 		{
 			stmt.setString(1, PROCTRAN.PROC_TRAN_VALID);
 			stmt.setString(2, sortCode2);

@@ -53,10 +53,39 @@ public class Customer {
 
 	
 	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.web.vsam");
+	
+	private static final String GET_CUSTOMER = "getCustomer(long customerNumber, int sortCode";
+	private static final String GET_CUSTOMERS = "getCustomers(int sortCode)";
+	private static final String GET_CUSTOMERS_WITH_OFFSET_AND_LIMIT = "getCustomers(int sortCode, int limit, int offset)";
+	private static final String GET_CUSTOMERS_BY_NAME_WITH_OFFSET_AND_LIMIT = "getCustomersByName(int sortCode, int limit, int offset, String name)";
+	private static final String GET_CUSTOMERS_BY_NAME = "getCustomersByName(int sortCode, String name)";
+	private static final String GET_CUSTOMERS_BY_NAME_COUNT_ONLY = "getCustomersByNameCountOnly(int sortCode, String name)";
+	private static final String GET_CUSTOMERS_BY_TOWN = "getCustomersbyTown(String town)";
+	private static final String GET_CUSTOMERS_BY_SURNAME = "getCustomersbySurname(String surname)";
+	private static final String GET_CUSTOMERS_BY_AGE =	"getCustomersbyAge(int age)";
+	private static final String GET_CUSTOMERS_COUNT_ONLY = "getCustomersCountOnly(int sortCode))";
+	private static final String UPDATE_CUSTOMER = "updateCustomer(CustomerJSON customer)";
+	private static final String DELETE_CUSTOMER = "deleteCustomer(long customerNumber, int sortCode)";
+	private static final String CREATE_CUSTOMER = "createCustomer(CustomerJSON customer, Integer sortCodeInteger, boolean useNamedCounter)";
+	
+	private static final String FILENAME = "CUSTOMER";
+	
+	private static final String ABOUT_TO_GO_TO_SLEEP = "About to go to sleep for ";
+	private static final String MILLISECONDS = " milliseconds";
+	private static final String READ_GIVE_UP = "Cannot read CUSTOMER file after 100 attempts";
+	private static final String BROWSE_GIVE_UP = "Cannot browse CUSTOMER file after 100 attempts";
+	private static final String CODEPAGE = "Cp1047";
 
+	private static final String ERROR_START_BROWSE = "Error starting browse of file CUSTOMER ";
+	private static final String ERROR_BROWSE = "Error browsing file CUSTOMER ";
+	private static final String ERROR_END_BROWSE = "Error ending browse of file CUSTOMER ";
+	private static final String ERROR_DELETE1 = "Error deleting customer ";
+	private static final String ERROR_DELETE2 = " in CUSTOMER file ";
+	
+	private static final String LAST_CUSTOMER = "0000009999999999";
 
 	// String ACCOUNT_EYECATCHER             CHAR(4),
-	private 	String 		customer_number;
+	private 	String 		customerNumber;
 	private 	String 		sortcode;              
 	private 	String 		name;
 	private 	String 		address;
@@ -90,14 +119,14 @@ public class Customer {
 	}
 
 	public String getCustomer_number() {
-		if(this.customer_number.length()<10)
+		if(this.customerNumber.length()<10)
 		{
-			for (int i=this.customer_number.length();i<10;i++)
+			for (int i=this.customerNumber.length();i<10;i++)
 			{
-				this.customer_number = "0" + this.customer_number;
+				this.customerNumber = "0" + this.customerNumber;
 			}
 		}
-		return this.customer_number;
+		return this.customerNumber;
 	}
 
 	public void setCustomer_number(String customer_number) {
@@ -108,7 +137,7 @@ public class Customer {
 				customer_number = "0" + customer_number;
 			}
 		}
-		this.customer_number = customer_number;
+		this.customerNumber = customer_number;
 	}
 
 	public String getSortcode() {
@@ -165,7 +194,7 @@ public class Customer {
 	 */
 	public void printCustomerDetails(){
 		logger.fine("VSAM CUSTMOMER----");
-		logger.fine("Customer Numeber: " + this.customer_number);
+		logger.fine("Customer Numeber: " + this.customerNumber);
 		logger.fine("Name: " + this.name);
 		logger.fine("Address: " + this.address);
 		logger.fine("Dob: " + this.dob.toString());
@@ -178,11 +207,11 @@ public class Customer {
 
 	public Customer getCustomer(long customerNumber, int sortCode) 
 	{
-		logger.entering(this.getClass().getName(),"getCustomer(long customerNumber, int sortCode");
+		logger.entering(this.getClass().getName(),GET_CUSTOMER);
 		Customer temp = null;
 
 		customerFile = new KSDS();
-		customerFile.setName("CUSTOMER");
+		customerFile.setName(FILENAME);
 
 		myCustomer = new CUSTOMER();
 
@@ -214,15 +243,15 @@ public class Customer {
 					| FileDisabledException | DuplicateKeyException | FileNotFoundException | ISCInvalidRequestException
 					| NotAuthorisedException | RecordNotFoundException | NotOpenException e) {
 				logger.severe("Error reading customer " + customerNumber + " " + e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),"getCustomer(long customerNumber, int sortCode",null);
+				logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
 				return null;
 			} catch (LengthErrorException e) {
 				logger.severe(e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),"getCustomer(long customerNumber, int sortCode",null);
+				logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
 				return null;
 			} catch (EndOfFileException e) {
 				logger.severe(e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),"getCustomer(long customerNumber, int sortCode",null);
+				logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
 				return null;
 			}
 			catch (InvalidSystemIdException  e1) {
@@ -231,7 +260,7 @@ public class Customer {
 				for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 				{
 					try {
-						logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
+						logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 						Thread.sleep(3000);
 					} 
 					catch (InterruptedException e) 
@@ -251,7 +280,7 @@ public class Customer {
 							| ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 							e3) {
 						logger.severe(e3.getLocalizedMessage());
-						logger.exiting(this.getClass().getName(),"getCustomer(long customerNumber, int sortCode",null);
+						logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
 						return null;
 					}
 					catch (InvalidSystemIdException e4)
@@ -261,8 +290,8 @@ public class Customer {
 				}
 				if(number_of_retries == maximum_retries && success == false)
 				{
-					logger.severe("Cannot read CUSTOMER file after 100 attempts");
-					logger.exiting(this.getClass().getName(),"getCustomer(long customerNumber, int sortCode",null);
+					logger.severe(READ_GIVE_UP);
+					logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
 					return null;
 				}
 			}
@@ -298,10 +327,10 @@ public class Customer {
 
 			String keyString = new String(key);
 			try {
-				key = keyString.getBytes("Cp1047");
+				key = keyString.getBytes(CODEPAGE);
 			} catch (UnsupportedEncodingException e2) {
 				logger.severe(e2.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),"getCustomer(long customerNumber, int sortCode",null);
+				logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
 				return null;
 			}
 			try {
@@ -311,7 +340,7 @@ public class Customer {
 					| FileDisabledException | DuplicateKeyException | FileNotFoundException | ISCInvalidRequestException
 					| NotAuthorisedException | RecordNotFoundException | NotOpenException e) {
 				logger.severe("Error reading customer file for " + customerNumber + " " + e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),"getCustomer(long customerNumber, int sortCode",null);
+				logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
 				return null;
 			}
 			catch (InvalidSystemIdException  e1) {
@@ -320,7 +349,7 @@ public class Customer {
 				for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 				{
 					try {
-						logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
+						logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 						Thread.sleep(3000);
 					} 
 					catch (InterruptedException e) 
@@ -335,7 +364,7 @@ public class Customer {
 					} catch (FileDisabledException | DuplicateKeyException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 							e3) {
 						logger.severe("Error reading customer file for " + customerNumber + "," + e3.getLocalizedMessage());
-						logger.exiting(this.getClass().getName(),"getCustomer(long customerNumber, int sortCode",null);
+						logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
 						return null;
 					}
 					catch (InvalidSystemIdException e4)
@@ -345,8 +374,8 @@ public class Customer {
 				}
 				if(number_of_retries == maximum_retries && success == false)
 				{
-					logger.severe("Cannot read CUSTOMER file after 100 attempts");
-					logger.exiting(this.getClass().getName(),"getCustomer(long customerNumber, int sortCode",null);
+					logger.severe(READ_GIVE_UP);
+					logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
 					return null;
 				}
 			}
@@ -372,18 +401,18 @@ public class Customer {
 				Integer.toString(myCustomer.getCustomerCreditScore()),
 				myCustomerReviewDate
 				);
-		logger.exiting(this.getClass().getName(),"getCustomer(long customerNumber, int sortCode",temp);
+		logger.exiting(this.getClass().getName(),GET_CUSTOMER,temp);
 		return temp;
 	}
 
 	public Customer[] getCustomers(int sortCode) {
-		logger.entering(this.getClass().getName(),"getCustomers(int sortCode)",null);
+		logger.entering(this.getClass().getName(),GET_CUSTOMERS,null);
 		Customer[] temp = new Customer[250000];
 		int i = 0;
 
 
 		KSDS customerFile = new KSDS();
-		customerFile.setName("CUSTOMER");
+		customerFile.setName(FILENAME);
 
 		myCustomer = new CUSTOMER();
 
@@ -410,10 +439,10 @@ public class Customer {
 		// We need to convert the key to EBCDIC
 		String keyString = new String(key);
 		try {
-			key = keyString.getBytes("Cp1047");
+			key = keyString.getBytes(CODEPAGE);
 		} catch (UnsupportedEncodingException e2) {
 			logger.severe(e2.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS,null);
 			return null;
 		}
 
@@ -424,8 +453,8 @@ public class Customer {
 				| LockedException | RecordBusyException | LoadingException | ChangedException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 				| NotOpenException e1) {
-			logger.severe("Error starting browse of customer " + e1.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+			logger.severe(ERROR_START_BROWSE + e1.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS,null);
 			return null;
 		}
 		catch (InvalidSystemIdException  e1) {
@@ -434,7 +463,7 @@ public class Customer {
 			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine("About to sleep for " + totalSleep + " milliseconds");
+					logger.fine(ABOUT_TO_GO_TO_SLEEP+ totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				}  
 				catch (InterruptedException e) 
@@ -448,8 +477,8 @@ public class Customer {
 
 				} catch (FileDisabledException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 						e3) {
-					logger.severe("Error starting browse of CUSTOMER file, " + e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+					logger.severe(ERROR_START_BROWSE+ e3.getLocalizedMessage());
+					logger.exiting(this.getClass().getName(),GET_CUSTOMERS,null);
 					return null;
 				}
 				catch (InvalidSystemIdException e4)
@@ -459,8 +488,8 @@ public class Customer {
 			}
 			if(number_of_retries == maximum_retries && success == false)
 			{
-				logger.severe("Cannot read CUSTOMER file after 100 attempts");
-				logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+				logger.severe(READ_GIVE_UP);
+				logger.exiting(this.getClass().getName(),GET_CUSTOMERS,null);
 				return null;
 			}
 		}
@@ -489,8 +518,8 @@ public class Customer {
 					| FileNotFoundException
 					| ISCInvalidRequestException | NotAuthorisedException
 					| RecordNotFoundException | NotOpenException | LengthErrorException e) {
-				logger.severe("Error browsing CUSTOMER file, " + e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+				logger.severe(ERROR_BROWSE + e.getLocalizedMessage());
+				logger.exiting(this.getClass().getName(),GET_CUSTOMERS,null);
 				return null;
 			}
 			catch (InvalidSystemIdException  e1) {
@@ -500,7 +529,7 @@ public class Customer {
 				{
 					try 
 					{
-						logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
+						logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 						Thread.sleep(3000);
 					}
 					catch (InterruptedException e) 
@@ -515,7 +544,7 @@ public class Customer {
 					} catch (DuplicateKeyException | LengthErrorException | FileDisabledException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 							e3) {
 						logger.severe(e3.getLocalizedMessage());
-						logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+						logger.exiting(this.getClass().getName(),GET_CUSTOMERS,null);
 						return null;
 					}
 					catch (InvalidSystemIdException e4)
@@ -530,8 +559,8 @@ public class Customer {
 				}
 				if(number_of_retries == maximum_retries && success == false)
 				{
-					logger.severe("Cannot browse CUSTOMER file after 100 attempts");
-					logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+					logger.severe(BROWSE_GIVE_UP);
+					logger.exiting(this.getClass().getName(),GET_CUSTOMERS,null);
 					return null;
 				}
 
@@ -566,8 +595,8 @@ public class Customer {
 		} catch (LogicException | InvalidRequestException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
 				| NotOpenException e) {
-			logger.severe("Error ending browse of CUSTOMER file "  + e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+			logger.severe("ERROR_END_BROWSE "  + e.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS,null);
 			return null;
 		}
 		catch (InvalidSystemIdException  e2) {
@@ -576,7 +605,7 @@ public class Customer {
 			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
+					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				}
 				catch (InterruptedException e) 
@@ -589,8 +618,8 @@ public class Customer {
 					success = true;
 				} catch (FileDisabledException | NotOpenException | LogicException | InvalidRequestException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
 						e3) {
-					logger.severe("Error ending browse of CUSTOMER file, " + e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+					logger.severe(ERROR_END_BROWSE + e3.getLocalizedMessage());
+					logger.exiting(this.getClass().getName(),GET_CUSTOMERS,null);
 					return null;
 				}
 				catch (InvalidSystemIdException e4)
@@ -600,8 +629,8 @@ public class Customer {
 			}
 			if(number_of_retries == maximum_retries && success == false)
 			{
-				logger.severe("Cannot browse CUSTOMER file after 100 attempts");
-				logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+				logger.severe(BROWSE_GIVE_UP);
+				logger.exiting(this.getClass().getName(),GET_CUSTOMERS,null);
 				return null;
 			}
 		}
@@ -611,7 +640,7 @@ public class Customer {
 		{
 			real[j] = temp[j];	
 		}
-		logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",real);
+		logger.exiting(this.getClass().getName(),GET_CUSTOMERS,real);
 		return real;
 	}
 
@@ -620,10 +649,10 @@ public class Customer {
 
 	public Customer updateCustomer(CustomerJSON customer) 
 	{
-		logger.entering(this.getClass().getName(),"updateCustomer(CustomerJSON customer)",null);
+		logger.entering(this.getClass().getName(),UPDATE_CUSTOMER,null);
 
 		customerFile = new KSDS();
-		customerFile.setName("CUSTOMER");
+		customerFile.setName(FILENAME);
 		Customer temp;
 		RecordHolder holder = new RecordHolder();
 		byte[] key = new byte[16];
@@ -655,12 +684,12 @@ public class Customer {
 		String keyString = new String(key);
 		try 
 		{
-			key = keyString.getBytes("Cp1047");
+			key = keyString.getBytes(CODEPAGE);
 		}
 		catch (UnsupportedEncodingException e2) 
 		{
 			logger.severe(e2.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"updateCustomer(CustomerJSON customer)",null);
+			logger.exiting(this.getClass().getName(),UPDATE_CUSTOMER,null);
 			return null;
 		}
 		try 
@@ -678,14 +707,14 @@ public class Customer {
 				| NotAuthorisedException | NotOpenException | LengthErrorException | DuplicateRecordException | NoSpaceException e) 
 		{
 			logger.severe("Error updating customer " + customerNumberLong + " " + e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"updateCustomer(CustomerJSON customer)",null);
+			logger.exiting(this.getClass().getName(),UPDATE_CUSTOMER,null);
 			return null;
 		}
 		catch (RecordNotFoundException e2)
 		{
 			Customer customer404 = new Customer();
 			customer404.setNot_found(true);
-			logger.exiting(this.getClass().getName(),"updateCustomer(CustomerJSON customer)",customer404);
+			logger.exiting(this.getClass().getName(),UPDATE_CUSTOMER,customer404);
 			return customer404;
 		}
 		catch (InvalidSystemIdException  e2) {
@@ -694,7 +723,7 @@ public class Customer {
 			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
+					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				} 
 				catch (InterruptedException e) 
@@ -716,7 +745,7 @@ public class Customer {
 				catch (NoSpaceException | DuplicateRecordException | DuplicateKeyException | ChangedException | LoadingException | RecordBusyException | LockedException | IOErrorException | LengthErrorException | FileDisabledException | NotOpenException | LogicException | InvalidRequestException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException 	e3) 
 				{
 					logger.severe("Error updating CUSTOMER file, " + e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),"updateCustomer(CustomerJSON customer)",null);
+					logger.exiting(this.getClass().getName(),UPDATE_CUSTOMER,null);
 					return null;
 				}
 				catch (InvalidSystemIdException e4)
@@ -726,14 +755,14 @@ public class Customer {
 				{
 					Customer customer404 = new Customer();
 					customer404.setNot_found(true);
-					logger.exiting(this.getClass().getName(),"updateCustomer(CustomerJSON customer)",customer404);
+					logger.exiting(this.getClass().getName(),UPDATE_CUSTOMER,customer404);
 					return customer404;
 				}
 			}
 			if(number_of_retries == maximum_retries && success == false)
 			{
 				logger.severe("Cannot update CUSTOMER file after 100 attempts");
-				logger.exiting(this.getClass().getName(),"updateCustomer(CustomerJSON customer)",null);
+				logger.exiting(this.getClass().getName(),UPDATE_CUSTOMER,null);
 				return null;
 			}
 		}
@@ -761,7 +790,7 @@ public class Customer {
 				myCustomerBirthDate, 
 				Integer.toString(myCustomer.getCustomerCreditScore()),
 				myCustomerReviewDate);
-		logger.exiting(this.getClass().getName(),"updateCustomer(CustomerJSON customer)",temp);
+		logger.exiting(this.getClass().getName(),UPDATE_CUSTOMER,temp);
 		return temp;
 	}
 
@@ -778,13 +807,13 @@ public class Customer {
 
 	public Customer deleteCustomer(long customerNumber, int sortCode) {
 
-		logger.entering(this.getClass().getName(),"deleteCustomer(long customerNumber, int sortCode)");
+		logger.entering(this.getClass().getName(),DELETE_CUSTOMER);
 
 
 		Customer temp = null;
 
 		customerFile = new KSDS();
-		customerFile.setName("CUSTOMER");
+		customerFile.setName(FILENAME);
 
 		myCustomer = new CUSTOMER();
 
@@ -821,8 +850,8 @@ public class Customer {
 					| ChangedException | LockedException | LoadingException | RecordBusyException
 					| FileDisabledException | DuplicateKeyException | FileNotFoundException | ISCInvalidRequestException
 					| NotAuthorisedException | RecordNotFoundException | NotOpenException e) {
-				logger.severe("Error deleting customer " + customerNumber + " in CUSTOMER file " + e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),"deleteCustomer(long customerNumber, int sortCode)",null);
+				logger.severe(ERROR_DELETE1 + customerNumber + ERROR_DELETE2 + e.getLocalizedMessage());
+				logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,null);
 				return null;
 			}
 			catch (InvalidSystemIdException  e2) {
@@ -832,7 +861,7 @@ public class Customer {
 				{
 					try 
 					{
-						logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
+						logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 						Thread.sleep(3000);
 					}
 					catch (InterruptedException e) 
@@ -852,8 +881,8 @@ public class Customer {
 
 					} catch (EndOfFileException | DuplicateKeyException | ChangedException | LoadingException | RecordBusyException | LockedException | RecordNotFoundException | IOErrorException | LengthErrorException | FileDisabledException | NotOpenException | LogicException | InvalidRequestException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
 							e3) {
-						logger.severe("Error deleting customer " + customerNumber + " in CUSTOMER file " + e3.getLocalizedMessage());
-						logger.exiting(this.getClass().getName(),"deleteCustomer(long customerNumber, int sortCode)",null);
+						logger.severe(ERROR_DELETE1 + customerNumber + ERROR_DELETE2 + e3.getLocalizedMessage());
+						logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,null);
 						return null;
 					}
 					catch (InvalidSystemIdException e4)
@@ -863,7 +892,7 @@ public class Customer {
 				if(number_of_retries == maximum_retries && success == false)
 				{
 					logger.severe("Cannot delete customer " + customerNumber + " in CUSTOMER file after 100 attempts");
-					logger.exiting(this.getClass().getName(),"deleteCustomer(long customerNumber, int sortCode)",null);
+					logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,null);
 					return null;
 				}
 			}
@@ -899,10 +928,10 @@ public class Customer {
 
 			String keyString = new String(key);
 			try {
-				key = keyString.getBytes("Cp1047");
+				key = keyString.getBytes(CODEPAGE);
 			} catch (UnsupportedEncodingException e2) {
 				logger.severe(e2.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),"deleteCustomer(long customerNumber, int sortCode)",null);
+				logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,null);
 				return null;
 			}
 			try {
@@ -912,8 +941,8 @@ public class Customer {
 					| ChangedException | LockedException | LoadingException | RecordBusyException
 					| FileDisabledException | DuplicateKeyException | FileNotFoundException | ISCInvalidRequestException
 					| NotAuthorisedException | NotOpenException e) {
-				logger.severe("Error deleting customer " + customerNumber + " in CUSTOMER file," + e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),"deleteCustomer(long customerNumber, int sortCode)",null);
+				logger.severe(ERROR_DELETE1 + customerNumber + " in CUSTOMER file," + e.getLocalizedMessage());
+				logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,null);
 				return null;
 			}
 			catch (InvalidSystemIdException  e2) {
@@ -922,7 +951,7 @@ public class Customer {
 				for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 				{
 					try {
-						logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
+						logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 						Thread.sleep(3000);
 					}
 					catch (InterruptedException e) 
@@ -937,8 +966,8 @@ public class Customer {
 
 					} catch (DuplicateKeyException | ChangedException | LoadingException | RecordBusyException | LockedException |IOErrorException | FileDisabledException | NotOpenException | LogicException | InvalidRequestException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
 							e3) {
-						logger.severe("Error deleting customer " + customerNumber + " in CUSTOMER file " + e3.getLocalizedMessage());
-						logger.exiting(this.getClass().getName(),"deleteCustomer(long customerNumber, int sortCode)",null);
+						logger.severe(ERROR_DELETE1 + customerNumber + ERROR_DELETE2 + e3.getLocalizedMessage());
+						logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,null);
 						return null;
 					}
 					catch (InvalidSystemIdException e4)
@@ -954,7 +983,7 @@ public class Customer {
 				if(number_of_retries == maximum_retries && success == false)
 				{
 					logger.severe("Cannot delete customer " + customerNumber + " in CUSTOMER file after 100 attempts");
-					logger.exiting(this.getClass().getName(),"deleteCustomer(long customerNumber, int sortCode)",null);
+					logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,null);
 					return null;
 				}
 			}
@@ -962,29 +991,29 @@ public class Customer {
 			{
 				Customer customer404 = new Customer();
 				customer404.setNot_found(true);
-				logger.exiting(this.getClass().getName(),"deleteCustomer(long customerNumber, int sortCode)",customer404);
+				logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,customer404);
 				return customer404;
 			}
 
 			myCustomer = new CUSTOMER(holder.getValue());
 			CustomerControl myCustomerControl = new CustomerControl();
 			KSDS customerKSDS = new KSDS();
-			customerKSDS.setName("CUSTOMER");
+			customerKSDS.setName(FILENAME);
 
 			myCustomerControl.setCustomerControlSortcode(0);
 			myCustomerControl.setCustomerControlNumber(9999999999L);
 
-			key = "0000009999999999".getBytes();
+			key = LAST_CUSTOMER.getBytes();
 
 			keyString = new String(key);
 			try 
 			{
-				key = keyString.getBytes("Cp1047");
+				key = keyString.getBytes(CODEPAGE);
 			}
 			catch (UnsupportedEncodingException e2) 
 			{
 				logger.severe(e2.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),"deleteCustomer(long customerNumber, int sortCode)",null);
+				logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,null);
 				return null;
 			}
 
@@ -997,7 +1026,7 @@ public class Customer {
 					| FileDisabledException | DuplicateKeyException | FileNotFoundException | ISCInvalidRequestException
 					| NotAuthorisedException | RecordNotFoundException | NotOpenException e) {
 				logger.severe(e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),"deleteCustomer(long customerNumber, int sortCode)",null);
+				logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,null);
 				return null;
 			}
 			myCustomerControl = new CustomerControl(holder.getValue());
@@ -1013,7 +1042,7 @@ public class Customer {
 					| RecordBusyException | FileDisabledException | DuplicateRecordException | FileNotFoundException
 					| ISCInvalidRequestException | NoSpaceException | NotAuthorisedException | NotOpenException e) {
 				logger.severe(e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),"deleteCustomer(long customerNumber, int sortCode)",null);
+				logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,null);
 				return null;
 			}
 		}
@@ -1034,19 +1063,19 @@ public class Customer {
 				Integer.toString(myCustomer.getCustomerCreditScore()),
 				myCustomerReviewDate);
 
-		logger.exiting(this.getClass().getName(),"deleteCustomer(long customerNumber, int sortCode)",temp);
+		logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,temp);
 		return temp;
 
 	}
 
 	public Customer createCustomer(CustomerJSON customer, Integer sortCodeInteger, boolean useNamedCounter) 
 	{
-		logger.entering(this.getClass().getName(),"createCustomer(CustomerJSON customer, Integer sortCodeInteger, boolean useNamedCounter)");
+		logger.entering(this.getClass().getName(),CREATE_CUSTOMER);
 		
 		Customer temp = null;
 
 		customerFile = new KSDS();
-		customerFile.setName("CUSTOMER");
+		customerFile.setName(FILENAME);
 		CounterResource myCounterResource = null;
 		myCustomer = new CUSTOMER();
 		long customerNumber = 1234567890L;
@@ -1062,7 +1091,7 @@ public class Customer {
 				customerNumber = (Long) myCounterJSON.get("customerNumber");
 			} catch (IOException e) {
 				logger.severe(e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),"createCustomer(CustomerJSON customer, Integer sortCodeInteger, boolean useNamedCounter)",null);
+				logger.exiting(this.getClass().getName(),CREATE_CUSTOMER,null);
 				return null;
 
 			}
@@ -1077,31 +1106,31 @@ public class Customer {
 				enqueue.enqueue();
 			} catch (ResourceUnavailableException e) {
 				logger.severe(e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),"createCustomer(CustomerJSON customer, Integer sortCodeInteger, boolean useNamedCounter)",null);
+				logger.exiting(this.getClass().getName(),CREATE_CUSTOMER,null);
 				return null;
 			} catch (LengthErrorException e) {
 				logger.severe(e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),"createCustomer(CustomerJSON customer, Integer sortCodeInteger, boolean useNamedCounter)",null);
+				logger.exiting(this.getClass().getName(),CREATE_CUSTOMER,null);
 				return null;
 			}
 			CustomerControl myCustomerControl = new CustomerControl();
 			KSDS customerKSDS = new KSDS();
-			customerKSDS.setName("CUSTOMER");
+			customerKSDS.setName(FILENAME);
 
 			myCustomerControl.setCustomerControlSortcode(0);
 			myCustomerControl.setCustomerControlNumber(9999999999L);
 
-			byte[] key = "0000009999999999".getBytes();
+			byte[] key = LAST_CUSTOMER.getBytes();
 
 			String keyString = new String(key);
 			try 
 			{
-				key = keyString.getBytes("Cp1047");
+				key = keyString.getBytes(CODEPAGE);
 			}
 			catch (UnsupportedEncodingException e2) 
 			{
 				logger.severe(e2.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),"createCustomer(CustomerJSON customer, Integer sortCodeInteger, boolean useNamedCounter)",null);
+				logger.exiting(this.getClass().getName(),CREATE_CUSTOMER,null);
 				return null;
 			}
 
@@ -1114,7 +1143,7 @@ public class Customer {
 					| FileDisabledException | DuplicateKeyException | FileNotFoundException | ISCInvalidRequestException
 					| NotAuthorisedException | RecordNotFoundException | NotOpenException e) {
 				logger.severe(e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),"createCustomer(CustomerJSON customer, Integer sortCodeInteger, boolean useNamedCounter)",null);
+				logger.exiting(this.getClass().getName(),CREATE_CUSTOMER,null);
 				return null;
 			}
 
@@ -1137,7 +1166,7 @@ public class Customer {
 					| RecordBusyException | FileDisabledException | DuplicateRecordException | FileNotFoundException
 					| ISCInvalidRequestException | NoSpaceException | NotAuthorisedException | NotOpenException e) {
 				logger.severe(e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),"createCustomer(CustomerJSON customer, Integer sortCodeInteger, boolean useNamedCounter)",null);
+				logger.exiting(this.getClass().getName(),CREATE_CUSTOMER,null);
 				return null;
 			}
 		}
@@ -1170,12 +1199,12 @@ public class Customer {
 		String keyString = new String(key);
 		try 
 		{
-			key = keyString.getBytes("Cp1047");
+			key = keyString.getBytes(CODEPAGE);
 		}
 		catch (UnsupportedEncodingException e2) 
 		{
 			logger.severe(e2.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"createCustomer(CustomerJSON customer, Integer sortCodeInteger, boolean useNamedCounter)",null);
+			logger.exiting(this.getClass().getName(),CREATE_CUSTOMER,null);
 			return null;
 		}
 		myCustomer = new CUSTOMER();
@@ -1210,7 +1239,7 @@ public class Customer {
 		else
 		{
 			logger.severe("Error! populateCreditScoreAndReviewDate returned null");
-			logger.exiting(this.getClass().getName(),"createCustomer(CustomerJSON customer, Integer sortCodeInteger, boolean useNamedCounter)",null);
+			logger.exiting(this.getClass().getName(),CREATE_CUSTOMER,null);
 			return null;
 		}
 
@@ -1236,11 +1265,11 @@ public class Customer {
 				myCounterResource.decrementCustomerCounter();
 			}
 			logger.severe("Error writing record to CUSTOMER file, " + e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"createCustomer(CustomerJSON customer, Integer sortCodeInteger, boolean useNamedCounter)",null);
+			logger.exiting(this.getClass().getName(),CREATE_CUSTOMER,null);
 			return null;
 		} catch (DuplicateRecordException e) {
 			logger.severe("DuplicateRecordException duplicate value. Have you combined named counter and non-named counter with the same data? com.ibm.cics.cip.bankliberty.web.vsam.Customer.");
-			logger.exiting(this.getClass().getName(),"createCustomer(CustomerJSON customer, Integer sortCodeInteger, boolean useNamedCounter)",null);
+			logger.exiting(this.getClass().getName(),CREATE_CUSTOMER,null);
 			if(useNamedCounter)
 			{
 				myCounterResource.decrementCustomerCounter();
@@ -1253,7 +1282,7 @@ public class Customer {
 			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
+					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				}
 				catch (InterruptedException e) 
@@ -1269,7 +1298,7 @@ public class Customer {
 				} catch (NoSpaceException | LengthErrorException | DuplicateRecordException | ChangedException | LoadingException | RecordBusyException | LockedException | IOErrorException | FileDisabledException | NotOpenException | LogicException | InvalidRequestException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
 						e3) {
 					logger.severe("Error inserting customer " + customerNumber + " into CUSTOMER file " + e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),"createCustomer(CustomerJSON customer, Integer sortCodeInteger, boolean useNamedCounter)",null);
+					logger.exiting(this.getClass().getName(),CREATE_CUSTOMER,null);
 					return null;
 				}
 				catch (InvalidSystemIdException e4)
@@ -1279,7 +1308,7 @@ public class Customer {
 			if(number_of_retries == maximum_retries && success == false)
 			{
 				logger.severe("Cannot insert customer " + customerNumber + " into CUSTOMER file after 100 attempts");
-				logger.exiting(this.getClass().getName(),"createCustomer(CustomerJSON customer, Integer sortCodeInteger, boolean useNamedCounter)",null);
+				logger.exiting(this.getClass().getName(),CREATE_CUSTOMER,null);
 				return null;
 			}
 		}
@@ -1311,20 +1340,20 @@ public class Customer {
 				myCustomerBirthDate, 
 				Integer.toString(myCustomer.getCustomerCreditScore()),
 				myCustomerReviewDate);
-		logger.exiting(this.getClass().getName(),"createCustomer(CustomerJSON customer, Integer sortCodeInteger, boolean useNamedCounter)",temp);
+		logger.exiting(this.getClass().getName(),CREATE_CUSTOMER,temp);
 		return temp;
 
 	}
 
 	public Customer[] getCustomers(int sortCode, int limit, int offset) 
 	{
-		logger.entering(this.getClass().getName(),"getCustomers(int sortCode, int limit, int offset)");
+		logger.entering(this.getClass().getName(),GET_CUSTOMERS_WITH_OFFSET_AND_LIMIT);
 		Customer[] temp = new Customer[limit];
 		int stored = 0, retrieved = 0;
 
 
 		KSDS customerFile = new KSDS();
-		customerFile.setName("CUSTOMER");
+		customerFile.setName(FILENAME);
 
 		myCustomer = new CUSTOMER();
 
@@ -1358,10 +1387,10 @@ public class Customer {
 		// We need to convert the key to EBCDIC
 		String keyString = new String(key);
 		try {
-			key = keyString.getBytes("Cp1047");
+			key = keyString.getBytes(CODEPAGE);
 		} catch (UnsupportedEncodingException e2) {
 			logger.severe(e2.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"getCustomers(int sortCode, int limit, int offset)",null);
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_WITH_OFFSET_AND_LIMIT,null);
 			return null;
 		}
 
@@ -1372,8 +1401,8 @@ public class Customer {
 				| LockedException | RecordBusyException | LoadingException | ChangedException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 				| NotOpenException e1) {
-			logger.severe("Error starting browse of customer " + e1.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"getCustomers(int sortCode, int limit, int offset)",null);
+			logger.severe(ERROR_START_BROWSE + e1.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_WITH_OFFSET_AND_LIMIT,null);
 			return null;
 		}
 		catch (InvalidSystemIdException  e1) {
@@ -1382,7 +1411,7 @@ public class Customer {
 			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
+					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				}
 				catch (InterruptedException e) 
@@ -1397,7 +1426,7 @@ public class Customer {
 				} catch (FileDisabledException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 						e3) {
 					logger.severe(e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),"getCustomers(int sortCode, int limit, int offset)",null);
+					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_WITH_OFFSET_AND_LIMIT,null);
 					return null;
 				}
 				catch (InvalidSystemIdException e4)
@@ -1407,7 +1436,7 @@ public class Customer {
 			}
 			if(number_of_retries == maximum_retries && success == false)
 			{
-				logger.severe("Cannot read CUSTOMER file after 100 attempts");
+				logger.severe(READ_GIVE_UP);
 				return null;
 			}
 		}
@@ -1436,8 +1465,8 @@ public class Customer {
 					| FileNotFoundException
 					| ISCInvalidRequestException | NotAuthorisedException
 					| RecordNotFoundException | NotOpenException | LengthErrorException e) {
-				logger.severe("Error browsing CUSTOMER file, " + e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),"getCustomers(int sortCode, int limit, int offset)",null);
+				logger.severe(ERROR_BROWSE + e.getLocalizedMessage());
+				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_WITH_OFFSET_AND_LIMIT,null);
 				return null;
 			}
 			catch (InvalidSystemIdException  e1) {
@@ -1446,7 +1475,7 @@ public class Customer {
 				for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 				{
 					try {
-						logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
+						logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 						Thread.sleep(3000);
 					}
 					 catch (InterruptedException e) 
@@ -1461,7 +1490,7 @@ public class Customer {
 					} catch (DuplicateKeyException | LengthErrorException | FileDisabledException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 							e3) {
 						logger.severe(e3.getLocalizedMessage());
-						logger.exiting(this.getClass().getName(),"getCustomers(int sortCode, int limit, int offset)",null);
+						logger.exiting(this.getClass().getName(),GET_CUSTOMERS_WITH_OFFSET_AND_LIMIT,null);
 						return null;
 					}
 					catch (InvalidSystemIdException e4)
@@ -1477,8 +1506,8 @@ public class Customer {
 				}
 				if(number_of_retries == maximum_retries && success == false)
 				{
-					logger.severe("Cannot browse CUSTOMER file after 100 attempts");
-					logger.exiting(this.getClass().getName(),"getCustomers(int sortCode, int limit, int offset)",null);
+					logger.severe(BROWSE_GIVE_UP);
+					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_WITH_OFFSET_AND_LIMIT,null);
 					return null;
 				}
 
@@ -1513,8 +1542,8 @@ public class Customer {
 		} catch (LogicException | InvalidRequestException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
 				| NotOpenException e) {
-			logger.severe("Error ending browse of CUSTOMER file "  + e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"getCustomers(int sortCode, int limit, int offset)",null);
+			logger.severe("ERROR_END_BROWSE "  + e.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_WITH_OFFSET_AND_LIMIT,null);
 			return null;
 		}
 		catch (InvalidSystemIdException  e2) {
@@ -1523,7 +1552,7 @@ public class Customer {
 			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
+					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				}
 				catch (InterruptedException e) 
@@ -1537,8 +1566,8 @@ public class Customer {
 
 				} catch (FileDisabledException | NotOpenException | LogicException | InvalidRequestException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
 						e3) {
-					logger.severe("Error ending browse of CUSTOMER file, " + e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),"getCustomers(int sortCode, int limit, int offset)",null);
+					logger.severe(ERROR_END_BROWSE + e3.getLocalizedMessage());
+					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_WITH_OFFSET_AND_LIMIT,null);
 					return null;
 				}
 				catch (InvalidSystemIdException e4)
@@ -1548,8 +1577,8 @@ public class Customer {
 			}
 			if(number_of_retries == maximum_retries && success == false)
 			{
-				logger.severe("Cannot browse CUSTOMER file after 100 attempts");
-				logger.exiting(this.getClass().getName(),"getCustomers(int sortCode, int limit, int offset)",null);
+				logger.severe(BROWSE_GIVE_UP);
+				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_WITH_OFFSET_AND_LIMIT,null);
 				return null;
 			}
 		}
@@ -1560,13 +1589,13 @@ public class Customer {
 		{
 			real[j] = temp[j];	
 		}
-		logger.exiting(this.getClass().getName(),"getCustomers(int sortCode, int limit, int offset)",real);
+		logger.exiting(this.getClass().getName(),GET_CUSTOMERS_WITH_OFFSET_AND_LIMIT,real);
 		return real;
 
 	}
 
 	public Customer[] getCustomersByName(int sortCode, int limit, int offset, String name) {
-		logger.entering(this.getClass().getName(),"getCustomersByName(int sortCode, int limit, int offset, String name)");
+		logger.entering(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_WITH_OFFSET_AND_LIMIT);
 		Customer[] temp = new Customer[1000000];
 
 	
@@ -1575,7 +1604,7 @@ public class Customer {
 
 		
 		KSDS customerFile = new KSDS();
-		customerFile.setName("CUSTOMER");
+		customerFile.setName(FILENAME);
 
 		myCustomer = new CUSTOMER();
 
@@ -1609,10 +1638,10 @@ public class Customer {
 		// We need to convert the key to EBCDIC
 		String keyString = new String(key);
 		try {
-			key = keyString.getBytes("Cp1047");
+			key = keyString.getBytes(CODEPAGE);
 		} catch (UnsupportedEncodingException e2) {
 			logger.severe(e2.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"getCustomersByName(int sortCode, int limit, int offset, String name)",null);
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_WITH_OFFSET_AND_LIMIT,null);
 			return null;
 		}
 
@@ -1624,8 +1653,8 @@ public class Customer {
 				| LockedException | RecordBusyException | LoadingException | ChangedException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 				| NotOpenException e1) {
-			logger.severe("Error starting browse of customer " + e1.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"getCustomersByName(int sortCode, int limit, int offset, String name)",null);
+			logger.severe(ERROR_START_BROWSE + e1.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_WITH_OFFSET_AND_LIMIT,null);
 			return null;
 		}
 		catch (InvalidSystemIdException  e1) {
@@ -1634,7 +1663,7 @@ public class Customer {
 			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
+					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				}
 				catch (InterruptedException e) 
@@ -1648,8 +1677,8 @@ public class Customer {
 
 				} catch (FileDisabledException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 						e3) {
-					logger.severe("Error starting browse of CUSTOMER file, " + e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),"getCustomersByName(int sortCode, int limit, int offset, String name)",null);
+					logger.severe(ERROR_START_BROWSE+ e3.getLocalizedMessage());
+					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_WITH_OFFSET_AND_LIMIT,null);
 					return null;
 				}
 				catch (InvalidSystemIdException e4)
@@ -1659,8 +1688,8 @@ public class Customer {
 			}
 			if(number_of_retries == maximum_retries && success == false)
 			{
-				logger.severe("Cannot read CUSTOMER file after 100 attempts");
-				logger.exiting(this.getClass().getName(),"getCustomersByName(int sortCode, int limit, int offset, String name)",null);
+				logger.severe(READ_GIVE_UP);
+				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_WITH_OFFSET_AND_LIMIT,null);
 				return null;
 			}
 		}
@@ -1688,8 +1717,8 @@ public class Customer {
 					| FileNotFoundException
 					| ISCInvalidRequestException | NotAuthorisedException
 					| RecordNotFoundException | NotOpenException | LengthErrorException e) {
-				logger.severe("Error browsing CUSTOMER file, " + e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),"getCustomersByName(int sortCode, int limit, int offset, String name)",null);
+				logger.severe(ERROR_BROWSE + e.getLocalizedMessage());
+				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_WITH_OFFSET_AND_LIMIT,null);
 				return null;
 			}
 			catch (InvalidSystemIdException  e1) {
@@ -1698,7 +1727,7 @@ public class Customer {
 				for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 				{
 					try {
-						logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
+						logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 						Thread.sleep(3000);
 					}
 					catch (InterruptedException e) 
@@ -1712,8 +1741,8 @@ public class Customer {
 
 					} catch (DuplicateKeyException | LengthErrorException | FileDisabledException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 							e3) {
-						logger.severe("Error browsing CUSTOMER file, " + e3.getLocalizedMessage());
-						logger.exiting(this.getClass().getName(),"getCustomersByName(int sortCode, int limit, int offset, String name)",null);
+						logger.severe(ERROR_BROWSE + e3.getLocalizedMessage());
+						logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_WITH_OFFSET_AND_LIMIT,null);
 						return null;
 					}
 					catch (InvalidSystemIdException e4)
@@ -1729,8 +1758,8 @@ public class Customer {
 				}
 				if(number_of_retries == maximum_retries && success == false)
 				{
-					logger.severe("Cannot browse CUSTOMER file after 100 attempts");
-					logger.exiting(this.getClass().getName(),"getCustomersByName(int sortCode, int limit, int offset, String name)",null);
+					logger.severe(BROWSE_GIVE_UP);
+					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_WITH_OFFSET_AND_LIMIT,null);
 					return null;
 				}
 
@@ -1771,8 +1800,8 @@ public class Customer {
 		} catch (LogicException | InvalidRequestException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
 				| NotOpenException e) {
-			logger.severe("Error ending browse of CUSTOMER file "  + e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"getCustomersByName(int sortCode, int limit, int offset, String name)",null);
+			logger.severe("ERROR_END_BROWSE "  + e.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_WITH_OFFSET_AND_LIMIT,null);
 			return null;
 		}
 		catch (InvalidSystemIdException  e2) {
@@ -1781,7 +1810,7 @@ public class Customer {
 			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
+					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				}
 
@@ -1796,8 +1825,8 @@ public class Customer {
 
 				} catch (FileDisabledException | NotOpenException | LogicException | InvalidRequestException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
 						e3) {
-					logger.severe("Error ending browse of CUSTOMER file, " + e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),"getCustomersByName(int sortCode, int limit, int offset, String name)",null);
+					logger.severe(ERROR_END_BROWSE + e3.getLocalizedMessage());
+					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_WITH_OFFSET_AND_LIMIT,null);
 					return null;
 				}
 				catch (InvalidSystemIdException e4)
@@ -1807,8 +1836,8 @@ public class Customer {
 			}
 			if(number_of_retries == maximum_retries && success == false)
 			{
-				logger.severe("Cannot browse CUSTOMER file after 100 attempts");
-				logger.exiting(this.getClass().getName(),"getCustomersByName(int sortCode, int limit, int offset, String name)",null);
+				logger.severe(BROWSE_GIVE_UP);
+				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_WITH_OFFSET_AND_LIMIT,null);
 				return null;
 			}
 		}
@@ -1842,18 +1871,18 @@ public class Customer {
 		}
 
 		
-		logger.exiting(this.getClass().getName(),"getCustomersByName(int sortCode, int limit, int offset, String name)",returnCust);
+		logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_WITH_OFFSET_AND_LIMIT,returnCust);
 		return returnCust;
 	}
 
 	public Customer[] getCustomers(int sortCode, String name) 
 	{
-		logger.entering(this.getClass().getName(),"getCustomers(int sortCode, String name)");
+		logger.entering(this.getClass().getName(),GET_CUSTOMERS_BY_NAME);
 		Customer[] temp = new Customer[250000];
 		int stored = 0, retrieved = 0;
 
 		KSDS customerFile = new KSDS();
-		customerFile.setName("CUSTOMER");
+		customerFile.setName(FILENAME);
 
 		myCustomer = new CUSTOMER();
 
@@ -1888,10 +1917,10 @@ public class Customer {
 		// We need to convert the key to EBCDIC
 		String keyString = new String(key);
 		try {
-			key = keyString.getBytes("Cp1047");
+			key = keyString.getBytes(CODEPAGE);
 		} catch (UnsupportedEncodingException e2) {
 			logger.severe(e2.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"getCustomers(int sortCode, String name)",null);
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME,null);
 			return null;
 		}
 
@@ -1903,8 +1932,8 @@ public class Customer {
 				| LockedException | RecordBusyException | LoadingException | ChangedException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 				| NotOpenException e1) {
-			logger.severe("Error starting browse of customer " + e1.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"getCustomers(int sortCode, String name)",null);
+			logger.severe(ERROR_START_BROWSE + e1.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME,null);
 			return null;
 		}
 		catch (InvalidSystemIdException  e1) {
@@ -1913,7 +1942,7 @@ public class Customer {
 			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
+					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				}
 				catch (InterruptedException e) 
@@ -1928,8 +1957,8 @@ public class Customer {
 
 				} catch (FileDisabledException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 						e3) {
-					logger.severe("Error starting browse of CUSTOMER file, " + e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),"getCustomers(int sortCode, String name)",null);
+					logger.severe(ERROR_START_BROWSE+ e3.getLocalizedMessage());
+					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME,null);
 					return null;
 				}
 				catch (InvalidSystemIdException e4)
@@ -1939,8 +1968,8 @@ public class Customer {
 			}
 			if(number_of_retries == maximum_retries && success == false)
 			{
-				logger.severe("Cannot read CUSTOMER file after 100 attempts");
-				logger.exiting(this.getClass().getName(),"getCustomers(int sortCode, String name)",null);
+				logger.severe(READ_GIVE_UP);
+				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME,null);
 				return null;
 			}
 		}
@@ -1968,8 +1997,8 @@ public class Customer {
 					| FileNotFoundException
 					| ISCInvalidRequestException | NotAuthorisedException
 					| RecordNotFoundException | NotOpenException | LengthErrorException e) {
-				logger.severe("Error browsing CUSTOMER file, " + e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),"getCustomers(int sortCode, String name)",null);
+				logger.severe(ERROR_BROWSE + e.getLocalizedMessage());
+				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME,null);
 				return null;
 			}
 			catch (InvalidSystemIdException  e1) {
@@ -1978,7 +2007,7 @@ public class Customer {
 				for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 				{
 					try {
-						logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
+						logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 						Thread.sleep(3000);
 					}
 					catch (InterruptedException e) 
@@ -1992,8 +2021,8 @@ public class Customer {
 
 					} catch (DuplicateKeyException | LengthErrorException | FileDisabledException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 							e3) {
-						logger.severe("Error browsing CUSTOMER file, " + e3.getLocalizedMessage());
-						logger.exiting(this.getClass().getName(),"getCustomers(int sortCode, String name)",null);
+						logger.severe(ERROR_BROWSE + e3.getLocalizedMessage());
+						logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME,null);
 						return null;
 					}
 					catch (InvalidSystemIdException e4)
@@ -2009,8 +2038,8 @@ public class Customer {
 				}
 				if(number_of_retries == maximum_retries && success == false)
 				{
-					logger.severe("Cannot browse CUSTOMER file after 100 attempts");
-					logger.exiting(this.getClass().getName(),"getCustomers(int sortCode, String name)",null);
+					logger.severe(BROWSE_GIVE_UP);
+					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME,null);
 					return null;
 				}
 
@@ -2048,8 +2077,8 @@ public class Customer {
 		} catch (LogicException | InvalidRequestException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
 				| NotOpenException e) {
-			logger.severe("Error ending browse of CUSTOMER file "  + e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"getCustomers(int sortCode, String name)",null);
+			logger.severe("ERROR_END_BROWSE "  + e.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME,null);
 			return null;
 		}
 		catch (InvalidSystemIdException  e2) {
@@ -2058,7 +2087,7 @@ public class Customer {
 			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
+					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				}
 				catch (InterruptedException e) 
@@ -2072,8 +2101,8 @@ public class Customer {
 
 				} catch (FileDisabledException | NotOpenException | LogicException | InvalidRequestException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
 						e3) {
-					logger.severe("Error ending browse of CUSTOMER file, " + e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),"getCustomers(int sortCode, String name)",null);
+					logger.severe(ERROR_END_BROWSE + e3.getLocalizedMessage());
+					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME,null);
 					return null;
 				}
 				catch (InvalidSystemIdException e4)
@@ -2083,8 +2112,8 @@ public class Customer {
 			}
 			if(number_of_retries == maximum_retries && success == false)
 			{
-				logger.severe("Cannot browse CUSTOMER file after 100 attempts");
-				logger.exiting(this.getClass().getName(),"getCustomers(int sortCode, String name)",null);
+				logger.severe(BROWSE_GIVE_UP);
+				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME,null);
 				return null;
 			}
 		}
@@ -2095,16 +2124,16 @@ public class Customer {
 		{
 			real[j] = temp[j];	
 		}
-		logger.exiting(this.getClass().getName(),"getCustomers(int sortCode, String name)",real);
+		logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME,real);
 		return real;
 	}
 
 	public long getCustomersCountOnly(int sortCode)
 	{
-		logger.entering(this.getClass().getName(),"getCustomersCountOnly(int sortCode))");
+		logger.entering(this.getClass().getName(),GET_CUSTOMERS_COUNT_ONLY);
 
 		KSDS customerFile = new KSDS();
-		customerFile.setName("CUSTOMER");
+		customerFile.setName(FILENAME);
 
 
 
@@ -2113,12 +2142,12 @@ public class Customer {
 
 		byte[] key = new byte[16];
 		// We need to convert the key to EBCDIC
-		String keyString = new String("0000009999999999");
+		String keyString = new String(LAST_CUSTOMER);
 		try {
-			key = keyString.getBytes("Cp1047");
+			key = keyString.getBytes(CODEPAGE);
 		} catch (UnsupportedEncodingException e2) {
 			logger.severe(e2.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"getCustomersCountOnly(int sortCode))",-1L);
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_COUNT_ONLY,-1L);
 			return -1L;
 		}
 
@@ -2129,7 +2158,7 @@ public class Customer {
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 				| DuplicateKeyException | NotOpenException e1) {
 			logger.severe("Error reading control record for customer file " + e1.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"getCustomersCountOnly(int sortCode))",-1L);
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_COUNT_ONLY,-1L);
 			return -1L;
 		}
 		catch (InvalidSystemIdException  e1) {
@@ -2138,7 +2167,7 @@ public class Customer {
 			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
+					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				}
 				catch (InterruptedException e) 
@@ -2153,7 +2182,7 @@ public class Customer {
 				} catch (FileDisabledException | DuplicateKeyException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 						e3) {
 					logger.severe("Error reading control record for customer file file, " + e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),"getCustomersCountOnly(int sortCode))",-1L);
+					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_COUNT_ONLY,-1L);
 					return -1L;
 				}
 				catch (InvalidSystemIdException e4)
@@ -2164,26 +2193,26 @@ public class Customer {
 			if(number_of_retries == maximum_retries && success == false)
 			{
 				logger.severe("Cannot read control record for CUSTOMER file after 100 attempts");
-				logger.exiting(this.getClass().getName(),"getCustomersCountOnly(int sortCode))",-1L);
+				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_COUNT_ONLY,-1L);
 				return -1L;
 			}
 		}
 
 		CustomerControl myCustomerControl = new CustomerControl(holder.getValue());
-		logger.exiting(this.getClass().getName(),"getCustomersCountOnly(int sortCode))",myCustomerControl.getNumberOfCustomers());
+		logger.exiting(this.getClass().getName(),GET_CUSTOMERS_COUNT_ONLY,myCustomerControl.getNumberOfCustomers());
 		return myCustomerControl.getNumberOfCustomers();
 
 	}
 
 	public long getCustomersByNameCountOnly(int sortCode, String name) {
-		logger.entering(this.getClass().getName(),"getCustomersByNameCountOnly(int sortCode, String name)");
+		logger.entering(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_COUNT_ONLY);
 
 		long matchingCustomers = 0;
 
 
 
 		KSDS customerFile = new KSDS();
-		customerFile.setName("CUSTOMER");
+		customerFile.setName(FILENAME);
 
 		myCustomer = new CUSTOMER();
 
@@ -2217,10 +2246,10 @@ public class Customer {
 		// We need to convert the key to EBCDIC
 		String keyString = new String(key);
 		try {
-			key = keyString.getBytes("Cp1047");
+			key = keyString.getBytes(CODEPAGE);
 		} catch (UnsupportedEncodingException e2) {
 			logger.severe(e2.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"getCustomersByNameCountOnly(int sortCode, String name)",-1L);
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_COUNT_ONLY,-1L);
 			return -1L;
 		}
 
@@ -2232,8 +2261,8 @@ public class Customer {
 				| LockedException | RecordBusyException | LoadingException | ChangedException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 				| NotOpenException e1) {
-			logger.severe("Error starting browse of customer " + e1.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"getCustomersByNameCountOnly(int sortCode, String name)",-1L);
+			logger.severe(ERROR_START_BROWSE + e1.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_COUNT_ONLY,-1L);
 			return -1L;
 		}
 		catch (InvalidSystemIdException  e1) {
@@ -2242,7 +2271,7 @@ public class Customer {
 			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
+					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				}
 
@@ -2259,8 +2288,8 @@ public class Customer {
 
 				} catch (FileDisabledException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 						e3) {
-					logger.severe("Error starting browse of CUSTOMER file, " + e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),"getCustomersByNameCountOnly(int sortCode, String name)",-1L);
+					logger.severe(ERROR_START_BROWSE+ e3.getLocalizedMessage());
+					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_COUNT_ONLY,-1L);
 					return -1L;
 				}
 				catch (InvalidSystemIdException e4)
@@ -2270,8 +2299,8 @@ public class Customer {
 			}
 			if(number_of_retries == maximum_retries && success == false)
 			{
-				logger.severe("Cannot read CUSTOMER file after 100 attempts");
-				logger.exiting(this.getClass().getName(),"getCustomersByNameCountOnly(int sortCode, String name)",-1L);
+				logger.severe(READ_GIVE_UP);
+				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_COUNT_ONLY,-1L);
 				return -1L;
 			}
 		}
@@ -2299,8 +2328,8 @@ public class Customer {
 					| FileNotFoundException
 					| ISCInvalidRequestException | NotAuthorisedException
 					| RecordNotFoundException | NotOpenException | LengthErrorException e) {
-				logger.severe("Error browsing CUSTOMER file, " + e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),"getCustomersByNameCountOnly(int sortCode, String name)",-1L);
+				logger.severe(ERROR_BROWSE + e.getLocalizedMessage());
+				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_COUNT_ONLY,-1L);
 				return -1L;
 			}
 			catch (InvalidSystemIdException  e1) {
@@ -2309,7 +2338,7 @@ public class Customer {
 				for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 				{
 					try {
-						logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
+						logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 						Thread.sleep(3000);
 					}
 					catch (InterruptedException e) 
@@ -2323,8 +2352,8 @@ public class Customer {
 
 					} catch (DuplicateKeyException | LengthErrorException | FileDisabledException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 							e3) {
-						logger.severe("Error browsing CUSTOMER file, " + e3.getLocalizedMessage());
-						logger.exiting(this.getClass().getName(),"getCustomersByNameCountOnly(int sortCode, String name)",-1L);
+						logger.severe(ERROR_BROWSE + e3.getLocalizedMessage());
+						logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_COUNT_ONLY,-1L);
 						return -1L;
 					}
 					catch (InvalidSystemIdException e4)
@@ -2340,8 +2369,8 @@ public class Customer {
 				}
 				if(number_of_retries == maximum_retries && success == false)
 				{
-					logger.severe("Cannot browse CUSTOMER file after 100 attempts");
-					logger.exiting(this.getClass().getName(),"getCustomersByNameCountOnly(int sortCode, String name)",-1L);
+					logger.severe(BROWSE_GIVE_UP);
+					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_COUNT_ONLY,-1L);
 					return -1L;
 				}
 
@@ -2362,8 +2391,8 @@ public class Customer {
 		} catch (LogicException | InvalidRequestException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
 				| NotOpenException e) {
-			logger.severe("Error ending browse of CUSTOMER file "  + e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"getCustomersByNameCountOnly(int sortCode, String name)",-1L);
+			logger.severe("ERROR_END_BROWSE "  + e.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_COUNT_ONLY,-1L);
 			return -1L;
 		}
 		catch (InvalidSystemIdException  e2) {
@@ -2372,7 +2401,7 @@ public class Customer {
 			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
+					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				} 
 				catch (InterruptedException e) 
@@ -2386,8 +2415,8 @@ public class Customer {
 
 				} catch (FileDisabledException | NotOpenException | LogicException | InvalidRequestException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
 						e3) {
-					logger.fine("Error ending browse of CUSTOMER file, " + e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),"getCustomersByNameCountOnly(int sortCode, String name)",-1L);
+					logger.fine(ERROR_END_BROWSE + e3.getLocalizedMessage());
+					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_COUNT_ONLY,-1L);
 					return -1L;
 				}
 				catch (InvalidSystemIdException e4)
@@ -2397,13 +2426,13 @@ public class Customer {
 			}
 			if(number_of_retries == maximum_retries && success == false)
 			{
-				logger.severe("Cannot browse CUSTOMER file after 100 attempts");
-				logger.exiting(this.getClass().getName(),"getCustomersByNameCountOnly(int sortCode, String name)",-1L);
+				logger.severe(BROWSE_GIVE_UP);
+				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_COUNT_ONLY,-1L);
 				return -1L;
 			}
 		}
 
-		logger.exiting(this.getClass().getName(),"getCustomersByNameCountOnly(int sortCode, String name)",matchingCustomers);
+		logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_COUNT_ONLY,matchingCustomers);
 		return matchingCustomers;
 
 	}
@@ -2418,13 +2447,13 @@ public class Customer {
 		}
 	}
 	public Customer[] getCustomersByTown(String town) {
-		logger.entering(this.getClass().getName(),"getCustomersbyTown(String town)",null);
+		logger.entering(this.getClass().getName(),GET_CUSTOMERS_BY_TOWN,null);
 		Customer[] temp = new Customer[250000];
 		int i = 0;
 
 
 		KSDS customerFile = new KSDS();
-		customerFile.setName("CUSTOMER");
+		customerFile.setName(FILENAME);
 
 		myCustomer = new CUSTOMER();
 
@@ -2451,10 +2480,10 @@ public class Customer {
 		// We need to convert the key to EBCDIC
 		String keyString = new String(key);
 		try {
-			key = keyString.getBytes("Cp1047");
+			key = keyString.getBytes(CODEPAGE);
 		} catch (UnsupportedEncodingException e2) {
 			logger.severe(e2.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_TOWN,null);
 			return null;
 		}
 
@@ -2465,8 +2494,8 @@ public class Customer {
 				| LockedException | RecordBusyException | LoadingException | ChangedException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 				| NotOpenException e1) {
-			logger.severe("Error starting browse of customer " + e1.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+			logger.severe(ERROR_START_BROWSE + e1.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_TOWN,null);
 			return null;
 		}
 		catch (InvalidSystemIdException  e1) {
@@ -2475,7 +2504,7 @@ public class Customer {
 			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine("About to sleep for " + totalSleep + " milliseconds");
+					logger.fine(ABOUT_TO_GO_TO_SLEEP+ totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				}  
 				catch (InterruptedException e) 
@@ -2490,8 +2519,8 @@ public class Customer {
 
 				} catch (FileDisabledException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 						e3) {
-					logger.severe("Error starting browse of CUSTOMER file, " + e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+					logger.severe(ERROR_START_BROWSE+ e3.getLocalizedMessage());
+					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_TOWN,null);
 					return null;
 				}
 				catch (InvalidSystemIdException e4)
@@ -2501,8 +2530,8 @@ public class Customer {
 			}
 			if(number_of_retries == maximum_retries && success == false)
 			{
-				logger.severe("Cannot read CUSTOMER file after 100 attempts");
-				logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+				logger.severe(READ_GIVE_UP);
+				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_TOWN,null);
 				return null;
 			}
 		}
@@ -2531,8 +2560,8 @@ public class Customer {
 					| FileNotFoundException
 					| ISCInvalidRequestException | NotAuthorisedException
 					| RecordNotFoundException | NotOpenException | LengthErrorException e) {
-				logger.severe("Error browsing CUSTOMER file, " + e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+				logger.severe(ERROR_BROWSE + e.getLocalizedMessage());
+				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_TOWN,null);
 				return null;
 			}
 			catch (InvalidSystemIdException  e1) {
@@ -2541,7 +2570,7 @@ public class Customer {
 				for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 				{
 					try {
-						logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
+						logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 						Thread.sleep(3000);
 					} 
 					catch (InterruptedException e) 
@@ -2556,7 +2585,7 @@ public class Customer {
 					} catch (DuplicateKeyException | LengthErrorException | FileDisabledException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 							e3) {
 						logger.severe(e3.getLocalizedMessage());
-						logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+						logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_TOWN,null);
 						return null;
 					}
 					catch (InvalidSystemIdException e4)
@@ -2571,8 +2600,8 @@ public class Customer {
 				}
 				if(number_of_retries == maximum_retries && success == false)
 				{
-					logger.severe("Cannot browse CUSTOMER file after 100 attempts");
-					logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+					logger.severe(BROWSE_GIVE_UP);
+					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_TOWN,null);
 					return null;
 				}
 
@@ -2608,8 +2637,8 @@ public class Customer {
 		} catch (LogicException | InvalidRequestException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
 				| NotOpenException e) {
-			logger.severe("Error ending browse of CUSTOMER file "  + e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+			logger.severe("ERROR_END_BROWSE "  + e.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_TOWN,null);
 			return null;
 		}
 		catch (InvalidSystemIdException  e2) {
@@ -2618,7 +2647,7 @@ public class Customer {
 			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
+					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				} 
 				catch (InterruptedException e) 
@@ -2631,8 +2660,8 @@ public class Customer {
 					success = true;
 				} catch (FileDisabledException | NotOpenException | LogicException | InvalidRequestException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
 						e3) {
-					logger.severe("Error ending browse of CUSTOMER file, " + e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+					logger.severe(ERROR_END_BROWSE + e3.getLocalizedMessage());
+					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_TOWN,null);
 					return null;
 				}
 				catch (InvalidSystemIdException e4)
@@ -2642,8 +2671,8 @@ public class Customer {
 			}
 			if(number_of_retries == maximum_retries && success == false)
 			{
-				logger.severe("Cannot browse CUSTOMER file after 100 attempts");
-				logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+				logger.severe(BROWSE_GIVE_UP);
+				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_TOWN,null);
 				return null;
 			}
 		}
@@ -2653,18 +2682,18 @@ public class Customer {
 		{
 			real[j] = temp[j];	
 		}
-		logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",real);
+		logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_TOWN,real);
 		return real;
 	}
 
 	public Customer[] getCustomersBySurname(String surname) {
-		logger.entering(this.getClass().getName(),"getCustomersbySurname(String surname)",null);
+		logger.entering(this.getClass().getName(),GET_CUSTOMERS_BY_SURNAME,null);
 		Customer[] temp = new Customer[250000];
 		int i = 0;
 
 
 		KSDS customerFile = new KSDS();
-		customerFile.setName("CUSTOMER");
+		customerFile.setName(FILENAME);
 
 		myCustomer = new CUSTOMER();
 
@@ -2691,10 +2720,10 @@ public class Customer {
 		// We need to convert the key to EBCDIC
 		String keyString = new String(key);
 		try {
-			key = keyString.getBytes("Cp1047");
+			key = keyString.getBytes(CODEPAGE);
 		} catch (UnsupportedEncodingException e2) {
 			logger.severe(e2.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_SURNAME,null);
 			return null;
 		}
 
@@ -2705,8 +2734,8 @@ public class Customer {
 				| LockedException | RecordBusyException | LoadingException | ChangedException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 				| NotOpenException e1) {
-			logger.severe("Error starting browse of customer " + e1.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+			logger.severe(ERROR_START_BROWSE + e1.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_SURNAME,null);
 			return null;
 		}
 		catch (InvalidSystemIdException  e1) {
@@ -2715,7 +2744,7 @@ public class Customer {
 			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine("About to sleep for " + totalSleep + " milliseconds");
+					logger.fine(ABOUT_TO_GO_TO_SLEEP+ totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				}  
 				catch (InterruptedException e) 
@@ -2730,8 +2759,8 @@ public class Customer {
 
 				} catch (FileDisabledException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 						e3) {
-					logger.severe("Error starting browse of CUSTOMER file, " + e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+					logger.severe(ERROR_START_BROWSE+ e3.getLocalizedMessage());
+					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_SURNAME,null);
 					return null;
 				}
 				catch (InvalidSystemIdException e4)
@@ -2741,8 +2770,8 @@ public class Customer {
 			}
 			if(number_of_retries == maximum_retries && success == false)
 			{
-				logger.severe("Cannot read CUSTOMER file after 100 attempts");
-				logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+				logger.severe(READ_GIVE_UP);
+				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_SURNAME,null);
 				return null;
 			}
 		}
@@ -2771,8 +2800,8 @@ public class Customer {
 					| FileNotFoundException
 					| ISCInvalidRequestException | NotAuthorisedException
 					| RecordNotFoundException | NotOpenException | LengthErrorException e) {
-				logger.severe("Error browsing CUSTOMER file, " + e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+				logger.severe(ERROR_BROWSE + e.getLocalizedMessage());
+				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_SURNAME,null);
 				return null;
 			}
 			catch (InvalidSystemIdException  e1) {
@@ -2781,7 +2810,7 @@ public class Customer {
 				for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 				{
 					try {
-						logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
+						logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 						Thread.sleep(3000);
 					} 
 					catch (InterruptedException e) 
@@ -2796,7 +2825,7 @@ public class Customer {
 					} catch (DuplicateKeyException | LengthErrorException | FileDisabledException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 							e3) {
 						logger.severe(e3.getLocalizedMessage());
-						logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+						logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_SURNAME,null);
 						return null;
 					}
 					catch (InvalidSystemIdException e4)
@@ -2811,8 +2840,8 @@ public class Customer {
 				}
 				if(number_of_retries == maximum_retries && success == false)
 				{
-					logger.severe("Cannot browse CUSTOMER file after 100 attempts");
-					logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+					logger.severe(BROWSE_GIVE_UP);
+					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_SURNAME,null);
 					return null;
 				}
 
@@ -2848,8 +2877,8 @@ public class Customer {
 		} catch (LogicException | InvalidRequestException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
 				| NotOpenException e) {
-			logger.severe("Error ending browse of CUSTOMER file "  + e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+			logger.severe("ERROR_END_BROWSE "  + e.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_SURNAME,null);
 			return null;
 		}
 		catch (InvalidSystemIdException  e2) {
@@ -2858,7 +2887,7 @@ public class Customer {
 			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
+					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				} 
 				catch (InterruptedException e) 
@@ -2871,8 +2900,8 @@ public class Customer {
 					success = true;
 				} catch (FileDisabledException | NotOpenException | LogicException | InvalidRequestException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
 						e3) {
-					logger.severe("Error ending browse of CUSTOMER file, " + e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+					logger.severe(ERROR_END_BROWSE + e3.getLocalizedMessage());
+					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_SURNAME,null);
 					return null;
 				}
 				catch (InvalidSystemIdException e4)
@@ -2882,8 +2911,8 @@ public class Customer {
 			}
 			if(number_of_retries == maximum_retries && success == false)
 			{
-				logger.severe("Cannot browse CUSTOMER file after 100 attempts");
-				logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+				logger.severe(BROWSE_GIVE_UP);
+				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_SURNAME,null);
 				return null;
 			}
 		}
@@ -2893,18 +2922,18 @@ public class Customer {
 		{
 			real[j] = temp[j];	
 		}
-		logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",real);
+		logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_SURNAME,real);
 		return real;
 	}
 
 	public Customer[] getCustomersByAge(int age) {
-		logger.entering(this.getClass().getName(),"getCustomersbyAge(int age)",null);
+		logger.entering(this.getClass().getName(),GET_CUSTOMERS_BY_AGE,null);
 		Customer[] temp = new Customer[250000];
 		int i = 0;
 
 
 		KSDS customerFile = new KSDS();
-		customerFile.setName("CUSTOMER");
+		customerFile.setName(FILENAME);
 
 		myCustomer = new CUSTOMER();
 
@@ -2931,10 +2960,10 @@ public class Customer {
 		// We need to convert the key to EBCDIC
 		String keyString = new String(key);
 		try {
-			key = keyString.getBytes("Cp1047");
+			key = keyString.getBytes(CODEPAGE);
 		} catch (UnsupportedEncodingException e2) {
 			logger.severe(e2.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_AGE,null);
 			return null;
 		}
 
@@ -2945,8 +2974,8 @@ public class Customer {
 				| LockedException | RecordBusyException | LoadingException | ChangedException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 				| NotOpenException e1) {
-			logger.severe("Error starting browse of customer " + e1.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+			logger.severe(ERROR_START_BROWSE + e1.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_AGE,null);
 			return null;
 		}
 		catch (InvalidSystemIdException  e1) {
@@ -2955,7 +2984,7 @@ public class Customer {
 			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine("About to sleep for " + totalSleep + " milliseconds");
+					logger.fine(ABOUT_TO_GO_TO_SLEEP+ totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				}  
 				catch (InterruptedException e) 
@@ -2969,8 +2998,8 @@ public class Customer {
 
 				} catch (FileDisabledException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 						e3) {
-					logger.severe("Error starting browse of CUSTOMER file, " + e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+					logger.severe(ERROR_START_BROWSE+ e3.getLocalizedMessage());
+					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_AGE,null);
 					return null;
 				}
 				catch (InvalidSystemIdException e4)
@@ -2980,8 +3009,8 @@ public class Customer {
 			}
 			if(number_of_retries == maximum_retries && success == false)
 			{
-				logger.severe("Cannot read CUSTOMER file after 100 attempts");
-				logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+				logger.severe(READ_GIVE_UP);
+				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_AGE,null);
 				return null;
 			}
 		}
@@ -3012,8 +3041,8 @@ public class Customer {
 					| FileNotFoundException
 					| ISCInvalidRequestException | NotAuthorisedException
 					| RecordNotFoundException | NotOpenException | LengthErrorException e) {
-				logger.severe("Error browsing CUSTOMER file, " + e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+				logger.severe(ERROR_BROWSE + e.getLocalizedMessage());
+				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_AGE,null);
 				return null;
 			}
 			catch (InvalidSystemIdException  e1) {
@@ -3022,7 +3051,7 @@ public class Customer {
 				for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 				{
 					try {
-						logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
+						logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 						Thread.sleep(3000);
 					} 
 					catch (InterruptedException e) 
@@ -3038,7 +3067,7 @@ public class Customer {
 					} catch (DuplicateKeyException | LengthErrorException | FileDisabledException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 							e3) {
 						logger.severe(e3.getLocalizedMessage());
-						logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+						logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_AGE,null);
 						return null;
 					}
 					catch (InvalidSystemIdException e4)
@@ -3053,8 +3082,8 @@ public class Customer {
 				}
 				if(number_of_retries == maximum_retries && success == false)
 				{
-					logger.severe("Cannot browse CUSTOMER file after 100 attempts");
-					logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+					logger.severe(BROWSE_GIVE_UP);
+					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_AGE,null);
 					return null;
 				}
 
@@ -3090,8 +3119,8 @@ public class Customer {
 		} catch (LogicException | InvalidRequestException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
 				| NotOpenException e) {
-			logger.severe("Error ending browse of CUSTOMER file "  + e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+			logger.severe("ERROR_END_BROWSE "  + e.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_AGE,null);
 			return null;
 		}
 		catch (InvalidSystemIdException  e2) {
@@ -3100,7 +3129,7 @@ public class Customer {
 			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine("About to go to sleep for " + totalSleep + " milliseconds");
+					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				} 
 				catch (InterruptedException e) 
@@ -3113,8 +3142,8 @@ public class Customer {
 					success = true;
 				} catch (FileDisabledException | NotOpenException | LogicException | InvalidRequestException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
 						e3) {
-					logger.severe("Error ending browse of CUSTOMER file, " + e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+					logger.severe(ERROR_END_BROWSE + e3.getLocalizedMessage());
+					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_AGE,null);
 					return null;
 				}
 				catch (InvalidSystemIdException e4)
@@ -3124,8 +3153,8 @@ public class Customer {
 			}
 			if(number_of_retries == maximum_retries && success == false)
 			{
-				logger.severe("Cannot browse CUSTOMER file after 100 attempts");
-				logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",null);
+				logger.severe(BROWSE_GIVE_UP);
+				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_AGE,null);
 				return null;
 			}
 		}
@@ -3135,7 +3164,7 @@ public class Customer {
 		{
 			real[j] = temp[j];	
 		}
-		logger.exiting(this.getClass().getName(),"getCustomers(int sortCode)",real);
+		logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_AGE,real);
 		return real;
 	}
 
