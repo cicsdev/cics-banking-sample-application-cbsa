@@ -296,27 +296,27 @@ public class AccountsResource extends HBankDataAccess{
 		if(db2Account != null)
 		{
 			response.put(JSON_SORT_CODE, db2Account.getSortcode().trim());
-			response.put("id", db2Account.getAccount_number());
-			response.put(JSON_CUSTOMER_NUMBER, db2Account.getCustomer_number());
+			response.put("id", db2Account.getAccountNumber());
+			response.put(JSON_CUSTOMER_NUMBER, db2Account.getCustomerNumber());
 			response.put(JSON_ACCOUNT_TYPE, db2Account.getType().trim());
-			response.put(JSON_AVAILABLE_BALANCE,  BigDecimal.valueOf(db2Account.getAvailable_balance()));
-			response.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(db2Account.getActual_balance()));
-			response.put(JSON_INTEREST_RATE, BigDecimal.valueOf(db2Account.getInterest_rate()));
-			response.put(JSON_OVERDRAFT, db2Account.getOverdraft_limit());
-			response.put(JSON_LAST_STATEMENT_DATE, db2Account.getLast_statement().toString().trim());
-			response.put(JSON_NEXT_STATEMENT_DATE, db2Account.getNext_statement().toString().trim());
+			response.put(JSON_AVAILABLE_BALANCE,  BigDecimal.valueOf(db2Account.getAvailableBalance()));
+			response.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(db2Account.getActualBalance()));
+			response.put(JSON_INTEREST_RATE, BigDecimal.valueOf(db2Account.getInterestRate()));
+			response.put(JSON_OVERDRAFT, db2Account.getOverdraftLimit());
+			response.put(JSON_LAST_STATEMENT_DATE, db2Account.getLastStatement().toString().trim());
+			response.put(JSON_NEXT_STATEMENT_DATE, db2Account.getNextStatement().toString().trim());
 			response.put(JSON_DATE_OPENED, db2Account.getOpened().toString().trim());
 
 			//Create a new ProcessedTransactionAccount and set credentials
 			ProcessedTransactionResource myProcessedTransactionResource = new ProcessedTransactionResource();
 			ProcessedTransactionAccountJSON myProctranAccount = new ProcessedTransactionAccountJSON();
 			myProctranAccount.setSortCode(db2Account.getSortcode());
-			myProctranAccount.setAccountNumber(db2Account.getAccount_number());
-			myProctranAccount.setCustomerNumber(new Long(db2Account.getCustomer_number()).toString());
-			myProctranAccount.setLastStatement(db2Account.getLast_statement());
-			myProctranAccount.setNextStatement(db2Account.getNext_statement());
+			myProctranAccount.setAccountNumber(db2Account.getAccountNumber());
+			myProctranAccount.setCustomerNumber(new Long(db2Account.getCustomerNumber()).toString());
+			myProctranAccount.setLastStatement(db2Account.getLastStatement());
+			myProctranAccount.setNextStatement(db2Account.getNextStatement());
 			myProctranAccount.setType(db2Account.getType());
-			myProctranAccount.setActualBalance(BigDecimal.valueOf(db2Account.getActual_balance()));
+			myProctranAccount.setActualBalance(BigDecimal.valueOf(db2Account.getActualBalance()));
 
 
 
@@ -412,15 +412,15 @@ public class AccountsResource extends HBankDataAccess{
 			{
 				JSONObject account = new JSONObject();
 				account.put(JSON_SORT_CODE, myAccounts[i].getSortcode().trim());
-				account.put("id", myAccounts[i].getAccount_number());
-				account.put(JSON_CUSTOMER_NUMBER, myAccounts[i].getCustomer_number());
+				account.put("id", myAccounts[i].getAccountNumber());
+				account.put(JSON_CUSTOMER_NUMBER, myAccounts[i].getCustomerNumber());
 				account.put(JSON_ACCOUNT_TYPE, myAccounts[i].getType().trim());
-				account.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(myAccounts[i].getAvailable_balance()).setScale(2,RoundingMode.HALF_UP));
-				account.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(myAccounts[i].getActual_balance()).setScale(2,RoundingMode.HALF_UP));
-				account.put(JSON_INTEREST_RATE, BigDecimal.valueOf(myAccounts[i].getInterest_rate()).setScale(2,RoundingMode.HALF_UP));
-				account.put(JSON_OVERDRAFT, myAccounts[i].getOverdraft_limit());
-				account.put(JSON_LAST_STATEMENT_DATE, myAccounts[i].getLast_statement().toString().trim());
-				account.put(JSON_NEXT_STATEMENT_DATE, myAccounts[i].getNext_statement().toString().trim());
+				account.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(myAccounts[i].getAvailableBalance()).setScale(2,RoundingMode.HALF_UP));
+				account.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(myAccounts[i].getActualBalance()).setScale(2,RoundingMode.HALF_UP));
+				account.put(JSON_INTEREST_RATE, BigDecimal.valueOf(myAccounts[i].getInterestRate()).setScale(2,RoundingMode.HALF_UP));
+				account.put(JSON_OVERDRAFT, myAccounts[i].getOverdraftLimit());
+				account.put(JSON_LAST_STATEMENT_DATE, myAccounts[i].getLastStatement().toString().trim());
+				account.put(JSON_NEXT_STATEMENT_DATE, myAccounts[i].getNextStatement().toString().trim());
 				account.put(JSON_DATE_OPENED, myAccounts[i].getOpened().toString());
 
 				accounts.add(account);
@@ -475,15 +475,15 @@ public class AccountsResource extends HBankDataAccess{
 		{
 			
 			response.put(JSON_SORT_CODE, db2Account.getSortcode().trim());
-			response.put("id", db2Account.getAccount_number());
-			response.put(JSON_CUSTOMER_NUMBER, db2Account.getCustomer_number());
+			response.put("id", db2Account.getAccountNumber());
+			response.put(JSON_CUSTOMER_NUMBER, db2Account.getCustomerNumber());
 			response.put(JSON_ACCOUNT_TYPE, db2Account.getType().trim());
-			response.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(db2Account.getAvailable_balance()));
-			response.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(db2Account.getActual_balance()));
-			response.put(JSON_INTEREST_RATE, BigDecimal.valueOf(db2Account.getInterest_rate()));
-			response.put(JSON_OVERDRAFT, db2Account.getOverdraft_limit());
-			response.put(JSON_LAST_STATEMENT_DATE, db2Account.getLast_statement().toString().trim());
-			response.put(JSON_NEXT_STATEMENT_DATE, db2Account.getNext_statement().toString().trim());
+			response.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(db2Account.getAvailableBalance()));
+			response.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(db2Account.getActualBalance()));
+			response.put(JSON_INTEREST_RATE, BigDecimal.valueOf(db2Account.getInterestRate()));
+			response.put(JSON_OVERDRAFT, db2Account.getOverdraftLimit());
+			response.put(JSON_LAST_STATEMENT_DATE, db2Account.getLastStatement().toString().trim());
+			response.put(JSON_NEXT_STATEMENT_DATE, db2Account.getNextStatement().toString().trim());
 			response.put(JSON_DATE_OPENED, db2Account.getOpened().toString().trim());
 		}
 		else
@@ -496,15 +496,15 @@ public class AccountsResource extends HBankDataAccess{
 				if(db2Account != null)
 				{
 					response.put(JSON_SORT_CODE, db2Account.getSortcode().trim());
-					response.put("id", db2Account.getAccount_number());
-					response.put(JSON_CUSTOMER_NUMBER, db2Account.getCustomer_number());
+					response.put("id", db2Account.getAccountNumber());
+					response.put(JSON_CUSTOMER_NUMBER, db2Account.getCustomerNumber());
 					response.put(JSON_ACCOUNT_TYPE, db2Account.getType().trim());
-					response.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(db2Account.getAvailable_balance()));
-					response.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(db2Account.getActual_balance()));
-					response.put(JSON_INTEREST_RATE, BigDecimal.valueOf(db2Account.getInterest_rate()));
-					response.put(JSON_OVERDRAFT, db2Account.getOverdraft_limit());
-					response.put(JSON_LAST_STATEMENT_DATE, db2Account.getLast_statement().toString().trim());
-					response.put(JSON_NEXT_STATEMENT_DATE, db2Account.getNext_statement().toString().trim());
+					response.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(db2Account.getAvailableBalance()));
+					response.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(db2Account.getActualBalance()));
+					response.put(JSON_INTEREST_RATE, BigDecimal.valueOf(db2Account.getInterestRate()));
+					response.put(JSON_OVERDRAFT, db2Account.getOverdraftLimit());
+					response.put(JSON_LAST_STATEMENT_DATE, db2Account.getLastStatement().toString().trim());
+					response.put(JSON_NEXT_STATEMENT_DATE, db2Account.getNextStatement().toString().trim());
 					response.put(JSON_DATE_OPENED, db2Account.getOpened().toString().trim());
 				}
 				//* There exists a possibility that the last account has been deleted. In which case we try once the old fashioned way
@@ -605,15 +605,15 @@ public class AccountsResource extends HBankDataAccess{
 
 			JSONObject account = new JSONObject();
 			account.put(JSON_SORT_CODE, myAccounts[i].getSortcode());
-			account.put("id", myAccounts[i].getAccount_number());
-			account.put(JSON_CUSTOMER_NUMBER, myAccounts[i].getCustomer_number());
+			account.put("id", myAccounts[i].getAccountNumber());
+			account.put(JSON_CUSTOMER_NUMBER, myAccounts[i].getCustomerNumber());
 			account.put(JSON_ACCOUNT_TYPE, myAccounts[i].getType());
-			account.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(myAccounts[i].getAvailable_balance()));
-			account.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(myAccounts[i].getActual_balance()));
-			account.put(JSON_INTEREST_RATE, BigDecimal.valueOf(myAccounts[i].getInterest_rate()));
-			account.put(JSON_OVERDRAFT, myAccounts[i].getOverdraft_limit());
-			account.put(JSON_LAST_STATEMENT_DATE, myAccounts[i].getLast_statement().toString());
-			account.put(JSON_NEXT_STATEMENT_DATE, myAccounts[i].getNext_statement().toString());
+			account.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(myAccounts[i].getAvailableBalance()));
+			account.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(myAccounts[i].getActualBalance()));
+			account.put(JSON_INTEREST_RATE, BigDecimal.valueOf(myAccounts[i].getInterestRate()));
+			account.put(JSON_OVERDRAFT, myAccounts[i].getOverdraftLimit());
+			account.put(JSON_LAST_STATEMENT_DATE, myAccounts[i].getLastStatement().toString());
+			account.put(JSON_NEXT_STATEMENT_DATE, myAccounts[i].getNextStatement().toString());
 			account.put(JSON_DATE_OPENED, myAccounts[i].getOpened().toString());
 
 			accounts.add(account);
@@ -740,15 +740,15 @@ public class AccountsResource extends HBankDataAccess{
 			if(db2Account != null)
 			{
 				response.put(JSON_SORT_CODE, db2Account.getSortcode().trim());
-				response.put("id", db2Account.getAccount_number());
-				response.put(JSON_CUSTOMER_NUMBER,db2Account.getCustomer_number());
+				response.put("id", db2Account.getAccountNumber());
+				response.put(JSON_CUSTOMER_NUMBER,db2Account.getCustomerNumber());
 				response.put(JSON_ACCOUNT_TYPE, db2Account.getType().trim());
-				response.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(db2Account.getAvailable_balance()));
-				response.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(db2Account.getActual_balance()));
-				response.put(JSON_INTEREST_RATE, BigDecimal.valueOf(db2Account.getInterest_rate()));				
-				response.put(JSON_OVERDRAFT, db2Account.getOverdraft_limit());
-				response.put(JSON_LAST_STATEMENT_DATE, db2Account.getLast_statement().toString());
-				response.put(JSON_NEXT_STATEMENT_DATE, db2Account.getNext_statement().toString());
+				response.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(db2Account.getAvailableBalance()));
+				response.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(db2Account.getActualBalance()));
+				response.put(JSON_INTEREST_RATE, BigDecimal.valueOf(db2Account.getInterestRate()));				
+				response.put(JSON_OVERDRAFT, db2Account.getOverdraftLimit());
+				response.put(JSON_LAST_STATEMENT_DATE, db2Account.getLastStatement().toString());
+				response.put(JSON_NEXT_STATEMENT_DATE, db2Account.getNextStatement().toString());
 				response.put(JSON_DATE_OPENED, db2Account.getOpened().toString().trim());
 			}
 			else
@@ -1008,11 +1008,11 @@ public class AccountsResource extends HBankDataAccess{
 		}
 
 		com.ibm.cics.cip.bankliberty.web.db2.Account db2Account  = new  com.ibm.cics.cip.bankliberty.web.db2.Account();
-		db2Account.setAccount_number(accountNumber);
+		db2Account.setAccountNumber(accountNumber);
 		db2Account.setSortcode(sortCode.toString());
 		db2Account.debitCredit(negativeAmount);
 
-		db2Account.setAccount_number(transferLocal.targetAccount.toString());
+		db2Account.setAccountNumber(transferLocal.targetAccount.toString());
 		db2Account.setSortcode(sortCode.toString());
 		db2Account.debitCredit(amount);
 
@@ -1020,7 +1020,7 @@ public class AccountsResource extends HBankDataAccess{
 
 		ProcessedTransactionTransferLocalJSON myProctranTransferLocal = new ProcessedTransactionTransferLocalJSON();
 		myProctranTransferLocal.setSortCode(db2Account.getSortcode());
-		myProctranTransferLocal.setAccountNumber(db2Account.getAccount_number());
+		myProctranTransferLocal.setAccountNumber(db2Account.getAccountNumber());
 		myProctranTransferLocal.setAmount(amount);
 		myProctranTransferLocal.setTargetAccountNumber(transferLocal.getTargetAccount().toString());
 
@@ -1041,10 +1041,10 @@ public class AccountsResource extends HBankDataAccess{
 
 
 		response.put(JSON_SORT_CODE, db2Account.getSortcode().trim());
-		response.put("id", db2Account.getAccount_number());
-		response.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(db2Account.getAvailable_balance()));
-		response.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(db2Account.getActual_balance()));
-		response.put(JSON_INTEREST_RATE, BigDecimal.valueOf(db2Account.getInterest_rate()));
+		response.put("id", db2Account.getAccountNumber());
+		response.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(db2Account.getAvailableBalance()));
+		response.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(db2Account.getActualBalance()));
+		response.put(JSON_INTEREST_RATE, BigDecimal.valueOf(db2Account.getInterestRate()));
 
 		myResponse = Response.status(200).entity(response.toString()).build();
 		logger.exiting(this.getClass().getName(),TRANSFER_LOCAL_INTERNAL,myResponse);
@@ -1062,7 +1062,7 @@ public class AccountsResource extends HBankDataAccess{
 
 
 		com.ibm.cics.cip.bankliberty.web.db2.Account db2Account  = new  com.ibm.cics.cip.bankliberty.web.db2.Account();
-		db2Account.setAccount_number(accountNumber);
+		db2Account.setAccountNumber(accountNumber);
 		db2Account.setSortcode(sortCode.toString());
 		if(!db2Account.debitCredit(apiAmount))
 		{
@@ -1088,7 +1088,7 @@ public class AccountsResource extends HBankDataAccess{
 		ProcessedTransactionResource myProcessedTransactionResource = new ProcessedTransactionResource();
 		ProcessedTransactionDebitCreditJSON myProctranDbCr = new ProcessedTransactionDebitCreditJSON();
 		myProctranDbCr.setSortCode(db2Account.getSortcode());
-		myProctranDbCr.setAccountNumber(db2Account.getAccount_number());
+		myProctranDbCr.setAccountNumber(db2Account.getAccountNumber());
 		myProctranDbCr.setAmount(apiAmount);
 
 
@@ -1110,10 +1110,10 @@ public class AccountsResource extends HBankDataAccess{
 		}
 
 		response.put(JSON_SORT_CODE, db2Account.getSortcode().trim());
-		response.put("id", db2Account.getAccount_number());
-		response.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(db2Account.getAvailable_balance()));
-		response.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(db2Account.getActual_balance()));
-		response.put(JSON_INTEREST_RATE, BigDecimal.valueOf(db2Account.getInterest_rate()));
+		response.put("id", db2Account.getAccountNumber());
+		response.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(db2Account.getAvailableBalance()));
+		response.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(db2Account.getActualBalance()));
+		response.put(JSON_INTEREST_RATE, BigDecimal.valueOf(db2Account.getInterestRate()));
 		myResponse = Response.status(200).entity(response.toString()).build();
 		logger.exiting(this.getClass().getName(),DEBIT_CREDIT_ACCOUNT,myResponse);
 		return myResponse;
@@ -1148,27 +1148,27 @@ public class AccountsResource extends HBankDataAccess{
 		if(db2Account != null)
 		{
 			response.put(JSON_SORT_CODE, db2Account.getSortcode().trim());
-			response.put("id",db2Account.getAccount_number());
-			response.put(JSON_CUSTOMER_NUMBER, db2Account.getCustomer_number());
+			response.put("id",db2Account.getAccountNumber());
+			response.put(JSON_CUSTOMER_NUMBER, db2Account.getCustomerNumber());
 			response.put(JSON_ACCOUNT_TYPE, db2Account.getType().trim());
-			response.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(db2Account.getAvailable_balance()));
-			response.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(db2Account.getActual_balance()));
-			response.put(JSON_INTEREST_RATE, BigDecimal.valueOf(db2Account.getInterest_rate()));
-			response.put(JSON_OVERDRAFT, db2Account.getOverdraft_limit());
-			response.put(JSON_LAST_STATEMENT_DATE, db2Account.getLast_statement().toString().trim());
-			response.put(JSON_NEXT_STATEMENT_DATE, db2Account.getNext_statement().toString().trim());
+			response.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(db2Account.getAvailableBalance()));
+			response.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(db2Account.getActualBalance()));
+			response.put(JSON_INTEREST_RATE, BigDecimal.valueOf(db2Account.getInterestRate()));
+			response.put(JSON_OVERDRAFT, db2Account.getOverdraftLimit());
+			response.put(JSON_LAST_STATEMENT_DATE, db2Account.getLastStatement().toString().trim());
+			response.put(JSON_NEXT_STATEMENT_DATE, db2Account.getNextStatement().toString().trim());
 			response.put(JSON_DATE_OPENED, db2Account.getOpened().toString().trim());
 
 			ProcessedTransactionResource myProcessedTransactionResource = new ProcessedTransactionResource();
 
 			ProcessedTransactionAccountJSON myDeletedAccount = new ProcessedTransactionAccountJSON();
-			myDeletedAccount.setAccountNumber(db2Account.getAccount_number());
+			myDeletedAccount.setAccountNumber(db2Account.getAccountNumber());
 			myDeletedAccount.setType(db2Account.getType());
-			myDeletedAccount.setCustomerNumber(db2Account.getCustomer_number());
+			myDeletedAccount.setCustomerNumber(db2Account.getCustomerNumber());
 			myDeletedAccount.setSortCode(db2Account.getSortcode());
-			myDeletedAccount.setNextStatement(db2Account.getNext_statement());
-			myDeletedAccount.setLastStatement(db2Account.getLast_statement());
-			myDeletedAccount.setActualBalance(BigDecimal.valueOf(db2Account.getActual_balance()));
+			myDeletedAccount.setNextStatement(db2Account.getNextStatement());
+			myDeletedAccount.setLastStatement(db2Account.getLastStatement());
+			myDeletedAccount.setActualBalance(BigDecimal.valueOf(db2Account.getActualBalance()));
 
 
 			Response deletedAccountResponse = myProcessedTransactionResource.writeDeleteAccountInternal(myDeletedAccount);
@@ -1284,15 +1284,15 @@ public class AccountsResource extends HBankDataAccess{
 			{
 				JSONObject account = new JSONObject();
 				account.put(JSON_SORT_CODE, myAccounts[i].getSortcode().trim());
-				account.put("id", myAccounts[i].getAccount_number());
-				account.put(JSON_CUSTOMER_NUMBER, myAccounts[i].getCustomer_number());
+				account.put("id", myAccounts[i].getAccountNumber());
+				account.put(JSON_CUSTOMER_NUMBER, myAccounts[i].getCustomerNumber());
 				account.put(JSON_ACCOUNT_TYPE, myAccounts[i].getType().trim());
-				account.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(myAccounts[i].getAvailable_balance()));
-				account.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(myAccounts[i].getActual_balance()));
-				account.put(JSON_INTEREST_RATE, BigDecimal.valueOf(myAccounts[i].getInterest_rate()));
-				account.put(JSON_OVERDRAFT, myAccounts[i].getOverdraft_limit());
-				account.put(JSON_LAST_STATEMENT_DATE, myAccounts[i].getLast_statement().toString().trim());
-				account.put(JSON_NEXT_STATEMENT_DATE, myAccounts[i].getNext_statement().toString().trim());
+				account.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(myAccounts[i].getAvailableBalance()));
+				account.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(myAccounts[i].getActualBalance()));
+				account.put(JSON_INTEREST_RATE, BigDecimal.valueOf(myAccounts[i].getInterestRate()));
+				account.put(JSON_OVERDRAFT, myAccounts[i].getOverdraftLimit());
+				account.put(JSON_LAST_STATEMENT_DATE, myAccounts[i].getLastStatement().toString().trim());
+				account.put(JSON_NEXT_STATEMENT_DATE, myAccounts[i].getNextStatement().toString().trim());
 				account.put(JSON_DATE_OPENED, myAccounts[i].getOpened().toString());
 
 				accounts.add(account);
@@ -1425,15 +1425,15 @@ public class AccountsResource extends HBankDataAccess{
 			{
 				JSONObject account = new JSONObject();
 				account.put(JSON_SORT_CODE, myAccounts[i].getSortcode().trim());
-				account.put("id", myAccounts[i].getAccount_number());
-				account.put(JSON_CUSTOMER_NUMBER, myAccounts[i].getCustomer_number());
+				account.put("id", myAccounts[i].getAccountNumber());
+				account.put(JSON_CUSTOMER_NUMBER, myAccounts[i].getCustomerNumber());
 				account.put(JSON_ACCOUNT_TYPE, myAccounts[i].getType().trim());
-				account.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(myAccounts[i].getAvailable_balance()));
-				account.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(myAccounts[i].getActual_balance()));
-				account.put(JSON_INTEREST_RATE, BigDecimal.valueOf(myAccounts[i].getInterest_rate()));
-				account.put(JSON_OVERDRAFT, myAccounts[i].getOverdraft_limit());
-				account.put(JSON_LAST_STATEMENT_DATE, myAccounts[i].getLast_statement().toString().trim());
-				account.put(JSON_NEXT_STATEMENT_DATE, myAccounts[i].getNext_statement().toString().trim());
+				account.put(JSON_AVAILABLE_BALANCE, BigDecimal.valueOf(myAccounts[i].getAvailableBalance()));
+				account.put(JSON_ACTUAL_BALANCE, BigDecimal.valueOf(myAccounts[i].getActualBalance()));
+				account.put(JSON_INTEREST_RATE, BigDecimal.valueOf(myAccounts[i].getInterestRate()));
+				account.put(JSON_OVERDRAFT, myAccounts[i].getOverdraftLimit());
+				account.put(JSON_LAST_STATEMENT_DATE, myAccounts[i].getLastStatement().toString().trim());
+				account.put(JSON_NEXT_STATEMENT_DATE, myAccounts[i].getNextStatement().toString().trim());
 				account.put(JSON_DATE_OPENED, myAccounts[i].getOpened().toString());
 
 				accounts.add(account);

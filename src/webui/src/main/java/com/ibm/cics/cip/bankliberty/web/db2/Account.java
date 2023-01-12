@@ -8,14 +8,14 @@
 package com.ibm.cics.cip.bankliberty.web.db2;
 
 
-import java.io.IOException;
+
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
-import java.util.logging.LogManager;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.ibm.cics.cip.bankliberty.api.json.AccountJSON;
@@ -35,17 +35,17 @@ public class Account extends HBankDataAccess{
 	// </copyright>
 
 	// String ACCOUNT_EYECATCHER             CHAR(4),
-	private 	String 		customer_number;
+	private 	String 		customerNumber;
 	private 	String 		sortcode;              
-	private 	String 		account_number;
+	private 	String 		accountNumber;
 	private 	String 		type;
-	private 	double 		interest_rate;
+	private 	double 		interestRate;
 	private 	Date 		opened;
-	private 	int 		overdraft_limit;
+	private 	int 		overdraftLimit;
 	private 	Date 		last_statement;
 	private 	Date 		next_statement;
-	private	 	double 		available_balance;    
-	private 	double 		actual_balance;
+	private	 	double 		availableBalance;    
+	private 	double 		actualBalance;
 
 	public Account()
 	{
@@ -54,71 +54,82 @@ public class Account extends HBankDataAccess{
 
 
 
-	public Account (String c_n, String sc, String a_n, String type, double i_r, Date opened, int o_l, Date l_s, Date n_s, double av_b, double ac_b) {
-		setCustomer_number(c_n);
-		setSortcode(sc);
-		setAccount_number(a_n);
+	public Account (String custNo, String sortCo, String accNo, String type, double intRate, Date opened, int overdraft, Date lastStatement, Date nextStatement, double avBal, double acBal) {
+		setCustomerNumber(custNo);
+		setSortcode(sortCo);
+		setAccountNumber(accNo);
 		setType(type);
-		setInterest_rate(i_r);
+		setInterestRate(intRate);
 		setOpened(opened);
-		setOverdraft_limit(o_l);
-		setLast_statement(l_s);
-		setNext_statement(n_s);
-		setAvailable_balance(av_b);
-		setActual_balance(ac_b);
+		setOverdraftLimit(overdraft);
+		setLastStatement(lastStatement);
+		setNextStatement(nextStatement);
+		setAvailableBalance(avBal);
+		setActualBalance(acBal);
 		sortOutLogging();
 	}
 
-	public Account(String c_n, String sc, String a_n, String type, double i_r, java.util.Date opened,
-			int o_l, Date l_s, Date n_s, double av_b, double ac_b) {
-		setCustomer_number(c_n);
-		setSortcode(sc);
-		setAccount_number(a_n);
+	public Account(String custNo, String sortCo, String accNo, String type, double intRate, java.util.Date opened,
+			int overdraft, Date lastStatement, Date nextStatement, double avBal, double acBal) {
+		setCustomerNumber(custNo);
+		setSortcode(sortCo);
+		setAccountNumber(accNo);
 		setType(type);
-		setInterest_rate(i_r);
+		setInterestRate(intRate);
 		setOpened(new Date(opened.getTime()));
-		setOverdraft_limit(o_l);
-		setLast_statement(l_s);
-		setNext_statement(n_s);
-		setAvailable_balance(av_b);
-		setActual_balance(ac_b);
+		setOverdraftLimit(overdraft);
+		setLastStatement(lastStatement);
+		setNextStatement(nextStatement);
+		setAvailableBalance(avBal);
+		setActualBalance(acBal);
 		sortOutLogging();
 	}
 
 	public void showInfo(){
-		logger.fine("------------"+this.account_number+":"+this.sortcode+"------------");
-		logger.fine("Customer number - "+this.customer_number);
-		logger.fine("Type - "+this.type);
-		logger.fine("Interest rate - "+this.interest_rate);
-		logger.fine("Opened - "+this.opened.toString());
-		logger.fine("Overdraft Limit - "+this.overdraft_limit);
-		logger.fine("Last Statement - "+this.last_statement.toString());
-		logger.fine("Next Statement - "+this.next_statement.toString());
-		logger.fine("Available Balance - "+this.available_balance);
-		logger.fine("Actual Balance - "+this.actual_balance);
+		logger.log(Level.FINE, () -> "------------"+this.accountNumber+":"+this.sortcode+"------------");
+		logger.log(Level.FINE, () -> "Customer number - "+this.customerNumber);
+		logger.log(Level.FINE, () -> "Type - "+this.type);
+		logger.log(Level.FINE, () -> "Interest rate - "+this.interestRate);
+		logger.log(Level.FINE, () -> "Opened - "+this.opened.toString());
+		logger.log(Level.FINE, () -> "Overdraft Limit - "+this.overdraftLimit);
+		logger.log(Level.FINE, () -> "Last Statement - "+this.last_statement.toString());
+		logger.log(Level.FINE, () -> "Next Statement - "+this.next_statement.toString());
+		logger.log(Level.FINE, () -> "Available Balance - "+this.availableBalance);
+		logger.log(Level.FINE, () -> "Actual Balance - "+this.actualBalance);
 	}
 
-	public String getCustomer_number() {
-		if(this.customer_number.length()<10)
+	public String getCustomerNumber() {
+		if(this.customerNumber.length()<10)
 		{
-			for (int i=10;this.customer_number.length()<10;i--)
+			StringBuilder myStringBuilder = new StringBuilder();
+			
+
+			for (int i=this.customerNumber.length();i<10;i++)
 			{
-				this.customer_number = "0" + this.customer_number;
+				myStringBuilder.append('0');
 			}
+			myStringBuilder.append(this.customerNumber);
+			this.customerNumber = myStringBuilder.toString();
 		}
-		return this.customer_number;
+		return this.customerNumber;
 	}
 
-	public void setCustomer_number(String customer_number) {
+	public void setCustomerNumber(String custNo) {
 
-		if(customer_number.length()<10)
+		if(custNo.length()<10)
 		{
-			for (int i=10;customer_number.length()<10;i--)
+			StringBuilder myStringBuilder = new StringBuilder();
+			
+
+			for (int i=custNo.length();i<10;i++)
 			{
-				customer_number = "0" + customer_number;
+				myStringBuilder.append('0');
 			}
+			myStringBuilder.append(custNo);
+			custNo = myStringBuilder.toString();
 		}
-		this.customer_number = customer_number;
+
+		this.customerNumber = custNo;
 	}
 
 	public String getSortcode() {
@@ -129,26 +140,26 @@ public class Account extends HBankDataAccess{
 		this.sortcode = sortcode;
 	}
 
-	public String getAccount_number() {
-		if(this.account_number.length()<8)
+	public String getAccountNumber() {
+		if(this.accountNumber.length()<8)
 		{
-			for (int i=8;this.account_number.length()<8;i--)
+			for (int i=8;i>0 || this.accountNumber.length()<8;i--)
 			{
-				this.account_number = "0" + this.account_number;
+				this.accountNumber = "0" + this.accountNumber;
 			}
 		}
-		return this.account_number;
+		return this.accountNumber;
 	}
 
-	public void setAccount_number(String account_number) {
-		if(account_number.length()<8)
+	public void setAccountNumber(String accNo) {
+		if(accNo.length()<8)
 		{
-			for (int i=8;account_number.length()<8;i--)
+			for (int i=8;i>0 || accNo.length()<8;i--)
 			{
-				account_number = "0" + account_number;
+				accNo = "0" + accNo;
 			}
 		}
-		this.account_number = account_number;
+		this.accountNumber = accNo;
 	}
 
 	public String getType() {
@@ -159,12 +170,12 @@ public class Account extends HBankDataAccess{
 		this.type = type;
 	}
 
-	public double getInterest_rate() {
-		return interest_rate;
+	public double getInterestRate() {
+		return interestRate;
 	}
 
-	public void setInterest_rate(double interest_rate) {
-		this.interest_rate = interest_rate;
+	public void setInterestRate(double interestRate) {
+		this.interestRate = interestRate;
 	}
 
 	public Date getOpened() {
@@ -175,60 +186,60 @@ public class Account extends HBankDataAccess{
 		this.opened = opened;
 	}
 
-	public int getOverdraft_limit() {
-		return overdraft_limit;
+	public int getOverdraftLimit() {
+		return overdraftLimit;
 	}
 
-	public void setOverdraft_limit(int overdraft_limit) {
-		this.overdraft_limit = overdraft_limit;
+	public void setOverdraftLimit(int overdraftLimit) {
+		this.overdraftLimit = overdraftLimit;
 	}
 
-	public Date getLast_statement() {
+	public Date getLastStatement() {
 		return last_statement;
 	}
 
-	public void setLast_statement(Date last_statement) {
-		if(last_statement == null){
+	public void setLastStatement(Date lastStatement) {
+		if(lastStatement == null){
 			this.last_statement = this.opened;
 		}
 		else{
-			this.last_statement = last_statement;
+			this.last_statement = lastStatement;
 		}
 	}
 
-	public Date getNext_statement() {
+	public Date getNextStatement() {
 		return next_statement;
 	}
 
-	@SuppressWarnings("static-access")
-	public void setNext_statement(Date next_statement) {
-		if(next_statement == null){
+	
+	public void setNextStatement(Date nextStatement) {
+		if(nextStatement == null){
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(opened);
-			cal.add(cal.DATE, +7);
+			cal.add(Calendar.DATE, +7);
 			this.next_statement =  new Date(cal.getTime().getTime());
 		}
 		else{
-			this.next_statement = next_statement;
+			this.next_statement = nextStatement;
 		}
 	}
 
 
 
-	public double getAvailable_balance() {
-		return available_balance;
+	public double getAvailableBalance() {
+		return availableBalance;
 	}
 
-	public void setAvailable_balance(double available_balance) {
-		this.available_balance = available_balance;
+	public void setAvailableBalance(double availableBalance) {
+		this.availableBalance = availableBalance;
 	}
 
-	public double getActual_balance() {
-		return actual_balance;
+	public double getActualBalance() {
+		return actualBalance;
 	}
 
-	public void setActual_balance(double actual_balance) {
-		this.actual_balance = actual_balance;
+	public void setActualBalance(double actualBalance) {
+		this.actualBalance = actualBalance;
 	}
 
 	public void updateThis(){
@@ -247,13 +258,13 @@ public class Account extends HBankDataAccess{
 				" AND ACCOUNT_SORTCODE like ?";
 		try(PreparedStatement stmt = conn.prepareStatement(sql);){
 			stmt.setString(1,this.type);
-			stmt.setDouble(2, this.interest_rate);
-			stmt.setInt(3, this.overdraft_limit);
+			stmt.setDouble(2, this.interestRate);
+			stmt.setInt(3, this.overdraftLimit);
 			stmt.setString(4,this.last_statement.toString());
 			stmt.setString(5,this.next_statement.toString());
-			stmt.setDouble(6, this.available_balance);
-			stmt.setDouble(7, this.actual_balance);
-			stmt.setString(8, this.account_number);
+			stmt.setDouble(6, this.availableBalance);
+			stmt.setDouble(7, this.actualBalance);
+			stmt.setString(8, this.accountNumber);
 			stmt.setString(9,this.sortcode);
 			stmt.executeUpdate();
 		} catch (SQLException e) 
@@ -601,7 +612,7 @@ public class Account extends HBankDataAccess{
 		Date lastStatement = dateOpened;
 
 		temp.setOpened(dateOpened);
-		temp.setLast_statement(lastStatement);
+		temp.setLastStatement(lastStatement);
 
 		long timeNow = myCalendar.getTimeInMillis();
 		// You must specify the values here as longs otherwise it ends up negative due to overflow
@@ -651,7 +662,7 @@ public class Account extends HBankDataAccess{
 		long nextStatementLong = timeNow + nextMonthInMs;
 		Date nextStatement =  new Date(nextStatementLong);
 
-		temp.setNext_statement(nextStatement);
+		temp.setNextStatement(nextStatement);
 
 
 
@@ -686,14 +697,14 @@ public class Account extends HBankDataAccess{
 			stmt.setDate(8, lastStatement);
 			stmt.setDate(9, nextStatement);
 			stmt.execute();
-			temp.setAccount_number(accountNumberString);
-			temp.setActual_balance(0.00);
-			temp.setAvailable_balance(0.00);
-			temp.setCustomer_number(customerNumberString);
-			temp.setInterest_rate(account.getInterestRate().doubleValue());
-			temp.setLast_statement(lastStatement);
-			temp.setNext_statement(nextStatement);
-			temp.setOverdraft_limit(account.getOverdraft().intValue());
+			temp.setAccountNumber(accountNumberString);
+			temp.setActualBalance(0.00);
+			temp.setAvailableBalance(0.00);
+			temp.setCustomerNumber(customerNumberString);
+			temp.setInterestRate(account.getInterestRate().doubleValue());
+			temp.setLastStatement(lastStatement);
+			temp.setNextStatement(nextStatement);
+			temp.setOverdraftLimit(account.getOverdraft().intValue());
 			temp.setSortcode(sortCodeString);
 			temp.setType(account.getAccountType());
 			temp.setOpened(dateOpened);
@@ -754,8 +765,8 @@ public class Account extends HBankDataAccess{
 		}
 		Account temp = null;
 		openConnection();
-		String accountNumberString = db2Account.getAccount_number();
-		Integer accountNumber = new Integer(db2Account.getAccount_number());
+		String accountNumberString = db2Account.getAccountNumber();
+		Integer accountNumber = new Integer(db2Account.getAccountNumber());
 		StringBuffer myStringBuffer = new StringBuffer(accountNumber.toString());
 		for(int z = myStringBuffer.length(); z < 8;z++)
 		{
@@ -816,16 +827,16 @@ public class Account extends HBankDataAccess{
 	public boolean debitCredit(BigDecimal apiAmount) 
 	{
 		logger.entering(this.getClass().getName(),"debitCredit(BigDecimal apiAmount)");
-		Account temp = this.getAccount(new Integer(this.getAccount_number()).intValue(), new Integer(this.getSortcode()).intValue());
+		Account temp = this.getAccount(new Integer(this.getAccountNumber()).intValue(), new Integer(this.getSortcode()).intValue());
 		if(temp == null)
 		{
-			logger.warning("Unable to find account " + this.getAccount_number());
+			logger.warning("Unable to find account " + this.getAccountNumber());
 			logger.exiting(this.getClass().getName(),"debitCredit(BigDecimal apiAmount)",false);
 			return false;
 		}
 
 		openConnection();
-		String accountNumberString = temp.getAccount_number();
+		String accountNumberString = temp.getAccountNumber();
 		StringBuffer myStringBuffer = new StringBuffer(this.getSortcode());
 		for(int z = myStringBuffer.length(); z < 6;z++)
 		{
@@ -862,15 +873,15 @@ public class Account extends HBankDataAccess{
 				return false;
 			}
 
-			double newActualBalance = temp.getActual_balance();
-			double newAvailableBalance = temp.getAvailable_balance();
+			double newActualBalance = temp.getActualBalance();
+			double newAvailableBalance = temp.getAvailableBalance();
 
 
 			newActualBalance = newActualBalance + apiAmount.doubleValue();
 			newAvailableBalance = newAvailableBalance + apiAmount.doubleValue();
 
-			this.setActual_balance(newActualBalance);
-			this.setAvailable_balance(newAvailableBalance);
+			this.setActualBalance(newActualBalance);
+			this.setAvailableBalance(newAvailableBalance);
 
 
 			
