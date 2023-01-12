@@ -20,12 +20,12 @@ public class CUSTOMER {
 
 	/** <pre>
 	 01 COBOL-LANGUAGE-STRUCTURE. </pre> */
-	public static final int COBOL_LANGUAGE_STRUCTURE_len = 259; 
+	public static final int COBOL_LANGUAGE_STRUCTURE_LEN = 259; 
 
 	/** <pre>
 	     03 CUSTOMER-RECORD. </pre> */
-	public static final int CUSTOMER_RECORD_len = 259; 
-	public static final int CUSTOMER_RECORD_offset = factory.getOffset();
+	public static final int CUSTOMER_RECORD_LEN = 259; 
+	public static final int CUSTOMER_RECORD_OFFSET = factory.getOffset();
 
 	/** <pre>
 	        05 CUSTOMER-EYECATCHER                 PIC X(4). </pre> */
@@ -37,8 +37,8 @@ public class CUSTOMER {
 
 	/** <pre>
 	        05 CUSTOMER-KEY. </pre> */
-	public static final int CUSTOMER_KEY_len = 16; 
-	public static final int CUSTOMER_KEY_offset = factory.getOffset();
+	public static final int CUSTOMER_KEY_LEN = 16; 
+	public static final int CUSTOMER_KEY_OFFSET = factory.getOffset();
 
 	/** <pre>
 	           07 CUSTOMER-SORTCODE                PIC 9(6) DISPLAY. </pre> */
@@ -72,8 +72,8 @@ public class CUSTOMER {
 	        05 CUSTOMER-DOB-GROUP REDEFINES CUSTOMER-DATE-OF-BIRTH. </pre> */
 	static { factory.pushOffset(); } 
 	static { factory.setOffset(CUSTOMER_DATE_OF_BIRTH.getOffset()); } 
-	public static final int CUSTOMER_DOB_GROUP_len = 8; 
-	public static final int CUSTOMER_DOB_GROUP_offset = factory.getOffset();
+	public static final int CUSTOMER_DOB_GROUP_LEN = 8; 
+	public static final int CUSTOMER_DOB_GROUP_OFFSET = factory.getOffset();
 
 	/** <pre>
 	           07 CUSTOMER-BIRTH-DAY               PIC 99. </pre> */
@@ -101,8 +101,8 @@ public class CUSTOMER {
 	           REDEFINES CUSTOMER-CS-REVIEW-DATE. </pre> */
 	static { factory.pushOffset(); } 
 	static { factory.setOffset(CUSTOMER_CS_REVIEW_DATE.getOffset()); } 
-	public static final int CUSTOMER_CS_GROUP_len = 8; 
-	public static final int CUSTOMER_CS_GROUP_offset = factory.getOffset();
+	public static final int CUSTOMER_CS_GROUP_LEN = 8; 
+	public static final int CUSTOMER_CS_GROUP_OFFSET = factory.getOffset();
 
 	/** <pre>
 	           07 CUSTOMER-CS-REVIEW-DAY           PIC 99. </pre> */
@@ -132,7 +132,7 @@ public class CUSTOMER {
 	}
 
 	public CUSTOMER () {
-		this._byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_len];
+		this._byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_LEN];
 	}
 
 	public byte[] getByteBuffer() {

@@ -21,12 +21,12 @@ public class PROCTRAN {
 
 	/** <pre>
 	 01 COBOL-LANGUAGE-STRUCTURE. </pre> */
-	public static final int COBOL_LANGUAGE_STRUCTURE_len = 99; 
+	public static final int COBOL_LANGUAGE_STRUCTURE_LEN = 99; 
 
 	/** <pre>
 	     03 PROC-TRAN-DATA. </pre> */
-	public static final int PROC_TRAN_DATA_len = 99; 
-	public static final int PROC_TRAN_DATA_offset = factory.getOffset();
+	public static final int PROC_TRAN_DATA_lEN = 99; 
+	public static final int PROC_TRAN_DATA_OFFSET = factory.getOffset();
 
 	/** <pre>
 	        05 PROC-TRAN-EYE-CATCHER        PIC X(4). </pre> */
@@ -41,8 +41,8 @@ public class PROCTRAN {
 	           PROC-TRAN-EYE-CATCHER. </pre> */
 	static { factory.pushOffset(); } 
 	static { factory.setOffset(PROC_TRAN_EYE_CATCHER.getOffset()); } 
-	public static final int PROC_TRAN_LOGICAL_DELETE_AREA_len = 4; 
-	public static final int PROC_TRAN_LOGICAL_DELETE_AREA_offset = factory.getOffset();
+	public static final int PROC_TRAN_LOGICAL_DELETE_AREA_LEN = 4; 
+	public static final int PROC_TRAN_LOGICAL_DELETE_AREA_OFFSET = factory.getOffset();
 
 	/** <pre>
 	           07 PROC-TRAN-LOGICAL-DELETE-FLAG PIC X. </pre> */
@@ -59,8 +59,8 @@ public class PROCTRAN {
 
 	/** <pre>
 	        05 PROC-TRAN-ID. </pre> */
-	public static final int PROC_TRAN_ID_len = 14; 
-	public static final int PROC_TRAN_ID_offset = factory.getOffset();
+	public static final int PROC_TRAN_ID_LEN = 14; 
+	public static final int PROC_TRAN_ID_OFFSET = factory.getOffset();
 
 	/** <pre>
 	           07 PROC-TRAN-SORT-CODE       PIC 9(6). </pre> */
@@ -78,8 +78,8 @@ public class PROCTRAN {
 	        05 PROC-TRAN-DATE-GRP REDEFINES PROC-TRAN-DATE. </pre> */
 	static { factory.pushOffset(); } 
 	static { factory.setOffset(PROC_TRAN_DATE.getOffset()); } 
-	public static final int PROC_TRAN_DATE_GRP_len = 8; 
-	public static final int PROC_TRAN_DATE_GRP_offset = factory.getOffset();
+	public static final int PROC_TRAN_DATE_GRP_LEN = 8; 
+	public static final int PROC_TRAN_DATE_GRP_OFFSET = factory.getOffset();
 
 	/** <pre>
 	           07 PROC-TRAN-DATE-GRP-YYYY   PIC 9999. </pre> */
@@ -102,8 +102,8 @@ public class PROCTRAN {
 	        05 PROC-TRAN-TIME-GRP REDEFINES PROC-TRAN-TIME. </pre> */
 	static { factory.pushOffset(); } 
 	static { factory.setOffset(PROC_TRAN_TIME.getOffset()); } 
-	public static final int PROC_TRAN_TIME_GRP_len = 6; 
-	public static final int PROC_TRAN_TIME_GRP_offset = factory.getOffset();
+	public static final int PROC_TRAN_TIME_GRP_LEN = 6; 
+	public static final int PROC_TRAN_TIME_GRP_OFFSET = factory.getOffset();
 
 	/** <pre>
 	           07 PROC-TRAN-TIME-GRP-HH     PIC 99. </pre> */
@@ -198,8 +198,8 @@ public class PROCTRAN {
 	        05 PROC-TRAN-DESC-XFR REDEFINES PROC-TRAN-DESC. </pre> */
 	static { factory.pushOffset(); } 
 	static { factory.setOffset(PROC_TRAN_DESC.getOffset()); } 
-	public static final int PROC_TRAN_DESC_XFR_len = 40; 
-	public static final int PROC_TRAN_DESC_XFR_offset = factory.getOffset();
+	public static final int PROC_TRAN_DESC_XFR_LEN = 40; 
+	public static final int PROC_TRAN_DESC_XFR_OFFSET = factory.getOffset();
 
 	/** <pre>
 	          07 PROC-TRAN-DESC-XFR-HEADER PIC X(26). </pre> */
@@ -225,8 +225,8 @@ public class PROCTRAN {
 	        05 PROC-TRAN-DESC-DELACC REDEFINES PROC-TRAN-DESC. </pre> */
 	static { factory.pushOffset(); } 
 	static { factory.setOffset(PROC_TRAN_DESC.getOffset()); } 
-	public static final int PROC_TRAN_DESC_DELACC_len = 40; 
-	public static final int PROC_TRAN_DESC_DELACC_offset = factory.getOffset();
+	public static final int PROC_TRAN_DESC_DELACC_LEN = 40; 
+	public static final int PROC_TRAN_DESC_DELACC_OFFSET = factory.getOffset();
 
 	/** <pre>
 	          07 PROC-DESC-DELACC-CUSTOMER PIC 9(10). </pre> */
@@ -274,8 +274,8 @@ public class PROCTRAN {
 	        05 PROC-TRAN-DESC-CREACC REDEFINES PROC-TRAN-DESC. </pre> */
 	static { factory.pushOffset(); } 
 	static { factory.setOffset(PROC_TRAN_DESC.getOffset()); } 
-	public static final int PROC_TRAN_DESC_CREACC_len = 40; 
-	public static final int PROC_TRAN_DESC_CREACC_offset = factory.getOffset();
+	public static final int PROC_TRAN_DESC_CREACC_LEN = 40; 
+	public static final int PROC_TRAN_DESC_CREACC_OFFSET = factory.getOffset();
 
 	/** <pre>
 	          07 PROC-DESC-CREACC-CUSTOMER PIC 9(10). </pre> */
@@ -323,8 +323,8 @@ public class PROCTRAN {
 	        05 PROC-TRAN-DESC-DELCUS REDEFINES PROC-TRAN-DESC. </pre> */
 	static { factory.pushOffset(); } 
 	static { factory.setOffset(PROC_TRAN_DESC.getOffset()); } 
-	public static final int PROC_TRAN_DESC_DELCUS_len = 40; 
-	public static final int PROC_TRAN_DESC_DELCUS_offset = factory.getOffset();
+	public static final int PROC_TRAN_DESC_DELCUS_LEN = 40; 
+	public static final int PROC_TRAN_DESC_DELCUS_OFFSET = factory.getOffset();
 
 	/** <pre>
 	          07 PROC-DESC-DELCUS-SORTCODE PIC 9(6). </pre> */
@@ -371,8 +371,8 @@ public class PROCTRAN {
 	        05 PROC-TRAN-DESC-CRECUS REDEFINES PROC-TRAN-DESC. </pre> */
 	static { factory.pushOffset(); } 
 	static { factory.setOffset(PROC_TRAN_DESC.getOffset()); } 
-	public static final int PROC_TRAN_DESC_CRECUS_len = 40; 
-	public static final int PROC_TRAN_DESC_CRECUS_offset = factory.getOffset();
+	public static final int PROC_TRAN_DESC_CRECUS_LEN = 40; 
+	public static final int PROC_TRAN_DESC_CRECUS_OFFSET = factory.getOffset();
 
 	/** <pre>
 	          07 PROC-DESC-CRECUS-SORTCODE PIC 9(6). </pre> */
@@ -433,7 +433,7 @@ public class PROCTRAN {
 	}
 
 	public PROCTRAN () {
-		this._byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_len];
+		this._byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_LEN];
 	}
 
 	public byte[] getByteBuffer() {

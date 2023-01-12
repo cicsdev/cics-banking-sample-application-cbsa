@@ -20,7 +20,7 @@ public class NewAccountNumber {
 
 	/** <pre>
 	 01 COBOL-LANGUAGE-STRUCTURE. </pre> */
-	public static final int COBOL_LANGUAGE_STRUCTURE_len = 11; 
+	public static final int COBOL_LANGUAGE_STRUCTURE_LEN = 11; 
 
 	/** <pre>
 	    03 NEWACCNO-FUNCTION  PIC X. </pre> */
@@ -63,7 +63,7 @@ public class NewAccountNumber {
 	}
 
 	public NewAccountNumber () {
-		this._byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_len];
+		this._byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_LEN];
 	}
 
 	public byte[] getByteBuffer() {

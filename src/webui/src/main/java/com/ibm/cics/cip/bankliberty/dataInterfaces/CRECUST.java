@@ -20,7 +20,7 @@ public class CRECUST {
 
 	/** <pre>
 	 01 COBOL-LANGUAGE-STRUCTURE. </pre> */
-	public static final int COBOL_LANGUAGE_STRUCTURE_len = 261; 
+	public static final int COBOL_LANGUAGE_STRUCTURE_LEN = 261; 
 
 	/** <pre>
 	    03 COMM-EYECATCHER                 PIC X(4). </pre> */
@@ -28,8 +28,8 @@ public class CRECUST {
 
 	/** <pre>
 	    03 COMM-KEY. </pre> */
-	public static final int COMM_KEY_len = 16; 
-	public static final int COMM_KEY_offset = factory.getOffset();
+	public static final int COMM_KEY_LEN = 16; 
+	public static final int COMM_KEY_OFFSET = factory.getOffset();
 
 	/** <pre>
 	       05 COMM-SORTCODE                PIC 9(6) DISPLAY. </pre> */
@@ -55,8 +55,8 @@ public class CRECUST {
 	    03 COMM-DOB-GROUP REDEFINES COMM-DATE-OF-BIRTH. </pre> */
 	static { factory.pushOffset(); } 
 	static { factory.setOffset(COMM_DATE_OF_BIRTH.getOffset()); } 
-	public static final int COMM_DOB_GROUP_len = 8; 
-	public static final int COMM_DOB_GROUP_offset = factory.getOffset();
+	public static final int COMM_DOB_GROUP_LEN = 8; 
+	public static final int COMM_DOB_GROUP_OFFSET = factory.getOffset();
 
 	/** <pre>
 	       05 COMM-BIRTH-DAY               PIC 99. </pre> */
@@ -83,8 +83,8 @@ public class CRECUST {
 	    03 COMM-CS-REVIEW-DATE-GROUP REDEFINES COMM-CS-REVIEW-DATE. </pre> */
 	static { factory.pushOffset(); } 
 	static { factory.setOffset(COMM_CS_REVIEW_DATE.getOffset()); } 
-	public static final int COMM_CS_REVIEW_DATE_GROUP_len = 8; 
-	public static final int COMM_CS_REVIEW_DATE_GROUP_offset = factory.getOffset();
+	public static final int COMM_CS_REVIEW_DATE_GROUP_LEN= 8; 
+	public static final int COMM_CS_REVIEW_DATE_GROUP_OFFSET = factory.getOffset();
 
 	/** <pre>
 	       05 COMM-CS-REVIEW-DD            PIC 99. </pre> */
@@ -124,7 +124,7 @@ public class CRECUST {
 	}
 
 	public CRECUST () {
-		this._byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_len];
+		this._byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_LEN];
 	}
 
 	public byte[] getByteBuffer() {

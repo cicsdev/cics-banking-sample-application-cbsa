@@ -19,12 +19,12 @@ public class CustomerControl {
 
 	/** <pre>
 	 01 COBOL-LANGUAGE-STRUCTURE. </pre> */
-	public static final int COBOL_LANGUAGE_STRUCTURE_len = 329; 
+	public static final int COBOL_LANGUAGE_STRUCTURE_LEN = 329; 
 
 	/** <pre>
 	     03 CUSTOMER-CONTROL-RECORD. </pre> */
-	public static final int CUSTOMER_CONTROL_RECORD_len = 329; 
-	public static final int CUSTOMER_CONTROL_RECORD_offset = factory.getOffset();
+	public static final int CUSTOMER_CONTROL_RECORD_LEN = 329; 
+	public static final int CUSTOMER_CONTROL_RECORD_OFFSET = factory.getOffset();
 
 	/** <pre>
 	        05 CUSTOMER-CONTROL-EYECATCHER             PIC X(4). </pre> */
@@ -36,8 +36,8 @@ public class CustomerControl {
 
 	/** <pre>
 	        05 CUSTOMER-CONTROL-KEY. </pre> */
-	public static final int CUSTOMER_CONTROL_KEY_len = 16; 
-	public static final int CUSTOMER_CONTROL_KEY_offset = factory.getOffset();
+	public static final int CUSTOMER_CONTROL_KEY_LEN = 16; 
+	public static final int CUSTOMER_CONTROL_KEY_OFFSET = factory.getOffset();
 
 	/** <pre>
 	           07 CUSTOMER-CONTROL-SORTCODE        PIC 9(6) DISPLAY. </pre> */
@@ -116,7 +116,7 @@ public class CustomerControl {
 	}
 
 	public CustomerControl () {
-		this._byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_len];
+		this._byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_LEN];
 	}
 
 	public byte[] getByteBuffer() {

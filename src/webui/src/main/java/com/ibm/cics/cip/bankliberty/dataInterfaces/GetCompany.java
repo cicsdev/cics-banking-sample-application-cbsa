@@ -20,12 +20,12 @@ public class GetCompany {
 
 	/** <pre>
 	 01 COBOL-LANGUAGE-STRUCTURE. </pre> */
-	public static final int COBOL_LANGUAGE_STRUCTURE_len = 40; 
+	public static final int COBOL_LANGUAGE_STRUCTURE_LEN = 40; 
 
 	/** <pre>
 	     03 GETCompanyOperation. </pre> */
-	public static final int GETCOMPANYOPERATION_len = 40; 
-	public static final int GETCOMPANYOPERATION_offset = factory.getOffset();
+	public static final int GETCOMPANYOPERATION_LEN = 40; 
+	public static final int GETCOMPANYOPERATION_OFFSET = factory.getOffset();
 
 	/** <pre>
 	       06 company-name pic x(40). </pre> */
@@ -39,7 +39,7 @@ public class GetCompany {
 	}
 
 	public GetCompany () {
-		this._byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_len];
+		this._byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_LEN];
 	}
 
 	public byte[] getByteBuffer() {
