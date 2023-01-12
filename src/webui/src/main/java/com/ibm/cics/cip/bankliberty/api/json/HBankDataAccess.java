@@ -66,7 +66,7 @@ public class HBankDataAccess {
 		this.conn = (Connection) cornedBeef.get(db2ConnString);
 		if(this.conn == null)
 		{
-			HBankDataAccess.connectionCount++;
+			HBankDataAccess.incrementConnCount();
 			logger.fine("Attempting to create DB2CONN for task number " + taskNumberInteger.toString());
 			//Attempt to open a connection
 			openConnectionInternal();
@@ -103,7 +103,7 @@ public class HBankDataAccess {
 		//Close the connection to the DB2 database
 		logger.entering(this.getClass().getName(),"closeConnection()");
 
-		HBankDataAccess.connectionCount--;
+		HBankDataAccess.decrementConnCount();
 
 		Integer taskNumberInterger = new Integer(Task.getTask().getTaskNumber());
 		String db2ConnString = DB2CONN.concat(taskNumberInterger.toString());
@@ -151,7 +151,7 @@ public class HBankDataAccess {
 				Integer taskNumberInterger = new Integer(Task.getTask().getTaskNumber());
 				String db2ConnString = DB2CONN.concat(taskNumberInterger.toString());
 				cornedBeef.put(db2ConnString,this.conn);
-				HBankDataAccess.connectionCount++;
+				HBankDataAccess.incrementConnCount();
 
 			}else{
 				//If the connection is closed, open a new connection
@@ -177,5 +177,15 @@ public class HBankDataAccess {
 		{
 			logger.severe(e.toString());
 		}
+	}
+	
+	private static void incrementConnCount()
+	{
+		HBankDataAccess.connectionCount++;
+	}
+	
+	private static void decrementConnCount()
+	{
+		HBankDataAccess.connectionCount--;
 	}
 }

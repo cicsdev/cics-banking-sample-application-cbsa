@@ -25,7 +25,7 @@ public class PROCTRAN {
 
 	/** <pre>
 	     03 PROC-TRAN-DATA. </pre> */
-	public static final int PROC_TRAN_DATA_lEN = 99; 
+	public static final int PROC_TRAN_DATA_LEN = 99; 
 	public static final int PROC_TRAN_DATA_OFFSET = factory.getOffset();
 
 	/** <pre>

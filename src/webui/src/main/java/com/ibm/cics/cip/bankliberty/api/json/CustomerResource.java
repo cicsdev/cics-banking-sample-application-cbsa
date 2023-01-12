@@ -71,6 +71,7 @@ public class CustomerResource{
 	private static final String JSON_DATE_OF_BIRTH = "dateOfBirth";
 	private static final String JSON_ERROR_MSG = "errorMessage";
 
+	private static final String CUSTOMER_PREFIX = "Customer ";
 	private static final String NOT_FOUND_MSG = " not found";
 	public CustomerResource()
 	{
@@ -239,7 +240,7 @@ public class CustomerResource{
 			if(vsamCustomer.isNot_found())
 			{
 				JSONObject error = new JSONObject();
-				error.put(JSON_ERROR_MSG, "Customer " + id.toString() + " not found.");
+				error.put(JSON_ERROR_MSG, CUSTOMER_PREFIX + id.toString() + " not found.");
 				Response myResponse = Response.status(404).entity(error.toString()).build();
 				logger.warning("Failed to find customer in com.ibm.cics.cip.bankliberty.web.vsam.Customer");
 				logger.exiting(this.getClass().getName(), "updateCustomerInternal() exiting",myResponse);
@@ -324,7 +325,7 @@ public class CustomerResource{
 		else
 		{
 
-			response.put(JSON_ERROR_MSG,"Customer " + id + NOT_FOUND_MSG);
+			response.put(JSON_ERROR_MSG,CUSTOMER_PREFIX + id + NOT_FOUND_MSG);
 			Response myResponse = Response.status(404).entity(response.toString()).build();
 			logger.warning("Customer not found in in com.ibm.cics.cip.bankliberty.web.vsam.Customer");
 			logger.exiting(this.getClass().getName(), GET_CUSTOMER_INTERNAL_EXIT,myResponse);
@@ -435,7 +436,7 @@ public class CustomerResource{
 		{
 			if(vsamCustomer.isNot_found())
 			{
-				response.put(JSON_ERROR_MSG,"Customer " + id + NOT_FOUND_MSG);
+				response.put(JSON_ERROR_MSG,CUSTOMER_PREFIX + id + NOT_FOUND_MSG);
 				Response myResponse = Response.status(404).entity(response.toString()).build();
 				logger.warning("CustomerResource.deleteCustomerInternal() customer " + id + NOT_FOUND_MSG);
 				logger.exiting(this.getClass().getName(), DELETE_CUSTOMER_INTERNAL,myResponse);
@@ -664,7 +665,7 @@ public class CustomerResource{
 		{
 			SortCodeResource mySortCodeResource = new SortCodeResource();
 			Response mySortCodeJSON = mySortCodeResource.getSortCode();
-			sortcode = ((String) mySortCodeJSON.getEntity()).substring(13, 19);
+			CustomerResource.setSortcode(((String) mySortCodeJSON.getEntity()).substring(13, 19));
 		}
 		logger.exiting(this.getClass().getName(), "getSortCode()",new Integer(sortcode));
 		return new Integer(sortcode);
@@ -873,5 +874,10 @@ public class CustomerResource{
 		{
 			logger.severe(e.toString());
 		}
+	}
+	
+	private static void setSortcode(String sortcodeIn)
+	{
+		sortcode = sortcodeIn;
 	}
 }

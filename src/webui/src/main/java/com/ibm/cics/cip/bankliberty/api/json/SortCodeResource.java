@@ -82,7 +82,7 @@ public class SortCodeResource{
 			GetSortCode myGetSortCodeData = new GetSortCode(sortCodeBytes);
 
 
-			SortCodeResource.sortCodeString = myGetSortCodeData.getSortcode();
+			SortCodeResource.setSortCode(myGetSortCodeData.getSortcode());
 		}
 
 		JSONObject response = new JSONObject();
@@ -91,6 +91,10 @@ public class SortCodeResource{
 		return Response.status(200)
 				.entity(response.toString())
 				.build();
+	}
+	private static void setSortCode(String sortcode) 
+	{
+		sortCodeString = sortcode;
 	}
 	private static void sortOutLogging()
 	{

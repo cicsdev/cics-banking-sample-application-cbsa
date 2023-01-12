@@ -32,6 +32,41 @@ public class Account extends HBankDataAccess{
 
 
 	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.web.db2");
+	
+	private static final String GET_ACCOUNT = "getAccount(int accountNumber, int sortCode) for account ";
+	private static final String GET_ACCOUNTS_CUSTNO = "getAccounts(long l, int sortCode) for customer ";
+	private static final String GET_ACCOUNTS = "getAccounts(int sortCode)";
+	private static final String GET_ACCOUNTS_COUNT_ONLY = "getAccountsCountOnly(int sortCode)";
+	private static final String DELETE_ACCOUNT = "deleteAccount(int account, int sortCode)";
+	private static final String CREATE_ACCOUNT = "createAccount(AccountJSON account, Integer sortcode, boolean use NamedCounter)";
+	private static final String UPDATE_ACCOUNT = "updateAccount(AccountJSON account)";
+	private static final String DEBIT_CREDIT_ACCOUNT = "debitCredit(BigDecimal apiAmount)";
+	private static final String GET_ACCOUNTS_BY_BALANCE = "getAccountsByBalance(Integer sortCode2, BigDecimal balance, boolean lessThan)";
+	private static final String GET_ACCOUNTS_WITH_LIMIT_AND_OFFSET = "getAccounts(Integer sortCode, int limit, int offset)";
+	private static final String GET_ACCOUNTS_BY_BALANCE_WITH_LIMIT_AND_OFFSET = "getAccountsByBalance(Integer sortCode2, BigDecimal balance, boolean lessThan, int offset, int limit)";
+	private static final String GET_ACCOUNTS_COUNT_ONLY2 = "getAccountsCountOnly(Integer sortCode2)";
+	private static final String GET_ACCOUNTS_BY_BALANCE_COUNT_ONLY = "getAccountsByBalanceCountOnly(Integer sortCode2, BigDecimal balance, boolean lessThan, Integer offset, Integer limit)";
+	
+	private static final String PRE_SELECT_MSG = "About to do SELECT <";
+	private static final String SQL_WAS = "SQL was <";
+	
+	private static final String ACCOUNT_SORTCODE = "ACCOUNT_SORTCODE";
+	private static final String ACCOUNT_CUSTOMER_NUMBER = "ACCOUNT_CUSTOMER_NUMBER";
+	private static final String ACCOUNT_NUMBER = "ACCOUNT_NUMBER";
+	private static final String ACCOUNT_TYPE = "ACCOUNT_TYPE";
+	private static final String ACCOUNT_INTEREST_RATE = "ACCOUNT_INTEREST_RATE";
+	private static final String ACCOUNT_LAST_STATEMENT = "ACCOUNT_LAST_STATEMENT";
+	private static final String ACCOUNT_NEXT_STATEMENT = "ACCOUNT_NEXT_STATEMENT";
+	private static final String ACCOUNT_OVERDRAFT_LIMIT = "ACCOUNT_OVERDRAFT_LIMIT";
+	private static final String ACCOUNT_OPENED = "ACCOUNT_OPENED";
+	private static final String ACCOUNT_AVAILABLE_BALANCE = "ACCOUNT_AVAILABLE_BALANCE";
+	private static final String ACCOUNT_ACTUAL_BALANCE = "ACCOUNT_ACTUAL_BALANCE";
+	private static final String ACCOUNT_COUNT = "ACCOUNT_COUNT";
+	
+	private static final String SQL_SELECT = "SELECT * from ACCOUNT where ACCOUNT_EYECATCHER LIKE 'ACCT' AND ACCOUNT_NUMBER like ? and ACCOUNT_SORTCODE like ?";
+	private static final String SQL_LESS_THAN = " AND ACCOUNT_ACTUAL_BALANCE <= ?";
+	private static final String SQL_MORE_THAN = " AND ACCOUNT_ACTUAL_BALANCE >= ?";
+	
 	// </copyright>
 
 	// String ACCOUNT_EYECATCHER             CHAR(4),
@@ -245,17 +280,7 @@ public class Account extends HBankDataAccess{
 	public void updateThis(){
 		openConnection();
 
-		String sql = "UPDATE ACCOUNT "+
-				"SET"+
-				" ACCOUNT_TYPE = ?"+
-				" ,ACCOUNT_INTEREST_RATE = ?"+
-				" ,ACCOUNT_OVERDRAFT_LIMIT = ?"+
-				" ,ACCOUNT_LAST_STATEMENT = ?"+
-				" ,ACCOUNT_NEXT_STATEMENT = ?"+
-				" ,ACCOUNT_AVAILABLE_BALANCE = ? " +
-				" ,ACCOUNT_ACTUAL_BALANCE = ?"  +
-				" WHERE ACCOUNT_NUMBER like ?"+
-				" AND ACCOUNT_SORTCODE like ?";
+		String sql = "UPDATE ACCOUNT SET ACCOUNT_TYPE = ? ,ACCOUNT_INTEREST_RATE = ? ,ACCOUNT_OVERDRAFT_LIMIT = ? ,ACCOUNT_LAST_STATEMENT = ? ,ACCOUNT_NEXT_STATEMENT = ? ,ACCOUNT_AVAILABLE_BALANCE = ? ,ACCOUNT_ACTUAL_BALANCE = ? WHERE ACCOUNT_NUMBER like ? AND ACCOUNT_SORTCODE like ?";
 		try(PreparedStatement stmt = conn.prepareStatement(sql);){
 			stmt.setString(1,this.type);
 			stmt.setDouble(2, this.interestRate);
@@ -275,7 +300,7 @@ public class Account extends HBankDataAccess{
 
 
 	public Account getAccount(int accountNumber, int sortCode){
-		logger.entering(this.getClass().getName(),"getAccount(int accountNumber, int sortCode) for account " + accountNumber);
+		logger.entering(this.getClass().getName(),GET_ACCOUNT + accountNumber);
 		openConnection();
 		Account temp = null;
 		StringBuffer myStringBuffer = new StringBuffer(new Integer(sortCode).toString());
@@ -287,41 +312,41 @@ public class Account extends HBankDataAccess{
 		if(accountNumber == 99999999)
 		{
 			String sql = "SELECT * from ACCOUNT where ACCOUNT_EYECATCHER LIKE 'ACCT' AND ACCOUNT_SORTCODE like ? order by ACCOUNT_NUMBER DESC";
-			logger.fine("About to do SELECT <" + sql + ">");
+			logger.fine(PRE_SELECT_MSG + sql + ">");
 			try (PreparedStatement stmt = conn.prepareStatement(sql);)
 			{
 				stmt.setString(1, sortCodeString);
 				ResultSet rs = stmt.executeQuery();
 				if(rs.next())
 				{
-					temp = new Account(rs.getString("ACCOUNT_CUSTOMER_NUMBER"), rs.getString("ACCOUNT_SORTCODE"),
-							rs.getString("ACCOUNT_NUMBER"), rs.getString("ACCOUNT_TYPE"), rs.getDouble("ACCOUNT_INTEREST_RATE"),
-							rs.getDate("ACCOUNT_OPENED"), rs.getInt("ACCOUNT_OVERDRAFT_LIMIT"), rs.getDate("ACCOUNT_LAST_STATEMENT"),
-							rs.getDate("ACCOUNT_NEXT_STATEMENT"), rs.getDouble("ACCOUNT_AVAILABLE_BALANCE"),
-							rs.getDouble("ACCOUNT_ACTUAL_BALANCE"));
+					temp = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER), rs.getString(ACCOUNT_SORTCODE),
+							rs.getString(ACCOUNT_NUMBER), rs.getString(ACCOUNT_TYPE), rs.getDouble(ACCOUNT_INTEREST_RATE),
+							rs.getDate(ACCOUNT_OPENED), rs.getInt(ACCOUNT_OVERDRAFT_LIMIT), rs.getDate(ACCOUNT_LAST_STATEMENT),
+							rs.getDate(ACCOUNT_NEXT_STATEMENT), rs.getDouble(ACCOUNT_AVAILABLE_BALANCE),
+							rs.getDouble(ACCOUNT_ACTUAL_BALANCE));
 					rs.close();
-					logger.exiting(this.getClass().getName(),"getAccount(int accountNumber, int sortCode) for account " + accountNumber,temp);
+					logger.exiting(this.getClass().getName(),GET_ACCOUNT + accountNumber,temp);
 					return temp;
 				}
 				else
 				{
 					logger.warning("No results found");
-					logger.exiting(this.getClass().getName(),"getAccount(int accountNumber, int sortCode) for account " + accountNumber,null);
+					logger.exiting(this.getClass().getName(),GET_ACCOUNT + accountNumber,null);
 					return null;
 				}
 
 			} catch (SQLException e) {
 				logger.severe(e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),"getAccount(int accountNumber, int sortCode) for account " + accountNumber,null);
+				logger.exiting(this.getClass().getName(),GET_ACCOUNT + accountNumber,null);
 				return null;
 			}
 		}
 		else
 		{
-			String sql = "SELECT * from ACCOUNT where ACCOUNT_EYECATCHER LIKE 'ACCT' AND ACCOUNT_NUMBER like ? and ACCOUNT_SORTCODE like ?";
+			String sql = SQL_SELECT;
 			try (PreparedStatement stmt = conn.prepareStatement(sql);)
 			{
-				logger.fine("About to execute query SQL <" + sql + ">");
+				logger.fine(PRE_SELECT_MSG + sql + ">");
 				myStringBuffer = new StringBuffer(new Integer(accountNumber).toString());
 				for(int z = myStringBuffer.length(); z < 8;z++)
 				{
@@ -335,20 +360,20 @@ public class Account extends HBankDataAccess{
 				if(rs.isClosed())
 				{
 					logger.warning("Result set is closed so returning 'temp' which is " + temp);
-					logger.exiting(this.getClass().getName(),"getAccount(int accountNumber, int sortCode) for account " + accountNumber,temp);
+					logger.exiting(this.getClass().getName(),GET_ACCOUNT + accountNumber,temp);
 					return temp;
 				}
 				else
 				{
 					while(rs.next())
 					{
-						temp = new Account(rs.getString("ACCOUNT_CUSTOMER_NUMBER"), rs.getString("ACCOUNT_SORTCODE"),
-								rs.getString("ACCOUNT_NUMBER"), rs.getString("ACCOUNT_TYPE"), rs.getDouble("ACCOUNT_INTEREST_RATE"),
-								rs.getDate("ACCOUNT_OPENED"), rs.getInt("ACCOUNT_OVERDRAFT_LIMIT"), rs.getDate("ACCOUNT_LAST_STATEMENT"),
-								rs.getDate("ACCOUNT_NEXT_STATEMENT"), rs.getDouble("ACCOUNT_AVAILABLE_BALANCE"),
-								rs.getDouble("ACCOUNT_ACTUAL_BALANCE"));
+						temp = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER), rs.getString(ACCOUNT_SORTCODE),
+								rs.getString(ACCOUNT_NUMBER), rs.getString(ACCOUNT_TYPE), rs.getDouble(ACCOUNT_INTEREST_RATE),
+								rs.getDate(ACCOUNT_OPENED), rs.getInt(ACCOUNT_OVERDRAFT_LIMIT), rs.getDate(ACCOUNT_LAST_STATEMENT),
+								rs.getDate(ACCOUNT_NEXT_STATEMENT), rs.getDouble(ACCOUNT_AVAILABLE_BALANCE),
+								rs.getDouble(ACCOUNT_ACTUAL_BALANCE));
 						rs.close();
-						logger.exiting(this.getClass().getName(),"getAccount(int accountNumber, int sortCode) for account " + accountNumber,temp);
+						logger.exiting(this.getClass().getName(),GET_ACCOUNT + accountNumber,temp);
 						return temp;
 					}
 
@@ -356,16 +381,16 @@ public class Account extends HBankDataAccess{
 
 			} catch (SQLException e) {
 				logger.severe(e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),"getAccount(int accountNumber, int sortCode) for account " + accountNumber,null);
+				logger.exiting(this.getClass().getName(),GET_ACCOUNT + accountNumber,null);
 				return null;
 			}
 		}
-		logger.exiting(this.getClass().getName(),"getAccount(int accountNumber, int sortCode) for account " + accountNumber,temp);
+		logger.exiting(this.getClass().getName(),GET_ACCOUNT + accountNumber,temp);
 		return temp;
 	}
 
 	public Account[] getAccounts(long l, int sortCode){
-		logger.entering(this.getClass().getName(),"getAccounts(long l, int sortCode) for customer " + l);
+		logger.entering(this.getClass().getName(),GET_ACCOUNTS_CUSTNO + l);
 		openConnection();
 		Account[] temp = new Account[10];
 		int i = 0;
@@ -384,7 +409,7 @@ public class Account extends HBankDataAccess{
 		String sortCodeString = myStringBuffer.toString();
 
 		String sql = "SELECT * from ACCOUNT where ACCOUNT_EYECATCHER LIKE 'ACCT' AND ACCOUNT_CUSTOMER_NUMBER like ? and ACCOUNT_SORTCODE like ? ORDER BY ACCOUNT_NUMBER";
-		logger.fine("About to issue query SQL <" + sql + ">");
+		logger.fine(PRE_SELECT_MSG + sql + ">");
 		try (PreparedStatement stmt = conn.prepareStatement(sql);)
 		{
 			stmt.setString(1, customerNumberString);
@@ -392,16 +417,16 @@ public class Account extends HBankDataAccess{
 
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				temp[i] = new Account(rs.getString("ACCOUNT_CUSTOMER_NUMBER"), rs.getString("ACCOUNT_SORTCODE"),
-						rs.getString("ACCOUNT_NUMBER"), rs.getString("ACCOUNT_TYPE"), rs.getDouble("ACCOUNT_INTEREST_RATE"),
-						rs.getDate("ACCOUNT_OPENED"), rs.getInt("ACCOUNT_OVERDRAFT_LIMIT"), rs.getDate("ACCOUNT_LAST_STATEMENT"),
-						rs.getDate("ACCOUNT_NEXT_STATEMENT"), rs.getDouble("ACCOUNT_AVAILABLE_BALANCE"),
-						rs.getDouble("ACCOUNT_ACTUAL_BALANCE"));
+				temp[i] = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER), rs.getString(ACCOUNT_SORTCODE),
+						rs.getString(ACCOUNT_NUMBER), rs.getString(ACCOUNT_TYPE), rs.getDouble(ACCOUNT_INTEREST_RATE),
+						rs.getDate(ACCOUNT_OPENED), rs.getInt(ACCOUNT_OVERDRAFT_LIMIT), rs.getDate(ACCOUNT_LAST_STATEMENT),
+						rs.getDate(ACCOUNT_NEXT_STATEMENT), rs.getDouble(ACCOUNT_AVAILABLE_BALANCE),
+						rs.getDouble(ACCOUNT_ACTUAL_BALANCE));
 				i++;
 			}
 		} catch (SQLException e) {
 			logger.severe(e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"getAccounts(long l, int sortCode) for customer " + l,null);
+			logger.exiting(this.getClass().getName(),GET_ACCOUNTS_CUSTNO + l,null);
 			return null;
 		}
 		Account[] real = new Account[i];
@@ -409,12 +434,12 @@ public class Account extends HBankDataAccess{
 		{
 			real[j] = temp[j];
 		}
-		logger.exiting(this.getClass().getName(),"getAccounts(long l, int sortCode) for customer " + l,real);
+		logger.exiting(this.getClass().getName(),GET_ACCOUNTS_CUSTNO + l,real);
 		return real;
 	}
 
 	public Account[] getAccounts(int sortCode){
-		logger.entering(this.getClass().getName(),"getAccounts(int sortCode)");
+		logger.entering(this.getClass().getName(),GET_ACCOUNTS);
 		openConnection();
 		Account[] temp = new Account[250000];
 		int i = 0;
@@ -431,16 +456,16 @@ public class Account extends HBankDataAccess{
 			stmt.setString(1, sortCodeString);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				temp[i] = new Account(rs.getString("ACCOUNT_CUSTOMER_NUMBER"), rs.getString("ACCOUNT_SORTCODE"),
-						rs.getString("ACCOUNT_NUMBER"), rs.getString("ACCOUNT_TYPE"), rs.getDouble("ACCOUNT_INTEREST_RATE"),
-						rs.getDate("ACCOUNT_OPENED"), rs.getInt("ACCOUNT_OVERDRAFT_LIMIT"), rs.getDate("ACCOUNT_LAST_STATEMENT"),
-						rs.getDate("ACCOUNT_NEXT_STATEMENT"), rs.getDouble("ACCOUNT_AVAILABLE_BALANCE"),
-						rs.getDouble("ACCOUNT_ACTUAL_BALANCE"));
+				temp[i] = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER), rs.getString(ACCOUNT_SORTCODE),
+						rs.getString(ACCOUNT_NUMBER), rs.getString(ACCOUNT_TYPE), rs.getDouble(ACCOUNT_INTEREST_RATE),
+						rs.getDate(ACCOUNT_OPENED), rs.getInt(ACCOUNT_OVERDRAFT_LIMIT), rs.getDate(ACCOUNT_LAST_STATEMENT),
+						rs.getDate(ACCOUNT_NEXT_STATEMENT), rs.getDouble(ACCOUNT_AVAILABLE_BALANCE),
+						rs.getDouble(ACCOUNT_ACTUAL_BALANCE));
 				i++;
 			}
 		} catch (SQLException e) {
 			logger.severe(e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"getAccounts(int sortCode)",null);
+			logger.exiting(this.getClass().getName(),GET_ACCOUNTS,null);
 			return null;
 		}
 		Account[] real = new Account[i];
@@ -448,12 +473,12 @@ public class Account extends HBankDataAccess{
 		{
 			real[j] = temp[j];
 		}
-		logger.exiting(this.getClass().getName(),"getAccounts(int sortCode)",real);
+		logger.exiting(this.getClass().getName(),GET_ACCOUNTS,real);
 		return real;
 	}
 
 	public int getAccountsCountOnly(int sortCode){
-		logger.entering(this.getClass().getName(),"getAccountsCountOnly(int sortCode)");
+		logger.entering(this.getClass().getName(),GET_ACCOUNTS_COUNT_ONLY);
 		openConnection();
 		StringBuffer myStringBuffer = new StringBuffer(new Integer(sortCode).toString());
 		for(int z = myStringBuffer.length(); z < 6;z++)
@@ -462,34 +487,34 @@ public class Account extends HBankDataAccess{
 		}
 		String sortCodeString = myStringBuffer.toString();
 		String sql = "SELECT COUNT(*) as ACCOUNT_COUNT from ACCOUNT where ACCOUNT_EYECATCHER LIKE 'ACCT' AND ACCOUNT_SORTCODE like ?";
-		logger.fine("About to issue query SQL <" + sql + ">");
+		logger.fine(PRE_SELECT_MSG + sql + ">");
 		try (PreparedStatement stmt = conn.prepareStatement(sql);)
 		{
 			stmt.setString(1, sortCodeString);
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next())
 			{
-				logger.exiting(this.getClass().getName(),"getAccountsCountOnly(int sortCode)",rs.getInt("ACCOUNT_COUNT"));
-				return rs.getInt("ACCOUNT_COUNT");
+				logger.exiting(this.getClass().getName(),GET_ACCOUNTS_COUNT_ONLY,rs.getInt(ACCOUNT_COUNT));
+				return rs.getInt(ACCOUNT_COUNT);
 			}
 			else 
 			{
-				logger.exiting(this.getClass().getName(),"getAccountsCountOnly(int sortCode)",-1);
+				logger.exiting(this.getClass().getName(),GET_ACCOUNTS_COUNT_ONLY,-1);
 				return -1;
 			}
 		} catch (SQLException e) {
 			logger.severe(e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"getAccountsCountOnly(int sortCode)",-1);
+			logger.exiting(this.getClass().getName(),GET_ACCOUNTS_COUNT_ONLY,-1);
 			return -1;
 		}
 	}
 
 	public Account deleteAccount(int account, int sortcode) {
-		logger.entering(this.getClass().getName(),"deleteAccount(int account, int sortCode)");
+		logger.entering(this.getClass().getName(),DELETE_ACCOUNT);
 		Account db2Account = this.getAccount(account, sortcode);
 		if(db2Account == null)
 		{
-			logger.exiting(this.getClass().getName(),"deleteAccount(int account, int sortCode)",null);
+			logger.exiting(this.getClass().getName(),DELETE_ACCOUNT,null);
 			return null;
 		}
 		Account temp = null;
@@ -508,39 +533,39 @@ public class Account extends HBankDataAccess{
 		}
 		String sortCodeString = myStringBuffer.toString();
 
-		String sql1 = "SELECT * from ACCOUNT where ACCOUNT_EYECATCHER LIKE 'ACCT' AND ACCOUNT_NUMBER like ? and ACCOUNT_SORTCODE like ?";
+		String sql1 = SQL_SELECT;
 		String sql2 = "DELETE from ACCOUNT where ACCOUNT_EYECATCHER LIKE 'ACCT' AND ACCOUNT_NUMBER like ? and ACCOUNT_SORTCODE like ?";
 		try (PreparedStatement stmt = conn.prepareStatement(sql1);
 			PreparedStatement stmt2 = conn.prepareStatement(sql2);)
 		{
-			logger.fine("About to issue query SQL <" + sql1 + ">");
+			logger.fine(PRE_SELECT_MSG + sql1 + ">");
 
 			stmt.setString(1, accountNumberString);
 			stmt.setString(2,sortCodeString);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) 
 			{
-				temp = new Account(rs.getString("ACCOUNT_CUSTOMER_NUMBER"), rs.getString("ACCOUNT_SORTCODE"),
-						rs.getString("ACCOUNT_NUMBER"), rs.getString("ACCOUNT_TYPE"), rs.getDouble("ACCOUNT_INTEREST_RATE"),
-						rs.getDate("ACCOUNT_OPENED"), rs.getInt("ACCOUNT_OVERDRAFT_LIMIT"), rs.getDate("ACCOUNT_LAST_STATEMENT"),
-						rs.getDate("ACCOUNT_NEXT_STATEMENT"), rs.getDouble("ACCOUNT_AVAILABLE_BALANCE"),
-						rs.getDouble("ACCOUNT_ACTUAL_BALANCE"));
+				temp = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER), rs.getString(ACCOUNT_SORTCODE),
+						rs.getString(ACCOUNT_NUMBER), rs.getString(ACCOUNT_TYPE), rs.getDouble(ACCOUNT_INTEREST_RATE),
+						rs.getDate(ACCOUNT_OPENED), rs.getInt(ACCOUNT_OVERDRAFT_LIMIT), rs.getDate(ACCOUNT_LAST_STATEMENT),
+						rs.getDate(ACCOUNT_NEXT_STATEMENT), rs.getDouble(ACCOUNT_AVAILABLE_BALANCE),
+						rs.getDouble(ACCOUNT_ACTUAL_BALANCE));
 				db2Account = temp;
 				logger.fine("About to issue delete SQL <" + sql2 + ">");
 				stmt2.setString(1, accountNumberString);
 				stmt2.setString(2,sortCodeString);
 				stmt2.execute();
-				logger.exiting(this.getClass().getName(),"deleteAccount(int account, int sortCode)",temp);
+				logger.exiting(this.getClass().getName(),DELETE_ACCOUNT,temp);
 				return temp;
 			}
 		} 
 		catch (SQLException e) 
 		{
 			logger.severe(e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"deleteAccount(int account, int sortCode)",null);
+			logger.exiting(this.getClass().getName(),DELETE_ACCOUNT,null);
 			return null;
 		}
-		logger.exiting(this.getClass().getName(),"deleteAccount(int account, int sortCode)",db2Account);
+		logger.exiting(this.getClass().getName(),DELETE_ACCOUNT,db2Account);
 		return db2Account;
 	}
 
@@ -549,7 +574,7 @@ public class Account extends HBankDataAccess{
 	@SuppressWarnings("deprecation")
 	public Account createAccount(AccountJSON account, Integer sortcode, boolean useNamedCounter) 
 	{
-		logger.entering(this.getClass().getName(),"createAccount(AccountJSON account, Integer sortcode, boolean use NamedCounter)");
+		logger.entering(this.getClass().getName(),CREATE_ACCOUNT);
 
 		Account temp = null;
 		openConnection();
@@ -567,7 +592,7 @@ public class Account extends HBankDataAccess{
 		Long accountNumber =0L;
 		String controlString = sortcode.toString() + "-" + "ACCOUNT-LAST";
 		String sqlControl = "SELECT * from CONTROL where CONTROL_NAME = ?";
-		logger.fine("About to do SELECT <" + sqlControl + ">" + " " + controlString);
+		logger.fine(PRE_SELECT_MSG + sqlControl + ">" + " " + controlString);
 
 		try(PreparedStatement stmt = conn.prepareStatement(sqlControl);) 
 		{
@@ -582,7 +607,7 @@ public class Account extends HBankDataAccess{
 		catch (SQLException e) 
 		{
 			logger.severe("Error accessing Control Table for SELECT " + e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"createAccount(AccountJSON account, Integer sortcode, boolean use NamedCounter)",null);
+			logger.exiting(this.getClass().getName(),CREATE_ACCOUNT,null);
 			try {
 				Task.getTask().rollback();
 			} catch (InvalidRequestException e1) {
@@ -619,15 +644,6 @@ public class Account extends HBankDataAccess{
 		long nextMonthInMs = 0L;
 		switch(today.getMonth())
 		{
-		case 0:
-		case 2:
-		case 4:
-		case 6:
-		case 7:
-		case 9:
-		case 11:
-			nextMonthInMs = 1000L * 60L * 60L * 24L * 31L;
-			break;
 		case 8:
 		case 3:
 		case 5:
@@ -657,6 +673,9 @@ public class Account extends HBankDataAccess{
 					}
 				}
 			}
+		default:
+			nextMonthInMs = 1000L * 60L * 60L * 24L * 31L;
+			break;
 		}
 
 		long nextStatementLong = timeNow + nextMonthInMs;
@@ -709,7 +728,7 @@ public class Account extends HBankDataAccess{
 			temp.setType(account.getAccountType());
 			temp.setOpened(dateOpened);
 
-			logger.fine("About to do SELECT <" + sqlControl + ">");
+			logger.fine(PRE_SELECT_MSG + sqlControl + ">");
 			try {
 				ResultSet rs = stmt2.executeQuery();
 				rs.next();
@@ -720,7 +739,7 @@ public class Account extends HBankDataAccess{
 				stmt3.execute();
 			} catch (SQLException e) {
 				logger.severe("Error accessing Control Table for UPDATE" + e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),"createAccount(AccountJSON account, Integer sortcode, boolean use NamedCounter)",null);
+				logger.exiting(this.getClass().getName(),CREATE_ACCOUNT,null);
 				try {
 					Task.getTask().rollback();
 				} catch (InvalidRequestException e1) {
@@ -744,7 +763,7 @@ public class Account extends HBankDataAccess{
 			}
 			logger.severe("SQL statement #" + sqlInsert + "# had error " + e.getErrorCode());
 			logger.severe(e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"createAccount(AccountJSON account, Integer sortcode, boolean use NamedCounter)",null);
+			logger.exiting(this.getClass().getName(),CREATE_ACCOUNT,null);
 			return null;
 		}
 
@@ -755,12 +774,12 @@ public class Account extends HBankDataAccess{
 
 	public Account updateAccount(AccountJSON account) 
 	{
-		logger.entering(this.getClass().getName(),"updateAccount(AccountJSON account)");
+		logger.entering(this.getClass().getName(),UPDATE_ACCOUNT);
 		Account db2Account = this.getAccount(new Integer(account.getId()).intValue(), new Integer(sortcode).intValue());
 		if(db2Account == null)
 		{
 			logger.warning("Unable to access DB2 account " + account.getId());
-			logger.exiting(this.getClass().getName(),"updateAccount(AccountJSON account)",null);
+			logger.exiting(this.getClass().getName(),UPDATE_ACCOUNT,null);
 			return null;
 		}
 		Account temp = null;
@@ -779,15 +798,9 @@ public class Account extends HBankDataAccess{
 			myStringBuffer = myStringBuffer.insert(0, "0");	
 		}
 		String sortCodeString = myStringBuffer.toString();
-		String sql1 = "SELECT * from ACCOUNT where ACCOUNT_EYECATCHER LIKE 'ACCT' AND ACCOUNT_NUMBER like ? and ACCOUNT_SORTCODE like ?";
+		String sql1 = SQL_SELECT;
 		logger.fine("About to perform query SQL <" + sql1 + ">");
-		String sqlUpdateSafe = "UPDATE ACCOUNT "+
-				"SET"+
-				" ACCOUNT_TYPE = ?"+
-				" ,ACCOUNT_INTEREST_RATE = ?" +
-				" ,ACCOUNT_OVERDRAFT_LIMIT = ?" +
-				" WHERE ACCOUNT_NUMBER like ?" +
-				" AND ACCOUNT_SORTCODE like ?";
+		String sqlUpdateSafe = "UPDATE ACCOUNT SET ACCOUNT_TYPE = ?,ACCOUNT_INTEREST_RATE = ? ,ACCOUNT_OVERDRAFT_LIMIT = ? WHERE ACCOUNT_NUMBER like ? AND ACCOUNT_SORTCODE like ?";
 		try(PreparedStatement stmt = conn.prepareStatement(sql1);
 		PreparedStatement myPreparedStatement = conn.prepareStatement(sqlUpdateSafe);) 
 		{
@@ -795,11 +808,11 @@ public class Account extends HBankDataAccess{
 			stmt.setString(2, sortCodeString);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				temp = new Account(rs.getString("ACCOUNT_CUSTOMER_NUMBER"), rs.getString("ACCOUNT_SORTCODE"),
-						rs.getString("ACCOUNT_NUMBER"), rs.getString("ACCOUNT_TYPE"), rs.getDouble("ACCOUNT_INTEREST_RATE"),
-						rs.getDate("ACCOUNT_OPENED"), rs.getInt("ACCOUNT_OVERDRAFT_LIMIT"), rs.getDate("ACCOUNT_LAST_STATEMENT"),
-						rs.getDate("ACCOUNT_NEXT_STATEMENT"), rs.getDouble("ACCOUNT_AVAILABLE_BALANCE"),
-						rs.getDouble("ACCOUNT_ACTUAL_BALANCE"));
+				temp = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER), rs.getString(ACCOUNT_SORTCODE),
+						rs.getString(ACCOUNT_NUMBER), rs.getString(ACCOUNT_TYPE), rs.getDouble(ACCOUNT_INTEREST_RATE),
+						rs.getDate(ACCOUNT_OPENED), rs.getInt(ACCOUNT_OVERDRAFT_LIMIT), rs.getDate(ACCOUNT_LAST_STATEMENT),
+						rs.getDate(ACCOUNT_NEXT_STATEMENT), rs.getDouble(ACCOUNT_AVAILABLE_BALANCE),
+						rs.getDouble(ACCOUNT_ACTUAL_BALANCE));
 				db2Account = temp;
 				
 				myPreparedStatement.setString(1,account.getAccountType());
@@ -810,15 +823,15 @@ public class Account extends HBankDataAccess{
 				logger.fine("About to execute update SQL <" + sqlUpdateSafe + ">");
 				myPreparedStatement.execute();
 
-				logger.exiting(this.getClass().getName(),"updateAccount(AccountJSON account)",temp);
+				logger.exiting(this.getClass().getName(),UPDATE_ACCOUNT,temp);
 				return temp;
 			}
 		} catch (SQLException e) {
 			logger.severe(e.toString());
-			logger.exiting(this.getClass().getName(),"updateAccount(AccountJSON account)",null);
+			logger.exiting(this.getClass().getName(),UPDATE_ACCOUNT,null);
 			return null;
 		}
-		logger.exiting(this.getClass().getName(),"updateAccount(AccountJSON account)",temp);
+		logger.exiting(this.getClass().getName(),UPDATE_ACCOUNT,temp);
 		return temp;
 	}
 
@@ -826,12 +839,12 @@ public class Account extends HBankDataAccess{
 
 	public boolean debitCredit(BigDecimal apiAmount) 
 	{
-		logger.entering(this.getClass().getName(),"debitCredit(BigDecimal apiAmount)");
+		logger.entering(this.getClass().getName(),DEBIT_CREDIT_ACCOUNT);
 		Account temp = this.getAccount(new Integer(this.getAccountNumber()).intValue(), new Integer(this.getSortcode()).intValue());
 		if(temp == null)
 		{
 			logger.warning("Unable to find account " + this.getAccountNumber());
-			logger.exiting(this.getClass().getName(),"debitCredit(BigDecimal apiAmount)",false);
+			logger.exiting(this.getClass().getName(),DEBIT_CREDIT_ACCOUNT,false);
 			return false;
 		}
 
@@ -843,14 +856,9 @@ public class Account extends HBankDataAccess{
 			myStringBuffer = myStringBuffer.insert(0, "0");	
 		}
 		String sortCodeString = myStringBuffer.toString();
-		String sql1 = "SELECT * from ACCOUNT where ACCOUNT_EYECATCHER LIKE 'ACCT' AND ACCOUNT_NUMBER like ? and ACCOUNT_SORTCODE like ?";
+		String sql1 = SQL_SELECT;
 		logger.fine("About to issue QUERY <" + sql1 + ">");
-		String sqlUpdate = "UPDATE ACCOUNT "+
-				"SET"+
-				" ACCOUNT_ACTUAL_BALANCE = ?" +
-				" ,ACCOUNT_AVAILABLE_BALANCE = ?" +
-				" WHERE ACCOUNT_NUMBER like ?" +
-				" AND ACCOUNT_SORTCODE like ?";
+		String sqlUpdate = "UPDATE ACCOUNT SET ACCOUNT_ACTUAL_BALANCE = ? ,ACCOUNT_AVAILABLE_BALANCE = ? WHERE ACCOUNT_NUMBER like ? AND ACCOUNT_SORTCODE like ?";
 		try (PreparedStatement stmt = conn.prepareStatement(sql1);
 			PreparedStatement stmt2 = conn.prepareStatement(sqlUpdate);)
 		{
@@ -859,17 +867,17 @@ public class Account extends HBankDataAccess{
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next())
 			{
-				temp = new Account(rs.getString("ACCOUNT_CUSTOMER_NUMBER"), rs.getString("ACCOUNT_SORTCODE"),
-						rs.getString("ACCOUNT_NUMBER"), rs.getString("ACCOUNT_TYPE"), rs.getDouble("ACCOUNT_INTEREST_RATE"),
-						rs.getDate("ACCOUNT_OPENED"), rs.getInt("ACCOUNT_OVERDRAFT_LIMIT"), rs.getDate("ACCOUNT_LAST_STATEMENT"),
-						rs.getDate("ACCOUNT_NEXT_STATEMENT"), rs.getDouble("ACCOUNT_AVAILABLE_BALANCE"),
-						rs.getDouble("ACCOUNT_ACTUAL_BALANCE"));
+				temp = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER), rs.getString(ACCOUNT_SORTCODE),
+						rs.getString(ACCOUNT_NUMBER), rs.getString(ACCOUNT_TYPE), rs.getDouble(ACCOUNT_INTEREST_RATE),
+						rs.getDate(ACCOUNT_OPENED), rs.getInt(ACCOUNT_OVERDRAFT_LIMIT), rs.getDate(ACCOUNT_LAST_STATEMENT),
+						rs.getDate(ACCOUNT_NEXT_STATEMENT), rs.getDouble(ACCOUNT_AVAILABLE_BALANCE),
+						rs.getDouble(ACCOUNT_ACTUAL_BALANCE));
 
 			}
 			else 
 			{
 				logger.warning("Result set had no results");
-				logger.exiting(this.getClass().getName(),"debitCredit(BigDecimal apiAmount)",false);
+				logger.exiting(this.getClass().getName(),DEBIT_CREDIT_ACCOUNT,false);
 				return false;
 			}
 
@@ -893,14 +901,14 @@ public class Account extends HBankDataAccess{
 			logger.fine("About to issue update SQL <" + sqlUpdate + ">");
 			stmt2.execute();
 
-			logger.exiting(this.getClass().getName(),"debitCredit(BigDecimal apiAmount)",true);
+			logger.exiting(this.getClass().getName(),DEBIT_CREDIT_ACCOUNT,true);
 			return true;
 
 		} 
 		catch (SQLException e) 
 		{
 			logger.severe(e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),"debitCredit(BigDecimal apiAmount)",false);
+			logger.exiting(this.getClass().getName(),DEBIT_CREDIT_ACCOUNT,false);
 			return false;
 		}
 	}
@@ -909,7 +917,7 @@ public class Account extends HBankDataAccess{
 
 	public Account[] getAccountsByBalance(Integer sortCode2, BigDecimal balance, boolean lessThan) 
 	{
-		logger.entering(this.getClass().getName(), "getAccountsByBalance(Integer sortCode2, BigDecimal balance, boolean lessThan)");
+		logger.entering(this.getClass().getName(), GET_ACCOUNTS_BY_BALANCE);
 		openConnection();
 		Account[] temp = new Account[250000];
 		int i = 0;
@@ -922,18 +930,18 @@ public class Account extends HBankDataAccess{
 		String sql = "SELECT * from ACCOUNT where ACCOUNT_EYECATCHER LIKE 'ACCT' AND ACCOUNT_SORTCODE like ? ";
 		if(lessThan)
 		{
-			sql=sql.concat(" AND ACCOUNT_ACTUAL_BALANCE <= ?");
+			sql=sql.concat(SQL_LESS_THAN);
 		}
 		else
 		{
-			sql=sql.concat(" AND ACCOUNT_ACTUAL_BALANCE >= ?");
+			sql=sql.concat(SQL_MORE_THAN);
 		}
 		sql = sql.concat(" order by ACCOUNT_NUMBER");
 
 		sql = sql.concat(" , ACCOUNT_ACTUAL_BALANCE DESC");
 
 
-		logger.fine("About to issue query SQL <" + sql + ">");
+		logger.fine(PRE_SELECT_MSG + sql + ">");
 		try (PreparedStatement stmt = conn.prepareStatement(sql);)
 		{
 			stmt.setString(1,sortCodeString);
@@ -941,19 +949,19 @@ public class Account extends HBankDataAccess{
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) 
 			{
-				temp[i] = new Account(rs.getString("ACCOUNT_CUSTOMER_NUMBER"), rs.getString("ACCOUNT_SORTCODE"),
-						rs.getString("ACCOUNT_NUMBER"), rs.getString("ACCOUNT_TYPE"), rs.getDouble("ACCOUNT_INTEREST_RATE"),
-						rs.getDate("ACCOUNT_OPENED"), rs.getInt("ACCOUNT_OVERDRAFT_LIMIT"), rs.getDate("ACCOUNT_LAST_STATEMENT"),
-						rs.getDate("ACCOUNT_NEXT_STATEMENT"), rs.getDouble("ACCOUNT_AVAILABLE_BALANCE"),
-						rs.getDouble("ACCOUNT_ACTUAL_BALANCE"));
+				temp[i] = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER), rs.getString(ACCOUNT_SORTCODE),
+						rs.getString(ACCOUNT_NUMBER), rs.getString(ACCOUNT_TYPE), rs.getDouble(ACCOUNT_INTEREST_RATE),
+						rs.getDate(ACCOUNT_OPENED), rs.getInt(ACCOUNT_OVERDRAFT_LIMIT), rs.getDate(ACCOUNT_LAST_STATEMENT),
+						rs.getDate(ACCOUNT_NEXT_STATEMENT), rs.getDouble(ACCOUNT_AVAILABLE_BALANCE),
+						rs.getDouble(ACCOUNT_ACTUAL_BALANCE));
 				i++;
 			}
 		} 
 		catch (SQLException e) 
 		{
-			System.err.println("Sql was <" + sql + ">");
+			System.err.println(SQL_WAS + sql + ">");
 			logger.severe(e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(), "getAccountsByBalance(Integer sortCode2, BigDecimal balance, boolean lessThan)",null);
+			logger.exiting(this.getClass().getName(), GET_ACCOUNTS_BY_BALANCE,null);
 			return null;
 		}
 		Account[] real = new Account[i];
@@ -961,7 +969,7 @@ public class Account extends HBankDataAccess{
 		{
 			real[j] = temp[j];
 		}
-		logger.exiting(this.getClass().getName(), "getAccountsByBalance(Integer sortCode2, BigDecimal balance, boolean lessThan)",real);
+		logger.exiting(this.getClass().getName(), GET_ACCOUNTS_BY_BALANCE,real);
 		return real;
 
 	}
@@ -970,7 +978,7 @@ public class Account extends HBankDataAccess{
 
 	public Account[] getAccounts(Integer sortCode, int limit, int offset) 
 	{
-		logger.entering(this.getClass().getName(), "getAccounts(Integer sortCode, int limit, int offset)");
+		logger.entering(this.getClass().getName(), GET_ACCOUNTS_WITH_LIMIT_AND_OFFSET);
 		openConnection();
 		Account[] temp = new Account[limit];
 		int i = 0, retrieved = 0;
@@ -981,7 +989,7 @@ public class Account extends HBankDataAccess{
 		}
 		String sortCodeString = myStringBuffer.toString();
 		String sql = "SELECT * from ACCOUNT where ACCOUNT_EYECATCHER LIKE 'ACCT' AND ACCOUNT_SORTCODE like ? ORDER BY ACCOUNT_NUMBER";
-		logger.fine("About to issue query SQL <" + sql + ">");
+		logger.fine(PRE_SELECT_MSG + sql + ">");
 		try(PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
 			stmt.setString(1, sortCodeString);
@@ -990,11 +998,11 @@ public class Account extends HBankDataAccess{
 			{
 				if(retrieved >= offset)
 				{
-					temp[i] = new Account(rs.getString("ACCOUNT_CUSTOMER_NUMBER"), rs.getString("ACCOUNT_SORTCODE"),
-							rs.getString("ACCOUNT_NUMBER"), rs.getString("ACCOUNT_TYPE"), rs.getDouble("ACCOUNT_INTEREST_RATE"),
-							rs.getDate("ACCOUNT_OPENED"), rs.getInt("ACCOUNT_OVERDRAFT_LIMIT"), rs.getDate("ACCOUNT_LAST_STATEMENT"),
-							rs.getDate("ACCOUNT_NEXT_STATEMENT"), rs.getDouble("ACCOUNT_AVAILABLE_BALANCE"),
-							rs.getDouble("ACCOUNT_ACTUAL_BALANCE"));
+					temp[i] = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER), rs.getString(ACCOUNT_SORTCODE),
+							rs.getString(ACCOUNT_NUMBER), rs.getString(ACCOUNT_TYPE), rs.getDouble(ACCOUNT_INTEREST_RATE),
+							rs.getDate(ACCOUNT_OPENED), rs.getInt(ACCOUNT_OVERDRAFT_LIMIT), rs.getDate(ACCOUNT_LAST_STATEMENT),
+							rs.getDate(ACCOUNT_NEXT_STATEMENT), rs.getDouble(ACCOUNT_AVAILABLE_BALANCE),
+							rs.getDouble(ACCOUNT_ACTUAL_BALANCE));
 					i++;
 				}
 				retrieved++;
@@ -1003,7 +1011,7 @@ public class Account extends HBankDataAccess{
 		catch (SQLException e) 
 		{
 			logger.severe(e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(), "getAccounts(Integer sortCode, int limit, int offset)",null);
+			logger.exiting(this.getClass().getName(), GET_ACCOUNTS_WITH_LIMIT_AND_OFFSET,null);
 			return null;
 		}
 		Account[] real = new Account[i];
@@ -1011,7 +1019,7 @@ public class Account extends HBankDataAccess{
 		{
 			real[j] = temp[j];
 		}
-		logger.exiting(this.getClass().getName(), "getAccounts(Integer sortCode, int limit, int offset)",real);
+		logger.exiting(this.getClass().getName(), GET_ACCOUNTS_WITH_LIMIT_AND_OFFSET,real);
 		return real;
 
 	}
@@ -1021,7 +1029,7 @@ public class Account extends HBankDataAccess{
 	public Account[] getAccountsByBalance(Integer sortCode2, BigDecimal balance, boolean lessThan, int offset,
 			int limit) 
 	{
-		logger.entering(this.getClass().getName(), "getAccountsByBalance(Integer sortCode2, BigDecimal balance, boolean lessThan, int offset, int limit)");
+		logger.entering(this.getClass().getName(), GET_ACCOUNTS_BY_BALANCE_WITH_LIMIT_AND_OFFSET);
 		openConnection();
 		Account[] temp = new Account[250000];
 		int i = 0;
@@ -1034,11 +1042,11 @@ public class Account extends HBankDataAccess{
 		String sql = "SELECT * from (SELECT p.*,row_number() over() as rn from ACCOUNT as p where ACCOUNT_EYECATCHER LIKE 'ACCT' AND ACCOUNT_SORTCODE like ?";
 		if(lessThan)
 		{
-			sql=sql.concat(" AND ACCOUNT_ACTUAL_BALANCE <= ?");
+			sql=sql.concat(SQL_LESS_THAN);
 		}
 		else
 		{
-			sql=sql.concat(" AND ACCOUNT_ACTUAL_BALANCE >= ?");
+			sql=sql.concat(SQL_MORE_THAN);
 		}
 
 		sql = sql.concat(" order by ACCOUNT_NUMBER");
@@ -1051,7 +1059,7 @@ public class Account extends HBankDataAccess{
 
 		try(PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
-			logger.fine("About to issue query SQL <" + sql + ">");
+			logger.fine(PRE_SELECT_MSG + sql + ">");
 			stmt.setString(1, sortCodeString);
 			stmt.setBigDecimal(2, balance);
 			stmt.setInt(3, offset);
@@ -1059,19 +1067,19 @@ public class Account extends HBankDataAccess{
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) 
 			{
-				temp[i] = new Account(rs.getString("ACCOUNT_CUSTOMER_NUMBER"), rs.getString("ACCOUNT_SORTCODE"),
-						rs.getString("ACCOUNT_NUMBER"), rs.getString("ACCOUNT_TYPE"), rs.getDouble("ACCOUNT_INTEREST_RATE"),
-						rs.getDate("ACCOUNT_OPENED"), rs.getInt("ACCOUNT_OVERDRAFT_LIMIT"), rs.getDate("ACCOUNT_LAST_STATEMENT"),
-						rs.getDate("ACCOUNT_NEXT_STATEMENT"), rs.getDouble("ACCOUNT_AVAILABLE_BALANCE"),
-						rs.getDouble("ACCOUNT_ACTUAL_BALANCE"));
+				temp[i] = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER), rs.getString(ACCOUNT_SORTCODE),
+						rs.getString(ACCOUNT_NUMBER), rs.getString(ACCOUNT_TYPE), rs.getDouble(ACCOUNT_INTEREST_RATE),
+						rs.getDate(ACCOUNT_OPENED), rs.getInt(ACCOUNT_OVERDRAFT_LIMIT), rs.getDate(ACCOUNT_LAST_STATEMENT),
+						rs.getDate(ACCOUNT_NEXT_STATEMENT), rs.getDouble(ACCOUNT_AVAILABLE_BALANCE),
+						rs.getDouble(ACCOUNT_ACTUAL_BALANCE));
 				i++;
 			}
 		} 
 		catch (SQLException e) 
 		{
-			System.err.println("Sql was <" + sql + ">");
+			System.err.println(SQL_WAS + sql + ">");
 			logger.severe(e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(), "getAccountsByBalance(Integer sortCode2, BigDecimal balance, boolean lessThan, int offset, int limit)",null);
+			logger.exiting(this.getClass().getName(), GET_ACCOUNTS_BY_BALANCE_WITH_LIMIT_AND_OFFSET,null);
 			return null;
 		}
 		Account[] real = new Account[i];
@@ -1079,7 +1087,7 @@ public class Account extends HBankDataAccess{
 		{
 			real[j] = temp[j];
 		}
-		logger.exiting(this.getClass().getName(), "getAccountsByBalance(Integer sortCode2, BigDecimal balance, boolean lessThan, int offset, int limit)",real);
+		logger.exiting(this.getClass().getName(), GET_ACCOUNTS_BY_BALANCE_WITH_LIMIT_AND_OFFSET,real);
 		return real;
 	}
 
@@ -1087,7 +1095,7 @@ public class Account extends HBankDataAccess{
 
 	public int getAccountsCountOnly(Integer sortCode2) 
 	{
-		logger.entering(this.getClass().getName(), "getAccountsCountOnly(Integer sortCode2)");
+		logger.entering(this.getClass().getName(), GET_ACCOUNTS_COUNT_ONLY2);
 
 		openConnection();
 		int accountCount = 0;
@@ -1098,26 +1106,26 @@ public class Account extends HBankDataAccess{
 		}
 		String sortCodeString = myStringBuffer.toString();
 		String sql = "SELECT COUNT(*) as ACCOUNT_COUNT from ACCOUNT where ACCOUNT_EYECATCHER LIKE 'ACCT' AND ACCOUNT_SORTCODE like ?";
-		logger.fine("About to issue query SQL <" + sql + ">");
+		logger.fine(PRE_SELECT_MSG + sql + ">");
 		try (PreparedStatement stmt = conn.prepareStatement(sql);)
 		{
 			stmt.setString(1, sortCodeString);
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next())
 			{
-				accountCount = rs.getInt("ACCOUNT_COUNT");
+				accountCount = rs.getInt(ACCOUNT_COUNT);
 			}
 			else
 			{
-				logger.exiting(this.getClass().getName(), "getAccountsCountOnly(Integer sortCode2)",-1);
+				logger.exiting(this.getClass().getName(), GET_ACCOUNTS_COUNT_ONLY2,-1);
 				return -1;
 			}
 		} catch (SQLException e) {
 			logger.severe(e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(), "getAccountsCountOnly(Integer sortCode2)",-1);
+			logger.exiting(this.getClass().getName(), GET_ACCOUNTS_COUNT_ONLY2,-1);
 			return -1;
 		}
-		logger.exiting(this.getClass().getName(), "getAccountsCountOnly(Integer sortCode2)",accountCount);
+		logger.exiting(this.getClass().getName(), GET_ACCOUNTS_COUNT_ONLY2,accountCount);
 		return accountCount;
 	}
 
@@ -1125,7 +1133,7 @@ public class Account extends HBankDataAccess{
 
 	public int getAccountsByBalanceCountOnly(Integer sortCode2, BigDecimal balance, boolean lessThan, Integer offset, Integer limit) 
 	{
-		logger.entering(this.getClass().getName(), "getAccountsByBalanceCountOnly(Integer sortCode2, BigDecimal balance, boolean lessThan, Integer offset, Integer limit)");
+		logger.entering(this.getClass().getName(), GET_ACCOUNTS_BY_BALANCE_COUNT_ONLY);
 
 		int accountCount = 0;
 		openConnection();
@@ -1138,15 +1146,15 @@ public class Account extends HBankDataAccess{
 		String sql = "SELECT COUNT(*) AS ACCOUNT_COUNT from ACCOUNT where ACCOUNT_EYECATCHER LIKE 'ACCT' AND ACCOUNT_SORTCODE like ?";
 		if(lessThan)
 		{
-			sql=sql.concat(" AND ACCOUNT_ACTUAL_BALANCE <= ?");
+			sql=sql.concat(SQL_LESS_THAN);
 		}
 		else
 		{
-			sql=sql.concat(" AND ACCOUNT_ACTUAL_BALANCE >= ?");
+			sql=sql.concat(SQL_MORE_THAN);
 		}
 
 
-		logger.fine("About to issue query SQL <" + sql + ">");
+		logger.fine(PRE_SELECT_MSG + sql + ">");
 		try(PreparedStatement stmt = conn.prepareStatement(sql);)
 		{
 			stmt.setString(1,sortCodeString);
@@ -1154,20 +1162,20 @@ public class Account extends HBankDataAccess{
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next())
 			{
-				accountCount = rs.getInt("ACCOUNT_COUNT");
+				accountCount = rs.getInt(ACCOUNT_COUNT);
 			}
 			else
 			{
-				logger.exiting(this.getClass().getName(), "getAccountsByBalanceCountOnly(Integer sortCode2, BigDecimal balance, boolean lessThan, Integer offset, Integer limit)",-1);
+				logger.exiting(this.getClass().getName(), GET_ACCOUNTS_BY_BALANCE_COUNT_ONLY,-1);
 				return -1;
 			}
 		} catch (SQLException e) {
-			System.err.println("Sql was <" + sql + ">");
+			System.err.println(SQL_WAS + sql + ">");
 			logger.severe(e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(), "getAccountsByBalanceCountOnly(Integer sortCode2, BigDecimal balance, boolean lessThan, Integer offset, Integer limit)",-1);
+			logger.exiting(this.getClass().getName(), GET_ACCOUNTS_BY_BALANCE_COUNT_ONLY,-1);
 			return -1;
 		}
-		logger.exiting(this.getClass().getName(), "getAccountsByBalanceCountOnly(Integer sortCode2, BigDecimal balance, boolean lessThan, Integer offset, Integer limit)",accountCount);
+		logger.exiting(this.getClass().getName(), GET_ACCOUNTS_BY_BALANCE_COUNT_ONLY,accountCount);
 		return accountCount;
 	}
 }
