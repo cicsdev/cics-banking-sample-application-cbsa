@@ -111,7 +111,9 @@ public class CreditScoreCICS540 {
 				break;
 			case 8:
 				containerID[i] = new String("CIPI");
-				break;					
+				break;			
+			default:
+				break;
 			}
 
 			CRECUST myCRECUST = new CRECUST();

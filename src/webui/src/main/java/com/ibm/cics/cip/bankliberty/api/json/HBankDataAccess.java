@@ -37,6 +37,7 @@ public class HBankDataAccess {
 	private 	DataSource 	ds;
 	protected 	Connection	conn = null;
 	static int connectionCount = 0;
+	private static final String DB2CONN = "DB2CONN";
 	
 	@SuppressWarnings("rawtypes")
 	static Hashtable cornedBeef = null;
@@ -60,12 +61,12 @@ public class HBankDataAccess {
 		logger.entering(this.getClass().getName(),"openConnection()");
 
 		Integer taskNumberInteger = new Integer(Task.getTask().getTaskNumber());
-		String db2ConnString = "DB2CONN".concat(taskNumberInteger.toString());
+		String db2ConnString = DB2CONN.concat(taskNumberInteger.toString());
 		logger.fine("Attempting to get DB2CONN for task number " + taskNumberInteger.toString());
 		this.conn = (Connection) cornedBeef.get(db2ConnString);
 		if(this.conn == null)
 		{
-			connectionCount++;
+			HBankDataAccess.connectionCount++;
 			logger.fine("Attempting to create DB2CONN for task number " + taskNumberInteger.toString());
 			//Attempt to open a connection
 			openConnectionInternal();
@@ -102,10 +103,10 @@ public class HBankDataAccess {
 		//Close the connection to the DB2 database
 		logger.entering(this.getClass().getName(),"closeConnection()");
 
-		connectionCount--;
+		HBankDataAccess.connectionCount--;
 
 		Integer taskNumberInterger = new Integer(Task.getTask().getTaskNumber());
-		String db2ConnString = "DB2CONN".concat(taskNumberInterger.toString());
+		String db2ConnString = DB2CONN.concat(taskNumberInterger.toString());
 		this.conn = (Connection) cornedBeef.get(db2ConnString);
 		//If there is an open connection
 		if(this.conn != null)
@@ -148,9 +149,9 @@ public class HBankDataAccess {
 				this.conn = ds.getConnection();
 				this.conn.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);
 				Integer taskNumberInterger = new Integer(Task.getTask().getTaskNumber());
-				String db2ConnString = "DB2CONN".concat(taskNumberInterger.toString());
+				String db2ConnString = DB2CONN.concat(taskNumberInterger.toString());
 				cornedBeef.put(db2ConnString,this.conn);
-				connectionCount++;
+				HBankDataAccess.connectionCount++;
 
 			}else{
 				//If the connection is closed, open a new connection

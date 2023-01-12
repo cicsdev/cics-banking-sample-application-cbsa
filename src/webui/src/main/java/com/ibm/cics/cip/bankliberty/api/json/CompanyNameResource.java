@@ -49,9 +49,9 @@ public class CompanyNameResource{
 	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.api.json.CompanyNameResource");
 	// </copyright>
 	
-	private static final String getCompanyName = "getCompanyName()";
-	private static final String errorMsgPrefix = "CompanyNameResource.getCompanyName() has experienced error ";
-	private static final String errorMsgSuffix = " linking to program GETCOMPY";
+	private static final String GET_COMPANY_NAME = "getCompanyName()";
+	private static final String ERROR_MSG_PREFIX = "CompanyNameResource.getCompanyName() has experienced error ";
+	private static final String ERROR_MSG_SUFFIX = " linking to program GETCOMPY";
 
 
 	public CompanyNameResource()
@@ -61,7 +61,7 @@ public class CompanyNameResource{
 	@GET
 	@Produces("application/json")
 	public Response getCompanyName() {
-		logger.entering(this.getClass().getName(), getCompanyName);
+		logger.entering(this.getClass().getName(), GET_COMPANY_NAME);
 // We cache the company name as a static variable. If not set, we jCICS LINK to a COBOL program to go get it
 		if(companyNameString == null)
 		{
@@ -81,16 +81,16 @@ public class CompanyNameResource{
 					| InvalidProgramIdException | RolledBackException
 					| TerminalException e) {
 				Response myResponse = Response.status(500)
-						.entity(errorMsgPrefix + e.toString() + errorMsgSuffix)
+						.entity(ERROR_MSG_PREFIX + e.toString() + ERROR_MSG_SUFFIX)
 						.build();
-				logger.warning(errorMsgPrefix + e.toString() + errorMsgSuffix);
-				logger.exiting(this.getClass().getName(),  getCompanyName,myResponse);
+				logger.warning(ERROR_MSG_PREFIX + e.toString() + ERROR_MSG_SUFFIX);
+				logger.exiting(this.getClass().getName(),  GET_COMPANY_NAME,myResponse);
 				return myResponse;
 			}
 			catch (AbendException e) {
-				logger.severe("CompanyNameResource.getCompanyName() has experienced abend " + e.toString() + errorMsgSuffix);
-				Response myResponse = Response.status(500).entity(errorMsgPrefix + e.toString() + errorMsgSuffix).build();
-				logger.exiting(this.getClass().getName(),  getCompanyName,myResponse);
+				logger.severe("CompanyNameResource.getCompanyName() has experienced abend " + e.toString() + ERROR_MSG_SUFFIX);
+				Response myResponse = Response.status(500).entity(ERROR_MSG_PREFIX + e.toString() + ERROR_MSG_SUFFIX).build();
+				logger.exiting(this.getClass().getName(),  GET_COMPANY_NAME,myResponse);
 				return myResponse;
 			}
 
@@ -100,7 +100,7 @@ public class CompanyNameResource{
 		response.put("companyName", companyNameString);
 		
 		Response myResponse = Response.status(200).entity(response.toString()).build();
-		logger.exiting(this.getClass().getName(), getCompanyName,myResponse);
+		logger.exiting(this.getClass().getName(), GET_COMPANY_NAME,myResponse);
 
 		return myResponse;
 	}
