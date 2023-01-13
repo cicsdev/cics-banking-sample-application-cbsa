@@ -351,16 +351,15 @@ public class AccountUI extends VerticalLayout{
 		//if required fields are all populated
 		if(validateSimple()){
 			int temp = 0;
-			BigDecimal tempBD = BigDecimal.valueOf(new Double(interestT.getValue()));
+			BigDecimal tempBD = BigDecimal.valueOf(Double.parseDouble(interestT.getValue()));
 			//Create a new account object
 			Account newAcc = new Account(cusNumT.getValue(), sCodeT.getValue(), String.format("%08d",temp), 
 					typeT.getValue().toString(), tempBD, new Date(), 
 					Integer.valueOf(overdraftT.getValue()),  
-					BigDecimal.valueOf(new Double(balanceT.getValue())), BigDecimal.valueOf(new Double(balanceT.getValue())));
-			//			newAcc.showInfo();
+					BigDecimal.valueOf(Double.parseDouble(balanceT.getValue())), BigDecimal.valueOf(Double.parseDouble(balanceT.getValue())));
 			
 			//Add the new account to the database
-			temp = newAcc.addToDB();
+			newAcc.addToDB();
 			//Check that the account is now in the database
 			if(newAcc.inDB()){
 				return newAcc.getAccountNumber();
@@ -374,7 +373,7 @@ public class AccountUI extends VerticalLayout{
 	//edit account "a"
 	private boolean editAccount(){
 		a.setType(typeT.getValue().toString());
-		a.setInterestRate(BigDecimal.valueOf(new Double(interestT.getValue())));
+		a.setInterestRate(BigDecimal.valueOf(Double.parseDouble(interestT.getValue())));
 		BigDecimal temp = a.getInterestRate().setScale(2,RoundingMode.HALF_UP);
 		a.setInterestRate(temp);
 		a.setOverdraftLimit(Integer.valueOf(overdraftT.getValue()));
@@ -413,7 +412,7 @@ public class AccountUI extends VerticalLayout{
 		}
 		try
 		{
-			BigDecimal tempBD = BigDecimal.valueOf(new Double(interestT.getValue()));
+			BigDecimal tempBD = BigDecimal.valueOf(Double.parseDouble(interestT.getValue()));
 			if(tempBD.doubleValue() < 0)
 			{
 				return false;

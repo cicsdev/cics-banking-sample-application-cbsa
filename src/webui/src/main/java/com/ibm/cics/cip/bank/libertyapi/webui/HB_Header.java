@@ -58,7 +58,7 @@ public class HB_Header extends HorizontalLayout{
 		});
 	}
 
-	public HB_Header(final UI ui, String name, final Com_ibm_cics_cip_bank_libertyapi_webuiUI exit){
+	public HB_Header(final UI ui, String name, final ComIbmCicsCipBankLibertyapiWebuiUI exit){
 		setupBack();
 		setup();
 

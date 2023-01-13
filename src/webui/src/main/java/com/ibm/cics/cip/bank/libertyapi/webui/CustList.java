@@ -89,11 +89,11 @@ public class CustList extends VerticalLayout{
 		//Create new container "sA" and scale
 		HorizontalLayout sA = new HorizontalLayout();
 
-		Button bP_cust = new Button("<-");
-		bP_cust.setId("bbutton_cust");
-		bP_cust.setStyleName("link"); 
+		Button buttonPrevCust = new Button("<-");
+		buttonPrevCust.setId("bbutton_cust");
+		buttonPrevCust.setStyleName("link"); 
 
-		bP_cust.addClickListener(new Button.ClickListener() {
+		buttonPrevCust.addClickListener(new Button.ClickListener() {
 			/**
 			 * 
 			 */
@@ -109,11 +109,11 @@ public class CustList extends VerticalLayout{
 			}
 		});
 
-		Button bPM_cust = new Button("<<<-");
-		bPM_cust.setId("bmbutton_cust");
-		bPM_cust.setStyleName("link"); 
+		Button buttonPrevMultipleCust = new Button("<<<-");
+		buttonPrevMultipleCust.setId("bmbutton_cust");
+		buttonPrevMultipleCust.setStyleName("link"); 
 
-		bPM_cust.addClickListener(new Button.ClickListener() {
+		buttonPrevMultipleCust.addClickListener(new Button.ClickListener() {
 			/**
 			 * 
 			 */
@@ -130,11 +130,11 @@ public class CustList extends VerticalLayout{
 			}
 		});
 
-		Button fP_cust = new Button("->");
-		fP_cust.setId("fbutton_cust");
-		fP_cust.setStyleName("link"); 
+		Button buttonNextCust = new Button("->");
+		buttonNextCust.setId("fbutton_cust");
+		buttonNextCust.setStyleName("link"); 
 
-		fP_cust.addClickListener(new Button.ClickListener() {
+		buttonNextCust.addClickListener(new Button.ClickListener() {
 			/**
 			 * 
 			 */
@@ -148,11 +148,11 @@ public class CustList extends VerticalLayout{
 			}
 		});
 
-		Button fPM_cust = new Button("->>>");
-		fPM_cust.setId("fmbutton_cust");
-		fPM_cust.setStyleName("link"); 
+		Button buttonNextMultipleCust = new Button("->>>");
+		buttonNextMultipleCust.setId("fmbutton_cust");
+		buttonNextMultipleCust.setStyleName("link"); 
 
-		fPM_cust.addClickListener(new Button.ClickListener() {
+		buttonNextMultipleCust.addClickListener(new Button.ClickListener() {
 			/**
 			 * 
 			 */
@@ -165,8 +165,7 @@ public class CustList extends VerticalLayout{
 				}
 				else
 				{
-					int curNext = cur;
-					for(curNext = cur; curNext < next; curNext++)
+					for(int curNext = cur; curNext < next; curNext++)
 					{
 						offset += limit;
 					}
@@ -176,11 +175,11 @@ public class CustList extends VerticalLayout{
 		});
 
 		//Add components to sA container
-		sA.addComponent(bPM_cust);
-		sA.addComponent(bP_cust);
+		sA.addComponent(buttonPrevMultipleCust);
+		sA.addComponent(buttonPrevCust);
 		sA.addComponent(page);
-		sA.addComponent(fP_cust);
-		sA.addComponent(fPM_cust);
+		sA.addComponent(buttonNextCust);
+		sA.addComponent(buttonNextMultipleCust);
 		
 		//Add components to head container
 		head.addComponent(cusLbl);
@@ -202,8 +201,6 @@ public class CustList extends VerticalLayout{
 		//Create a new container "searchL"
 		HorizontalLayout searchL = new HorizontalLayout();
 
-		//Create a new container "cvl"
-		VerticalLayout cvl = new VerticalLayout();
 		searchL.setWidth("100%");
 
 		//Create new textfields for customer number and name entry
@@ -250,19 +247,13 @@ public class CustList extends VerticalLayout{
 		this.addComponent(searchL);
 	}
 
-	private ArrayList<String> setupSearch(ArrayList<String> arr){
-		ArrayList<String> outcome = arr;
-
-		return outcome;
-	}
-
 
 
 	private void createCusList(String filter){
 		vl.removeAllComponents();
 		try {
 
-			//TEST.out.println("TEST - cList.doGet - limit: " + limit + ", offset: " + offset + ", filter: " + filter);
+
 
 			//get list of accounts within limit and offset, using the filter
 			cList.doGet(limit, offset, filter);
@@ -281,14 +272,13 @@ public class CustList extends VerticalLayout{
 					page.setValue("1/1");
 				}
 			}
-			//TEST.out.println("TEST - GOT COUNT OF CUSTOMERS");
+
 			cur = ((offset/limit)+1);
 			next = cur + limit;
 			if (next > total)
 			{
 				next = cur;
 			}
-//			next = (int)Math.ceil((cList.getCount(filter)/limit))+1; 
 
 		} 
 		catch (ServletException | IOException e1) 
@@ -299,7 +289,7 @@ public class CustList extends VerticalLayout{
 			HorizontalLayout hl = new HorizontalLayout();
 			hl.setWidth("100%");
 
-			//	//TEST.out.println("CUST_LIST: INDEX -  " + (i+1) + "  CUSTOMER NUMBER -  "+ this.cList.getCustomer(i).getCustomer_number());
+
 			//Create new labels and populate to show customer number, name, address, DOB			
 			Label cusNumb = new Label(this.cList.getCustomer(i).getCustomerNumber());
 			Label name = new Label(this.cList.getCustomer(i).getName());
