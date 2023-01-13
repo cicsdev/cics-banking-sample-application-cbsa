@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Future;
+import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -73,44 +74,44 @@ public class CreditScoreCICS540 {
 
 		String[] transactionID = new String[creditAgencyCount];
 		String[] containerID = new String[creditAgencyCount];
-//		Future<ChildResponse>[] children = new Future[creditAgencyCount];
+
 		List<Future<ChildResponse>> children = new ArrayList<Future<ChildResponse>>();
-//		Object[] children = new Object[creditAgencyCount];
+
 		int creditScoreTotal = 0;
 
 		AsyncService asService = new AsyncServiceImpl();
 
 		for(int i=0;i < creditAgencyCount;i++)
 		{
-			transactionID[i] = new String("O" + "CR" + (i +1));
+			transactionID[i] = "O" + "CR" + (i +1);
 			switch(i)
 			{
 			case 0:
-				containerID[i] = new String("CIPA");
+				containerID[i] = "CIPA";
 				break;
 			case 1:
-				containerID[i] = new String("CIPB");
+				containerID[i] = "CIPB";
 				break;
 			case 2:
-				containerID[i] = new String("CIPC");
+				containerID[i] = "CIPC";
 				break;
 			case 3:
-				containerID[i] = new String("CIPD");
+				containerID[i] = "CIPD";
 				break;
 			case 4:
-				containerID[i] = new String("CIPE");
+				containerID[i] = "CIPE";
 				break;
 			case 5:
-				containerID[i] = new String("CIPF");
+				containerID[i] = "CIPF";
 				break;
 			case 6:
-				containerID[i] = new String("CIPG");
+				containerID[i] = "CIPG";
 				break;
 			case 7:
-				containerID[i] = new String("CIPH");
+				containerID[i] = "CIPH";
 				break;
 			case 8:
-				containerID[i] = new String("CIPI");
+				containerID[i] = "CIPI";
 				break;			
 			default:
 				break;
@@ -192,7 +193,7 @@ public class CreditScoreCICS540 {
 			} 
 			else
 			{
-				System.err.println("One of the agencies didn't work");
+				logger.log(Level.SEVERE,() -> "One of the agencies didn't work");
 				creditAgencyCount--;
 			}
 		}
@@ -200,7 +201,7 @@ public class CreditScoreCICS540 {
 
 
 		int creditScoreAverage = creditScoreTotal / creditAgencyCount;
-		customer.setCreditScore(new Integer(creditScoreAverage).toString());
+		customer.setCreditScore(Integer.valueOf(creditScoreAverage).toString());
 		return customer;
 	}
 	

@@ -44,7 +44,7 @@ public class CreditScore {
 			{
 				creditScoreTotal = creditScoreTotal + new Random(Calendar.getInstance().getTimeInMillis()).nextInt(999) + 1;
 			}
-			customer.setCreditScore(new Integer(creditScoreTotal/5).toString());
+			customer.setCreditScore(Integer.valueOf(creditScoreTotal/5).toString());
 			Calendar calendar = Calendar.getInstance();
 			long nowMs = calendar.getTimeInMillis();
 			int next21Days = new Random(calendar.getTimeInMillis()).nextInt(20);

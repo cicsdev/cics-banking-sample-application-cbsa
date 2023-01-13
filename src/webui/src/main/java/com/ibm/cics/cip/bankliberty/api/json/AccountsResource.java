@@ -995,7 +995,7 @@ public class AccountsResource extends HBankDataAccess{
 		{
 			JSONObject error = new JSONObject();
 			error.put(JSON_ERROR_MSG, TARGET_ACCOUNT_NUMBER + transferLocal.getTargetAccount() + CANNOT_BE_ACCESSED);
-			logger.log(Level.SEVERE,TARGET_ACCOUNT_NUMBER + accountNumber + CANNOT_BE_ACCESSED);
+			logger.log(Level.SEVERE,() -> TARGET_ACCOUNT_NUMBER + accountNumber + CANNOT_BE_ACCESSED);
 			myResponse = Response.status(404).entity(error.toString()).build(); 
 			logger.exiting(this.getClass().getName(),TRANSFER_LOCAL_INTERNAL,myResponse);
 			return myResponse;
@@ -1027,6 +1027,7 @@ public class AccountsResource extends HBankDataAccess{
 			try {
 				Task.getTask().rollback();
 			} catch (InvalidRequestException e) {
+				logger.log(Level.SEVERE,() -> "Accounts: transferLocal: " +PROCTRAN_WRITE_FAILURE);
 			}
 			myResponse = Response.status(500).entity(error.toString()).build();
 			logger.exiting(this.getClass().getName(),TRANSFER_LOCAL_INTERNAL,myResponse);
@@ -1097,6 +1098,7 @@ public class AccountsResource extends HBankDataAccess{
 			try {
 				Task.getTask().rollback();
 			} catch (InvalidRequestException e) {
+				logger.log(Level.SEVERE,() -> PROCTRAN_WRITE_FAILURE);
 			}
 			myResponse = Response.status(500).entity(error.toString()).build(); 
 			logger.exiting(this.getClass().getName(),DEBIT_CREDIT_ACCOUNT,myResponse);
@@ -1174,6 +1176,7 @@ public class AccountsResource extends HBankDataAccess{
 				try {
 					Task.getTask().rollback();
 				} catch (InvalidRequestException e) {
+					logger.log(Level.SEVERE,() -> PROCTRAN_WRITE_FAILURE);
 				}
 				myResponse = Response.status(500).entity(error.toString()).build();
 				logger.exiting(this.getClass().getName(),DELETE_ACCOUNT,myResponse);
@@ -1239,15 +1242,15 @@ public class AccountsResource extends HBankDataAccess{
 // We want to set a limit to try to avoid OutOfMemory Exceptions. 250,000 seems a bit large
 		if(limit == null)
 		{
-			limit = new Integer(250000);
+			limit = 250000;
 		}
 		if(limit == 0)
 		{
-			limit = new Integer(250000);
+			limit = 250000;
 		}
 		if(offset == null)
 		{
-			offset = new Integer(0);
+			offset = 0;
 		}
 
 
@@ -1359,17 +1362,17 @@ public class AccountsResource extends HBankDataAccess{
 		
 		if(offset == null)
 		{
-			offset = new Integer(0);
+			offset = 0;
 		}
 		// We want to set a limit to try to avoid OutOfMemory Exceptions. 250,000 seems a bit large
 
 		if(limit == null)
 		{
-			limit = new Integer(250000);
+			limit = 250000;
 		}
 		if(limit.intValue() == 0)
 		{
-			limit = new Integer(250000);
+			limit = 250000;
 		}
 
 
