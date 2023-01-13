@@ -22,7 +22,6 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.UI;
-import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.VerticalLayout;
 
 import com.vaadin.ui.Button.ClickEvent;
@@ -41,7 +40,6 @@ public class CustomerUI extends VerticalLayout{
 	private static final long serialVersionUID = 1L;
 	private transient Customer c;
 	private UI ui;
-	private VerticalLayout vl = new VerticalLayout();
 	private Boolean edit = false;
 	private TextField cusNumT; 
 	private TextField cusNameT;
@@ -65,7 +63,7 @@ public class CustomerUI extends VerticalLayout{
 		//Constructor for editing a customer
 		edit = true;
 		this.c = cust;
-		editCustUI(ui, back, user, cust);
+		editCustUI(ui, back, cust);
 		setFields(cust);
 		setSortcode();
 	}
@@ -76,11 +74,11 @@ public class CustomerUI extends VerticalLayout{
 	**/
 
 	//Build the edit customer UI
-	private void editCustUI(UI ui, Welcome back, String user, Customer cust) {
+	private void editCustUI(UI ui, Welcome back, Customer cust) {
 		//ui is passed to the template - it's used to add the components to the UI using .addComponent()
 		//cust is passed to the template - it's used to populate the relevant fields, such as customer number etc.
 		this.ui = ui;
-		HB_Header header = new HB_Header(ui, "Customer Update", back);
+		HB_Header header = new HB_Header(ui, back);
 		this.addComponent(header);
 		this.setExpandRatio(header, 0.1f);
 
@@ -150,7 +148,7 @@ public class CustomerUI extends VerticalLayout{
 
 		Button submit;
 		//Change button text depending on context (editing vs creating)
-		if (this.edit)
+		if (Boolean.TRUE.equals(this.edit))
 		{
 			submit = new Button("Edit customer");
 		}
@@ -169,7 +167,8 @@ public class CustomerUI extends VerticalLayout{
 
 			public void buttonClick(ClickEvent event) {
 				//Determine what to set the button label to
-				if(edit == false){
+				if(Boolean.FALSE.equals(edit))
+				{
 					//if creating a customer
 					String temp = createNewCustomer();
 					if(temp.startsWith("-1"))
@@ -207,7 +206,6 @@ public class CustomerUI extends VerticalLayout{
 
 	private void setFields(Customer cust){
 		//Set each component's value to the relevant value held in the 'cust' object 
-//		cust.showInfo();
 		cusNumT.setValue(cust.getCustomerNumber());
 		sCodeT.setValue(cust.getSortcode());
 		cusAddressT.setValue(cust.getAddress().trim());
@@ -223,7 +221,7 @@ public class CustomerUI extends VerticalLayout{
 	private void createCustUI(UI ui, Welcome back, String user){
 
 		this.ui = ui;
-		HB_Header header = new HB_Header(ui, "Customer Creation", back);
+		HB_Header header = new HB_Header(ui, back);
 		this.addComponent(header);
 		this.setExpandRatio(header, 0.1f);
 
@@ -281,7 +279,8 @@ public class CustomerUI extends VerticalLayout{
 
 		submit.addClickListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
-				if(edit == false){
+				if(Boolean.FALSE.equals(edit))
+				{
 					String temp = createNewCustomer();
 					if(temp.startsWith("-1"))
 					{
@@ -326,15 +325,13 @@ public class CustomerUI extends VerticalLayout{
 					cusAddressT.getValue().replace("\n", ""),
 					new java.sql.Date(cusDoBT.getValue().getTime()));
 
-//			newCust.showInfo();
 			
 			//add customer to the database
-			temp = newCust.addToDB();
-			cusNumT.setValue(new Long(temp).toString());
+			cusNumT.setValue(newCust.addToDB());
 			
 			//Check if the customer now exists in the database
 			if(newCust.inDB()){
-				return temp;
+				return cusNumT.getValue();
 			}else{
 				return "-1";
 			}
@@ -347,14 +344,7 @@ public class CustomerUI extends VerticalLayout{
 		c.setAddress(cusAddressT.getValue().replace("\n", ""));
 
 
-		if(c.updateThis())
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return c.updateThis();
 	}
 
 	private boolean validateSimple(){
@@ -363,20 +353,15 @@ public class CustomerUI extends VerticalLayout{
 		{
 			return false;
 		}
-		if(cusNameT.getValue().toString().isEmpty())
+		if(cusNameT.getValue().isEmpty())
 		{
 			return false;
 		}
-		if(cusAddressT.getValue().toString().isEmpty())
+		if(cusAddressT.getValue().isEmpty())
 		{
 			return false;
 		}
-		if(cusDoBT.isEmpty())
-		{
-			return false;
-		}
-
-		return true;
+		return !cusDoBT.isEmpty();
 	}
 	
 	///get sortcode

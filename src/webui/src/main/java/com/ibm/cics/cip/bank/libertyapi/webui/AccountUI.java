@@ -68,11 +68,11 @@ public class AccountUI extends VerticalLayout{
 
 	}
 
-	public AccountUI(UI ui, String user, Welcome back, Account acc){
+	public AccountUI(UI ui, Welcome back, Account acc){
 		//Edit an existing account
 		edit = true;
 		this.a = acc;
-		createAccUI(ui, back, user, acc);
+		createAccUI(ui, back, acc);
 		setFields(acc);
 		setSortcode();
 
@@ -84,11 +84,11 @@ public class AccountUI extends VerticalLayout{
 	 **/
 
 	//Function creates the UI for account creation
-	private void createAccUI(UI ui, Welcome back, String user, Account acc) {
+	private void createAccUI(UI ui, Welcome back, Account acc) {
 		//ui is passed in so that containers can be added to it later using this.addComponent()
 		//acc is passed in so that it can be used to populate the components
 		this.ui = ui;
-		HB_Header header = new HB_Header(ui, "New Account", back);
+		HB_Header header = new HB_Header(ui, back);
 		this.addComponent(header);
 		this.setExpandRatio(header, 0.1f);
 
@@ -233,7 +233,6 @@ public class AccountUI extends VerticalLayout{
 
 	private void setFields(Account acc){
 		//Set values for the fields by using acc
-		//		acc.showInfo();
 		cusNumT.setValue(acc.getCustomerNumber());
 		sCodeT.setValue(acc.getSortcode());
 		typeT.setValue(acc.getType().trim());
@@ -246,7 +245,7 @@ public class AccountUI extends VerticalLayout{
 	private void createAccUI(UI ui, Welcome back, String user){
 
 		this.ui = ui;
-		HB_Header header = new HB_Header(ui, "New Account", back);
+		HB_Header header = new HB_Header(ui, back);
 		this.addComponent(header);
 		this.setExpandRatio(header, 0.1f);
 

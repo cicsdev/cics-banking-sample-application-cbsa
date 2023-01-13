@@ -33,7 +33,7 @@ public class Customer {
 	private static final String JSON_CUSTOMER_REVIEW_DATE = "customerCreditScoreReviewDate";
 	private static final String JSON_DATE_OF_BIRTH = "dateOfBirth";
 	
-	private static final String dashes = "------------";
+	private static final String DASHES = "------------";
 
 
 
@@ -326,7 +326,7 @@ public class Customer {
 		
 		if(!editingCustomer)
 		{
-			logger.info(dashes+ this.customerNumber+":"+this.sortcode+dashes);
+			logger.info(DASHES+ this.customerNumber+":"+this.sortcode+DASHES);
 			logger.info("Sortcode - "+ this.sortcode);
 			logger.info("Customer name - "+this.getName());
 			logger.info("Customer address - " +this.getAddress());
@@ -335,7 +335,7 @@ public class Customer {
 		}
 		else 
 		{
-			logger.info(dashes+ this.customerNumber+":"+this.sortcode+dashes);
+			logger.info(DASHES+ this.customerNumber+":"+this.sortcode+DASHES);
 			logger.info("Sortcode - "+ this.sortcode);
 			logger.info("Customer name - "+this.getName());
 			logger.info("Customer address - " +this.getAddress());

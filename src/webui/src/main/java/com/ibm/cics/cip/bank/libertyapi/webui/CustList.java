@@ -71,7 +71,7 @@ public class CustList extends VerticalLayout{
 	{
 		sortOutLogging();
 		this.ui = ui;
-		HB_Header header = new HB_Header(ui, welcome, back);
+		HB_Header header = new HB_Header(ui, back);
 		this.addComponent(header);
 		this.setExpandRatio(header, 0.1f);
 		createSearch();
@@ -335,7 +335,7 @@ public class CustList extends VerticalLayout{
 				private static final long serialVersionUID = 3139185739387258242L;
 
 				public void buttonClick(ClickEvent event) {
-					ui.setContent(new AccList(ui, "test", new Welcome(ui, welcome),cList.getCustomer(temp)));
+					ui.setContent(new AccList(ui, new Welcome(ui, welcome),cList.getCustomer(temp)));
 				}
 			});
 			edit.addClickListener(new Button.ClickListener() {

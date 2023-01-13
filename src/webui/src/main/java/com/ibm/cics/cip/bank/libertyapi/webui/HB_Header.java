@@ -39,12 +39,12 @@ public class HB_Header extends HorizontalLayout{
 	Button back;
 	Label label;
 
-	public HB_Header(UI ui, String name){
+	public HB_Header(){
 		setup();
 		this.setComponentAlignment(label, Alignment.MIDDLE_CENTER);
 	}
 
-	public HB_Header(final UI ui, String name, final Welcome wlc){
+	public HB_Header(final UI ui, final Welcome wlc){
 		setupBack();
 		setup();
 
@@ -58,7 +58,7 @@ public class HB_Header extends HorizontalLayout{
 		});
 	}
 
-	public HB_Header(final UI ui, String name, final ComIbmCicsCipBankLibertyapiWebuiUI exit){
+	public HB_Header(final UI ui, final ComIbmCicsCipBankLibertyapiWebuiUI exit){
 		setupBack();
 		setup();
 
@@ -75,7 +75,7 @@ public class HB_Header extends HorizontalLayout{
 
 
 
-	public HB_Header(final UI ui, String name, final AccList acc_list){
+	public HB_Header(final UI ui, final AccList acc_list){
 		setupBack();
 		setup();
 
@@ -94,7 +94,7 @@ public class HB_Header extends HorizontalLayout{
 		sortOutLogging();
 		this.setWidth("100%");
 		this.setHeight("100px");
-		//this.addStyleName("header");
+
 		CompanyNameResource myCompanyNameResource = new CompanyNameResource();
 		Response myCompanyNameResponse = null;
 

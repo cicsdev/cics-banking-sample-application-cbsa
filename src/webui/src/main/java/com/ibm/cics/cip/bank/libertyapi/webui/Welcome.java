@@ -59,7 +59,7 @@ public class Welcome extends VerticalLayout{
 		sortOutLogging();
 		this.ui = ui;
 		// create an add header
-		HB_Header header = new HB_Header(ui, "welcome");
+		HB_Header header = new HB_Header();
 		this.addComponent(header);
 		this.setExpandRatio(header, 0.1f);
 		// create and add labels

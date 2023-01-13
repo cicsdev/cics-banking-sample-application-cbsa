@@ -66,7 +66,7 @@ public class AccList extends VerticalLayout{
 		sortOutLogging();
 		logger.entering(this.getClass().getName(),"Acc_list(UI ui,  welcome back)");
 		this.ui = ui;
-		HB_Header header = new HB_Header(ui, "Welcome", back);
+		HB_Header header = new HB_Header(ui, back);
 		this.addComponent(header);
 		this.setExpandRatio(header, 0.1f);
 		createSearch();
@@ -194,13 +194,13 @@ public class AccList extends VerticalLayout{
 
 	}
 	
-	public AccList(UI ui, String string, Welcome back, Customer customer) {
+	public AccList(UI ui, Welcome back, Customer customer) {
 		sortOutLogging();
-		logger.entering(this.getClass().getName(),"Acc_list(UI ui, String string, welcome back, Customer customer) for customer " + customer.getName());
+		logger.entering(this.getClass().getName(),"Acc_list(UI ui,  welcome back, Customer customer) for customer " + customer.getName());
 		this.ui = ui;
 		
 		//Create a header, add to the UI and scale
-		HB_Header header = new HB_Header(ui, "welcome", back);
+		HB_Header header = new HB_Header(ui, back);
 		this.addComponent(header);
 		this.setExpandRatio(header, 0.1f);
 		
@@ -577,7 +577,7 @@ public class AccList extends VerticalLayout{
 			
 
 			page.setValue(((offset/limit)+1)+"/"+(((int)Math.ceil((total/limit))+1))); 
-			if((((int)Math.ceil((aList.getCount(filter)/limit)))) == 0)
+			if(((int)Math.ceil((aList.getCount(filter)/limit))) == 0)
 			{
 				page.setValue("0/0");
 				if(aList.getCount(filter)>0)
@@ -642,7 +642,7 @@ public class AccList extends VerticalLayout{
 				private static final long serialVersionUID = 8881026371623070226L;
 
 				public void buttonClick(ClickEvent event) {
-					ui.setContent(new AccountUI(ui, "test", new Welcome(ui, "Welcome"),aList.getAccount(temp)));
+					ui.setContent(new AccountUI(ui, new Welcome(ui, "Welcome"),aList.getAccount(temp)));
 				}
 			});
 			delete.addClickListener(new Button.ClickListener() {
