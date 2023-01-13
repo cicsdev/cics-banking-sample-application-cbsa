@@ -8,7 +8,8 @@ package com.ibm.cics.cip.bankliberty.api.json;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -40,19 +41,25 @@ public class HBankDataAccess {
 	private static final String DB2CONN = "DB2CONN";
 	
 	@SuppressWarnings("rawtypes")
-	static Hashtable cornedBeef = null;
+	static HashMap cornedBeef = null;
 	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.api.json");
 
 
 	public HBankDataAccess()
 	{
 		sortOutLogging();
-		//If the hashtable 'cornedBeef' does not exist then create a new hashtable
+		//If the hashmap 'cornedBeef' does not exist then create a new hashtable
 		if(cornedBeef == null)
 		{
-			logger.fine("HBankDataAccess creating new hashtable");
-			cornedBeef = new Hashtable<>();
+			logger.log(Level.FINE, () -> "HBankDataAccess creating new hashtable");
+			HBankDataAccess.createHashMap();
 		}
+	}
+
+
+	private static void createHashMap() {
+		 cornedBeef = new HashMap<>();
+		
 	}
 
 
@@ -60,21 +67,21 @@ public class HBankDataAccess {
 		//Open a connection to the DB2 database
 		logger.entering(this.getClass().getName(),"openConnection()");
 
-		Integer taskNumberInteger = new Integer(Task.getTask().getTaskNumber());
+		Integer taskNumberInteger = Task.getTask().getTaskNumber();
 		String db2ConnString = DB2CONN.concat(taskNumberInteger.toString());
-		logger.fine("Attempting to get DB2CONN for task number " + taskNumberInteger.toString());
+		logger.log(Level.FINE, () -> "Attempting to get DB2CONN for task number " + taskNumberInteger.toString());
 		this.conn = (Connection) cornedBeef.get(db2ConnString);
 		if(this.conn == null)
 		{
 			HBankDataAccess.incrementConnCount();
-			logger.fine("Attempting to create DB2CONN for task number " + taskNumberInteger.toString());
+			logger.log(Level.FINE, () -> "Attempting to create DB2CONN for task number " + taskNumberInteger.toString());
 			//Attempt to open a connection
 			openConnectionInternal();
-			logger.fine("Creation succcessful for DB2CONN for task number " + taskNumberInteger.toString());
+			logger.log(Level.FINE, () -> "Creation succcessful for DB2CONN for task number " + taskNumberInteger.toString());
 		}
 		else
 		{
-			logger.fine("Reusing DB2CONN for task number " + taskNumberInteger.toString());
+			logger.log(Level.FINE, () -> "Reusing DB2CONN for task number " + taskNumberInteger.toString());
 
 			try {
 				//If the connection is closed, try to reopen the connection
@@ -105,24 +112,22 @@ public class HBankDataAccess {
 
 		HBankDataAccess.decrementConnCount();
 
-		Integer taskNumberInterger = new Integer(Task.getTask().getTaskNumber());
+		Integer taskNumberInterger = Task.getTask().getTaskNumber();
 		String db2ConnString = DB2CONN.concat(taskNumberInterger.toString());
 		this.conn = (Connection) cornedBeef.get(db2ConnString);
 		//If there is an open connection
 		if(this.conn != null)
 		{
-			logger.fine("We have a DB2 connection to close");
+			logger.log(Level.FINE, () -> "We have a DB2 connection to close");
 			try {
-				logger.fine("Syncpointing");
+				logger.log(Level.FINE, () -> "Syncpointing");
 				Task.getTask().commit();
 				//Close the connection
 				this.conn.close();
 				cornedBeef.remove(db2ConnString);
 			} catch (SQLException e) {
 				logger.severe("SQLException in com.ibm.cics.cip.bankliberty.web.db2.Customer " + e.getErrorCode() + "," + e.getSQLState() + ","  + e.getMessage());
-			} catch (InvalidRequestException e) {
-				logger.severe(e.getLocalizedMessage());
-			} catch (RolledBackException e) {
+			} catch (InvalidRequestException | RolledBackException e) {
 				logger.severe(e.getLocalizedMessage());
 			} 
 		}
@@ -141,14 +146,14 @@ public class HBankDataAccess {
 		try{
 			ctx = new InitialContext();
 			ds = (DataSource) ctx.lookup(jndiString);
-			logger.fine("jndi string is " + jndiString);
+			logger.log(Level.FINE, () -> "jndi string is " + jndiString);
 			//If there is no current connection
 			if(this.conn == null){
-				logger.fine("About to attempt to get DB2 connection");
+				logger.log(Level.FINE, () -> "About to attempt to get DB2 connection");
 				//Try and get a connection
 				this.conn = ds.getConnection();
 				this.conn.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);
-				Integer taskNumberInterger = new Integer(Task.getTask().getTaskNumber());
+				Integer taskNumberInterger = Task.getTask().getTaskNumber();
 				String db2ConnString = DB2CONN.concat(taskNumberInterger.toString());
 				cornedBeef.put(db2ConnString,this.conn);
 				HBankDataAccess.incrementConnCount();
@@ -156,7 +161,7 @@ public class HBankDataAccess {
 			}else{
 				//If the connection is closed, open a new connection
 				if(this.conn.isClosed()){
-					logger.fine("DB2 connection was closed, getting a new one");
+					logger.log(Level.FINE, () -> "DB2 connection was closed, getting a new one");
 					this.conn = ds.getConnection();
 				}
 			}
