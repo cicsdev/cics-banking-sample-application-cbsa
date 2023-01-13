@@ -354,9 +354,9 @@ public class CustList extends VerticalLayout{
 				private static final long serialVersionUID = -6352320168324201352L;
 
 				public void buttonClick(ClickEvent event) {
-					String filter = "";
+					String thisFilter = "";
 					cList.getCustomer(temp).deleteFromDB();
-					createCusList(filter);
+					createCusList(thisFilter);
 				}
 			});
 

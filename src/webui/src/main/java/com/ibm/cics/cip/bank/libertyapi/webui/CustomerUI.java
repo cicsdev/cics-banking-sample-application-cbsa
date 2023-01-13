@@ -317,7 +317,6 @@ public class CustomerUI extends VerticalLayout{
 	//Create a new customer object, then add the customer to the database. If customer already in database then return "-1"
 	private String createNewCustomer(){
 		if(validateSimple()){
-			String temp = "";
 			Customer newCust;
 			//create a new customer
 			newCust = new Customer("0",sCodeT.getValue(),

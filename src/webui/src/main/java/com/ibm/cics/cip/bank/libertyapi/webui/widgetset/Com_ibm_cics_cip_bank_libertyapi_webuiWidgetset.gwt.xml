@@ -19,15 +19,5 @@
     -->
     <!-- <set-property name="user.agent" value="safari"/> -->
 
-    <!--
-    To enable SuperDevMode, uncomment this line.
-
-    See https://vaadin.com/wiki/-/wiki/Main/Using%20SuperDevMode for more
-    information and instructions.
-    -->
-    <!-- <set-configuration-property name="devModeRedirectEnabled" value="true" /> -->
-
-
-
     <inherits name="com.vaadin.DefaultWidgetSet" />
 </module>

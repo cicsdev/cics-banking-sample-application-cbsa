@@ -65,7 +65,7 @@ public class Welcome extends VerticalLayout{
 		// create and add labels
 		addLabels(user);
 		// create and add buttons
-		addButtons(user);
+		addButtons();
 		
 	}
 	
@@ -126,7 +126,7 @@ public class Welcome extends VerticalLayout{
 		this.setHeight("100%");
 	}
 	
-	private void addButtons(final String user){
+	private void addButtons(){
 		// This bit adds the buttons that we see on the screen
 		final Welcome cur = this;
 		// create button list (new buttons only need to be added here)

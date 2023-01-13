@@ -44,7 +44,7 @@ public class AccountUI extends VerticalLayout{
 	private transient Account a;
 	private UI ui;
 	private Boolean edit = false;
-	private TextField accNumT; 
+	 
 	private TextField cusNumT; 
 	private TextField sCodeT;
 	private ComboBox typeT; 
@@ -95,7 +95,7 @@ public class AccountUI extends VerticalLayout{
 		Label title = new Label("Account Creation / Update");
 		this.addComponent(title);
 
-		accNumT = new TextField("Account Number");
+		TextField accNumT = new TextField("Account Number");
 
 		accNumT.setEnabled(false);
 
@@ -178,7 +178,7 @@ public class AccountUI extends VerticalLayout{
 
 		Button submit;
 		//Change button text depending on context
-		if (this.edit)
+		if (Boolean.TRUE.equals(this.edit))
 		{
 			submit = new Button("Edit account");
 		}
@@ -215,7 +215,7 @@ public class AccountUI extends VerticalLayout{
 				}
 				else{
 					//Editing an account	
-					if(!editAccount())
+					if(Boolean.FALSE.equals(editAccount()))
 					{
 						event.getButton().setCaption(EDITING_STRING + a.getAccountNumber() + " failed");
 					}

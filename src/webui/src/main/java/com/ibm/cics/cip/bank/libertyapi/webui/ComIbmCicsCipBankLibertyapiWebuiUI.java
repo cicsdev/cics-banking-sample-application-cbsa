@@ -36,7 +36,7 @@ public class ComIbmCicsCipBankLibertyapiWebuiUI extends UI {
 
 	@WebServlet(value = "/*", asyncSupported = true)
 	@VaadinServletConfiguration(productionMode = false, ui = ComIbmCicsCipBankLibertyapiWebuiUI.class)
-	public static class Servlet {
+	private static class Servlet {
 
     static final String COPYRIGHT =
       "Copyright IBM Corp. 2022";

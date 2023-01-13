@@ -7,7 +7,6 @@
 package com.ibm.cics.cip.bank.libertyapi.webui;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -98,7 +97,6 @@ public class AccList extends VerticalLayout{
 				if(offset != 0){
 					offset -= limit;
 					if(offset<0) offset=0;
-					//("Go back a page: offset from UI should now be " + offset);
 					createAccList(filter);
 				}
 			}
@@ -120,7 +118,6 @@ public class AccList extends VerticalLayout{
 					if(offset < 0){
 						offset = 0;
 					}
-					//("Go back 10 pages: offset from UI should now be " + offset);
 					createAccList(filter);
 				}
 			}
@@ -139,7 +136,6 @@ public class AccList extends VerticalLayout{
 			public void buttonClick(ClickEvent event) {
 				if(cur < next){
 					offset += limit;
-					//("Go forward a page: offset from UI should now be " + offset);
 					createAccList(filter);
 				}
 			}
@@ -158,7 +154,6 @@ public class AccList extends VerticalLayout{
 			public void buttonClick(ClickEvent event) {
 				if((cur+10) < next){
 					offset += limit*10;
-					//("Go forward 10 pages: offset from UI should now be " + offset);
 					createAccList(filter);
 				}
 				else
@@ -319,24 +314,24 @@ public class AccList extends VerticalLayout{
 		//Add head and vl containers to the UI
 		this.addComponent(head);
 		this.addComponent(vl);
-		String filter = customerNumberFilter + String.format(customerNumberFormat,Integer.valueOf(customer.getCustomerNumber())) + "";
-		createAccList(filter);
+		String thisFilter = customerNumberFilter + String.format(customerNumberFormat,Integer.valueOf(customer.getCustomerNumber())) + "";
+		createAccList(thisFilter);
 		logger.exiting(this.getClass().getName(),"Acc_list(UI ui, String string, welcome back, Customer customer) for customer " + customer.getName());
 
 
 	}
 
-	private void createSearch(String customer_number) {
+	private void createSearch(String custNo) {
 		//Search for a customer using customer number		
 		sortOutLogging();
-		logger.entering(this.getClass().getName(),"createSearch(String customer_number) for customer number " + customer_number);
+		logger.entering(this.getClass().getName(),"createSearch(String customer_number) for customer number " + custNo);
 		HorizontalLayout searchL = new HorizontalLayout();
 		VerticalLayout cvl = new VerticalLayout();
 		searchL.setWidth("100%");
 		
 		//Enter the customer number
 		cusNumT = new TextField("Customer Number");
-		cusNumT.setValue(customer_number);
+		cusNumT.setValue(custNo);
 		
 		//Enter the customer account number
 		accNumT = new TextField("Account Number");
@@ -443,7 +438,7 @@ public class AccList extends VerticalLayout{
 		this.addComponent(searchL);
 		limit = 50;
 		offset = 0;
-		logger.exiting(this.getClass().getName(),"createSearch(String customer_number) for customer number " + customer_number);
+		logger.exiting(this.getClass().getName(),"createSearch(String customer_number) for customer number " + custNo);
 
 		
 	}

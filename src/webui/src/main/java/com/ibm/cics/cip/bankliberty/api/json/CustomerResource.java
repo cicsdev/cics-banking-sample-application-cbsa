@@ -375,7 +375,7 @@ public class CustomerResource{
 
 		JSONObject myAccountsJSON;
 		try {
-			myAccountsJSON = JSONObject.parse(myAccountsResource.getAccountsByCustomerInternal(id,false).getEntity().toString());
+			myAccountsJSON = JSONObject.parse(myAccountsResource.getAccountsByCustomerInternal(id).getEntity().toString());
 		} catch (IOException e) {
 
 			response.put(JSON_ERROR_MSG,"Error obtaining accounts to delete for customer " + id);
