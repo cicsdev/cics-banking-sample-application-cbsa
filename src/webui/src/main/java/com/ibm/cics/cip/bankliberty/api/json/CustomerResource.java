@@ -772,22 +772,18 @@ public class CustomerResource{
 		{
 			countOnlyReal = countOnly.booleanValue();
 		}
-		logger.log(Level.FINE, () -> "offset is " + offset);
 		if(offset == null)
 		{
-			logger.log(Level.FINE, () -> "Offset is null defaulting to zero");
 			offset = 0;
 		}
 
 		if(limit == null)
 		{
-			logger.log(Level.FINE, () -> "Limit not supplied, defaulting to 250,000");
 			limit = 250000;
 		}
 
 		if(limit.intValue() == 0)
 		{
-			logger.log(Level.FINE, () -> "Limit is zero, defaulting to 250,000");
 			limit = 250000;
 		}
 		Response myResponse = getCustomersByNameInternal(name,limit,offset,countOnlyReal); 
