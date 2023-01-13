@@ -65,15 +65,15 @@ public class CompanyNameResource{
 // We cache the company name as a static variable. If not set, we jCICS LINK to a COBOL program to go get it
 		if(companyNameString == null)
 		{
-			Program GETCOMPY = new Program();
-			GETCOMPY.setName("GETCOMPY");
+			Program getCompy = new Program();
+			getCompy.setName("GETCOMPY");
 
 			byte[] companyNameBytes = new byte[40];
 
 
 
 			try {
-				GETCOMPY.link(companyNameBytes);
+				getCompy.link(companyNameBytes);
 				GetCompany myGetCompanyData = new GetCompany(companyNameBytes);
 				CompanyNameResource.setCompanyName(myGetCompanyData.getCompanyName().trim());
 			} catch (InvalidRequestException | LengthErrorException

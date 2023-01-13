@@ -165,12 +165,7 @@ public class AccountJSON {
 		{
 			return true;
 		}
-		if(accountType2.equalsIgnoreCase("CURRENT")) 
-		{
-			return true;
-		}
-		
-		return false;
+		return accountType2.equalsIgnoreCase("CURRENT"); 
 	}
 
 

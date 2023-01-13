@@ -137,7 +137,7 @@ public class Welcome extends VerticalLayout{
 		buttons.add(new Button("Add Customer"));
 		
 		// create horizontal layout list
-		List<HorizontalLayout> hls= new ArrayList<HorizontalLayout>();
+		List<HorizontalLayout> hls= new ArrayList<>();
 		
 		// buttons vertical layout (all horizontal layouts added to this)
 		VerticalLayout optionsVl = new VerticalLayout();

@@ -9,8 +9,6 @@ package com.ibm.cics.cip.bankliberty.api.json;
 
 
 
-import java.io.IOException;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import javax.ws.rs.DELETE;
@@ -86,15 +84,15 @@ public class CounterResource extends HBankDataAccess{
 		Response myResponse = null;
 
 
-		Program NEWACCNO_Program = new Program();
-		NEWACCNO_Program.setName(NEWACCNO);
+		Program newaccnoProgam = new Program();
+		newaccnoProgam.setName(NEWACCNO);
 
 		NewAccountNumber myNEWACCNO = new NewAccountNumber();
 
 		myNEWACCNO.setNewaccnoFunction("C");
 		byte[] data = myNEWACCNO.getByteBuffer();
 		try {
-			NEWACCNO_Program.link(data);
+			newaccnoProgam.link(data);
 			myNEWACCNO = new NewAccountNumber(data);
 			logger.fine(NEW_ACCNO_PREFIX + myNEWACCNO.getAccountNumber());
 			response.put(JSON_ACCOUNT_NUMBER, myNEWACCNO.getAccountNumber());
@@ -123,15 +121,15 @@ public class CounterResource extends HBankDataAccess{
 		Response myResponse = null;
 
 
-		Program NEWCUSNO_Program = new Program();
-		NEWCUSNO_Program.setName(NEWCUSNO);
+		Program newcusnoProgram = new Program();
+		newcusnoProgram.setName(NEWCUSNO);
 
 		NewCustomerNumber myNEWCUSNO = new NewCustomerNumber();
 
 		myNEWCUSNO.setNewcusnoFunction("C");
 		byte[] data = myNEWCUSNO.getByteBuffer();
 		try {
-			NEWCUSNO_Program.link(data);
+			newcusnoProgram.link(data);
 			myNEWCUSNO = new NewCustomerNumber(data);
 			logger.fine(NEW_CUSNO_PREFIX + myNEWCUSNO.getCustomerNumber());
 			response.put(JSON_CUSTOMER_NUMBER, myNEWCUSNO.getCustomerNumber());
@@ -160,15 +158,15 @@ public class CounterResource extends HBankDataAccess{
 		JSONObject response = new JSONObject();
 
 
-		Program NEWCUSNO_Program = new Program();
-		NEWCUSNO_Program.setName(NEWCUSNO);
+		Program newcusnoProgram = new Program();
+		newcusnoProgram.setName(NEWCUSNO);
 
 		NewCustomerNumber myNEWCUSNO = new NewCustomerNumber();
 
 		myNEWCUSNO.setNewcusnoFunction("G");
 		byte[] data = myNEWCUSNO.getByteBuffer();
 		try {
-			NEWCUSNO_Program.link(data);
+			newcusnoProgram.link(data);
 			myNEWCUSNO = new NewCustomerNumber(data);
 
 			logger.fine(NEW_CUSNO_PREFIX + myNEWCUSNO.getCustomerNumber());
@@ -198,19 +196,19 @@ public class CounterResource extends HBankDataAccess{
 		JSONObject response = new JSONObject();
 
 
-		Program NEWCUSNO_Program = new Program();
-		NEWCUSNO_Program.setName(NEWCUSNO);
+		Program newcusnoProgram = new Program();
+		newcusnoProgram.setName(NEWCUSNO);
 
 		NewCustomerNumber myNEWCUSNO = new NewCustomerNumber();
 
 		myNEWCUSNO.setNewcusnoFunction("C");
 		byte[] data = myNEWCUSNO.getByteBuffer();
 		try {
-			NEWCUSNO_Program.link(data);
+			newcusnoProgram.link(data);
 			myNEWCUSNO = new NewCustomerNumber(data);
 			myNEWCUSNO.setCustomerNumber(myNEWCUSNO.getCustomerNumber() - 1);
 			myNEWCUSNO.setNewcusnoFunction("R");
-			NEWCUSNO_Program.link(data);
+			newcusnoProgram.link(data);
 
 			logger.fine(NEW_CUSNO_PREFIX + myNEWCUSNO.getCustomerNumber());
 			response.put(JSON_CUSTOMER_NUMBER, myNEWCUSNO.getCustomerNumber());
@@ -239,15 +237,15 @@ public class CounterResource extends HBankDataAccess{
 		Response myResponse = null;
 		JSONObject response = new JSONObject();
 
-		Program NEWACCNO_Program = new Program();
-		NEWACCNO_Program.setName(NEWACCNO);
+		Program newaccnoProgram = new Program();
+		newaccnoProgram.setName(NEWACCNO);
 
 		NewAccountNumber myNEWACCNO = new NewAccountNumber();
 
 		myNEWACCNO.setNewaccnoFunction("G");
 		byte[] data = myNEWACCNO.getByteBuffer();
 		try {
-			NEWACCNO_Program.link(data);
+			newaccnoProgram.link(data);
 			myNEWACCNO = new NewAccountNumber(data);
 			logger.fine(NEW_ACCNO_PREFIX + myNEWACCNO.getAccountNumber());
 			response.put(JSON_ACCOUNT_NUMBER, myNEWACCNO.getAccountNumber());
@@ -274,19 +272,19 @@ public class CounterResource extends HBankDataAccess{
 		Response myResponse = null;
 		JSONObject response = new JSONObject();
 
-		Program NEWACCNO_Program = new Program();
-		NEWACCNO_Program.setName(NEWACCNO);
+		Program newaccnoProgram = new Program();
+		newaccnoProgram.setName(NEWACCNO);
 
 		NewAccountNumber myNEWACCNO = new NewAccountNumber();
 
 		myNEWACCNO.setNewaccnoFunction("C");
 		byte[] data = myNEWACCNO.getByteBuffer();
 		try {
-			NEWACCNO_Program.link(data);
+			newaccnoProgram.link(data);
 			myNEWACCNO = new NewAccountNumber(data);
 			myNEWACCNO.setAccountNumber(myNEWACCNO.getAccountNumber() - 1);
 			myNEWACCNO.setNewaccnoFunction("R");
-			NEWACCNO_Program.link(data);
+			newaccnoProgram.link(data);
 
 			logger.fine(NEW_ACCNO_PREFIX + myNEWACCNO.getAccountNumber());
 			response.put(JSON_ACCOUNT_NUMBER, myNEWACCNO.getAccountNumber());

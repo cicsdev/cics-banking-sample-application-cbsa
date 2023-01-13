@@ -612,12 +612,16 @@ public class AccountsResource extends HBankDataAccess{
 
 			accounts.add(account);
 		}
-		String customerNumberString = customerNumber.toString();
-		for(int i=10;customerNumberString.length()<10;i--)
+		StringBuilder myStringBuilder = new StringBuilder();
+		
+
+		for (int i=customerNumber.toString().length();i<10;i++)
 		{
-			customerNumberString = "0" + customerNumberString;
+			myStringBuilder.append('0');
 		}
-		response.put(JSON_CUSTOMER_NUMBER, customerNumberString);
+		myStringBuilder.append(customerNumber.toString());
+		
+		response.put(JSON_CUSTOMER_NUMBER, myStringBuilder.toString());
 		response.put(JSON_NUMBER_OF_ACCOUNTS, numberOfAccounts);
 		response.put(JSON_ACCOUNTS, accounts);
 
