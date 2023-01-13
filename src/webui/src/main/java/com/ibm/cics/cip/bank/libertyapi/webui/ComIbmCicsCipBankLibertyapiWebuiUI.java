@@ -7,10 +7,10 @@
 package com.ibm.cics.cip.bank.libertyapi.webui;
 
 
-import javax.servlet.annotation.WebServlet;
+
 
 import com.vaadin.annotations.Theme;
-import com.vaadin.annotations.VaadinServletConfiguration;
+
 
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.UI;

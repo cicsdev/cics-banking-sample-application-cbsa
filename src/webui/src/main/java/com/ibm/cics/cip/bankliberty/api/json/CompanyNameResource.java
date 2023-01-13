@@ -18,7 +18,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
-import com.ibm.cics.cip.bankliberty.dataInterfaces.GetCompany;
+import com.ibm.cics.cip.bankliberty.datainterfaces.GetCompany;
 import com.ibm.cics.server.AbendException;
 import com.ibm.cics.server.InvalidProgramIdException;
 import com.ibm.cics.server.InvalidRequestException;

@@ -16,9 +16,8 @@ import java.util.logging.Logger;
 import com.ibm.cics.cip.bankliberty.api.json.CounterResource;
 import com.ibm.cics.cip.bankliberty.api.json.CreditScore;
 import com.ibm.cics.cip.bankliberty.api.json.CustomerJSON;
-import com.ibm.cics.cip.bankliberty.dataInterfaces.CUSTOMER;
-import com.ibm.cics.cip.bankliberty.dataInterfaces.CustomerControl;
-
+import com.ibm.cics.cip.bankliberty.datainterfaces.CUSTOMER;
+import com.ibm.cics.cip.bankliberty.datainterfaces.CustomerControl;
 import com.ibm.cics.server.ChangedException;
 import com.ibm.cics.server.DuplicateKeyException;
 import com.ibm.cics.server.DuplicateRecordException;

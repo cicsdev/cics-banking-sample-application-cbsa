@@ -18,7 +18,7 @@ import java.util.Calendar;
 import java.util.logging.Logger;
 
 import com.ibm.cics.cip.bankliberty.api.json.HBankDataAccess;
-import com.ibm.cics.cip.bankliberty.dataInterfaces.PROCTRAN;
+import com.ibm.cics.cip.bankliberty.datainterfaces.PROCTRAN;
 import com.ibm.cics.server.Task;
 
 public class ProcessedTransaction extends HBankDataAccess{

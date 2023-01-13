@@ -58,11 +58,7 @@ public class ProcessedTransactionResource{
 	private static final String JSON_ACCOUNT_TYPE = "accountType";
 	private static final String JSON_LAST_STATEMENT = "lastStatement";
 	private static final String JSON_NEXT_STATEMENT = "nextStatement";
-	private static final String JSON_ID = "id";
 	private static final String JSON_CUSTOMER_NAME = "customerName";
-	private static final String JSON_CUSTOMER_ADDRESS = "customerAddress";
-	private static final String JSON_CUSTOMER_CREDIT_SCORE = "customerCreditScore";
-	private static final String JSON_CUSTOMER_REVIEW_DATE = "customerCreditScoreReviewDate";
 	private static final String JSON_DATE_OF_BIRTH = "dateOfBirth";
 	private static final String JSON_ERROR_MSG = "errorMessage";
 	private static final String JSON_SUCCESS = "success";
@@ -165,7 +161,7 @@ public class ProcessedTransactionResource{
 			numberOfProcessedTransactions = processedTransactionsJSON.size();
 		}
 
-		numberOfProcessedTransactions = processedTransactions.length;
+		
 		processedTransactionsJSON = new JSONArray(processedTransactions.length);
 
 
@@ -276,22 +272,19 @@ if(processedTransactions[i].getType().compareTo(com.ibm.cics.cip.bankliberty.web
 		{
 			if(myProcessedTransactionDB2.writeDebit(proctranDbCr.getAccountNumber(), proctranDbCr.getSortCode(), proctranDbCr.getAmount()))
 			{
-				Response myResponse = Response.ok().build();
-				return myResponse;
+				return Response.ok().build();
 			}
 			else
 			{
 				logger.severe("PROCTRAN Insert debit didn't work");
-				Response myResponse = Response.serverError().build();
-				return myResponse;
+				return Response.serverError().build();
 			}	
 		}
 		else
 		{
 			if(myProcessedTransactionDB2.writeCredit(proctranDbCr.getAccountNumber(), proctranDbCr.getSortCode(), proctranDbCr.getAmount()))
 			{
-				Response myResponse = Response.ok().build();
-				return myResponse;
+				return Response.ok().build();
 			}
 			else
 			{

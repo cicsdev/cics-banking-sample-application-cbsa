@@ -22,13 +22,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
-
-import com.ibm.cics.cip.bankliberty.dataInterfaces.GetSortCode;
-
-
-
-
-
+import com.ibm.cics.cip.bankliberty.datainterfaces.GetSortCode;
 import com.ibm.cics.server.InvalidProgramIdException;
 import com.ibm.cics.server.InvalidRequestException;
 import com.ibm.cics.server.InvalidSystemIdException;
@@ -63,15 +57,15 @@ public class SortCodeResource{
 
 		if(sortCodeString == null)
 		{
-			Program GETSCODE = new Program();
-			GETSCODE.setName("GETSCODE");
+			Program getscode = new Program();
+			getscode.setName("GETSCODE");
 
 			byte[] sortCodeBytes = new byte[6];
 
 
 
 			try {
-				GETSCODE.link(sortCodeBytes);
+				getscode.link(sortCodeBytes);
 			} catch (InvalidRequestException | LengthErrorException
 					| InvalidSystemIdException | NotAuthorisedException
 					| InvalidProgramIdException | RolledBackException

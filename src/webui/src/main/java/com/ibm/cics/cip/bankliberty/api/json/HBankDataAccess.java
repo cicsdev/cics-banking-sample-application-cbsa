@@ -35,7 +35,7 @@ public class HBankDataAccess {
     static final String COPYRIGHT =
       "Copyright IBM Corp. 2022";
 
-	private 	DataSource 	ds;
+	
 	protected 	Connection	conn = null;
 	static int connectionCount = 0;
 	private static final String DB2CONN = "DB2CONN";
@@ -145,7 +145,7 @@ public class HBankDataAccess {
 
 		try{
 			ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup(jndiString);
+			DataSource ds = (DataSource) ctx.lookup(jndiString);
 			logger.log(Level.FINE, () -> "jndi string is " + jndiString);
 			//If there is no current connection
 			if(this.conn == null){

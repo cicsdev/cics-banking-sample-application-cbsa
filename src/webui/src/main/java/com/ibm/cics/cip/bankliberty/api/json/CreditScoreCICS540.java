@@ -16,7 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-import com.ibm.cics.cip.bankliberty.dataInterfaces.CRECUST;
+import com.ibm.cics.cip.bankliberty.datainterfaces.CRECUST;
 import com.ibm.cics.server.AsyncService;
 import com.ibm.cics.server.AsyncServiceImpl;
 import com.ibm.cics.server.CCSIDErrorException;

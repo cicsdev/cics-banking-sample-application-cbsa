@@ -110,7 +110,7 @@ public class CustomerResource{
 
 		Integer inputSortCode = Integer.parseInt(customer.getSortCode());
 
-		if(inputSortCode != this.getSortCode())
+		if(inputSortCode.equals(this.getSortCode()))
 		{
 			JSONObject error = new JSONObject();
 			error.put(JSON_ERROR_MSG, "Sortcode " +  inputSortCode + " not valid for this bank (" + this.getSortCode() + ")");
@@ -143,7 +143,7 @@ public class CustomerResource{
 
 
 		response.put(JSON_ID, vsamCustomer.getCustomer_number());
-		response.put(JSON_SORT_CODE, sortcode.toString());
+		response.put(JSON_SORT_CODE, sortcode);
 		response.put(JSON_CUSTOMER_NAME, customer.getCustomerName());
 		response.put(JSON_CUSTOMER_ADDRESS, customer.getCustomerAddress());
 		response.put(JSON_DATE_OF_BIRTH, customer.getDateOfBirth().toString());
@@ -165,7 +165,9 @@ public class CustomerResource{
 			try {
 				logger.severe("Customer: createCustomer: Failed to write to PROCTRAN");
 				Task.getTask().rollback();
-			} catch (InvalidRequestException e) {
+			} catch (InvalidRequestException e) 
+			{
+				logger.severe("Customer: createCustomer: Failed to rollback");
 			}
 			Response myResponse = Response.status(500).entity(error.toString()).build();
 			logger.exiting(this.getClass().getName(), CREATE_CUSTOMER_INTERNAL_EXIT,myResponse);
@@ -216,7 +218,7 @@ public class CustomerResource{
 
 		Integer inputSortCode = Integer.parseInt(customer.getSortCode());
 
-		if(inputSortCode != this.getSortCode())
+		if(inputSortCode.equals(this.getSortCode()))
 			//Sortcode invalid
 		{
 			JSONObject error = new JSONObject();

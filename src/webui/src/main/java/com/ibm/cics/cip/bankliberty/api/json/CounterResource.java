@@ -20,10 +20,8 @@ import javax.ws.rs.Produces;
 
 import javax.ws.rs.core.Response;
 
-
-import com.ibm.cics.cip.bankliberty.dataInterfaces.NewAccountNumber;
-import com.ibm.cics.cip.bankliberty.dataInterfaces.NewCustomerNumber;
-
+import com.ibm.cics.cip.bankliberty.datainterfaces.NewAccountNumber;
+import com.ibm.cics.cip.bankliberty.datainterfaces.NewCustomerNumber;
 import com.ibm.cics.server.InvalidProgramIdException;
 import com.ibm.cics.server.InvalidRequestException;
 import com.ibm.cics.server.InvalidSystemIdException;

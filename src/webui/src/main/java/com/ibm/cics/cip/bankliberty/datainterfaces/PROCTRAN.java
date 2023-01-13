@@ -3,7 +3,7 @@
  *    Copyright IBM Corp. 2022
  *
  */
-package com.ibm.cics.cip.bankliberty.dataInterfaces;
+package com.ibm.cics.cip.bankliberty.datainterfaces;
 import com.ibm.jzos.fields.*;
 import java.math.*;
 

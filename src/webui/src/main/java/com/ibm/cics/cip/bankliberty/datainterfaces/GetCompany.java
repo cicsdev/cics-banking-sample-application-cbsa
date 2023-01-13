@@ -3,7 +3,7 @@
  *    Copyright IBM Corp. 2022
  *
  */
-package com.ibm.cics.cip.bankliberty.dataInterfaces;
+package com.ibm.cics.cip.bankliberty.datainterfaces;
 
 import com.ibm.jzos.fields.*;
 
@@ -31,28 +31,28 @@ public class GetCompany {
 	       06 company-name pic x(40). </pre> */
 	protected static StringField COMPANY_NAME = factory.getStringField(40);
 
-	protected byte[] _byteBuffer;
+	protected byte[] byteBuffer;
 
 
 	public GetCompany (byte[] buffer) {
-		this._byteBuffer = buffer;
+		this.byteBuffer = buffer;
 	}
 
 	public GetCompany () {
-		this._byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_LEN];
+		this.byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_LEN];
 	}
 
 	public byte[] getByteBuffer() {
-		return _byteBuffer;
+		return byteBuffer;
 	}
 
 
 	public String getCompanyName() {
-		return COMPANY_NAME.getString(_byteBuffer);
+		return COMPANY_NAME.getString(byteBuffer);
 	}
 
 	public void setCompanyName(String companyName) {
-		COMPANY_NAME.putString(companyName, _byteBuffer);
+		COMPANY_NAME.putString(companyName, byteBuffer);
 	}
 
 }
