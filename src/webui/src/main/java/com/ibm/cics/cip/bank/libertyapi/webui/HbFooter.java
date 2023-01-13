@@ -16,7 +16,7 @@ import com.vaadin.ui.HorizontalLayout;
 
 
 
-public class HB_Footer extends HorizontalLayout {
+public class HbFooter extends HorizontalLayout {
 
     static final String COPYRIGHT =
       "Copyright IBM Corp. 2022";
@@ -24,7 +24,7 @@ public class HB_Footer extends HorizontalLayout {
 
 	private static final long serialVersionUID = -3638937118776518241L;
 
-	public HB_Footer(){
+	public HbFooter(){
 		/** 
 		 * We do not use the footer but it is available if required
 		 */

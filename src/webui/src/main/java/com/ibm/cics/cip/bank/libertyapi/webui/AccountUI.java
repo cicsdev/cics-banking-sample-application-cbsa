@@ -52,17 +52,17 @@ public class AccountUI extends VerticalLayout{
 	private TextField overdraftT; 
 	private TextField balanceT;
 	private static String sortcode;
-	private static String typeCurrent = "CURRENT";
-	private static String typeISA = "ISA";
-	private static String typeLoan = "LOAN";
-	private static String typeMortgage = "MORTGAGE";
-	private static String typeSaving = "SAVING";
-	private String editingString = "Editing account " ;
+	private static final String TYPE_CURRENT = "CURRENT";
+	private static final String TYPE_ISA = "ISA";
+	private static final String TYPE_LOAN = "LOAN";
+	private static final String TYPE_MORTGAGE = "MORTGAGE";
+	private static final String TYPE_SAVING = "SAVING";
+	private static final String EDITING_STRING = "Editing account " ;
 	
 
-	public AccountUI(UI ui, String user, Welcome back){
+	public AccountUI(UI ui, Welcome back){
 		//Create a new account		
-		createAccUI(ui, back, user);
+		createAccUI(ui, back,null);
 		edit = false;
 		setSortcode();
 
@@ -88,7 +88,7 @@ public class AccountUI extends VerticalLayout{
 		//ui is passed in so that containers can be added to it later using this.addComponent()
 		//acc is passed in so that it can be used to populate the components
 		this.ui = ui;
-		HB_Header header = new HB_Header(ui, back);
+		HbHeader header = new HbHeader(ui, back);
 		this.addComponent(header);
 		this.setExpandRatio(header, 0.1f);
 
@@ -96,7 +96,7 @@ public class AccountUI extends VerticalLayout{
 		this.addComponent(title);
 
 		accNumT = new TextField("Account Number");
-		accNumT.setValue(acc.getAccountNumber());
+
 		accNumT.setEnabled(false);
 
 		//Create a new container and scale - components can be added to it using cusNumL.addComponent()
@@ -107,23 +107,33 @@ public class AccountUI extends VerticalLayout{
 
 		//Textfield showing account number
 		accNumT = new TextField("Account Number");
-		accNumT.setValue(acc.getAccountNumber());
 		accNumT.setEnabled(false);
 
 		//Textfield showing customer number
 		cusNumT = new TextField("Customer Number");
-		cusNumT.setValue(acc.getCustomerNumber());
+
 		cusNumT.setEnabled(false);
 
 		//Textfield showing sortcode
 		sCodeT = new TextField("Sortcode");
 		sCodeT.setValue(getSortcode());
 		sCodeT.setEnabled(false);
+		
+		if(acc!= null)
+		{
+			accNumT.setValue(acc.getAccountNumber());
+			cusNumT.setValue(acc.getCustomerNumber());
+		}
+		else
+		{
+			accNumT.setValue("00000000");
+			cusNumT.setValue("");
+		}
 
 		//Add the components to the container and align
 		cusNumL.addComponent(accNumT);
 		cusNumL.addComponent(cusNumT);
-		cusNumT.setEnabled(!edit);
+		cusNumT.setEnabled(Boolean.FALSE.equals(edit));
 		cusNumL.addComponent(sCodeT);
 		cusNumL.setComponentAlignment(sCodeT, Alignment.MIDDLE_RIGHT);
 
@@ -133,12 +143,12 @@ public class AccountUI extends VerticalLayout{
 
 		//Set the account type
 		typeT = new ComboBox("Type");
-		typeT.addItem(typeCurrent);
-		typeT.addItem(typeISA);
-		typeT.addItem(typeLoan);
-		typeT.addItem(typeMortgage);
-		typeT.addItem(typeSaving);
-		typeT.setValue(acc.getType());
+		typeT.addItem(TYPE_CURRENT);
+		typeT.addItem(TYPE_ISA);
+		typeT.addItem(TYPE_LOAN);
+		typeT.addItem(TYPE_MORTGAGE);
+		typeT.addItem(TYPE_SAVING);
+		typeT.setValue(TYPE_CURRENT);
 		typeT.setNullSelectionAllowed(false);
 		
 		//Set interest rate
@@ -190,7 +200,8 @@ public class AccountUI extends VerticalLayout{
 			private static final long serialVersionUID = 3760485465663201508L;
 
 			public void buttonClick(ClickEvent event) {
-				if(!edit){
+				if(Boolean.FALSE.equals(edit))
+				{
 					//Creating an account
 					String temp = createNewAccount();
 					if(temp.startsWith("-1"))
@@ -206,11 +217,11 @@ public class AccountUI extends VerticalLayout{
 					//Editing an account	
 					if(!editAccount())
 					{
-						event.getButton().setCaption(editingString + a.getAccountNumber() + " failed");
+						event.getButton().setCaption(EDITING_STRING + a.getAccountNumber() + " failed");
 					}
 					else
 					{
-						event.getButton().setCaption(editingString + a.getAccountNumber() + " successful");
+						event.getButton().setCaption(EDITING_STRING + a.getAccountNumber() + " successful");
 					}
 				}
 			}
@@ -245,7 +256,7 @@ public class AccountUI extends VerticalLayout{
 	private void createAccUI(UI ui, Welcome back, String user){
 
 		this.ui = ui;
-		HB_Header header = new HB_Header(ui, back);
+		HbHeader header = new HbHeader(ui, back);
 		this.addComponent(header);
 		this.setExpandRatio(header, 0.1f);
 
@@ -268,12 +279,12 @@ public class AccountUI extends VerticalLayout{
 
 		///Create combobox with type options and set the type to 'CURRENT'		
 		typeT = new ComboBox("Type");
-		typeT.addItem(typeCurrent);
-		typeT.addItem(typeISA);
-		typeT.addItem(typeLoan);
-		typeT.addItem(typeMortgage);
-		typeT.addItem(typeSaving);
-		typeT.setValue(typeCurrent);
+		typeT.addItem(TYPE_CURRENT);
+		typeT.addItem(TYPE_ISA);
+		typeT.addItem(TYPE_LOAN);
+		typeT.addItem(TYPE_MORTGAGE);
+		typeT.addItem(TYPE_SAVING);
+		typeT.setValue(TYPE_CURRENT);
 		typeT.setNullSelectionAllowed(false);
 		
 		//Create interest textfield and set to '0.00'	
@@ -320,11 +331,11 @@ public class AccountUI extends VerticalLayout{
 
 					if(!editAccount())
 					{
-						event.getButton().setCaption(editingString + a.getAccountNumber() + " failed");
+						event.getButton().setCaption(EDITING_STRING + a.getAccountNumber() + " failed");
 					}
 					else
 					{
-						event.getButton().setCaption(editingString + a.getAccountNumber() + " successful");
+						event.getButton().setCaption(EDITING_STRING + a.getAccountNumber() + " successful");
 					}
 
 				}

@@ -7,7 +7,6 @@
 package com.ibm.cics.cip.bank.libertyapi.webui;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.text.SimpleDateFormat;
@@ -67,11 +66,11 @@ public class CustList extends VerticalLayout{
 	int next;
 	private String welcome="Welcome";
 
-	public CustList(UI ui, String user, Welcome back)
+	public CustList(UI ui, Welcome back)
 	{
 		sortOutLogging();
 		this.ui = ui;
-		HB_Header header = new HB_Header(ui, back);
+		HbHeader header = new HbHeader(ui, back);
 		this.addComponent(header);
 		this.setExpandRatio(header, 0.1f);
 		createSearch();
@@ -263,8 +262,8 @@ public class CustList extends VerticalLayout{
 				offset = total;
 			}
 
-			page.setValue(((offset/limit)+1)+"/"+(((int)Math.ceil((total/limit))+1))); 
-			if((((int)Math.ceil((cList.getCount(filter)/limit)))) == 0)
+			page.setValue(((offset/limit)+1)+"/"+((int)Math.ceil((total/limit))+1)); 
+			if(((int)Math.ceil((cList.getCount(filter)/limit))) == 0)
 			{
 				page.setValue("0/0");
 				if(cList.getCount(filter)>0)
@@ -304,8 +303,8 @@ public class CustList extends VerticalLayout{
 			hl.addComponent(dob);
 
 			//Create new container and scale
-			HorizontalLayout hl_buttons = new HorizontalLayout();
-			hl_buttons.setWidth("100%");
+			HorizontalLayout hlButtons = new HorizontalLayout();
+			hlButtons.setWidth("100%");
 
 			//Create new buttons for "Accounts", "edit" and "delete"
 			Button showAcc = new Button("Accounts");
@@ -313,16 +312,16 @@ public class CustList extends VerticalLayout{
 			Button delete = new Button("Delete");
 
 			//Add components to hl_buttons container
-			hl_buttons.addComponent(showAcc);
-			hl_buttons.addComponent(edit);
-			hl_buttons.addComponent(delete);
+			hlButtons.addComponent(showAcc);
+			hlButtons.addComponent(edit);
+			hlButtons.addComponent(delete);
 
-			hl_buttons.setExpandRatio(showAcc, 0.3f);
-			hl_buttons.setExpandRatio(edit, 0.3f);
-			hl_buttons.setExpandRatio(delete, 0.3f);
+			hlButtons.setExpandRatio(showAcc, 0.3f);
+			hlButtons.setExpandRatio(edit, 0.3f);
+			hlButtons.setExpandRatio(delete, 0.3f);
 
 			//Add "hl_buttons" container to "hl" container
-			hl.addComponent(hl_buttons);
+			hl.addComponent(hlButtons);
 
 			//Add "hl" container to "vl" container
 			vl.addComponent(hl);

@@ -66,7 +66,7 @@ public class AccList extends VerticalLayout{
 		sortOutLogging();
 		logger.entering(this.getClass().getName(),"Acc_list(UI ui,  welcome back)");
 		this.ui = ui;
-		HB_Header header = new HB_Header(ui, back);
+		HbHeader header = new HbHeader(ui, back);
 		this.addComponent(header);
 		this.setExpandRatio(header, 0.1f);
 		createSearch();
@@ -200,7 +200,7 @@ public class AccList extends VerticalLayout{
 		this.ui = ui;
 		
 		//Create a header, add to the UI and scale
-		HB_Header header = new HB_Header(ui, back);
+		HbHeader header = new HbHeader(ui, back);
 		this.addComponent(header);
 		this.setExpandRatio(header, 0.1f);
 		
@@ -554,14 +554,8 @@ public class AccList extends VerticalLayout{
 		logger.exiting(this.getClass().getName(),"createSearch()");
 	}
 	
-	@SuppressWarnings("unused")
-	private ArrayList<String> setupSearch(ArrayList<String> arr){
-		ArrayList<String> outcome = arr;
-		
-		return outcome;
-	}
-	
-	
+
+
 	
 	private void createAccList(final String filter){
 		sortOutLogging();
@@ -576,8 +570,8 @@ public class AccList extends VerticalLayout{
 			int total = aList.howMany(filter);
 			
 
-			page.setValue(((offset/limit)+1)+"/"+(((int)Math.ceil((total/limit))+1))); 
-			if(((int)Math.ceil((aList.getCount(filter)/limit))) == 0)
+			page.setValue(((offset/limit)+1)+"/"+((int)Math.ceil((total/limit))+1)); 
+			if((int)Math.ceil((aList.getCount(filter)/limit)) == 0)
 			{
 				page.setValue("0/0");
 				if(aList.getCount(filter)>0)
@@ -608,8 +602,8 @@ public class AccList extends VerticalLayout{
 			hl.addComponent(acb);
 			
 			
-			HorizontalLayout hl_buttons = new HorizontalLayout();
-			hl_buttons.setWidth("100%");
+			HorizontalLayout hlButtons = new HorizontalLayout();
+			hlButtons.setWidth("100%");
 			
 			
 			//Create new buttons with labels 'edit' and 'delete'
@@ -619,15 +613,15 @@ public class AccList extends VerticalLayout{
 
 			
 			//Add buttons to container "hl_buttons"
-			hl_buttons.addComponent(edit);
-			hl_buttons.addComponent(delete);
+			hlButtons.addComponent(edit);
+			hlButtons.addComponent(delete);
 			
 
-			hl_buttons.setExpandRatio(edit, 0.2f);
-			hl_buttons.setExpandRatio(delete, 0.4f);
+			hlButtons.setExpandRatio(edit, 0.2f);
+			hlButtons.setExpandRatio(delete, 0.4f);
 			
 			//Add "hl_buttons" container to "hl" container
-			hl.addComponent(hl_buttons);
+			hl.addComponent(hlButtons);
 			
 			//Add "hl" container to "vl" container
 			vl.addComponent(hl);

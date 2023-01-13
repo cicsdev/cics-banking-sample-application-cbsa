@@ -52,14 +52,14 @@ public class CustomerUI extends VerticalLayout{
 	private static String editing = "Editing customer ";
 
 
-	public CustomerUI(UI ui, String user, Welcome back){
+	public CustomerUI(UI ui, Welcome back){
 		//Constructor for creating a customer
-		createCustUI(ui, back, user);
+		createCustUI(ui, back);
 		edit = false;
 		setSortcode();
 	}
 
-	public CustomerUI(UI ui, String user, Welcome back, Customer cust){
+	public CustomerUI(UI ui, Welcome back, Customer cust){
 		//Constructor for editing a customer
 		edit = true;
 		this.c = cust;
@@ -78,7 +78,7 @@ public class CustomerUI extends VerticalLayout{
 		//ui is passed to the template - it's used to add the components to the UI using .addComponent()
 		//cust is passed to the template - it's used to populate the relevant fields, such as customer number etc.
 		this.ui = ui;
-		HB_Header header = new HB_Header(ui, back);
+		HbHeader header = new HbHeader(ui, back);
 		this.addComponent(header);
 		this.setExpandRatio(header, 0.1f);
 
@@ -218,10 +218,10 @@ public class CustomerUI extends VerticalLayout{
 
 	@SuppressWarnings("serial")
 	//Build the customer creation UI
-	private void createCustUI(UI ui, Welcome back, String user){
+	private void createCustUI(UI ui, Welcome back){
 
 		this.ui = ui;
-		HB_Header header = new HB_Header(ui, back);
+		HbHeader header = new HbHeader(ui, back);
 		this.addComponent(header);
 		this.setExpandRatio(header, 0.1f);
 

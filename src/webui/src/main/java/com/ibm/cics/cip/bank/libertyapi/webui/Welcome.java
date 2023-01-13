@@ -59,7 +59,7 @@ public class Welcome extends VerticalLayout{
 		sortOutLogging();
 		this.ui = ui;
 		// create an add header
-		HB_Header header = new HB_Header();
+		HbHeader header = new HbHeader();
 		this.addComponent(header);
 		this.setExpandRatio(header, 0.1f);
 		// create and add labels
@@ -110,19 +110,19 @@ public class Welcome extends VerticalLayout{
 		
 		// property edits + add to there own section (layout)
 		
-		VerticalLayout labels_vl = new VerticalLayout();
-		labels_vl.setWidth("100%");
-		labels_vl.setHeight("100%");
+		VerticalLayout labels = new VerticalLayout();
+		labels.setWidth("100%");
+		labels.setHeight("100%");
 		
-		labels_vl.addComponent(welcomeText);
-		labels_vl.setComponentAlignment(welcomeText, Alignment.MIDDLE_CENTER);
-		labels_vl.addComponent(selectText);
-		labels_vl.setComponentAlignment(selectText, Alignment.MIDDLE_CENTER);
+		labels.addComponent(welcomeText);
+		labels.setComponentAlignment(welcomeText, Alignment.MIDDLE_CENTER);
+		labels.addComponent(selectText);
+		labels.setComponentAlignment(selectText, Alignment.MIDDLE_CENTER);
 		
 		// add section to class layout + class properties
 		
-		this.addComponent(labels_vl);
-		this.setExpandRatio(labels_vl, 0.2f);
+		this.addComponent(labels);
+		this.setExpandRatio(labels, 0.2f);
 		this.setHeight("100%");
 	}
 	
@@ -130,7 +130,7 @@ public class Welcome extends VerticalLayout{
 		// This bit adds the buttons that we see on the screen
 		final Welcome cur = this;
 		// create button list (new buttons only need to be added here)
-		List<Button> buttons = new ArrayList<Button>();
+		List<Button> buttons = new ArrayList<>();
 		buttons.add(new Button("List / Search Accounts"));
 		buttons.add(new Button("Add Account"));
 		buttons.add(new Button("List / Search Customers"));
@@ -140,9 +140,9 @@ public class Welcome extends VerticalLayout{
 		List<HorizontalLayout> hls= new ArrayList<HorizontalLayout>();
 		
 		// buttons vertical layout (all horizontal layouts added to this)
-		VerticalLayout options_vl = new VerticalLayout();
-		options_vl.setWidth("100%");
-		options_vl.setHeight("100%");
+		VerticalLayout optionsVl = new VerticalLayout();
+		optionsVl.setWidth("100%");
+		optionsVl.setHeight("100%");
 		
 		HorizontalLayout hl = new HorizontalLayout();
 		
@@ -166,8 +166,8 @@ public class Welcome extends VerticalLayout{
 				hl.setComponentAlignment(buttons.get(i), Alignment.MIDDLE_RIGHT);
 			}
 			hls.add(hl);
-			options_vl.addComponent(hl);
-			options_vl.setComponentAlignment(hl, Alignment.MIDDLE_CENTER);
+			optionsVl.addComponent(hl);
+			optionsVl.setComponentAlignment(hl, Alignment.MIDDLE_CENTER);
 			
 			buttons.get(i).addClickListener(new Button.ClickListener() {
 				/**
@@ -190,12 +190,12 @@ public class Welcome extends VerticalLayout{
 						}
 						break;
 					case 1: // Create Account
-						ui.setContent(new AccountUI(ui, user, cur));
+						ui.setContent(new AccountUI(ui, cur));
 						break;
 					case 2: // Customer List
 						try
 						{
-							ui.setContent(new CustList(ui, user, cur));
+							ui.setContent(new CustList(ui, cur));
 						}
 						catch(NumberFormatException nfe)
 						{
@@ -203,7 +203,7 @@ public class Welcome extends VerticalLayout{
 						}
 						break;
 					case 3: // Create Customer
-						ui.setContent(new CustomerUI(ui, user, cur));
+						ui.setContent(new CustomerUI(ui, cur));
 						break;
 					default:
 					}
@@ -211,8 +211,8 @@ public class Welcome extends VerticalLayout{
 			});
 		}
 		//Add options container to the ui
-		this.addComponent(options_vl);
-		this.setExpandRatio(options_vl, 0.7f);
+		this.addComponent(optionsVl);
+		this.setExpandRatio(optionsVl, 0.7f);
 	}
 		
 

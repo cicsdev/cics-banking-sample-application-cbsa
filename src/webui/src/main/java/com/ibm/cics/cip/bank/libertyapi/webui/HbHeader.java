@@ -29,7 +29,7 @@ import com.vaadin.ui.Button.ClickEvent;
 
 
 
-public class HB_Header extends HorizontalLayout{
+public class HbHeader extends HorizontalLayout{
 
     static final String COPYRIGHT =
       "Copyright IBM Corp. 2022";
@@ -39,12 +39,12 @@ public class HB_Header extends HorizontalLayout{
 	Button back;
 	Label label;
 
-	public HB_Header(){
+	public HbHeader(){
 		setup();
 		this.setComponentAlignment(label, Alignment.MIDDLE_CENTER);
 	}
 
-	public HB_Header(final UI ui, final Welcome wlc){
+	public HbHeader(final UI ui, final Welcome wlc){
 		setupBack();
 		setup();
 
@@ -58,7 +58,7 @@ public class HB_Header extends HorizontalLayout{
 		});
 	}
 
-	public HB_Header(final UI ui, final ComIbmCicsCipBankLibertyapiWebuiUI exit){
+	public HbHeader(final UI ui, final ComIbmCicsCipBankLibertyapiWebuiUI exit){
 		setupBack();
 		setup();
 
@@ -75,7 +75,7 @@ public class HB_Header extends HorizontalLayout{
 
 
 
-	public HB_Header(final UI ui, final AccList acc_list){
+	public HbHeader(final UI ui, final AccList accList){
 		setupBack();
 		setup();
 
@@ -84,7 +84,7 @@ public class HB_Header extends HorizontalLayout{
 			private static final long serialVersionUID = -4825345661184875623L;
 
 			public void buttonClick(ClickEvent event) {
-				ui.setContent(acc_list);
+				ui.setContent(accList);
 			}
 		});
 	}
