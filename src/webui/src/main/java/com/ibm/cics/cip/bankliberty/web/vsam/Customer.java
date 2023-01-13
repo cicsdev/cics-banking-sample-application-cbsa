@@ -10,6 +10,7 @@ import java.io.UnsupportedEncodingException;
 
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -97,18 +98,19 @@ public class Customer {
 
 	private CUSTOMER myCustomer;
 
-	private     int maximum_retries = 100, totalSleep = 3000;
+	private     int maximumRetries = 100, 
+			totalSleep = 3000;
 
-	private boolean not_found;
+	private boolean notFound;
 
-	public Customer (String c_n, String sc, String n, String a, Date d, String c_s, Date r_d) {
-		setCustomer_number(c_n);
+	public Customer (String custNo, String sc, String n, String a, Date d, String creditScore, Date reviewDate) {
+		setCustomer_number(custNo);
 		setSortcode(sc);
 		setName(n);
 		setAddress(a);
 		setDob(d);
-		setCreditScore(c_s);
-		setReviewDate(r_d);
+		setCreditScore(creditScore);
+		setReviewDate(reviewDate);
 		sortOutLogging();
 	}
 
@@ -128,15 +130,16 @@ public class Customer {
 		return this.customerNumber;
 	}
 
-	public void setCustomer_number(String customer_number) {
-		if(customer_number.length()<10)
+	public void setCustomer_number(String custNo) {
+		StringBuilder myStringBuilder = new StringBuilder();
+		
+		for (int i=custNo.length();i<10;i++)
 		{
-			for (int i=customer_number.length();i<10;i++)
-			{
-				customer_number = "0" + customer_number;
-			}
+			myStringBuilder.append('0');
 		}
-		this.customerNumber = customer_number;
+
+		myStringBuilder.append(custNo);
+		this.customerNumber = myStringBuilder.toString();
 	}
 
 	public String getSortcode() {
@@ -192,14 +195,14 @@ public class Customer {
 	 * 
 	 */
 	public void printCustomerDetails(){
-		logger.fine("VSAM CUSTMOMER----");
-		logger.fine("Customer Numeber: " + this.customerNumber);
-		logger.fine("Name: " + this.name);
-		logger.fine("Address: " + this.address);
-		logger.fine("Dob: " + this.dob.toString());
-		logger.fine("Sortcode : " + this.sortcode);
-		logger.fine("Credit Score: " + this.creditScore);
-		logger.fine("Review Date: " + this.reviewDate.toString());
+		logger.log(Level.FINE, () -> "VSAM CUSTMOMER----");
+		logger.log(Level.FINE, () -> "Customer Number: " + this.customerNumber);
+		logger.log(Level.FINE, () -> "Name: " + this.name);
+		logger.log(Level.FINE, () -> "Address: " + this.address);
+		logger.log(Level.FINE, () -> "Dob: " + this.dob.toString());
+		logger.log(Level.FINE, () -> "Sortcode : " + this.sortcode);
+		logger.log(Level.FINE, () -> "Credit Score: " + this.creditScore);
+		logger.log(Level.FINE, () -> "Review Date: " + this.reviewDate.toString());
 	}
 
 
@@ -214,8 +217,8 @@ public class Customer {
 
 		myCustomer = new CUSTOMER();
 
-		Integer sortCodeInteger = new Integer(sortCode);
-		Long customerNumberLong = new Long(customerNumber);
+		Integer sortCodeInteger = sortCode;
+		Long customerNumberLong = customerNumber;
 
 		if(customerNumber == 9999999999L)
 		{
@@ -254,12 +257,12 @@ public class Customer {
 				return null;
 			}
 			catch (InvalidSystemIdException  e1) {
-				int number_of_retries = 0;
+				int numberOfRetries = 0;
 				boolean success;
-				for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+				for(numberOfRetries = 0,success = false; numberOfRetries < maximumRetries && !success;numberOfRetries++)
 				{
 					try {
-						logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
+						logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 						Thread.sleep(3000);
 					} 
 					catch (InterruptedException e) 
@@ -284,10 +287,11 @@ public class Customer {
 					}
 					catch (InvalidSystemIdException e4)
 					{
+						logger.log(Level.WARNING,() -> "Invalid SystemIdException, will try again");
 					} 
 
 				}
-				if(number_of_retries == maximum_retries && success == false)
+				if(numberOfRetries == maximumRetries && success == false)
 				{
 					logger.severe(READ_GIVE_UP);
 					logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
@@ -302,29 +306,22 @@ public class Customer {
 		{
 			RecordHolder holder = new RecordHolder();
 			byte[] key = new byte[16];
-			StringBuffer myStringBuffer = new StringBuffer(sortCodeInteger.toString());
-			for(int z = myStringBuffer.length(); z < 6;z++)
+			StringBuilder myStringBuilder = new StringBuilder(); 
+			for(int z = Integer.toString(sortCodeInteger).length(); z < 6;z++)
 			{
-				myStringBuffer = myStringBuffer.insert(0, "0");	
+				myStringBuilder = myStringBuilder.append("0");	
 			}
+			myStringBuilder.append(sortCodeInteger.toString());
+		
 
-			for(int i = 0; i < 6; i++)
+			for(int z = Long.toString(customerNumber).length(); z < 10;z++)
 			{
-				key[i] = (byte) myStringBuffer.toString().charAt(i);
+				myStringBuilder = myStringBuilder.append("0");	
 			}
+			myStringBuilder.append(Long.toString(customerNumber));
 
-			myStringBuffer = new StringBuffer(customerNumberLong.toString());
-			for(int z = myStringBuffer.length(); z < 10;z++)
-			{
-				myStringBuffer = myStringBuffer.insert(0, "0");	
-			}
-
-			for(int i = 6, j = 0; i < 16; i++,j++)
-			{
-				key[i] = (byte) myStringBuffer.toString().charAt(j);
-			}
-
-			String keyString = new String(key);
+			
+			String keyString = myStringBuilder.toString();
 			try {
 				key = keyString.getBytes(CODEPAGE);
 			} catch (UnsupportedEncodingException e2) {
@@ -343,12 +340,12 @@ public class Customer {
 				return null;
 			}
 			catch (InvalidSystemIdException  e1) {
-				int number_of_retries = 0;
+				int numberOfRetries = 0;
 				boolean success;
-				for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+				for(numberOfRetries = 0,success = false; numberOfRetries < maximumRetries && !success;numberOfRetries++)
 				{
 					try {
-						logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
+						logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 						Thread.sleep(3000);
 					} 
 					catch (InterruptedException e) 
@@ -362,16 +359,17 @@ public class Customer {
 
 					} catch (FileDisabledException | DuplicateKeyException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 							e3) {
-						logger.severe("Error reading customer file for " + customerNumber + "," + e3.getLocalizedMessage());
+						logger.log(Level.SEVERE,() -> "Error reading customer file for " + customerNumber + "," + e3.getLocalizedMessage());
 						logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
 						return null;
 					}
 					catch (InvalidSystemIdException e4)
 					{
+						logger.log(Level.WARNING,() -> "Invalid SystemIdException, will try again");
 					} 
 
 				}
-				if(number_of_retries == maximum_retries && success == false)
+				if(numberOfRetries == maximumRetries && success == false)
 				{
 					logger.severe(READ_GIVE_UP);
 					logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
@@ -459,10 +457,10 @@ public class Customer {
 		catch (InvalidSystemIdException  e1) {
 			int number_of_retries = 0;
 			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine(ABOUT_TO_GO_TO_SLEEP+ totalSleep + MILLISECONDS);
+					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP+ totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				}  
 				catch (InterruptedException e) 
@@ -485,7 +483,7 @@ public class Customer {
 				} 
 
 			}
-			if(number_of_retries == maximum_retries && success == false)
+			if(number_of_retries == maximumRetries && success == false)
 			{
 				logger.severe(READ_GIVE_UP);
 				logger.exiting(this.getClass().getName(),GET_CUSTOMERS,null);
@@ -524,11 +522,11 @@ public class Customer {
 			catch (InvalidSystemIdException  e1) {
 				int number_of_retries = 0;
 				boolean success;
-				for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+				for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
 				{
 					try 
 					{
-						logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
+						logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 						Thread.sleep(3000);
 					}
 					catch (InterruptedException e) 
@@ -556,7 +554,7 @@ public class Customer {
 					}
 
 				}
-				if(number_of_retries == maximum_retries && success == false)
+				if(number_of_retries == maximumRetries && success == false)
 				{
 					logger.severe(BROWSE_GIVE_UP);
 					logger.exiting(this.getClass().getName(),GET_CUSTOMERS,null);
@@ -601,10 +599,10 @@ public class Customer {
 		catch (InvalidSystemIdException  e2) {
 			int number_of_retries = 0;
 			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
+					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				}
 				catch (InterruptedException e) 
@@ -626,7 +624,7 @@ public class Customer {
 				} 
 
 			}
-			if(number_of_retries == maximum_retries && success == false)
+			if(number_of_retries == maximumRetries && success == false)
 			{
 				logger.severe(BROWSE_GIVE_UP);
 				logger.exiting(this.getClass().getName(),GET_CUSTOMERS,null);
@@ -719,10 +717,10 @@ public class Customer {
 		catch (InvalidSystemIdException  e2) {
 			int number_of_retries = 0;
 			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
+					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				} 
 				catch (InterruptedException e) 
@@ -758,7 +756,7 @@ public class Customer {
 					return customer404;
 				}
 			}
-			if(number_of_retries == maximum_retries && success == false)
+			if(number_of_retries == maximumRetries && success == false)
 			{
 				logger.severe("Cannot update CUSTOMER file after 100 attempts");
 				logger.exiting(this.getClass().getName(),UPDATE_CUSTOMER,null);
@@ -795,12 +793,12 @@ public class Customer {
 
 
 	private void setNot_found(boolean b) {
-		this.not_found = b;
+		this.notFound = b;
 
 	}
 
 	public boolean isNot_found() {
-		return this.not_found;
+		return this.notFound;
 
 	}
 
@@ -856,11 +854,11 @@ public class Customer {
 			catch (InvalidSystemIdException  e2) {
 				int number_of_retries = 0;
 				boolean success;
-				for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+				for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
 				{
 					try 
 					{
-						logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
+						logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 						Thread.sleep(3000);
 					}
 					catch (InterruptedException e) 
@@ -888,7 +886,7 @@ public class Customer {
 					{
 					} 
 				}
-				if(number_of_retries == maximum_retries && success == false)
+				if(number_of_retries == maximumRetries && success == false)
 				{
 					logger.severe("Cannot delete customer " + customerNumber + " in CUSTOMER file after 100 attempts");
 					logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,null);
@@ -947,10 +945,10 @@ public class Customer {
 			catch (InvalidSystemIdException  e2) {
 				int number_of_retries = 0;
 				boolean success;
-				for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+				for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
 				{
 					try {
-						logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
+						logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 						Thread.sleep(3000);
 					}
 					catch (InterruptedException e) 
@@ -979,7 +977,7 @@ public class Customer {
 						return customer404;
 					}
 				}
-				if(number_of_retries == maximum_retries && success == false)
+				if(number_of_retries == maximumRetries && success == false)
 				{
 					logger.severe("Cannot delete customer " + customerNumber + " in CUSTOMER file after 100 attempts");
 					logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,null);
@@ -1278,10 +1276,10 @@ public class Customer {
 		catch (InvalidSystemIdException  e2) {
 			int number_of_retries = 0;
 			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
+					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				}
 				catch (InterruptedException e) 
@@ -1304,7 +1302,7 @@ public class Customer {
 				{
 				} 
 			}
-			if(number_of_retries == maximum_retries && success == false)
+			if(number_of_retries == maximumRetries && success == false)
 			{
 				logger.severe("Cannot insert customer " + customerNumber + " into CUSTOMER file after 100 attempts");
 				logger.exiting(this.getClass().getName(),CREATE_CUSTOMER,null);
@@ -1407,10 +1405,10 @@ public class Customer {
 		catch (InvalidSystemIdException  e1) {
 			int number_of_retries = 0;
 			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
+					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				}
 				catch (InterruptedException e) 
@@ -1433,7 +1431,7 @@ public class Customer {
 				} 
 
 			}
-			if(number_of_retries == maximum_retries && success == false)
+			if(number_of_retries == maximumRetries && success == false)
 			{
 				logger.severe(READ_GIVE_UP);
 				return null;
@@ -1471,10 +1469,10 @@ public class Customer {
 			catch (InvalidSystemIdException  e1) {
 				int number_of_retries = 0;
 				boolean success;
-				for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+				for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
 				{
 					try {
-						logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
+						logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 						Thread.sleep(3000);
 					}
 					 catch (InterruptedException e) 
@@ -1503,7 +1501,7 @@ public class Customer {
 					}
 
 				}
-				if(number_of_retries == maximum_retries && success == false)
+				if(number_of_retries == maximumRetries && success == false)
 				{
 					logger.severe(BROWSE_GIVE_UP);
 					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_WITH_OFFSET_AND_LIMIT,null);
@@ -1548,10 +1546,10 @@ public class Customer {
 		catch (InvalidSystemIdException  e2) {
 			int number_of_retries = 0;
 			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
+					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				}
 				catch (InterruptedException e) 
@@ -1574,7 +1572,7 @@ public class Customer {
 				} 
 
 			}
-			if(number_of_retries == maximum_retries && success == false)
+			if(number_of_retries == maximumRetries && success == false)
 			{
 				logger.severe(BROWSE_GIVE_UP);
 				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_WITH_OFFSET_AND_LIMIT,null);
@@ -1659,10 +1657,10 @@ public class Customer {
 		catch (InvalidSystemIdException  e1) {
 			int number_of_retries = 0;
 			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
+					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				}
 				catch (InterruptedException e) 
@@ -1685,7 +1683,7 @@ public class Customer {
 				} 
 
 			}
-			if(number_of_retries == maximum_retries && success == false)
+			if(number_of_retries == maximumRetries && success == false)
 			{
 				logger.severe(READ_GIVE_UP);
 				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_WITH_OFFSET_AND_LIMIT,null);
@@ -1723,10 +1721,10 @@ public class Customer {
 			catch (InvalidSystemIdException  e1) {
 				int number_of_retries = 0;
 				boolean success;
-				for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+				for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
 				{
 					try {
-						logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
+						logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 						Thread.sleep(3000);
 					}
 					catch (InterruptedException e) 
@@ -1755,7 +1753,7 @@ public class Customer {
 					}
 
 				}
-				if(number_of_retries == maximum_retries && success == false)
+				if(number_of_retries == maximumRetries && success == false)
 				{
 					logger.severe(BROWSE_GIVE_UP);
 					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_WITH_OFFSET_AND_LIMIT,null);
@@ -1806,10 +1804,10 @@ public class Customer {
 		catch (InvalidSystemIdException  e2) {
 			int number_of_retries = 0;
 			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
+					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				}
 
@@ -1833,7 +1831,7 @@ public class Customer {
 				} 
 
 			}
-			if(number_of_retries == maximum_retries && success == false)
+			if(number_of_retries == maximumRetries && success == false)
 			{
 				logger.severe(BROWSE_GIVE_UP);
 				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_WITH_OFFSET_AND_LIMIT,null);
@@ -1938,10 +1936,10 @@ public class Customer {
 		catch (InvalidSystemIdException  e1) {
 			int number_of_retries = 0;
 			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
+					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				}
 				catch (InterruptedException e) 
@@ -1965,7 +1963,7 @@ public class Customer {
 				} 
 
 			}
-			if(number_of_retries == maximum_retries && success == false)
+			if(number_of_retries == maximumRetries && success == false)
 			{
 				logger.severe(READ_GIVE_UP);
 				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME,null);
@@ -2003,10 +2001,10 @@ public class Customer {
 			catch (InvalidSystemIdException  e1) {
 				int number_of_retries = 0;
 				boolean success;
-				for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+				for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
 				{
 					try {
-						logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
+						logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 						Thread.sleep(3000);
 					}
 					catch (InterruptedException e) 
@@ -2035,7 +2033,7 @@ public class Customer {
 					}
 
 				}
-				if(number_of_retries == maximum_retries && success == false)
+				if(number_of_retries == maximumRetries && success == false)
 				{
 					logger.severe(BROWSE_GIVE_UP);
 					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME,null);
@@ -2083,10 +2081,10 @@ public class Customer {
 		catch (InvalidSystemIdException  e2) {
 			int number_of_retries = 0;
 			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
+					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				}
 				catch (InterruptedException e) 
@@ -2109,7 +2107,7 @@ public class Customer {
 				} 
 
 			}
-			if(number_of_retries == maximum_retries && success == false)
+			if(number_of_retries == maximumRetries && success == false)
 			{
 				logger.severe(BROWSE_GIVE_UP);
 				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME,null);
@@ -2163,10 +2161,10 @@ public class Customer {
 		catch (InvalidSystemIdException  e1) {
 			int number_of_retries = 0;
 			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
+					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				}
 				catch (InterruptedException e) 
@@ -2189,7 +2187,7 @@ public class Customer {
 				} 
 
 			}
-			if(number_of_retries == maximum_retries && success == false)
+			if(number_of_retries == maximumRetries && success == false)
 			{
 				logger.severe("Cannot read control record for CUSTOMER file after 100 attempts");
 				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_COUNT_ONLY,-1L);
@@ -2267,10 +2265,10 @@ public class Customer {
 		catch (InvalidSystemIdException  e1) {
 			int number_of_retries = 0;
 			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
+					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				}
 
@@ -2296,7 +2294,7 @@ public class Customer {
 				} 
 
 			}
-			if(number_of_retries == maximum_retries && success == false)
+			if(number_of_retries == maximumRetries && success == false)
 			{
 				logger.severe(READ_GIVE_UP);
 				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_COUNT_ONLY,-1L);
@@ -2334,10 +2332,10 @@ public class Customer {
 			catch (InvalidSystemIdException  e1) {
 				int number_of_retries = 0;
 				boolean success;
-				for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+				for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
 				{
 					try {
-						logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
+						logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 						Thread.sleep(3000);
 					}
 					catch (InterruptedException e) 
@@ -2366,7 +2364,7 @@ public class Customer {
 					}
 
 				}
-				if(number_of_retries == maximum_retries && success == false)
+				if(number_of_retries == maximumRetries && success == false)
 				{
 					logger.severe(BROWSE_GIVE_UP);
 					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_COUNT_ONLY,-1L);
@@ -2397,10 +2395,10 @@ public class Customer {
 		catch (InvalidSystemIdException  e2) {
 			int number_of_retries = 0;
 			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
+					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				} 
 				catch (InterruptedException e) 
@@ -2414,7 +2412,7 @@ public class Customer {
 
 				} catch (FileDisabledException | NotOpenException | LogicException | InvalidRequestException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
 						e3) {
-					logger.fine(ERROR_END_BROWSE + e3.getLocalizedMessage());
+					logger.log(Level.FINE, () -> ERROR_END_BROWSE + e3.getLocalizedMessage());
 					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_COUNT_ONLY,-1L);
 					return -1L;
 				}
@@ -2423,7 +2421,7 @@ public class Customer {
 				} 
 
 			}
-			if(number_of_retries == maximum_retries && success == false)
+			if(number_of_retries == maximumRetries && success == false)
 			{
 				logger.severe(BROWSE_GIVE_UP);
 				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_COUNT_ONLY,-1L);
@@ -2500,10 +2498,10 @@ public class Customer {
 		catch (InvalidSystemIdException  e1) {
 			int number_of_retries = 0;
 			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine(ABOUT_TO_GO_TO_SLEEP+ totalSleep + MILLISECONDS);
+					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP+ totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				}  
 				catch (InterruptedException e) 
@@ -2527,7 +2525,7 @@ public class Customer {
 				} 
 
 			}
-			if(number_of_retries == maximum_retries && success == false)
+			if(number_of_retries == maximumRetries && success == false)
 			{
 				logger.severe(READ_GIVE_UP);
 				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_TOWN,null);
@@ -2566,10 +2564,10 @@ public class Customer {
 			catch (InvalidSystemIdException  e1) {
 				int number_of_retries = 0;
 				boolean success;
-				for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+				for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
 				{
 					try {
-						logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
+						logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 						Thread.sleep(3000);
 					} 
 					catch (InterruptedException e) 
@@ -2597,7 +2595,7 @@ public class Customer {
 					}
 
 				}
-				if(number_of_retries == maximum_retries && success == false)
+				if(number_of_retries == maximumRetries && success == false)
 				{
 					logger.severe(BROWSE_GIVE_UP);
 					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_TOWN,null);
@@ -2643,10 +2641,10 @@ public class Customer {
 		catch (InvalidSystemIdException  e2) {
 			int number_of_retries = 0;
 			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
+					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				} 
 				catch (InterruptedException e) 
@@ -2668,7 +2666,7 @@ public class Customer {
 				} 
 
 			}
-			if(number_of_retries == maximum_retries && success == false)
+			if(number_of_retries == maximumRetries && success == false)
 			{
 				logger.severe(BROWSE_GIVE_UP);
 				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_TOWN,null);
@@ -2740,10 +2738,10 @@ public class Customer {
 		catch (InvalidSystemIdException  e1) {
 			int number_of_retries = 0;
 			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine(ABOUT_TO_GO_TO_SLEEP+ totalSleep + MILLISECONDS);
+					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP+ totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				}  
 				catch (InterruptedException e) 
@@ -2767,7 +2765,7 @@ public class Customer {
 				} 
 
 			}
-			if(number_of_retries == maximum_retries && success == false)
+			if(number_of_retries == maximumRetries && success == false)
 			{
 				logger.severe(READ_GIVE_UP);
 				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_SURNAME,null);
@@ -2806,10 +2804,10 @@ public class Customer {
 			catch (InvalidSystemIdException  e1) {
 				int number_of_retries = 0;
 				boolean success;
-				for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+				for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
 				{
 					try {
-						logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
+						logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 						Thread.sleep(3000);
 					} 
 					catch (InterruptedException e) 
@@ -2837,7 +2835,7 @@ public class Customer {
 					}
 
 				}
-				if(number_of_retries == maximum_retries && success == false)
+				if(number_of_retries == maximumRetries && success == false)
 				{
 					logger.severe(BROWSE_GIVE_UP);
 					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_SURNAME,null);
@@ -2883,10 +2881,10 @@ public class Customer {
 		catch (InvalidSystemIdException  e2) {
 			int number_of_retries = 0;
 			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
+					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				} 
 				catch (InterruptedException e) 
@@ -2908,7 +2906,7 @@ public class Customer {
 				} 
 
 			}
-			if(number_of_retries == maximum_retries && success == false)
+			if(number_of_retries == maximumRetries && success == false)
 			{
 				logger.severe(BROWSE_GIVE_UP);
 				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_SURNAME,null);
@@ -2980,10 +2978,10 @@ public class Customer {
 		catch (InvalidSystemIdException  e1) {
 			int number_of_retries = 0;
 			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine(ABOUT_TO_GO_TO_SLEEP+ totalSleep + MILLISECONDS);
+					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP+ totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				}  
 				catch (InterruptedException e) 
@@ -3006,7 +3004,7 @@ public class Customer {
 				} 
 
 			}
-			if(number_of_retries == maximum_retries && success == false)
+			if(number_of_retries == maximumRetries && success == false)
 			{
 				logger.severe(READ_GIVE_UP);
 				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_AGE,null);
@@ -3047,10 +3045,10 @@ public class Customer {
 			catch (InvalidSystemIdException  e1) {
 				int number_of_retries = 0;
 				boolean success;
-				for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+				for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
 				{
 					try {
-						logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
+						logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 						Thread.sleep(3000);
 					} 
 					catch (InterruptedException e) 
@@ -3079,7 +3077,7 @@ public class Customer {
 					}
 
 				}
-				if(number_of_retries == maximum_retries && success == false)
+				if(number_of_retries == maximumRetries && success == false)
 				{
 					logger.severe(BROWSE_GIVE_UP);
 					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_AGE,null);
@@ -3125,10 +3123,10 @@ public class Customer {
 		catch (InvalidSystemIdException  e2) {
 			int number_of_retries = 0;
 			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximum_retries && success == false;number_of_retries++)
+			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
 			{
 				try {
-					logger.fine(ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
+					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
 					Thread.sleep(3000);
 				} 
 				catch (InterruptedException e) 
@@ -3150,7 +3148,7 @@ public class Customer {
 				} 
 
 			}
-			if(number_of_retries == maximum_retries && success == false)
+			if(number_of_retries == maximumRetries && success == false)
 			{
 				logger.severe(BROWSE_GIVE_UP);
 				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_AGE,null);

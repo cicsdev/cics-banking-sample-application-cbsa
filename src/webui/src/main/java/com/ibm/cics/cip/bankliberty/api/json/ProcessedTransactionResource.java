@@ -26,6 +26,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.ibm.cics.cip.bankliberty.datainterfaces.PROCTRAN;
 import com.ibm.json.java.JSONArray;
 import com.ibm.json.java.JSONObject;
 
@@ -121,7 +122,7 @@ public class ProcessedTransactionResource{
 			proctran.put(JSON_DESCRIPTION, processedTransactions[i].getDescription().trim());
 			proctran.put(JSON_TYPE, processedTransactions[i].getType());
 			proctran.put(JSON_REFERENCE, processedTransactions[i].getReference());
-			if(processedTransactions[i].getType().compareTo(com.ibm.cics.cip.bankliberty.web.db2.ProcessedTransaction.BRANCH_DELETE_ACCOUNT) == 0 || processedTransactions[i].getType().compareTo(com.ibm.cics.cip.bankliberty.web.db2.ProcessedTransaction.WEB_DELETE_ACCOUNT) ==0)
+			if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_BRANCH_DELETE_ACCOUNT) == 0 || processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_WEB_DELETE_ACCOUNT) ==0)
 			{
 				proctran.put(JSON_ACCOUNT_TYPE, processedTransactions[i].getAccount_type());
 				proctran.put(JSON_LAST_STATEMENT, myDateFormat.format(processedTransactions[i].getLast_statement()));
@@ -130,26 +131,26 @@ public class ProcessedTransactionResource{
 			}
 
 
-			if(processedTransactions[i].getType().compareTo(com.ibm.cics.cip.bankliberty.web.db2.ProcessedTransaction.BRANCH_DELETE_CUSTOMER) == 0 || processedTransactions[i].getType().compareTo(com.ibm.cics.cip.bankliberty.web.db2.ProcessedTransaction.WEB_DELETE_CUSTOMER) ==0)
+			if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_BRANCH_DELETE_CUSTOMER) == 0 || processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_WEB_DELETE_CUSTOMER) ==0)
 			{
 				proctran.put(JSON_DATE_OF_BIRTH, myDateFormat.format(processedTransactions[i].getDateOfBirth()));
 				proctran.put(JSON_CUSTOMER_NAME, processedTransactions[i].getCustomerName());
 				proctran.put(JSON_CUSTOMER, processedTransactions[i].getCustomer());
 			}
 
-			if(processedTransactions[i].getType().compareTo(com.ibm.cics.cip.bankliberty.web.db2.ProcessedTransaction.BRANCH_CREATE_CUSTOMER) == 0 || processedTransactions[i].getType().compareTo(com.ibm.cics.cip.bankliberty.web.db2.ProcessedTransaction.WEB_CREATE_CUSTOMER) ==0)
+			if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_BRANCH_CREATE_CUSTOMER) == 0 || processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_WEB_CREATE_CUSTOMER) ==0)
 			{	
 				proctran.put(JSON_DATE_OF_BIRTH, myDateFormat.format(processedTransactions[i].getDateOfBirth()));
 				proctran.put(JSON_CUSTOMER_NAME, processedTransactions[i].getCustomerName());
 				proctran.put(JSON_CUSTOMER, processedTransactions[i].getCustomer());
 			}
 
-			if(processedTransactions[i].getType().compareTo(com.ibm.cics.cip.bankliberty.web.db2.ProcessedTransaction.TRANSFER) == 0)
+			if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_TRANSFER) == 0)
 			{
 				proctran.put(JSON_TARGET_ACCOUNT,processedTransactions[i].getTarget_account_number());
 				proctran.put(JSON_TARGET_SORT_CODE,processedTransactions[i].getTarget_sortcode());
 			}
-			if(processedTransactions[i].getType().compareTo(com.ibm.cics.cip.bankliberty.web.db2.ProcessedTransaction.BRANCH_CREATE_ACCOUNT) == 0 || processedTransactions[i].getType().compareTo(com.ibm.cics.cip.bankliberty.web.db2.ProcessedTransaction.WEB_CREATE_ACCOUNT) ==0)
+			if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_BRANCH_CREATE_ACCOUNT) == 0 || processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_WEB_CREATE_ACCOUNT) ==0)
 			{
 				proctran.put(JSON_ACCOUNT_TYPE, processedTransactions[i].getAccount_type());
 				proctran.put(JSON_LAST_STATEMENT, myDateFormat.format(processedTransactions[i].getLast_statement()));
@@ -175,14 +176,14 @@ public class ProcessedTransactionResource{
 			proctran.put(JSON_TIMESTAMP, myDateFormat.format(processedTransactions[i].getTransactionDate()));
 			proctran.put(JSON_DESCRIPTION, processedTransactions[i].getDescription().trim());
 			proctran.put(JSON_TYPE, processedTransactions[i].getType());
-			if(processedTransactions[i].getType().compareTo(com.ibm.cics.cip.bankliberty.web.db2.ProcessedTransaction.BRANCH_DELETE_ACCOUNT) == 0)
+			if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_BRANCH_DELETE_ACCOUNT) == 0)
 			{
 				proctran.put(JSON_ACCOUNT_TYPE, processedTransactions[i].getAccount_type());
 				proctran.put(JSON_LAST_STATEMENT, myDateFormat.format(processedTransactions[i].getLast_statement()));
 				proctran.put(JSON_NEXT_STATEMENT, myDateFormat.format(processedTransactions[i].getNext_statement()));
 				proctran.put(JSON_CUSTOMER, processedTransactions[i].getCustomer());
 			}
-			if(processedTransactions[i].getType().compareTo(com.ibm.cics.cip.bankliberty.web.db2.ProcessedTransaction.WEB_DELETE_ACCOUNT) == 0)
+			if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_WEB_DELETE_ACCOUNT) == 0)
 			{
 				proctran.put(JSON_ACCOUNT_TYPE, processedTransactions[i].getAccount_type());
 				proctran.put(JSON_LAST_STATEMENT, myDateFormat.format(processedTransactions[i].getLast_statement()));
@@ -194,22 +195,22 @@ public class ProcessedTransactionResource{
 				proctran.put(JSON_TARGET_ACCOUNT,processedTransactions[i].getTarget_account_number());
 				proctran.put(JSON_TARGET_SORT_CODE,processedTransactions[i].getTarget_sortcode());
 			}
-if(processedTransactions[i].getType().compareTo(com.ibm.cics.cip.bankliberty.web.db2.ProcessedTransaction.BRANCH_CREATE_CUSTOMER) == 0  )
+if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_BRANCH_CREATE_CUSTOMER) == 0  )
 {
 	proctran.put(JSON_CUSTOMER_NAME,processedTransactions[i].getCustomerName());
 	proctran.put(JSON_DATE_OF_BIRTH,myDateFormat.format(processedTransactions[i].getDateOfBirth()));
 }
-if(processedTransactions[i].getType().compareTo(com.ibm.cics.cip.bankliberty.web.db2.ProcessedTransaction.BRANCH_DELETE_CUSTOMER) == 0  )
+if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_BRANCH_DELETE_CUSTOMER) == 0  )
 {
 	proctran.put(JSON_CUSTOMER_NAME,processedTransactions[i].getCustomerName());
 	proctran.put(JSON_DATE_OF_BIRTH,myDateFormat.format(processedTransactions[i].getDateOfBirth()));
 }
-if(processedTransactions[i].getType().compareTo(com.ibm.cics.cip.bankliberty.web.db2.ProcessedTransaction.WEB_CREATE_CUSTOMER) == 0  )
+if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_WEB_CREATE_CUSTOMER) == 0  )
 {
 	proctran.put(JSON_CUSTOMER_NAME,processedTransactions[i].getCustomerName());
 	proctran.put(JSON_DATE_OF_BIRTH,myDateFormat.format(processedTransactions[i].getDateOfBirth()));
 }
-if(processedTransactions[i].getType().compareTo(com.ibm.cics.cip.bankliberty.web.db2.ProcessedTransaction.WEB_DELETE_CUSTOMER) == 0  )
+if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_WEB_DELETE_CUSTOMER) == 0  )
 {
 	proctran.put(JSON_CUSTOMER_NAME,processedTransactions[i].getCustomerName());
 	proctran.put(JSON_DATE_OF_BIRTH,myDateFormat.format(processedTransactions[i].getDateOfBirth()));
