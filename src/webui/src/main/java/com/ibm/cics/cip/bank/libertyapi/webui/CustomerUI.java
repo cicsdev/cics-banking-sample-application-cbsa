@@ -94,7 +94,7 @@ public class CustomerUI extends VerticalLayout{
 		
 		//Textbox to enter customer number
 		cusNumT = new TextField("Customer Number");
-		cusNumT.setValue(cust.getCustomer_number());
+		cusNumT.setValue(cust.getCustomerNumber());
 		cusNumT.setEnabled(false);
 
 		//Textbox to enter customer name
@@ -185,11 +185,11 @@ public class CustomerUI extends VerticalLayout{
 					//if editing a customer
 					if(!editCustomer())
 					{
-						event.getButton().setCaption(editing + c.getCustomer_number() + " failed");
+						event.getButton().setCaption(editing + c.getCustomerNumber() + " failed");
 					}
 					else
 					{
-						event.getButton().setCaption(editing + c.getCustomer_number() + " successful");
+						event.getButton().setCaption(editing + c.getCustomerNumber() + " successful");
 					}
 				}
 			}
@@ -208,7 +208,7 @@ public class CustomerUI extends VerticalLayout{
 	private void setFields(Customer cust){
 		//Set each component's value to the relevant value held in the 'cust' object 
 //		cust.showInfo();
-		cusNumT.setValue(cust.getCustomer_number());
+		cusNumT.setValue(cust.getCustomerNumber());
 		sCodeT.setValue(cust.getSortcode());
 		cusAddressT.setValue(cust.getAddress().trim());
 		cusNameT.setValue(cust.getName().trim());
@@ -295,11 +295,11 @@ public class CustomerUI extends VerticalLayout{
 				else{
 					if(!editCustomer())
 					{
-						event.getButton().setCaption(editing + c.getCustomer_number() + " failed");
+						event.getButton().setCaption(editing + c.getCustomerNumber() + " failed");
 					}
 					else
 					{
-						event.getButton().setCaption(editing + c.getCustomer_number() + " successful");
+						event.getButton().setCaption(editing + c.getCustomerNumber() + " successful");
 					}
 				}
 			}

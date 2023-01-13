@@ -301,7 +301,7 @@ public class CustList extends VerticalLayout{
 
 			//	//TEST.out.println("CUST_LIST: INDEX -  " + (i+1) + "  CUSTOMER NUMBER -  "+ this.cList.getCustomer(i).getCustomer_number());
 			//Create new labels and populate to show customer number, name, address, DOB			
-			Label cusNumb = new Label(this.cList.getCustomer(i).getCustomer_number());
+			Label cusNumb = new Label(this.cList.getCustomer(i).getCustomerNumber());
 			Label name = new Label(this.cList.getCustomer(i).getName());
 			Label address = new Label(this.cList.getCustomer(i).getAddress());
 			SimpleDateFormat ddMyyyy = new SimpleDateFormat("dd-M-yyyy");

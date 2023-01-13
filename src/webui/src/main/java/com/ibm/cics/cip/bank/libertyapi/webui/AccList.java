@@ -204,7 +204,7 @@ public class AccList extends VerticalLayout{
 		this.addComponent(header);
 		this.setExpandRatio(header, 0.1f);
 		
-		createSearch(customer.getCustomer_number());
+		createSearch(customer.getCustomerNumber());
 		
 		//Create new container
 		HorizontalLayout head = new HorizontalLayout();
@@ -319,7 +319,7 @@ public class AccList extends VerticalLayout{
 		//Add head and vl containers to the UI
 		this.addComponent(head);
 		this.addComponent(vl);
-		String filter = customerNumberFilter + String.format(customerNumberFormat,Integer.valueOf(customer.getCustomer_number())) + "";
+		String filter = customerNumberFilter + String.format(customerNumberFormat,Integer.valueOf(customer.getCustomerNumber())) + "";
 		createAccList(filter);
 		logger.exiting(this.getClass().getName(),"Acc_list(UI ui, String string, welcome back, Customer customer) for customer " + customer.getName());
 

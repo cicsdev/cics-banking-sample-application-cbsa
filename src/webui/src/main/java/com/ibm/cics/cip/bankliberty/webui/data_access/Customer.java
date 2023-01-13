@@ -25,12 +25,20 @@ public class Customer {
 
 
 
-
+	private static final String JSON_SORT_CODE = "sortCode";
+	private static final String JSON_ID = "id";
+	private static final String JSON_CUSTOMER_NAME = "customerName";
+	private static final String JSON_CUSTOMER_ADDRESS = "customerAddress";
+	private static final String JSON_CUSTOMER_CREDIT_SCORE = "customerCreditScore";
+	private static final String JSON_CUSTOMER_REVIEW_DATE = "customerCreditScoreReviewDate";
+	private static final String JSON_DATE_OF_BIRTH = "dateOfBirth";
+	
+	private static final String dashes = "------------";
 
 
 
 	// String ACCOUNT_EYECATCHER             CHAR(4),
-	private 	String 		customer_number;
+	private 	String 		customerNumber;
 	private 	String 		sortcode;              
 	private 	String 		name;
 	private 	String 		address;
@@ -42,11 +50,11 @@ public class Customer {
 	
 	
 	//NEW CUSTOMER
-	public Customer (String customer_number, String sortCode, String name, String address, Date dob) 
+	public Customer (String custNo, String sortCode, String name, String address, Date dob) 
 	{
 		sortOutLogging();
 		editingCustomer = false;
-		setCustomer_number(customer_number);
+		setCustomerNumber(custNo);
 		setSortcode(sortCode);
 		setName(name);
 		setAddress(address);
@@ -54,11 +62,11 @@ public class Customer {
 	}
 	
 	//EDITING CUSTOMER
-	public Customer (String customer_number, String sortCode, String name, String address, Date dob, String creditScore, Date creditScoreReviewDate) 
+	public Customer (String custNo, String sortCode, String name, String address, Date dob, String creditScore, Date creditScoreReviewDate) 
 	{
 		sortOutLogging();
 		editingCustomer = true;
-		setCustomer_number(customer_number);
+		setCustomerNumber(custNo);
 		setSortcode(sortCode);
 		setName(name);
 		setAddress(address);
@@ -67,12 +75,12 @@ public class Customer {
 		setCreditScoreReviewDate(creditScoreReviewDate);
 	}
 
-	public String getCustomer_number() {
-		return customer_number;
+	public String getCustomerNumber() {
+		return customerNumber;
 	}
 
-	public void setCustomer_number(String customer_number) {
-		this.customer_number = customer_number;
+	public void setCustomerNumber(String custNo) {
+		this.customerNumber = custNo;
 	}
 
 	public String getSortcode() {
@@ -134,7 +142,7 @@ public class Customer {
 		myCustomerJSON.setSortCode(this.getSortcode());
 		myCustomerJSON.setSortCode(this.getSortcode());
 		
-		Response myCustomerResponse = myCustomerResource.updateCustomerExternal(new Long(this.getCustomer_number()), myCustomerJSON);
+		Response myCustomerResponse = myCustomerResource.updateCustomerExternal(Long.parseLong(this.getCustomerNumber()), myCustomerJSON);
 
 		String myCustomerString = null;
 		JSONObject myCustomer = null;
@@ -149,12 +157,12 @@ public class Customer {
  				return false;
 			}
 
-			this.setDob(sortOutDate((String) myCustomer.get("dateOfBirth")));
-			this.setAddress((String) myCustomer.get("customerAddress"));
-			this.setName((String) myCustomer.get("customerName"));
-			this.setSortcode((String) myCustomer.get("sortCode"));
-			String customerNoString = (String) myCustomer.get("id");
-			this.setCustomer_number(customerNoString);
+			this.setDob(sortOutDate((String) myCustomer.get(JSON_DATE_OF_BIRTH)));
+			this.setAddress((String) myCustomer.get(JSON_CUSTOMER_ADDRESS));
+			this.setName((String) myCustomer.get(JSON_CUSTOMER_NAME));
+			this.setSortcode((String) myCustomer.get(JSON_SORT_CODE));
+			String customerNoString = (String) myCustomer.get(JSON_ID);
+			this.setCustomerNumber(customerNoString);
 
 		}
 		else
@@ -169,7 +177,7 @@ public class Customer {
 	public boolean deleteFromDB(){
 		CustomerResource myCustomerResource = new CustomerResource();
 		
-		Response myCustomerResponse = myCustomerResource.deleteCustomerExternal(new Long(this.getCustomer_number()));
+		Response myCustomerResponse = myCustomerResource.deleteCustomerExternal(Long.parseLong(this.getCustomerNumber()));
 
 		String myCustomerString = null;
 		JSONObject myCustomer = null;
@@ -188,15 +196,15 @@ public class Customer {
 				return false;
 			}
 
-			this.setDob(sortOutDate((String) myCustomer.get("dateOfBirth")));
-			this.setAddress((String) myCustomer.get("customerAddress"));
-			this.setName((String) myCustomer.get("customerName"));
-			this.setSortcode((String) myCustomer.get("sortCode"));
-			this.setCreditScore((String) myCustomer.get("customerCreditScore"));
-			this.setCreditScoreReviewDate(sortOutDate((String) myCustomer.get("customerCreditScoreReviewDate")));
-			String customerNoString = (String) myCustomer.get("id");
+			this.setDob(sortOutDate((String) myCustomer.get(JSON_DATE_OF_BIRTH)));
+			this.setAddress((String) myCustomer.get(JSON_CUSTOMER_ADDRESS));
+			this.setName((String) myCustomer.get(JSON_CUSTOMER_NAME));
+			this.setSortcode((String) myCustomer.get(JSON_SORT_CODE));
+			this.setCreditScore((String) myCustomer.get(JSON_CUSTOMER_CREDIT_SCORE));
+			this.setCreditScoreReviewDate(sortOutDate((String) myCustomer.get(JSON_CUSTOMER_REVIEW_DATE)));
+			String customerNoString = (String) myCustomer.get(JSON_ID);
 
-			this.setCustomer_number(customerNoString);
+			this.setCustomerNumber(customerNoString);
 		}
 		else
 		{
@@ -233,19 +241,19 @@ public class Customer {
 				return "-1";
 			}
 
-			this.setDob(sortOutDate((String) myCustomer.get("dateOfBirth")));
-			this.setAddress((String) myCustomer.get("customerAddress"));
-			this.setName((String) myCustomer.get("customerName"));
-			this.setSortcode((String) myCustomer.get("sortCode"));
+			this.setDob(sortOutDate((String) myCustomer.get(JSON_DATE_OF_BIRTH)));
+			this.setAddress((String) myCustomer.get(JSON_CUSTOMER_ADDRESS));
+			this.setName((String) myCustomer.get(JSON_CUSTOMER_NAME));
+			this.setSortcode((String) myCustomer.get(JSON_SORT_CODE));
 		
-			String customerNoString = (String) myCustomer.get("id");
-			this.setCustomer_number(customerNoString);
+			String customerNoString = (String) myCustomer.get(JSON_ID);
+			this.setCustomerNumber(customerNoString);
 			myCustomerResponse.close();
 			return  customerNoString;
 		}
 		else
 		{
-			System.err.println(myCustomerResponse.getStatus() + " " + myCustomerResponse.getEntity().toString());
+			logger.severe(myCustomerResponse.getStatus() + " " + myCustomerResponse.getEntity().toString());
 			myCustomerResponse.close();
 			return "-1";
 		}
@@ -264,7 +272,7 @@ public class Customer {
 		String myCustomerString = null;
 		JSONObject myCustomer = null;
 
-		myCustomerResponse = myCustomerResource.getCustomerExternal(new Long(this.customer_number));
+		myCustomerResponse = myCustomerResource.getCustomerExternal(Long.parseLong(this.customerNumber));
 		if(myCustomerResponse.getStatus() == 200)
 		{
 			myCustomerString = myCustomerResponse.getEntity().toString();
@@ -276,13 +284,13 @@ public class Customer {
 				return false;
 			}
 
-			this.setDob(sortOutDate((String) myCustomer.get("dateOfBirth")));
+			this.setDob(sortOutDate((String) myCustomer.get(JSON_DATE_OF_BIRTH)));
 
-			String customerNoString = (String) myCustomer.get("id");
-			this.setCustomer_number(customerNoString);
-			this.setAddress((String) myCustomer.get("customerAddress"));
-			this.setName((String) myCustomer.get("customerName"));
-			this.setSortcode((String) myCustomer.get("sortCode")); 	
+			String customerNoString = (String) myCustomer.get(JSON_ID);
+			this.setCustomerNumber(customerNoString);
+			this.setAddress((String) myCustomer.get(JSON_CUSTOMER_ADDRESS));
+			this.setName((String) myCustomer.get(JSON_CUSTOMER_NAME));
+			this.setSortcode((String) myCustomer.get(JSON_SORT_CODE)); 	
 			myCustomerResponse.close();
 			return true;
 		}
@@ -297,7 +305,6 @@ public class Customer {
 	 * @param dateString
 	 * @return
 	 */
-	@SuppressWarnings("deprecation")
 	private Date sortOutDate(String dateString) {
 		String[] dateArray = dateString.split("-");
 
@@ -305,8 +312,7 @@ public class Customer {
 		Integer month = new Integer(dateArray[1]);
 		Integer day = new Integer(dateArray[2]);
 
-		Date sortedOutDate = new Date(year.intValue() - 1900,month.intValue() - 1, day.intValue());
-		return sortedOutDate;
+		return new Date(year - 1900,month - 1, day);
 	}
 
 	
@@ -317,22 +323,26 @@ public class Customer {
 	 * 
 	 */
 	public void showInfo() {
-		if(editingCustomer == false){
-			System.out.println("------------"+ this.customer_number+":"+this.sortcode+"------------");
-			System.out.println("Sortcode - "+ this.sortcode);
-			System.out.println("Customer name - "+this.getName());
-			System.out.println("Customer address - " +this.getAddress());
-			System.out.println("Customer Date of Birth - "+ this.getDob().toString());
-			System.out.println("Customer is new");
-		} else {
-			System.out.println("------------"+ this.customer_number+":"+this.sortcode+"------------");
-			System.out.println("Sortcode - "+ this.sortcode);
-			System.out.println("Customer name - "+this.getName());
-			System.out.println("Customer address - " +this.getAddress());
-			System.out.println("Customer Date of Birth - "+ this.getDob().toString());
-			System.out.println("Customer credit score - " + this.getCreditScore());
-			System.out.println("Customer cs review date - "+ this.getCreditScoreReviewDate().toString());
-			System.out.println("Customer is being edited");
+		
+		if(!editingCustomer)
+		{
+			logger.info(dashes+ this.customerNumber+":"+this.sortcode+dashes);
+			logger.info("Sortcode - "+ this.sortcode);
+			logger.info("Customer name - "+this.getName());
+			logger.info("Customer address - " +this.getAddress());
+			logger.info("Customer Date of Birth - "+ this.getDob().toString());
+			logger.info("Customer is new");
+		}
+		else 
+		{
+			logger.info(dashes+ this.customerNumber+":"+this.sortcode+dashes);
+			logger.info("Sortcode - "+ this.sortcode);
+			logger.info("Customer name - "+this.getName());
+			logger.info("Customer address - " +this.getAddress());
+			logger.info("Customer Date of Birth - "+ this.getDob().toString());
+			logger.info("Customer credit score - " + this.getCreditScore());
+			logger.info("Customer cs review date - "+ this.getCreditScoreReviewDate().toString());
+			logger.info("Customer is being edited");
 		}
 	}
 	
