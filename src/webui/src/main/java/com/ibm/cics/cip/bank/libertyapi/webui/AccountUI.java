@@ -62,7 +62,7 @@ public class AccountUI extends VerticalLayout{
 
 	public AccountUI(UI ui, Welcome back){
 		//Create a new account		
-		createAccUI(ui, back,null);
+		createAccUI(ui, back, new Account());
 		edit = false;
 		setSortcode();
 
@@ -119,7 +119,7 @@ public class AccountUI extends VerticalLayout{
 		sCodeT.setValue(getSortcode());
 		sCodeT.setEnabled(false);
 		
-		if(acc!= null)
+		if(acc.getAccountNumber() == null)
 		{
 			accNumT.setValue(acc.getAccountNumber());
 			cusNumT.setValue(acc.getCustomerNumber());

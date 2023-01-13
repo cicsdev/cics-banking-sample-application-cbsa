@@ -344,7 +344,7 @@ public class CustList extends VerticalLayout{
 				private static final long serialVersionUID = -4092770723316728200L;
 
 				public void buttonClick(ClickEvent event) {
-					ui.setContent(new CustomerUI(ui, "test", new Welcome(ui, welcome), cList.getCustomer(temp)));
+					ui.setContent(new CustomerUI(ui, new Welcome(ui, welcome), cList.getCustomer(temp)));
 				}
 			});
 			delete.addClickListener(new Button.ClickListener() {
