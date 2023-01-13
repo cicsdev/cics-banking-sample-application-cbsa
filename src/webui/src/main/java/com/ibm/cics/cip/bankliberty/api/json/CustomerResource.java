@@ -8,6 +8,7 @@ package com.ibm.cics.cip.bankliberty.api.json;
 
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -92,7 +93,6 @@ public class CustomerResource{
 
 	public Response createCustomerInternal(CustomerJSON customer) {
 		logger.entering(this.getClass().getName(),CREATE_CUSTOMER_INTERNAL + customer.toString());
-		Integer sortcode = this.getSortCode();
 		JSONObject response = new JSONObject();
 
 		String[] name = customer.getCustomerName().split(" ");
@@ -103,20 +103,19 @@ public class CustomerResource{
 			JSONObject error = new JSONObject();
 			error.put(JSON_ERROR_MSG, "Customer title " + name[0] + " is not valid");
 			Response myResponse = Response.status(400).entity(error.toString()).build();
-			logger.warning("Invalid title in CustomerResource.createCustomerInternal(), " + name[0].trim());
+			logger.log(Level.WARNING,() ->"Invalid title in CustomerResource.createCustomerInternal(), " + name[0].trim());
 			logger.exiting(this.getClass().getName(), CREATE_CUSTOMER_INTERNAL_EXIT,myResponse);
 			return myResponse;
 		}
 
-		Integer inputSortCode = new Integer(customer.getSortCode());
-		Integer thisSortCode = this.getSortCode();
+		Integer inputSortCode = Integer.parseInt(customer.getSortCode());
 
-		if(inputSortCode.intValue() != thisSortCode.intValue())
+		if(inputSortCode != this.getSortCode())
 		{
 			JSONObject error = new JSONObject();
-			error.put(JSON_ERROR_MSG, "Sortcode " +  inputSortCode + " not valid for this bank (" + thisSortCode + ")");
+			error.put(JSON_ERROR_MSG, "Sortcode " +  inputSortCode + " not valid for this bank (" + this.getSortCode() + ")");
 			Response myResponse = Response.status(400).entity(error.toString()).build();
-			logger.warning("Invalid sortcode CustomerResource.createCustomerInternal(), " + inputSortCode.intValue());
+			logger.log(Level.WARNING,() ->"Invalid sortcode CustomerResource.createCustomerInternal(), " + inputSortCode.intValue());
 			logger.exiting(this.getClass().getName(), CREATE_CUSTOMER_INTERNAL_EXIT,myResponse);
 			return myResponse;
 		}
@@ -210,20 +209,19 @@ public class CustomerResource{
 			JSONObject error = new JSONObject();
 			error.put(JSON_ERROR_MSG, "Customer title " + name[0] + " is not valid");
 			Response myResponse = Response.status(400).entity(error.toString()).build();
-			logger.warning("Invalid title in CustomerResource.updateCustomerInternal(), " + name[0].trim());
+			logger.log(Level.WARNING,() ->"Invalid title in CustomerResource.updateCustomerInternal(), " + name[0].trim());
 			logger.exiting(this.getClass().getName(), CREATE_CUSTOMER_INTERNAL_EXIT,myResponse);
 			return myResponse;
 		}
 
-		Integer inputSortCode = new Integer(customer.getSortCode());
-		Integer thisSortCode = this.getSortCode();
+		Integer inputSortCode = Integer.parseInt(customer.getSortCode());
 
-		if(inputSortCode.intValue() != thisSortCode.intValue())
+		if(inputSortCode != this.getSortCode())
 			//Sortcode invalid
 		{
 			JSONObject error = new JSONObject();
-			error.put(JSON_ERROR_MSG, "Sortcode " +  inputSortCode + " not valid for this bank (" + thisSortCode + ")");
-			logger.warning("Invalid sortcode in CustomerResource.updateCustomerInternal(), " + inputSortCode);
+			error.put(JSON_ERROR_MSG, "Sortcode " +  inputSortCode + " not valid for this bank (" + this.getSortCode() + ")");
+			logger.log(Level.WARNING,() ->"Invalid sortcode in CustomerResource.updateCustomerInternal(), " + inputSortCode);
 			return Response.status(400).entity(error.toString()).build();
 		}
 
@@ -242,7 +240,7 @@ public class CustomerResource{
 				JSONObject error = new JSONObject();
 				error.put(JSON_ERROR_MSG, CUSTOMER_PREFIX + id.toString() + " not found.");
 				Response myResponse = Response.status(404).entity(error.toString()).build();
-				logger.warning("Failed to find customer in com.ibm.cics.cip.bankliberty.web.vsam.Customer");
+				logger.log(Level.WARNING,() ->"Failed to find customer in com.ibm.cics.cip.bankliberty.web.vsam.Customer");
 				logger.exiting(this.getClass().getName(), "updateCustomerInternal() exiting",myResponse);
 				return myResponse;
 			}
@@ -257,7 +255,7 @@ public class CustomerResource{
 			JSONObject error = new JSONObject();
 			error.put(JSON_ERROR_MSG, "Failed to update customer in com.ibm.cics.cip.bankliberty.web.vsam.Customer");
 			Response myResponse = Response.status(500).entity(error.toString()).build();
-			logger.warning("Failed to update customer in com.ibm.cics.cip.bankliberty.web.vsam.Customer");
+			logger.log(Level.WARNING,() ->"Failed to update customer in com.ibm.cics.cip.bankliberty.web.vsam.Customer");
 			logger.exiting(this.getClass().getName(), "updateCustomerInternal() exiting",myResponse);
 			return myResponse;
 		}
@@ -282,7 +280,7 @@ public class CustomerResource{
 
 		} catch (Exception ex) {
 			// Log the exception
-			logger.warning("Exception in getCustomerExternal "+ ex );
+			logger.log(Level.WARNING,() ->"Exception in getCustomerExternal "+ ex );
 		}
 		logger.exiting(this.getClass().getName(),GET_CUSTOMER_EXTERNAL_EXIT,null);
 
@@ -304,7 +302,7 @@ public class CustomerResource{
 			//Customer number cannot be negative
 			response.put(JSON_ERROR_MSG,"Customer number cannot be negative");
 			Response myResponse = Response.status(404).entity(response.toString()).build();
-			logger.warning("Customer number supplied was negative in CustomerResource.getCustomerInternal");
+			logger.log(Level.WARNING,() ->"Customer number supplied was negative in CustomerResource.getCustomerInternal");
 			logger.exiting(this.getClass().getName(), GET_CUSTOMER_INTERNAL_EXIT,myResponse);
 			return myResponse;
 		}
@@ -327,7 +325,7 @@ public class CustomerResource{
 
 			response.put(JSON_ERROR_MSG,CUSTOMER_PREFIX + id + NOT_FOUND_MSG);
 			Response myResponse = Response.status(404).entity(response.toString()).build();
-			logger.warning("Customer not found in in com.ibm.cics.cip.bankliberty.web.vsam.Customer");
+			logger.log(Level.WARNING,() ->"Customer not found in in com.ibm.cics.cip.bankliberty.web.vsam.Customer");
 			logger.exiting(this.getClass().getName(), GET_CUSTOMER_INTERNAL_EXIT,myResponse);
 			return myResponse;
 		}
@@ -363,7 +361,7 @@ public class CustomerResource{
 			//Customer number cannot be negative
 			response.put(JSON_ERROR_MSG,"Customer number cannot be negative");
 			Response myResponse = Response.status(404).entity(response.toString()).build();
-			logger.warning("Customer number supplied was negative in deleteCustomerInternal()");
+			logger.log(Level.WARNING,() ->"Customer number supplied was negative in deleteCustomerInternal()");
 			logger.exiting(this.getClass().getName(), DELETE_CUSTOMER_INTERNAL_EXIT,myResponse);
 			return myResponse;
 		}
@@ -380,32 +378,32 @@ public class CustomerResource{
 
 			response.put(JSON_ERROR_MSG,"Error obtaining accounts to delete for customer " + id);
 			Response myResponse = Response.status(500).entity(response.toString()).build();
-			logger.warning("Error obtaining accounts to delete for customer " + id + " in deleteCustomerInternal()");
+			logger.log(Level.WARNING,() ->"Error obtaining accounts to delete for customer " + id + " in deleteCustomerInternal()");
 			logger.exiting(this.getClass().getName(), GET_CUSTOMER_INTERNAL_EXIT,myResponse);
 			return myResponse;
 		}
 		//		
-		JSONArray accounts_to_delete = (JSONArray) myAccountsJSON.get("accounts");
-		for(int i = 0; i < accounts_to_delete.size();i++)
+		JSONArray accountsToDelete = (JSONArray) myAccountsJSON.get("accounts");
+		for(int i = 0; i < accountsToDelete.size();i++)
 		{
 
-			JSONObject account_to_delete = (JSONObject) accounts_to_delete.get(i);
-			Long account_to_delete_long = new Long((String) account_to_delete.get(JSON_ID));
-			Response deleteAccountResponse = myAccountsResource.deleteAccountInternal(account_to_delete_long);
+			JSONObject accountToDelete = (JSONObject) accountsToDelete.get(i);
+			Long accountToDeleteLong = Long.parseLong((String) accountToDelete.get(JSON_ID));
+			Response deleteAccountResponse = myAccountsResource.deleteAccountInternal(accountToDeleteLong);
 
 
 			if(deleteAccountResponse.getStatus() == 404)
 			{
 
-				response.put(JSON_ERROR_MSG,"Error deleting account " + account_to_delete_long + " for customer " + id + ",account not found");
+				response.put(JSON_ERROR_MSG,"Error deleting account " + accountToDeleteLong + " for customer " + id + ",account not found");
 				try {
-					System.err.println("Customer: deleteAccount: Failed to delete account, not found");
+					logger.log(Level.SEVERE,() -> "Customer: deleteAccount: Failed to delete account, not found");
 					Task.getTask().rollback();
 				} catch (InvalidRequestException e) {
-					System.err.println("rollback failed " + e.toString());
+					logger.log(Level.SEVERE,() -> "rollback failed " + e.toString());
 				}
 				Response myResponse = Response.status(404).entity(response.toString()).build();
-				logger.warning("Customer: deleteAccount: Failed to delete account, not found for customer " + id + " in deleteCustomerInternal()");
+				logger.log(Level.WARNING,() ->"Customer: deleteAccount: Failed to delete account, not found for customer " + id + " in deleteCustomerInternal()");
 				logger.exiting(this.getClass().getName(), DELETE_CUSTOMER_INTERNAL_EXIT,myResponse);
 				return myResponse;
 			}
@@ -413,12 +411,12 @@ public class CustomerResource{
 			if(deleteAccountResponse.getStatus() != 200)
 			{
 
-				response.put(JSON_ERROR_MSG,"Error deleting account " + account_to_delete_long + " for customer " + id);
+				response.put(JSON_ERROR_MSG,"Error deleting account " + accountToDeleteLong + " for customer " + id);
 				try {
-					System.err.println("Customer: deleteAccount: Failed to delete account, error");
+					logger.log(Level.SEVERE,() -> "Customer: deleteAccount: Failed to delete account, error");
 					Task.getTask().rollback();
 				} catch (InvalidRequestException e) {
-					System.err.println("rollback failed " + e.toString());
+					logger.log(Level.SEVERE,() -> "rollback failed " + e.toString());
 				}
 				Response myResponse = Response.status(deleteAccountResponse.getStatus()).entity(response.toString()).build();
 				logger.exiting(this.getClass().getName(), DELETE_CUSTOMER_INTERNAL_EXIT,myResponse);
@@ -438,7 +436,7 @@ public class CustomerResource{
 			{
 				response.put(JSON_ERROR_MSG,CUSTOMER_PREFIX + id + NOT_FOUND_MSG);
 				Response myResponse = Response.status(404).entity(response.toString()).build();
-				logger.warning("CustomerResource.deleteCustomerInternal() customer " + id + NOT_FOUND_MSG);
+				logger.log(Level.WARNING,() ->"CustomerResource.deleteCustomerInternal() customer " + id + NOT_FOUND_MSG);
 				logger.exiting(this.getClass().getName(), DELETE_CUSTOMER_INTERNAL,myResponse);
 				return myResponse;	
 			}
@@ -450,7 +448,7 @@ public class CustomerResource{
 			response.put(JSON_DATE_OF_BIRTH, vsamCustomer.getDob().toString());
 
 			if(vsamCustomer.getCreditScore() != null){
-				response.put(JSON_CUSTOMER_CREDIT_SCORE, vsamCustomer.getCreditScore().toString());
+				response.put(JSON_CUSTOMER_CREDIT_SCORE, vsamCustomer.getCreditScore());
 				response.put(JSON_CUSTOMER_REVIEW_DATE, vsamCustomer.getReviewDate().toString());
 			}
 
@@ -469,12 +467,13 @@ public class CustomerResource{
 				JSONObject error = new JSONObject();
 				error.put(JSON_ERROR_MSG, "Failed to write to PROCTRAN data store");
 				try {
-					System.err.println("Customer: deleteCustomer: Failed to write to proctran");
+					logger.log(Level.SEVERE,() -> "Customer: deleteCustomer: Failed to write to proctran");
 					Task.getTask().rollback();
 				} catch (InvalidRequestException e) {
+					logger.log(Level.SEVERE,() -> "Customer: deleteCustomer: Failed to rollback");
 				}
 				Response myResponse = Response.status(500).entity(error.toString()).build();
-				logger.warning("CustomerResource.deleteCustomerInternal() failed to write to proctran");
+				logger.log(Level.WARNING,() ->"CustomerResource.deleteCustomerInternal() failed to write to proctran");
 				logger.exiting(this.getClass().getName(), DELETE_CUSTOMER_INTERNAL,myResponse);
 				return myResponse;
 			}
@@ -485,7 +484,7 @@ public class CustomerResource{
 		{
 			response.put(JSON_ERROR_MSG,"Unable to access Customer " + id + ".");
 			Response myResponse = Response.status(500).entity(response.toString()).build();
-			logger.warning("CustomerResource.deleteCustomerInternal() unable to access customer " + id);
+			logger.log(Level.WARNING,() ->"CustomerResource.deleteCustomerInternal() unable to access customer " + id);
 			logger.exiting(this.getClass().getName(), DELETE_CUSTOMER_INTERNAL,myResponse);
 			return myResponse;
 		}
@@ -519,7 +518,7 @@ public class CustomerResource{
 
 		com.ibm.cics.cip.bankliberty.web.vsam.Customer myCustomer = new Customer();
 		myCustomer.setSortcode(this.getSortCode().toString());
-		com.ibm.cics.cip.bankliberty.web.vsam.Customer vsamCustomers[] = myCustomer.getCustomersByTown(town);
+		com.ibm.cics.cip.bankliberty.web.vsam.Customer[] vsamCustomers = myCustomer.getCustomersByTown(town);
 
 
 		for(int i=0;i<vsamCustomers.length;i++)
@@ -528,18 +527,17 @@ public class CustomerResource{
 			response.put(JSON_CUSTOMER_NAME, vsamCustomers[i].getName().trim());
 			response.put(JSON_CUSTOMER_ADDRESS, vsamCustomers[i].getAddress().trim());
 
-			String dateOfBirth = new String();
 			Calendar dobCalendar = Calendar.getInstance();
 			dobCalendar.setTime(vsamCustomers[i].getDob());
-			Integer dobDD = new Integer(dobCalendar.get(Calendar.DAY_OF_MONTH));
-			dateOfBirth = dateOfBirth.concat(dobDD.toString());
+			Integer dobDD = dobCalendar.get(Calendar.DAY_OF_MONTH);
+			String dateOfBirth = dobDD.toString();
 			dateOfBirth = dateOfBirth.concat("-");
 
-			Integer dobMM = new Integer(dobCalendar.get(Calendar.MONTH) + 1);
+			Integer dobMM = dobCalendar.get(Calendar.MONTH) + 1;
 			dateOfBirth = dateOfBirth.concat(dobMM.toString());
 			dateOfBirth = dateOfBirth.concat("-");
 
-			Integer dobYYYY = new Integer(dobCalendar.get(Calendar.YEAR));
+			Integer dobYYYY = dobCalendar.get(Calendar.YEAR);
 			dateOfBirth = dateOfBirth.concat(dobYYYY.toString());
 
 			response.put(JSON_DATE_OF_BIRTH,dateOfBirth);
@@ -573,7 +571,7 @@ public class CustomerResource{
 
 		com.ibm.cics.cip.bankliberty.web.vsam.Customer myCustomer = new Customer();
 		myCustomer.setSortcode(this.getSortCode().toString());
-		com.ibm.cics.cip.bankliberty.web.vsam.Customer vsamCustomers[] = myCustomer.getCustomersBySurname(surname);
+		com.ibm.cics.cip.bankliberty.web.vsam.Customer[] vsamCustomers = myCustomer.getCustomersBySurname(surname);
 
 
 		for(int i=0;i<vsamCustomers.length;i++)
@@ -582,18 +580,18 @@ public class CustomerResource{
 			response.put(JSON_CUSTOMER_NAME, vsamCustomers[i].getName().trim());
 			response.put(JSON_CUSTOMER_ADDRESS, vsamCustomers[i].getAddress().trim());
 
-			String dateOfBirth = new String();
+
 			Calendar myCalendar = Calendar.getInstance();
 			myCalendar.setTime(vsamCustomers[i].getDob());
-			Integer dobDD = new Integer(myCalendar.get(Calendar.DAY_OF_MONTH));
-			dateOfBirth = dateOfBirth.concat(dobDD.toString());
+			Integer dobDD = myCalendar.get(Calendar.DAY_OF_MONTH);
+			String dateOfBirth = dobDD.toString();
 			dateOfBirth = dateOfBirth.concat("-");
 
-			Integer dobMM = new Integer(myCalendar.get(Calendar.MONTH) +1);
+			Integer dobMM = myCalendar.get(Calendar.MONTH) +1;
 			dateOfBirth = dateOfBirth.concat(dobMM.toString());
 			dateOfBirth = dateOfBirth.concat("-");
 
-			Integer dobYYYY = new Integer(myCalendar.get(Calendar.YEAR) + 1900);
+			Integer dobYYYY = myCalendar.get(Calendar.YEAR);
 			dateOfBirth = dateOfBirth.concat(dobYYYY.toString());
 
 			response.put(JSON_DATE_OF_BIRTH,dateOfBirth);
@@ -628,7 +626,7 @@ public class CustomerResource{
 
 		com.ibm.cics.cip.bankliberty.web.vsam.Customer myCustomer = new Customer();
 		myCustomer.setSortcode(this.getSortCode().toString());
-		com.ibm.cics.cip.bankliberty.web.vsam.Customer vsamCustomers[] = myCustomer.getCustomersByAge(new Integer(age).intValue());
+		com.ibm.cics.cip.bankliberty.web.vsam.Customer[] vsamCustomers = myCustomer.getCustomersByAge(Integer.parseInt(age));
 
 
 		for(int i=0;i<vsamCustomers.length;i++)
@@ -637,18 +635,18 @@ public class CustomerResource{
 			response.put(JSON_CUSTOMER_NAME, vsamCustomers[i].getName().trim());
 			response.put(JSON_CUSTOMER_ADDRESS, vsamCustomers[i].getAddress().trim());
 
-			String dateOfBirth = new String();
+			
 			Calendar myCalendar = Calendar.getInstance();
 			myCalendar.setTime(vsamCustomers[i].getDob());
-			Integer dobDD = new Integer(myCalendar.get(Calendar.DAY_OF_MONTH));
-			dateOfBirth = dateOfBirth.concat(dobDD.toString());
+			Integer dobDD = myCalendar.get(Calendar.DAY_OF_MONTH);
+			String dateOfBirth = dobDD.toString();
 			dateOfBirth = dateOfBirth.concat("-");
 
-			Integer dobMM = new Integer(myCalendar.get(Calendar.MONTH) +1);
+			Integer dobMM = myCalendar.get(Calendar.MONTH) +1;
 			dateOfBirth = dateOfBirth.concat(dobMM.toString());
 			dateOfBirth = dateOfBirth.concat("-");
 
-			Integer dobYYYY = new Integer(myCalendar.get(Calendar.YEAR) + 1900);
+			Integer dobYYYY = myCalendar.get(Calendar.YEAR);
 			dateOfBirth = dateOfBirth.concat(dobYYYY.toString());
 			
 			response.put(JSON_DATE_OF_BIRTH,dateOfBirth);
@@ -667,8 +665,8 @@ public class CustomerResource{
 			Response mySortCodeJSON = mySortCodeResource.getSortCode();
 			CustomerResource.setSortcode(((String) mySortCodeJSON.getEntity()).substring(13, 19));
 		}
-		logger.exiting(this.getClass().getName(), "getSortCode()",new Integer(sortcode));
-		return new Integer(sortcode);
+		logger.exiting(this.getClass().getName(), "getSortCode()",this.getSortCode());
+		return Integer.parseInt(sortcode);
 	}
 
 
@@ -697,23 +695,19 @@ public class CustomerResource{
 		JSONArray customers = null;
 
 
-		logger.fine("offset is " + offset);
 		if(offset == null)
 		{
-			logger.fine("Offset is null defaulting to zero");
-			offset = new Integer(0);
+			offset = 0;
 		}
 
 		if(limit == null)
 		{
-			logger.fine("Limit not supplied, defaulting to zero");
-			limit = new Integer(250000);
+			limit = 250000;
 		}
 
 		if(limit.intValue() == 0)
 		{
-			logger.fine("Limit is zero, defaulting to 250,000");
-			limit = new Integer(250000);
+			limit = 250000;
 		}
 
 		if(countOnly)
@@ -754,7 +748,7 @@ public class CustomerResource{
 			{
 
 				response.put(JSON_ERROR_MSG,"Customers cannot be listed in com.ibm.cics.cip.bankliberty.web.vsam.Customer");
-				logger.warning(this.getClass().getName() + ".getCustomersInternal() " + " Customers cannot be listed in com.ibm.cics.cip.bankliberty.web.vsam.Customer");
+				logger.log(Level.WARNING,() ->this.getClass().getName() + ".getCustomersInternal() " + " Customers cannot be listed in com.ibm.cics.cip.bankliberty.web.vsam.Customer");
 				Response myResponse = Response.status(404).entity(response.toString()).build();
 				logger.exiting(this.getClass().getName(),"getCustomersInternal()",myResponse);
 				return myResponse;
@@ -778,23 +772,23 @@ public class CustomerResource{
 		{
 			countOnlyReal = countOnly.booleanValue();
 		}
-		logger.fine("offset is " + offset);
+		logger.log(Level.FINE, () -> "offset is " + offset);
 		if(offset == null)
 		{
-			logger.fine("Offset is null defaulting to zero");
-			offset = new Integer(0);
+			logger.log(Level.FINE, () -> "Offset is null defaulting to zero");
+			offset = 0;
 		}
 
 		if(limit == null)
 		{
-			logger.fine("Limit not supplied, defaulting to 250,000");
-			limit = new Integer(250000);
+			logger.log(Level.FINE, () -> "Limit not supplied, defaulting to 250,000");
+			limit = 250000;
 		}
 
 		if(limit.intValue() == 0)
 		{
-			logger.fine("Limit is zero, defaulting to 250,000");
-			limit = new Integer(250000);
+			logger.log(Level.FINE, () -> "Limit is zero, defaulting to 250,000");
+			limit = 250000;
 		}
 		Response myResponse = getCustomersByNameInternal(name,limit,offset,countOnlyReal); 
 		HBankDataAccess myHBankDataAccess = new HBankDataAccess();
@@ -853,7 +847,7 @@ public class CustomerResource{
 			else
 			{
 				response.put(JSON_ERROR_MSG,"Customers cannot be listed in com.ibm.cics.cip.bankliberty.web.vsam.Customer");
-				logger.warning(this.getClass().getName() + ".getCustomersByNameInternal() " + " Customers cannot be listed in com.ibm.cics.cip.bankliberty.web.vsam.Customer");
+				logger.log(Level.WARNING,() ->this.getClass().getName() + ".getCustomersByNameInternal() " + " Customers cannot be listed in com.ibm.cics.cip.bankliberty.web.vsam.Customer");
 				Response myResponse = Response.status(404).entity(response.toString()).build();
 				logger.exiting(this.getClass().getName(),"getCustomersByNameInternal()",myResponse);
 				return myResponse;
