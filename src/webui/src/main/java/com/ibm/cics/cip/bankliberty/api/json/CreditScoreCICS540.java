@@ -75,7 +75,7 @@ public class CreditScoreCICS540 {
 		String[] transactionID = new String[creditAgencyCount];
 		String[] containerID = new String[creditAgencyCount];
 
-		List<Future<ChildResponse>> children = new ArrayList<Future<ChildResponse>>();
+		List<Future<ChildResponse>> children = new ArrayList<>();
 
 		int creditScoreTotal = 0;
 
@@ -125,12 +125,12 @@ public class CreditScoreCICS540 {
 			myCRECUST.setCommBirthMonth(myCalendar.get(Calendar.MONTH) + 1);
 			myCRECUST.setCommBirthYear(myCalendar.get(Calendar.YEAR));
 			myCRECUST.setCommName(customer.getCustomerName());
-			myCRECUST.setCommNumber(new Long(customer.getId()));
+			myCRECUST.setCommNumber(Long.parseLong(customer.getId()));
 			myCalendar.setTime(customer.getReviewDate());
 			myCRECUST.setCommCsReviewDd(myCalendar.get(Calendar.DAY_OF_MONTH));
 			myCRECUST.setCommCsReviewMm(myCalendar.get(Calendar.MONTH) + 1);
 			myCRECUST.setCommCsReviewYyyy(myCalendar.get(Calendar.YEAR));
-			myCRECUST.setCommSortcode(new Integer(customer.getSortCode()));
+			myCRECUST.setCommSortcode(Integer.parseInt(customer.getSortCode()));
 
 			try 
 			{
@@ -201,7 +201,7 @@ public class CreditScoreCICS540 {
 
 
 		int creditScoreAverage = creditScoreTotal / creditAgencyCount;
-		customer.setCreditScore(Integer.valueOf(creditScoreAverage).toString());
+		customer.setCreditScore(Integer.toString(creditScoreAverage));
 		return customer;
 	}
 	

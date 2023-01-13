@@ -148,11 +148,7 @@ public class CustomerJSON {
 		{
 			return true;
 		}
-		if(title.equalsIgnoreCase("Lady"))
-		{
-			return true;
-		}
-		return false;
+		return(title.equalsIgnoreCase("Lady"));
 	}
 
 }
