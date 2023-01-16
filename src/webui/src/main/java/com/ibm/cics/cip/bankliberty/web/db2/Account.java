@@ -317,12 +317,14 @@ public class Account extends HBankDataAccess{
 
 		String sortCodeString = myStringBuilder.toString();
 		
-		if(accountNumber == 99999999)
+		try
 		{
-			String sql = "SELECT * from ACCOUNT where ACCOUNT_EYECATCHER LIKE 'ACCT' AND ACCOUNT_SORTCODE like ? order by ACCOUNT_NUMBER DESC";
-			logger.log(Level.FINE,() ->PRE_SELECT_MSG + sql + ">");
-			try (PreparedStatement stmt = conn.prepareStatement(sql);)
+			if(accountNumber == 99999999)
 			{
+				String sql = "SELECT * from ACCOUNT where ACCOUNT_EYECATCHER LIKE 'ACCT' AND ACCOUNT_SORTCODE like ? order by ACCOUNT_NUMBER DESC";
+				logger.log(Level.FINE,() ->PRE_SELECT_MSG + sql + ">");
+				PreparedStatement stmt = conn.prepareStatement(sql);
+
 				stmt.setString(1, sortCodeString);
 				ResultSet rs = stmt.executeQuery();
 				if(rs.next())
@@ -343,56 +345,53 @@ public class Account extends HBankDataAccess{
 					return null;
 				}
 
-			} catch (SQLException e) {
-				logger.severe(e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),GET_ACCOUNT + accountNumber,null);
-				return null;
-			}
-		}
-		else
-		{
-			String sql = SQL_SELECT;
-			try (PreparedStatement stmt = conn.prepareStatement(sql);)
-			{
-				logger.log(Level.FINE,() ->PRE_SELECT_MSG + sql + ">");
-				myStringBuilder  = new StringBuilder();
-				for(int z = Integer.valueOf(accountNumber).toString().length(); z < 8;z++)
-				{
-					myStringBuilder = myStringBuilder.append("0");	
-				}
-				myStringBuilder.append(Integer.toString(accountNumber));
-				String accountNumberString = myStringBuilder.toString();
-				stmt.setString(1,accountNumberString);
-				stmt.setString(2,sortCodeString);
 
-				ResultSet rs = stmt.executeQuery();
-				if(rs.isClosed())
-				{
-					logger.warning("Result set is closed so returning 'temp' which is " + temp);
-					logger.exiting(this.getClass().getName(),GET_ACCOUNT + accountNumber,temp);
-					return temp;
-				}
-				else
-				{
-					while(rs.next())
+			}
+			else
+			{
+				String sql = SQL_SELECT;
+				PreparedStatement stmt = conn.prepareStatement(sql);
+					logger.log(Level.FINE,() ->PRE_SELECT_MSG + sql + ">");
+					myStringBuilder  = new StringBuilder();
+					for(int z = Integer.valueOf(accountNumber).toString().length(); z < 8;z++)
 					{
-						temp = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER), rs.getString(ACCOUNT_SORTCODE),
-								rs.getString(ACCOUNT_NUMBER), rs.getString(ACCOUNT_TYPE), rs.getDouble(ACCOUNT_INTEREST_RATE),
-								rs.getDate(ACCOUNT_OPENED), rs.getInt(ACCOUNT_OVERDRAFT_LIMIT), rs.getDate(ACCOUNT_LAST_STATEMENT),
-								rs.getDate(ACCOUNT_NEXT_STATEMENT), rs.getDouble(ACCOUNT_AVAILABLE_BALANCE),
-								rs.getDouble(ACCOUNT_ACTUAL_BALANCE));
-						rs.close();
+						myStringBuilder = myStringBuilder.append("0");	
+					}
+					myStringBuilder.append(Integer.toString(accountNumber));
+					String accountNumberString = myStringBuilder.toString();
+					stmt.setString(1,accountNumberString);
+					stmt.setString(2,sortCodeString);
+
+					ResultSet rs = stmt.executeQuery();
+					if(rs.isClosed())
+					{
+						logger.warning("Result set is closed so returning 'temp' which is " + temp);
 						logger.exiting(this.getClass().getName(),GET_ACCOUNT + accountNumber,temp);
 						return temp;
+					}
+					else
+					{
+						while(rs.next())
+						{
+							temp = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER), rs.getString(ACCOUNT_SORTCODE),
+									rs.getString(ACCOUNT_NUMBER), rs.getString(ACCOUNT_TYPE), rs.getDouble(ACCOUNT_INTEREST_RATE),
+									rs.getDate(ACCOUNT_OPENED), rs.getInt(ACCOUNT_OVERDRAFT_LIMIT), rs.getDate(ACCOUNT_LAST_STATEMENT),
+									rs.getDate(ACCOUNT_NEXT_STATEMENT), rs.getDouble(ACCOUNT_AVAILABLE_BALANCE),
+									rs.getDouble(ACCOUNT_ACTUAL_BALANCE));
+							rs.close();
+							logger.exiting(this.getClass().getName(),GET_ACCOUNT + accountNumber,temp);
+							return temp;
+						}
+
 					}
 
 				}
 
-			} catch (SQLException e) {
-				logger.severe(e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),GET_ACCOUNT + accountNumber,null);
-				return null;
-			}
+		}
+		catch (SQLException e) {
+			logger.severe(e.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),GET_ACCOUNT + accountNumber,null);
+			return null;
 		}
 		logger.exiting(this.getClass().getName(),GET_ACCOUNT + accountNumber,temp);
 		return temp;
