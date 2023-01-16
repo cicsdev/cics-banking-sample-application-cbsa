@@ -409,7 +409,7 @@ public class CustomerResource{
 				}
 			} 
 		}
-		catch (IOException e) {
+		catch (IOException | InvalidRequestException e) {
 
 			response.put(JSON_ERROR_MSG,"Error obtaining accounts to delete for customer " + id);
 			Response myResponse = Response.status(500).entity(response.toString()).build();
@@ -417,9 +417,7 @@ public class CustomerResource{
 			logger.exiting(this.getClass().getName(), GET_CUSTOMER_INTERNAL_EXIT,myResponse);
 			return myResponse;
 		}
-		catch (InvalidRequestException e) {
-			logger.log(Level.SEVERE,() -> "rollback failed " + e.toString());
-		}
+
 
 		// If we are still here then we can try to delete the customer
 
@@ -427,64 +425,52 @@ public class CustomerResource{
 
 		vsamCustomer = vsamCustomer.deleteCustomer(id, sortCode);
 
-		if(vsamCustomer != null)
+		if(vsamCustomer.isNot_found())
 		{
-			if(vsamCustomer.isNot_found())
-			{
-				response.put(JSON_ERROR_MSG,CUSTOMER_PREFIX + id + NOT_FOUND_MSG);
-				Response myResponse = Response.status(404).entity(response.toString()).build();
-				logger.log(Level.WARNING,() ->"CustomerResource.deleteCustomerInternal() customer " + id + NOT_FOUND_MSG);
-				logger.exiting(this.getClass().getName(), DELETE_CUSTOMER_INTERNAL,myResponse);
-				return myResponse;	
-			}
-			response.put(JSON_SORT_CODE, vsamCustomer.getSortcode().trim());
-			response.put(JSON_ID, vsamCustomer.getCustomer_number().trim());
-			response.put(JSON_CUSTOMER_NAME, vsamCustomer.getName().trim());
-			response.put(JSON_CUSTOMER_ADDRESS, vsamCustomer.getAddress().trim());
-
-			response.put(JSON_DATE_OF_BIRTH, vsamCustomer.getDob().toString());
-
-			if(vsamCustomer.getCreditScore() != null){
-				response.put(JSON_CUSTOMER_CREDIT_SCORE, vsamCustomer.getCreditScore());
-				response.put(JSON_CUSTOMER_REVIEW_DATE, vsamCustomer.getReviewDate().toString());
-			}
-
-			ProcessedTransactionResource myProcessedTransactionResource = new ProcessedTransactionResource();
-
-			ProcessedTransactionDeleteCustomerJSON myDeletedCustomer = new ProcessedTransactionDeleteCustomerJSON();
-			myDeletedCustomer.setAccountNumber("0");
-			myDeletedCustomer.setCustomerDOB(vsamCustomer.getDob());
-			myDeletedCustomer.setCustomerName(vsamCustomer.getName());
-			myDeletedCustomer.setSortCode(vsamCustomer.getSortcode());
-			myDeletedCustomer.setCustomerNumber(vsamCustomer.getCustomer_number());
-
-			Response writeDeleteCustomerResponse = myProcessedTransactionResource.writeDeleteCustomerInternal(myDeletedCustomer);
-			if(writeDeleteCustomerResponse == null || writeDeleteCustomerResponse.getStatus() != 200)
-			{
-				JSONObject error = new JSONObject();
-				error.put(JSON_ERROR_MSG, "Failed to write to PROCTRAN data store");
-				try {
-					logger.log(Level.SEVERE,() -> "Customer: deleteCustomer: Failed to write to proctran");
-					Task.getTask().rollback();
-				} catch (InvalidRequestException e) {
-					logger.log(Level.SEVERE,() -> "Customer: deleteCustomer: Failed to rollback");
-				}
-				Response myResponse = Response.status(500).entity(error.toString()).build();
-				logger.log(Level.WARNING,() ->"CustomerResource.deleteCustomerInternal() failed to write to proctran");
-				logger.exiting(this.getClass().getName(), DELETE_CUSTOMER_INTERNAL,myResponse);
-				return myResponse;
-			}
-
-
+			response.put(JSON_ERROR_MSG,CUSTOMER_PREFIX + id + NOT_FOUND_MSG);
+			Response myResponse = Response.status(404).entity(response.toString()).build();
+			logger.log(Level.WARNING,() ->"CustomerResource.deleteCustomerInternal() customer " + id + NOT_FOUND_MSG);
+			logger.exiting(this.getClass().getName(), DELETE_CUSTOMER_INTERNAL,myResponse);
+			return myResponse;	
 		}
-		else
+		response.put(JSON_SORT_CODE, vsamCustomer.getSortcode().trim());
+		response.put(JSON_ID, vsamCustomer.getCustomer_number().trim());
+		response.put(JSON_CUSTOMER_NAME, vsamCustomer.getName().trim());
+		response.put(JSON_CUSTOMER_ADDRESS, vsamCustomer.getAddress().trim());
+
+		response.put(JSON_DATE_OF_BIRTH, vsamCustomer.getDob().toString());
+
+		response.put(JSON_CUSTOMER_CREDIT_SCORE, vsamCustomer.getCreditScore());
+		response.put(JSON_CUSTOMER_REVIEW_DATE, vsamCustomer.getReviewDate().toString());
+
+		ProcessedTransactionResource myProcessedTransactionResource = new ProcessedTransactionResource();
+
+		ProcessedTransactionDeleteCustomerJSON myDeletedCustomer = new ProcessedTransactionDeleteCustomerJSON();
+		myDeletedCustomer.setAccountNumber("0");
+		myDeletedCustomer.setCustomerDOB(vsamCustomer.getDob());
+		myDeletedCustomer.setCustomerName(vsamCustomer.getName());
+		myDeletedCustomer.setSortCode(vsamCustomer.getSortcode());
+		myDeletedCustomer.setCustomerNumber(vsamCustomer.getCustomer_number());
+
+		Response writeDeleteCustomerResponse = myProcessedTransactionResource.writeDeleteCustomerInternal(myDeletedCustomer);
+		if(writeDeleteCustomerResponse.getStatus() != 200)
 		{
-			response.put(JSON_ERROR_MSG,"Unable to access Customer " + id + ".");
-			Response myResponse = Response.status(500).entity(response.toString()).build();
-			logger.log(Level.WARNING,() ->"CustomerResource.deleteCustomerInternal() unable to access customer " + id);
+			JSONObject error = new JSONObject();
+			error.put(JSON_ERROR_MSG, "Failed to write to PROCTRAN data store");
+			try {
+				logger.log(Level.SEVERE,() -> "Customer: deleteCustomer: Failed to write to proctran");
+				Task.getTask().rollback();
+			} catch (InvalidRequestException e) {
+				logger.log(Level.SEVERE,() -> "Customer: deleteCustomer: Failed to rollback");
+			}
+			Response myResponse = Response.status(500).entity(error.toString()).build();
+			logger.log(Level.WARNING,() ->"CustomerResource.deleteCustomerInternal() failed to write to proctran");
 			logger.exiting(this.getClass().getName(), DELETE_CUSTOMER_INTERNAL,myResponse);
 			return myResponse;
 		}
+
+
+
 
 		logger.exiting(this.getClass().getName(), "deleteCustomerInternal(Long id)",Response.status(200).entity(response.toString()).build());
 		return Response.status(200).entity(response.toString()).build();

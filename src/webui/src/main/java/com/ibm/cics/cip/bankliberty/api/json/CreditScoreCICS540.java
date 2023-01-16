@@ -143,22 +143,17 @@ public class CreditScoreCICS540 {
 	while(completedRequests < creditAgencyCount)
 	{
 		ChildResponse anyOneWillDo = null;
-		try {
+		try 
+		{
 			anyOneWillDo = asService.getAny();
-		} catch (InvalidRequestException | NotFoundException e1) 
-		{
-			logger.severe(e1.toString());
-		} 
 
-		if(anyOneWillDo != null && anyOneWillDo.getCompletionStatus().equals(CompletionStatus.NORMAL))
-		{
-			Channel responseChannel = anyOneWillDo.getChannel();
-			customer.setCreditScore("123");
-			Container myContainer;
-			boolean foundIt = false;
-			for(int j = 0; !foundIt;j++)
+			if(anyOneWillDo.getCompletionStatus().equals(CompletionStatus.NORMAL))
 			{
-				try 
+				Channel responseChannel = anyOneWillDo.getChannel();
+				customer.setCreditScore("123");
+				Container myContainer;
+				boolean foundIt = false;
+				for(int j = 0; !foundIt;j++)
 				{
 					if(anyOneWillDo.equals(children.get(j)))
 					{
@@ -170,19 +165,20 @@ public class CreditScoreCICS540 {
 						completedRequests++;
 					}
 				}
-				catch (ChannelErrorException | CCSIDErrorException | CodePageErrorException | ContainerErrorException e) 
-				{
-					logger.severe(e.toString());
-					Task.getTask().abend("CRDT");
-				}
-			}
 
-		} 
-		else
-		{
-			logger.log(Level.SEVERE,() -> "One of the agencies didn't work");
-			creditAgencyCount--;
+			} 
+			else
+			{
+				logger.log(Level.SEVERE,() -> "One of the agencies didn't work");
+				creditAgencyCount--;
+			}
 		}
+		catch (InvalidRequestException | NotFoundException | ChannelErrorException | CCSIDErrorException | CodePageErrorException | ContainerErrorException e) 
+		{
+			logger.severe(e.toString());
+			Task.getTask().abend("CRDT");
+		}
+
 	}
 
 
