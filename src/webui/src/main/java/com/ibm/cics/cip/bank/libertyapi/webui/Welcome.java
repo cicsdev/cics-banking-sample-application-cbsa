@@ -154,17 +154,18 @@ public class Welcome extends VerticalLayout{
 			buttons.get(i).setId("button"+i);
 			// every 2 buttons create new horizontal layout, starting from 0
 			
-			if(i%2==0){
+			if(i%2==0)
+			{
 				hl = new HorizontalLayout();
 				hl.setWidth("80%");
 			}
-				hl.addComponent(buttons.get(i));
-				
-			// every 2nd button set to right hand alignment
-				
-			if(i%2 != 0){
+			else
+			{
 				hl.setComponentAlignment(buttons.get(i), Alignment.MIDDLE_RIGHT);
 			}
+			hl.addComponent(buttons.get(i));
+				
+			
 			hls.add(hl);
 			optionsVl.addComponent(hl);
 			optionsVl.setComponentAlignment(hl, Alignment.MIDDLE_CENTER);

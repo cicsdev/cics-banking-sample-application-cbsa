@@ -128,112 +128,11 @@ public class AccountsResource extends HBankDataAccess{
 			AccountJSON account) {
 		logger.entering(this.getClass().getName(),CREATE_ACCOUNT_INTERNAL + " for account " + account.toString());
 		Response myResponse = null;
-		/* Only ISA, LOAN, CURRENT, MORTGAGE and SAVING are valid account types */
-		if(!account.validateType(account.getAccountType().trim()))
+
+		JSONObject error = validateNewAccount(account);
+		if(error != null)
 		{
-			JSONObject error = new JSONObject();
-			error.put(JSON_ERROR_MSG, ACC_TYPE_STRING + account.getAccountType() + NOT_SUPPORTED);
-			logger.log(Level.WARNING,() ->  ACC_TYPE_STRING + account.getAccountType() + NOT_SUPPORTED);
 			myResponse = Response.status(400).entity(error.toString()).build();
-			logger.exiting(this.getClass().getName(),CREATE_ACCOUNT_INTERNAL ,myResponse);
-			return myResponse;
-
-		}
-		//Interest rate cannot be < 0
-		if(account.getInterestRate().doubleValue() < 0.00)
-		{
-			JSONObject error = new JSONObject();
-			error.put(JSON_ERROR_MSG, INTEREST_RATE_LESS_THAN_ZERO);
-			logger.log(Level.WARNING,() ->  (INTEREST_RATE_LESS_THAN_ZERO));
-			myResponse = Response.status(400).entity(error.toString()).build();
-			logger.exiting(this.getClass().getName(),CREATE_ACCOUNT_INTERNAL ,myResponse);
-			return myResponse;
-		}
-
-		//Interest rate cannot be > 9999.99%
-		if(account.getInterestRate().doubleValue() > 9999.99)
-		{
-			JSONObject error = new JSONObject();
-			error.put(JSON_ERROR_MSG, INTEREST_RATE_TOO_HIGH);
-			logger.log(Level.WARNING,() ->  (INTEREST_RATE_TOO_HIGH));
-			myResponse = Response.status(400).entity(error.toString()).build();
-			logger.exiting(this.getClass().getName(),CREATE_ACCOUNT_INTERNAL ,myResponse);
-			return myResponse;
-		}
-
-		//Interest rate cannot have more than 2dp
-		BigDecimal myInterestRate = account.getInterestRate();
-		if(myInterestRate.scale() > 2)
-		{
-			JSONObject error = new JSONObject();
-			error.put(JSON_ERROR_MSG, "Interest rate cannot have more than 2 decimal places. " + myInterestRate.toPlainString());
-			logger.log(Level.WARNING,() ->  ("Interest rate cannot have more than 2 decimal places."  + myInterestRate.toPlainString()));
-			myResponse = Response.status(400).entity(error.toString()).build();
-			logger.exiting(this.getClass().getName(),CREATE_ACCOUNT_INTERNAL ,myResponse);
-			return myResponse;			
-		}
-
-		//Overdraft limit cannot be < 0
-		if(account.getOverdraft().intValue() < 0)
-		{
-			JSONObject error = new JSONObject();
-			error.put(JSON_ERROR_MSG, "Overdraft limit cannot be less than zero.");
-			logger.log(Level.WARNING,() ->  ("Overdraft limit cannot be less than zero."));
-			myResponse = Response.status(400).entity(error.toString()).build();
-			logger.exiting(this.getClass().getName(),CREATE_ACCOUNT_INTERNAL ,myResponse);
-			return myResponse;			
-		}
-
-		//Customer number cannot be < 1
-		Long customerNumberLong = Long.parseLong(account.getCustomerNumber());
-		if(customerNumberLong.longValue() < 1)
-		{
-			JSONObject error = new JSONObject();
-			error.put(JSON_ERROR_MSG, "Customer number cannot be less than one.");
-			logger.log(Level.WARNING,() ->  ("Customer number cannot be less than one."));
-			myResponse = Response.status(400).entity(error.toString()).build();
-			logger.exiting(this.getClass().getName(),CREATE_ACCOUNT_INTERNAL ,myResponse);
-			return myResponse;
-		}
-		
-		//Customer number cannot be 9999999999
-		if(customerNumberLong.longValue() == 9999999999L)
-		{
-			JSONObject error = new JSONObject();
-			error.put(JSON_ERROR_MSG, "Customer number cannot be 9,999,999,999.");
-			logger.log(Level.WARNING,() ->  ("Customer number cannot be 9,999,999,999."));
-			myResponse = Response.status(400).entity(error.toString()).build();
-			logger.exiting(this.getClass().getName(),CREATE_ACCOUNT_INTERNAL ,myResponse);
-			return myResponse;
-		}
-		
-		//Sortcode is not valid for this bank
-		Integer inputSortCode = Integer.parseInt(account.getSortCode());
-		Integer thisSortCode = this.getSortCode();
-
-		if(inputSortCode.intValue() != thisSortCode.intValue())
-		{
-			JSONObject error = new JSONObject();
-			error.put(JSON_ERROR_MSG, SORT_CODE_LITERAL+  inputSortCode + NOT_VALID_FOR_THIS_BANK + thisSortCode + ")");
-			logger.log(Level.WARNING,() ->  (SORT_CODE_LITERAL+  inputSortCode + NOT_VALID_FOR_THIS_BANK + thisSortCode + ")"));
-			myResponse = Response.status(400).entity(error.toString()).build();
-			logger.exiting(this.getClass().getName(),CREATE_ACCOUNT_INTERNAL ,myResponse);
-			return myResponse;
-		}
-
-
-
-
-
-		CustomerResource myCustomer = new CustomerResource();
-		Response customerResponse = myCustomer.getCustomerInternal(customerNumberLong);
-		// Customer number cannot be found
-		if(customerResponse.getStatus() != 200)
-		{
-			JSONObject error = new JSONObject();
-			error.put(JSON_ERROR_MSG, CUSTOMER_NUMBER_LITERAL + customerNumberLong.longValue() + CANNOT_BE_FOUND);
-			logger.log(Level.WARNING,() -> CUSTOMER_NUMBER_LITERAL + customerNumberLong.longValue() + CANNOT_BE_FOUND);
-			myResponse = Response.status(404).entity(error.toString()).build();
 			logger.exiting(this.getClass().getName(),CREATE_ACCOUNT_INTERNAL ,myResponse);
 			return myResponse;
 
@@ -242,6 +141,7 @@ public class AccountsResource extends HBankDataAccess{
 		JSONObject response = new JSONObject();
 		AccountsResource thisAccountsResource = new AccountsResource();
 
+		Long customerNumberLong = Long.parseLong(account.getCustomerNumber());
 		JSONObject myAccountsJSON = null;
 		try {
 			Response accountsOfThisCustomer = thisAccountsResource.getAccountsByCustomerInternal(customerNumberLong);
@@ -250,14 +150,14 @@ public class AccountsResource extends HBankDataAccess{
 				//If accountsOfThisCustomer returns status 404, create new JSONObject containing the error message
 				if(accountsOfThisCustomer.getStatus() == 404)
 				{
-					JSONObject error = new JSONObject();
+					error = new JSONObject();
 					error.put(JSON_ERROR_MSG, CUSTOMER_NUMBER_LITERAL + customerNumberLong.longValue() + CANNOT_BE_FOUND);
 					logger.log(Level.WARNING,() -> CUSTOMER_NUMBER_LITERAL + customerNumberLong.longValue() + CANNOT_BE_FOUND);
 					myResponse = Response.status(404).entity(error.toString()).build();
 					logger.exiting(this.getClass().getName(),CREATE_ACCOUNT_INTERNAL ,myResponse);
 					return myResponse;
 				}
-				JSONObject error = new JSONObject();
+				error = new JSONObject();
 				error.put(JSON_ERROR_MSG, CUSTOMER_NUMBER_LITERAL + customerNumberLong.longValue() + CANNOT_BE_ACCESSED);
 				logger.log(Level.SEVERE,() -> CUSTOMER_NUMBER_LITERAL + customerNumberLong.longValue() + CANNOT_BE_ACCESSED);
 				myResponse = Response.status(accountsOfThisCustomer.getStatus()).entity(error.toString()).build();
@@ -268,7 +168,7 @@ public class AccountsResource extends HBankDataAccess{
 			String accountsOfThisCustomerString = accountsOfThisCustomer.getEntity().toString();
 			myAccountsJSON = JSONObject.parse(accountsOfThisCustomerString);
 		} catch (IOException e) {
-			JSONObject error = new JSONObject();
+			error = new JSONObject();
 			error.put(JSON_ERROR_MSG,"Failed to retrieve customer number " + customerNumberLong + " " + e.getLocalizedMessage());
 			logger.log(Level.SEVERE,() -> "Failed to retrieve customer number " + customerNumberLong + " " + e.getLocalizedMessage());
 			myResponse = Response.status(500).entity(error.toString()).build();
@@ -281,7 +181,7 @@ public class AccountsResource extends HBankDataAccess{
 
 		if(accountCount >= 10)
 		{
-			JSONObject error = new JSONObject();
+			error = new JSONObject();
 			error.put(JSON_ERROR_MSG, CUSTOMER_NUMBER_LITERAL + customerNumberLong.longValue() + " cannot have more than ten accounts.");
 			logger.log(Level.WARNING,() ->  (CUSTOMER_NUMBER_LITERAL + customerNumberLong.longValue() + " cannot have more than ten accounts."));
 			myResponse = Response.status(400).entity(error.toString()).build();
@@ -323,7 +223,7 @@ public class AccountsResource extends HBankDataAccess{
 			Response writeCreateAccountResponse = myProcessedTransactionResource.writeCreateAccountInternal(myProctranAccount);
 			if(writeCreateAccountResponse == null || writeCreateAccountResponse.getStatus() != 200)
 			{
-				JSONObject error = new JSONObject();
+				error = new JSONObject();
 				error.put(JSON_ERROR_MSG, PROCTRAN_WRITE_FAILURE);
 				try {
 					logger.log(Level.SEVERE,() -> "Accounts: createAccount: " +PROCTRAN_WRITE_FAILURE);
@@ -341,7 +241,7 @@ public class AccountsResource extends HBankDataAccess{
 		}
 		else
 		{
-			JSONObject error = new JSONObject();
+			error = new JSONObject();
 			error.put(JSON_ERROR_MSG, ACCOUNT_CREATE_FAILURE);
 			logger.log(Level.SEVERE,() -> ACCOUNT_CREATE_FAILURE);
 			myResponse = Response.status(500).entity(error.toString()).build();
@@ -1459,7 +1359,90 @@ public class AccountsResource extends HBankDataAccess{
 
 
 
+private JSONObject validateNewAccount(AccountJSON newAccount)
+{
+	JSONObject error = new JSONObject();
+	if(!newAccount.validateType(newAccount.getAccountType().trim()))
+	{
+		error.put(JSON_ERROR_MSG, ACC_TYPE_STRING + newAccount.getAccountType() + NOT_SUPPORTED);
+		logger.log(Level.WARNING,() ->  ACC_TYPE_STRING + newAccount.getAccountType() + NOT_SUPPORTED);
+		return error;
 
+	}
+	//Interest rate cannot be < 0
+	if(newAccount.getInterestRate().doubleValue() < 0.00)
+	{
+		error.put(JSON_ERROR_MSG, INTEREST_RATE_LESS_THAN_ZERO);
+		logger.log(Level.WARNING,() ->  (INTEREST_RATE_LESS_THAN_ZERO));
+		return error;
+	}
+
+	//Interest rate cannot be > 9999.99%
+	if(newAccount.getInterestRate().doubleValue() > 9999.99)
+	{
+		error.put(JSON_ERROR_MSG, INTEREST_RATE_TOO_HIGH);
+		logger.log(Level.WARNING,() ->  (INTEREST_RATE_TOO_HIGH));
+		return error;
+	}
+
+	//Interest rate cannot have more than 2dp
+	BigDecimal myInterestRate = newAccount.getInterestRate();
+	if(myInterestRate.scale() > 2)
+	{
+		error.put(JSON_ERROR_MSG, "Interest rate cannot have more than 2 decimal places. " + myInterestRate.toPlainString());
+		logger.log(Level.WARNING,() ->  ("Interest rate cannot have more than 2 decimal places."  + myInterestRate.toPlainString()));
+		return error;			
+	}
+
+	//Overdraft limit cannot be < 0
+	if(newAccount.getOverdraft().intValue() < 0)
+	{
+		error.put(JSON_ERROR_MSG, "Overdraft limit cannot be less than zero.");
+		logger.log(Level.WARNING,() ->  ("Overdraft limit cannot be less than zero."));
+		return error;			
+	}
+
+	//Customer number cannot be < 1
+	Long customerNumberLong = Long.parseLong(newAccount.getCustomerNumber());
+	if(customerNumberLong.longValue() < 1)
+	{
+		error.put(JSON_ERROR_MSG, "Customer number cannot be less than one.");
+		logger.log(Level.WARNING,() ->  ("Customer number cannot be less than one."));
+		return error;
+	}
+	
+	//Customer number cannot be 9999999999
+	if(customerNumberLong.longValue() == 9999999999L)
+	{
+		error.put(JSON_ERROR_MSG, "Customer number cannot be 9,999,999,999.");
+		logger.log(Level.WARNING,() ->  ("Customer number cannot be 9,999,999,999."));
+		return error;
+	}
+	
+	//Sortcode is not valid for this bank
+	Integer inputSortCode = Integer.parseInt(newAccount.getSortCode());
+	Integer thisSortCode = this.getSortCode();
+
+	if(inputSortCode.intValue() != thisSortCode.intValue())
+	{
+		error.put(JSON_ERROR_MSG, SORT_CODE_LITERAL+  inputSortCode + NOT_VALID_FOR_THIS_BANK + thisSortCode + ")");
+		logger.log(Level.WARNING,() ->  (SORT_CODE_LITERAL+  inputSortCode + NOT_VALID_FOR_THIS_BANK + thisSortCode + ")"));
+		return error;
+	}
+
+	CustomerResource myCustomer = new CustomerResource();
+	Response customerResponse = myCustomer.getCustomerInternal(customerNumberLong);
+	// Customer number cannot be found
+	if(customerResponse.getStatus() != 200)
+	{
+		error.put(JSON_ERROR_MSG, CUSTOMER_NUMBER_LITERAL + customerNumberLong.longValue() + CANNOT_BE_FOUND);
+		logger.log(Level.WARNING,() -> CUSTOMER_NUMBER_LITERAL + customerNumberLong.longValue() + CANNOT_BE_FOUND);
+		return error;
+
+	}
+
+	return null;
+}
 
 }
 

@@ -40,8 +40,8 @@ import com.vaadin.ui.Button.ClickEvent;
 
 public class CustList extends VerticalLayout{
 
-    static final String COPYRIGHT =
-      "Copyright IBM Corp. 2022";
+	static final String COPYRIGHT =
+			"Copyright IBM Corp. 2022";
 
 
 
@@ -74,17 +74,17 @@ public class CustList extends VerticalLayout{
 		this.addComponent(header);
 		this.setExpandRatio(header, 0.1f);
 		createSearch();
-		
+
 		//Create new container "head" and scale
 		HorizontalLayout head = new HorizontalLayout();
 		head.setWidth("100%");
-		
+
 		//Create labels
 		Label cusLbl = new Label("Customer Number");
 		Label nameLbl = new Label("Name");
 		Label addressLbl = new Label("Address");
 		Label dobLbl = new Label("Date of Birth dd-M-yyyy");
-		
+
 		//Create new container "sA" and scale
 		HorizontalLayout sA = new HorizontalLayout();
 
@@ -100,11 +100,11 @@ public class CustList extends VerticalLayout{
 
 			//Go back a page: offset from UI should now be  + offset
 			public void buttonClick(ClickEvent event) {
-				if(offset != 0){
+				if(offset != 0)
+				{
 					offset -= limit;
-					if(offset<0) offset = 0;
-					createCusList(filter);
 				}
+				createCusList(filter);
 			}
 		});
 
@@ -119,13 +119,13 @@ public class CustList extends VerticalLayout{
 			private static final long serialVersionUID = -140037750120660537L;
 			//Go back 10 pages
 			public void buttonClick(ClickEvent event) {
-				if(offset != 0){
+				if(offset != 0)
+				{
 					offset -= limit*10;
-					if(offset < 0){
-						offset = 0;
-					}
-					createCusList(filter);
 				}
+
+				createCusList(filter);
+
 			}
 		});
 
@@ -179,16 +179,16 @@ public class CustList extends VerticalLayout{
 		sA.addComponent(page);
 		sA.addComponent(buttonNextCust);
 		sA.addComponent(buttonNextMultipleCust);
-		
+
 		//Add components to head container
 		head.addComponent(cusLbl);
 		head.addComponent(nameLbl);
 		head.addComponent(addressLbl);
 		head.addComponent(dobLbl);
-		
+
 		//Add sA container to head container
 		head.addComponent(sA);
-		
+
 		//Add containers to UI		
 		this.addComponent(head);
 		this.addComponent(vl);
@@ -250,6 +250,7 @@ public class CustList extends VerticalLayout{
 
 	private void createCusList(String filter){
 		vl.removeAllComponents();
+		if(offset<0) offset = 0;
 		try {
 
 
@@ -295,7 +296,7 @@ public class CustList extends VerticalLayout{
 			Label address = new Label(this.cList.getCustomer(i).getAddress());
 			SimpleDateFormat ddMyyyy = new SimpleDateFormat("dd-M-yyyy");
 			Label dob = new Label(ddMyyyy.format(this.cList.getCustomer(i).getDob()));
-			
+
 			//Add labels to hl container
 			hl.addComponent(cusNumb);
 			hl.addComponent(name);
