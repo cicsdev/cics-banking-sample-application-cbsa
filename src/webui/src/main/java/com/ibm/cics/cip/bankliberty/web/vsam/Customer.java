@@ -2132,9 +2132,6 @@ public class Customer {
 		KSDS customerFile = new KSDS();
 		customerFile.setName(FILENAME);
 
-
-
-
 		RecordHolder holder = new RecordHolder();
 
 		byte[] key = new byte[16];
@@ -2158,47 +2155,56 @@ public class Customer {
 			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_COUNT_ONLY,-1L);
 			return -1L;
 		}
-		catch (InvalidSystemIdException  e1) {
-			int number_of_retries = 0;
-			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
-			{
-				try {
-					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
-					Thread.sleep(3000);
-				}
-				catch (InterruptedException e) 
-				{
-					logger.warning(e.toString());
-					Thread.currentThread().interrupt();
-				}
-				try {
-					customerFile.read(key, holder);
-					success = true;
-
-				} catch (FileDisabledException | DuplicateKeyException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
-						e3) {
-					logger.severe("Error reading control record for customer file file, " + e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_COUNT_ONLY,-1L);
-					return -1L;
-				}
-				catch (InvalidSystemIdException e4)
-				{
-				} 
-
-			}
-			if(number_of_retries == maximumRetries && success == false)
-			{
-				logger.severe("Cannot read control record for CUSTOMER file after 100 attempts");
-				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_COUNT_ONLY,-1L);
-				return -1L;
-			}
+		catch (InvalidSystemIdException  e1) 
+		{
+			if(keepTryingUntilWeSucceedOrGiveUp(key,holder) == -1)
+				return -1;
 		}
 
 		CustomerControl myCustomerControl = new CustomerControl(holder.getValue());
 		logger.exiting(this.getClass().getName(),GET_CUSTOMERS_COUNT_ONLY,myCustomerControl.getNumberOfCustomers());
 		return myCustomerControl.getNumberOfCustomers();
 
+	}
+
+	private long keepTryingUntilWeSucceedOrGiveUp(byte[] key, RecordHolder holder) {
+		int numberOfRetries = 0;
+		boolean success= false;
+		for(; numberOfRetries < maximumRetries && success == false;numberOfRetries++)
+		{
+			try {
+				logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
+				Thread.sleep(3000);
+			}
+			catch (InterruptedException e) 
+			{
+				logger.warning(e.toString());
+				Thread.currentThread().interrupt();
+			}
+			try {
+				customerFile.read(key, holder);
+				success = true;
+
+			} catch (FileDisabledException | DuplicateKeyException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
+					e3) {
+				logger.log(Level.SEVERE,() -> "Error reading control record for customer file file, " + e3.getLocalizedMessage());
+				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_COUNT_ONLY,-1L);
+				return -1L;
+			}
+			catch (InvalidSystemIdException e4)
+			{
+				// This is expected. Log as a warning.
+				logger.log(Level.WARNING,() -> "Error reading control record for customer file file, " + e4.getLocalizedMessage());
+			} 
+
+		}
+		if(numberOfRetries == maximumRetries && success == false)
+		{
+			logger.severe("Cannot read control record for CUSTOMER file after 100 attempts");
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_COUNT_ONLY,-1L);
+			return -1L;
+		}
+		return 0;
 	}
 
 	public long getCustomersByNameCountOnly(int sortCode, String name) {
