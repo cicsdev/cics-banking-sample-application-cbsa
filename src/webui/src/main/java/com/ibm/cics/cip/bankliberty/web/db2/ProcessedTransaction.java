@@ -208,22 +208,26 @@ public class ProcessedTransaction extends HBankDataAccess{
 
 		this.offset = offset.intValue();
 		this.limit = limit.intValue();
-		int i = 0;
 
-		StringBuffer myStringBuffer = new StringBuffer(new Integer(sortCode).toString());
-		for(int z = myStringBuffer.length(); z < 6;z++)
+		StringBuilder myStringBuilder = new StringBuilder();
+		
+		for (int i=Integer.toString(sortCode).length();i<6;i++)
 		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
+			myStringBuilder.append('0');
 		}
-		String sortCodeString = myStringBuffer.toString();
+
+		myStringBuilder.append(Integer.toString(sortCode));
+		String sortCodeString = myStringBuilder.toString();
 
 
 		openConnection();
 		String sql = "SELECT * from (SELECT p.*,row_number() over() as rn from PROCTRAN as p where PROCTRAN_SORTCODE like ? ORDER BY PROCTRAN_DATE ASC, PROCTRAN_TIME ASC) as col where rn between ? and ?";
 		logger.fine("About to issue query SQL <" + sql + ">");
 
+		int i = 0;
 		try (PreparedStatement stmt = conn.prepareStatement(sql);)
 		{
+
 			stmt.setString(1,sortCodeString);
 			stmt.setInt(2, offset+1);
 			stmt.setInt(3, (limit+offset));
@@ -240,100 +244,9 @@ public class ProcessedTransaction extends HBankDataAccess{
 				temp[i].setAmount(rs.getDouble("PROCTRAN_AMOUNT"));
 				temp[i].setType(rs.getString("PROCTRAN_TYPE"));
 				
-				if((temp[i].getType()).compareTo("TFR") == 0)
-				{
-					String targetSortcode = temp[i].getDescription().substring(25, 31);
-					String targetAccount = temp[i].getDescription().substring(31, 40);
-					
-					temp[i].setTarget_account_number(targetAccount);
-					temp[i].setTargetSortcode(targetSortcode);
-					temp[i].setTransfer(true);
-				}
-				if(temp[i].getType().compareTo("IDA") == 0 || temp[i].getType().compareTo("ODA") == 0)
-				{
-					String deletedAccountCustomer = temp[i].getDescription().substring(0,10);
-					String deletedAccountType     = temp[i].getDescription().substring(10,18);
-					String lastStatementDD        = temp[i].getDescription().substring(18,20);
-					String lastStatementMM        = temp[i].getDescription().substring(20,22);
-					String lastStatementYYYY      = temp[i].getDescription().substring(22,26);
-					String nextStatementDD        = temp[i].getDescription().substring(26,28);
-					String nextStatementMM        = temp[i].getDescription().substring(28,30);
-					String nextStatementYYYY      = temp[i].getDescription().substring(30,34);
-
-					temp[i].setAccountType(deletedAccountType);
-					Calendar myCalendar = Calendar.getInstance();
-					myCalendar.set(Calendar.YEAR, (new Integer(lastStatementYYYY).intValue() - 1900));
-					myCalendar.set(Calendar.MONTH, (new Integer(lastStatementMM).intValue() -1));
-					myCalendar.set(Calendar.DAY_OF_MONTH, new Integer(lastStatementDD).intValue());
-					Date lastStatementDate = new Date(myCalendar.getTimeInMillis());
-					myCalendar.set(Calendar.YEAR, (new Integer(nextStatementYYYY).intValue() - 1900));
-					myCalendar.set(Calendar.MONTH, (new Integer(nextStatementMM).intValue() -1));
-					myCalendar.set(Calendar.DAY_OF_MONTH, new Integer(nextStatementDD).intValue());
-					Date nextStatementDate = new Date(myCalendar.getTimeInMillis());
-					temp[i].setLastStatement(lastStatementDate);
-					temp[i].setNextStatement(nextStatementDate);
-					temp[i].setCustomer(deletedAccountCustomer);
-				}
-				if(temp[i].getType().compareTo("ICA") == 0 || temp[i].getType().compareTo("OCA") == 0)
-				{
-					String createdAccountCustomer = temp[i].getDescription().substring(0,10);
-					String createdAccountType     = temp[i].getDescription().substring(10,18);
-					String lastStatementDD        = temp[i].getDescription().substring(18,20);
-					String lastStatementMM        = temp[i].getDescription().substring(20,22);
-					String lastStatementYYYY      = temp[i].getDescription().substring(22,26);
-					String nextStatementDD        = temp[i].getDescription().substring(26,28);
-					String nextStatementMM        = temp[i].getDescription().substring(28,30);
-					String nextStatementYYYY      = temp[i].getDescription().substring(30,34);
-
-					temp[i].setAccountType(createdAccountType);
-					Calendar myCalendar = Calendar.getInstance();
-					myCalendar.set(Calendar.YEAR, (new Integer(lastStatementYYYY).intValue() - 1900));
-					myCalendar.set(Calendar.MONTH, (new Integer(lastStatementMM).intValue() -1));
-					myCalendar.set(Calendar.DAY_OF_MONTH, new Integer(lastStatementDD).intValue());
-					Date lastStatementDate = new Date(myCalendar.getTimeInMillis());
-					myCalendar.set(Calendar.YEAR, (new Integer(nextStatementYYYY).intValue() - 1900));
-					myCalendar.set(Calendar.MONTH, (new Integer(nextStatementMM).intValue() -1));
-					myCalendar.set(Calendar.DAY_OF_MONTH, new Integer(nextStatementDD).intValue());
-					Date nextStatementDate = new Date(myCalendar.getTimeInMillis());
-					temp[i].setLastStatement(lastStatementDate);
-					temp[i].setNextStatement(nextStatementDate);
-					temp[i].setCustomer(createdAccountCustomer);
-				}
-
-				if(temp[i].getType().compareTo("IDC") == 0 || temp[i].getType().compareTo("ODC") == 0)
-				{
-					String deletedCustomerNumber = temp[i].getDescription().substring(6,16);
-					String deletedCustomerName   = temp[i].getDescription().substring(16,30);
-					temp[i].setCustomerName(deletedCustomerName);
-					String dateOfBirthDD        = temp[i].getDescription().substring(30,32);
-					String dateOfBirthMM        = temp[i].getDescription().substring(33,35);
-					String dateOfBirthYYYY      = temp[i].getDescription().substring(36,40);
-					Calendar myCalendar = Calendar.getInstance();
-					myCalendar.set(Calendar.YEAR, (new Integer(dateOfBirthYYYY).intValue() - 1900));
-					myCalendar.set(Calendar.MONTH, (new Integer(dateOfBirthMM).intValue() -1));
-					myCalendar.set(Calendar.DAY_OF_MONTH, new Integer(dateOfBirthDD).intValue());
-					Date dateOfBirth = new Date(myCalendar.getTimeInMillis());					
-					temp[i].setDateOfBirth(dateOfBirth);
-					temp[i].setCustomer(deletedCustomerNumber);
-				}
-
-				if(temp[i].getType().compareTo("ICC") == 0 || temp[i].getType().compareTo("OCC") == 0)
-				{
-					String createdCustomerNumber = temp[i].getDescription().substring(6,16);
-					String createdCustomerName   = temp[i].getDescription().substring(16,30);
-					temp[i].setCustomerName(createdCustomerName);
-					String dateOfBirthDD        = temp[i].getDescription().substring(30,32);
-					String dateOfBirthMM        = temp[i].getDescription().substring(33,35);
-					String dateOfBirthYYYY      = temp[i].getDescription().substring(36,40);
-					Calendar myCalendar = Calendar.getInstance();
-					myCalendar.set(Calendar.YEAR, (new Integer(dateOfBirthYYYY).intValue() - 1900));
-					myCalendar.set(Calendar.MONTH, (new Integer(dateOfBirthMM).intValue() -1));
-					myCalendar.set(Calendar.DAY_OF_MONTH, new Integer(dateOfBirthDD).intValue());
-					Date dateOfBirth = new Date(myCalendar.getTimeInMillis());
-					temp[i].setDateOfBirth(dateOfBirth);
-					temp[i].setCustomer(createdCustomerNumber);
-				}
-
+				temp[i] = processTransferRecord(temp[i]);
+				temp[i] = processCreateDeleteAccountRecord(temp[i]);
+				temp[i] = processCreateDeleteCustomerRecord(temp[i]);
 
 				Calendar myCalendar = Calendar.getInstance();
 				Date transactionDate = rs.getDate("PROCTRAN_DATE");
@@ -365,6 +278,77 @@ public class ProcessedTransaction extends HBankDataAccess{
 		System.arraycopy(temp, 0, real, 0, i);
 		logger.exiting(this.getClass().getName(),GET_PROCESSED_TRANSACTIONS,real);
 		return real;
+	}
+
+
+	private ProcessedTransaction processCreateDeleteCustomerRecord(ProcessedTransaction processedTransaction) {
+		// Created/deleted customer records are identical
+		if(processedTransaction.getType().compareTo("IDC") == 0 || processedTransaction.getType().compareTo("ODC") == 0 || processedTransaction.getType().compareTo("ICC") == 0 || processedTransaction.getType().compareTo("OCC") == 0)
+		{
+			String deletedCustomerNumber = processedTransaction.getDescription().substring(6,16);
+			String deletedCustomerName   = processedTransaction.getDescription().substring(16,30);
+			processedTransaction.setCustomerName(deletedCustomerName);
+			String dateOfBirthDD        = processedTransaction.getDescription().substring(30,32);
+			String dateOfBirthMM        = processedTransaction.getDescription().substring(33,35);
+			String dateOfBirthYYYY      = processedTransaction.getDescription().substring(36,40);
+			Calendar myCalendar = Calendar.getInstance();
+			myCalendar.set(Calendar.YEAR, (new Integer(dateOfBirthYYYY).intValue() - 1900));
+			myCalendar.set(Calendar.MONTH, (new Integer(dateOfBirthMM).intValue() -1));
+			myCalendar.set(Calendar.DAY_OF_MONTH, new Integer(dateOfBirthDD).intValue());
+			Date dateOfBirth = new Date(myCalendar.getTimeInMillis());					
+			processedTransaction.setDateOfBirth(dateOfBirth);
+			processedTransaction.setCustomer(deletedCustomerNumber);
+		}
+		
+		return processedTransaction;
+	}
+
+
+	private ProcessedTransaction processCreateDeleteAccountRecord(ProcessedTransaction processedTransaction) 
+	{
+		// Creating/deleting account records are the same whether we create them over the Internet or Over the Counter
+		if(processedTransaction.getType().compareTo("IDA") == 0 || processedTransaction.getType().compareTo("ODA") == 0 || processedTransaction.getType().compareTo("ICA") == 0 || processedTransaction.getType().compareTo("OCA") == 0)
+		{
+			String deletedAccountCustomer = processedTransaction.getDescription().substring(0,10);
+			String deletedAccountType     = processedTransaction.getDescription().substring(10,18);
+			String lastStatementDD        = processedTransaction.getDescription().substring(18,20);
+			String lastStatementMM        = processedTransaction.getDescription().substring(20,22);
+			String lastStatementYYYY      = processedTransaction.getDescription().substring(22,26);
+			String nextStatementDD        = processedTransaction.getDescription().substring(26,28);
+			String nextStatementMM        = processedTransaction.getDescription().substring(28,30);
+			String nextStatementYYYY      = processedTransaction.getDescription().substring(30,34);
+
+			processedTransaction.setAccountType(deletedAccountType);
+			Calendar myCalendar = Calendar.getInstance();
+			myCalendar.set(Calendar.YEAR, (new Integer(lastStatementYYYY).intValue() - 1900));
+			myCalendar.set(Calendar.MONTH, (new Integer(lastStatementMM).intValue() -1));
+			myCalendar.set(Calendar.DAY_OF_MONTH, new Integer(lastStatementDD).intValue());
+			Date lastStatementDate = new Date(myCalendar.getTimeInMillis());
+			myCalendar.set(Calendar.YEAR, (new Integer(nextStatementYYYY).intValue() - 1900));
+			myCalendar.set(Calendar.MONTH, (new Integer(nextStatementMM).intValue() -1));
+			myCalendar.set(Calendar.DAY_OF_MONTH, new Integer(nextStatementDD).intValue());
+			Date nextStatementDate = new Date(myCalendar.getTimeInMillis());
+			processedTransaction.setLastStatement(lastStatementDate);
+			processedTransaction.setNextStatement(nextStatementDate);
+			processedTransaction.setCustomer(deletedAccountCustomer);
+		}
+		return processedTransaction;
+	}
+
+
+	private ProcessedTransaction processTransferRecord(ProcessedTransaction processedTransaction) 
+	{
+		// If we're a "Transfer between accounts" record, set flags appropriately
+		if(processedTransaction.getType().compareTo("TFR") == 0)
+		{
+			String targetSortcode = processedTransaction.getDescription().substring(25, 31);
+			String targetAccount = processedTransaction.getDescription().substring(31, 40);
+			
+			processedTransaction.setTarget_account_number(targetAccount);
+			processedTransaction.setTargetSortcode(targetSortcode);
+			processedTransaction.setTransfer(true);
+		}
+		return processedTransaction;
 	}
 
 

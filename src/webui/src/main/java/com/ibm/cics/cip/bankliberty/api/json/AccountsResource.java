@@ -1241,28 +1241,21 @@ public class AccountsResource extends HBankDataAccess{
 		logger.entering(this.getClass().getName(),GET_ACCOUNTS_BY_BALANCE_WITH_OFFSET_AND_LIMIT_INTERNAL);
 		Response myResponse = null;
 		boolean lessThan;
+		if(!operator.startsWith("<")&&!(operator.startsWith(">")))
+		{
+			JSONObject error = new JSONObject();
+			error.put(JSON_ERROR_MSG, "Invalid operator, '" + operator + "' only <= or >= allowed");
+			logger.log(Level.WARNING,() -> "Invalid operator, '" + operator + "' only <= or >= allowed");
+			logger.exiting(this.getClass().getName(),GET_ACCOUNTS_BY_BALANCE_WITH_OFFSET_AND_LIMIT_INTERNAL,myResponse);
+			myResponse = Response.status(400).entity(error.toString()).build();
+			return myResponse;
+			
+		}
+		lessThan = false;
 		if(operator.startsWith("<"))
 		{
 			lessThan = true;
 		}
-		else
-		{
-			if(operator.startsWith(">"))
-			{
-				lessThan = false;
-			}
-			else
-			{
-				JSONObject error = new JSONObject();
-				error.put(JSON_ERROR_MSG, "Invalid operator, '" + operator + "' only <= or >= allowed");
-				logger.log(Level.WARNING,() -> "Invalid operator, '" + operator + "' only <= or >= allowed");
-				logger.exiting(this.getClass().getName(),GET_ACCOUNTS_BY_BALANCE_WITH_OFFSET_AND_LIMIT_INTERNAL,myResponse);
-				myResponse = Response.status(400).entity(error.toString()).build();
-				return myResponse;
-			}
-		}
-
-		
 		
 		if(offset == null)
 		{
