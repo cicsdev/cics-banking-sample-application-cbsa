@@ -316,17 +316,18 @@ public class Account extends HBankDataAccess{
 		myStringBuilder.append(Integer.valueOf(sortCode).toString());
 
 		String sortCodeString = myStringBuilder.toString();
-		
-		try
+		String sql9999 = "SELECT * from ACCOUNT where ACCOUNT_EYECATCHER LIKE 'ACCT' AND ACCOUNT_SORTCODE like ? order by ACCOUNT_NUMBER DESC";
+		String sql = SQL_SELECT;
+		try(PreparedStatement stmt9999 = conn.prepareStatement(sql9999);PreparedStatement stmt = conn.prepareStatement(sql);)
 		{
 			if(accountNumber == 99999999)
 			{
-				String sql = "SELECT * from ACCOUNT where ACCOUNT_EYECATCHER LIKE 'ACCT' AND ACCOUNT_SORTCODE like ? order by ACCOUNT_NUMBER DESC";
-				logger.log(Level.FINE,() ->PRE_SELECT_MSG + sql + ">");
-				PreparedStatement stmt = conn.prepareStatement(sql);
+				
+				logger.log(Level.FINE,() ->PRE_SELECT_MSG + sql9999 + ">");
+				
 
-				stmt.setString(1, sortCodeString);
-				ResultSet rs = stmt.executeQuery();
+				stmt9999.setString(1, sortCodeString);
+				ResultSet rs = stmt9999.executeQuery();
 				if(rs.next())
 				{
 					temp = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER), rs.getString(ACCOUNT_SORTCODE),
@@ -349,8 +350,8 @@ public class Account extends HBankDataAccess{
 			}
 			else
 			{
-				String sql = SQL_SELECT;
-				PreparedStatement stmt = conn.prepareStatement(sql);
+				
+				
 					logger.log(Level.FINE,() ->PRE_SELECT_MSG + sql + ">");
 					myStringBuilder  = new StringBuilder();
 					for(int z = Integer.valueOf(accountNumber).toString().length(); z < 8;z++)

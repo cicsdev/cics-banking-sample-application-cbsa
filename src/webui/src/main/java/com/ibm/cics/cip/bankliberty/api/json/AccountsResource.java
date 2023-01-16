@@ -1270,16 +1270,10 @@ public class AccountsResource extends HBankDataAccess{
 		}
 		// We want to set a limit to try to avoid OutOfMemory Exceptions. 250,000 seems a bit large
 
-		if(limit == null)
+		if(limit == null || limit.intValue() == 0)
 		{
 			limit = 250000;
 		}
-		if(limit.intValue() == 0)
-		{
-			limit = 250000;
-		}
-
-
 
 		com.ibm.cics.cip.bankliberty.web.db2.Account db2Account = null;
 		JSONObject response = new JSONObject();

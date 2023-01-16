@@ -78,38 +78,7 @@ public class CreditScoreCICS540 {
 			for(int i=0;i < creditAgencyCount;i++)
 			{
 				transactionID[i] = "O" + "CR" + (i +1);
-				switch(i)
-				{
-				case 0:
-					containerID[i] = "CIPA";
-					break;
-				case 1:
-					containerID[i] = "CIPB";
-					break;
-				case 2:
-					containerID[i] = "CIPC";
-					break;
-				case 3:
-					containerID[i] = "CIPD";
-					break;
-				case 4:
-					containerID[i] = "CIPE";
-					break;
-				case 5:
-					containerID[i] = "CIPF";
-					break;
-				case 6:
-					containerID[i] = "CIPG";
-					break;
-				case 7:
-					containerID[i] = "CIPH";
-					break;
-				case 8:
-					containerID[i] = "CIPI";
-					break;			
-				default:
-					break;
-				}
+				containerID[i] = "CIP" + ((char)('A'+i));
 
 				CRECUST myCRECUST = new CRECUST();
 				myCRECUST.setCommAddress(customer.getCustomerAddress());
