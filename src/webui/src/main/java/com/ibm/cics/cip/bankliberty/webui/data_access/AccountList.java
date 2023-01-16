@@ -71,103 +71,92 @@ public class AccountList {
 		Response myAccountsResponse = null;
 
 
-		if(filter.contains("AND ACCOUNT_AVAILABLE_BALANCE"))
+		try
 		{
-			//01234567890123456789012345678901234567890
-			// AND ACCOUNT_AVAILABLE_BALANCE <= 33558.0
-
-			String operator = filter.substring(31,32);
-			BigDecimal balance = BigDecimal.valueOf(new Double(filter.substring(34)));
-
-			myAccountsResponse = myAccountsResource.getAccountsByBalanceWithOffsetAndLimitExternal(balance,operator,null,null,true);
-
-			if(myAccountsResponse.getStatus() == 200)
+			if(filter.contains("AND ACCOUNT_AVAILABLE_BALANCE"))
 			{
+				//01234567890123456789012345678901234567890
+				// AND ACCOUNT_AVAILABLE_BALANCE <= 33558.0
 
-				String myAccountsString = myAccountsResponse.getEntity().toString();
+				String operator = filter.substring(31,32);
+				BigDecimal balance = BigDecimal.valueOf(new Double(filter.substring(34)));
 
-				try {
+				myAccountsResponse = myAccountsResource.getAccountsByBalanceWithOffsetAndLimitExternal(balance,operator,null,null,true);
+
+				if(myAccountsResponse.getStatus() == 200)
+				{
+
+					String myAccountsString = myAccountsResponse.getEntity().toString();
+
+
 					JSONObject myAccountsJSON = JSONObject.parse(myAccountsString);
 					long accountCount = (Long) myAccountsJSON.get(JSON_NUMBER_OF_ACCOUNTS);
 					this.count = (int) accountCount;
 
+
 				}
-				catch (IOException e) 
+				else
 				{
-					logger.severe(e.toString());
+					this.count = 0;
+				}
+
+			}
+
+			if(filter.contains("AND ACCOUNT_NUMBER"))
+			{
+				//("We are filtering by account");
+				String accountNumberFilter = filter.substring(22);
+				if(accountNumberFilter.indexOf(' ') >= 0)
+				{
+					accountNumberFilter = accountNumberFilter.substring(0,accountNumberFilter.indexOf(' '));
+				}
+				Long accountNumberFilterLong = new Long(accountNumberFilter);
+				myAccountsResponse = myAccountsResource.getAccountExternal(accountNumberFilterLong);
+				this.count = 0;
+				if(myAccountsResponse.getStatus() == 200)
+				{
+					this.count = 1;
 				}
 			}
-			else
+
+			if(filter.contains("AND ACCOUNT_CUSTOMER_NUMBER"))
 			{
+				//("We are filtering by account_customer_number!");
+				String customerNumberFilter = filter.substring(31);
+				Long customerNumber = new Long(customerNumberFilter);
+
+				myAccountsResponse = myAccountsResource.getAccountsByCustomerExternal(customerNumber,true);
+				String myAccountsString = myAccountsResponse.getEntity().toString();
+				JSONObject myAccountsJSON;
 				this.count = 0;
-			}
-
-		}
-
-		if(filter.contains("AND ACCOUNT_NUMBER"))
-		{
-			//("We are filtering by account");
-			String accountNumberFilter = filter.substring(22);
-			if(accountNumberFilter.indexOf(' ') >= 0)
-			{
-				accountNumberFilter = accountNumberFilter.substring(0,accountNumberFilter.indexOf(' '));
-			}
-			Long accountNumberFilterLong = new Long(accountNumberFilter);
-			myAccountsResponse = myAccountsResource.getAccountExternal(accountNumberFilterLong);
-			if(myAccountsResponse.getStatus() == 200)
-			{
-				this.count = 1;
-			}
-			else
-			{
-				this.count = 0;
-			}
-		}
-
-		if(filter.contains("AND ACCOUNT_CUSTOMER_NUMBER"))
-		{
-			//("We are filtering by account_customer_number!");
-			String customerNumberFilter = filter.substring(31);
-			Long customerNumber = new Long(customerNumberFilter);
-
-			myAccountsResponse = myAccountsResource.getAccountsByCustomerExternal(customerNumber,true);
-			String myAccountsString = myAccountsResponse.getEntity().toString();
-			JSONObject myAccountsJSON;
-			if(myAccountsResponse.getStatus() == 200)
-			{
-				try {
+				if(myAccountsResponse.getStatus() == 200)
+				{
 					myAccountsJSON = JSONObject.parse(myAccountsString);
 					long accountCount = (Long) myAccountsJSON.get(JSON_NUMBER_OF_ACCOUNTS);
 					this.count = (int) accountCount;
 					//("Account_customer_number has " + accountCount + " accounts");
-				} catch (IOException e) {
-					logger.severe(e.toString());
 				}
-			}
-			else
-			{
-				//("myAccountsResponse was " + myAccountsResponse.getStatus());
-				this.count = 0;
-			}
-		}
 
-		if(filter.length() ==  0)
-		{
-			//("No filter so get the lot please!");
-			myAccountsResponse = myAccountsResource.getAccountsExternal(true);
-			String myAccountsString = myAccountsResponse.getEntity().toString();
-			JSONObject myAccountsJSON;
-			if(myAccountsResponse.getStatus() == 200)
+			}
+
+			if(filter.length() ==  0)
 			{
-				try {
+				//("No filter so get the lot please!");
+				myAccountsResponse = myAccountsResource.getAccountsExternal(true);
+				String myAccountsString = myAccountsResponse.getEntity().toString();
+				JSONObject myAccountsJSON;
+				this.count = 0;
+				if(myAccountsResponse.getStatus() == 200)
+				{
 					myAccountsJSON = JSONObject.parse(myAccountsString);
 					long accountCount = (Long) myAccountsJSON.get(JSON_NUMBER_OF_ACCOUNTS);
 					this.count = (int) accountCount;
-				} catch (IOException e) 
-				{
-					logger.severe(e.toString());
 				}
 			}
+		}
+		catch (IOException e) 
+		{
+			logger.severe(e.toString());
 		}
 		return this.count;
 
