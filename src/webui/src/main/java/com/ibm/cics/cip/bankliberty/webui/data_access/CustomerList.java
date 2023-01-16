@@ -11,6 +11,7 @@ import java.io.IOException;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
@@ -61,7 +62,7 @@ public class CustomerList {
 	}
 
 	private void howMany(String filter){
-		//TEST.out.println("TEST - Getting count of Customers");
+
 		CustomerResource myCustomerResource = new CustomerResource();
 		Response myCustomerResponse = null;
 
@@ -71,8 +72,6 @@ public class CustomerList {
 		{
 			if(filter.startsWith(" AND CUSTOMER_NAME like '"))
 			{
-				//01234567890123456789012345678901234567890
-				// AND ACCOUNT_AVAILABLE_BALANCE <= 33558.0
 
 				String customerNameFilter = filter.substring(25);
 				customerNameFilter = customerNameFilter.substring(0,customerNameFilter.length() -1);
@@ -109,7 +108,7 @@ public class CustomerList {
 
 			if(filter.length() ==  0)
 			{
-				//("No filter so get the lot please!");
+
 				myCustomerResponse = myCustomerResource.getCustomersExternal(new Integer(250000), new Integer(0),true);
 				String myCustomersString = myCustomerResponse.getEntity().toString();
 				if(myCustomerResponse.getStatus() == 200)
@@ -144,129 +143,80 @@ public class CustomerList {
 		String myCustomerString = null;
  
 
-		if(filter.length() == 0)
+		try
 		{
-			try {
+			if(filter.length() == 0)
+			{
+
 				myCustomerResponse = myCustomerResource.getCustomersExternal(limit,offset,false);
 
-				if(myCustomerResponse.getStatus() == 200)
-				{
-					myCustomerString = myCustomerResponse.getEntity().toString();
-					this.customerList.clear();
-								
-					JSONObject myCustomersJSON = JSONObject.parse(myCustomerString);
-					JSONArray myCustomersArrayJSON = (JSONArray) myCustomersJSON.get(JSON_CUSTOMERS);
-					long customerCount = myCustomersArrayJSON.size();
-					for(int i = 0;i < customerCount;i++)
-					{
-						JSONObject myCustomer = (JSONObject) myCustomersArrayJSON.get(i);
-						Date dateOfBirth = sortOutDate((String)myCustomer.get(JSON_DATE_OF_BIRTH));
-						Date creditScoreReviewDate = sortOutDate((String)myCustomer.get(JSON_CUSTOMER_REVIEW_DATE));
 
-						String id = (String)myCustomer.get(JSON_ID);
-						
-						Customer myListCustomer = new Customer(id, 
-								(String)myCustomer.get(JSON_SORT_CODE),
-								(String)myCustomer.get(JSON_CUSTOMER_NAME),
-								(String)myCustomer.get(JSON_CUSTOMER_ADDRESS), 
-								dateOfBirth, (String)myCustomer.get(JSON_CUSTOMER_CREDIT_SCORE), 
-								creditScoreReviewDate);
-
-						
-					
-						this.customerList.add(myListCustomer);
-
-					}
-				}
-				else
-				{
-					logger.severe(myCustomerResponse.getStatus() + " " + myCustomerResponse.getEntity().toString());
-				}
-			} 
-			catch (IOException e1) 
-			{
-				logger.severe(e1.toString());
 			}
-		}
-		if(filter.startsWith(" AND CUSTOMER_NUMBER = "))
-		{
+			if(filter.startsWith(" AND CUSTOMER_NUMBER = "))
+			{
 
-			this.customerList.clear();
-			String customerNumberFilter = filter.substring(23);
-			Long customerNumber = new Long(customerNumberFilter);
+				this.customerList.clear();
+				String customerNumberFilter = filter.substring(23);
+				Long customerNumber = new Long(customerNumberFilter);
 
-			myCustomerResponse = myCustomerResource.getCustomerExternal(customerNumber);
-			String myCustomersString = myCustomerResponse.getEntity().toString();
-			JSONObject myCustomerJSON;
+				myCustomerResponse = myCustomerResource.getCustomerExternal(customerNumber);
+			}
+
+
+			if(filter.startsWith(" AND CUSTOMER_NAME like '"))
+			{
+				String customerNameFilter = filter.substring(25);
+				customerNameFilter = customerNameFilter.substring(0,customerNameFilter.length() -1);
+
+				myCustomerResponse = myCustomerResource.getCustomersByNameExternal(customerNameFilter,limit,offset,false);
+			}
+
+
+
+			if(offset == 0)
+			{
+				howMany(filter);
+			}
 			if(myCustomerResponse.getStatus() == 200)
 			{
-				try {
-					myCustomerJSON = JSONObject.parse(myCustomersString);
-										
-					Date dateOfBirth = sortOutDate((String)myCustomerJSON.get(JSON_DATE_OF_BIRTH));
-					String id = (String)myCustomerJSON.get(JSON_ID);
-									
-					Date creditScoreReviewDate = sortOutDate((String)myCustomerJSON.get(JSON_CUSTOMER_REVIEW_DATE));
-					
-					Customer myListCustomer = new Customer(id, (String)myCustomerJSON.get(JSON_SORT_CODE),
-							(String)myCustomerJSON.get(JSON_CUSTOMER_NAME),(String)myCustomerJSON.get(JSON_CUSTOMER_ADDRESS), dateOfBirth, (String)myCustomerJSON.get(JSON_CUSTOMER_CREDIT_SCORE), creditScoreReviewDate);
+				myCustomerString = myCustomerResponse.getEntity().toString();
+				this.customerList.clear();
+
+				JSONObject myCustomersJSON = JSONObject.parse(myCustomerString);
+				JSONArray myCustomersArrayJSON = (JSONArray) myCustomersJSON.get(JSON_CUSTOMERS);
+				long customerCount = myCustomersArrayJSON.size();
+				for(int i = 0;i < customerCount;i++)
+				{
+					JSONObject myCustomer = (JSONObject) myCustomersArrayJSON.get(i);
+					Date dateOfBirth = sortOutDate((String)myCustomer.get(JSON_DATE_OF_BIRTH));
+					Date creditScoreReviewDate = sortOutDate((String)myCustomer.get(JSON_CUSTOMER_REVIEW_DATE));
+
+					String id = (String)myCustomer.get(JSON_ID);
+
+					Customer myListCustomer = new Customer(id, 
+							(String)myCustomer.get(JSON_SORT_CODE),
+							(String)myCustomer.get(JSON_CUSTOMER_NAME),
+							(String)myCustomer.get(JSON_CUSTOMER_ADDRESS), 
+							dateOfBirth, (String)myCustomer.get(JSON_CUSTOMER_CREDIT_SCORE), 
+							creditScoreReviewDate);
+
+
 
 					this.customerList.add(myListCustomer);
-				} 
-				catch (IOException e) 
-				{
-					logger.severe(e.toString());
+
 				}
-			}
-			else this.count = 0;
-		}
-
-		
-		if(filter.startsWith(" AND CUSTOMER_NAME like '"))
-		{
-			String customerNameFilter = filter.substring(25);
-			customerNameFilter = customerNameFilter.substring(0,customerNameFilter.length() -1);
-
-			myCustomerResponse = myCustomerResource.getCustomersByNameExternal(customerNameFilter,limit,offset,false);
-			myCustomerString = myCustomerResponse.getEntity().toString();
-			if(myCustomerResponse.getStatus() == 200)
-			{
-				try {
-					this.customerList.clear();
-					JSONObject myCustomersJSON = JSONObject.parse(myCustomerString);
-					JSONArray myCustomersArrayJSON = (JSONArray) myCustomersJSON.get(JSON_CUSTOMERS);
-					long customerCount = myCustomersArrayJSON.size();
-					for(int i = 0;i < customerCount;i++)
-					{
-						JSONObject myCustomer = (JSONObject) myCustomersArrayJSON.get(i);
-						Date myDate = sortOutDate((String)myCustomer.get(JSON_DATE_OF_BIRTH));
-						String id = (String)myCustomer.get(JSON_ID);
-						Date creditScoreReviewDate = sortOutDate((String)myCustomer.get(JSON_CUSTOMER_REVIEW_DATE));
-
-						Customer myListCustomer = new Customer(id, (String)myCustomer.get(JSON_SORT_CODE),
-								(String)myCustomer.get(JSON_CUSTOMER_NAME),(String)myCustomer.get(JSON_CUSTOMER_ADDRESS), myDate, (String)myCustomer.get(JSON_CUSTOMER_CREDIT_SCORE), creditScoreReviewDate);
-						
-						this.customerList.add(myListCustomer);
-					}
-				} 
-				catch (IOException e1) 
-				{
-					logger.severe(e1.toString());
-				}
-				
 			}
 			else
 			{
-				logger.severe(myCustomerResponse.getStatus() + " " + myCustomerString);
+				logger.severe(myCustomerResponse.getStatus() + " " + myCustomerResponse.getEntity().toString());
 			}
+
 		}
-
-
-
-		if(offset == 0)
+		catch (IOException e1) 
 		{
-			howMany(filter);
+			logger.severe(e1.toString());
 		}
+		
 
 	}
 
@@ -278,8 +228,13 @@ public class CustomerList {
 		Integer month = new Integer(dateArray[1]);
 		Integer day = new Integer(dateArray[2]);
 
-		Date sortedOutDate = new Date(year.intValue() - 1900,month.intValue() - 1, day.intValue());
-		return sortedOutDate;
+		Calendar myCalendar = Calendar.getInstance();
+		myCalendar.set(Calendar.YEAR,year);
+		myCalendar.set(Calendar.MONTH,month-1);
+		myCalendar.set(Calendar.DATE, day);
+		
+		Date myDate = new Date(myCalendar.getTimeInMillis());
+		return myDate;
 	}
 
 
