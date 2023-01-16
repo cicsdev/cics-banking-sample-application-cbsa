@@ -43,15 +43,15 @@ import com.ibm.cics.server.ChildResponse.CompletionStatus;
 
 public class CreditScoreCICS540 {
 
-    static final String COPYRIGHT =
-      "Copyright IBM Corp. 2022";
-	
-    private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.api.json");
+	static final String COPYRIGHT =
+			"Copyright IBM Corp. 2022";
+
+	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.api.json");
 
 	public static CustomerJSON populateCreditScoreAndReviewDate(CustomerJSON customer)
 	{
 		sortOutLogging();
-		
+
 		int creditAgencyCount = 5;
 
 		/*                Set up a random CS review date within the next 21 days */
@@ -64,157 +64,144 @@ public class CreditScoreCICS540 {
 		customer.setReviewDate(new Date(nowMs));
 		Channel myCreditScoreChannel = null;
 
-		try {
-			myCreditScoreChannel = Task.getTask().createChannel("CIPCREDCHANN");
-		} 
-		catch (ChannelErrorException e1) 
-		{
-			logger.severe(e1.toString());
-		}
-
-		String[] transactionID = new String[creditAgencyCount];
-		String[] containerID = new String[creditAgencyCount];
-
-		List<Future<ChildResponse>> children = new ArrayList<>();
-
-		int creditScoreTotal = 0;
-
 		AsyncService asService = new AsyncServiceImpl();
-
-		for(int i=0;i < creditAgencyCount;i++)
-		{
-			transactionID[i] = "O" + "CR" + (i +1);
-			switch(i)
-			{
-			case 0:
-				containerID[i] = "CIPA";
-				break;
-			case 1:
-				containerID[i] = "CIPB";
-				break;
-			case 2:
-				containerID[i] = "CIPC";
-				break;
-			case 3:
-				containerID[i] = "CIPD";
-				break;
-			case 4:
-				containerID[i] = "CIPE";
-				break;
-			case 5:
-				containerID[i] = "CIPF";
-				break;
-			case 6:
-				containerID[i] = "CIPG";
-				break;
-			case 7:
-				containerID[i] = "CIPH";
-				break;
-			case 8:
-				containerID[i] = "CIPI";
-				break;			
-			default:
-				break;
-			}
-
-			CRECUST myCRECUST = new CRECUST();
-			myCRECUST.setCommAddress(customer.getCustomerAddress());
-			Calendar myCalendar = Calendar.getInstance();
-			myCalendar.setTime(customer.getDateOfBirth());
-			myCRECUST.setCommBirthDay(myCalendar.get(Calendar.DAY_OF_MONTH));
-			myCRECUST.setCommBirthMonth(myCalendar.get(Calendar.MONTH) + 1);
-			myCRECUST.setCommBirthYear(myCalendar.get(Calendar.YEAR));
-			myCRECUST.setCommName(customer.getCustomerName());
-			myCRECUST.setCommNumber(Long.parseLong(customer.getId()));
-			myCalendar.setTime(customer.getReviewDate());
-			myCRECUST.setCommCsReviewDd(myCalendar.get(Calendar.DAY_OF_MONTH));
-			myCRECUST.setCommCsReviewMm(myCalendar.get(Calendar.MONTH) + 1);
-			myCRECUST.setCommCsReviewYyyy(myCalendar.get(Calendar.YEAR));
-			myCRECUST.setCommSortcode(Integer.parseInt(customer.getSortCode()));
-
-			try 
-			{
-				Container myContainer = myCreditScoreChannel.createContainer(containerID[i]);
-				myContainer.put(myCRECUST.getByteBuffer());
-			}
-			catch (ContainerErrorException | ChannelErrorException | InvalidRequestException | CCSIDErrorException | CodePageErrorException e1) 
-			{
-				logger.severe(e1.toString());
-			}
-
-			try 
-			{
-				children.add(asService.runTransactionId(transactionID[i],myCreditScoreChannel));
-			} 
-			catch (InvalidRequestException | InvalidTransactionIdException | NotAuthorisedException | ResourceDisabledException | ChannelErrorException e) {
-				logger.severe(e.toString());
-			} 
-		}
-
+		List<Future<ChildResponse>> children = new ArrayList<>();
+		String[] containerID = new String[creditAgencyCount];
+		int creditScoreTotal = 0;
 		
-		int completedRequests = 0;
-		while(completedRequests < creditAgencyCount)
-		{
-			ChildResponse anyOneWillDo = null;
-			try {
-				anyOneWillDo = asService.getAny();
-			} catch (InvalidRequestException | NotFoundException e1) 
-			{
-				logger.severe(e1.toString());
-			} 
-
-			if(anyOneWillDo != null && anyOneWillDo.getCompletionStatus().equals(CompletionStatus.NORMAL))
-			{
-				Channel responseChannel = anyOneWillDo.getChannel();
-				customer.setCreditScore("123");
-				Container myContainer;
-				boolean foundIt = false;
-				for(int j = 0; !foundIt;j++)
-				{
-					try 
-					{
-						if(anyOneWillDo.equals(children.get(j)))
-						{
-							myContainer = responseChannel.getContainer(containerID[j]);
-							byte[] myContainerBytes = myContainer.get();
-							CRECUST myCRECUST = new CRECUST(myContainerBytes);
-							creditScoreTotal = creditScoreTotal + myCRECUST.getCommCreditScore();
-							foundIt = true;
-							completedRequests++;
-						}
-					}
-					catch (ChannelErrorException | CCSIDErrorException | CodePageErrorException | ContainerErrorException e) 
-					{
-						logger.severe(e.toString());
-						Task.getTask().abend("CRDT");
-					}
-				}
-
-			} 
-			else
-			{
-				logger.log(Level.SEVERE,() -> "One of the agencies didn't work");
-				creditAgencyCount--;
-			}
-		}
-
-
-
-		int creditScoreAverage = creditScoreTotal / creditAgencyCount;
-		customer.setCreditScore(Integer.toString(creditScoreAverage));
-		return customer;
-	}
-	
-	private static void sortOutLogging()
-	{
 		try 
 		{
-			LogManager.getLogManager().readConfiguration();
-		} 
-		catch (SecurityException | IOException e) 
+			myCreditScoreChannel = Task.getTask().createChannel("CIPCREDCHANN");
+
+			String[] transactionID = new String[creditAgencyCount];
+
+			for(int i=0;i < creditAgencyCount;i++)
+			{
+				transactionID[i] = "O" + "CR" + (i +1);
+				switch(i)
+				{
+				case 0:
+					containerID[i] = "CIPA";
+					break;
+				case 1:
+					containerID[i] = "CIPB";
+					break;
+				case 2:
+					containerID[i] = "CIPC";
+					break;
+				case 3:
+					containerID[i] = "CIPD";
+					break;
+				case 4:
+					containerID[i] = "CIPE";
+					break;
+				case 5:
+					containerID[i] = "CIPF";
+					break;
+				case 6:
+					containerID[i] = "CIPG";
+					break;
+				case 7:
+					containerID[i] = "CIPH";
+					break;
+				case 8:
+					containerID[i] = "CIPI";
+					break;			
+				default:
+					break;
+				}
+
+				CRECUST myCRECUST = new CRECUST();
+				myCRECUST.setCommAddress(customer.getCustomerAddress());
+				Calendar myCalendar = Calendar.getInstance();
+				myCalendar.setTime(customer.getDateOfBirth());
+				myCRECUST.setCommBirthDay(myCalendar.get(Calendar.DAY_OF_MONTH));
+				myCRECUST.setCommBirthMonth(myCalendar.get(Calendar.MONTH) + 1);
+				myCRECUST.setCommBirthYear(myCalendar.get(Calendar.YEAR));
+				myCRECUST.setCommName(customer.getCustomerName());
+				myCRECUST.setCommNumber(Long.parseLong(customer.getId()));
+				myCalendar.setTime(customer.getReviewDate());
+				myCRECUST.setCommCsReviewDd(myCalendar.get(Calendar.DAY_OF_MONTH));
+				myCRECUST.setCommCsReviewMm(myCalendar.get(Calendar.MONTH) + 1);
+				myCRECUST.setCommCsReviewYyyy(myCalendar.get(Calendar.YEAR));
+				myCRECUST.setCommSortcode(Integer.parseInt(customer.getSortCode()));
+
+				Container myContainer = myCreditScoreChannel.createContainer(containerID[i]);
+				myContainer.put(myCRECUST.getByteBuffer());
+
+				children.add(asService.runTransactionId(transactionID[i],myCreditScoreChannel));
+
+			}
+		}
+		catch (CCSIDErrorException | CodePageErrorException | ContainerErrorException | InvalidRequestException | InvalidTransactionIdException | NotAuthorisedException | ResourceDisabledException | ChannelErrorException e) 
 		{
 			logger.severe(e.toString());
+			return null;
 		} 
+
+	int completedRequests = 0;
+	while(completedRequests < creditAgencyCount)
+	{
+		ChildResponse anyOneWillDo = null;
+		try {
+			anyOneWillDo = asService.getAny();
+		} catch (InvalidRequestException | NotFoundException e1) 
+		{
+			logger.severe(e1.toString());
+		} 
+
+		if(anyOneWillDo != null && anyOneWillDo.getCompletionStatus().equals(CompletionStatus.NORMAL))
+		{
+			Channel responseChannel = anyOneWillDo.getChannel();
+			customer.setCreditScore("123");
+			Container myContainer;
+			boolean foundIt = false;
+			for(int j = 0; !foundIt;j++)
+			{
+				try 
+				{
+					if(anyOneWillDo.equals(children.get(j)))
+					{
+						myContainer = responseChannel.getContainer(containerID[j]);
+						byte[] myContainerBytes = myContainer.get();
+						CRECUST myCRECUST = new CRECUST(myContainerBytes);
+						creditScoreTotal = creditScoreTotal + myCRECUST.getCommCreditScore();
+						foundIt = true;
+						completedRequests++;
+					}
+				}
+				catch (ChannelErrorException | CCSIDErrorException | CodePageErrorException | ContainerErrorException e) 
+				{
+					logger.severe(e.toString());
+					Task.getTask().abend("CRDT");
+				}
+			}
+
+		} 
+		else
+		{
+			logger.log(Level.SEVERE,() -> "One of the agencies didn't work");
+			creditAgencyCount--;
+		}
 	}
+
+
+
+	int creditScoreAverage = creditScoreTotal / creditAgencyCount;
+	customer.setCreditScore(Integer.toString(creditScoreAverage));
+	return customer;
+}
+
+private static void sortOutLogging()
+{
+	try 
+	{
+		LogManager.getLogManager().readConfiguration();
+	} 
+	catch (SecurityException | IOException e) 
+	{
+		logger.severe(e.toString());
+	} 
+}
 
 }

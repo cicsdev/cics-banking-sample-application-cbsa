@@ -33,8 +33,8 @@ import com.ibm.json.java.JSONObject;
 @Path("/customer")
 public class CustomerResource{
 
-    static final String COPYRIGHT =
-      "Copyright IBM Corp. 2022";
+	static final String COPYRIGHT =
+			"Copyright IBM Corp. 2022";
 
 	/**
 	 * This class describes the methods of the Customer Resource
@@ -54,13 +54,13 @@ public class CustomerResource{
 	private static final String GET_CUSTOMER_EXTERNAL_EXIT = "getCustomerExternal exiting";
 	private static final String DELETE_CUSTOMER_INTERNAL = "deleteCustomerInternal()";
 	private static final String DELETE_CUSTOMER_INTERNAL_EXIT = "deleteCustomerInternal() exiting";
-	
+
 	private static final String UPDATE_CUSTOMER_INTERNAL = "updateCustomerInternal for customerNumber ";
 	private static final String UPDATE_CUSTOMER_EXTERNAL = "updateCustomerExternal for customerNumber "; 
-	
+
 
 	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.api.json");
-	
+
 	private static final String JSON_NUMBER_OF_CUSTOMERS = "numberOfCustomers";
 	private static final String JSON_CUSTOMERS = "customers";
 	private static final String JSON_SORT_CODE = "sortCode";
@@ -125,7 +125,7 @@ public class CustomerResource{
 		com.ibm.cics.cip.bankliberty.web.vsam.Customer vsamCustomer = new com.ibm.cics.cip.bankliberty.web.vsam.Customer();
 
 		customer.setSortCode(this.getSortCode().toString());
-		
+
 
 		vsamCustomer = vsamCustomer.createCustomer(customer, this.getSortCode(),false);
 
@@ -156,7 +156,7 @@ public class CustomerResource{
 		myCreatedCustomer.setCustomerName(vsamCustomer.getName());
 		myCreatedCustomer.setSortCode(vsamCustomer.getSortcode());
 		myCreatedCustomer.setCustomerNumber(vsamCustomer.getCustomer_number());
-		
+
 		Response writeCreateCustomerResponse = myProcessedTransactionResource.writeCreateCustomerInternal(myCreatedCustomer);
 		if(writeCreateCustomerResponse == null || writeCreateCustomerResponse.getStatus() != 200)
 		{
@@ -376,7 +376,40 @@ public class CustomerResource{
 		JSONObject myAccountsJSON;
 		try {
 			myAccountsJSON = JSONObject.parse(myAccountsResource.getAccountsByCustomerInternal(id).getEntity().toString());
-		} catch (IOException e) {
+
+			//		
+			JSONArray accountsToDelete = (JSONArray) myAccountsJSON.get("accounts");
+			for(int i = 0; i < accountsToDelete.size();i++)
+			{
+
+				JSONObject accountToDelete = (JSONObject) accountsToDelete.get(i);
+				Long accountToDeleteLong = Long.parseLong((String) accountToDelete.get(JSON_ID));
+				Response deleteAccountResponse = myAccountsResource.deleteAccountInternal(accountToDeleteLong);
+
+				if(deleteAccountResponse.getStatus() == 404)
+				{
+
+					response.put(JSON_ERROR_MSG,"Error deleting account " + accountToDeleteLong + " for customer " + id + ",account not found");
+					logger.log(Level.SEVERE,() -> "Customer: deleteAccount: Failed to delete account, not found");
+					Task.getTask().rollback();
+					Response myResponse = Response.status(404).entity(response.toString()).build();
+					logger.log(Level.WARNING,() ->"Customer: deleteAccount: Failed to delete account, not found for customer " + id + " in deleteCustomerInternal()");
+					logger.exiting(this.getClass().getName(), DELETE_CUSTOMER_INTERNAL_EXIT,myResponse);
+					return myResponse;
+				}
+
+				if(deleteAccountResponse.getStatus() != 200)
+				{
+					response.put(JSON_ERROR_MSG,"Error deleting account " + accountToDeleteLong + " for customer " + id);
+					logger.log(Level.SEVERE,() -> "Customer: deleteAccount: Failed to delete account, error");
+					Task.getTask().rollback();
+					Response myResponse = Response.status(deleteAccountResponse.getStatus()).entity(response.toString()).build();
+					logger.exiting(this.getClass().getName(), DELETE_CUSTOMER_INTERNAL_EXIT,myResponse);
+					return myResponse;
+				}
+			} 
+		}
+		catch (IOException e) {
 
 			response.put(JSON_ERROR_MSG,"Error obtaining accounts to delete for customer " + id);
 			Response myResponse = Response.status(500).entity(response.toString()).build();
@@ -384,46 +417,8 @@ public class CustomerResource{
 			logger.exiting(this.getClass().getName(), GET_CUSTOMER_INTERNAL_EXIT,myResponse);
 			return myResponse;
 		}
-		//		
-		JSONArray accountsToDelete = (JSONArray) myAccountsJSON.get("accounts");
-		for(int i = 0; i < accountsToDelete.size();i++)
-		{
-
-			JSONObject accountToDelete = (JSONObject) accountsToDelete.get(i);
-			Long accountToDeleteLong = Long.parseLong((String) accountToDelete.get(JSON_ID));
-			Response deleteAccountResponse = myAccountsResource.deleteAccountInternal(accountToDeleteLong);
-
-
-			if(deleteAccountResponse.getStatus() == 404)
-			{
-
-				response.put(JSON_ERROR_MSG,"Error deleting account " + accountToDeleteLong + " for customer " + id + ",account not found");
-				try {
-					logger.log(Level.SEVERE,() -> "Customer: deleteAccount: Failed to delete account, not found");
-					Task.getTask().rollback();
-				} catch (InvalidRequestException e) {
-					logger.log(Level.SEVERE,() -> "rollback failed " + e.toString());
-				}
-				Response myResponse = Response.status(404).entity(response.toString()).build();
-				logger.log(Level.WARNING,() ->"Customer: deleteAccount: Failed to delete account, not found for customer " + id + " in deleteCustomerInternal()");
-				logger.exiting(this.getClass().getName(), DELETE_CUSTOMER_INTERNAL_EXIT,myResponse);
-				return myResponse;
-			}
-
-			if(deleteAccountResponse.getStatus() != 200)
-			{
-
-				response.put(JSON_ERROR_MSG,"Error deleting account " + accountToDeleteLong + " for customer " + id);
-				try {
-					logger.log(Level.SEVERE,() -> "Customer: deleteAccount: Failed to delete account, error");
-					Task.getTask().rollback();
-				} catch (InvalidRequestException e) {
-					logger.log(Level.SEVERE,() -> "rollback failed " + e.toString());
-				}
-				Response myResponse = Response.status(deleteAccountResponse.getStatus()).entity(response.toString()).build();
-				logger.exiting(this.getClass().getName(), DELETE_CUSTOMER_INTERNAL_EXIT,myResponse);
-				return myResponse;
-			}
+		catch (InvalidRequestException e) {
+			logger.log(Level.SEVERE,() -> "rollback failed " + e.toString());
 		}
 
 		// If we are still here then we can try to delete the customer
@@ -637,7 +632,7 @@ public class CustomerResource{
 			response.put(JSON_CUSTOMER_NAME, vsamCustomers[i].getName().trim());
 			response.put(JSON_CUSTOMER_ADDRESS, vsamCustomers[i].getAddress().trim());
 
-			
+
 			Calendar myCalendar = Calendar.getInstance();
 			myCalendar.setTime(vsamCustomers[i].getDob());
 			Integer dobDD = myCalendar.get(Calendar.DAY_OF_MONTH);
@@ -650,7 +645,7 @@ public class CustomerResource{
 
 			Integer dobYYYY = myCalendar.get(Calendar.YEAR);
 			dateOfBirth = dateOfBirth.concat(dobYYYY.toString());
-			
+
 			response.put(JSON_DATE_OF_BIRTH,dateOfBirth);
 			allCustomers.add(response);
 		}
@@ -867,7 +862,7 @@ public class CustomerResource{
 			logger.severe(e.toString());
 		}
 	}
-	
+
 	private static void setSortcode(String sortcodeIn)
 	{
 		sortcode = sortcodeIn;
