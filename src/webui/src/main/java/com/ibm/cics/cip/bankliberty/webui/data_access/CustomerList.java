@@ -66,41 +66,36 @@ public class CustomerList {
 		Response myCustomerResponse = null;
 
 		//                0123456789012345678901234
-		if(filter.startsWith(" AND CUSTOMER_NAME like '"))
+		
+		try
 		{
-			//01234567890123456789012345678901234567890
-			// AND ACCOUNT_AVAILABLE_BALANCE <= 33558.0
-
-			String customerNameFilter = filter.substring(25);
-			customerNameFilter = customerNameFilter.substring(0,customerNameFilter.length() -1);
-
-			myCustomerResponse = myCustomerResource.getCustomersByNameExternal(customerNameFilter,0,0,true);
-			String myCustomersString = myCustomerResponse.getEntity().toString();
-			JSONObject myCustomersJSON;
-			try 
+			if(filter.startsWith(" AND CUSTOMER_NAME like '"))
 			{
+				//01234567890123456789012345678901234567890
+				// AND ACCOUNT_AVAILABLE_BALANCE <= 33558.0
+
+				String customerNameFilter = filter.substring(25);
+				customerNameFilter = customerNameFilter.substring(0,customerNameFilter.length() -1);
+
+				myCustomerResponse = myCustomerResource.getCustomersByNameExternal(customerNameFilter,0,0,true);
+				String myCustomersString = myCustomerResponse.getEntity().toString();
+				JSONObject myCustomersJSON;
 				myCustomersJSON = JSONObject.parse(myCustomersString);
 				long customerCount = (Long) myCustomersJSON.get(JSON_NUMBER_OF_CUSTOMERS);
 				this.count = (int)customerCount;
-			} 
-			catch (IOException e) 
-			{
-				logger.severe(e.toString());
 			}
-		}
 
-		//                    01234567890123456789012
-		if(filter.startsWith(" AND CUSTOMER_NUMBER = "))
-		{
-			String customerNumberFilter = filter.substring(23);
-			Long customerNumber = new Long(customerNumberFilter);
-
-			myCustomerResponse = myCustomerResource.getCustomerExternal(customerNumber);
-			String myCustomersString = myCustomerResponse.getEntity().toString();
-			JSONObject myCustomerJSON;
-			if(myCustomerResponse.getStatus() == 200)
+			//                    01234567890123456789012
+			if(filter.startsWith(" AND CUSTOMER_NUMBER = "))
 			{
-				try 
+				String customerNumberFilter = filter.substring(23);
+				Long customerNumber = new Long(customerNumberFilter);
+
+				myCustomerResponse = myCustomerResource.getCustomerExternal(customerNumber);
+				String myCustomersString = myCustomerResponse.getEntity().toString();
+				JSONObject myCustomerJSON;
+				this.count= 0;
+				if(myCustomerResponse.getStatus() == 200)
 				{
 					myCustomerJSON = JSONObject.parse(myCustomersString);
 					Date myDate = sortOutDate((String)myCustomerJSON.get(JSON_DATE_OF_BIRTH));
@@ -109,39 +104,33 @@ public class CustomerList {
 					{
 						this.count = 1;
 					}
-				} 
-				catch (IOException e) 
-				{
-					logger.severe(e.toString());
 				}
 			}
-			else this.count= 0;
-		}
 
-		if(filter.length() ==  0)
-		{
-			//("No filter so get the lot please!");
-			myCustomerResponse = myCustomerResource.getCustomersExternal(new Integer(250000), new Integer(0),true);
-			String myCustomersString = myCustomerResponse.getEntity().toString();
-			if(myCustomerResponse.getStatus() == 200)
+			if(filter.length() ==  0)
 			{
-				JSONObject myCustomersJSON;
-				try 
+				//("No filter so get the lot please!");
+				myCustomerResponse = myCustomerResource.getCustomersExternal(new Integer(250000), new Integer(0),true);
+				String myCustomersString = myCustomerResponse.getEntity().toString();
+				if(myCustomerResponse.getStatus() == 200)
 				{
+					JSONObject myCustomersJSON;
 					myCustomersJSON = JSONObject.parse(myCustomersString);
 					long customerCount = (Long) myCustomersJSON.get(JSON_NUMBER_OF_CUSTOMERS);
 					this.count = (int)customerCount;
-				} 
-				catch (IOException e) 
+
+				}
+				else
 				{
-					logger.severe(e.toString());
+					System.err.println(myCustomerResponse.getStatus() + " " + myCustomersString);
 				}
 			}
-			else
-			{
-				System.err.println(myCustomerResponse.getStatus() + " " + myCustomersString);
-			}
 		}
+		catch (IOException e) 
+		{
+			logger.severe(e.toString());
+		}
+		
 	}
 
 
