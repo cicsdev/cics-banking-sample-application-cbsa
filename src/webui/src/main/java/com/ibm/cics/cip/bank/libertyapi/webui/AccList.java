@@ -99,10 +99,6 @@ public class AccList extends VerticalLayout{
 				{
 					offset -= limit;
 				}
-				if(offset<0)
-				{
-					offset=0;
-				}
 				createAccList(filter);
 			}
 		}
@@ -122,10 +118,6 @@ public class AccList extends VerticalLayout{
 			{
 				if(offset != 0){
 					offset -= limit*10;
-				}
-				if(offset < 0)
-				{
-					offset = 0;
 				}
 				createAccList(filter);
 			}
@@ -234,10 +226,6 @@ public class AccList extends VerticalLayout{
 			public void buttonClick(ClickEvent event) {
 				if(offset != 0){
 					offset -= limit;
-					if(offset<0)
-					{
-						offset=0;
-					}
 					// Go back a page
 					createAccList(filter);
 				}
@@ -257,9 +245,6 @@ public class AccList extends VerticalLayout{
 			public void buttonClick(ClickEvent event) {
 				if(offset != 0){
 					offset -= limit*10;
-					if(offset < 0){
-						offset = 0;
-					}
 					// Go back 10 pages
 					createAccList(filter);
 				}
@@ -564,7 +549,7 @@ public class AccList extends VerticalLayout{
 	private void createAccList(final String filter){
 		sortOutLogging();
 		logger.entering(this.getClass().getName(),"createAccList(final String filter) for filter " + filter);
-		
+		if(offset<0) offset=0;
 		vl.removeAllComponents();
 		try {
 			
