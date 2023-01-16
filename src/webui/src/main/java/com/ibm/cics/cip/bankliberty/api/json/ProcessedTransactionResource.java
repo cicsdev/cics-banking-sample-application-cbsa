@@ -124,9 +124,9 @@ public class ProcessedTransactionResource{
 			proctran.put(JSON_REFERENCE, processedTransactions[i].getReference());
 			if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_BRANCH_DELETE_ACCOUNT) == 0 || processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_WEB_DELETE_ACCOUNT) ==0)
 			{
-				proctran.put(JSON_ACCOUNT_TYPE, processedTransactions[i].getAccount_type());
-				proctran.put(JSON_LAST_STATEMENT, myDateFormat.format(processedTransactions[i].getLast_statement()));
-				proctran.put(JSON_NEXT_STATEMENT, myDateFormat.format(processedTransactions[i].getNext_statement()));
+				proctran.put(JSON_ACCOUNT_TYPE, processedTransactions[i].getAccountType());
+				proctran.put(JSON_LAST_STATEMENT, myDateFormat.format(processedTransactions[i].getLastStatement()));
+				proctran.put(JSON_NEXT_STATEMENT, myDateFormat.format(processedTransactions[i].getNextStatement()));
 				proctran.put(JSON_CUSTOMER, processedTransactions[i].getCustomer());
 			}
 
@@ -148,13 +148,13 @@ public class ProcessedTransactionResource{
 			if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_TRANSFER) == 0)
 			{
 				proctran.put(JSON_TARGET_ACCOUNT,processedTransactions[i].getTarget_account_number());
-				proctran.put(JSON_TARGET_SORT_CODE,processedTransactions[i].getTarget_sortcode());
+				proctran.put(JSON_TARGET_SORT_CODE,processedTransactions[i].getTargetSortcode());
 			}
 			if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_BRANCH_CREATE_ACCOUNT) == 0 || processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_WEB_CREATE_ACCOUNT) ==0)
 			{
-				proctran.put(JSON_ACCOUNT_TYPE, processedTransactions[i].getAccount_type());
-				proctran.put(JSON_LAST_STATEMENT, myDateFormat.format(processedTransactions[i].getLast_statement()));
-				proctran.put(JSON_NEXT_STATEMENT, myDateFormat.format(processedTransactions[i].getNext_statement()));
+				proctran.put(JSON_ACCOUNT_TYPE, processedTransactions[i].getAccountType());
+				proctran.put(JSON_LAST_STATEMENT, myDateFormat.format(processedTransactions[i].getLastStatement()));
+				proctran.put(JSON_NEXT_STATEMENT, myDateFormat.format(processedTransactions[i].getNextStatement()));
 				proctran.put(JSON_CUSTOMER, processedTransactions[i].getCustomer());
 			}
 
@@ -178,22 +178,22 @@ public class ProcessedTransactionResource{
 			proctran.put(JSON_TYPE, processedTransactions[i].getType());
 			if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_BRANCH_DELETE_ACCOUNT) == 0)
 			{
-				proctran.put(JSON_ACCOUNT_TYPE, processedTransactions[i].getAccount_type());
-				proctran.put(JSON_LAST_STATEMENT, myDateFormat.format(processedTransactions[i].getLast_statement()));
-				proctran.put(JSON_NEXT_STATEMENT, myDateFormat.format(processedTransactions[i].getNext_statement()));
+				proctran.put(JSON_ACCOUNT_TYPE, processedTransactions[i].getAccountType());
+				proctran.put(JSON_LAST_STATEMENT, myDateFormat.format(processedTransactions[i].getLastStatement()));
+				proctran.put(JSON_NEXT_STATEMENT, myDateFormat.format(processedTransactions[i].getNextStatement()));
 				proctran.put(JSON_CUSTOMER, processedTransactions[i].getCustomer());
 			}
 			if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_WEB_DELETE_ACCOUNT) == 0)
 			{
-				proctran.put(JSON_ACCOUNT_TYPE, processedTransactions[i].getAccount_type());
-				proctran.put(JSON_LAST_STATEMENT, myDateFormat.format(processedTransactions[i].getLast_statement()));
-				proctran.put(JSON_NEXT_STATEMENT, myDateFormat.format(processedTransactions[i].getNext_statement()));
+				proctran.put(JSON_ACCOUNT_TYPE, processedTransactions[i].getAccountType());
+				proctran.put(JSON_LAST_STATEMENT, myDateFormat.format(processedTransactions[i].getLastStatement()));
+				proctran.put(JSON_NEXT_STATEMENT, myDateFormat.format(processedTransactions[i].getNextStatement()));
 				proctran.put(JSON_CUSTOMER, processedTransactions[i].getCustomer());
 			}
 			if(processedTransactions[i].isTransfer())
 			{
 				proctran.put(JSON_TARGET_ACCOUNT,processedTransactions[i].getTarget_account_number());
-				proctran.put(JSON_TARGET_SORT_CODE,processedTransactions[i].getTarget_sortcode());
+				proctran.put(JSON_TARGET_SORT_CODE,processedTransactions[i].getTargetSortcode());
 			}
 if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_BRANCH_CREATE_CUSTOMER) == 0  )
 {

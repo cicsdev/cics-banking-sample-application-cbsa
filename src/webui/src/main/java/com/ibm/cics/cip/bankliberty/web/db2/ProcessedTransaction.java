@@ -48,10 +48,13 @@ public class ProcessedTransaction extends HBankDataAccess{
 	private 	String 		sortcode;              
 	private 	String 		customerName;
 
-	int retrieved = 0, stored = 0, offset = 0, limit = 0;
+	int retrieved = 0;
+	int stored = 0;
+	int offset = 0;
+	int limit = 0;
 
 
-	int valid_proctran_records = 0;
+	int validProctranRecords = 0;
 	public String getCustomerName() {
 		return customerName;
 	}
@@ -63,9 +66,10 @@ public class ProcessedTransaction extends HBankDataAccess{
 
 
 
-	private 	String 		account_number;
-	private 	String 		account_type;
-	private 	Date  		last_statement, next_statement;
+	private 	String 		accountNumber;
+	private 	String 		accountType;
+	private 	Date  		lastStatement;
+	private 	Date	 	nextStatement;
 	private     boolean     moneyTransfer = false;
 	private 	String 		description;
 	private 	Date 		transactionDate;
@@ -76,8 +80,8 @@ public class ProcessedTransaction extends HBankDataAccess{
 
 	
 
-	private 	String 		target_account_number;
-	private 	String 		target_sortcode;
+	private 	String 		targetAccountNumber;
+	private 	String 		targetSortcode;
 	private 	String 		type;
 	private 	String 		reference;
 
@@ -103,44 +107,44 @@ public class ProcessedTransaction extends HBankDataAccess{
 	}
 
 
-	public String getAccount_type() {
-		return account_type;
+	public String getAccountType() {
+		return accountType;
 	}
 
 
-	public void setAccount_type(String account_type) {
-		this.account_type = account_type;
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
 	}
 
 
-	public Date getLast_statement() {
-		return last_statement;
+	public Date getLastStatement() {
+		return lastStatement;
 	}
 
 
-	public void setLast_statement(Date last_statement) {
-		this.last_statement = last_statement;
+	public void setLastStatement(Date lastStatement) {
+		this.lastStatement = lastStatement;
 	}
 
 
-	public Date getNext_statement() {
-		return next_statement;
+	public Date getNextStatement() {
+		return nextStatement;
 	}
 
 
-	public void setNext_statement(Date next_statement) {
-		this.next_statement = next_statement;
+	public void setNextStatement(Date nextStatement) {
+		this.nextStatement = nextStatement;
 	}
 
 
 
-	public String getTarget_sortcode() {
-		return target_sortcode;
+	public String getTargetSortcode() {
+		return targetSortcode;
 	}
 
 
-	public void setTarget_sortcode(String target_sortcode) {
-		this.target_sortcode = target_sortcode;
+	public void setTargetSortcode(String targetSortcode) {
+		this.targetSortcode = targetSortcode;
 	}
 
 
@@ -174,11 +178,11 @@ public class ProcessedTransaction extends HBankDataAccess{
 	}
 
 	public String getAccount_number() {
-		return account_number;
+		return accountNumber;
 	}
 
 	public void setAccount_number(String account_number) {
-		this.account_number = account_number;
+		this.accountNumber = account_number;
 	}
 
 	public String getType() {
@@ -242,7 +246,7 @@ public class ProcessedTransaction extends HBankDataAccess{
 					String targetAccount = temp[i].getDescription().substring(31, 40);
 					
 					temp[i].setTarget_account_number(targetAccount);
-					temp[i].setTarget_sortcode(targetSortcode);
+					temp[i].setTargetSortcode(targetSortcode);
 					temp[i].setTransfer(true);
 				}
 				if(temp[i].getType().compareTo("IDA") == 0 || temp[i].getType().compareTo("ODA") == 0)
@@ -256,7 +260,7 @@ public class ProcessedTransaction extends HBankDataAccess{
 					String nextStatementMM        = temp[i].getDescription().substring(28,30);
 					String nextStatementYYYY      = temp[i].getDescription().substring(30,34);
 
-					temp[i].setAccount_type(deletedAccountType);
+					temp[i].setAccountType(deletedAccountType);
 					Calendar myCalendar = Calendar.getInstance();
 					myCalendar.set(Calendar.YEAR, (new Integer(lastStatementYYYY).intValue() - 1900));
 					myCalendar.set(Calendar.MONTH, (new Integer(lastStatementMM).intValue() -1));
@@ -266,8 +270,8 @@ public class ProcessedTransaction extends HBankDataAccess{
 					myCalendar.set(Calendar.MONTH, (new Integer(nextStatementMM).intValue() -1));
 					myCalendar.set(Calendar.DAY_OF_MONTH, new Integer(nextStatementDD).intValue());
 					Date nextStatementDate = new Date(myCalendar.getTimeInMillis());
-					temp[i].setLast_statement(lastStatementDate);
-					temp[i].setNext_statement(nextStatementDate);
+					temp[i].setLastStatement(lastStatementDate);
+					temp[i].setNextStatement(nextStatementDate);
 					temp[i].setCustomer(deletedAccountCustomer);
 				}
 				if(temp[i].getType().compareTo("ICA") == 0 || temp[i].getType().compareTo("OCA") == 0)
@@ -281,7 +285,7 @@ public class ProcessedTransaction extends HBankDataAccess{
 					String nextStatementMM        = temp[i].getDescription().substring(28,30);
 					String nextStatementYYYY      = temp[i].getDescription().substring(30,34);
 
-					temp[i].setAccount_type(createdAccountType);
+					temp[i].setAccountType(createdAccountType);
 					Calendar myCalendar = Calendar.getInstance();
 					myCalendar.set(Calendar.YEAR, (new Integer(lastStatementYYYY).intValue() - 1900));
 					myCalendar.set(Calendar.MONTH, (new Integer(lastStatementMM).intValue() -1));
@@ -291,8 +295,8 @@ public class ProcessedTransaction extends HBankDataAccess{
 					myCalendar.set(Calendar.MONTH, (new Integer(nextStatementMM).intValue() -1));
 					myCalendar.set(Calendar.DAY_OF_MONTH, new Integer(nextStatementDD).intValue());
 					Date nextStatementDate = new Date(myCalendar.getTimeInMillis());
-					temp[i].setLast_statement(lastStatementDate);
-					temp[i].setNext_statement(nextStatementDate);
+					temp[i].setLastStatement(lastStatementDate);
+					temp[i].setNextStatement(nextStatementDate);
 					temp[i].setCustomer(createdAccountCustomer);
 				}
 
@@ -358,23 +362,20 @@ public class ProcessedTransaction extends HBankDataAccess{
 			return null;
 		}
 		ProcessedTransaction[] real = new ProcessedTransaction[i];
-		for(int j=0;j<i;j++)
-		{
-			real[j] = temp[j];	
-		}
+		System.arraycopy(temp, 0, real, 0, i);
 		logger.exiting(this.getClass().getName(),GET_PROCESSED_TRANSACTIONS,real);
 		return real;
 	}
 
 
 	public String getTarget_account_number() {
-		return target_account_number;
+		return targetAccountNumber;
 	}
 
 
 
 	public void setTarget_account_number(String target_account_number) {
-		this.target_account_number = target_account_number;
+		this.targetAccountNumber = target_account_number;
 	}
 
 
