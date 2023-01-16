@@ -100,7 +100,7 @@ public class NewAccountNumber {
 
 	public int getAccountNumber() {
 		if (accountNumber == null) {
-			accountNumber = new Integer(ACCOUNT_NUMBER.getInt(_byteBuffer));
+			accountNumber = ACCOUNT_NUMBER.getInt(_byteBuffer);
 		}
 		return accountNumber.intValue();
 	}
@@ -110,7 +110,7 @@ public class NewAccountNumber {
 			return;
 		}
 		ACCOUNT_NUMBER.putInt(accountNumber, _byteBuffer);
-		this.accountNumber = new Integer(accountNumber);
+		this.accountNumber = accountNumber;
 	}
 
 	public String getNewaccnoSuccess() {

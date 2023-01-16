@@ -471,7 +471,7 @@ public class PROCTRAN {
 
 	public int getProcTranSortCode() {
 		if (procTranSortCode == null) {
-			procTranSortCode = new Integer(PROC_TRAN_SORT_CODE.getInt(_byteBuffer));
+			procTranSortCode = PROC_TRAN_SORT_CODE.getInt(_byteBuffer);
 		}
 		return procTranSortCode.intValue();
 	}
@@ -481,12 +481,12 @@ public class PROCTRAN {
 			return;
 		}
 		PROC_TRAN_SORT_CODE.putInt(procTranSortCode, _byteBuffer);
-		this.procTranSortCode = new Integer(procTranSortCode);
+		this.procTranSortCode = procTranSortCode;
 	}
 
 	public int getProcTranNumber() {
 		if (procTranNumber == null) {
-			procTranNumber = new Integer(PROC_TRAN_NUMBER.getInt(_byteBuffer));
+			procTranNumber = PROC_TRAN_NUMBER.getInt(_byteBuffer);
 		}
 		return procTranNumber.intValue();
 	}
@@ -496,7 +496,7 @@ public class PROCTRAN {
 			return;
 		}
 		PROC_TRAN_NUMBER.putInt(procTranNumber, _byteBuffer);
-		this.procTranNumber = new Integer(procTranNumber);
+		this.procTranNumber = procTranNumber;
 	}
 
 	public int getProcTranDate() {
@@ -565,7 +565,7 @@ public class PROCTRAN {
 
 	public long getProcTranRef() {
 		if (procTranRef == null) {
-			procTranRef = new Long(PROC_TRAN_REF.getLong(_byteBuffer));
+			procTranRef = PROC_TRAN_REF.getLong(_byteBuffer);
 		}
 		return procTranRef.longValue();
 	}
@@ -575,7 +575,7 @@ public class PROCTRAN {
 			return;
 		}
 		PROC_TRAN_REF.putLong(procTranRef, _byteBuffer);
-		this.procTranRef = new Long(procTranRef);
+		this.procTranRef = procTranRef;
 	}
 
 	public String getProcTranType() {

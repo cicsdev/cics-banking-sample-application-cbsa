@@ -100,7 +100,7 @@ public class NewCustomerNumber {
 
 	public long getCustomerNumber() {
 		if (customerNumber == null) {
-			customerNumber = new Long(CUSTOMER_NUMBER.getLong(_byteBuffer));
+			customerNumber = CUSTOMER_NUMBER.getLong(_byteBuffer);
 		}
 		return customerNumber.longValue();
 	}
@@ -110,7 +110,7 @@ public class NewCustomerNumber {
 			return;
 		}
 		CUSTOMER_NUMBER.putLong(customerNumber, _byteBuffer);
-		this.customerNumber = new Long(customerNumber);
+		this.customerNumber = customerNumber;
 	}
 
 	public String getNewcusnoSuccess() {
