@@ -93,14 +93,20 @@ public class AccList extends VerticalLayout{
 			 */
 			private static final long serialVersionUID = -2915663639842484327L;
 
-			public void buttonClick(ClickEvent event) {
-				if(offset != 0){
+			public void buttonClick(ClickEvent event) 
+			{
+				if(offset != 0)
+				{
 					offset -= limit;
-					if(offset<0) offset=0;
-					createAccList(filter);
 				}
+				if(offset<0)
+				{
+					offset=0;
+				}
+				createAccList(filter);
 			}
-		});
+		}
+		);
 		
 		Button bPM = new Button("<<<-");
 		bPM.setId("bmbutton");
@@ -112,16 +118,19 @@ public class AccList extends VerticalLayout{
 			 */
 			private static final long serialVersionUID = 7702513785219853137L;
 
-			public void buttonClick(ClickEvent event) {
+			public void buttonClick(ClickEvent event) 
+			{
 				if(offset != 0){
 					offset -= limit*10;
-					if(offset < 0){
-						offset = 0;
-					}
-					createAccList(filter);
 				}
+				if(offset < 0)
+				{
+					offset = 0;
+				}
+				createAccList(filter);
 			}
-		});
+		}
+		);
 		
 		Button fP = new Button("->");
 		fP.setId("fbutton");
@@ -152,9 +161,9 @@ public class AccList extends VerticalLayout{
 			private static final long serialVersionUID = -922311815047591792L;
 
 			public void buttonClick(ClickEvent event) {
-				if((cur+10) < next){
+				if((cur+10) < next)
+				{
 					offset += limit*10;
-					createAccList(filter);
 				}
 				else
 				{
@@ -162,8 +171,8 @@ public class AccList extends VerticalLayout{
 					{
 						offset += limit;
 					}
-					createAccList(filter);
 				}
+				createAccList(filter);
 			}
 		});
 		
