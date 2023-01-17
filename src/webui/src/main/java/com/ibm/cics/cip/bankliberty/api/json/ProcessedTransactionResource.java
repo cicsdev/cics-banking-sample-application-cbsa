@@ -27,6 +27,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.ibm.cics.cip.bankliberty.datainterfaces.PROCTRAN;
+import com.ibm.cics.cip.bankliberty.web.db2.ProcessedTransaction;
 import com.ibm.json.java.JSONArray;
 import com.ibm.json.java.JSONObject;
 
@@ -40,11 +41,11 @@ import com.ibm.json.java.JSONObject;
 @Path("/processedTransaction")
 public class ProcessedTransactionResource{
 
-    static final String COPYRIGHT =
-      "Copyright IBM Corp. 2022";
-    
-    private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.api.json");
-    
+	static final String COPYRIGHT =
+			"Copyright IBM Corp. 2022";
+
+	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.api.json");
+
 	private static final String JSON_NUMBER_OF_RECORDS = "numberOfProcessedTransactionRecords";
 	private static final String JSON_PROCESSED_TRANSACTIONS = "processedTransactions";
 	private static final String JSON_SORT_CODE = "sortCode";
@@ -122,47 +123,16 @@ public class ProcessedTransactionResource{
 			proctran.put(JSON_DESCRIPTION, processedTransactions[i].getDescription().trim());
 			proctran.put(JSON_TYPE, processedTransactions[i].getType());
 			proctran.put(JSON_REFERENCE, processedTransactions[i].getReference());
-			if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_BRANCH_DELETE_ACCOUNT) == 0 || processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_WEB_DELETE_ACCOUNT) ==0)
-			{
-				proctran.put(JSON_ACCOUNT_TYPE, processedTransactions[i].getAccountType());
-				proctran.put(JSON_LAST_STATEMENT, myDateFormat.format(processedTransactions[i].getLastStatement()));
-				proctran.put(JSON_NEXT_STATEMENT, myDateFormat.format(processedTransactions[i].getNextStatement()));
-				proctran.put(JSON_CUSTOMER, processedTransactions[i].getCustomer());
-			}
 
-
-			if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_BRANCH_DELETE_CUSTOMER) == 0 || processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_WEB_DELETE_CUSTOMER) ==0)
-			{
-				proctran.put(JSON_DATE_OF_BIRTH, myDateFormat.format(processedTransactions[i].getDateOfBirth()));
-				proctran.put(JSON_CUSTOMER_NAME, processedTransactions[i].getCustomerName());
-				proctran.put(JSON_CUSTOMER, processedTransactions[i].getCustomer());
-			}
-
-			if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_BRANCH_CREATE_CUSTOMER) == 0 || processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_WEB_CREATE_CUSTOMER) ==0)
-			{	
-				proctran.put(JSON_DATE_OF_BIRTH, myDateFormat.format(processedTransactions[i].getDateOfBirth()));
-				proctran.put(JSON_CUSTOMER_NAME, processedTransactions[i].getCustomerName());
-				proctran.put(JSON_CUSTOMER, processedTransactions[i].getCustomer());
-			}
-
-			if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_TRANSFER) == 0)
-			{
-				proctran.put(JSON_TARGET_ACCOUNT,processedTransactions[i].getTarget_account_number());
-				proctran.put(JSON_TARGET_SORT_CODE,processedTransactions[i].getTargetSortcode());
-			}
-			if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_BRANCH_CREATE_ACCOUNT) == 0 || processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_WEB_CREATE_ACCOUNT) ==0)
-			{
-				proctran.put(JSON_ACCOUNT_TYPE, processedTransactions[i].getAccountType());
-				proctran.put(JSON_LAST_STATEMENT, myDateFormat.format(processedTransactions[i].getLastStatement()));
-				proctran.put(JSON_NEXT_STATEMENT, myDateFormat.format(processedTransactions[i].getNextStatement()));
-				proctran.put(JSON_CUSTOMER, processedTransactions[i].getCustomer());
-			}
+			proctran = processDeleteCreateAccount(proctran,processedTransactions[i],myDateFormat);
+			proctran = processDeleteCreateCustomer(proctran,processedTransactions[i],myDateFormat);
+			proctran = processTransfer(proctran,processedTransactions[i],myDateFormat);
 
 			processedTransactionsJSON.add(proctran);
-			numberOfProcessedTransactions = processedTransactionsJSON.size();
 		}
+		numberOfProcessedTransactions = processedTransactionsJSON.size();
 
-		
+
 		processedTransactionsJSON = new JSONArray(processedTransactions.length);
 
 
@@ -195,26 +165,26 @@ public class ProcessedTransactionResource{
 				proctran.put(JSON_TARGET_ACCOUNT,processedTransactions[i].getTarget_account_number());
 				proctran.put(JSON_TARGET_SORT_CODE,processedTransactions[i].getTargetSortcode());
 			}
-if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_BRANCH_CREATE_CUSTOMER) == 0  )
-{
-	proctran.put(JSON_CUSTOMER_NAME,processedTransactions[i].getCustomerName());
-	proctran.put(JSON_DATE_OF_BIRTH,myDateFormat.format(processedTransactions[i].getDateOfBirth()));
-}
-if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_BRANCH_DELETE_CUSTOMER) == 0  )
-{
-	proctran.put(JSON_CUSTOMER_NAME,processedTransactions[i].getCustomerName());
-	proctran.put(JSON_DATE_OF_BIRTH,myDateFormat.format(processedTransactions[i].getDateOfBirth()));
-}
-if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_WEB_CREATE_CUSTOMER) == 0  )
-{
-	proctran.put(JSON_CUSTOMER_NAME,processedTransactions[i].getCustomerName());
-	proctran.put(JSON_DATE_OF_BIRTH,myDateFormat.format(processedTransactions[i].getDateOfBirth()));
-}
-if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_WEB_DELETE_CUSTOMER) == 0  )
-{
-	proctran.put(JSON_CUSTOMER_NAME,processedTransactions[i].getCustomerName());
-	proctran.put(JSON_DATE_OF_BIRTH,myDateFormat.format(processedTransactions[i].getDateOfBirth()));
-}
+			if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_BRANCH_CREATE_CUSTOMER) == 0  )
+			{
+				proctran.put(JSON_CUSTOMER_NAME,processedTransactions[i].getCustomerName());
+				proctran.put(JSON_DATE_OF_BIRTH,myDateFormat.format(processedTransactions[i].getDateOfBirth()));
+			}
+			if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_BRANCH_DELETE_CUSTOMER) == 0  )
+			{
+				proctran.put(JSON_CUSTOMER_NAME,processedTransactions[i].getCustomerName());
+				proctran.put(JSON_DATE_OF_BIRTH,myDateFormat.format(processedTransactions[i].getDateOfBirth()));
+			}
+			if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_WEB_CREATE_CUSTOMER) == 0  )
+			{
+				proctran.put(JSON_CUSTOMER_NAME,processedTransactions[i].getCustomerName());
+				proctran.put(JSON_DATE_OF_BIRTH,myDateFormat.format(processedTransactions[i].getDateOfBirth()));
+			}
+			if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_WEB_DELETE_CUSTOMER) == 0  )
+			{
+				proctran.put(JSON_CUSTOMER_NAME,processedTransactions[i].getCustomerName());
+				proctran.put(JSON_DATE_OF_BIRTH,myDateFormat.format(processedTransactions[i].getDateOfBirth()));
+			}
 
 			processedTransactionsJSON.add(proctran);
 			numberOfProcessedTransactions = processedTransactionsJSON.size();
@@ -243,6 +213,41 @@ if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_WEB_DELETE_CUST
 
 
 
+
+	private JSONObject processTransfer(JSONObject proctran, ProcessedTransaction processedTransaction,
+			DateFormat myDateFormat) {
+		// Process bank to bank transfer records
+		if(processedTransaction.getType().compareTo(PROCTRAN.PROC_TY_TRANSFER) == 0)
+		{
+			proctran.put(JSON_TARGET_ACCOUNT,processedTransaction.getTarget_account_number());
+			proctran.put(JSON_TARGET_SORT_CODE,processedTransaction.getTargetSortcode());
+		}
+		return proctran;
+	}
+
+	private JSONObject processDeleteCreateCustomer(JSONObject proctran, ProcessedTransaction processedTransaction,
+			DateFormat myDateFormat) {
+		// Deal with create account and delete customer
+		if(processedTransaction.getType().compareTo(PROCTRAN.PROC_TY_BRANCH_DELETE_CUSTOMER) == 0 || processedTransaction.getType().compareTo(PROCTRAN.PROC_TY_WEB_DELETE_CUSTOMER) ==0 || (processedTransaction.getType().compareTo(PROCTRAN.PROC_TY_BRANCH_CREATE_CUSTOMER) == 0 || processedTransaction.getType().compareTo(PROCTRAN.PROC_TY_WEB_CREATE_CUSTOMER) ==0))
+		{
+			proctran.put(JSON_DATE_OF_BIRTH, myDateFormat.format(processedTransaction.getDateOfBirth()));
+			proctran.put(JSON_CUSTOMER_NAME, processedTransaction.getCustomerName());
+			proctran.put(JSON_CUSTOMER, processedTransaction.getCustomer());
+		}
+		return proctran;
+	}
+
+	private JSONObject processDeleteCreateAccount(JSONObject proctran, ProcessedTransaction processedTransaction, DateFormat myDateFormat) {
+		// Deal with create account and delete account
+		if(processedTransaction.getType().compareTo(PROCTRAN.PROC_TY_BRANCH_DELETE_ACCOUNT) == 0 || processedTransaction.getType().compareTo(PROCTRAN.PROC_TY_WEB_DELETE_ACCOUNT) ==0 || processedTransaction.getType().compareTo(PROCTRAN.PROC_TY_BRANCH_CREATE_ACCOUNT) == 0 || processedTransaction.getType().compareTo(PROCTRAN.PROC_TY_WEB_CREATE_ACCOUNT) ==0)
+		{
+			proctran.put(JSON_ACCOUNT_TYPE, processedTransaction.getAccountType());
+			proctran.put(JSON_LAST_STATEMENT, myDateFormat.format(processedTransaction.getLastStatement()));
+			proctran.put(JSON_NEXT_STATEMENT, myDateFormat.format(processedTransaction.getNextStatement()));
+			proctran.put(JSON_CUSTOMER, processedTransaction.getCustomer());
+		}
+		return proctran;
+	}
 
 	private Integer getSortCode() {
 		SortCodeResource mySortCodeResource = new SortCodeResource();
@@ -430,7 +435,7 @@ if(processedTransactions[i].getType().compareTo(PROCTRAN.PROC_TY_WEB_DELETE_CUST
 		}	
 
 	}
-	
+
 	protected void sortOutLogging()
 	{
 		try 
