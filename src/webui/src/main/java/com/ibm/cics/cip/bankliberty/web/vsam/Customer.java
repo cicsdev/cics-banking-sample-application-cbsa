@@ -325,7 +325,7 @@ public class Customer {
 	}
 
 	private byte[] getLastCustomer() {
-		// TODO Auto-generated method stub
+		// The last customer in the file is accessed by reading backwards from the end
 		RecordHolder holder = new RecordHolder();
 		KeyHolder keyHolder = new KeyHolder();
 

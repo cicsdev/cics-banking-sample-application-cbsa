@@ -660,44 +660,8 @@ public class Account extends HBankDataAccess{
 
 				long timeNow = myCalendar.getTimeInMillis();
 				// You must specify the values here as longs otherwise it ends up negative due to overflow
-				long nextMonthInMs = 0L;
-				switch(today.getMonth())
-				{
-				case 8:
-				case 3:
-				case 5:
-				case 10:
-					nextMonthInMs = 1000L * 60L * 60L * 24L * 30L;
-					break;
-				case 1:
-					if((today.getYear() + 1900) % 4 > 0)
-					{
-						nextMonthInMs = 1000L * 60L * 60L * 24L * 28L;
-					}
-					else
-					{
-						if((today.getYear() + 1900) % 100 > 0)
-						{
-							nextMonthInMs = 1000L * 60L * 60L * 24L * 29L;
-						}
-						else
-						{
-							if((today.getYear() + 1900) % 400 == 0)
-							{
-								nextMonthInMs = 1000L * 60L * 60L * 24L * 29L;
-							}
-							else
-							{
-								nextMonthInMs = 1000L * 60L * 60L * 24L * 28L;
-							}
-						}
-					}
-					break;
-				default:
-					nextMonthInMs = 1000L * 60L * 60L * 24L * 31L;
-					break;
-				}
-
+				long nextMonthInMs = getNextMonth(today);
+			
 				long nextStatementLong = timeNow + nextMonthInMs;
 				Date nextStatement =  new Date(nextStatementLong);
 
@@ -765,6 +729,53 @@ public class Account extends HBankDataAccess{
 		}
 	}
 
+
+
+
+	private long getNextMonth(Date today) {
+		// What is next month?
+		long nextMonthInMs;
+		Calendar myCalendar = Calendar.getInstance();
+		myCalendar.setTime(today);
+		switch(myCalendar.get(Calendar.MONTH))
+		{
+		case 8:
+		case 3:
+		case 5:
+		case 10:
+			nextMonthInMs = 1000L * 60L * 60L * 24L * 30L;
+			break;
+		case 1:
+			if((myCalendar.get(Calendar.YEAR)) % 4 > 0)
+			{
+				nextMonthInMs = 1000L * 60L * 60L * 24L * 28L;
+			}
+			else
+			{
+				if(myCalendar.get(Calendar.YEAR) % 100 > 0)
+				{
+					nextMonthInMs = 1000L * 60L * 60L * 24L * 29L;
+				}
+				else
+				{
+					if(myCalendar.get(Calendar.YEAR) % 400 == 0)
+					{
+						nextMonthInMs = 1000L * 60L * 60L * 24L * 29L;
+					}
+					else
+					{
+						nextMonthInMs = 1000L * 60L * 60L * 24L * 28L;
+					}
+				}
+			}
+			break;
+		default:
+			nextMonthInMs = 1000L * 60L * 60L * 24L * 31L;
+			break;
+		}
+		return nextMonthInMs;
+
+	}
 
 
 
