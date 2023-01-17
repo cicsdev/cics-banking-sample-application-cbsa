@@ -127,7 +127,7 @@ public class CustomerResource{
 		customer.setSortCode(this.getSortCode().toString());
 
 
-		vsamCustomer = vsamCustomer.createCustomer(customer, this.getSortCode(),false);
+		vsamCustomer = vsamCustomer.createCustomer(customer, this.getSortCode());
 
 
 		if (vsamCustomer == null) 
