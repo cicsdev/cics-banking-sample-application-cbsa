@@ -30,10 +30,10 @@ import com.ibm.json.java.JSONObject;
 
 public class CustomerList {
 
-    static final String COPYRIGHT =
-      "Copyright IBM Corp. 2022";
-    
-    private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.webui.dataAccess");
+	static final String COPYRIGHT =
+			"Copyright IBM Corp. 2022";
+
+	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.webui.dataAccess");
 
 
 
@@ -41,7 +41,7 @@ public class CustomerList {
 
 	private static String sortcode = null;
 	private int count;
-	
+
 	private static final String JSON_SORT_CODE = "sortCode";
 	private static final String JSON_ID = "id";
 	private static final String JSON_CUSTOMER_NAME = "customerName";
@@ -67,7 +67,7 @@ public class CustomerList {
 		Response myCustomerResponse = null;
 
 		//                0123456789012345678901234
-		
+
 		try
 		{
 			if(filter.startsWith(" AND CUSTOMER_NAME like '"))
@@ -129,19 +129,19 @@ public class CustomerList {
 		{
 			logger.severe(e.toString());
 		}
-		
+
 	}
 
 
 	public void doGet(int limit, int offset, String filter) throws ServletException, IOException {
-		
-		
+
+
 		CustomerResource myCustomerResource = new CustomerResource();
 
 		Response myCustomerResponse = null;
 
 		String myCustomerString = null;
- 
+
 
 		try
 		{
@@ -177,6 +177,11 @@ public class CustomerList {
 			{
 				howMany(filter);
 			}
+
+			if(myCustomerResponse == null)
+			{
+				return;
+			}
 			if(myCustomerResponse.getStatus() == 200)
 			{
 				myCustomerString = myCustomerResponse.getEntity().toString();
@@ -210,13 +215,13 @@ public class CustomerList {
 			{
 				logger.severe(myCustomerResponse.getStatus() + " " + myCustomerResponse.getEntity().toString());
 			}
-
 		}
+
 		catch (IOException e1) 
 		{
 			logger.severe(e1.toString());
 		}
-		
+
 
 	}
 
@@ -232,7 +237,7 @@ public class CustomerList {
 		myCalendar.set(Calendar.YEAR,year);
 		myCalendar.set(Calendar.MONTH,month-1);
 		myCalendar.set(Calendar.DATE, day);
-		
+
 		Date myDate = new Date(myCalendar.getTimeInMillis());
 		return myDate;
 	}

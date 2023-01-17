@@ -112,7 +112,7 @@ public class AccountList {
 				myAccountsResponse = myAccountsResource.getAccountsExternal(true);
 				this.count = 0;
 			}
-			if(myAccountsResponse.getStatus() == 200)
+			if(myAccountsResponse != null && myAccountsResponse.getStatus() == 200)
 			{
 
 				String myAccountsString = myAccountsResponse.getEntity().toString();
