@@ -221,7 +221,7 @@ public class Customer {
 
 		if(customerNumber == 9999999999L)
 		{
-			myCustomer = new CUSTOMER(getLastCustomer());		
+			myCustomer = new CUSTOMER(getLastCustomer().getValue());		
 		}
 
 		if(customerNumber > 0 && customerNumber < 9999999999L)
@@ -253,50 +253,13 @@ public class Customer {
 			}
 			try {
 				customerFile.read(key, holder);
-			} catch (LogicException | InvalidRequestException | IOErrorException 
+			} catch (InvalidSystemIdException | LogicException | InvalidRequestException | IOErrorException 
 					| ChangedException | LockedException | LoadingException | RecordBusyException
 					| FileDisabledException | DuplicateKeyException | FileNotFoundException | ISCInvalidRequestException
 					| NotAuthorisedException | RecordNotFoundException | NotOpenException e) {
 				logger.severe("Error reading customer file for " + customerNumber + " " + e.getLocalizedMessage());
 				logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
 				return null;
-			}
-			catch (InvalidSystemIdException  e1) {
-				int numberOfRetries = 0;
-				boolean success;
-				for(numberOfRetries = 0,success = false; numberOfRetries < maximumRetries && !success;numberOfRetries++)
-				{
-					try {
-						logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
-						Thread.sleep(3000);
-					} 
-					catch (InterruptedException e) 
-					{
-						logger.warning(e.toString());
-						Thread.currentThread().interrupt();
-					} 
-					try {
-						customerFile.read(key, holder);
-						success = true;
-
-					} catch (FileDisabledException | DuplicateKeyException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
-							e3) {
-						logger.log(Level.SEVERE,() -> "Error reading customer file for " + customerNumber + "," + e3.getLocalizedMessage());
-						logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
-						return null;
-					}
-					catch (InvalidSystemIdException e4)
-					{
-						logger.log(Level.WARNING,() -> "Invalid SystemIdException, will try again");
-					} 
-
-				}
-				if(numberOfRetries == maximumRetries && success == false)
-				{
-					logger.severe(READ_GIVE_UP);
-					logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
-					return null;
-				}
 			}
 			myCustomer = new CUSTOMER(holder.getValue());
 		}
@@ -324,7 +287,7 @@ public class Customer {
 		return temp;
 	}
 
-	private byte[] getLastCustomer() {
+	private RecordHolder getLastCustomer() {
 		// The last customer in the file is accessed by reading backwards from the end
 		RecordHolder holder = new RecordHolder();
 		KeyHolder keyHolder = new KeyHolder();
@@ -344,7 +307,7 @@ public class Customer {
 			myKeyedFileBrowse.end();
 			key = keyHolder.getValue();
 			customerFile.read(key, holder);
-		} catch (LengthErrorException | EndOfFileException | LogicException | InvalidRequestException | IOErrorException 
+		} catch (InvalidSystemIdException | LengthErrorException | EndOfFileException | LogicException | InvalidRequestException | IOErrorException 
 				| ChangedException | LockedException | LoadingException | RecordBusyException
 				| FileDisabledException | DuplicateKeyException | FileNotFoundException | ISCInvalidRequestException
 				| NotAuthorisedException | RecordNotFoundException | NotOpenException e) {
@@ -352,49 +315,7 @@ public class Customer {
 			logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
 			return null;
 		} 
-		catch (InvalidSystemIdException  e1) {
-			int numberOfRetries = 0;
-			boolean success;
-			for(numberOfRetries = 0,success = false; numberOfRetries < maximumRetries && !success;numberOfRetries++)
-			{
-				try {
-					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
-					Thread.sleep(3000);
-				} 
-				catch (InterruptedException e) 
-				{
-					logger.warning(e.toString());
-					Thread.currentThread().interrupt();
-				}
-				try {
-					KeyedFileBrowse myKeyedFileBrowse =	customerFile.startBrowse(key);
-					myKeyedFileBrowse.previous(holder, keyHolder);
-					myKeyedFileBrowse.end();
-					key = keyHolder.getValue();
-					customerFile.read(key, holder);
-					success = true;
-
-				} catch (EndOfFileException | FileDisabledException | DuplicateKeyException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | LengthErrorException 
-						| ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
-						e3) {
-					logger.severe(e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
-					return null;
-				}
-				catch (InvalidSystemIdException e4)
-				{
-					logger.log(Level.WARNING,() -> "Invalid SystemIdException, will try again");
-				} 
-
-			}
-			if(numberOfRetries == maximumRetries && success == false)
-			{
-				logger.severe(READ_GIVE_UP);
-				logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
-				return null;
-			}
-		}
-		return holder.getValue();
+		return holder;
 	}
 
 	public Customer[] getCustomers(int sortCode) {
@@ -441,49 +362,13 @@ public class Customer {
 		KeyedFileBrowse customerFileBrowse = null;
 		try {
 			customerFileBrowse = customerFile.startBrowse(key);
-		} catch (LogicException | InvalidRequestException | IOErrorException
+		} catch (InvalidSystemIdException | LogicException | InvalidRequestException | IOErrorException
 				| LockedException | RecordBusyException | LoadingException | ChangedException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 				| NotOpenException e1) {
 			logger.severe(ERROR_START_BROWSE + e1.getLocalizedMessage());
 			logger.exiting(this.getClass().getName(),GET_CUSTOMERS,null);
 			return null;
-		}
-		catch (InvalidSystemIdException  e1) {
-			int number_of_retries = 0;
-			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
-			{
-				try {
-					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP+ totalSleep + MILLISECONDS);
-					Thread.sleep(3000);
-				}  
-				catch (InterruptedException e) 
-				{
-					logger.warning(e.toString());
-					Thread.currentThread().interrupt();
-				} 
-				try {
-					customerFileBrowse = customerFile.startBrowse(key);
-					success = true;
-
-				} catch (FileDisabledException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
-						e3) {
-					logger.severe(ERROR_START_BROWSE+ e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),GET_CUSTOMERS,null);
-					return null;
-				}
-				catch (InvalidSystemIdException e4)
-				{
-				} 
-
-			}
-			if(number_of_retries == maximumRetries && success == false)
-			{
-				logger.severe(READ_GIVE_UP);
-				logger.exiting(this.getClass().getName(),GET_CUSTOMERS,null);
-				return null;
-			}
 		}
 		i = 0;
 		boolean carryOn = true;
@@ -503,7 +388,7 @@ public class Customer {
 				carryOn = false;
 
 			}
-			catch (LogicException | InvalidRequestException
+			catch (InvalidSystemIdException | LogicException | InvalidRequestException
 					| IOErrorException 
 					| ChangedException | LockedException | LoadingException
 					| RecordBusyException | FileDisabledException
@@ -513,49 +398,6 @@ public class Customer {
 				logger.severe(ERROR_BROWSE + e.getLocalizedMessage());
 				logger.exiting(this.getClass().getName(),GET_CUSTOMERS,null);
 				return null;
-			}
-			catch (InvalidSystemIdException  e1) {
-				int number_of_retries = 0;
-				boolean success;
-				for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
-				{
-					try 
-					{
-						logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
-						Thread.sleep(3000);
-					}
-					catch (InterruptedException e) 
-					{
-						logger.warning(e.toString());
-						Thread.currentThread().interrupt();
-					}
-					try {
-						customerFileBrowse.next(holder, keyHolder);
-						success = true;
-
-					} catch (DuplicateKeyException | LengthErrorException | FileDisabledException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
-							e3) {
-						logger.severe(e3.getLocalizedMessage());
-						logger.exiting(this.getClass().getName(),GET_CUSTOMERS,null);
-						return null;
-					}
-					catch (InvalidSystemIdException e4)
-					{
-					}
-					catch (EndOfFileException e4)
-					{
-						success = true;
-						carryOn = false;
-					}
-
-				}
-				if(number_of_retries == maximumRetries && success == false)
-				{
-					logger.severe(BROWSE_GIVE_UP);
-					logger.exiting(this.getClass().getName(),GET_CUSTOMERS,null);
-					return null;
-				}
-
 			}
 
 			myCustomer = new CUSTOMER(holder.getValue());
@@ -584,54 +426,16 @@ public class Customer {
 		}
 		try {
 			customerFileBrowse.end();
-		} catch (LogicException | InvalidRequestException | FileDisabledException
+		} catch (InvalidSystemIdException | LogicException | InvalidRequestException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
 				| NotOpenException e) {
 			logger.severe(ERROR_END_BROWSE  + e.getLocalizedMessage());
 			logger.exiting(this.getClass().getName(),GET_CUSTOMERS,null);
 			return null;
 		}
-		catch (InvalidSystemIdException  e2) {
-			int number_of_retries = 0;
-			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
-			{
-				try {
-					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
-					Thread.sleep(3000);
-				}
-				catch (InterruptedException e) 
-				{
-					logger.warning(e.toString());
-					Thread.currentThread().interrupt(); 
-				} 
-				try {
-					customerFileBrowse.end();
-					success = true;
-				} catch (FileDisabledException | NotOpenException | LogicException | InvalidRequestException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
-						e3) {
-					logger.severe(ERROR_END_BROWSE + e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),GET_CUSTOMERS,null);
-					return null;
-				}
-				catch (InvalidSystemIdException e4)
-				{
-				} 
-
-			}
-			if(number_of_retries == maximumRetries && success == false)
-			{
-				logger.severe(BROWSE_GIVE_UP);
-				logger.exiting(this.getClass().getName(),GET_CUSTOMERS,null);
-				return null;
-			}
-		}
 
 		Customer[] real = new Customer[i];
-		for(int j=0;j<i;j++)
-		{
-			real[j] = temp[j];	
-		}
+		System.arraycopy(temp, 0, real, 0, temp.length);
 		logger.exiting(this.getClass().getName(),GET_CUSTOMERS,real);
 		return real;
 	}
@@ -693,7 +497,7 @@ public class Customer {
 			customerFile.rewrite(myCustomer.getByteBuffer());
 			myCustomer = new CUSTOMER(holder.getValue());
 		} 
-		catch (LogicException | InvalidRequestException | IOErrorException
+		catch (InvalidSystemIdException | LogicException | InvalidRequestException | IOErrorException
 				| ChangedException | LockedException | LoadingException | RecordBusyException
 				| FileDisabledException | DuplicateKeyException | FileNotFoundException | ISCInvalidRequestException
 				| NotAuthorisedException | NotOpenException | LengthErrorException | DuplicateRecordException | NoSpaceException e) 
@@ -708,55 +512,6 @@ public class Customer {
 			customer404.setNot_found(true);
 			logger.exiting(this.getClass().getName(),UPDATE_CUSTOMER,customer404);
 			return customer404;
-		}
-		catch (InvalidSystemIdException  e2) {
-			int number_of_retries = 0;
-			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
-			{
-				try {
-					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
-					Thread.sleep(3000);
-				} 
-				catch (InterruptedException e) 
-				{
-					logger.warning(e.toString());
-					Thread.currentThread().interrupt();
-				}
-				try 
-				{
-					customerFile.readForUpdate(key, holder);
-					myCustomer = new CUSTOMER(holder.getValue());
-					myCustomer.setCustomerAddress(customer.getCustomerAddress());
-					myCustomer.setCustomerName(customer.getCustomerName());
-					customerFile.rewrite(myCustomer.getByteBuffer());
-					myCustomer = new CUSTOMER(holder.getValue());
-					success = true;
-
-				}
-				catch (NoSpaceException | DuplicateRecordException | DuplicateKeyException | ChangedException | LoadingException | RecordBusyException | LockedException | IOErrorException | LengthErrorException | FileDisabledException | NotOpenException | LogicException | InvalidRequestException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException 	e3) 
-				{
-					logger.severe("Error updating CUSTOMER file, " + e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),UPDATE_CUSTOMER,null);
-					return null;
-				}
-				catch (InvalidSystemIdException e4)
-				{
-				} 
-				catch (RecordNotFoundException e5)
-				{
-					Customer customer404 = new Customer();
-					customer404.setNot_found(true);
-					logger.exiting(this.getClass().getName(),UPDATE_CUSTOMER,customer404);
-					return customer404;
-				}
-			}
-			if(number_of_retries == maximumRetries && success == false)
-			{
-				logger.severe("Cannot update CUSTOMER file after 100 attempts");
-				logger.exiting(this.getClass().getName(),UPDATE_CUSTOMER,null);
-				return null;
-			}
 		}
 
 		Calendar myCalendar = Calendar.getInstance();
@@ -797,7 +552,8 @@ public class Customer {
 
 	}
 
-	public Customer deleteCustomer(long customerNumber, int sortCode) {
+	public Customer deleteCustomer(long customerNumber, int sortCode) 
+	{
 
 		logger.entering(this.getClass().getName(),DELETE_CUSTOMER);
 
@@ -813,112 +569,69 @@ public class Customer {
 		Long customerNumberLong = new Long(customerNumber);
 
 
+		RecordHolder holder = null;
+		byte[] key = new byte[16];
+		String keyString = null;
 
 		if(customerNumber == 9999999999L)
 		{
+			holder = getLastCustomer();
+			myCustomer = new CUSTOMER(holder.getValue());
+			StringBuilder myStringBuilder = new StringBuilder();
 
-			RecordHolder holder = new RecordHolder();
-			KeyHolder keyHolder = new KeyHolder();
-
-			// We need to set the key to high values. This is awkward in Java
-			byte[] key = new byte[16];
-
-			for(int z = 0; z < 16;z++)
+			for (int i=sortCodeInteger.toString().length();i<6;i++)
 			{
-
-				key[z] = (byte) -1;	
+				myStringBuilder.append('0');
 			}
 
-			KeyedFileBrowse myKeyedFileBrowse =	null;
-			try {
-				myKeyedFileBrowse =	customerFile.startBrowse(key);
-				myKeyedFileBrowse.previous(holder, keyHolder);
-				myKeyedFileBrowse.end();
-				key = keyHolder.getValue();
-
-				customerFile.readForUpdate(key, holder);
-				customerFile.delete();
-			} catch (LengthErrorException | EndOfFileException | LogicException | InvalidRequestException | IOErrorException
-					| ChangedException | LockedException | LoadingException | RecordBusyException
-					| FileDisabledException | DuplicateKeyException | FileNotFoundException | ISCInvalidRequestException
-					| NotAuthorisedException | RecordNotFoundException | NotOpenException e) {
-				logger.severe(ERROR_DELETE1 + customerNumber + ERROR_DELETE2 + e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,null);
-				return null;
-			}
-			catch (InvalidSystemIdException  e2) {
-				int number_of_retries = 0;
-				boolean success;
-				for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
-				{
-					try 
-					{
-						logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
-						Thread.sleep(3000);
-					}
-					catch (InterruptedException e) 
-					{
-						logger.warning(e.toString());
-						Thread.currentThread().interrupt();
-					}
-					try {
-						myKeyedFileBrowse =	customerFile.startBrowse(key);
-						myKeyedFileBrowse.previous(holder, keyHolder);
-						myKeyedFileBrowse.end();
-						key = keyHolder.getValue();
-
-						customerFile.readForUpdate(key, holder);
-						customerFile.delete();
-						success = true;
-
-					} catch (EndOfFileException | DuplicateKeyException | ChangedException | LoadingException | RecordBusyException | LockedException | RecordNotFoundException | IOErrorException | LengthErrorException | FileDisabledException | NotOpenException | LogicException | InvalidRequestException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
-							e3) {
-						logger.severe(ERROR_DELETE1 + customerNumber + ERROR_DELETE2 + e3.getLocalizedMessage());
-						logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,null);
-						return null;
-					}
-					catch (InvalidSystemIdException e4)
-					{
-					} 
-				}
-				if(number_of_retries == maximumRetries && success == false)
-				{
-					logger.severe("Cannot delete customer " + customerNumber + " in CUSTOMER file after 100 attempts");
-					logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,null);
-					return null;
-				}
+			myStringBuilder.append(sortCodeInteger);
+			for(int i = 0; i < 6; i++)
+			{
+				key[i] = (byte) myStringBuilder.toString().charAt(i);
 			}
 
-			myCustomer = new CUSTOMER(holder.getValue());		
+			myStringBuilder = new StringBuilder();
+			for(int z = Long.toString(myCustomer.getCustomerNumber()).length(); z < 10;z++)
+			{
+				myStringBuilder = myStringBuilder.insert(0, "0");	
+			}
+			myStringBuilder.append(customerNumberLong.toString());
+
+			for(int i = 6, j = 0; i < 16; i++,j++)
+			{
+				key[i] = (byte) myStringBuilder.toString().charAt(j);
+			}
 		}
 
 		if(customerNumber > 0 && customerNumber < 9999999999L)
 		{
-			RecordHolder holder = new RecordHolder();
-			byte[] key = new byte[16];
-			StringBuffer myStringBuffer = new StringBuffer(sortCodeInteger.toString());
-			for(int z = myStringBuffer.length(); z < 6;z++)
+			holder = new RecordHolder();
+			StringBuilder myStringBuilder = new StringBuilder();
+
+			for (int i=sortCodeInteger.toString().length();i<6;i++)
 			{
-				myStringBuffer = myStringBuffer.insert(0, "0");	
+				myStringBuilder.append('0');
 			}
 
+			myStringBuilder.append(sortCodeInteger);
 			for(int i = 0; i < 6; i++)
 			{
-				key[i] = (byte) myStringBuffer.toString().charAt(i);
+				key[i] = (byte) myStringBuilder.toString().charAt(i);
 			}
 
-			myStringBuffer = new StringBuffer(customerNumberLong.toString());
-			for(int z = myStringBuffer.length(); z < 10;z++)
+			myStringBuilder = new StringBuilder();
+			for(int z = customerNumberLong.toString().length(); z < 10;z++)
 			{
-				myStringBuffer = myStringBuffer.insert(0, "0");	
+				myStringBuilder = myStringBuilder.insert(0, "0");	
 			}
+			myStringBuilder.append(customerNumberLong.toString());
 
 			for(int i = 6, j = 0; i < 16; i++,j++)
 			{
-				key[i] = (byte) myStringBuffer.toString().charAt(j);
+				key[i] = (byte) myStringBuilder.toString().charAt(j);
 			}
 
-			String keyString = new String(key);
+			keyString = new String(key);
 			try {
 				key = keyString.getBytes(CODEPAGE);
 			} catch (UnsupportedEncodingException e2) {
@@ -926,118 +639,79 @@ public class Customer {
 				logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,null);
 				return null;
 			}
-			try {
-				customerFile.readForUpdate(key, holder);
-				customerFile.delete();
-			} catch (LogicException | InvalidRequestException | IOErrorException 
-					| ChangedException | LockedException | LoadingException | RecordBusyException
-					| FileDisabledException | DuplicateKeyException | FileNotFoundException | ISCInvalidRequestException
-					| NotAuthorisedException | NotOpenException e) {
-				logger.severe(ERROR_DELETE1 + customerNumber + " in CUSTOMER file," + e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,null);
-				return null;
-			}
-			catch (InvalidSystemIdException  e2) {
-				int number_of_retries = 0;
-				boolean success;
-				for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
-				{
-					try {
-						logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
-						Thread.sleep(3000);
-					}
-					catch (InterruptedException e) 
-					{
-						logger.warning(e.toString());
-						Thread.currentThread().interrupt();
-					}
-					try {
-						customerFile.readForUpdate(key, holder);
-						customerFile.delete();
-						success = true;
-
-					} catch (DuplicateKeyException | ChangedException | LoadingException | RecordBusyException | LockedException |IOErrorException | FileDisabledException | NotOpenException | LogicException | InvalidRequestException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
-							e3) {
-						logger.severe(ERROR_DELETE1 + customerNumber + ERROR_DELETE2 + e3.getLocalizedMessage());
-						logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,null);
-						return null;
-					}
-					catch (InvalidSystemIdException e4)
-					{
-					}
-					catch(RecordNotFoundException e)
-					{
-						Customer customer404 = new Customer();
-						customer404.setNot_found(true);
-						return customer404;
-					}
-				}
-				if(number_of_retries == maximumRetries && success == false)
-				{
-					logger.severe("Cannot delete customer " + customerNumber + " in CUSTOMER file after 100 attempts");
-					logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,null);
-					return null;
-				}
-			}
-			catch(RecordNotFoundException e)
-			{
-				Customer customer404 = new Customer();
-				customer404.setNot_found(true);
-				logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,customer404);
-				return customer404;
-			}
-
-			myCustomer = new CUSTOMER(holder.getValue());
-			CustomerControl myCustomerControl = new CustomerControl();
-			KSDS customerKSDS = new KSDS();
-			customerKSDS.setName(FILENAME);
-
-			myCustomerControl.setCustomerControlSortcode(0);
-			myCustomerControl.setCustomerControlNumber(9999999999L);
-
-			key = LAST_CUSTOMER.getBytes();
-
-			keyString = new String(key);
-			try 
-			{
-				key = keyString.getBytes(CODEPAGE);
-			}
-			catch (UnsupportedEncodingException e2) 
-			{
-				logger.severe(e2.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,null);
-				return null;
-			}
-
-			holder = new RecordHolder();
-
-			try {
-				customerKSDS.readForUpdate(key, holder);
-			} catch (LogicException | InvalidRequestException | IOErrorException | InvalidSystemIdException
-					| LockedException | ChangedException | LoadingException | RecordBusyException
-					| FileDisabledException | DuplicateKeyException | FileNotFoundException | ISCInvalidRequestException
-					| NotAuthorisedException | RecordNotFoundException | NotOpenException e) {
-				logger.severe(e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,null);
-				return null;
-			}
-			myCustomerControl = new CustomerControl(holder.getValue());
-
-			long numberOfCustomers = myCustomerControl.getNumberOfCustomers();
-			numberOfCustomers--;
-
-			myCustomerControl.setNumberOfCustomers(numberOfCustomers);
-			try {
-				customerKSDS.rewrite(myCustomerControl.getByteBuffer());
-			} catch (LogicException | InvalidRequestException | IOErrorException | LengthErrorException
-					| InvalidSystemIdException | ChangedException | LockedException | LoadingException
-					| RecordBusyException | FileDisabledException | DuplicateRecordException | FileNotFoundException
-					| ISCInvalidRequestException | NoSpaceException | NotAuthorisedException | NotOpenException e) {
-				logger.severe(e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,null);
-				return null;
-			}
 		}
+		try 
+		{
+			customerFile.readForUpdate(key, holder);
+			customerFile.delete();
+		}
+		catch (InvalidSystemIdException | LogicException | InvalidRequestException | IOErrorException 
+				| ChangedException | LockedException | LoadingException | RecordBusyException
+				| FileDisabledException | DuplicateKeyException | FileNotFoundException | ISCInvalidRequestException
+				| NotAuthorisedException | NotOpenException e) {
+			logger.severe(ERROR_DELETE1 + customerNumber + " in CUSTOMER file," + e.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,null);
+			return null;
+		}
+		catch(RecordNotFoundException e)
+		{
+			Customer customer404 = new Customer();
+			customer404.setNot_found(true);
+			logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,customer404);
+			return customer404;
+		}
+
+		myCustomer = new CUSTOMER(holder.getValue());
+		CustomerControl myCustomerControl = new CustomerControl();
+		KSDS customerKSDS = new KSDS();
+		customerKSDS.setName(FILENAME);
+
+		myCustomerControl.setCustomerControlSortcode(0);
+		myCustomerControl.setCustomerControlNumber(9999999999L);
+
+		key = LAST_CUSTOMER.getBytes();
+
+		keyString = new String(key);
+		try 
+		{
+			key = keyString.getBytes(CODEPAGE);
+		}
+		catch (UnsupportedEncodingException e2) 
+		{
+			logger.severe(e2.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,null);
+			return null;
+		}
+
+		holder = new RecordHolder();
+
+		try {
+			customerKSDS.readForUpdate(key, holder);
+		} catch (LogicException | InvalidRequestException | IOErrorException | InvalidSystemIdException
+				| LockedException | ChangedException | LoadingException | RecordBusyException
+				| FileDisabledException | DuplicateKeyException | FileNotFoundException | ISCInvalidRequestException
+				| NotAuthorisedException | RecordNotFoundException | NotOpenException e) {
+			logger.severe(e.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,null);
+			return null;
+		}
+		myCustomerControl = new CustomerControl(holder.getValue());
+
+		long numberOfCustomers = myCustomerControl.getNumberOfCustomers();
+		numberOfCustomers--;
+
+		myCustomerControl.setNumberOfCustomers(numberOfCustomers);
+		try {
+			customerKSDS.rewrite(myCustomerControl.getByteBuffer());
+		} catch (LogicException | InvalidRequestException | IOErrorException | LengthErrorException
+				| InvalidSystemIdException | ChangedException | LockedException | LoadingException
+				| RecordBusyException | FileDisabledException | DuplicateRecordException | FileNotFoundException
+				| ISCInvalidRequestException | NoSpaceException | NotAuthorisedException | NotOpenException e) {
+			logger.severe(e.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,null);
+			return null;
+		}
+
 		Calendar myCalendar = Calendar.getInstance();
 		myCalendar.set(Calendar.YEAR, myCustomer.getCustomerBirthYear());
 		myCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth());
