@@ -614,180 +614,155 @@ public class Account extends HBankDataAccess{
 		Long accountNumber =0L;
 		String controlString = sortcode.toString() + "-" + "ACCOUNT-LAST";
 		String sqlControl = "SELECT * from CONTROL where CONTROL_NAME = ?";
-
-		try(PreparedStatement stmt = conn.prepareStatement(sqlControl);) 
-		{
-			stmt.setString(1,controlString);
-			ResultSet rs = stmt.executeQuery();
-			if(rs.next())
-			{
-				accountNumber = (Long) rs.getLong("CONTROL_VALUE_NUM");
-				rs.close();
-			}
-		} 
-		catch (SQLException e) 
-		{
-			logger.severe("Error accessing Control Table for SELECT " + e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),CREATE_ACCOUNT,null);
-			try {
-				Task.getTask().rollback();
-			} catch (InvalidRequestException e1) {
-				logger.severe(e1.toString());
-			}
-			return null;
-		}
-		accountNumber++;
-
-		myStringBuffer = new StringBuffer(accountNumber.toString());
-		for(int z = myStringBuffer.length(); z < 8;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		accountNumberString = myStringBuffer.toString();
-
-
-		//
-		// Store today's date as the ACCOUNT-OPENED date and calculate
-		// the LAST-STMT-DATE (which should be today) and the
-		// NEXT-STMT-DATE (which should be today + 30 days).
-
-		Calendar myCalendar = Calendar.getInstance();
-		Date today = new Date(myCalendar.getTimeInMillis());
-
-		Date dateOpened = today;
-		Date lastStatement = dateOpened;
-
-		temp.setOpened(dateOpened);
-		temp.setLastStatement(lastStatement);
-
-		long timeNow = myCalendar.getTimeInMillis();
-		// You must specify the values here as longs otherwise it ends up negative due to overflow
-		long nextMonthInMs = 0L;
-		switch(today.getMonth())
-		{
-		case 8:
-		case 3:
-		case 5:
-		case 10:
-			nextMonthInMs = 1000L * 60L * 60L * 24L * 30L;
-			break;
-		case 1:
-			if((today.getYear() + 1900) % 4 > 0)
-			{
-				nextMonthInMs = 1000L * 60L * 60L * 24L * 28L;
-			}
-			else
-			{
-				if((today.getYear() + 1900) % 100 > 0)
-				{
-					nextMonthInMs = 1000L * 60L * 60L * 24L * 29L;
-				}
-				else
-				{
-					if((today.getYear() + 1900) % 400 == 0)
-					{
-						nextMonthInMs = 1000L * 60L * 60L * 24L * 29L;
-					}
-					else
-					{
-						nextMonthInMs = 1000L * 60L * 60L * 24L * 28L;
-					}
-				}
-			}
-			break;
-		default:
-			nextMonthInMs = 1000L * 60L * 60L * 24L * 31L;
-			break;
-		}
-
-		long nextStatementLong = timeNow + nextMonthInMs;
-		Date nextStatement =  new Date(nextStatementLong);
-
-		temp.setNextStatement(nextStatement);
-
-
-
-		myStringBuffer = new StringBuffer(new Integer(account.getCustomerNumber()).toString());
-		for(int z = myStringBuffer.length(); z < 10;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		String customerNumberString = myStringBuffer.toString();
-
-		String sqlInsert = "INSERT INTO ACCOUNT (ACCOUNT_EYECATCHER, ACCOUNT_CUSTOMER_NUMBER, ACCOUNT_SORTCODE, ACCOUNT_NUMBER, ACCOUNT_TYPE, ACCOUNT_INTEREST_RATE, ACCOUNT_OPENED, ACCOUNT_OVERDRAFT_LIMIT, ACCOUNT_LAST_STATEMENT, ACCOUNT_NEXT_STATEMENT, ACCOUNT_AVAILABLE_BALANCE, ACCOUNT_ACTUAL_BALANCE) VALUES ('ACCT',?,?,?,?,?,?,?,?,?,0.00,0.00)";
-		logger.log(Level.FINE,() ->"About to insert record SQL <" + sqlInsert + ">");
 		controlString = sortcode.toString() + "-" + "ACCOUNT-LAST";
 		sqlControl = "SELECT * from CONTROL where CONTROL_NAME LIKE '" + controlString + "'";
 		String sqlUpdate = "UPDATE CONTROL "+
 				"SET"+
 				" CONTROL_VALUE_NUM = ?"+
 				" WHERE CONTROL_NAME = ?";
+		String sqlInsert = "INSERT INTO ACCOUNT (ACCOUNT_EYECATCHER, ACCOUNT_CUSTOMER_NUMBER, ACCOUNT_SORTCODE, ACCOUNT_NUMBER, ACCOUNT_TYPE, ACCOUNT_INTEREST_RATE, ACCOUNT_OPENED, ACCOUNT_OVERDRAFT_LIMIT, ACCOUNT_LAST_STATEMENT, ACCOUNT_NEXT_STATEMENT, ACCOUNT_AVAILABLE_BALANCE, ACCOUNT_ACTUAL_BALANCE) VALUES ('ACCT',?,?,?,?,?,?,?,?,?,0.00,0.00)";
 
-		try(PreparedStatement stmt = conn.prepareStatement(sqlInsert);
-			PreparedStatement stmt2 = conn.prepareStatement(sqlControl);
-			PreparedStatement stmt3 = conn.prepareStatement(sqlUpdate);) 
+		try(PreparedStatement stmtC = conn.prepareStatement(sqlControl);
+				PreparedStatement stmt = conn.prepareStatement(sqlInsert);
+				PreparedStatement stmt2 = conn.prepareStatement(sqlControl);
+				PreparedStatement stmt3 = conn.prepareStatement(sqlUpdate);) 
 		{
+			stmtC.setString(1,controlString);
+			ResultSet rs = stmtC.executeQuery();
+			if(rs.next())
+			{
+				accountNumber = (Long) rs.getLong("CONTROL_VALUE_NUM");
+				rs.close();
 
-			stmt.setString(1, customerNumberString);
-			stmt.setString(2, sortCodeString);
-			stmt.setString(3,accountNumberString);
-			stmt.setString(4, account.getAccountType());
-			stmt.setBigDecimal(5, account.getInterestRate());
-			stmt.setDate(6, dateOpened);
-			stmt.setInt(7, account.getOverdraft());
-			stmt.setDate(8, lastStatement);
-			stmt.setDate(9, nextStatement);
-			stmt.execute();
-			temp.setAccountNumber(accountNumberString);
-			temp.setActualBalance(0.00);
-			temp.setAvailableBalance(0.00);
-			temp.setCustomerNumber(customerNumberString);
-			temp.setInterestRate(account.getInterestRate().doubleValue());
-			temp.setLastStatement(lastStatement);
-			temp.setNextStatement(nextStatement);
-			temp.setOverdraftLimit(account.getOverdraft().intValue());
-			temp.setSortcode(sortCodeString);
-			temp.setType(account.getAccountType());
-			temp.setOpened(dateOpened);
+				accountNumber++;
 
-			try {
-				ResultSet rs = stmt2.executeQuery();
+				myStringBuffer = new StringBuffer(accountNumber.toString());
+				for(int z = myStringBuffer.length(); z < 8;z++)
+				{
+					myStringBuffer = myStringBuffer.insert(0, "0");	
+				}
+				accountNumberString = myStringBuffer.toString();
+
+
+				//
+				// Store today's date as the ACCOUNT-OPENED date and calculate
+				// the LAST-STMT-DATE (which should be today) and the
+				// NEXT-STMT-DATE (which should be today + 30 days).
+
+				Calendar myCalendar = Calendar.getInstance();
+				Date today = new Date(myCalendar.getTimeInMillis());
+
+				Date dateOpened = today;
+				Date lastStatement = dateOpened;
+
+				temp.setOpened(dateOpened);
+				temp.setLastStatement(lastStatement);
+
+				long timeNow = myCalendar.getTimeInMillis();
+				// You must specify the values here as longs otherwise it ends up negative due to overflow
+				long nextMonthInMs = 0L;
+				switch(today.getMonth())
+				{
+				case 8:
+				case 3:
+				case 5:
+				case 10:
+					nextMonthInMs = 1000L * 60L * 60L * 24L * 30L;
+					break;
+				case 1:
+					if((today.getYear() + 1900) % 4 > 0)
+					{
+						nextMonthInMs = 1000L * 60L * 60L * 24L * 28L;
+					}
+					else
+					{
+						if((today.getYear() + 1900) % 100 > 0)
+						{
+							nextMonthInMs = 1000L * 60L * 60L * 24L * 29L;
+						}
+						else
+						{
+							if((today.getYear() + 1900) % 400 == 0)
+							{
+								nextMonthInMs = 1000L * 60L * 60L * 24L * 29L;
+							}
+							else
+							{
+								nextMonthInMs = 1000L * 60L * 60L * 24L * 28L;
+							}
+						}
+					}
+					break;
+				default:
+					nextMonthInMs = 1000L * 60L * 60L * 24L * 31L;
+					break;
+				}
+
+				long nextStatementLong = timeNow + nextMonthInMs;
+				Date nextStatement =  new Date(nextStatementLong);
+
+				temp.setNextStatement(nextStatement);
+
+
+
+				myStringBuffer = new StringBuffer(new Integer(account.getCustomerNumber()).toString());
+				for(int z = myStringBuffer.length(); z < 10;z++)
+				{
+					myStringBuffer = myStringBuffer.insert(0, "0");	
+				}
+				String customerNumberString = myStringBuffer.toString();
+
+
+				logger.log(Level.FINE,() ->"About to insert record SQL <" + sqlInsert + ">");
+
+
+
+
+				stmt.setString(1, customerNumberString);
+				stmt.setString(2, sortCodeString);
+				stmt.setString(3,accountNumberString);
+				stmt.setString(4, account.getAccountType());
+				stmt.setBigDecimal(5, account.getInterestRate());
+				stmt.setDate(6, dateOpened);
+				stmt.setInt(7, account.getOverdraft());
+				stmt.setDate(8, lastStatement);
+				stmt.setDate(9, nextStatement);
+				stmt.execute();
+				temp.setAccountNumber(accountNumberString);
+				temp.setActualBalance(0.00);
+				temp.setAvailableBalance(0.00);
+				temp.setCustomerNumber(customerNumberString);
+				temp.setInterestRate(account.getInterestRate().doubleValue());
+				temp.setLastStatement(lastStatement);
+				temp.setNextStatement(nextStatement);
+				temp.setOverdraftLimit(account.getOverdraft().intValue());
+				temp.setSortcode(sortCodeString);
+				temp.setType(account.getAccountType());
+				temp.setOpened(dateOpened);
+
+				rs = stmt2.executeQuery();
 				rs.next();
 
 				logger.log(Level.FINE,() ->"About to execute update SQL <" + sqlUpdate + ">");
 				stmt3.setLong(1, accountNumber);
 				stmt3.setString(2, controlString);
 				stmt3.execute();
-			} catch (SQLException e) {
-				logger.severe("Error accessing Control Table for UPDATE" + e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),CREATE_ACCOUNT,null);
-				try {
-					Task.getTask().rollback();
-				} catch (InvalidRequestException e1) {
-					logger.severe(e1.toString());
-				}
-				return null;
-			}			
-			return temp;
-		}
+
+				return temp;
+			}
+			return null;
+		} 
 		catch (SQLException e) 
 		{
-
-			if(e.getErrorCode() == -803)
-			{
-				logger.severe("SQLException -803 duplicate value. Have you combined named counter and non-named counter with the same data? com.ibm.cics.cip.bankliberty.web.db2.Account " + e.getErrorCode() + "," + e.getSQLState() + ","  + e.getMessage());
-			}
+			logger.severe("Error creating account " + e.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),CREATE_ACCOUNT,null);
 			try {
 				Task.getTask().rollback();
 			} catch (InvalidRequestException e1) {
 				logger.severe(e1.toString());
 			}
-			logger.severe("SQL statement #" + sqlInsert + "# had error " + e.getErrorCode());
-			logger.severe(e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),CREATE_ACCOUNT,null);
 			return null;
 		}
-
 	}
 
 
