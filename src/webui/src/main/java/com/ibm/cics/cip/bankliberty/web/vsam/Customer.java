@@ -217,89 +217,11 @@ public class Customer {
 
 		myCustomer = new CUSTOMER();
 
-		Integer sortCodeInteger = sortCode;
-		Long customerNumberLong = customerNumber;
+		
 
 		if(customerNumber == 9999999999L)
 		{
-			RecordHolder holder = new RecordHolder();
-			KeyHolder keyHolder = new KeyHolder();
-
-			// We need to set the key to high values. This is awkward in Java
-			byte[] key = new byte[16];
-
-			for(int z = 0; z < 16;z++)
-			{
-
-				key[z] = (byte) -1;	
-			}
-
-			try {
-				KeyedFileBrowse myKeyedFileBrowse =	customerFile.startBrowse(key);
-				myKeyedFileBrowse.previous(holder, keyHolder);
-				myKeyedFileBrowse.end();
-				key = keyHolder.getValue();
-				customerFile.read(key, holder);
-			} catch (LogicException | InvalidRequestException | IOErrorException 
-					| ChangedException | LockedException | LoadingException | RecordBusyException
-					| FileDisabledException | DuplicateKeyException | FileNotFoundException | ISCInvalidRequestException
-					| NotAuthorisedException | RecordNotFoundException | NotOpenException e) {
-				logger.severe("Error reading customer " + customerNumber + " " + e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
-				return null;
-			} catch (LengthErrorException e) {
-				logger.severe(e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
-				return null;
-			} catch (EndOfFileException e) {
-				logger.severe(e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
-				return null;
-			}
-			catch (InvalidSystemIdException  e1) {
-				int numberOfRetries = 0;
-				boolean success;
-				for(numberOfRetries = 0,success = false; numberOfRetries < maximumRetries && !success;numberOfRetries++)
-				{
-					try {
-						logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
-						Thread.sleep(3000);
-					} 
-					catch (InterruptedException e) 
-					{
-						logger.warning(e.toString());
-						Thread.currentThread().interrupt();
-					}
-					try {
-						KeyedFileBrowse myKeyedFileBrowse =	customerFile.startBrowse(key);
-						myKeyedFileBrowse.previous(holder, keyHolder);
-						myKeyedFileBrowse.end();
-						key = keyHolder.getValue();
-						customerFile.read(key, holder);
-						success = true;
-
-					} catch (EndOfFileException | FileDisabledException | DuplicateKeyException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | LengthErrorException 
-							| ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
-							e3) {
-						logger.severe(e3.getLocalizedMessage());
-						logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
-						return null;
-					}
-					catch (InvalidSystemIdException e4)
-					{
-						logger.log(Level.WARNING,() -> "Invalid SystemIdException, will try again");
-					} 
-
-				}
-				if(numberOfRetries == maximumRetries && success == false)
-				{
-					logger.severe(READ_GIVE_UP);
-					logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
-					return null;
-				}
-			}
-
-			myCustomer = new CUSTOMER(holder.getValue());		
+			myCustomer = new CUSTOMER(getLastCustomer());		
 		}
 
 		if(customerNumber > 0 && customerNumber < 9999999999L)
@@ -307,11 +229,11 @@ public class Customer {
 			RecordHolder holder = new RecordHolder();
 			byte[] key = new byte[16];
 			StringBuilder myStringBuilder = new StringBuilder(); 
-			for(int z = Integer.toString(sortCodeInteger).length(); z < 6;z++)
+			for(int z = Integer.toString(sortCode).length(); z < 6;z++)
 			{
 				myStringBuilder = myStringBuilder.append("0");	
 			}
-			myStringBuilder.append(sortCodeInteger.toString());
+			myStringBuilder.append(Integer.toString(sortCode));
 		
 
 			for(int z = Long.toString(customerNumber).length(); z < 10;z++)
@@ -400,6 +322,87 @@ public class Customer {
 				);
 		logger.exiting(this.getClass().getName(),GET_CUSTOMER,temp);
 		return temp;
+	}
+
+	private byte[] getLastCustomer() {
+		// TODO Auto-generated method stub
+		RecordHolder holder = new RecordHolder();
+		KeyHolder keyHolder = new KeyHolder();
+
+		// We need to set the key to high values. This is awkward in Java
+		byte[] key = new byte[16];
+
+		for(int z = 0; z < 16;z++)
+		{
+
+			key[z] = (byte) -1;	
+		}
+
+		try {
+			KeyedFileBrowse myKeyedFileBrowse =	customerFile.startBrowse(key);
+			myKeyedFileBrowse.previous(holder, keyHolder);
+			myKeyedFileBrowse.end();
+			key = keyHolder.getValue();
+			customerFile.read(key, holder);
+		} catch (LogicException | InvalidRequestException | IOErrorException 
+				| ChangedException | LockedException | LoadingException | RecordBusyException
+				| FileDisabledException | DuplicateKeyException | FileNotFoundException | ISCInvalidRequestException
+				| NotAuthorisedException | RecordNotFoundException | NotOpenException e) {
+			logger.severe("Error reading customer " + customerNumber + " " + e.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
+			return null;
+		} catch (LengthErrorException e) {
+			logger.severe(e.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
+			return null;
+		} catch (EndOfFileException e) {
+			logger.severe(e.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
+			return null;
+		}
+		catch (InvalidSystemIdException  e1) {
+			int numberOfRetries = 0;
+			boolean success;
+			for(numberOfRetries = 0,success = false; numberOfRetries < maximumRetries && !success;numberOfRetries++)
+			{
+				try {
+					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
+					Thread.sleep(3000);
+				} 
+				catch (InterruptedException e) 
+				{
+					logger.warning(e.toString());
+					Thread.currentThread().interrupt();
+				}
+				try {
+					KeyedFileBrowse myKeyedFileBrowse =	customerFile.startBrowse(key);
+					myKeyedFileBrowse.previous(holder, keyHolder);
+					myKeyedFileBrowse.end();
+					key = keyHolder.getValue();
+					customerFile.read(key, holder);
+					success = true;
+
+				} catch (EndOfFileException | FileDisabledException | DuplicateKeyException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | LengthErrorException 
+						| ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
+						e3) {
+					logger.severe(e3.getLocalizedMessage());
+					logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
+					return null;
+				}
+				catch (InvalidSystemIdException e4)
+				{
+					logger.log(Level.WARNING,() -> "Invalid SystemIdException, will try again");
+				} 
+
+			}
+			if(numberOfRetries == maximumRetries && success == false)
+			{
+				logger.severe(READ_GIVE_UP);
+				logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
+				return null;
+			}
+		}
+		return holder.getValue();
 	}
 
 	public Customer[] getCustomers(int sortCode) {
