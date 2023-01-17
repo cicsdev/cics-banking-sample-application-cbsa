@@ -1492,7 +1492,7 @@ public class Customer {
 		return returnCust;
 	}
 
-	public Customer[] getCustomers(int sortCode, String name) 
+	public Customer[] getCustomersByName(int sortCode, String name) 
 	{
 		logger.entering(this.getClass().getName(),GET_CUSTOMERS_BY_NAME);
 		Customer[] temp = new Customer[250000];
@@ -1545,50 +1545,13 @@ public class Customer {
 		try {
 
 			customerFileBrowse = customerFile.startBrowse(key);
-		} catch (LogicException | InvalidRequestException | IOErrorException
+		} catch (InvalidSystemIdException | LogicException | InvalidRequestException | IOErrorException
 				| LockedException | RecordBusyException | LoadingException | ChangedException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 				| NotOpenException e1) {
-			logger.severe(ERROR_START_BROWSE + e1.getLocalizedMessage());
+			logger.severe(e1.getLocalizedMessage());
 			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME,null);
 			return null;
-		}
-		catch (InvalidSystemIdException  e1) {
-			int number_of_retries = 0;
-			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
-			{
-				try {
-					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
-					Thread.sleep(3000);
-				}
-				catch (InterruptedException e) 
-				{
-					logger.warning(e.toString());
-					Thread.currentThread().interrupt();
-				}
-				try {
-
-					customerFileBrowse = customerFile.startBrowse(key);
-					success = true;
-
-				} catch (FileDisabledException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
-						e3) {
-					logger.severe(ERROR_START_BROWSE+ e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME,null);
-					return null;
-				}
-				catch (InvalidSystemIdException e4)
-				{
-				} 
-
-			}
-			if(number_of_retries == maximumRetries && success == false)
-			{
-				logger.severe(READ_GIVE_UP);
-				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME,null);
-				return null;
-			}
 		}
 		boolean carryOn = true, endOfFile = false;
 		for(retrieved = 0;retrieved<250000 && carryOn;retrieved++)
