@@ -344,22 +344,14 @@ public class Customer {
 			myKeyedFileBrowse.end();
 			key = keyHolder.getValue();
 			customerFile.read(key, holder);
-		} catch (LogicException | InvalidRequestException | IOErrorException 
+		} catch (LengthErrorException | EndOfFileException | LogicException | InvalidRequestException | IOErrorException 
 				| ChangedException | LockedException | LoadingException | RecordBusyException
 				| FileDisabledException | DuplicateKeyException | FileNotFoundException | ISCInvalidRequestException
 				| NotAuthorisedException | RecordNotFoundException | NotOpenException e) {
 			logger.severe("Error reading customer " + customerNumber + " " + e.getLocalizedMessage());
 			logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
 			return null;
-		} catch (LengthErrorException e) {
-			logger.severe(e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
-			return null;
-		} catch (EndOfFileException e) {
-			logger.severe(e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
-			return null;
-		}
+		} 
 		catch (InvalidSystemIdException  e1) {
 			int numberOfRetries = 0;
 			boolean success;

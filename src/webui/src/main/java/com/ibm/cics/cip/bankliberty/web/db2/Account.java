@@ -615,7 +615,7 @@ public class Account extends HBankDataAccess{
 		String controlString = sortcode.toString() + "-" + "ACCOUNT-LAST";
 		String sqlControl = "SELECT * from CONTROL where CONTROL_NAME = ?";
 		controlString = sortcode.toString() + "-" + "ACCOUNT-LAST";
-		sqlControl = "SELECT * from CONTROL where CONTROL_NAME LIKE '" + controlString + "'";
+		sqlControl = "SELECT * from CONTROL where CONTROL_NAME LIKE ?";
 		String sqlUpdate = "UPDATE CONTROL "+
 				"SET"+
 				" CONTROL_VALUE_NUM = ?"+
