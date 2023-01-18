@@ -757,83 +757,16 @@ public class Customer {
 		String sortCodeString = sortCodeInteger.toString();
 
 
-		// We need to get a NEW customer number
-		// We need to enqueue, then get the last customer number
-		NameResource enqueue = new NameResource();
 
-		enqueue.setName("HBNKCUST" + sortCodeString + "  ");
-		try {
-			enqueue.enqueue();
-		} catch (ResourceUnavailableException e) {
-			logger.severe(e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),CREATE_CUSTOMER,null);
-			return null;
-		} catch (LengthErrorException e) {
-			logger.severe(e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),CREATE_CUSTOMER,null);
-			return null;
-		}
-		CustomerControl myCustomerControl = new CustomerControl();
-		KSDS customerKSDS = new KSDS();
-		customerKSDS.setName(FILENAME);
-
-		myCustomerControl.setCustomerControlSortcode(0);
-		myCustomerControl.setCustomerControlNumber(9999999999L);
-
-		byte[] key = LAST_CUSTOMER.getBytes();
-
-		String keyString = new String(key);
-		try 
-		{
-			key = keyString.getBytes(CODEPAGE);
-		}
-		catch (UnsupportedEncodingException e2) 
-		{
-			logger.severe(e2.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),CREATE_CUSTOMER,null);
-			return null;
-		}
-
-		RecordHolder holder = new RecordHolder();
-
-		try {
-			customerKSDS.readForUpdate(key, holder);
-		} catch (LogicException | InvalidRequestException | IOErrorException | InvalidSystemIdException
-				| LockedException | ChangedException | LoadingException | RecordBusyException
-				| FileDisabledException | DuplicateKeyException | FileNotFoundException | ISCInvalidRequestException
-				| NotAuthorisedException | RecordNotFoundException | NotOpenException e) {
-			logger.severe(e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),CREATE_CUSTOMER,null);
-			return null;
-		}
-
-		myCustomerControl = new CustomerControl(holder.getValue());
-
-
-		long lastCustomerNumber = myCustomerControl.getLastCustomerNumber();
-		lastCustomerNumber++;
-
-		long numberOfCustomers = myCustomerControl.getNumberOfCustomers();
-		numberOfCustomers++;
-
-		myCustomerControl.setLastCustomerNumber(lastCustomerNumber);
-		myCustomerControl.setNumberOfCustomers(numberOfCustomers);
-		customerNumber = lastCustomerNumber;
-		try {
-			customerKSDS.rewrite(myCustomerControl.getByteBuffer());
-		} catch (LogicException | InvalidRequestException | IOErrorException | LengthErrorException
-				| InvalidSystemIdException | ChangedException | LockedException | LoadingException
-				| RecordBusyException | FileDisabledException | DuplicateRecordException | FileNotFoundException
-				| ISCInvalidRequestException | NoSpaceException | NotAuthorisedException | NotOpenException e) {
-			logger.severe(e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),CREATE_CUSTOMER,null);
-			return null;
-		}
-
+		customerNumber = getNextCustomerNumber(sortCodeString);
 
 		Long customerNumberLong = new Long(customerNumber);
+		if(customerNumberLong == -1)
+		{
+			return null;
+		}
 
-		key = new byte[16];
+		byte[] key = new byte[16];
 		StringBuffer myStringBuffer = new StringBuffer(sortCodeInteger.toString());
 		for(int z = myStringBuffer.length(); z < 6;z++)
 		{
@@ -856,7 +789,7 @@ public class Customer {
 			key[i] = (byte) myStringBuffer.toString().charAt(j);
 		}
 
-		keyString = new String(key);
+		String keyString = new String(key);
 		try 
 		{
 			key = keyString.getBytes(CODEPAGE);
@@ -926,7 +859,7 @@ public class Customer {
 		} catch (DuplicateRecordException e) {
 			logger.severe("DuplicateRecordException duplicate value. Have you combined named counter and non-named counter with the same data? com.ibm.cics.cip.bankliberty.web.vsam.Customer.");
 			logger.exiting(this.getClass().getName(),CREATE_CUSTOMER,null);
-			myCounterResource.decrementCustomerCounter();
+			resetNextCustomerNumber(sortCodeString);
 			return null;
 		}
 
@@ -960,6 +893,132 @@ public class Customer {
 		logger.exiting(this.getClass().getName(),CREATE_CUSTOMER,temp);
 		return temp;
 
+	}
+
+	private long getNextCustomerNumber(String sortCodeString) {
+		// TODO Auto-generated method stub
+		// We need to get a NEW customer number
+		// We need to enqueue, then get the last customer number
+		
+		NameResource enqueue = new NameResource();
+
+		enqueue.setName("HBNKCUST" + sortCodeString + "  ");
+		try {
+			enqueue.enqueue();
+		} catch (LengthErrorException | ResourceUnavailableException e) {
+			logger.severe(e.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),CREATE_CUSTOMER,null);
+			return -1;
+		} 
+		CustomerControl myCustomerControl = new CustomerControl();
+		KSDS customerKSDS = new KSDS();
+		customerKSDS.setName(FILENAME);
+
+		myCustomerControl.setCustomerControlSortcode(0);
+		myCustomerControl.setCustomerControlNumber(9999999999L);
+
+		byte[] key = LAST_CUSTOMER.getBytes();
+
+		String keyString = new String(key);
+		try 
+		{
+			key = keyString.getBytes(CODEPAGE);
+		}
+		catch (UnsupportedEncodingException e2) 
+		{
+			logger.severe(e2.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),CREATE_CUSTOMER,null);
+			return -1;
+		}
+
+		RecordHolder holder = new RecordHolder();
+
+		try {
+			customerKSDS.readForUpdate(key, holder);
+		} catch (LogicException | InvalidRequestException | IOErrorException | InvalidSystemIdException
+				| LockedException | ChangedException | LoadingException | RecordBusyException
+				| FileDisabledException | DuplicateKeyException | FileNotFoundException | ISCInvalidRequestException
+				| NotAuthorisedException | RecordNotFoundException | NotOpenException e) {
+			logger.severe(e.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),CREATE_CUSTOMER,null);
+			return -1;
+		}
+
+		myCustomerControl = new CustomerControl(holder.getValue());
+
+
+		long lastCustomerNumber = myCustomerControl.getLastCustomerNumber();
+		lastCustomerNumber++;
+
+		long numberOfCustomers = myCustomerControl.getNumberOfCustomers();
+		numberOfCustomers++;
+
+		myCustomerControl.setLastCustomerNumber(lastCustomerNumber);
+		myCustomerControl.setNumberOfCustomers(numberOfCustomers);
+		return lastCustomerNumber;
+	}
+	
+	private long resetNextCustomerNumber(String sortCodeString) {
+		// TODO Auto-generated method stub
+		// We need to get a NEW customer number
+		// We need to enqueue, then get the last customer number
+		
+		NameResource enqueue = new NameResource();
+
+		enqueue.setName("HBNKCUST" + sortCodeString + "  ");
+		try {
+			enqueue.enqueue();
+		} catch (LengthErrorException | ResourceUnavailableException e) {
+			logger.severe(e.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),CREATE_CUSTOMER,null);
+			return -1;
+		} 
+		CustomerControl myCustomerControl = new CustomerControl();
+		KSDS customerKSDS = new KSDS();
+		customerKSDS.setName(FILENAME);
+
+		myCustomerControl.setCustomerControlSortcode(0);
+		myCustomerControl.setCustomerControlNumber(9999999999L);
+
+		byte[] key = LAST_CUSTOMER.getBytes();
+
+		String keyString = new String(key);
+		try 
+		{
+			key = keyString.getBytes(CODEPAGE);
+		}
+		catch (UnsupportedEncodingException e2) 
+		{
+			logger.severe(e2.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),CREATE_CUSTOMER,null);
+			return -1;
+		}
+
+		RecordHolder holder = new RecordHolder();
+
+		try {
+			customerKSDS.readForUpdate(key, holder);
+		} catch (LogicException | InvalidRequestException | IOErrorException | InvalidSystemIdException
+				| LockedException | ChangedException | LoadingException | RecordBusyException
+				| FileDisabledException | DuplicateKeyException | FileNotFoundException | ISCInvalidRequestException
+				| NotAuthorisedException | RecordNotFoundException | NotOpenException e) {
+			logger.severe(e.getLocalizedMessage());
+			logger.exiting(this.getClass().getName(),CREATE_CUSTOMER,null);
+			return -1;
+		}
+
+		myCustomerControl = new CustomerControl(holder.getValue());
+
+
+		long lastCustomerNumber = myCustomerControl.getLastCustomerNumber();
+		lastCustomerNumber--;
+
+		long numberOfCustomers = myCustomerControl.getNumberOfCustomers();
+		numberOfCustomers--;
+
+		myCustomerControl.setLastCustomerNumber(lastCustomerNumber);
+		myCustomerControl.setNumberOfCustomers(numberOfCustomers);
+		return lastCustomerNumber;
 	}
 
 	public Customer[] getCustomers(int sortCode, int limit, int offset) 
