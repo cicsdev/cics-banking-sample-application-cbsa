@@ -678,7 +678,31 @@ public class Customer {
 			return customer404;
 		}
 
-		myCustomer = new CUSTOMER(holder.getValue());
+		decrementNumberOfCustomers();
+		
+		Calendar myCalendar = Calendar.getInstance();
+		myCalendar.set(Calendar.YEAR, myCustomer.getCustomerBirthYear());
+		myCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth());
+		myCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerBirthDay());
+		Date myCustomerBirthDate = new Date(myCalendar.toInstant().toEpochMilli());
+		myCalendar.set(Calendar.YEAR, myCustomer.getCustomerCsReviewYear());
+		myCalendar.set(Calendar.MONTH, myCustomer.getCustomerCsReviewMonth());
+		myCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerCsReviewDay());
+		Date myCustomerReviewDate = new Date(myCalendar.toInstant().toEpochMilli());
+		temp = new Customer(Long.toString(myCustomer.getCustomerNumber()), 
+				Integer.toString(myCustomer.getCustomerSortcode()), 
+				myCustomer.getCustomerName(),
+				myCustomer.getCustomerAddress(), 
+				myCustomerBirthDate, 
+				Integer.toString(myCustomer.getCustomerCreditScore()),
+				myCustomerReviewDate);
+
+		logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,temp);
+		return temp;
+
+	}
+
+	private boolean decrementNumberOfCustomers() {
 		CustomerControl myCustomerControl = new CustomerControl();
 		KSDS customerKSDS = new KSDS();
 		customerKSDS.setName(FILENAME);
@@ -686,9 +710,9 @@ public class Customer {
 		myCustomerControl.setCustomerControlSortcode(0);
 		myCustomerControl.setCustomerControlNumber(9999999999L);
 
-		key = LAST_CUSTOMER.getBytes();
+		byte[] key = LAST_CUSTOMER.getBytes();
 
-		keyString = new String(key);
+		String keyString = new String(key);
 		try 
 		{
 			key = keyString.getBytes(CODEPAGE);
@@ -697,10 +721,10 @@ public class Customer {
 		{
 			logger.severe(e2.getLocalizedMessage());
 			logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,null);
-			return null;
+			return false;
 		}
 
-		holder = new RecordHolder();
+		RecordHolder holder = new RecordHolder();
 
 		try {
 			customerKSDS.readForUpdate(key, holder);
@@ -710,7 +734,7 @@ public class Customer {
 				| NotAuthorisedException | RecordNotFoundException | NotOpenException e) {
 			logger.severe(e.getLocalizedMessage());
 			logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,null);
-			return null;
+			return false;
 		}
 		myCustomerControl = new CustomerControl(holder.getValue());
 
@@ -726,28 +750,9 @@ public class Customer {
 				| ISCInvalidRequestException | NoSpaceException | NotAuthorisedException | NotOpenException e) {
 			logger.severe(e.getLocalizedMessage());
 			logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,null);
-			return null;
+			return false;
 		}
-
-		Calendar myCalendar = Calendar.getInstance();
-		myCalendar.set(Calendar.YEAR, myCustomer.getCustomerBirthYear());
-		myCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth());
-		myCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerBirthDay());
-		Date myCustomerBirthDate = new Date(myCalendar.toInstant().toEpochMilli());
-		myCalendar.set(Calendar.YEAR, myCustomer.getCustomerCsReviewYear());
-		myCalendar.set(Calendar.MONTH, myCustomer.getCustomerCsReviewMonth());
-		myCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerCsReviewDay());
-		Date myCustomerReviewDate = new Date(myCalendar.toInstant().toEpochMilli());
-		temp = new Customer(new String(new Long(myCustomer.getCustomerNumber()).toString()), 
-				new String(new Integer(myCustomer.getCustomerSortcode()).toString()), 
-				new String(myCustomer.getCustomerName()),
-				new String(myCustomer.getCustomerAddress()), 
-				myCustomerBirthDate, 
-				Integer.toString(myCustomer.getCustomerCreditScore()),
-				myCustomerReviewDate);
-
-		logger.exiting(this.getClass().getName(),DELETE_CUSTOMER,temp);
-		return temp;
+		return true;
 
 	}
 
@@ -904,7 +909,6 @@ public class Customer {
 	}
 
 	private long getNextCustomerNumber(String sortCodeString) {
-		// TODO Auto-generated method stub
 		// We need to get a NEW customer number
 		// We need to enqueue, then get the last customer number
 		
@@ -967,7 +971,6 @@ public class Customer {
 	}
 	
 	private long resetNextCustomerNumber(String sortCodeString) {
-		// TODO Auto-generated method stub
 		// We need to get a NEW customer number
 		// We need to enqueue, then get the last customer number
 		
