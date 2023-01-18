@@ -593,60 +593,15 @@ public class Customer {
 		{
 			holder = getLastCustomer();
 			if(holder == null) return null;
-			myCustomer = new CUSTOMER(holder.getValue());
-			StringBuilder myStringBuilder = new StringBuilder();
 
-			for (int i=sortCodeInteger.toString().length();i<6;i++)
-			{
-				myStringBuilder.append('0');
-			}
+			key=buildKey(sortCode, customerNumber);
 
-			myStringBuilder.append(sortCodeInteger);
-			for(int i = 0; i < 6; i++)
-			{
-				key[i] = (byte) myStringBuilder.toString().charAt(i);
-			}
-
-			myStringBuilder = new StringBuilder();
-			for(int z = Long.toString(myCustomer.getCustomerNumber()).length(); z < 10;z++)
-			{
-				myStringBuilder = myStringBuilder.insert(0, "0");	
-			}
-			myStringBuilder.append(customerNumberLong.toString());
-
-			for(int i = 6, j = 0; i < 16; i++,j++)
-			{
-				key[i] = (byte) myStringBuilder.toString().charAt(j);
-			}
 		}
 
 		if(customerNumber > 0 && customerNumber < 9999999999L)
 		{
 			holder = new RecordHolder();
-			StringBuilder myStringBuilder = new StringBuilder();
-
-			for (int i=sortCodeInteger.toString().length();i<6;i++)
-			{
-				myStringBuilder.append('0');
-			}
-
-			myStringBuilder.append(sortCodeInteger);
-			for(int i = 0; i < 6; i++)
-			{
-				key[i] = (byte) myStringBuilder.toString().charAt(i);
-			}
-
-			myStringBuilder = new StringBuilder();
-			for(int z = customerNumberLong.toString().length(); z < 10;z++)
-			{
-				myStringBuilder = myStringBuilder.insert(0, "0");	
-			}
-			myStringBuilder.append(customerNumberLong.toString());
-
-			for(int i = 6, j = 0; i < 16; i++,j++)
-			{
-				key[i] = (byte) myStringBuilder.toString().charAt(j);
-			}
+			key=buildKey(sortCode, customerNumber);
 
 			keyString = new String(key);
 			try {
@@ -1921,5 +1876,23 @@ public class Customer {
 
 		return age;
 
+	}
+	
+	byte[] buildKey(int sortCode2, long customerNumber2)
+	{
+		StringBuilder myStringBuilder = new StringBuilder();
+
+		for (int i=Integer.toString(sortCode2).length();i<6;i++)
+		{
+			myStringBuilder.append('0');
+		}
+		myStringBuilder.append(Integer.toString(sortCode2));
+		for(int z = Long.toString(customerNumber2).length(); z < 10;z++)
+		{
+			myStringBuilder = myStringBuilder.append('0');	
+		}
+		myStringBuilder.append(Long.toString(customerNumber2));
+		
+		return myStringBuilder.toString().getBytes();
 	}
 }
