@@ -1518,183 +1518,47 @@ public class Customer {
 		try {
 
 			customerFileBrowse = customerFile.startBrowse(key);
-		} catch (LogicException | InvalidRequestException | IOErrorException
-				| LockedException | RecordBusyException | LoadingException | ChangedException | FileDisabledException
-				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
-				| NotOpenException e1) {
-			logger.severe(ERROR_START_BROWSE + e1.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_COUNT_ONLY,-1L);
-			return -1L;
-		}
-		catch (InvalidSystemIdException  e1) {
-			int number_of_retries = 0;
-			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
+
+			boolean carryOn = true, endOfFile = false;
+			for(carryOn = true, endOfFile = false;carryOn && !endOfFile;)
 			{
-				try {
-					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
-					Thread.sleep(3000);
+				try 
+				{
+					customerFileBrowse.next(holder, keyHolder);
+				}
+				catch(DuplicateKeyException e)
+				{
+					// we don't care about this one
+				}
+				catch(EndOfFileException e)
+				{
+					// This one we do care about but we expect it
+					carryOn = false;
+					endOfFile = true;
 				}
 
+				myCustomer = new CUSTOMER(holder.getValue());
 
-
-				catch (InterruptedException e) 
+				// We get here because we either successfully read a record, or hit end of file. if we hit end of file then we might add the last customer twice!
+				if(!endOfFile)
 				{
-					logger.warning(e.toString());
-					Thread.currentThread().interrupt();
-				}
-				try {
-					customerFileBrowse = customerFile.startBrowse(key);
-					success = true;
-
-				} catch (FileDisabledException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
-						e3) {
-					logger.severe(ERROR_START_BROWSE+ e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_COUNT_ONLY,-1L);
-					return -1L;
-				}
-				catch (InvalidSystemIdException e4)
-				{
-				} 
-
-			}
-			if(number_of_retries == maximumRetries && success == false)
-			{
-				logger.severe(READ_GIVE_UP);
-				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_COUNT_ONLY,-1L);
-				return -1L;
-			}
-		}
-		boolean carryOn = true, endOfFile = false;
-		for(carryOn = true, endOfFile = false;carryOn && !endOfFile;)
-		{
-			try 
-			{
-				customerFileBrowse.next(holder, keyHolder);
-			}
-			catch(DuplicateKeyException e)
-			{
-				// we don't care about this one
-			}
-			catch(EndOfFileException e)
-			{
-				// This one we do care about but we expect it
-				carryOn = false;
-				endOfFile = true;
-			}
-			catch (LogicException | InvalidRequestException
-					| IOErrorException 
-					| ChangedException | LockedException | LoadingException
-					| RecordBusyException | FileDisabledException
-					| FileNotFoundException
-					| ISCInvalidRequestException | NotAuthorisedException
-					| RecordNotFoundException | NotOpenException | LengthErrorException e) {
-				logger.severe(ERROR_BROWSE + e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_COUNT_ONLY,-1L);
-				return -1L;
-			}
-			catch (InvalidSystemIdException  e1) {
-				int number_of_retries = 0;
-				boolean success;
-				for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
-				{
-					try {
-						logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
-						Thread.sleep(3000);
-					}
-					catch (InterruptedException e) 
+					if(myCustomer.getCustomerName().contains(name))
 					{
-						logger.warning(e.toString());
-						Thread.currentThread().interrupt();
+						matchingCustomers++;
 					}
-					try {
-						customerFileBrowse.next(holder, keyHolder);
-						success = true;
-
-					} catch (DuplicateKeyException | LengthErrorException | FileDisabledException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
-							e3) {
-						logger.severe(ERROR_BROWSE + e3.getLocalizedMessage());
-						logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_COUNT_ONLY,-1L);
-						return -1L;
-					}
-					catch (InvalidSystemIdException e4)
-					{
-					}
-					catch (EndOfFileException e4)
-					{
-						success = true;
-						carryOn = false;
-						endOfFile = true;
-					}
-
-				}
-				if(number_of_retries == maximumRetries && success == false)
-				{
-					logger.severe(BROWSE_GIVE_UP);
-					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_COUNT_ONLY,-1L);
-					return -1L;
-				}
-
-			}
-			myCustomer = new CUSTOMER(holder.getValue());
-
-			// We get here because we either successfully read a record, or hit end of file. if we hit end of file then we might add the last customer twice!
-			if(!endOfFile)
-			{
-				if(myCustomer.getCustomerName().contains(name))
-				{
-					matchingCustomers++;
 				}
 			}
-		}
-		try {
 			customerFileBrowse.end();
-		} catch (LogicException | InvalidRequestException | FileDisabledException
-				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
-				| NotOpenException e) {
-			logger.severe(ERROR_END_BROWSE  + e.getLocalizedMessage());
+
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_COUNT_ONLY,matchingCustomers);
+			return matchingCustomers;
+		}
+		catch (LengthErrorException | FileDisabledException | NotOpenException | LogicException | InvalidRequestException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | IOErrorException | InvalidSystemIdException | LockedException | RecordBusyException | LoadingException | ChangedException | RecordNotFoundException
+				e3) {
+			logger.log(Level.FINE, () -> e3.getLocalizedMessage());
 			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_COUNT_ONLY,-1L);
 			return -1L;
 		}
-		catch (InvalidSystemIdException  e2) {
-			int number_of_retries = 0;
-			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
-			{
-				try {
-					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
-					Thread.sleep(3000);
-				} 
-				catch (InterruptedException e) 
-				{
-					logger.warning(e.toString());
-					Thread.currentThread().interrupt();
-				} 
-				try {
-					customerFileBrowse.end();
-					success = true;
-
-				} catch (FileDisabledException | NotOpenException | LogicException | InvalidRequestException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
-						e3) {
-					logger.log(Level.FINE, () -> ERROR_END_BROWSE + e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_COUNT_ONLY,-1L);
-					return -1L;
-				}
-				catch (InvalidSystemIdException e4)
-				{
-				} 
-
-			}
-			if(number_of_retries == maximumRetries && success == false)
-			{
-				logger.severe(BROWSE_GIVE_UP);
-				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_COUNT_ONLY,-1L);
-				return -1L;
-			}
-		}
-
-		logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_COUNT_ONLY,matchingCustomers);
-		return matchingCustomers;
 
 	}
 
