@@ -243,30 +243,7 @@ public class Customer {
 		if(customerNumber > 0 && customerNumber < 9999999999L)
 		{
 			RecordHolder holder = new RecordHolder();
-			byte[] key = new byte[16];
-			StringBuilder myStringBuilder = new StringBuilder(); 
-			for(int z = Integer.toString(sortCode).length(); z < 6;z++)
-			{
-				myStringBuilder = myStringBuilder.append("0");	
-			}
-			myStringBuilder.append(Integer.toString(sortCode));
-
-
-			for(int z = Long.toString(customerNumber).length(); z < 10;z++)
-			{
-				myStringBuilder = myStringBuilder.append("0");	
-			}
-			myStringBuilder.append(Long.toString(customerNumber));
-
-
-			String keyString = myStringBuilder.toString();
-			try {
-				key = keyString.getBytes(CODEPAGE);
-			} catch (UnsupportedEncodingException e2) {
-				logger.severe(e2.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),GET_CUSTOMER,null);
-				return null;
-			}
+			byte[] key = buildKey(sortCode, customerNumber);
 			try {
 				customerFile.read(key, holder);
 			} catch (InvalidSystemIdException | LogicException | InvalidRequestException | IOErrorException 
@@ -345,25 +322,9 @@ public class Customer {
 
 		myCustomer = new CUSTOMER();
 
-		Integer sortCodeInteger = new Integer(sortCode);
-		Integer customerNumberInteger = new Integer(0);
-		StringBuffer myStringBuffer = new StringBuffer(customerNumberInteger.toString());
-		for(int z = myStringBuffer.length(); z < 10;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-
 		RecordHolder holder = new RecordHolder();
 		KeyHolder keyHolder = new KeyHolder();
-		byte[] key = new byte[16];
-		for(int z = 0,y=0; z < 10; z++,y++)
-		{
-			key[z] = (byte) myStringBuffer.toString().charAt(y);
-		}
-		for(int z = 10,y=0; z < 16; z++,y++)
-		{
-			key[z] = (byte) sortCodeInteger.toString().charAt(y);
-		}
+		byte[] key = buildKey(sortCode, 0);
 
 		// We need to convert the key to EBCDIC
 		String keyString = new String(key);
@@ -1115,32 +1076,9 @@ public class Customer {
 
 		myCustomer = new CUSTOMER();
 
-		Integer sortCodeInteger = new Integer(sortCode);
-		Integer customerNumberInteger = new Integer(0);
-		StringBuffer myStringBuffer = new StringBuffer(customerNumberInteger.toString());
-		for(int z = myStringBuffer.length(); z < 10;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-
-		StringBuffer mySortCodeBuffer = new StringBuffer(sortCodeInteger.toString());
-		for(int z = mySortCodeBuffer.length(); z < 6;z++)
-		{
-			mySortCodeBuffer = mySortCodeBuffer.insert(0, "0");	
-		}
-
 		RecordHolder holder = new RecordHolder();
 		KeyHolder keyHolder = new KeyHolder();
-		byte[] key = new byte[16];
-		for(int z = 0,y=0; z < 6; z++,y++)
-		{
-			key[z] = (byte) mySortCodeBuffer.charAt(y);
-		}
-		for(int z = 6,y=0; z < 16; z++,y++)
-		{
-			key[z] = (byte) myStringBuffer.toString().charAt(y);
-		}
-
+		byte[] key = buildKey(sortCode, 0);
 
 		// We need to convert the key to EBCDIC
 		String keyString = new String(key);
@@ -1232,33 +1170,9 @@ public class Customer {
 
 		myCustomer = new CUSTOMER();
 
-		Integer sortCodeInteger = new Integer(sortCode);
-		Integer customerNumberInteger = new Integer(0);
-		StringBuffer myStringBuffer = new StringBuffer(customerNumberInteger.toString());
-		for(int z = myStringBuffer.length(); z < 10;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-
-		StringBuffer mySortCodeBuffer = new StringBuffer(sortCodeInteger.toString());
-		for(int z = mySortCodeBuffer.length(); z < 6;z++)
-		{
-			mySortCodeBuffer = mySortCodeBuffer.insert(0, "0");	
-		}
-
 		RecordHolder holder = new RecordHolder();
 		KeyHolder keyHolder = new KeyHolder();
-		byte[] key = new byte[16];
-		for(int z = 0,y=0; z < 6; z++,y++)
-		{
-			key[z] = (byte) mySortCodeBuffer.charAt(y);
-		}
-		for(int z = 6,y=0; z < 16; z++,y++)
-		{
-			key[z] = (byte) myStringBuffer.toString().charAt(y);
-		}
-
-
+		byte[] key = buildKey(sortCode, 0);
 
 		// We need to convert the key to EBCDIC
 		String keyString = new String(key);
@@ -1432,32 +1346,9 @@ public class Customer {
 
 		myCustomer = new CUSTOMER();
 
-		Integer sortCodeInteger = new Integer(sortCode);
-		Integer customerNumberInteger = new Integer(0);
-		StringBuffer myStringBuffer = new StringBuffer(customerNumberInteger.toString());
-		for(int z = myStringBuffer.length(); z < 10;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		StringBuffer mySortCodeBuffer = new StringBuffer(sortCodeInteger.toString());
-		for(int z = mySortCodeBuffer.length(); z < 6;z++)
-		{
-			mySortCodeBuffer = mySortCodeBuffer.insert(0, "0");	
-		}
-
 		RecordHolder holder = new RecordHolder();
 		KeyHolder keyHolder = new KeyHolder();
-		byte[] key = new byte[16];
-		for(int z = 0,y=0; z < 6; z++,y++)
-		{
-			key[z] = (byte) mySortCodeBuffer.charAt(y);
-		}
-		for(int z = 6,y=0; z < 16; z++,y++)
-		{
-			key[z] = (byte) myStringBuffer.toString().charAt(y);
-		}
-
-
+		byte[] key = buildKey(sortCode, 0);
 
 		// We need to convert the key to EBCDIC
 		String keyString = new String(key);
