@@ -1319,7 +1319,61 @@ public class Customer {
 		try {
 
 			customerFileBrowse = customerFile.startBrowse(key);
-		} catch (InvalidSystemIdException | LogicException | InvalidRequestException | IOErrorException
+
+			boolean carryOn = true, endOfFile = false;
+			for(retrieved = 0;retrieved<250000 && carryOn;retrieved++)
+			{
+				try 
+				{
+					customerFileBrowse.next(holder, keyHolder);
+				}
+				catch(DuplicateKeyException e)
+				{
+					// we don't care about this one
+				}
+				catch(EndOfFileException e)
+				{
+					// This one we do care about but we expect it
+					carryOn = false;
+					endOfFile = true;
+				} 
+				// We get here because we either successfully read a record, or hit end of file. if we hit end of file then we might add the last customer twice!
+				if(!endOfFile)
+				{
+					myCustomer = new CUSTOMER(holder.getValue());
+					if((myCustomer.getCustomerSortcode() == sortCode) && myCustomer.getCustomerName().contains(name))
+					{
+						temp[stored] = new Customer();
+						temp[stored].setAddress(myCustomer.getCustomerAddress());
+						temp[stored].setCustomer_number(new Long(myCustomer.getCustomerNumber()).toString());
+						temp[stored].setName(myCustomer.getCustomerName());
+						temp[stored].setSortcode(new Integer(myCustomer.getCustomerSortcode()).toString());
+						Calendar dobCalendar = Calendar.getInstance();
+						dobCalendar.set(Calendar.YEAR, myCustomer.getCustomerBirthYear());
+						dobCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth());
+						dobCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerBirthDay());
+						Date dob = new Date(dobCalendar.getTimeInMillis());
+						temp[stored].setDob(dob);
+						temp[stored].setCreditScore(Integer.toString(myCustomer.getCustomerCreditScore()));
+						Calendar csReviewCalendar = Calendar.getInstance();
+						csReviewCalendar.set(Calendar.YEAR, myCustomer.getCustomerCsReviewYear());
+						csReviewCalendar.set(Calendar.MONTH, myCustomer.getCustomerCsReviewMonth());
+						csReviewCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerCsReviewDay());
+						Date csReviewDate = new Date(csReviewCalendar.getTimeInMillis());
+						temp[stored].setReviewDate(csReviewDate);
+						stored++;
+					}
+				}
+			}
+			customerFileBrowse.end();
+
+
+			Customer[] real = new Customer[stored];
+			System.arraycopy(temp, 0, real, 0, stored);
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME,real);
+			return real;
+		}
+		catch (LengthErrorException | InvalidSystemIdException | LogicException | InvalidRequestException | IOErrorException
 				| LockedException | RecordBusyException | LoadingException | ChangedException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 				| NotOpenException e1) {
@@ -1327,159 +1381,6 @@ public class Customer {
 			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME,null);
 			return null;
 		}
-		boolean carryOn = true, endOfFile = false;
-		for(retrieved = 0;retrieved<250000 && carryOn;retrieved++)
-		{
-			try 
-			{
-				customerFileBrowse.next(holder, keyHolder);
-			}
-			catch(DuplicateKeyException e)
-			{
-				// we don't care about this one
-			}
-			catch(EndOfFileException e)
-			{
-				// This one we do care about but we expect it
-				carryOn = false;
-				endOfFile = true;
-			}
-			catch (LogicException | InvalidRequestException
-					| IOErrorException 
-					| ChangedException | LockedException | LoadingException
-					| RecordBusyException | FileDisabledException
-					| FileNotFoundException
-					| ISCInvalidRequestException | NotAuthorisedException
-					| RecordNotFoundException | NotOpenException | LengthErrorException e) {
-				logger.severe(ERROR_BROWSE + e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME,null);
-				return null;
-			}
-			catch (InvalidSystemIdException  e1) {
-				int number_of_retries = 0;
-				boolean success;
-				for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
-				{
-					try {
-						logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
-						Thread.sleep(3000);
-					}
-					catch (InterruptedException e) 
-					{
-						logger.warning(e.toString());
-						Thread.currentThread().interrupt();
-					}
-					try {
-						customerFileBrowse.next(holder, keyHolder);
-						success = true;
-
-					} catch (DuplicateKeyException | LengthErrorException | FileDisabledException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
-							e3) {
-						logger.severe(ERROR_BROWSE + e3.getLocalizedMessage());
-						logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME,null);
-						return null;
-					}
-					catch (InvalidSystemIdException e4)
-					{
-					}
-					catch (EndOfFileException e4)
-					{
-						success = true;
-						carryOn = false;
-						endOfFile = true;
-					}
-
-				}
-				if(number_of_retries == maximumRetries && success == false)
-				{
-					logger.severe(BROWSE_GIVE_UP);
-					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME,null);
-					return null;
-				}
-
-			}
-			// We get here because we either successfully read a record, or hit end of file. if we hit end of file then we might add the last customer twice!
-			if(!endOfFile)
-			{
-				myCustomer = new CUSTOMER(holder.getValue());
-				if((myCustomer.getCustomerSortcode() == sortCode) && myCustomer.getCustomerName().contains(name))
-				{
-					temp[stored] = new Customer();
-					temp[stored].setAddress(myCustomer.getCustomerAddress());
-					temp[stored].setCustomer_number(new Long(myCustomer.getCustomerNumber()).toString());
-					temp[stored].setName(myCustomer.getCustomerName());
-					temp[stored].setSortcode(new Integer(myCustomer.getCustomerSortcode()).toString());
-					Calendar dobCalendar = Calendar.getInstance();
-					dobCalendar.set(Calendar.YEAR, myCustomer.getCustomerBirthYear());
-					dobCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth());
-					dobCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerBirthDay());
-					Date dob = new Date(dobCalendar.getTimeInMillis());
-					temp[stored].setDob(dob);
-					temp[stored].setCreditScore(Integer.toString(myCustomer.getCustomerCreditScore()));
-					Calendar csReviewCalendar = Calendar.getInstance();
-					csReviewCalendar.set(Calendar.YEAR, myCustomer.getCustomerCsReviewYear());
-					csReviewCalendar.set(Calendar.MONTH, myCustomer.getCustomerCsReviewMonth());
-					csReviewCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerCsReviewDay());
-					Date csReviewDate = new Date(csReviewCalendar.getTimeInMillis());
-					temp[stored].setReviewDate(csReviewDate);
-					stored++;
-				}
-			}
-		}
-		try {
-			customerFileBrowse.end();
-		} catch (LogicException | InvalidRequestException | FileDisabledException
-				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
-				| NotOpenException e) {
-			logger.severe(ERROR_END_BROWSE  + e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME,null);
-			return null;
-		}
-		catch (InvalidSystemIdException  e2) {
-			int number_of_retries = 0;
-			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
-			{
-				try {
-					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
-					Thread.sleep(3000);
-				}
-				catch (InterruptedException e) 
-				{
-					logger.warning(e.toString());
-					Thread.currentThread().interrupt();
-				}
-				try {
-					customerFileBrowse.end();
-					success = true;
-
-				} catch (FileDisabledException | NotOpenException | LogicException | InvalidRequestException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
-						e3) {
-					logger.severe(ERROR_END_BROWSE + e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME,null);
-					return null;
-				}
-				catch (InvalidSystemIdException e4)
-				{
-				} 
-
-			}
-			if(number_of_retries == maximumRetries && success == false)
-			{
-				logger.severe(BROWSE_GIVE_UP);
-				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME,null);
-				return null;
-			}
-		}
-
-
-		Customer[] real = new Customer[stored];
-		for(int j=0; j<stored; j++)
-		{
-			real[j] = temp[j];	
-		}
-		logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_NAME,real);
-		return real;
 	}
 
 	public long getCustomersCountOnly(int sortCode)
