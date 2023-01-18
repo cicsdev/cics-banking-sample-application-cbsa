@@ -1615,200 +1615,66 @@ public class Customer {
 		KeyedFileBrowse customerFileBrowse = null;
 		try {
 			customerFileBrowse = customerFile.startBrowse(key);
-		} catch (LogicException | InvalidRequestException | IOErrorException
+
+			i = 0;
+			boolean carryOn = true;
+			for(int j=0;j<250000 && carryOn;j++)
+			{
+				try 
+				{
+					customerFileBrowse.next(holder, keyHolder);
+				}
+				catch(DuplicateKeyException e)
+				{
+					// we don't care about this one
+				}
+				catch(EndOfFileException e)
+				{
+					// This one we do care about but we expect it
+					carryOn = false;
+
+				} 
+				myCustomer = new CUSTOMER(holder.getValue());
+
+				temp[j] = new Customer();
+				temp[j].setAddress(myCustomer.getCustomerAddress());
+				temp[j].setCustomer_number(new Long(myCustomer.getCustomerNumber()).toString());
+				temp[j].setName(myCustomer.getCustomerName());
+				temp[j].setSortcode(new Integer(myCustomer.getCustomerSortcode()).toString());
+				Calendar dobCalendar = Calendar.getInstance();
+				dobCalendar.set(Calendar.YEAR, myCustomer.getCustomerBirthYear());
+				dobCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth());
+				dobCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerBirthDay());
+				Date dob = new Date(dobCalendar.getTimeInMillis());
+				temp[j].setDob(dob);
+				temp[j].setCreditScore(Integer.toString(myCustomer.getCustomerCreditScore()));
+				Calendar csReviewCalendar = Calendar.getInstance();
+				csReviewCalendar.set(Calendar.YEAR, myCustomer.getCustomerCsReviewYear());
+				csReviewCalendar.set(Calendar.MONTH, myCustomer.getCustomerCsReviewMonth());
+				csReviewCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerCsReviewDay());
+				Date csReviewDate = new Date(csReviewCalendar.getTimeInMillis());
+				temp[j].setReviewDate(csReviewDate);
+				if(temp[j].getAddress().contains(town))
+				{
+					i++;
+				}
+			}
+
+			customerFileBrowse.end();
+
+			Customer[] real = new Customer[i];
+			System.arraycopy(temp, 0, real, 0, i);
+
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_TOWN,real);
+			return real;
+		} catch (LengthErrorException | InvalidSystemIdException | LogicException | InvalidRequestException | IOErrorException
 				| LockedException | RecordBusyException | LoadingException | ChangedException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 				| NotOpenException e1) {
-			logger.severe(ERROR_START_BROWSE + e1.getLocalizedMessage());
+			logger.severe(e1.getLocalizedMessage());
 			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_TOWN,null);
 			return null;
 		}
-		catch (InvalidSystemIdException  e1) {
-			int number_of_retries = 0;
-			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
-			{
-				try {
-					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP+ totalSleep + MILLISECONDS);
-					Thread.sleep(3000);
-				}  
-				catch (InterruptedException e) 
-				{
-					logger.warning(e.toString());
-					Thread.currentThread().interrupt();
-				}
-				try 
-				{
-					customerFileBrowse = customerFile.startBrowse(key);
-					success = true;
-
-				} catch (FileDisabledException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
-						e3) {
-					logger.severe(ERROR_START_BROWSE+ e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_TOWN,null);
-					return null;
-				}
-				catch (InvalidSystemIdException e4)
-				{
-				} 
-
-			}
-			if(number_of_retries == maximumRetries && success == false)
-			{
-				logger.severe(READ_GIVE_UP);
-				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_TOWN,null);
-				return null;
-			}
-		}
-		i = 0;
-		boolean carryOn = true;
-		for(int j=0;j<250000 && carryOn;j++)
-		{
-			try 
-			{
-				customerFileBrowse.next(holder, keyHolder);
-			}
-			catch(DuplicateKeyException e)
-			{
-				// we don't care about this one
-			}
-			catch(EndOfFileException e)
-			{
-				// This one we do care about but we expect it
-				carryOn = false;
-
-			}
-			catch (LogicException | InvalidRequestException
-					| IOErrorException 
-					| ChangedException | LockedException | LoadingException
-					| RecordBusyException | FileDisabledException
-					| FileNotFoundException
-					| ISCInvalidRequestException | NotAuthorisedException
-					| RecordNotFoundException | NotOpenException | LengthErrorException e) {
-				logger.severe(ERROR_BROWSE + e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_TOWN,null);
-				return null;
-			}
-			catch (InvalidSystemIdException  e1) {
-				int number_of_retries = 0;
-				boolean success;
-				for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
-				{
-					try {
-						logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
-						Thread.sleep(3000);
-					} 
-					catch (InterruptedException e) 
-					{
-						logger.warning(e.toString());
-						Thread.currentThread().interrupt();
-					}
-					try {
-						customerFileBrowse.next(holder, keyHolder);
-						success = true;
-
-					} catch (DuplicateKeyException | LengthErrorException | FileDisabledException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
-							e3) {
-						logger.severe(e3.getLocalizedMessage());
-						logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_TOWN,null);
-						return null;
-					}
-					catch (InvalidSystemIdException e4)
-					{
-					}
-					catch (EndOfFileException e4)
-					{
-						success = true;
-						carryOn = false;
-					}
-
-				}
-				if(number_of_retries == maximumRetries && success == false)
-				{
-					logger.severe(BROWSE_GIVE_UP);
-					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_TOWN,null);
-					return null;
-				}
-
-			}
-
-			myCustomer = new CUSTOMER(holder.getValue());
-
-			temp[j] = new Customer();
-			temp[j].setAddress(myCustomer.getCustomerAddress());
-			temp[j].setCustomer_number(new Long(myCustomer.getCustomerNumber()).toString());
-			temp[j].setName(myCustomer.getCustomerName());
-			temp[j].setSortcode(new Integer(myCustomer.getCustomerSortcode()).toString());
-			Calendar dobCalendar = Calendar.getInstance();
-			dobCalendar.set(Calendar.YEAR, myCustomer.getCustomerBirthYear());
-			dobCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth());
-			dobCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerBirthDay());
-			Date dob = new Date(dobCalendar.getTimeInMillis());
-			temp[j].setDob(dob);
-			temp[j].setCreditScore(Integer.toString(myCustomer.getCustomerCreditScore()));
-			Calendar csReviewCalendar = Calendar.getInstance();
-			csReviewCalendar.set(Calendar.YEAR, myCustomer.getCustomerCsReviewYear());
-			csReviewCalendar.set(Calendar.MONTH, myCustomer.getCustomerCsReviewMonth());
-			csReviewCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerCsReviewDay());
-			Date csReviewDate = new Date(csReviewCalendar.getTimeInMillis());
-			temp[j].setReviewDate(csReviewDate);
-			if(temp[j].getAddress().contains(town))
-			{
-				i++;
-			}
-		}
-		try {
-			customerFileBrowse.end();
-		} catch (LogicException | InvalidRequestException | FileDisabledException
-				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
-				| NotOpenException e) {
-			logger.severe(ERROR_END_BROWSE  + e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_TOWN,null);
-			return null;
-		}
-		catch (InvalidSystemIdException  e2) {
-			int number_of_retries = 0;
-			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
-			{
-				try {
-					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
-					Thread.sleep(3000);
-				} 
-				catch (InterruptedException e) 
-				{
-					logger.warning(e.toString());
-					Thread.currentThread().interrupt();
-				} 
-				try {
-					customerFileBrowse.end();
-					success = true;
-				} catch (FileDisabledException | NotOpenException | LogicException | InvalidRequestException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
-						e3) {
-					logger.severe(ERROR_END_BROWSE + e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_TOWN,null);
-					return null;
-				}
-				catch (InvalidSystemIdException e4)
-				{
-				} 
-
-			}
-			if(number_of_retries == maximumRetries && success == false)
-			{
-				logger.severe(BROWSE_GIVE_UP);
-				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_TOWN,null);
-				return null;
-			}
-		}
-
-		Customer[] real = new Customer[i];
-		for(int j=0;j<i;j++)
-		{
-			real[j] = temp[j];	
-		}
-		logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_TOWN,real);
-		return real;
 	}
 
 	public Customer[] getCustomersBySurname(String surname) {
