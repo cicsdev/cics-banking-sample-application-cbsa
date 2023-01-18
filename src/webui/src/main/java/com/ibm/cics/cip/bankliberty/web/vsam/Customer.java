@@ -48,12 +48,12 @@ import com.ibm.json.java.JSONObject;
 
 public class Customer {
 
-    static final String COPYRIGHT =
-      "Copyright IBM Corp. 2022";
+	static final String COPYRIGHT =
+			"Copyright IBM Corp. 2022";
 
-	
+
 	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.web.vsam");
-	
+
 	private static final String GET_CUSTOMER = "getCustomer(long customerNumber, int sortCode";
 	private static final String GET_CUSTOMERS = "getCustomers(int sortCode)";
 	private static final String GET_CUSTOMERS_WITH_OFFSET_AND_LIMIT = "getCustomers(int sortCode, int limit, int offset)";
@@ -67,9 +67,9 @@ public class Customer {
 	private static final String UPDATE_CUSTOMER = "updateCustomer(CustomerJSON customer)";
 	private static final String DELETE_CUSTOMER = "deleteCustomer(long customerNumber, int sortCode)";
 	private static final String CREATE_CUSTOMER = "createCustomer(CustomerJSON customer, Integer sortCodeInteger, boolean useNamedCounter)";
-	
+
 	private static final String FILENAME = "CUSTOMER";
-	
+
 	private static final String ABOUT_TO_GO_TO_SLEEP = "About to go to sleep for ";
 	private static final String MILLISECONDS = " milliseconds";
 	private static final String READ_GIVE_UP = "Cannot read CUSTOMER file after 100 attempts";
@@ -81,7 +81,7 @@ public class Customer {
 	private static final String ERROR_END_BROWSE = "Error ending browse of file CUSTOMER ";
 	private static final String ERROR_DELETE1 = "Error deleting customer ";
 	private static final String ERROR_DELETE2 = " in CUSTOMER file ";
-	
+
 	private static final String LAST_CUSTOMER = "0000009999999999";
 
 	// String ACCOUNT_EYECATCHER             CHAR(4),
@@ -132,7 +132,7 @@ public class Customer {
 
 	public void setCustomer_number(String custNo) {
 		StringBuilder myStringBuilder = new StringBuilder();
-		
+
 		for (int i=custNo.length();i<10;i++)
 		{
 			myStringBuilder.append('0');
@@ -217,7 +217,7 @@ public class Customer {
 
 		myCustomer = new CUSTOMER();
 
-		
+
 
 		if(customerNumber == 9999999999L)
 		{
@@ -228,7 +228,7 @@ public class Customer {
 				lastCustomerBytes = recHolder.getValue();
 			}
 			else return null;
-			
+
 			if(lastCustomerBytes != null)
 			{
 				myCustomer = new CUSTOMER();
@@ -237,7 +237,7 @@ public class Customer {
 			{
 				return null;
 			}
-	
+
 		}
 
 		if(customerNumber > 0 && customerNumber < 9999999999L)
@@ -250,7 +250,7 @@ public class Customer {
 				myStringBuilder = myStringBuilder.append("0");	
 			}
 			myStringBuilder.append(Integer.toString(sortCode));
-		
+
 
 			for(int z = Long.toString(customerNumber).length(); z < 10;z++)
 			{
@@ -258,7 +258,7 @@ public class Customer {
 			}
 			myStringBuilder.append(Long.toString(customerNumber));
 
-			
+
 			String keyString = myStringBuilder.toString();
 			try {
 				key = keyString.getBytes(CODEPAGE);
@@ -545,7 +545,7 @@ public class Customer {
 		{
 			myCustomerNumber = "0" + myCustomerNumber;
 		}
-		
+
 		temp = new Customer(myCustomerNumber, 
 				new String(new Integer(myCustomer.getCustomerSortcode()).toString()), 
 				new String(myCustomer.getCustomerName()),
@@ -679,7 +679,7 @@ public class Customer {
 		}
 
 		decrementNumberOfCustomers();
-		
+
 		Calendar myCalendar = Calendar.getInstance();
 		myCalendar.set(Calendar.YEAR, myCustomer.getCustomerBirthYear());
 		myCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth());
@@ -911,7 +911,7 @@ public class Customer {
 	private long getNextCustomerNumber(String sortCodeString) {
 		// We need to get a NEW customer number
 		// We need to enqueue, then get the last customer number
-		
+
 		NameResource enqueue = new NameResource();
 
 		enqueue.setName("HBNKCUST" + sortCodeString + "  ");
@@ -969,11 +969,11 @@ public class Customer {
 		myCustomerControl.setNumberOfCustomers(numberOfCustomers);
 		return lastCustomerNumber;
 	}
-	
+
 	private long resetNextCustomerNumber(String sortCodeString) {
 		// We need to get a NEW customer number
 		// We need to enqueue, then get the last customer number
-		
+
 		NameResource enqueue = new NameResource();
 
 		enqueue.setName("HBNKCUST" + sortCodeString + "  ");
@@ -1152,9 +1152,9 @@ public class Customer {
 		logger.entering(this.getClass().getName(),GET_CUSTOMERS_BY_NAME_WITH_OFFSET_AND_LIMIT);
 		Customer[] temp = new Customer[1000000];
 
-	
+
 		int stored = 0;
-	
+
 		KSDS customerFile = new KSDS();
 		customerFile.setName(FILENAME);
 
@@ -1828,7 +1828,65 @@ public class Customer {
 		KeyedFileBrowse customerFileBrowse = null;
 		try {
 			customerFileBrowse = customerFile.startBrowse(key);
-		} catch (LogicException | InvalidRequestException | IOErrorException
+
+			i = 0;
+			boolean carryOn = true;
+			Date today = new Date(Calendar.getInstance().getTimeInMillis());
+
+			for(int j=0;j<250000 && carryOn;j++)
+			{
+				try 
+				{
+					customerFileBrowse.next(holder, keyHolder);
+				}
+				catch(DuplicateKeyException e)
+				{
+					// we don't care about this one
+				}
+				catch(EndOfFileException e)
+				{
+					// This one we do care about but we expect it
+					carryOn = false;
+
+				}
+
+				myCustomer = new CUSTOMER(holder.getValue());
+
+				temp[j] = new Customer();
+				temp[j].setAddress(myCustomer.getCustomerAddress());
+				temp[j].setCustomer_number(new Long(myCustomer.getCustomerNumber()).toString());
+				temp[j].setName(myCustomer.getCustomerName());
+				temp[j].setSortcode(new Integer(myCustomer.getCustomerSortcode()).toString());
+				Calendar dobCalendar = Calendar.getInstance();
+				dobCalendar.set(Calendar.YEAR, myCustomer.getCustomerBirthYear());
+				dobCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth());
+				dobCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerBirthDay());
+				Date dob = new Date(dobCalendar.getTimeInMillis());
+				temp[j].setDob(dob);
+				temp[j].setCreditScore(Integer.toString(myCustomer.getCustomerCreditScore()));
+				Calendar csReviewCalendar = Calendar.getInstance();
+				csReviewCalendar.set(Calendar.YEAR, myCustomer.getCustomerCsReviewYear());
+				csReviewCalendar.set(Calendar.MONTH, myCustomer.getCustomerCsReviewMonth());
+				csReviewCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerCsReviewDay());
+				Date csReviewDate = new Date(csReviewCalendar.getTimeInMillis());
+				temp[j].setReviewDate(csReviewDate);
+				if(customerAgeInYears(today,dob) == age)
+				{
+					i++;
+				}
+			}
+
+			customerFileBrowse.end();
+
+			Customer[] real = new Customer[i];
+			for(int j=0;j<i;j++)
+			{
+				real[j] = temp[j];	
+			}
+			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_AGE,real);
+			return real;
+		} 
+		catch (LengthErrorException | InvalidSystemIdException | LogicException | InvalidRequestException | IOErrorException
 				| LockedException | RecordBusyException | LoadingException | ChangedException | FileDisabledException
 				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
 				| NotOpenException e1) {
@@ -1836,194 +1894,6 @@ public class Customer {
 			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_AGE,null);
 			return null;
 		}
-		catch (InvalidSystemIdException  e1) {
-			int number_of_retries = 0;
-			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
-			{
-				try {
-					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP+ totalSleep + MILLISECONDS);
-					Thread.sleep(3000);
-				}  
-				catch (InterruptedException e) 
-				{
-					logger.warning(e.toString());
-					Thread.currentThread().interrupt();
-				}
-				try {
-					customerFileBrowse = customerFile.startBrowse(key);
-					success = true;
-
-				} catch (FileDisabledException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
-						e3) {
-					logger.severe(ERROR_START_BROWSE+ e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_AGE,null);
-					return null;
-				}
-				catch (InvalidSystemIdException e4)
-				{
-				} 
-
-			}
-			if(number_of_retries == maximumRetries && success == false)
-			{
-				logger.severe(READ_GIVE_UP);
-				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_AGE,null);
-				return null;
-			}
-		}
-		i = 0;
-		boolean carryOn = true;
-		Date today = new Date(Calendar.getInstance().getTimeInMillis());
-
-		for(int j=0;j<250000 && carryOn;j++)
-		{
-			try 
-			{
-				customerFileBrowse.next(holder, keyHolder);
-			}
-			catch(DuplicateKeyException e)
-			{
-				// we don't care about this one
-			}
-			catch(EndOfFileException e)
-			{
-				// This one we do care about but we expect it
-				carryOn = false;
-
-			}
-			catch (LogicException | InvalidRequestException
-					| IOErrorException 
-					| ChangedException | LockedException | LoadingException
-					| RecordBusyException | FileDisabledException
-					| FileNotFoundException
-					| ISCInvalidRequestException | NotAuthorisedException
-					| RecordNotFoundException | NotOpenException | LengthErrorException e) {
-				logger.severe(ERROR_BROWSE + e.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_AGE,null);
-				return null;
-			}
-			catch (InvalidSystemIdException  e1) {
-				int number_of_retries = 0;
-				boolean success;
-				for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
-				{
-					try {
-						logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
-						Thread.sleep(3000);
-					} 
-					catch (InterruptedException e) 
-					{
-						logger.warning(e.toString());
-						Thread.currentThread().interrupt();
-					}
-					try 
-					{
-						customerFileBrowse.next(holder, keyHolder);
-						success = true;
-
-					} catch (DuplicateKeyException | LengthErrorException | FileDisabledException | NotOpenException | LogicException | InvalidRequestException | IOErrorException  | ChangedException | LockedException | LoadingException | RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
-							e3) {
-						logger.severe(e3.getLocalizedMessage());
-						logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_AGE,null);
-						return null;
-					}
-					catch (InvalidSystemIdException e4)
-					{
-					}
-					catch (EndOfFileException e4)
-					{
-						success = true;
-						carryOn = false;
-					}
-
-				}
-				if(number_of_retries == maximumRetries && success == false)
-				{
-					logger.severe(BROWSE_GIVE_UP);
-					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_AGE,null);
-					return null;
-				}
-
-			}
-
-			myCustomer = new CUSTOMER(holder.getValue());
-
-			temp[j] = new Customer();
-			temp[j].setAddress(myCustomer.getCustomerAddress());
-			temp[j].setCustomer_number(new Long(myCustomer.getCustomerNumber()).toString());
-			temp[j].setName(myCustomer.getCustomerName());
-			temp[j].setSortcode(new Integer(myCustomer.getCustomerSortcode()).toString());
-			Calendar dobCalendar = Calendar.getInstance();
-			dobCalendar.set(Calendar.YEAR, myCustomer.getCustomerBirthYear());
-			dobCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth());
-			dobCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerBirthDay());
-			Date dob = new Date(dobCalendar.getTimeInMillis());
-			temp[j].setDob(dob);
-			temp[j].setCreditScore(Integer.toString(myCustomer.getCustomerCreditScore()));
-			Calendar csReviewCalendar = Calendar.getInstance();
-			csReviewCalendar.set(Calendar.YEAR, myCustomer.getCustomerCsReviewYear());
-			csReviewCalendar.set(Calendar.MONTH, myCustomer.getCustomerCsReviewMonth());
-			csReviewCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerCsReviewDay());
-			Date csReviewDate = new Date(csReviewCalendar.getTimeInMillis());
-			temp[j].setReviewDate(csReviewDate);
-			if(customerAgeInYears(today,dob) == age)
-			{
-				i++;
-			}
-		}
-		try {
-			customerFileBrowse.end();
-		} catch (LogicException | InvalidRequestException | FileDisabledException
-				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
-				| NotOpenException e) {
-			logger.severe(ERROR_END_BROWSE  + e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_AGE,null);
-			return null;
-		}
-		catch (InvalidSystemIdException  e2) {
-			int number_of_retries = 0;
-			boolean success;
-			for(number_of_retries = 0,success = false; number_of_retries < maximumRetries && success == false;number_of_retries++)
-			{
-				try {
-					logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
-					Thread.sleep(3000);
-				} 
-				catch (InterruptedException e) 
-				{
-					logger.warning(e.toString());
-					Thread.currentThread().interrupt();
-				} 
-				try {
-					customerFileBrowse.end();
-					success = true;
-				} catch (FileDisabledException | NotOpenException | LogicException | InvalidRequestException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
-						e3) {
-					logger.severe(ERROR_END_BROWSE + e3.getLocalizedMessage());
-					logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_AGE,null);
-					return null;
-				}
-				catch (InvalidSystemIdException e4)
-				{
-				} 
-
-			}
-			if(number_of_retries == maximumRetries && success == false)
-			{
-				logger.severe(BROWSE_GIVE_UP);
-				logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_AGE,null);
-				return null;
-			}
-		}
-
-		Customer[] real = new Customer[i];
-		for(int j=0;j<i;j++)
-		{
-			real[j] = temp[j];	
-		}
-		logger.exiting(this.getClass().getName(),GET_CUSTOMERS_BY_AGE,real);
-		return real;
 	}
 
 	int customerAgeInYears(Date now, Date dob)
@@ -2046,10 +1916,10 @@ public class Customer {
 				age--;
 				return age;
 			}
-			
+
 		}
-		
+
 		return age;
-		
+
 	}
 }
