@@ -593,7 +593,6 @@ public class Account extends HBankDataAccess{
 
 
 
-	@SuppressWarnings("deprecation")
 	public Account createAccount(AccountJSON account, Integer sortcode, boolean useNamedCounter) 
 	{
 		logger.entering(this.getClass().getName(),CREATE_ACCOUNT);
@@ -601,17 +600,12 @@ public class Account extends HBankDataAccess{
 		Account temp = null;
 		openConnection();
 		String accountNumberString = null;
-		StringBuffer myStringBuffer = null;
 
 		temp = new Account();
-		myStringBuffer = new StringBuffer(sortcode.toString());
-		for(int z = myStringBuffer.length(); z < 6;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		String sortCodeString = myStringBuffer.toString();
 
-		Long accountNumber =0L;
+		String sortCodeString = padSortCode(sortcode);
+
+		Integer accountNumber =0;
 		String controlString = sortcode.toString() + "-" + "ACCOUNT-LAST";
 		String sqlControl = "SELECT * from CONTROL where CONTROL_NAME = ?";
 		controlString = sortcode.toString() + "-" + "ACCOUNT-LAST";
@@ -631,17 +625,15 @@ public class Account extends HBankDataAccess{
 			ResultSet rs = stmtC.executeQuery();
 			if(rs.next())
 			{
-				accountNumber = (Long) rs.getLong("CONTROL_VALUE_NUM");
+				// CONTROL_VALUE_NUM is up to 10 digits long. Account number is only ever up to 8 digits long
+				Long tempLong = rs.getLong("CONTROL_VALUE_NUM");
+				accountNumber = Integer.parseInt(tempLong.toString()); 
 				rs.close();
 
 				accountNumber++;
 
-				myStringBuffer = new StringBuffer(accountNumber.toString());
-				for(int z = myStringBuffer.length(); z < 8;z++)
-				{
-					myStringBuffer = myStringBuffer.insert(0, "0");	
-				}
-				accountNumberString = myStringBuffer.toString();
+				
+				accountNumberString = padAccountNumber(accountNumber);
 
 
 				//
@@ -667,14 +659,7 @@ public class Account extends HBankDataAccess{
 
 				temp.setNextStatement(nextStatement);
 
-
-
-				myStringBuffer = new StringBuffer(new Integer(account.getCustomerNumber()).toString());
-				for(int z = myStringBuffer.length(); z < 10;z++)
-				{
-					myStringBuffer = myStringBuffer.insert(0, "0");	
-				}
-				String customerNumberString = myStringBuffer.toString();
+				String customerNumberString = padCustomerNumber(account.getCustomerNumber());
 
 
 				logger.log(Level.FINE,() ->"About to insert record SQL <" + sqlInsert + ">");
@@ -729,6 +714,46 @@ public class Account extends HBankDataAccess{
 		}
 	}
 
+
+
+
+	private String padCustomerNumber(String customerNumber2) {
+		StringBuilder myStringBuilder  = new StringBuilder();
+		for(int z = customerNumber2.length(); z < 10;z++)
+		{
+			myStringBuilder.append("0");	
+		}
+		myStringBuilder.append(customerNumber2.toString());
+		return myStringBuilder.toString();
+	}
+
+
+
+	private String padAccountNumber(Integer accountNumber2) {
+		// TODO Auto-generated method stub
+		StringBuilder myStringBuilder  = new StringBuilder();
+		for(int z = accountNumber2.toString().length(); z < 8;z++)
+		{
+			myStringBuilder.append("0");	
+		}
+		myStringBuilder.append(accountNumber2.toString());
+		return myStringBuilder.toString();
+	}
+
+
+
+	private String padSortCode(Integer sortcode2) {
+		// TODO Auto-generated method stub
+		StringBuilder myStringBuilder = new StringBuilder();
+		
+		for(int z =sortcode2.toString().length(); z<6;z++)
+		{
+			myStringBuilder.append("0");	
+		}
+		myStringBuilder.append(sortcode2.toString());
+		return myStringBuilder.toString();
+		
+	}
 
 
 
@@ -793,18 +818,9 @@ public class Account extends HBankDataAccess{
 		openConnection();
 		String accountNumberString = db2Account.getAccountNumber();
 		Integer accountNumber = new Integer(db2Account.getAccountNumber());
-		StringBuffer myStringBuffer = new StringBuffer(accountNumber.toString());
-		for(int z = myStringBuffer.length(); z < 8;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		accountNumberString = myStringBuffer.toString();
-		myStringBuffer = new StringBuffer(new Integer(sortcode).toString());
-		for(int z = myStringBuffer.length(); z < 6;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		String sortCodeString = myStringBuffer.toString();
+		accountNumberString = padAccountNumber(accountNumber);
+
+		String sortCodeString = padSortCode(Integer.valueOf(sortcode));
 		String sql1 = SQL_SELECT;
 		logger.log(Level.FINE,() ->"About to perform query SQL <" + sql1 + ">");
 		String sqlUpdateSafe = "UPDATE ACCOUNT SET ACCOUNT_TYPE = ?,ACCOUNT_INTEREST_RATE = ? ,ACCOUNT_OVERDRAFT_LIMIT = ? WHERE ACCOUNT_NUMBER like ? AND ACCOUNT_SORTCODE like ?";
@@ -1118,17 +1134,8 @@ public class Account extends HBankDataAccess{
 
 		openConnection();
 		int accountCount = 0;
-		StringBuffer myStringBuffer = new StringBuffer(sortCode2);
-		StringBuilder myStringBuilder = new StringBuilder();
-		
-		for (int i=sortCode2.toString().length();i<6;i++)
-		{
-			myStringBuilder.append('0');
-		}
 
-		myStringBuilder.append(sortCode2.toString());
-		
-		String sortCodeString = myStringBuilder.toString();
+		String sortCodeString = padSortCode(sortCode2);
 		String sql = "SELECT COUNT(*) as ACCOUNT_COUNT from ACCOUNT where ACCOUNT_EYECATCHER LIKE 'ACCT' AND ACCOUNT_SORTCODE like ?";
 		logger.log(Level.FINE,() ->PRE_SELECT_MSG + sql + ">");
 		try (PreparedStatement stmt = conn.prepareStatement(sql);)

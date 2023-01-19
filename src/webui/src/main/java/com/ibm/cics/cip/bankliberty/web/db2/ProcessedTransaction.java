@@ -254,9 +254,9 @@ public class ProcessedTransaction extends HBankDataAccess{
 				long seconds = 0, minutes = 0, hours = 0;
 				if(transactionTime.length() == 6)
 				{
-					seconds = new Integer(transactionTime.substring(4));
-					minutes = new Integer(transactionTime.substring(2,4));
-					hours   = new Integer(transactionTime.substring(0,2));
+					seconds = Integer.valueOf(transactionTime.substring(4));
+					minutes = Integer.valueOf(transactionTime.substring(2,4));
+					hours   = Integer.valueOf(transactionTime.substring(0,2));
 				}
 
 
@@ -292,9 +292,9 @@ public class ProcessedTransaction extends HBankDataAccess{
 			String dateOfBirthMM        = processedTransaction.getDescription().substring(33,35);
 			String dateOfBirthYYYY      = processedTransaction.getDescription().substring(36,40);
 			Calendar myCalendar = Calendar.getInstance();
-			myCalendar.set(Calendar.YEAR, (new Integer(dateOfBirthYYYY).intValue() - 1900));
-			myCalendar.set(Calendar.MONTH, (new Integer(dateOfBirthMM).intValue() -1));
-			myCalendar.set(Calendar.DAY_OF_MONTH, new Integer(dateOfBirthDD).intValue());
+			myCalendar.set(Calendar.YEAR, (Integer.valueOf(dateOfBirthYYYY).intValue() - 1900));
+			myCalendar.set(Calendar.MONTH, (Integer.valueOf(dateOfBirthMM).intValue() -1));
+			myCalendar.set(Calendar.DAY_OF_MONTH, Integer.valueOf(dateOfBirthDD).intValue());
 			Date dateOfBirth = new Date(myCalendar.getTimeInMillis());					
 			processedTransaction.setDateOfBirth(dateOfBirth);
 			processedTransaction.setCustomer(deletedCustomerNumber);
@@ -320,13 +320,13 @@ public class ProcessedTransaction extends HBankDataAccess{
 
 			processedTransaction.setAccountType(deletedAccountType);
 			Calendar myCalendar = Calendar.getInstance();
-			myCalendar.set(Calendar.YEAR, (new Integer(lastStatementYYYY).intValue() - 1900));
-			myCalendar.set(Calendar.MONTH, (new Integer(lastStatementMM).intValue() -1));
-			myCalendar.set(Calendar.DAY_OF_MONTH, new Integer(lastStatementDD).intValue());
+			myCalendar.set(Calendar.YEAR, (Integer.valueOf(lastStatementYYYY).intValue() - 1900));
+			myCalendar.set(Calendar.MONTH, (Integer.valueOf(lastStatementMM).intValue() -1));
+			myCalendar.set(Calendar.DAY_OF_MONTH, Integer.valueOf(lastStatementDD).intValue());
 			Date lastStatementDate = new Date(myCalendar.getTimeInMillis());
-			myCalendar.set(Calendar.YEAR, (new Integer(nextStatementYYYY).intValue() - 1900));
-			myCalendar.set(Calendar.MONTH, (new Integer(nextStatementMM).intValue() -1));
-			myCalendar.set(Calendar.DAY_OF_MONTH, new Integer(nextStatementDD).intValue());
+			myCalendar.set(Calendar.YEAR, (Integer.valueOf(nextStatementYYYY).intValue() - 1900));
+			myCalendar.set(Calendar.MONTH, (Integer.valueOf(nextStatementMM).intValue() -1));
+			myCalendar.set(Calendar.DAY_OF_MONTH, Integer.valueOf(nextStatementDD).intValue());
 			Date nextStatementDate = new Date(myCalendar.getTimeInMillis());
 			processedTransaction.setLastStatement(lastStatementDate);
 			processedTransaction.setNextStatement(nextStatementDate);
@@ -505,18 +505,10 @@ public class ProcessedTransaction extends HBankDataAccess{
 		String transferDescription = "";
 		transferDescription = transferDescription + PROCTRAN.PROC_TRAN_DESC_XFR_FLAG;
 		transferDescription = transferDescription.concat("                  ");
-		StringBuffer myStringBuffer = new StringBuffer(sortCode2);
-		for(int z = myStringBuffer.length(); z < 6;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		transferDescription = transferDescription.concat(myStringBuffer.toString());
-		myStringBuffer = new StringBuffer(target_account_number2);
-		for(int z = myStringBuffer.length(); z < 8;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		transferDescription = transferDescription.concat(myStringBuffer.toString());
+
+		transferDescription = transferDescription.concat(padSortCode(Integer.parseInt(sortCode2)));
+		
+		transferDescription = transferDescription.concat(padAccountNumber(Integer.parseInt(target_account_number2)));
 
 
 		openConnection();
@@ -555,24 +547,16 @@ public class ProcessedTransaction extends HBankDataAccess{
 		sortOutDateTimeTaskString();
 		customerDOBString = sortOutCustomerDOB(customerDOB);
 		String deleteCustomerDescription = "";
-		StringBuffer myStringBuffer = new StringBuffer(sortCode2);
-		for(int z = myStringBuffer.length(); z < 6;z++)
+
+		deleteCustomerDescription = deleteCustomerDescription.concat(padCustomerNumber(customerNumber));
+		StringBuilder myStringBuilder = new StringBuilder();
+
+		for(int z = customerName.length(); z < 14;z++)
 		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
+			myStringBuilder = myStringBuilder.append("0");	
 		}
-		deleteCustomerDescription = deleteCustomerDescription.concat(myStringBuffer.toString());
-		myStringBuffer = new StringBuffer(customerNumber);
-		for(int z = myStringBuffer.length(); z < 10;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		deleteCustomerDescription = deleteCustomerDescription.concat(myStringBuffer.toString());
-		myStringBuffer = new StringBuffer(customerName);
-		for(int z = myStringBuffer.length(); z < 14;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		deleteCustomerDescription = deleteCustomerDescription.concat(myStringBuffer.substring(0,14).toString());
+		myStringBuilder.append(customerName);
+		deleteCustomerDescription = deleteCustomerDescription.concat(myStringBuilder.substring(0,14).toString());
 
 		deleteCustomerDescription = deleteCustomerDescription + customerDOBString;		
 
@@ -610,38 +594,20 @@ public class ProcessedTransaction extends HBankDataAccess{
 		logger.entering(this.getClass().getName(),WRITE_CREATE_CUSTOMER);
 		sortOutDateTimeTaskString();
 		String createCustomerDescription = "";
-		StringBuffer myStringBuffer = new StringBuffer(sortCode2);
-		for(int z = myStringBuffer.length(); z < 6;z++)
+		createCustomerDescription = createCustomerDescription.concat(padSortCode(Integer.parseInt(sortCode2)));
+
+		createCustomerDescription = createCustomerDescription.concat(padCustomerNumber(customerNumber));
+		StringBuilder myStringBuilder = new StringBuilder();
+		for(int z = customerName.length(); z < 14;z++)
 		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
+			myStringBuilder.append("0");	
 		}
-		createCustomerDescription = createCustomerDescription.concat(myStringBuffer.toString());
-		myStringBuffer = new StringBuffer(customerNumber);
-		for(int z = myStringBuffer.length(); z < 10;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		createCustomerDescription = createCustomerDescription.concat(myStringBuffer.toString());
-		myStringBuffer = new StringBuffer(customerName);
-		for(int z = myStringBuffer.length(); z < 14;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		createCustomerDescription = createCustomerDescription.concat(myStringBuffer.substring(0,14).toString());
+		myStringBuilder.append(customerName);
+		createCustomerDescription = createCustomerDescription.concat(myStringBuilder.substring(0,14).toString());
 
 		String customerDOBString = sortOutCustomerDOB(customerDOB);
 
 		createCustomerDescription = createCustomerDescription + customerDOBString;		
-
-		myStringBuffer = new StringBuffer(new Integer(Task.getTask().getTaskNumber()).toString());
-		for(int z = myStringBuffer.length(); z < 12;z++)
-		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
-		}
-		String taskRef = myStringBuffer.toString();
-
-
-
 
 		openConnection();
 
@@ -690,7 +656,7 @@ public class ProcessedTransaction extends HBankDataAccess{
 		myPROCTRAN.setProcDescDelaccNextMm(myCalendar.get(Calendar.MONTH) + 1);
 		myPROCTRAN.setProcDescDelaccNextYyyy(myCalendar.get(Calendar.YEAR));
 		myPROCTRAN.setProcDescDelaccAcctype(accountType);
-		myPROCTRAN.setProcDescDelaccCustomer(new Integer(customerNumber).intValue());
+		myPROCTRAN.setProcDescDelaccCustomer(Integer.valueOf(customerNumber).intValue());
 		myPROCTRAN.setProcDescDelaccFooter(PROCTRAN.PROC_DESC_DELACC_FLAG);
 
 		String description = myPROCTRAN.getProcTranDesc();
@@ -753,7 +719,7 @@ public class ProcessedTransaction extends HBankDataAccess{
 		myPROCTRAN.setProcDescDelaccNextYyyy(myCalendar.get(Calendar.YEAR));
 
 		myPROCTRAN.setProcDescCreaccAcctype(accountType);
-		myPROCTRAN.setProcDescCreaccCustomer(new Integer(customerNumber).intValue());
+		myPROCTRAN.setProcDescCreaccCustomer(Integer.valueOf(customerNumber).intValue());
 		myPROCTRAN.setProcDescCreaccFooter(PROCTRAN.PROC_DESC_CREACC_FLAG);
 
 		String description = myPROCTRAN.getProcTranDesc();
@@ -793,52 +759,52 @@ public class ProcessedTransaction extends HBankDataAccess{
 	private void sortOutDateTimeTaskString()
 	{
 		Calendar now = Calendar.getInstance();
-		StringBuffer myStringBuffer = new StringBuffer(new Integer(now.get(Calendar.HOUR_OF_DAY)));
-		for(int z = myStringBuffer.length(); z < 2;z++)
+		StringBuilder myStringBuilder = new StringBuilder(Integer.valueOf(now.get(Calendar.HOUR_OF_DAY)));
+		for(int z = myStringBuilder.length(); z < 2;z++)
 		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
+			myStringBuilder = myStringBuilder.insert(0, "0");	
 		}
-		timeString = timeString.concat(myStringBuffer.toString());
-		myStringBuffer = new StringBuffer(new Integer(now.get(Calendar.MINUTE)));
-		for(int z = myStringBuffer.length(); z < 2;z++)
+		timeString = timeString.concat(myStringBuilder.toString());
+		myStringBuilder = new StringBuilder(Integer.valueOf(now.get(Calendar.MINUTE)));
+		for(int z = myStringBuilder.length(); z < 2;z++)
 		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
+			myStringBuilder = myStringBuilder.insert(0, "0");	
 		}
-		timeString = timeString.concat(myStringBuffer.toString());
-		myStringBuffer = new StringBuffer(new Integer(now.get(Calendar.SECOND)));
-		for(int z = myStringBuffer.length(); z < 2;z++)
+		timeString = timeString.concat(myStringBuilder.toString());
+		myStringBuilder = new StringBuilder(Integer.valueOf(now.get(Calendar.SECOND)));
+		for(int z = myStringBuilder.length(); z < 2;z++)
 		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
+			myStringBuilder = myStringBuilder.insert(0, "0");	
 		}
-		timeString = timeString.concat(myStringBuffer.toString());
+		timeString = timeString.concat(myStringBuilder.toString());
 
-		myStringBuffer = new StringBuffer(new Integer(now.get(Calendar.DATE)));
-		for(int z = myStringBuffer.length(); z < 2;z++)
+		myStringBuilder = new StringBuilder(Integer.valueOf(now.get(Calendar.DATE)));
+		for(int z = myStringBuilder.length(); z < 2;z++)
 		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
+			myStringBuilder = myStringBuilder.insert(0, "0");	
 		}
-		dateString = timeString.concat(myStringBuffer.toString());
+		dateString = timeString.concat(myStringBuilder.toString());
 
-		myStringBuffer = new StringBuffer(new Integer(now.get(Calendar.MONTH)+1));
-		for(int z = myStringBuffer.length(); z < 2;z++)
+		myStringBuilder = new StringBuilder(Integer.valueOf(now.get(Calendar.MONTH)+1));
+		for(int z = myStringBuilder.length(); z < 2;z++)
 		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
+			myStringBuilder = myStringBuilder.insert(0, "0");	
 		}
-		dateString = timeString.concat(myStringBuffer.toString());
+		dateString = timeString.concat(myStringBuilder.toString());
 		
-		myStringBuffer = new StringBuffer(new Integer(now.get(Calendar.YEAR)));
-		for(int z = myStringBuffer.length(); z < 4;z++)
+		myStringBuilder = new StringBuilder(Integer.valueOf(now.get(Calendar.YEAR)));
+		for(int z = myStringBuilder.length(); z < 4;z++)
 		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
+			myStringBuilder = myStringBuilder.insert(0, "0");	
 		}
-		dateString = timeString.concat(myStringBuffer.toString());
+		dateString = timeString.concat(myStringBuilder.toString());
 
-		myStringBuffer = new StringBuffer(new Integer(Task.getTask().getTaskNumber()).toString());
-		for(int z = myStringBuffer.length(); z < 12;z++)
+		myStringBuilder = new StringBuilder(Integer.valueOf(Task.getTask().getTaskNumber()).toString());
+		for(int z = myStringBuilder.length(); z < 12;z++)
 		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
+			myStringBuilder = myStringBuilder.insert(0, "0");	
 		}
-		taskRef = myStringBuffer.toString();
+		taskRef = myStringBuilder.toString();
 		return;
 	}
 	
@@ -847,27 +813,63 @@ public class ProcessedTransaction extends HBankDataAccess{
 		Calendar myCalendar = Calendar.getInstance();
 		myCalendar.setTime(customerDOB);
 		customerDOBString = new String();
-		StringBuffer myStringBuffer = new StringBuffer(new Integer(myCalendar.get(Calendar.DATE)));
-		for(int z = myStringBuffer.length(); z < 2;z++)
+		StringBuilder myStringBuilder = new StringBuilder(Integer.valueOf(myCalendar.get(Calendar.DATE)));
+		for(int z = myStringBuilder.length(); z < 2;z++)
 		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
+			myStringBuilder = myStringBuilder.insert(0, "0");	
 		}
-		customerDOBString = customerDOBString + myStringBuffer.toString();
+		customerDOBString = customerDOBString + myStringBuilder.toString();
 		customerDOBString = customerDOBString + "-";
-		myStringBuffer = new StringBuffer(new Integer(myCalendar.get(Calendar.MONTH)+1));
-		for(int z = myStringBuffer.length(); z < 2;z++)
+		myStringBuilder = new StringBuilder(Integer.valueOf(myCalendar.get(Calendar.MONTH)+1));
+		for(int z = myStringBuilder.length(); z < 2;z++)
 		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
+			myStringBuilder = myStringBuilder.insert(0, "0");	
 		}
-		customerDOBString = customerDOBString + myStringBuffer.toString();
+		customerDOBString = customerDOBString + myStringBuilder.toString();
 		customerDOBString = customerDOBString + "-";
-		myStringBuffer = new StringBuffer(new Integer(myCalendar.get(Calendar.YEAR)));
-		for(int z = myStringBuffer.length(); z < 4;z++)
+		myStringBuilder = new StringBuilder(Integer.valueOf(myCalendar.get(Calendar.YEAR)));
+		for(int z = myStringBuilder.length(); z < 4;z++)
 		{
-			myStringBuffer = myStringBuffer.insert(0, "0");	
+			myStringBuilder = myStringBuilder.insert(0, "0");	
 		}
-		customerDOBString = customerDOBString + myStringBuffer.toString();
+		customerDOBString = customerDOBString + myStringBuilder.toString();
 		return customerDOBString;
 	}
+	private String padCustomerNumber(String customerNumber2) {
+		StringBuilder myStringBuilder  = new StringBuilder();
+		for(int z = customerNumber2.length(); z < 10;z++)
+		{
+			myStringBuilder.append("0");	
+		}
+		myStringBuilder.append(customerNumber2.toString());
+		return myStringBuilder.toString();
+	}
 
+
+
+	private String padAccountNumber(Integer accountNumber2) {
+		// TODO Auto-generated method stub
+		StringBuilder myStringBuilder  = new StringBuilder();
+		for(int z = accountNumber2.toString().length(); z < 8;z++)
+		{
+			myStringBuilder.append("0");	
+		}
+		myStringBuilder.append(accountNumber2.toString());
+		return myStringBuilder.toString();
+	}
+
+
+
+	private String padSortCode(Integer sortcode2) {
+		// TODO Auto-generated method stub
+		StringBuilder myStringBuilder = new StringBuilder();
+		
+		for(int z =sortcode2.toString().length(); z<6;z++)
+		{
+			myStringBuilder.append("0");	
+		}
+		myStringBuilder.append(sortcode2.toString());
+		return myStringBuilder.toString();
+		
+	}
 }
