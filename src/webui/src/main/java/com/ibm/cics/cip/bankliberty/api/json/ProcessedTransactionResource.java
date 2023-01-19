@@ -126,7 +126,7 @@ public class ProcessedTransactionResource{
 
 			proctran = processDeleteCreateAccount(proctran,processedTransactions[i],myDateFormat);
 			proctran = processDeleteCreateCustomer(proctran,processedTransactions[i],myDateFormat);
-			proctran = processTransfer(proctran,processedTransactions[i],myDateFormat);
+			proctran = processTransfer(proctran,processedTransactions[i]);
 
 			processedTransactionsJSON.add(proctran);
 		}
@@ -151,8 +151,9 @@ public class ProcessedTransactionResource{
 
 
 
-	private JSONObject processTransfer(JSONObject proctran, ProcessedTransaction processedTransaction,
-			DateFormat myDateFormat) {
+	private JSONObject processTransfer(JSONObject proctran, ProcessedTransaction processedTransaction
+			) 
+	{
 		// Process bank to bank transfer records
 		if(processedTransaction.getType().compareTo(PROCTRAN.PROC_TY_TRANSFER) == 0)
 		{

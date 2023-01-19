@@ -14,7 +14,6 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-import com.ibm.cics.cip.bankliberty.api.json.CounterResource;
 import com.ibm.cics.cip.bankliberty.api.json.CreditScore;
 import com.ibm.cics.cip.bankliberty.api.json.CustomerJSON;
 import com.ibm.cics.cip.bankliberty.datainterfaces.CUSTOMER;
@@ -265,10 +264,10 @@ public class Customer {
 		myCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerCsReviewDay());
 		Date myCustomerReviewDate = new Date(myCalendar.toInstant().toEpochMilli());
 
-		temp = new Customer(new String(new Long(myCustomer.getCustomerNumber()).toString()),
+		temp = new Customer(Long.toString(myCustomer.getCustomerNumber()),
 				Integer.toString(myCustomer.getCustomerSortcode()),
-				new String(myCustomer.getCustomerName()),
-				new String(myCustomer.getCustomerAddress()),
+				myCustomer.getCustomerName(),
+				myCustomer.getCustomerAddress(),
 				myCustomerBirthDate,
 				Integer.toString(myCustomer.getCustomerCreditScore()),
 				myCustomerReviewDate
@@ -378,9 +377,9 @@ public class Customer {
 
 			temp[j] = new Customer();
 			temp[j].setAddress(myCustomer.getCustomerAddress());
-			temp[j].setCustomer_number(new Long(myCustomer.getCustomerNumber()).toString());
+			temp[j].setCustomer_number(Long.toString(myCustomer.getCustomerNumber()));
 			temp[j].setName(myCustomer.getCustomerName());
-			temp[j].setSortcode(new Integer(myCustomer.getCustomerSortcode()).toString());
+			temp[j].setSortcode(Integer.toString(myCustomer.getCustomerSortcode()));
 			Calendar myCalendar = Calendar.getInstance();
 			myCalendar.set(Calendar.YEAR, myCustomer.getCustomerBirthYear()) ;
 			myCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth());
@@ -393,7 +392,7 @@ public class Customer {
 			myCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerCsReviewDay());
 			Date myCustomerCsReviewDate = new Date(myCalendar.toInstant().toEpochMilli());
 			temp[j].setReviewDate(myCustomerCsReviewDate);
-			if(new Integer(temp[j].getSortcode()).intValue() == sortCode)
+			if(Integer.parseInt(temp[j].getSortcode()) == sortCode)
 			{
 				i++;
 			}
@@ -425,12 +424,12 @@ public class Customer {
 		customerFile.setName(FILENAME);
 		Customer temp;
 		RecordHolder holder = new RecordHolder();
-		byte[] key = new byte[16];
-		Long customerNumberLong = new Long(customer.getId());
+		
+		Long customerNumberLong = Long.parseLong(customer.getId());
 
 		customer.setId(padCustomerNumber(customer.getId()));
 		
-		key = buildKey(Integer.valueOf(customer.getSortCode()),Long.valueOf(customer.getId()));
+		byte[] key = buildKey(Integer.valueOf(customer.getSortCode()),Long.valueOf(customer.getId()));
 
 		String keyString = new String(key);
 		try 
@@ -661,7 +660,7 @@ public class Customer {
 
 		customerNumber = getNextCustomerNumber(sortCodeString);
 
-		Long customerNumberLong = new Long(customerNumber);
+		Long customerNumberLong = Long.valueOf(customerNumber);
 		if(customerNumberLong == -1)
 		{
 			return null;
@@ -715,7 +714,7 @@ public class Customer {
 			return null;
 		}
 
-		myCustomer.setCustomerCreditScore(new Integer(customer.getCreditScore()).intValue());
+		myCustomer.setCustomerCreditScore(Integer.parseInt(customer.getCreditScore()));
 		Date myCustomerCsReviewDate = customer.getReviewDate();
 		myCalendar.setTime(myCustomerCsReviewDate);
 		myCustomer.setCustomerCsReviewDay(myCalendar.get(Calendar.DAY_OF_MONTH));
@@ -753,7 +752,7 @@ public class Customer {
 		Date myCustomerReviewDate = new Date(myCalendar.toInstant().toEpochMilli());
 
 
-		String myCustomerNumber = new Long(myCustomer.getCustomerNumber()).toString();
+		String myCustomerNumber = Long.toString(myCustomer.getCustomerNumber());
 		// I think this was it
 		for(int i=myCustomerNumber.length();i<10;i++)
 		{
@@ -763,9 +762,9 @@ public class Customer {
 
 
 		temp = new Customer(myCustomerNumber, 
-				new String(new Integer(myCustomer.getCustomerSortcode()).toString()), 
-				new String(myCustomer.getCustomerName()),
-				new String(myCustomer.getCustomerAddress()), 
+				Integer.toString(myCustomer.getCustomerSortcode()), 
+				myCustomer.getCustomerName(),
+				myCustomer.getCustomerAddress(), 
 				myCustomerBirthDate, 
 				Integer.toString(myCustomer.getCustomerCreditScore()),
 				myCustomerReviewDate);
@@ -951,16 +950,16 @@ public class Customer {
 				{	
 					temp[stored] = new Customer();
 					temp[stored].setAddress(myCustomer.getCustomerAddress());
-					temp[stored].setCustomer_number(new Long(myCustomer.getCustomerNumber()).toString());
+					temp[stored].setCustomer_number(Long.toString(myCustomer.getCustomerNumber()));
 					temp[stored].setName(myCustomer.getCustomerName());
-					temp[stored].setSortcode(new Integer(myCustomer.getCustomerSortcode()).toString());
+					temp[stored].setSortcode(Integer.toString((myCustomer.getCustomerSortcode())));
 					Calendar dobCalendar = Calendar.getInstance();
 					dobCalendar.set(Calendar.YEAR,myCustomer.getCustomerBirthYear());
 					dobCalendar.set(Calendar.MONTH,myCustomer.getCustomerBirthMonth());
 					dobCalendar.set(Calendar.DAY_OF_MONTH,myCustomer.getCustomerBirthDay());
 					Date dobDate = new Date(dobCalendar.getTimeInMillis());
 					temp[stored].setDob(dobDate);
-					temp[stored].setCreditScore(new Integer(myCustomer.getCustomerCreditScore()).toString());
+					temp[stored].setCreditScore(Integer.toString(myCustomer.getCustomerCreditScore()));
 					Calendar reviewCalendar = Calendar.getInstance();
 					reviewCalendar.set(Calendar.YEAR,myCustomer.getCustomerCsReviewYear());
 					reviewCalendar.set(Calendar.MONTH,myCustomer.getCustomerCsReviewMonth());
@@ -1048,9 +1047,9 @@ public class Customer {
 					{
 						temp[stored] = new Customer();
 						temp[stored].setAddress(myCustomer.getCustomerAddress());
-						temp[stored].setCustomer_number(new Long(myCustomer.getCustomerNumber()).toString());
+						temp[stored].setCustomer_number(Long.toString(myCustomer.getCustomerNumber()));
 						temp[stored].setName(myCustomer.getCustomerName());
-						temp[stored].setSortcode(new Integer(myCustomer.getCustomerSortcode()).toString());
+						temp[stored].setSortcode(Integer.toString(myCustomer.getCustomerSortcode()));
 						Calendar dobCalendar = Calendar.getInstance();
 						dobCalendar.set(Calendar.YEAR, myCustomer.getCustomerBirthYear());
 						dobCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth());
@@ -1142,9 +1141,9 @@ public class Customer {
 					{
 						temp[stored] = new Customer();
 						temp[stored].setAddress(myCustomer.getCustomerAddress());
-						temp[stored].setCustomer_number(new Long(myCustomer.getCustomerNumber()).toString());
+						temp[stored].setCustomer_number(Long.toString(myCustomer.getCustomerNumber()));
 						temp[stored].setName(myCustomer.getCustomerName());
-						temp[stored].setSortcode(new Integer(myCustomer.getCustomerSortcode()).toString());
+						temp[stored].setSortcode(Integer.toString(myCustomer.getCustomerSortcode()));
 						Calendar dobCalendar = Calendar.getInstance();
 						dobCalendar.set(Calendar.YEAR, myCustomer.getCustomerBirthYear());
 						dobCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth());
@@ -1397,9 +1396,9 @@ public class Customer {
 
 				temp[j] = new Customer();
 				temp[j].setAddress(myCustomer.getCustomerAddress());
-				temp[j].setCustomer_number(new Long(myCustomer.getCustomerNumber()).toString());
+				temp[j].setCustomer_number(Long.toString(myCustomer.getCustomerNumber()));
 				temp[j].setName(myCustomer.getCustomerName());
-				temp[j].setSortcode(new Integer(myCustomer.getCustomerSortcode()).toString());
+				temp[j].setSortcode(Integer.toString(myCustomer.getCustomerSortcode()));
 				Calendar dobCalendar = Calendar.getInstance();
 				dobCalendar.set(Calendar.YEAR, myCustomer.getCustomerBirthYear());
 				dobCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth());
@@ -1447,7 +1446,7 @@ public class Customer {
 
 		myCustomer = new CUSTOMER();
 
-		Integer sortCodeInteger = new Integer(this.getSortcode());
+		Integer sortCodeInteger = Integer.parseInt(this.getSortcode());
 
 		RecordHolder holder = new RecordHolder();
 		KeyHolder keyHolder = new KeyHolder();
@@ -1491,9 +1490,9 @@ public class Customer {
 
 				temp[j] = new Customer();
 				temp[j].setAddress(myCustomer.getCustomerAddress());
-				temp[j].setCustomer_number(new Long(myCustomer.getCustomerNumber()).toString());
+				temp[j].setCustomer_number(Long.toString(myCustomer.getCustomerNumber()));
 				temp[j].setName(myCustomer.getCustomerName());
-				temp[j].setSortcode(new Integer(myCustomer.getCustomerSortcode()).toString());
+				temp[j].setSortcode(Integer.toString(myCustomer.getCustomerSortcode()));
 				Calendar dobCalendar = Calendar.getInstance();
 				dobCalendar.set(Calendar.YEAR, myCustomer.getCustomerBirthYear());
 				dobCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth());
@@ -1540,7 +1539,7 @@ public class Customer {
 
 		myCustomer = new CUSTOMER();
 
-		Integer sortCodeInteger = new Integer(this.getSortcode());
+		Integer sortCodeInteger = Integer.parseInt(this.getSortcode());
 
 		RecordHolder holder = new RecordHolder();
 		KeyHolder keyHolder = new KeyHolder();
@@ -1585,9 +1584,9 @@ public class Customer {
 
 				temp[j] = new Customer();
 				temp[j].setAddress(myCustomer.getCustomerAddress());
-				temp[j].setCustomer_number(new Long(myCustomer.getCustomerNumber()).toString());
+				temp[j].setCustomer_number(Long.toString(myCustomer.getCustomerNumber()));
 				temp[j].setName(myCustomer.getCustomerName());
-				temp[j].setSortcode(new Integer(myCustomer.getCustomerSortcode()).toString());
+				temp[j].setSortcode(Integer.toString(myCustomer.getCustomerSortcode()));
 				Calendar dobCalendar = Calendar.getInstance();
 				dobCalendar.set(Calendar.YEAR, myCustomer.getCustomerBirthYear());
 				dobCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth());

@@ -191,7 +191,7 @@ public class AccountsResource extends HBankDataAccess{
 
 		com.ibm.cics.cip.bankliberty.web.db2.Account db2Account = new com.ibm.cics.cip.bankliberty.web.db2.Account();
 		db2Account.setSortcode(this.getSortCode().toString());
-		db2Account = db2Account.createAccount(account, this.getSortCode(),true);
+		db2Account = db2Account.createAccount(account, this.getSortCode());
 		//Add data to JSONObject
 		if(db2Account != null)
 		{
@@ -1277,7 +1277,7 @@ public class AccountsResource extends HBankDataAccess{
 		if(countOnly)
 		{
 			db2Account = new Account();
-			numberOfAccounts = db2Account.getAccountsByBalanceCountOnly(sortCode,balance,lessThan,offset,limit);
+			numberOfAccounts = db2Account.getAccountsByBalanceCountOnly(sortCode,balance,lessThan);
 			if(numberOfAccounts == -1)
 			{
 				JSONObject error = new JSONObject();

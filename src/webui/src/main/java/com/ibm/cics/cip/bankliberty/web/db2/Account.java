@@ -592,7 +592,7 @@ public class Account extends HBankDataAccess{
 
 
 
-	public Account createAccount(AccountJSON account, Integer sortcode, boolean useNamedCounter) 
+	public Account createAccount(AccountJSON account, Integer sortcode) 
 	{
 		logger.entering(this.getClass().getName(),CREATE_ACCOUNT);
 
@@ -1163,7 +1163,7 @@ public class Account extends HBankDataAccess{
 
 
 
-	public int getAccountsByBalanceCountOnly(Integer sortCode2, BigDecimal balance, boolean lessThan, Integer offset, Integer limit) 
+	public int getAccountsByBalanceCountOnly(Integer sortCode2, BigDecimal balance, boolean lessThan) 
 	{
 		logger.entering(this.getClass().getName(), GET_ACCOUNTS_BY_BALANCE_COUNT_ONLY);
 
