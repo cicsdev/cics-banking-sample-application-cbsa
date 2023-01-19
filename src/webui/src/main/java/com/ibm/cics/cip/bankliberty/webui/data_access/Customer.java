@@ -8,6 +8,7 @@ package com.ibm.cics.cip.bankliberty.webui.data_access;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -207,7 +208,7 @@ public class Customer
 			}
 			catch (IOException e)
 			{
-				logger.severe(e.toString());
+				logger.log(Level.SEVERE,() -> e.toString());
 				myCustomerResponse.close();
 				return false;
 			}
@@ -255,7 +256,7 @@ public class Customer
 			}
 			catch (IOException e)
 			{
-				logger.severe(e.toString());
+				logger.log(Level.SEVERE,() -> e.toString());
 				myCustomerResponse.close();
 				return "-1";
 			}
@@ -272,7 +273,7 @@ public class Customer
 		}
 		else
 		{
-			logger.severe(myCustomerResponse.getStatus() + " " + myCustomerResponse.getEntity().toString());
+			logger.log(Level.SEVERE,() -> myCustomerResponse.getStatus() + " " + myCustomerResponse.getEntity().toString());
 			myCustomerResponse.close();
 			return "-1";
 		}
@@ -303,7 +304,7 @@ public class Customer
 			}
 			catch (IOException e)
 			{
-				logger.severe(e.toString());
+				logger.log(Level.SEVERE,() -> e.toString());
 				myCustomerResponse.close();
 				return false;
 			}
@@ -386,7 +387,7 @@ public class Customer
 		}
 		catch (SecurityException | IOException e)
 		{
-			logger.severe(e.toString());
+			logger.log(Level.SEVERE,() -> e.toString());
 		}
 	}
 

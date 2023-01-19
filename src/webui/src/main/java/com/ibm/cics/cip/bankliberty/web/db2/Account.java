@@ -606,7 +606,7 @@ public class Account extends HBankDataAccess
 
 		String sortCodeString = padSortCode(sortcode);
 
-		Integer accountNumber = 0;
+		Integer accountNumberInteger = 0;
 		String controlString = sortcode.toString() + "-" + "ACCOUNT-LAST";
 		String sqlControl = "SELECT * from CONTROL where CONTROL_NAME = ?";
 		controlString = sortcode.toString() + "-" + "ACCOUNT-LAST";
@@ -626,12 +626,12 @@ public class Account extends HBankDataAccess
 				// CONTROL_VALUE_NUM is up to 10 digits long. Account number is
 				// only ever up to 8 digits long
 				Long tempLong = rs.getLong("CONTROL_VALUE_NUM");
-				accountNumber = Integer.parseInt(tempLong.toString());
+				accountNumberInteger = Integer.parseInt(tempLong.toString());
 				rs.close();
 
-				accountNumber++;
+				accountNumberInteger++;
 
-				accountNumberString = padAccountNumber(accountNumber);
+				accountNumberString = padAccountNumber(accountNumberInteger);
 
 				//
 				// Store today's date as the ACCOUNT-OPENED date and calculate
@@ -642,10 +642,10 @@ public class Account extends HBankDataAccess
 				Date today = new Date(myCalendar.getTimeInMillis());
 
 				Date dateOpened = today;
-				Date lastStatement = dateOpened;
+				Date lastStatementforNewCustomer = dateOpened;
 
 				temp.setOpened(dateOpened);
-				temp.setLastStatement(lastStatement);
+				temp.setLastStatement(lastStatementforNewCustomer);
 
 				long timeNow = myCalendar.getTimeInMillis();
 				// You must specify the values here as longs otherwise it ends
@@ -653,9 +653,9 @@ public class Account extends HBankDataAccess
 				long nextMonthInMs = getNextMonth(today);
 
 				long nextStatementLong = timeNow + nextMonthInMs;
-				Date nextStatement = new Date(nextStatementLong);
+				Date nextStatementForNewCustomer = new Date(nextStatementLong);
 
-				temp.setNextStatement(nextStatement);
+				temp.setNextStatement(nextStatementForNewCustomer);
 
 				String customerNumberString = padCustomerNumber(account.getCustomerNumber());
 
@@ -668,16 +668,16 @@ public class Account extends HBankDataAccess
 				stmt.setBigDecimal(5, account.getInterestRate());
 				stmt.setDate(6, dateOpened);
 				stmt.setInt(7, account.getOverdraft());
-				stmt.setDate(8, lastStatement);
-				stmt.setDate(9, nextStatement);
+				stmt.setDate(8, lastStatementforNewCustomer);
+				stmt.setDate(9, nextStatementForNewCustomer);
 				stmt.execute();
 				temp.setAccountNumber(accountNumberString);
 				temp.setActualBalance(0.00);
 				temp.setAvailableBalance(0.00);
 				temp.setCustomerNumber(customerNumberString);
 				temp.setInterestRate(account.getInterestRate().doubleValue());
-				temp.setLastStatement(lastStatement);
-				temp.setNextStatement(nextStatement);
+				temp.setLastStatement(lastStatementforNewCustomer);
+				temp.setNextStatement(nextStatementForNewCustomer);
 				temp.setOverdraftLimit(account.getOverdraft().intValue());
 				temp.setSortcode(sortCodeString);
 				temp.setType(account.getAccountType());
@@ -687,7 +687,7 @@ public class Account extends HBankDataAccess
 				rs.next();
 
 				logger.log(Level.FINE, () -> "About to execute update SQL <" + sqlUpdate + ">");
-				stmt3.setLong(1, accountNumber);
+				stmt3.setLong(1, accountNumberInteger);
 				stmt3.setString(2, controlString);
 				stmt3.execute();
 
@@ -720,7 +720,7 @@ public class Account extends HBankDataAccess
 		{
 			myStringBuilder.append("0");
 		}
-		myStringBuilder.append(customerNumber2.toString());
+		myStringBuilder.append(customerNumber2);
 		return myStringBuilder.toString();
 	}
 
@@ -854,8 +854,8 @@ public class Account extends HBankDataAccess
 	public boolean debitCredit(BigDecimal apiAmount)
 	{
 		logger.entering(this.getClass().getName(), DEBIT_CREDIT_ACCOUNT);
-		Account temp = this.getAccount(new Integer(this.getAccountNumber()).intValue(),
-				new Integer(this.getSortcode()).intValue());
+		Account temp = this.getAccount(Integer.parseInt(this.getAccountNumber()),
+				Integer.parseInt(this.getSortcode()));
 		if (temp == null)
 		{
 			logger.log(Level.WARNING, () -> "Unable to find account " + this.getAccountNumber());

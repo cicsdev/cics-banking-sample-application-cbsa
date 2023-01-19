@@ -15,7 +15,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Date;
 
-import javax.servlet.ServletException;
 import javax.ws.rs.core.Response;
 
 import com.ibm.cics.cip.bankliberty.api.json.AccountsResource;
@@ -275,9 +274,9 @@ public class AccountList
 	{
 		String[] dateArray = dateString.split("-");
 
-		Integer year = new Integer(dateArray[0]);
-		Integer month = new Integer(dateArray[1]);
-		Integer day = new Integer(dateArray[2]);
+		Integer year = Integer.parseInt(dateArray[0]);
+		Integer month = Integer.parseInt(dateArray[1]);
+		Integer day = Integer.parseInt(dateArray[2]);
 
 		Calendar myCalendar = Calendar.getInstance();
 		myCalendar.set(Calendar.YEAR, year);

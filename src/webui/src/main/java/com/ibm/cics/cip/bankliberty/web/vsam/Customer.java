@@ -657,12 +657,11 @@ public class Customer
 		customerFile = new KSDS();
 		customerFile.setName(FILENAME);
 		myCustomer = new CUSTOMER();
-		long customerNumber = 1234567890L;
+		
 		String sortCodeString = sortCodeInteger.toString();
+		long customerNumberAsPrimitive = getNextCustomerNumber(sortCodeString);
 
-		customerNumber = getNextCustomerNumber(sortCodeString);
-
-		Long customerNumberLong = Long.valueOf(customerNumber);
+		Long customerNumberLong = Long.valueOf(customerNumberAsPrimitive);
 		if (customerNumberLong == -1)
 		{
 			return null;
@@ -694,7 +693,7 @@ public class Customer
 		myCustomer.setCustomerBirthYear(myCalendar.get(Calendar.YEAR));
 
 		myCustomer.setCustomerSortcode(sortCodeInteger);
-		myCustomer.setCustomerNumber(customerNumber);
+		myCustomer.setCustomerNumber(customerNumberAsPrimitive);
 
 		customer.setId(customerNumberLong.toString());
 
@@ -1052,9 +1051,6 @@ public class Customer
 				// last customer twice!
 				if (!endOfFile)
 				{
-					// if(retrieved >= offset &&
-					// (myCustomer.getCustomerSortcode() == sortCode) &&
-					// myCustomer.getCustomerName().contains(name))
 					if ((myCustomer.getCustomerSortcode() == sortCode) && myCustomer.getCustomerName().contains(name))
 					{
 						temp[stored] = new Customer();
@@ -1211,7 +1207,7 @@ public class Customer
 
 		byte[] key = new byte[16];
 		// We need to convert the key to EBCDIC
-		String keyString = new String(LAST_CUSTOMER);
+		String keyString = LAST_CUSTOMER;
 		try
 		{
 			key = keyString.getBytes(CODEPAGE);
@@ -1280,7 +1276,7 @@ public class Customer
 
 			boolean carryOn = true;
 			boolean endOfFile = false;
-			for (carryOn = true, endOfFile = false; carryOn && !endOfFile;)
+			for (; carryOn && !endOfFile;)
 			{
 				try
 				{

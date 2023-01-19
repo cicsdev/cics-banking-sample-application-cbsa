@@ -11,6 +11,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -28,7 +29,7 @@ public class CustomerList
 
 	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.webui.dataAccess");
 
-	private List<Customer> customerList = new ArrayList<>();
+	private List<Customer> listOfCustomers = new ArrayList<>();
 
 	private static String sortcode = null;
 	private int count;
@@ -45,7 +46,7 @@ public class CustomerList
 
 	public int getCount(String filter)
 	{
-		if (this.customerList.isEmpty())
+		if (this.listOfCustomers.isEmpty())
 		{
 			howMany(filter);
 		}
@@ -118,7 +119,7 @@ public class CustomerList
 		}
 		catch (IOException e)
 		{
-			logger.severe(e.toString());
+			logger.log(Level.SEVERE,() -> e.toString());
 		}
 
 	}
@@ -143,7 +144,7 @@ public class CustomerList
 			if (filter.startsWith(" AND CUSTOMER_NUMBER = "))
 			{
 
-				this.customerList.clear();
+				this.listOfCustomers.clear();
 				String customerNumberFilter = filter.substring(23);
 				Long customerNumber = Long.parseLong(customerNumberFilter);
 
@@ -171,7 +172,7 @@ public class CustomerList
 			if (myCustomerResponse.getStatus() == 200)
 			{
 				myCustomerString = myCustomerResponse.getEntity().toString();
-				this.customerList.clear();
+				this.listOfCustomers.clear();
 
 				JSONObject myCustomersJSON = JSONObject.parse(myCustomerString);
 				JSONArray myCustomersArrayJSON = (JSONArray) myCustomersJSON.get(JSON_CUSTOMERS);
@@ -188,19 +189,19 @@ public class CustomerList
 							(String) myCustomer.get(JSON_CUSTOMER_NAME), (String) myCustomer.get(JSON_CUSTOMER_ADDRESS),
 							dateOfBirth, (String) myCustomer.get(JSON_CUSTOMER_CREDIT_SCORE), creditScoreReviewDate);
 
-					this.customerList.add(myListCustomer);
+					this.listOfCustomers.add(myListCustomer);
 
 				}
 			}
 			else
 			{
-				logger.severe(myCustomerResponse.getStatus() + " " + myCustomerResponse.getEntity().toString());
+				logger.log(Level.SEVERE,() -> "Failed to get customer");
 			}
 		}
 
 		catch (IOException e1)
 		{
-			logger.severe(e1.toString());
+			logger.log(Level.SEVERE,() -> e1.toString());
 		}
 
 	}
@@ -223,12 +224,12 @@ public class CustomerList
 
 	public Customer getCustomer(int i)
 	{
-		return this.customerList.get(i);
+		return this.listOfCustomers.get(i);
 	}
 
 	public int size()
 	{
-		return this.customerList.size();
+		return this.listOfCustomers.size();
 	}
 
 	public CustomerList()
@@ -250,7 +251,7 @@ public class CustomerList
 
 	public List<Customer> getList()
 	{
-		return customerList;
+		return listOfCustomers;
 	}
 
 	private static void sortOutLogging()
@@ -261,7 +262,7 @@ public class CustomerList
 		}
 		catch (SecurityException | IOException e)
 		{
-			logger.severe(e.toString());
+			logger.log(Level.SEVERE,() -> e.toString());
 		}
 	}
 

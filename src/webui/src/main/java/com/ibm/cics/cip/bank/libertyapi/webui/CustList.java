@@ -390,9 +390,17 @@ public class CustList extends VerticalLayout
 			logger.severe(e.toString());
 		}
 	}
+	
+	@Override
 	public boolean equals(Object obj)
 	{
 		return super.equals(obj);
+	}
+	
+	@Override
+	public int hashCode()
+	{
+		return super.hashCode();
 	}
 
 }

@@ -321,11 +321,11 @@ public class ProcessedTransaction extends HBankDataAccess
 		// appropriately
 		if (processedTransaction.getType().compareTo("TFR") == 0)
 		{
-			String targetSortcode = processedTransaction.getDescription().substring(25, 31);
-			String targetAccount = processedTransaction.getDescription().substring(31, 40);
+			String targetSortcodeInRecord = processedTransaction.getDescription().substring(25, 31);
+			String targetAccountInRecord = processedTransaction.getDescription().substring(31, 40);
 
-			processedTransaction.setTargetAccountNumber(targetAccount);
-			processedTransaction.setTargetSortcode(targetSortcode);
+			processedTransaction.setTargetAccountNumber(targetAccountInRecord);
+			processedTransaction.setTargetSortcode(targetSortcodeInRecord);
 			processedTransaction.setTransfer(true);
 		}
 		return processedTransaction;
@@ -752,7 +752,7 @@ public class ProcessedTransaction extends HBankDataAccess
 		}
 		dateString = timeString.concat(myStringBuilder.toString());
 
-		myStringBuilder = new StringBuilder(Integer.valueOf(Task.getTask().getTaskNumber()).toString());
+		myStringBuilder = new StringBuilder(Integer.toString(Task.getTask().getTaskNumber()));
 		for (int z = myStringBuilder.length(); z < 12; z++)
 		{
 			myStringBuilder = myStringBuilder.insert(0, "0");
@@ -801,7 +801,6 @@ public class ProcessedTransaction extends HBankDataAccess
 
 	private String padAccountNumber(Integer accountNumber2)
 	{
-		// TODO Auto-generated method stub
 		StringBuilder myStringBuilder = new StringBuilder();
 		for (int z = accountNumber2.toString().length(); z < 8; z++)
 		{
@@ -813,7 +812,6 @@ public class ProcessedTransaction extends HBankDataAccess
 
 	private String padSortCode(Integer sortcode2)
 	{
-		// TODO Auto-generated method stub
 		StringBuilder myStringBuilder = new StringBuilder();
 
 		for (int z = sortcode2.toString().length(); z < 6; z++)

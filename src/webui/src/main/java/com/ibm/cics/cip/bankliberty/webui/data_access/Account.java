@@ -12,6 +12,7 @@ import java.math.RoundingMode;
 import java.sql.Date;
 
 import java.util.Calendar;
+import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -90,16 +91,16 @@ public class Account
 
 	public void showInfo()
 	{
-		logger.info("------------" + this.accountNumber + ":" + this.sortcode + "------------");
-		logger.info("Customer number - " + this.customerNumber);
-		logger.info("Type - " + this.type);
-		logger.info("Interest rate - " + this.interestRate);
-		logger.info("Opened - " + this.opened.toString());
-		logger.info("Overdraft Limit - " + this.overdraftLimit);
-		logger.info("Last Statement - " + this.lastStatement.toString());
-		logger.info("Next Statement - " + this.nextStatement.toString());
-		logger.info(("Available Balance - " + this.availableBalance));
-		logger.info("Actual Balance - " + this.actualBalance);
+		logger.log(Level.INFO,() ->"------------" + this.accountNumber + ":" + this.sortcode + "------------");
+		logger.log(Level.INFO,() ->"Customer number - " + this.customerNumber);
+		logger.log(Level.INFO,() ->"Type - " + this.type);
+		logger.log(Level.INFO,() ->"Interest rate - " + this.interestRate);
+		logger.log(Level.INFO,() ->"Opened - " + this.opened.toString());
+		logger.log(Level.INFO,() ->"Overdraft Limit - " + this.overdraftLimit);
+		logger.log(Level.INFO,() ->"Last Statement - " + this.lastStatement.toString());
+		logger.log(Level.INFO,() ->"Next Statement - " + this.nextStatement.toString());
+		logger.log(Level.INFO,() ->("Available Balance - " + this.availableBalance));
+		logger.log(Level.INFO,() ->"Actual Balance - " + this.actualBalance);
 	}
 
 	public String getCustomerNumber()
@@ -466,8 +467,7 @@ public class Account
 		myCalendar.set(Calendar.YEAR,year);
 		myCalendar.set(Calendar.MONTH,month-1);
 		myCalendar.set(Calendar.DATE, day);
-		Date myDate = new Date(myCalendar.getTimeInMillis());
-		return myDate;
+		return new Date(myCalendar.getTimeInMillis());
 	}
 
 	private static void sortOutLogging()
