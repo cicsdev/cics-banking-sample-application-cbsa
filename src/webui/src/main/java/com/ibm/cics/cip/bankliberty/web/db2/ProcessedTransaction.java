@@ -153,14 +153,14 @@ public class ProcessedTransaction extends HBankDataAccess
 		this.sortcode = sortcode;
 	}
 
-	public String getAccount_number()
+	public String getAccountNumber()
 	{
 		return accountNumber;
 	}
 
-	public void setAccount_number(String account_number)
+	public void setAccountNumber(String accountNumberIn)
 	{
-		this.accountNumber = account_number;
+		this.accountNumber = accountNumberIn;
 	}
 
 	public String getType()
@@ -206,9 +206,15 @@ public class ProcessedTransaction extends HBankDataAccess
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next())
 			{
+				Calendar myCalendar = Calendar.getInstance();
+				Date transactionDate = rs.getDate("PROCTRAN_DATE");
+				String transactionTime = rs.getString("PROCTRAN_TIME");
+				long seconds = 0;
+				long minutes = 0;
+				long hours = 0;
 				temp[i] = new ProcessedTransaction();
 
-				temp[i].setAccount_number(rs.getString("PROCTRAN_NUMBER"));
+				temp[i].setAccountNumber(rs.getString("PROCTRAN_NUMBER"));
 				temp[i].setReference(rs.getString("PROCTRAN_REF"));
 				temp[i].setSortcode(rs.getString("PROCTRAN_SORTCODE"));
 				this.setSortcode(temp[i].getSortcode());
@@ -220,10 +226,7 @@ public class ProcessedTransaction extends HBankDataAccess
 				temp[i] = processCreateDeleteAccountRecord(temp[i]);
 				temp[i] = processCreateDeleteCustomerRecord(temp[i]);
 
-				Calendar myCalendar = Calendar.getInstance();
-				Date transactionDate = rs.getDate("PROCTRAN_DATE");
-				String transactionTime = rs.getString("PROCTRAN_TIME");
-				long seconds = 0, minutes = 0, hours = 0;
+
 				if (transactionTime.length() == 6)
 				{
 					seconds = Integer.valueOf(transactionTime.substring(4));
@@ -267,9 +270,9 @@ public class ProcessedTransaction extends HBankDataAccess
 			String dateOfBirthMM = processedTransaction.getDescription().substring(33, 35);
 			String dateOfBirthYYYY = processedTransaction.getDescription().substring(36, 40);
 			Calendar myCalendar = Calendar.getInstance();
-			myCalendar.set(Calendar.YEAR, (Integer.valueOf(dateOfBirthYYYY).intValue() - 1900));
-			myCalendar.set(Calendar.MONTH, (Integer.valueOf(dateOfBirthMM).intValue() - 1));
-			myCalendar.set(Calendar.DAY_OF_MONTH, Integer.valueOf(dateOfBirthDD).intValue());
+			myCalendar.set(Calendar.YEAR, (Integer.parseInt(dateOfBirthYYYY)));
+			myCalendar.set(Calendar.MONTH, (Integer.parseInt(dateOfBirthMM) - 1));
+			myCalendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(dateOfBirthDD));
 			Date dateOfBirth = new Date(myCalendar.getTimeInMillis());
 			processedTransaction.setDateOfBirth(dateOfBirth);
 			processedTransaction.setCustomer(deletedCustomerNumber);
@@ -297,13 +300,13 @@ public class ProcessedTransaction extends HBankDataAccess
 
 			processedTransaction.setAccountType(deletedAccountType);
 			Calendar myCalendar = Calendar.getInstance();
-			myCalendar.set(Calendar.YEAR, (Integer.valueOf(lastStatementYYYY).intValue() - 1900));
-			myCalendar.set(Calendar.MONTH, (Integer.valueOf(lastStatementMM).intValue() - 1));
-			myCalendar.set(Calendar.DAY_OF_MONTH, Integer.valueOf(lastStatementDD).intValue());
+			myCalendar.set(Calendar.YEAR, (Integer.parseInt(lastStatementYYYY)));
+			myCalendar.set(Calendar.MONTH, (Integer.parseInt(lastStatementMM) - 1));
+			myCalendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(lastStatementDD));
 			Date lastStatementDate = new Date(myCalendar.getTimeInMillis());
-			myCalendar.set(Calendar.YEAR, (Integer.valueOf(nextStatementYYYY).intValue() - 1900));
-			myCalendar.set(Calendar.MONTH, (Integer.valueOf(nextStatementMM).intValue() - 1));
-			myCalendar.set(Calendar.DAY_OF_MONTH, Integer.valueOf(nextStatementDD).intValue());
+			myCalendar.set(Calendar.YEAR, (Integer.parseInt(nextStatementYYYY)));
+			myCalendar.set(Calendar.MONTH, (Integer.parseInt(nextStatementMM)- 1));
+			myCalendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(nextStatementDD));
 			Date nextStatementDate = new Date(myCalendar.getTimeInMillis());
 			processedTransaction.setLastStatement(lastStatementDate);
 			processedTransaction.setNextStatement(nextStatementDate);
@@ -321,21 +324,21 @@ public class ProcessedTransaction extends HBankDataAccess
 			String targetSortcode = processedTransaction.getDescription().substring(25, 31);
 			String targetAccount = processedTransaction.getDescription().substring(31, 40);
 
-			processedTransaction.setTarget_account_number(targetAccount);
+			processedTransaction.setTargetAccountNumber(targetAccount);
 			processedTransaction.setTargetSortcode(targetSortcode);
 			processedTransaction.setTransfer(true);
 		}
 		return processedTransaction;
 	}
 
-	public String getTarget_account_number()
+	public String getTargetAccountNumber()
 	{
 		return targetAccountNumber;
 	}
 
-	public void setTarget_account_number(String target_account_number)
+	public void setTargetAccountNumber(String targetAccountNumberIn)
 	{
-		this.targetAccountNumber = target_account_number;
+		this.targetAccountNumber = targetAccountNumberIn;
 	}
 
 	public String getReference()
@@ -456,8 +459,8 @@ public class ProcessedTransaction extends HBankDataAccess
 		return true;
 	}
 
-	public boolean writeTransferLocal(String sortCode2, String account_number2, BigDecimal amount2,
-			String target_account_number2)
+	public boolean writeTransferLocal(String sortCode2, String accountNumber2, BigDecimal amount2,
+			String targetAccountNumber2)
 	{
 		logger.entering(this.getClass().getName(), WRITE_TRANSFER_LOCAL);
 
@@ -469,7 +472,7 @@ public class ProcessedTransaction extends HBankDataAccess
 
 		transferDescription = transferDescription.concat(padSortCode(Integer.parseInt(sortCode2)));
 
-		transferDescription = transferDescription.concat(padAccountNumber(Integer.parseInt(target_account_number2)));
+		transferDescription = transferDescription.concat(padAccountNumber(Integer.parseInt(targetAccountNumber2)));
 
 		openConnection();
 
@@ -479,7 +482,7 @@ public class ProcessedTransaction extends HBankDataAccess
 		{
 			stmt.setString(1, PROCTRAN.PROC_TRAN_VALID);
 			stmt.setString(2, sortCode2);
-			stmt.setString(3, String.format("%08d", Integer.parseInt(account_number2)));
+			stmt.setString(3, String.format("%08d", Integer.parseInt(accountNumber2)));
 			stmt.setString(4, dateString);
 			stmt.setString(5, timeString);
 			stmt.setString(6, taskRef);
@@ -499,7 +502,7 @@ public class ProcessedTransaction extends HBankDataAccess
 		return true;
 	}
 
-	public boolean writeDeleteCustomer(String sortCode2, String accountNumber, double amount_which_will_be_zero,
+	public boolean writeDeleteCustomer(String sortCode2, String accountNumber, double amountWhichWillAlwaysBeZero,
 			Date customerDOB, String customerName, String customerNumber)
 	{
 		logger.entering(this.getClass().getName(), WRITE_DELETE_CUSTOMER);
@@ -516,7 +519,7 @@ public class ProcessedTransaction extends HBankDataAccess
 			myStringBuilder = myStringBuilder.append("0");
 		}
 		myStringBuilder.append(customerName);
-		deleteCustomerDescription = deleteCustomerDescription.concat(myStringBuilder.substring(0, 14).toString());
+		deleteCustomerDescription = deleteCustomerDescription.concat(myStringBuilder.substring(0, 14));
 
 		deleteCustomerDescription = deleteCustomerDescription + customerDOBString;
 
@@ -534,7 +537,7 @@ public class ProcessedTransaction extends HBankDataAccess
 			stmt.setString(6, taskRef);
 			stmt.setString(7, PROCTRAN.PROC_TY_WEB_DELETE_CUSTOMER);
 			stmt.setString(8, deleteCustomerDescription);
-			stmt.setDouble(9, amount_which_will_be_zero);
+			stmt.setDouble(9, amountWhichWillAlwaysBeZero);
 			stmt.executeUpdate();
 		}
 		catch (SQLException e)
@@ -547,7 +550,7 @@ public class ProcessedTransaction extends HBankDataAccess
 		return true;
 	}
 
-	public boolean writeCreateCustomer(String sortCode2, String accountNumber, double amount_which_will_be_zero,
+	public boolean writeCreateCustomer(String sortCode2, String accountNumber, double amountWhichWillBeZero,
 			Date customerDOB, String customerName, String customerNumber)
 	{
 		logger.entering(this.getClass().getName(), WRITE_CREATE_CUSTOMER);
@@ -562,7 +565,7 @@ public class ProcessedTransaction extends HBankDataAccess
 			myStringBuilder.append("0");
 		}
 		myStringBuilder.append(customerName);
-		createCustomerDescription = createCustomerDescription.concat(myStringBuilder.substring(0, 14).toString());
+		createCustomerDescription = createCustomerDescription.concat(myStringBuilder.substring(0, 14));
 
 		String customerDOBString = sortOutCustomerDOB(customerDOB);
 
@@ -582,7 +585,7 @@ public class ProcessedTransaction extends HBankDataAccess
 			stmt.setString(6, taskRef);
 			stmt.setString(7, PROCTRAN.PROC_TY_WEB_CREATE_CUSTOMER);
 			stmt.setString(8, createCustomerDescription);
-			stmt.setDouble(9, amount_which_will_be_zero);
+			stmt.setDouble(9, amountWhichWillBeZero);
 			stmt.executeUpdate();
 		}
 		catch (SQLException e)
@@ -615,7 +618,7 @@ public class ProcessedTransaction extends HBankDataAccess
 		myPROCTRAN.setProcDescDelaccNextMm(myCalendar.get(Calendar.MONTH) + 1);
 		myPROCTRAN.setProcDescDelaccNextYyyy(myCalendar.get(Calendar.YEAR));
 		myPROCTRAN.setProcDescDelaccAcctype(accountType);
-		myPROCTRAN.setProcDescDelaccCustomer(Integer.valueOf(customerNumber).intValue());
+		myPROCTRAN.setProcDescDelaccCustomer(Integer.parseInt(customerNumber));
 		myPROCTRAN.setProcDescDelaccFooter(PROCTRAN.PROC_DESC_DELACC_FLAG);
 
 		String description = myPROCTRAN.getProcTranDesc();
@@ -675,7 +678,7 @@ public class ProcessedTransaction extends HBankDataAccess
 		myPROCTRAN.setProcDescDelaccNextYyyy(myCalendar.get(Calendar.YEAR));
 
 		myPROCTRAN.setProcDescCreaccAcctype(accountType);
-		myPROCTRAN.setProcDescCreaccCustomer(Integer.valueOf(customerNumber).intValue());
+		myPROCTRAN.setProcDescCreaccCustomer(Integer.parseInt(customerNumber));
 		myPROCTRAN.setProcDescCreaccFooter(PROCTRAN.PROC_DESC_CREACC_FLAG);
 
 		String description = myPROCTRAN.getProcTranDesc();
@@ -709,7 +712,7 @@ public class ProcessedTransaction extends HBankDataAccess
 	private void sortOutDateTimeTaskString()
 	{
 		Calendar now = Calendar.getInstance();
-		StringBuilder myStringBuilder = new StringBuilder(Integer.valueOf(now.get(Calendar.HOUR_OF_DAY)));
+		StringBuilder myStringBuilder = new StringBuilder(Integer.toString(now.get(Calendar.HOUR_OF_DAY)));
 		for (int z = myStringBuilder.length(); z < 2; z++)
 		{
 			myStringBuilder = myStringBuilder.insert(0, "0");
@@ -755,7 +758,6 @@ public class ProcessedTransaction extends HBankDataAccess
 			myStringBuilder = myStringBuilder.insert(0, "0");
 		}
 		taskRef = myStringBuilder.toString();
-		return;
 	}
 
 	String sortOutCustomerDOB(Date customerDOB)
@@ -793,7 +795,7 @@ public class ProcessedTransaction extends HBankDataAccess
 		{
 			myStringBuilder.append("0");
 		}
-		myStringBuilder.append(customerNumber2.toString());
+		myStringBuilder.append(customerNumber2);
 		return myStringBuilder.toString();
 	}
 

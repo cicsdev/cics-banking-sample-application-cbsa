@@ -77,7 +77,7 @@ public class NewAccountNumber
 	 */
 	protected static final StringField NEWACCNO_FAIL_CODE = factory.getStringField(1);
 
-	protected byte[] _byteBuffer;
+	protected byte[] byteBuffer;
 	// Instance variables used to cache field values
 	protected String newaccnoFunction;
 	protected Integer accountNumber;
@@ -86,24 +86,24 @@ public class NewAccountNumber
 
 	public NewAccountNumber(byte[] buffer)
 	{
-		this._byteBuffer = buffer;
+		this.byteBuffer = buffer;
 	}
 
 	public NewAccountNumber()
 	{
-		this._byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_LEN];
+		this.byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_LEN];
 	}
 
 	public byte[] getByteBuffer()
 	{
-		return _byteBuffer;
+		return byteBuffer;
 	}
 
 	public String getNewaccnoFunction()
 	{
 		if (newaccnoFunction == null)
 		{
-			newaccnoFunction = NEWACCNO_FUNCTION.getString(_byteBuffer);
+			newaccnoFunction = NEWACCNO_FUNCTION.getString(byteBuffer);
 		}
 		return newaccnoFunction;
 	}
@@ -114,7 +114,7 @@ public class NewAccountNumber
 		{
 			return;
 		}
-		NEWACCNO_FUNCTION.putString(newaccnoFunction, _byteBuffer);
+		NEWACCNO_FUNCTION.putString(newaccnoFunction, byteBuffer);
 		this.newaccnoFunction = newaccnoFunction;
 	}
 
@@ -137,7 +137,7 @@ public class NewAccountNumber
 	{
 		if (accountNumber == null)
 		{
-			accountNumber = ACCOUNT_NUMBER.getInt(_byteBuffer);
+			accountNumber = ACCOUNT_NUMBER.getInt(byteBuffer);
 		}
 		return accountNumber.intValue();
 	}
@@ -148,7 +148,7 @@ public class NewAccountNumber
 		{
 			return;
 		}
-		ACCOUNT_NUMBER.putInt(accountNumber, _byteBuffer);
+		ACCOUNT_NUMBER.putInt(accountNumber, byteBuffer);
 		this.accountNumber = accountNumber;
 	}
 
@@ -156,7 +156,7 @@ public class NewAccountNumber
 	{
 		if (newaccnoSuccess == null)
 		{
-			newaccnoSuccess = NEWACCNO_SUCCESS.getString(_byteBuffer);
+			newaccnoSuccess = NEWACCNO_SUCCESS.getString(byteBuffer);
 		}
 		return newaccnoSuccess;
 	}
@@ -167,7 +167,7 @@ public class NewAccountNumber
 		{
 			return;
 		}
-		NEWACCNO_SUCCESS.putString(newaccnoSuccess, _byteBuffer);
+		NEWACCNO_SUCCESS.putString(newaccnoSuccess, byteBuffer);
 		this.newaccnoSuccess = newaccnoSuccess;
 	}
 
@@ -175,7 +175,7 @@ public class NewAccountNumber
 	{
 		if (newaccnoFailCode == null)
 		{
-			newaccnoFailCode = NEWACCNO_FAIL_CODE.getString(_byteBuffer);
+			newaccnoFailCode = NEWACCNO_FAIL_CODE.getString(byteBuffer);
 		}
 		return newaccnoFailCode;
 	}
@@ -186,7 +186,7 @@ public class NewAccountNumber
 		{
 			return;
 		}
-		NEWACCNO_FAIL_CODE.putString(newaccnoFailCode, _byteBuffer);
+		NEWACCNO_FAIL_CODE.putString(newaccnoFailCode, byteBuffer);
 		this.newaccnoFailCode = newaccnoFailCode;
 	}
 

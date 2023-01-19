@@ -399,5 +399,9 @@ public class CustomerUI extends VerticalLayout
 			sortcode = ((String) mySortCodeJSON.getEntity()).substring(13, 19);
 		}
 	}
+	public boolean equals(Object obj)
+	{
+		return super.equals(obj);
+	}
 
 }

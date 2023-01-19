@@ -27,5 +27,9 @@ public class HbFooter extends HorizontalLayout
 		 */
 
 	}
+	public boolean equals(Object obj)
+	{
+		return super.equals(obj);
+	}
 
 }

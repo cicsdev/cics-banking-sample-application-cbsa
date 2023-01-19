@@ -67,8 +67,6 @@ public class Customer
 
 	private static final String FILENAME = "CUSTOMER";
 
-	private static final String ABOUT_TO_GO_TO_SLEEP = "About to go to sleep for ";
-	private static final String MILLISECONDS = " milliseconds";
 	private static final String CODEPAGE = "Cp1047";
 
 	private static final String ERROR_START_BROWSE = "Error starting browse of file CUSTOMER ";
@@ -91,13 +89,12 @@ public class Customer
 
 	private CUSTOMER myCustomer;
 
-	private int maximumRetries = 100, totalSleep = 3000;
 
 	private boolean notFound;
 
 	public Customer(String custNo, String sc, String n, String a, Date d, String creditScore, Date reviewDate)
 	{
-		setCustomer_number(custNo);
+		setCustomerNumber(custNo);
 		setSortcode(sc);
 		setName(n);
 		setAddress(a);
@@ -113,29 +110,18 @@ public class Customer
 
 	}
 
-	public String getCustomer_number()
+	public String getCustomerNumber()
 	{
 		if (this.customerNumber.length() < 10)
 		{
-			for (int i = this.customerNumber.length(); i < 10; i++)
-			{
-				this.customerNumber = "0" + this.customerNumber;
-			}
+			this.customerNumber = padCustomerNumber(this.customerNumber);
 		}
 		return this.customerNumber;
 	}
 
-	public void setCustomer_number(String custNo)
+	public void setCustomerNumber(String custNo)
 	{
-		StringBuilder myStringBuilder = new StringBuilder();
-
-		for (int i = custNo.length(); i < 10; i++)
-		{
-			myStringBuilder.append('0');
-		}
-
-		myStringBuilder.append(custNo);
-		this.customerNumber = myStringBuilder.toString();
+		this.customerNumber = padCustomerNumber(custNo);
 	}
 
 	public String getSortcode()
@@ -394,7 +380,7 @@ public class Customer
 
 			temp[j] = new Customer();
 			temp[j].setAddress(myCustomer.getCustomerAddress());
-			temp[j].setCustomer_number(Long.toString(myCustomer.getCustomerNumber()));
+			temp[j].setCustomerNumber(Long.toString(myCustomer.getCustomerNumber()));
 			temp[j].setName(myCustomer.getCustomerName());
 			temp[j].setSortcode(Integer.toString(myCustomer.getCustomerSortcode()));
 			Calendar myCalendar = Calendar.getInstance();
@@ -479,7 +465,7 @@ public class Customer
 		catch (RecordNotFoundException e2)
 		{
 			Customer customer404 = new Customer();
-			customer404.setNot_found(true);
+			customer404.setNotFound(true);
 			logger.exiting(this.getClass().getName(), UPDATE_CUSTOMER, customer404);
 			return customer404;
 		}
@@ -503,13 +489,13 @@ public class Customer
 		return temp;
 	}
 
-	private void setNot_found(boolean b)
+	private void setNotFound(boolean b)
 	{
 		this.notFound = b;
 
 	}
 
-	public boolean isNot_found()
+	public boolean isNotFound()
 	{
 		return this.notFound;
 
@@ -575,7 +561,7 @@ public class Customer
 		catch (RecordNotFoundException e)
 		{
 			Customer customer404 = new Customer();
-			customer404.setNot_found(true);
+			customer404.setNotFound(true);
 			logger.exiting(this.getClass().getName(), DELETE_CUSTOMER, customer404);
 			return customer404;
 		}
@@ -767,12 +753,7 @@ public class Customer
 		myCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerCsReviewDay());
 		Date myCustomerReviewDate = new Date(myCalendar.toInstant().toEpochMilli());
 
-		String myCustomerNumber = Long.toString(myCustomer.getCustomerNumber());
-		// I think this was it
-		for (int i = myCustomerNumber.length(); i < 10; i++)
-		{
-			myCustomerNumber = "0" + myCustomerNumber;
-		}
+		String myCustomerNumber = padCustomerNumber(Long.toString(myCustomer.getCustomerNumber()));
 
 		temp = new Customer(myCustomerNumber, Integer.toString(myCustomer.getCustomerSortcode()),
 				myCustomer.getCustomerName(), myCustomer.getCustomerAddress(), myCustomerBirthDate,
@@ -922,7 +903,8 @@ public class Customer
 	{
 		logger.entering(this.getClass().getName(), GET_CUSTOMERS_WITH_OFFSET_AND_LIMIT);
 		Customer[] temp = new Customer[limit];
-		int stored = 0, retrieved = 0;
+		int stored = 0;
+		int retrieved = 0;
 
 		KSDS customerFile = new KSDS();
 		customerFile.setName(FILENAME);
@@ -972,7 +954,7 @@ public class Customer
 				{
 					temp[stored] = new Customer();
 					temp[stored].setAddress(myCustomer.getCustomerAddress());
-					temp[stored].setCustomer_number(Long.toString(myCustomer.getCustomerNumber()));
+					temp[stored].setCustomerNumber(Long.toString(myCustomer.getCustomerNumber()));
 					temp[stored].setName(myCustomer.getCustomerName());
 					temp[stored].setSortcode(Integer.toString((myCustomer.getCustomerSortcode())));
 					Calendar dobCalendar = Calendar.getInstance();
@@ -1046,7 +1028,8 @@ public class Customer
 		{
 
 			customerFileBrowse = customerFile.startBrowse(key);
-			boolean carryOn = true, endOfFile = false;
+			boolean carryOn = true;
+			boolean endOfFile = false;
 			while (carryOn)
 			{
 				try
@@ -1076,7 +1059,7 @@ public class Customer
 					{
 						temp[stored] = new Customer();
 						temp[stored].setAddress(myCustomer.getCustomerAddress());
-						temp[stored].setCustomer_number(Long.toString(myCustomer.getCustomerNumber()));
+						temp[stored].setCustomerNumber(Long.toString(myCustomer.getCustomerNumber()));
 						temp[stored].setName(myCustomer.getCustomerName());
 						temp[stored].setSortcode(Integer.toString(myCustomer.getCustomerSortcode()));
 						Calendar dobCalendar = Calendar.getInstance();
@@ -1120,7 +1103,8 @@ public class Customer
 	{
 		logger.entering(this.getClass().getName(), GET_CUSTOMERS_BY_NAME);
 		Customer[] temp = new Customer[250000];
-		int stored = 0, retrieved = 0;
+		int stored = 0;
+		int retrieved = 0;
 
 		KSDS customerFile = new KSDS();
 		customerFile.setName(FILENAME);
@@ -1150,7 +1134,8 @@ public class Customer
 
 			customerFileBrowse = customerFile.startBrowse(key);
 
-			boolean carryOn = true, endOfFile = false;
+			boolean carryOn = true;
+			boolean endOfFile = false;
 			for (retrieved = 0; retrieved < 250000 && carryOn; retrieved++)
 			{
 				try
@@ -1177,7 +1162,7 @@ public class Customer
 					{
 						temp[stored] = new Customer();
 						temp[stored].setAddress(myCustomer.getCustomerAddress());
-						temp[stored].setCustomer_number(Long.toString(myCustomer.getCustomerNumber()));
+						temp[stored].setCustomerNumber(Long.toString(myCustomer.getCustomerNumber()));
 						temp[stored].setName(myCustomer.getCustomerName());
 						temp[stored].setSortcode(Integer.toString(myCustomer.getCustomerSortcode()));
 						Calendar dobCalendar = Calendar.getInstance();
@@ -1242,7 +1227,7 @@ public class Customer
 		{
 			customerFile.read(key, holder);
 		}
-		catch (LogicException | InvalidRequestException | IOErrorException | LockedException | RecordBusyException
+		catch (InvalidSystemIdException | LogicException | InvalidRequestException | IOErrorException | LockedException | RecordBusyException
 				| LoadingException | ChangedException | FileDisabledException | FileNotFoundException
 				| ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException | DuplicateKeyException
 				| NotOpenException e1)
@@ -1251,11 +1236,6 @@ public class Customer
 			logger.exiting(this.getClass().getName(), GET_CUSTOMERS_COUNT_ONLY, -1L);
 			return -1L;
 		}
-		catch (InvalidSystemIdException e1)
-		{
-			if (keepTryingUntilWeSucceedOrGiveUp(key, holder) == -1)
-				return -1;
-		}
 
 		CustomerControl myCustomerControl = new CustomerControl(holder.getValue());
 		logger.exiting(this.getClass().getName(), GET_CUSTOMERS_COUNT_ONLY, myCustomerControl.getNumberOfCustomers());
@@ -1263,54 +1243,6 @@ public class Customer
 
 	}
 
-	private long keepTryingUntilWeSucceedOrGiveUp(byte[] key, RecordHolder holder)
-	{
-		int numberOfRetries = 0;
-		boolean success = false;
-		for (; numberOfRetries < maximumRetries && success == false; numberOfRetries++)
-		{
-			try
-			{
-				logger.log(Level.FINE, () -> ABOUT_TO_GO_TO_SLEEP + totalSleep + MILLISECONDS);
-				Thread.sleep(3000);
-			}
-			catch (InterruptedException e)
-			{
-				logger.warning(e.toString());
-				Thread.currentThread().interrupt();
-			}
-			try
-			{
-				customerFile.read(key, holder);
-				success = true;
-
-			}
-			catch (FileDisabledException | DuplicateKeyException | NotOpenException | LogicException
-					| InvalidRequestException | IOErrorException | ChangedException | LockedException | LoadingException
-					| RecordBusyException | FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException
-					| RecordNotFoundException e3)
-			{
-				logger.log(Level.SEVERE,
-						() -> "Error reading control record for customer file file, " + e3.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(), GET_CUSTOMERS_COUNT_ONLY, -1L);
-				return -1L;
-			}
-			catch (InvalidSystemIdException e4)
-			{
-				// This is expected. Log as a warning.
-				logger.log(Level.WARNING,
-						() -> "Error reading control record for customer file file, " + e4.getLocalizedMessage());
-			}
-
-		}
-		if (numberOfRetries == maximumRetries && success == false)
-		{
-			logger.severe("Cannot read control record for CUSTOMER file after 100 attempts");
-			logger.exiting(this.getClass().getName(), GET_CUSTOMERS_COUNT_ONLY, -1L);
-			return -1L;
-		}
-		return 0;
-	}
 
 	public long getCustomersByNameCountOnly(int sortCode, String name)
 	{
@@ -1346,7 +1278,8 @@ public class Customer
 
 			customerFileBrowse = customerFile.startBrowse(key);
 
-			boolean carryOn = true, endOfFile = false;
+			boolean carryOn = true;
+			boolean endOfFile = false;
 			for (carryOn = true, endOfFile = false; carryOn && !endOfFile;)
 			{
 				try
@@ -1461,7 +1394,7 @@ public class Customer
 
 				temp[j] = new Customer();
 				temp[j].setAddress(myCustomer.getCustomerAddress());
-				temp[j].setCustomer_number(Long.toString(myCustomer.getCustomerNumber()));
+				temp[j].setCustomerNumber(Long.toString(myCustomer.getCustomerNumber()));
 				temp[j].setName(myCustomer.getCustomerName());
 				temp[j].setSortcode(Integer.toString(myCustomer.getCustomerSortcode()));
 				Calendar dobCalendar = Calendar.getInstance();
@@ -1560,7 +1493,7 @@ public class Customer
 
 				temp[j] = new Customer();
 				temp[j].setAddress(myCustomer.getCustomerAddress());
-				temp[j].setCustomer_number(Long.toString(myCustomer.getCustomerNumber()));
+				temp[j].setCustomerNumber(Long.toString(myCustomer.getCustomerNumber()));
 				temp[j].setName(myCustomer.getCustomerName());
 				temp[j].setSortcode(Integer.toString(myCustomer.getCustomerSortcode()));
 				Calendar dobCalendar = Calendar.getInstance();
@@ -1660,7 +1593,7 @@ public class Customer
 
 				temp[j] = new Customer();
 				temp[j].setAddress(myCustomer.getCustomerAddress());
-				temp[j].setCustomer_number(Long.toString(myCustomer.getCustomerNumber()));
+				temp[j].setCustomerNumber(Long.toString(myCustomer.getCustomerNumber()));
 				temp[j].setName(myCustomer.getCustomerName());
 				temp[j].setSortcode(Integer.toString(myCustomer.getCustomerSortcode()));
 				Calendar dobCalendar = Calendar.getInstance();
@@ -1685,10 +1618,7 @@ public class Customer
 			customerFileBrowse.end();
 
 			Customer[] real = new Customer[i];
-			for (int j = 0; j < i; j++)
-			{
-				real[j] = temp[j];
-			}
+			System.arraycopy(temp, 0, real, 0, i);
 			logger.exiting(this.getClass().getName(), GET_CUSTOMERS_BY_AGE, real);
 			return real;
 		}
@@ -1755,7 +1685,7 @@ public class Customer
 		{
 			myStringBuilder.append("0");
 		}
-		myStringBuilder.append(customerNumber2.toString());
+		myStringBuilder.append(customerNumber2);
 		return myStringBuilder.toString();
 	}
 

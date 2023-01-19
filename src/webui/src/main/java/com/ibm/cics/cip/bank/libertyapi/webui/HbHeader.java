@@ -162,5 +162,9 @@ public class HbHeader extends HorizontalLayout
 			logger.severe(e.toString());
 		}
 	}
+	public boolean equals(Object obj)
+	{
+		return super.equals(obj);
+	}
 
 }

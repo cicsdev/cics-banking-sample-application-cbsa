@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-import javax.servlet.ServletException;
 
 import com.ibm.cics.cip.bankliberty.webui.data_access.AccountList;
 import com.ibm.cics.cip.bankliberty.webui.data_access.Customer;
@@ -624,7 +623,7 @@ public class AccList extends VerticalLayout
 
 			next = cur + limit;
 		}
-		catch (ServletException | IOException e1)
+		catch (IOException e1)
 		{
 			logger.severe(e1.toString());
 		}
@@ -706,5 +705,9 @@ public class AccList extends VerticalLayout
 		{
 			logger.severe(e.toString());
 		}
+	}
+	public boolean equals(Object obj)
+	{
+		return super.equals(obj);
 	}
 }

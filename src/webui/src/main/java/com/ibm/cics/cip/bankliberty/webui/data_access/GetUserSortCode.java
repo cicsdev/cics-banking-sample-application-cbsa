@@ -40,33 +40,33 @@ public class GetUserSortCode
 	       06 SORTCODE pic xXXXXX.
 	 * </pre>
 	 */
-	protected static StringField SORTCODE = factory.getStringField(6);
+	protected static StringField sortCode = factory.getStringField(6);
 
-	protected byte[] _byteBuffer;
+	protected byte[] byteBuffer;
 
 	public GetUserSortCode(byte[] buffer)
 	{
-		this._byteBuffer = buffer;
+		this.byteBuffer = buffer;
 	}
 
 	public GetUserSortCode()
 	{
-		this._byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_LEN];
+		this.byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_LEN];
 	}
 
 	public byte[] getByteBuffer()
 	{
-		return _byteBuffer;
+		return byteBuffer;
 	}
 
 	public String getSortcode()
 	{
-		return SORTCODE.getString(_byteBuffer);
+		return sortCode.getString(byteBuffer);
 	}
 
 	public void setSortcode(String sortcode)
 	{
-		SORTCODE.putString(sortcode, _byteBuffer);
+		sortCode.putString(sortcode, byteBuffer);
 	}
 
 }

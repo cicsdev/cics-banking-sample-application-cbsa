@@ -801,7 +801,7 @@ public class PROCTRAN
 	protected static final ExternalDecimalAsBigDecimalField PROC_TRAN_AMOUNT = factory
 			.getExternalDecimalAsBigDecimalField(12, 2, true, true, false, false);
 
-	protected byte[] _byteBuffer;
+	protected byte[] byteBuffer;
 	// Instance variables used to cache field values
 	protected Integer procTranSortCode;
 	protected Integer procTranNumber;
@@ -811,27 +811,27 @@ public class PROCTRAN
 
 	public PROCTRAN(byte[] buffer)
 	{
-		this._byteBuffer = buffer;
+		this.byteBuffer = buffer;
 	}
 
 	public PROCTRAN()
 	{
-		this._byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_LEN];
+		this.byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_LEN];
 	}
 
 	public byte[] getByteBuffer()
 	{
-		return _byteBuffer;
+		return byteBuffer;
 	}
 
 	public String getProcTranEyeCatcher()
 	{
-		return PROC_TRAN_EYE_CATCHER.getString(_byteBuffer);
+		return PROC_TRAN_EYE_CATCHER.getString(byteBuffer);
 	}
 
 	public void setProcTranEyeCatcher(String procTranEyeCatcher)
 	{
-		PROC_TRAN_EYE_CATCHER.putString(procTranEyeCatcher, _byteBuffer);
+		PROC_TRAN_EYE_CATCHER.putString(procTranEyeCatcher, byteBuffer);
 	}
 
 	public boolean isProcTranValid()
@@ -841,29 +841,20 @@ public class PROCTRAN
 
 	public String getProcTranLogicalDeleteFlag()
 	{
-		return PROC_TRAN_LOGICAL_DELETE_FLAG.getString(_byteBuffer);
+		return PROC_TRAN_LOGICAL_DELETE_FLAG.getString(byteBuffer);
 	}
 
 	public void setProcTranLogicalDeleteFlag(String procTranLogicalDeleteFlag)
 	{
-		PROC_TRAN_LOGICAL_DELETE_FLAG.putString(procTranLogicalDeleteFlag, _byteBuffer);
+		PROC_TRAN_LOGICAL_DELETE_FLAG.putString(procTranLogicalDeleteFlag, byteBuffer);
 	}
 
-	public String getFiller_1()
-	{
-		return FILLER_1.getString(_byteBuffer);
-	}
-
-	public void setFiller_1(String filler_1)
-	{
-		FILLER_1.putString(filler_1, _byteBuffer);
-	}
 
 	public int getProcTranSortCode()
 	{
 		if (procTranSortCode == null)
 		{
-			procTranSortCode = PROC_TRAN_SORT_CODE.getInt(_byteBuffer);
+			procTranSortCode = PROC_TRAN_SORT_CODE.getInt(byteBuffer);
 		}
 		return procTranSortCode.intValue();
 	}
@@ -874,7 +865,7 @@ public class PROCTRAN
 		{
 			return;
 		}
-		PROC_TRAN_SORT_CODE.putInt(procTranSortCode, _byteBuffer);
+		PROC_TRAN_SORT_CODE.putInt(procTranSortCode, byteBuffer);
 		this.procTranSortCode = procTranSortCode;
 	}
 
@@ -882,7 +873,7 @@ public class PROCTRAN
 	{
 		if (procTranNumber == null)
 		{
-			procTranNumber = PROC_TRAN_NUMBER.getInt(_byteBuffer);
+			procTranNumber = PROC_TRAN_NUMBER.getInt(byteBuffer);
 		}
 		return procTranNumber.intValue();
 	}
@@ -893,95 +884,95 @@ public class PROCTRAN
 		{
 			return;
 		}
-		PROC_TRAN_NUMBER.putInt(procTranNumber, _byteBuffer);
+		PROC_TRAN_NUMBER.putInt(procTranNumber, byteBuffer);
 		this.procTranNumber = procTranNumber;
 	}
 
 	public int getProcTranDate()
 	{
-		return PROC_TRAN_DATE.getInt(_byteBuffer);
+		return PROC_TRAN_DATE.getInt(byteBuffer);
 	}
 
 	public void setProcTranDate(int procTranDate)
 	{
-		PROC_TRAN_DATE.putInt(procTranDate, _byteBuffer);
+		PROC_TRAN_DATE.putInt(procTranDate, byteBuffer);
 	}
 
 	public int getProcTranDateGrpYyyy()
 	{
-		return PROC_TRAN_DATE_GRP_YYYY.getInt(_byteBuffer);
+		return PROC_TRAN_DATE_GRP_YYYY.getInt(byteBuffer);
 	}
 
 	public void setProcTranDateGrpYyyy(int procTranDateGrpYyyy)
 	{
-		PROC_TRAN_DATE_GRP_YYYY.putInt(procTranDateGrpYyyy, _byteBuffer);
+		PROC_TRAN_DATE_GRP_YYYY.putInt(procTranDateGrpYyyy, byteBuffer);
 	}
 
 	public int getProcTranDateGrpMm()
 	{
-		return PROC_TRAN_DATE_GRP_MM.getInt(_byteBuffer);
+		return PROC_TRAN_DATE_GRP_MM.getInt(byteBuffer);
 	}
 
 	public void setProcTranDateGrpMm(int procTranDateGrpMm)
 	{
-		PROC_TRAN_DATE_GRP_MM.putInt(procTranDateGrpMm, _byteBuffer);
+		PROC_TRAN_DATE_GRP_MM.putInt(procTranDateGrpMm, byteBuffer);
 	}
 
 	public int getProcTranDateGrpDd()
 	{
-		return PROC_TRAN_DATE_GRP_DD.getInt(_byteBuffer);
+		return PROC_TRAN_DATE_GRP_DD.getInt(byteBuffer);
 	}
 
 	public void setProcTranDateGrpDd(int procTranDateGrpDd)
 	{
-		PROC_TRAN_DATE_GRP_DD.putInt(procTranDateGrpDd, _byteBuffer);
+		PROC_TRAN_DATE_GRP_DD.putInt(procTranDateGrpDd, byteBuffer);
 	}
 
 	public int getProcTranTime()
 	{
-		return PROC_TRAN_TIME.getInt(_byteBuffer);
+		return PROC_TRAN_TIME.getInt(byteBuffer);
 	}
 
 	public void setProcTranTime(int procTranTime)
 	{
-		PROC_TRAN_TIME.putInt(procTranTime, _byteBuffer);
+		PROC_TRAN_TIME.putInt(procTranTime, byteBuffer);
 	}
 
 	public int getProcTranTimeGrpHh()
 	{
-		return PROC_TRAN_TIME_GRP_HH.getInt(_byteBuffer);
+		return PROC_TRAN_TIME_GRP_HH.getInt(byteBuffer);
 	}
 
 	public void setProcTranTimeGrpHh(int procTranTimeGrpHh)
 	{
-		PROC_TRAN_TIME_GRP_HH.putInt(procTranTimeGrpHh, _byteBuffer);
+		PROC_TRAN_TIME_GRP_HH.putInt(procTranTimeGrpHh, byteBuffer);
 	}
 
 	public int getProcTranTimeGrpMm()
 	{
-		return PROC_TRAN_TIME_GRP_MM.getInt(_byteBuffer);
+		return PROC_TRAN_TIME_GRP_MM.getInt(byteBuffer);
 	}
 
 	public void setProcTranTimeGrpMm(int procTranTimeGrpMm)
 	{
-		PROC_TRAN_TIME_GRP_MM.putInt(procTranTimeGrpMm, _byteBuffer);
+		PROC_TRAN_TIME_GRP_MM.putInt(procTranTimeGrpMm, byteBuffer);
 	}
 
 	public int getProcTranTimeGrpSs()
 	{
-		return PROC_TRAN_TIME_GRP_SS.getInt(_byteBuffer);
+		return PROC_TRAN_TIME_GRP_SS.getInt(byteBuffer);
 	}
 
 	public void setProcTranTimeGrpSs(int procTranTimeGrpSs)
 	{
-		PROC_TRAN_TIME_GRP_SS.putInt(procTranTimeGrpSs, _byteBuffer);
+		PROC_TRAN_TIME_GRP_SS.putInt(procTranTimeGrpSs, byteBuffer);
 	}
 
 	public long getProcTranRef()
 	{
 		if (procTranRef == null)
 		{
-			procTranRef = PROC_TRAN_REF.getLong(_byteBuffer);
+			procTranRef = PROC_TRAN_REF.getLong(byteBuffer);
 		}
 		return procTranRef.longValue();
 	}
@@ -992,7 +983,7 @@ public class PROCTRAN
 		{
 			return;
 		}
-		PROC_TRAN_REF.putLong(procTranRef, _byteBuffer);
+		PROC_TRAN_REF.putLong(procTranRef, byteBuffer);
 		this.procTranRef = procTranRef;
 	}
 
@@ -1000,7 +991,7 @@ public class PROCTRAN
 	{
 		if (procTranType == null)
 		{
-			procTranType = PROC_TRAN_TYPE.getString(_byteBuffer);
+			procTranType = PROC_TRAN_TYPE.getString(byteBuffer);
 		}
 		return procTranType;
 	}
@@ -1011,7 +1002,7 @@ public class PROCTRAN
 		{
 			return;
 		}
-		PROC_TRAN_TYPE.putString(procTranType, _byteBuffer);
+		PROC_TRAN_TYPE.putString(procTranType, byteBuffer);
 		this.procTranType = procTranType;
 	}
 
@@ -1097,22 +1088,22 @@ public class PROCTRAN
 
 	public String getProcTranDesc()
 	{
-		return PROC_TRAN_DESC.getString(_byteBuffer);
+		return PROC_TRAN_DESC.getString(byteBuffer);
 	}
 
 	public void setProcTranDesc(String procTranDesc)
 	{
-		PROC_TRAN_DESC.putString(procTranDesc, _byteBuffer);
+		PROC_TRAN_DESC.putString(procTranDesc, byteBuffer);
 	}
 
 	public String getProcTranDescXfrHeader()
 	{
-		return PROC_TRAN_DESC_XFR_HEADER.getString(_byteBuffer);
+		return PROC_TRAN_DESC_XFR_HEADER.getString(byteBuffer);
 	}
 
 	public void setProcTranDescXfrHeader(String procTranDescXfrHeader)
 	{
-		PROC_TRAN_DESC_XFR_HEADER.putString(procTranDescXfrHeader, _byteBuffer);
+		PROC_TRAN_DESC_XFR_HEADER.putString(procTranDescXfrHeader, byteBuffer);
 	}
 
 	public boolean isProcTranDescXfrFlag()
@@ -1122,112 +1113,112 @@ public class PROCTRAN
 
 	public int getProcTranDescXfrSortcode()
 	{
-		return PROC_TRAN_DESC_XFR_SORTCODE.getInt(_byteBuffer);
+		return PROC_TRAN_DESC_XFR_SORTCODE.getInt(byteBuffer);
 	}
 
 	public void setProcTranDescXfrSortcode(int procTranDescXfrSortcode)
 	{
-		PROC_TRAN_DESC_XFR_SORTCODE.putInt(procTranDescXfrSortcode, _byteBuffer);
+		PROC_TRAN_DESC_XFR_SORTCODE.putInt(procTranDescXfrSortcode, byteBuffer);
 	}
 
 	public int getProcTranDescXfrAccount()
 	{
-		return PROC_TRAN_DESC_XFR_ACCOUNT.getInt(_byteBuffer);
+		return PROC_TRAN_DESC_XFR_ACCOUNT.getInt(byteBuffer);
 	}
 
 	public void setProcTranDescXfrAccount(int procTranDescXfrAccount)
 	{
-		PROC_TRAN_DESC_XFR_ACCOUNT.putInt(procTranDescXfrAccount, _byteBuffer);
+		PROC_TRAN_DESC_XFR_ACCOUNT.putInt(procTranDescXfrAccount, byteBuffer);
 	}
 
 	public long getProcDescDelaccCustomer()
 	{
-		return PROC_DESC_DELACC_CUSTOMER.getLong(_byteBuffer);
+		return PROC_DESC_DELACC_CUSTOMER.getLong(byteBuffer);
 	}
 
 	public void setProcDescDelaccCustomer(long procDescDelaccCustomer)
 	{
-		PROC_DESC_DELACC_CUSTOMER.putLong(procDescDelaccCustomer, _byteBuffer);
+		PROC_DESC_DELACC_CUSTOMER.putLong(procDescDelaccCustomer, byteBuffer);
 	}
 
 	public String getProcDescDelaccAcctype()
 	{
-		return PROC_DESC_DELACC_ACCTYPE.getString(_byteBuffer);
+		return PROC_DESC_DELACC_ACCTYPE.getString(byteBuffer);
 	}
 
 	public void setProcDescDelaccAcctype(String procDescDelaccAcctype)
 	{
-		PROC_DESC_DELACC_ACCTYPE.putString(procDescDelaccAcctype, _byteBuffer);
+		PROC_DESC_DELACC_ACCTYPE.putString(procDescDelaccAcctype, byteBuffer);
 	}
 
 	public int getProcDescDelaccLastDd()
 	{
-		return PROC_DESC_DELACC_LAST_DD.getInt(_byteBuffer);
+		return PROC_DESC_DELACC_LAST_DD.getInt(byteBuffer);
 	}
 
 	public void setProcDescDelaccLastDd(int procDescDelaccLastDd)
 	{
-		PROC_DESC_DELACC_LAST_DD.putInt(procDescDelaccLastDd, _byteBuffer);
+		PROC_DESC_DELACC_LAST_DD.putInt(procDescDelaccLastDd, byteBuffer);
 	}
 
 	public int getProcDescDelaccLastMm()
 	{
-		return PROC_DESC_DELACC_LAST_MM.getInt(_byteBuffer);
+		return PROC_DESC_DELACC_LAST_MM.getInt(byteBuffer);
 	}
 
 	public void setProcDescDelaccLastMm(int procDescDelaccLastMm)
 	{
-		PROC_DESC_DELACC_LAST_MM.putInt(procDescDelaccLastMm, _byteBuffer);
+		PROC_DESC_DELACC_LAST_MM.putInt(procDescDelaccLastMm, byteBuffer);
 	}
 
 	public int getProcDescDelaccLastYyyy()
 	{
-		return PROC_DESC_DELACC_LAST_YYYY.getInt(_byteBuffer);
+		return PROC_DESC_DELACC_LAST_YYYY.getInt(byteBuffer);
 	}
 
 	public void setProcDescDelaccLastYyyy(int procDescDelaccLastYyyy)
 	{
-		PROC_DESC_DELACC_LAST_YYYY.putInt(procDescDelaccLastYyyy, _byteBuffer);
+		PROC_DESC_DELACC_LAST_YYYY.putInt(procDescDelaccLastYyyy, byteBuffer);
 	}
 
 	public int getProcDescDelaccNextDd()
 	{
-		return PROC_DESC_DELACC_NEXT_DD.getInt(_byteBuffer);
+		return PROC_DESC_DELACC_NEXT_DD.getInt(byteBuffer);
 	}
 
 	public void setProcDescDelaccNextDd(int procDescDelaccNextDd)
 	{
-		PROC_DESC_DELACC_NEXT_DD.putInt(procDescDelaccNextDd, _byteBuffer);
+		PROC_DESC_DELACC_NEXT_DD.putInt(procDescDelaccNextDd, byteBuffer);
 	}
 
 	public int getProcDescDelaccNextMm()
 	{
-		return PROC_DESC_DELACC_NEXT_MM.getInt(_byteBuffer);
+		return PROC_DESC_DELACC_NEXT_MM.getInt(byteBuffer);
 	}
 
 	public void setProcDescDelaccNextMm(int procDescDelaccNextMm)
 	{
-		PROC_DESC_DELACC_NEXT_MM.putInt(procDescDelaccNextMm, _byteBuffer);
+		PROC_DESC_DELACC_NEXT_MM.putInt(procDescDelaccNextMm, byteBuffer);
 	}
 
 	public int getProcDescDelaccNextYyyy()
 	{
-		return PROC_DESC_DELACC_NEXT_YYYY.getInt(_byteBuffer);
+		return PROC_DESC_DELACC_NEXT_YYYY.getInt(byteBuffer);
 	}
 
 	public void setProcDescDelaccNextYyyy(int procDescDelaccNextYyyy)
 	{
-		PROC_DESC_DELACC_NEXT_YYYY.putInt(procDescDelaccNextYyyy, _byteBuffer);
+		PROC_DESC_DELACC_NEXT_YYYY.putInt(procDescDelaccNextYyyy, byteBuffer);
 	}
 
 	public String getProcDescDelaccFooter()
 	{
-		return PROC_DESC_DELACC_FOOTER.getString(_byteBuffer);
+		return PROC_DESC_DELACC_FOOTER.getString(byteBuffer);
 	}
 
 	public void setProcDescDelaccFooter(String procDescDelaccFooter)
 	{
-		PROC_DESC_DELACC_FOOTER.putString(procDescDelaccFooter, _byteBuffer);
+		PROC_DESC_DELACC_FOOTER.putString(procDescDelaccFooter, byteBuffer);
 	}
 
 	public boolean isProcDescDelaccFlag()
@@ -1237,92 +1228,92 @@ public class PROCTRAN
 
 	public long getProcDescCreaccCustomer()
 	{
-		return PROC_DESC_CREACC_CUSTOMER.getLong(_byteBuffer);
+		return PROC_DESC_CREACC_CUSTOMER.getLong(byteBuffer);
 	}
 
 	public void setProcDescCreaccCustomer(long procDescCreaccCustomer)
 	{
-		PROC_DESC_CREACC_CUSTOMER.putLong(procDescCreaccCustomer, _byteBuffer);
+		PROC_DESC_CREACC_CUSTOMER.putLong(procDescCreaccCustomer, byteBuffer);
 	}
 
 	public String getProcDescCreaccAcctype()
 	{
-		return PROC_DESC_CREACC_ACCTYPE.getString(_byteBuffer);
+		return PROC_DESC_CREACC_ACCTYPE.getString(byteBuffer);
 	}
 
 	public void setProcDescCreaccAcctype(String procDescCreaccAcctype)
 	{
-		PROC_DESC_CREACC_ACCTYPE.putString(procDescCreaccAcctype, _byteBuffer);
+		PROC_DESC_CREACC_ACCTYPE.putString(procDescCreaccAcctype, byteBuffer);
 	}
 
 	public int getProcDescCreaccLastDd()
 	{
-		return PROC_DESC_CREACC_LAST_DD.getInt(_byteBuffer);
+		return PROC_DESC_CREACC_LAST_DD.getInt(byteBuffer);
 	}
 
 	public void setProcDescCreaccLastDd(int procDescCreaccLastDd)
 	{
-		PROC_DESC_CREACC_LAST_DD.putInt(procDescCreaccLastDd, _byteBuffer);
+		PROC_DESC_CREACC_LAST_DD.putInt(procDescCreaccLastDd, byteBuffer);
 	}
 
 	public int getProcDescCreaccLastMm()
 	{
-		return PROC_DESC_CREACC_LAST_MM.getInt(_byteBuffer);
+		return PROC_DESC_CREACC_LAST_MM.getInt(byteBuffer);
 	}
 
 	public void setProcDescCreaccLastMm(int procDescCreaccLastMm)
 	{
-		PROC_DESC_CREACC_LAST_MM.putInt(procDescCreaccLastMm, _byteBuffer);
+		PROC_DESC_CREACC_LAST_MM.putInt(procDescCreaccLastMm, byteBuffer);
 	}
 
 	public int getProcDescCreaccLastYyyy()
 	{
-		return PROC_DESC_CREACC_LAST_YYYY.getInt(_byteBuffer);
+		return PROC_DESC_CREACC_LAST_YYYY.getInt(byteBuffer);
 	}
 
 	public void setProcDescCreaccLastYyyy(int procDescCreaccLastYyyy)
 	{
-		PROC_DESC_CREACC_LAST_YYYY.putInt(procDescCreaccLastYyyy, _byteBuffer);
+		PROC_DESC_CREACC_LAST_YYYY.putInt(procDescCreaccLastYyyy, byteBuffer);
 	}
 
 	public int getProcDescCreaccNextDd()
 	{
-		return PROC_DESC_CREACC_NEXT_DD.getInt(_byteBuffer);
+		return PROC_DESC_CREACC_NEXT_DD.getInt(byteBuffer);
 	}
 
 	public void setProcDescCreaccNextDd(int procDescCreaccNextDd)
 	{
-		PROC_DESC_CREACC_NEXT_DD.putInt(procDescCreaccNextDd, _byteBuffer);
+		PROC_DESC_CREACC_NEXT_DD.putInt(procDescCreaccNextDd, byteBuffer);
 	}
 
 	public int getProcDescCreaccNextMm()
 	{
-		return PROC_DESC_CREACC_NEXT_MM.getInt(_byteBuffer);
+		return PROC_DESC_CREACC_NEXT_MM.getInt(byteBuffer);
 	}
 
 	public void setProcDescCreaccNextMm(int procDescCreaccNextMm)
 	{
-		PROC_DESC_CREACC_NEXT_MM.putInt(procDescCreaccNextMm, _byteBuffer);
+		PROC_DESC_CREACC_NEXT_MM.putInt(procDescCreaccNextMm, byteBuffer);
 	}
 
 	public int getProcDescCreaccNextYyyy()
 	{
-		return PROC_DESC_CREACC_NEXT_YYYY.getInt(_byteBuffer);
+		return PROC_DESC_CREACC_NEXT_YYYY.getInt(byteBuffer);
 	}
 
 	public void setProcDescCreaccNextYyyy(int procDescCreaccNextYyyy)
 	{
-		PROC_DESC_CREACC_NEXT_YYYY.putInt(procDescCreaccNextYyyy, _byteBuffer);
+		PROC_DESC_CREACC_NEXT_YYYY.putInt(procDescCreaccNextYyyy, byteBuffer);
 	}
 
 	public String getProcDescCreaccFooter()
 	{
-		return PROC_DESC_CREACC_FOOTER.getString(_byteBuffer);
+		return PROC_DESC_CREACC_FOOTER.getString(byteBuffer);
 	}
 
 	public void setProcDescCreaccFooter(String procDescCreaccFooter)
 	{
-		PROC_DESC_CREACC_FOOTER.putString(procDescCreaccFooter, _byteBuffer);
+		PROC_DESC_CREACC_FOOTER.putString(procDescCreaccFooter, byteBuffer);
 	}
 
 	public boolean isProcDescCreaccFlag()
@@ -1332,52 +1323,52 @@ public class PROCTRAN
 
 	public int getProcDescDelcusSortcode()
 	{
-		return PROC_DESC_DELCUS_SORTCODE.getInt(_byteBuffer);
+		return PROC_DESC_DELCUS_SORTCODE.getInt(byteBuffer);
 	}
 
 	public void setProcDescDelcusSortcode(int procDescDelcusSortcode)
 	{
-		PROC_DESC_DELCUS_SORTCODE.putInt(procDescDelcusSortcode, _byteBuffer);
+		PROC_DESC_DELCUS_SORTCODE.putInt(procDescDelcusSortcode, byteBuffer);
 	}
 
 	public long getProcDescDelcusCustomer()
 	{
-		return PROC_DESC_DELCUS_CUSTOMER.getLong(_byteBuffer);
+		return PROC_DESC_DELCUS_CUSTOMER.getLong(byteBuffer);
 	}
 
 	public void setProcDescDelcusCustomer(long procDescDelcusCustomer)
 	{
-		PROC_DESC_DELCUS_CUSTOMER.putLong(procDescDelcusCustomer, _byteBuffer);
+		PROC_DESC_DELCUS_CUSTOMER.putLong(procDescDelcusCustomer, byteBuffer);
 	}
 
 	public String getProcDescDelcusName()
 	{
-		return PROC_DESC_DELCUS_NAME.getString(_byteBuffer);
+		return PROC_DESC_DELCUS_NAME.getString(byteBuffer);
 	}
 
 	public void setProcDescDelcusName(String procDescDelcusName)
 	{
-		PROC_DESC_DELCUS_NAME.putString(procDescDelcusName, _byteBuffer);
+		PROC_DESC_DELCUS_NAME.putString(procDescDelcusName, byteBuffer);
 	}
 
 	public int getProcDescDelcusDobYyyy()
 	{
-		return PROC_DESC_DELCUS_DOB_YYYY.getInt(_byteBuffer);
+		return PROC_DESC_DELCUS_DOB_YYYY.getInt(byteBuffer);
 	}
 
 	public void setProcDescDelcusDobYyyy(int procDescDelcusDobYyyy)
 	{
-		PROC_DESC_DELCUS_DOB_YYYY.putInt(procDescDelcusDobYyyy, _byteBuffer);
+		PROC_DESC_DELCUS_DOB_YYYY.putInt(procDescDelcusDobYyyy, byteBuffer);
 	}
 
 	public String getProcDescDelcusFiller()
 	{
-		return PROC_DESC_DELCUS_FILLER.getString(_byteBuffer);
+		return PROC_DESC_DELCUS_FILLER.getString(byteBuffer);
 	}
 
 	public void setProcDescDelcusFiller(String procDescDelcusFiller)
 	{
-		PROC_DESC_DELCUS_FILLER.putString(procDescDelcusFiller, _byteBuffer);
+		PROC_DESC_DELCUS_FILLER.putString(procDescDelcusFiller, byteBuffer);
 	}
 
 	public boolean isProcDescDelcusFillerSet()
@@ -1387,22 +1378,22 @@ public class PROCTRAN
 
 	public int getProcDescDelcusDobMm()
 	{
-		return PROC_DESC_DELCUS_DOB_MM.getInt(_byteBuffer);
+		return PROC_DESC_DELCUS_DOB_MM.getInt(byteBuffer);
 	}
 
 	public void setProcDescDelcusDobMm(int procDescDelcusDobMm)
 	{
-		PROC_DESC_DELCUS_DOB_MM.putInt(procDescDelcusDobMm, _byteBuffer);
+		PROC_DESC_DELCUS_DOB_MM.putInt(procDescDelcusDobMm, byteBuffer);
 	}
 
 	public String getProcDescDelcusFiller2()
 	{
-		return PROC_DESC_DELCUS_FILLER2.getString(_byteBuffer);
+		return PROC_DESC_DELCUS_FILLER2.getString(byteBuffer);
 	}
 
 	public void setProcDescDelcusFiller2(String procDescDelcusFiller2)
 	{
-		PROC_DESC_DELCUS_FILLER2.putString(procDescDelcusFiller2, _byteBuffer);
+		PROC_DESC_DELCUS_FILLER2.putString(procDescDelcusFiller2, byteBuffer);
 	}
 
 	public boolean isProcDescDelcusFiller2Set()
@@ -1412,62 +1403,62 @@ public class PROCTRAN
 
 	public int getProcDescDelcusDobDd()
 	{
-		return PROC_DESC_DELCUS_DOB_DD.getInt(_byteBuffer);
+		return PROC_DESC_DELCUS_DOB_DD.getInt(byteBuffer);
 	}
 
 	public void setProcDescDelcusDobDd(int procDescDelcusDobDd)
 	{
-		PROC_DESC_DELCUS_DOB_DD.putInt(procDescDelcusDobDd, _byteBuffer);
+		PROC_DESC_DELCUS_DOB_DD.putInt(procDescDelcusDobDd, byteBuffer);
 	}
 
 	public int getProcDescCrecusSortcode()
 	{
-		return PROC_DESC_CRECUS_SORTCODE.getInt(_byteBuffer);
+		return PROC_DESC_CRECUS_SORTCODE.getInt(byteBuffer);
 	}
 
 	public void setProcDescCrecusSortcode(int procDescCrecusSortcode)
 	{
-		PROC_DESC_CRECUS_SORTCODE.putInt(procDescCrecusSortcode, _byteBuffer);
+		PROC_DESC_CRECUS_SORTCODE.putInt(procDescCrecusSortcode, byteBuffer);
 	}
 
 	public long getProcDescCrecusCustomer()
 	{
-		return PROC_DESC_CRECUS_CUSTOMER.getLong(_byteBuffer);
+		return PROC_DESC_CRECUS_CUSTOMER.getLong(byteBuffer);
 	}
 
 	public void setProcDescCrecusCustomer(long procDescCrecusCustomer)
 	{
-		PROC_DESC_CRECUS_CUSTOMER.putLong(procDescCrecusCustomer, _byteBuffer);
+		PROC_DESC_CRECUS_CUSTOMER.putLong(procDescCrecusCustomer, byteBuffer);
 	}
 
 	public String getProcDescCrecusName()
 	{
-		return PROC_DESC_CRECUS_NAME.getString(_byteBuffer);
+		return PROC_DESC_CRECUS_NAME.getString(byteBuffer);
 	}
 
 	public void setProcDescCrecusName(String procDescCrecusName)
 	{
-		PROC_DESC_CRECUS_NAME.putString(procDescCrecusName, _byteBuffer);
+		PROC_DESC_CRECUS_NAME.putString(procDescCrecusName, byteBuffer);
 	}
 
 	public int getProcDescCrecusDobYyyy()
 	{
-		return PROC_DESC_CRECUS_DOB_YYYY.getInt(_byteBuffer);
+		return PROC_DESC_CRECUS_DOB_YYYY.getInt(byteBuffer);
 	}
 
 	public void setProcDescCrecusDobYyyy(int procDescCrecusDobYyyy)
 	{
-		PROC_DESC_CRECUS_DOB_YYYY.putInt(procDescCrecusDobYyyy, _byteBuffer);
+		PROC_DESC_CRECUS_DOB_YYYY.putInt(procDescCrecusDobYyyy, byteBuffer);
 	}
 
 	public String getProcDescCrecusFiller()
 	{
-		return PROC_DESC_CRECUS_FILLER.getString(_byteBuffer);
+		return PROC_DESC_CRECUS_FILLER.getString(byteBuffer);
 	}
 
 	public void setProcDescCrecusFiller(String procDescCrecusFiller)
 	{
-		PROC_DESC_CRECUS_FILLER.putString(procDescCrecusFiller, _byteBuffer);
+		PROC_DESC_CRECUS_FILLER.putString(procDescCrecusFiller, byteBuffer);
 	}
 
 	public boolean isProcDescCrecusFillerSet()
@@ -1477,22 +1468,22 @@ public class PROCTRAN
 
 	public int getProcDescCrecusDobMm()
 	{
-		return PROC_DESC_CRECUS_DOB_MM.getInt(_byteBuffer);
+		return PROC_DESC_CRECUS_DOB_MM.getInt(byteBuffer);
 	}
 
 	public void setProcDescCrecusDobMm(int procDescCrecusDobMm)
 	{
-		PROC_DESC_CRECUS_DOB_MM.putInt(procDescCrecusDobMm, _byteBuffer);
+		PROC_DESC_CRECUS_DOB_MM.putInt(procDescCrecusDobMm, byteBuffer);
 	}
 
 	public String getProcDescCrecusFiller2()
 	{
-		return PROC_DESC_CRECUS_FILLER2.getString(_byteBuffer);
+		return PROC_DESC_CRECUS_FILLER2.getString(byteBuffer);
 	}
 
 	public void setProcDescCrecusFiller2(String procDescCrecusFiller2)
 	{
-		PROC_DESC_CRECUS_FILLER2.putString(procDescCrecusFiller2, _byteBuffer);
+		PROC_DESC_CRECUS_FILLER2.putString(procDescCrecusFiller2, byteBuffer);
 	}
 
 	public boolean isProcDescCrecusFiller2Set()
@@ -1502,19 +1493,19 @@ public class PROCTRAN
 
 	public int getProcDescCrecusDobDd()
 	{
-		return PROC_DESC_CRECUS_DOB_DD.getInt(_byteBuffer);
+		return PROC_DESC_CRECUS_DOB_DD.getInt(byteBuffer);
 	}
 
 	public void setProcDescCrecusDobDd(int procDescCrecusDobDd)
 	{
-		PROC_DESC_CRECUS_DOB_DD.putInt(procDescCrecusDobDd, _byteBuffer);
+		PROC_DESC_CRECUS_DOB_DD.putInt(procDescCrecusDobDd, byteBuffer);
 	}
 
 	public BigDecimal getProcTranAmount()
 	{
 		if (procTranAmount == null)
 		{
-			procTranAmount = PROC_TRAN_AMOUNT.getBigDecimal(_byteBuffer);
+			procTranAmount = PROC_TRAN_AMOUNT.getBigDecimal(byteBuffer);
 		}
 		return procTranAmount;
 	}
@@ -1525,7 +1516,7 @@ public class PROCTRAN
 		{
 			return;
 		}
-		PROC_TRAN_AMOUNT.putBigDecimal(procTranAmount, _byteBuffer);
+		PROC_TRAN_AMOUNT.putBigDecimal(procTranAmount, byteBuffer);
 		this.procTranAmount = procTranAmount;
 	}
 

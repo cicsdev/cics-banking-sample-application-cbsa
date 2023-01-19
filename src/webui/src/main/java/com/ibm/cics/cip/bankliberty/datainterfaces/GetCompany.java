@@ -40,7 +40,7 @@ public class GetCompany
 	       06 company-name pic x(40).
 	 * </pre>
 	 */
-	protected static StringField COMPANY_NAME = factory.getStringField(40);
+	protected static StringField companyName = factory.getStringField(40);
 
 	protected byte[] byteBuffer;
 
@@ -61,12 +61,12 @@ public class GetCompany
 
 	public String getCompanyName()
 	{
-		return COMPANY_NAME.getString(byteBuffer);
+		return companyName.getString(byteBuffer);
 	}
 
-	public void setCompanyName(String companyName)
+	public void setCompanyName(String companyNameIn)
 	{
-		COMPANY_NAME.putString(companyName, byteBuffer);
+		companyName.putString(companyNameIn, byteBuffer);
 	}
 
 }

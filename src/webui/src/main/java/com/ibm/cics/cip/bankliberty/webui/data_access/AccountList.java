@@ -6,6 +6,7 @@
 package com.ibm.cics.cip.bankliberty.webui.data_access;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
@@ -19,7 +20,6 @@ import javax.ws.rs.core.Response;
 
 import com.ibm.cics.cip.bankliberty.api.json.AccountsResource;
 import com.ibm.cics.cip.bankliberty.api.json.SortCodeResource;
-import com.ibm.cics.cip.bankliberty.webui.data_access.Account;
 import com.ibm.json.java.JSONArray;
 import com.ibm.json.java.JSONObject;
 
@@ -30,7 +30,7 @@ public class AccountList
 
 	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.webui.dataAccess");
 
-	private List<Account> accountList = new ArrayList<Account>();
+	private List<Account> accountList = new ArrayList<>();
 	private static String sortcode;
 	private int count;
 	private static final String JSON_NUMBER_OF_ACCOUNTS = "numberOfAccounts";
@@ -73,7 +73,7 @@ public class AccountList
 				// AND ACCOUNT_AVAILABLE_BALANCE <= 33558.0
 
 				String operator = filter.substring(31, 32);
-				BigDecimal balance = BigDecimal.valueOf(new Double(filter.substring(34)));
+				BigDecimal balance = BigDecimal.valueOf(Double.parseDouble(filter.substring(34)));
 
 				myAccountsResponse = myAccountsResource.getAccountsByBalanceWithOffsetAndLimitExternal(balance,
 						operator, null, null, true);
@@ -87,7 +87,7 @@ public class AccountList
 				{
 					accountNumberFilter = accountNumberFilter.substring(0, accountNumberFilter.indexOf(' '));
 				}
-				Long accountNumberFilterLong = new Long(accountNumberFilter);
+				Long accountNumberFilterLong = Long.parseLong(accountNumberFilter);
 				myAccountsResponse = myAccountsResource.getAccountExternal(accountNumberFilterLong);
 			}
 
@@ -95,7 +95,7 @@ public class AccountList
 			{
 				// ("We are filtering by account_customer_number!");
 				String customerNumberFilter = filter.substring(31);
-				Long customerNumber = new Long(customerNumberFilter);
+				Long customerNumber = Long.parseLong(customerNumberFilter);
 
 				myAccountsResponse = myAccountsResource.getAccountsByCustomerExternal(customerNumber, true);
 
@@ -125,7 +125,7 @@ public class AccountList
 
 	}
 
-	public void doGet(int limit, int offset, String filter) throws ServletException, IOException
+	public void doGet(int limit, int offset, String filter) throws IOException
 	{
 
 		AccountsResource myAccountsResource = new AccountsResource();
@@ -141,7 +141,7 @@ public class AccountList
 			{
 				this.accountList.clear();
 				String operator = filter.substring(31, 32);
-				BigDecimal balance = BigDecimal.valueOf(new Double(filter.substring(34)));
+				BigDecimal balance = BigDecimal.valueOf(Double.parseDouble(filter.substring(34)));
 
 				myAccountsResponse = myAccountsResource.getAccountsByBalanceWithOffsetAndLimitExternal(balance,
 						operator, offset, limit, false);
@@ -152,7 +152,7 @@ public class AccountList
 				this.accountList.clear();
 
 				String accountNumberFilter = filter.substring(22);
-				Long accountNumberFilterLong = new Long(accountNumberFilter);
+				Long accountNumberFilterLong = Long.parseLong(accountNumberFilter);
 
 				myAccountsResponse = myAccountsResource.getAccountExternal(accountNumberFilterLong);
 			}
@@ -162,7 +162,7 @@ public class AccountList
 			{
 				this.accountList.clear();
 				String customerNumberFilter = filter.substring(31);
-				Long customerNumber = new Long(customerNumberFilter);
+				Long customerNumber = Long.parseLong(customerNumberFilter);
 
 				myAccountsResponse = myAccountsResource.getAccountsByCustomerExternal(customerNumber, false);
 			}
@@ -198,11 +198,11 @@ public class AccountList
 					String id = (String) myAccount.get(JSON_ID);
 					String customerNumberString = (String) myAccount.get(JSON_CUSTOMER_NUMBER);
 
-					BigDecimal actual_balance = BigDecimal.valueOf((Double) myAccount.get(JSON_ACTUAL_BALANCE))
+					BigDecimal actualBalance = BigDecimal.valueOf((Double) myAccount.get(JSON_ACTUAL_BALANCE))
 							.setScale(2, RoundingMode.HALF_UP);
-					BigDecimal available_balance = BigDecimal.valueOf((Double) myAccount.get(JSON_AVAILABLE_BALANCE))
+					BigDecimal availableBalance = BigDecimal.valueOf((Double) myAccount.get(JSON_AVAILABLE_BALANCE))
 							.setScale(2, RoundingMode.HALF_UP);
-					BigDecimal interest_rate = BigDecimal.valueOf((Double) myAccount.get(JSON_INTEREST_RATE))
+					BigDecimal interestRate = BigDecimal.valueOf((Double) myAccount.get(JSON_INTEREST_RATE))
 							.setScale(2, RoundingMode.HALF_UP);
 					Long overdraft = (Long) myAccount.get(JSON_OVERDRAFT);
 					String sortCode = (String) myAccount.get(JSON_SORT_CODE);
@@ -210,10 +210,10 @@ public class AccountList
 
 					Account myListAccount = new Account();
 					myListAccount.setAccountNumber(id);
-					myListAccount.setActualBalance(actual_balance.setScale(2, RoundingMode.HALF_UP));
-					myListAccount.setAvailableBalance(available_balance.setScale(2, RoundingMode.HALF_UP));
+					myListAccount.setActualBalance(actualBalance.setScale(2, RoundingMode.HALF_UP));
+					myListAccount.setAvailableBalance(availableBalance.setScale(2, RoundingMode.HALF_UP));
 					myListAccount.setCustomerNumber(customerNumberString);
-					myListAccount.setInterestRate(interest_rate.setScale(2, RoundingMode.HALF_UP));
+					myListAccount.setInterestRate(interestRate.setScale(2, RoundingMode.HALF_UP));
 					myListAccount.setLastStatement(lastStatement);
 					myListAccount.setNextStatement(nextStatement);
 					myListAccount.setOpened(dateOpened);
@@ -270,7 +270,7 @@ public class AccountList
 		return accountList;
 	}
 
-	@SuppressWarnings("deprecation")
+	
 	private Date sortOutDate(String dateString)
 	{
 		String[] dateArray = dateString.split("-");
@@ -279,8 +279,13 @@ public class AccountList
 		Integer month = new Integer(dateArray[1]);
 		Integer day = new Integer(dateArray[2]);
 
-		Date sortedOutDate = new Date(year.intValue() - 1900, month.intValue() - 1, day.intValue());
-		return sortedOutDate;
+		Calendar myCalendar = Calendar.getInstance();
+		myCalendar.set(Calendar.YEAR, year);
+		myCalendar.set(Calendar.MONTH, month-1);
+		myCalendar.set(Calendar.DATE, day);
+				
+		return new Date(myCalendar.getTimeInMillis());
+
 	}
 
 	private static void sortOutLogging()

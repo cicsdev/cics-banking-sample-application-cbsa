@@ -229,5 +229,9 @@ public class Welcome extends VerticalLayout
 			logger.severe(e.toString());
 		}
 	}
+	public boolean equals(Object obj)
+	{
+		return super.equals(obj);
+	}
 
 }

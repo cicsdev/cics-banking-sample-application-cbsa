@@ -14,13 +14,10 @@ import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-import javax.servlet.ServletException;
-
 import javax.ws.rs.core.Response;
 
 import com.ibm.cics.cip.bankliberty.api.json.CustomerResource;
 import com.ibm.cics.cip.bankliberty.api.json.SortCodeResource;
-import com.ibm.cics.cip.bankliberty.webui.data_access.Customer;
 import com.ibm.json.java.JSONArray;
 import com.ibm.json.java.JSONObject;
 
@@ -31,7 +28,7 @@ public class CustomerList
 
 	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.webui.dataAccess");
 
-	private List<Customer> customerList = new ArrayList<Customer>();
+	private List<Customer> customerList = new ArrayList<>();
 
 	private static String sortcode = null;
 	private int count;
@@ -83,7 +80,7 @@ public class CustomerList
 			if (filter.startsWith(" AND CUSTOMER_NUMBER = "))
 			{
 				String customerNumberFilter = filter.substring(23);
-				Long customerNumber = new Long(customerNumberFilter);
+				Long customerNumber = Long.parseLong(customerNumberFilter);
 
 				myCustomerResponse = myCustomerResource.getCustomerExternal(customerNumber);
 				String myCustomersString = myCustomerResponse.getEntity().toString();
@@ -92,7 +89,6 @@ public class CustomerList
 				if (myCustomerResponse.getStatus() == 200)
 				{
 					myCustomerJSON = JSONObject.parse(myCustomersString);
-					Date myDate = sortOutDate((String) myCustomerJSON.get(JSON_DATE_OF_BIRTH));
 					String id = (String) myCustomerJSON.get(JSON_ID);
 					if (id != null)
 					{
@@ -104,7 +100,7 @@ public class CustomerList
 			if (filter.length() == 0)
 			{
 
-				myCustomerResponse = myCustomerResource.getCustomersExternal(new Integer(250000), new Integer(0), true);
+				myCustomerResponse = myCustomerResource.getCustomersExternal(250000,0, true);
 				String myCustomersString = myCustomerResponse.getEntity().toString();
 				if (myCustomerResponse.getStatus() == 200)
 				{
@@ -127,7 +123,7 @@ public class CustomerList
 
 	}
 
-	public void doGet(int limit, int offset, String filter) throws ServletException, IOException
+	public void doGet(int limit, int offset, String filter) throws IOException
 	{
 
 		CustomerResource myCustomerResource = new CustomerResource();
@@ -149,7 +145,7 @@ public class CustomerList
 
 				this.customerList.clear();
 				String customerNumberFilter = filter.substring(23);
-				Long customerNumber = new Long(customerNumberFilter);
+				Long customerNumber = Long.parseLong(customerNumberFilter);
 
 				myCustomerResponse = myCustomerResource.getCustomerExternal(customerNumber);
 			}
@@ -213,17 +209,16 @@ public class CustomerList
 	{
 		String[] dateArray = dateString.split("-");
 
-		Integer year = new Integer(dateArray[0]);
-		Integer month = new Integer(dateArray[1]);
-		Integer day = new Integer(dateArray[2]);
+		Integer year = Integer.parseInt(dateArray[0]);
+		Integer month = Integer.parseInt(dateArray[1]);
+		Integer day = Integer.parseInt(dateArray[2]);
 
 		Calendar myCalendar = Calendar.getInstance();
 		myCalendar.set(Calendar.YEAR, year);
 		myCalendar.set(Calendar.MONTH, month - 1);
 		myCalendar.set(Calendar.DATE, day);
 
-		Date myDate = new Date(myCalendar.getTimeInMillis());
-		return myDate;
+		return new Date(myCalendar.getTimeInMillis());
 	}
 
 	public Customer getCustomer(int i)

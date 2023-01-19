@@ -137,7 +137,7 @@ public class CustomerResource
 			return myResponse;
 		}
 
-		response.put(JSON_ID, vsamCustomer.getCustomer_number());
+		response.put(JSON_ID, vsamCustomer.getCustomerNumber());
 		response.put(JSON_SORT_CODE, sortcode);
 		response.put(JSON_CUSTOMER_NAME, customer.getCustomerName());
 		response.put(JSON_CUSTOMER_ADDRESS, customer.getCustomerAddress());
@@ -150,7 +150,7 @@ public class CustomerResource
 		myCreatedCustomer.setCustomerDOB(vsamCustomer.getDob());
 		myCreatedCustomer.setCustomerName(vsamCustomer.getName());
 		myCreatedCustomer.setSortCode(vsamCustomer.getSortcode());
-		myCreatedCustomer.setCustomerNumber(vsamCustomer.getCustomer_number());
+		myCreatedCustomer.setCustomerNumber(vsamCustomer.getCustomerNumber());
 
 		Response writeCreateCustomerResponse = myProcessedTransactionResource
 				.writeCreateCustomerInternal(myCreatedCustomer);
@@ -230,7 +230,7 @@ public class CustomerResource
 		vsamCustomer = vsamCustomer.updateCustomer(customer);
 		if (vsamCustomer != null)
 		{
-			if (vsamCustomer.isNot_found())
+			if (vsamCustomer.isNotFound())
 			{
 				JSONObject error = new JSONObject();
 				error.put(JSON_ERROR_MSG, CUSTOMER_PREFIX + id.toString() + " not found.");
@@ -240,7 +240,7 @@ public class CustomerResource
 				logger.exiting(this.getClass().getName(), "updateCustomerInternal() exiting", myResponse);
 				return myResponse;
 			}
-			response.put(JSON_ID, vsamCustomer.getCustomer_number());
+			response.put(JSON_ID, vsamCustomer.getCustomerNumber());
 			response.put(JSON_SORT_CODE, vsamCustomer.getSortcode().trim());
 			response.put(JSON_CUSTOMER_NAME, vsamCustomer.getName().trim());
 			response.put(JSON_CUSTOMER_ADDRESS, vsamCustomer.getAddress().trim());
@@ -312,7 +312,7 @@ public class CustomerResource
 		if (vsamCustomer != null)
 		{
 			response.put(JSON_SORT_CODE, vsamCustomer.getSortcode().trim());
-			response.put(JSON_ID, vsamCustomer.getCustomer_number().trim());
+			response.put(JSON_ID, vsamCustomer.getCustomerNumber().trim());
 			response.put(JSON_CUSTOMER_NAME, vsamCustomer.getName().trim());
 			response.put(JSON_CUSTOMER_ADDRESS, vsamCustomer.getAddress().trim());
 			response.put(JSON_DATE_OF_BIRTH, vsamCustomer.getDob().toString());
@@ -429,7 +429,7 @@ public class CustomerResource
 
 		vsamCustomer = vsamCustomer.deleteCustomer(id, sortCode);
 
-		if (vsamCustomer.isNot_found())
+		if (vsamCustomer.isNotFound())
 		{
 			response.put(JSON_ERROR_MSG, CUSTOMER_PREFIX + id + NOT_FOUND_MSG);
 			Response myResponse = Response.status(404).entity(response.toString()).build();
@@ -438,7 +438,7 @@ public class CustomerResource
 			return myResponse;
 		}
 		response.put(JSON_SORT_CODE, vsamCustomer.getSortcode().trim());
-		response.put(JSON_ID, vsamCustomer.getCustomer_number().trim());
+		response.put(JSON_ID, vsamCustomer.getCustomerNumber().trim());
 		response.put(JSON_CUSTOMER_NAME, vsamCustomer.getName().trim());
 		response.put(JSON_CUSTOMER_ADDRESS, vsamCustomer.getAddress().trim());
 
@@ -454,7 +454,7 @@ public class CustomerResource
 		myDeletedCustomer.setCustomerDOB(vsamCustomer.getDob());
 		myDeletedCustomer.setCustomerName(vsamCustomer.getName());
 		myDeletedCustomer.setSortCode(vsamCustomer.getSortcode());
-		myDeletedCustomer.setCustomerNumber(vsamCustomer.getCustomer_number());
+		myDeletedCustomer.setCustomerNumber(vsamCustomer.getCustomerNumber());
 
 		Response writeDeleteCustomerResponse = myProcessedTransactionResource
 				.writeDeleteCustomerInternal(myDeletedCustomer);
@@ -511,7 +511,7 @@ public class CustomerResource
 
 		for (int i = 0; i < vsamCustomers.length; i++)
 		{
-			response.put(JSON_ID, vsamCustomers[i].getCustomer_number().trim());
+			response.put(JSON_ID, vsamCustomers[i].getCustomerNumber().trim());
 			response.put(JSON_CUSTOMER_NAME, vsamCustomers[i].getName().trim());
 			response.put(JSON_CUSTOMER_ADDRESS, vsamCustomers[i].getAddress().trim());
 
@@ -567,7 +567,7 @@ public class CustomerResource
 
 		for (int i = 0; i < vsamCustomers.length; i++)
 		{
-			response.put(JSON_ID, vsamCustomers[i].getCustomer_number().trim());
+			response.put(JSON_ID, vsamCustomers[i].getCustomerNumber().trim());
 			response.put(JSON_CUSTOMER_NAME, vsamCustomers[i].getName().trim());
 			response.put(JSON_CUSTOMER_ADDRESS, vsamCustomers[i].getAddress().trim());
 
@@ -622,7 +622,7 @@ public class CustomerResource
 
 		for (int i = 0; i < vsamCustomers.length; i++)
 		{
-			response.put(JSON_ID, vsamCustomers[i].getCustomer_number().trim());
+			response.put(JSON_ID, vsamCustomers[i].getCustomerNumber().trim());
 			response.put(JSON_CUSTOMER_NAME, vsamCustomers[i].getName().trim());
 			response.put(JSON_CUSTOMER_ADDRESS, vsamCustomers[i].getAddress().trim());
 
@@ -729,7 +729,7 @@ public class CustomerResource
 					JSONObject customer = new JSONObject();
 					customer.put(JSON_SORT_CODE, myCustomers[i].getSortcode().trim());
 					customer.put(JSON_CUSTOMER_NAME, myCustomers[i].getName().trim());
-					customer.put(JSON_ID, myCustomers[i].getCustomer_number().trim());
+					customer.put(JSON_ID, myCustomers[i].getCustomerNumber().trim());
 					customer.put(JSON_CUSTOMER_ADDRESS, myCustomers[i].getAddress().trim());
 					customer.put(JSON_DATE_OF_BIRTH, myCustomers[i].getDob().toString());
 					customer.put(JSON_CUSTOMER_CREDIT_SCORE, myCustomers[i].getCreditScore().trim());
@@ -834,7 +834,7 @@ public class CustomerResource
 					JSONObject customer = new JSONObject();
 					customer.put(JSON_SORT_CODE, myCustomers[i].getSortcode().trim());
 					customer.put(JSON_CUSTOMER_NAME, myCustomers[i].getName().trim());
-					customer.put(JSON_ID, myCustomers[i].getCustomer_number().trim());
+					customer.put(JSON_ID, myCustomers[i].getCustomerNumber().trim());
 					customer.put(JSON_CUSTOMER_ADDRESS, myCustomers[i].getAddress().trim());
 					customer.put(JSON_DATE_OF_BIRTH, myCustomers[i].getDob().toString());
 					customer.put(JSON_CUSTOMER_CREDIT_SCORE, myCustomers[i].getCreditScore().trim());

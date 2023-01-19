@@ -114,7 +114,7 @@ public class ProcessedTransactionResource
 		{
 			JSONObject proctran = new JSONObject();
 			proctran.put(JSON_SORT_CODE, processedTransactions[i].getSortcode());
-			proctran.put(JSON_ACCOUNT_NUMBER, processedTransactions[i].getAccount_number());
+			proctran.put(JSON_ACCOUNT_NUMBER, processedTransactions[i].getAccountNumber());
 			proctran.put(JSON_AMOUNT,
 					BigDecimal.valueOf(processedTransactions[i].getAmount()).setScale(2, RoundingMode.HALF_UP));
 			DateFormat myDateFormat = DateFormat.getDateInstance();
@@ -147,7 +147,7 @@ public class ProcessedTransactionResource
 		// Process bank to bank transfer records
 		if (processedTransaction.getType().compareTo(PROCTRAN.PROC_TY_TRANSFER) == 0)
 		{
-			proctran.put(JSON_TARGET_ACCOUNT, processedTransaction.getTarget_account_number());
+			proctran.put(JSON_TARGET_ACCOUNT, processedTransaction.getTargetAccountNumber());
 			proctran.put(JSON_TARGET_SORT_CODE, processedTransaction.getTargetSortcode());
 		}
 		return proctran;

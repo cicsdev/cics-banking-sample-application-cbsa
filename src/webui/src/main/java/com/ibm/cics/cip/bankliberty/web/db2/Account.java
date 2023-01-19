@@ -323,15 +323,8 @@ public class Account extends HBankDataAccess
 		logger.entering(this.getClass().getName(), GET_ACCOUNT + accountNumber);
 		openConnection();
 		Account temp = null;
-		StringBuilder myStringBuilder = new StringBuilder();
 
-		for (int i = Integer.valueOf(sortCode).toString().length(); i < 6; i++)
-		{
-			myStringBuilder.append('0');
-		}
-		myStringBuilder.append(Integer.valueOf(sortCode).toString());
-
-		String sortCodeString = myStringBuilder.toString();
+		String sortCodeString = padSortCode(sortCode);
 		String sql9999 = "SELECT * from ACCOUNT where ACCOUNT_EYECATCHER LIKE 'ACCT' AND ACCOUNT_SORTCODE like ? order by ACCOUNT_NUMBER DESC";
 		String sql = SQL_SELECT;
 		try (PreparedStatement stmt9999 = conn.prepareStatement(sql9999);
@@ -368,13 +361,7 @@ public class Account extends HBankDataAccess
 			{
 
 				logger.log(Level.FINE, () -> PRE_SELECT_MSG + sql + ">");
-				myStringBuilder = new StringBuilder();
-				for (int z = Integer.valueOf(accountNumber).toString().length(); z < 8; z++)
-				{
-					myStringBuilder = myStringBuilder.append("0");
-				}
-				myStringBuilder.append(Integer.toString(accountNumber));
-				String accountNumberString = myStringBuilder.toString();
+				String accountNumberString = padAccountNumber(accountNumber);
 				stmt.setString(1, accountNumberString);
 				stmt.setString(2, sortCodeString);
 
@@ -420,23 +407,10 @@ public class Account extends HBankDataAccess
 		logger.entering(this.getClass().getName(), GET_ACCOUNTS_CUSTNO + l);
 		openConnection();
 		Account[] temp = new Account[10];
-		StringBuilder myStringBuilder = new StringBuilder();
 
-		for (int i = Long.toString(l).length(); i < 10; i++)
-		{
-			myStringBuilder.append('0');
-		}
+		String customerNumberString = padCustomerNumber(Long.toString(l));
 
-		myStringBuilder.append(Long.toString(l));
-		String customerNumberString = myStringBuilder.toString();
-
-		myStringBuilder = new StringBuilder();
-		for (int z = Integer.toString(sortCode).toString().length(); z < 6; z++)
-		{
-			myStringBuilder = myStringBuilder.append("0");
-		}
-		myStringBuilder.append(Integer.toString(sortCode));
-		String sortCodeString = myStringBuilder.toString();
+		String sortCodeString = padSortCode(sortCode);
 
 		String sql = "SELECT * from ACCOUNT where ACCOUNT_EYECATCHER LIKE 'ACCT' AND ACCOUNT_CUSTOMER_NUMBER like ? and ACCOUNT_SORTCODE like ? ORDER BY ACCOUNT_NUMBER";
 		logger.log(Level.FINE, () -> PRE_SELECT_MSG + sql + ">");
@@ -825,7 +799,7 @@ public class Account extends HBankDataAccess
 	public Account updateAccount(AccountJSON account)
 	{
 		logger.entering(this.getClass().getName(), UPDATE_ACCOUNT);
-		Account db2Account = this.getAccount(new Integer(account.getId()).intValue(), new Integer(sortcode).intValue());
+		Account db2Account = this.getAccount(Integer.parseInt(account.getId()), Integer.parseInt(sortcode));
 		if (db2Account == null)
 		{
 			logger.log(Level.WARNING, () -> "Unable to access DB2 account " + account.getId());
@@ -834,9 +808,7 @@ public class Account extends HBankDataAccess
 		}
 		Account temp = null;
 		openConnection();
-		String accountNumberString = db2Account.getAccountNumber();
-		Integer accountNumber = new Integer(db2Account.getAccountNumber());
-		accountNumberString = padAccountNumber(accountNumber);
+		String accountNumberString = padAccountNumber(Integer.parseInt(db2Account.getAccountNumber()));
 
 		String sortCodeString = padSortCode(Integer.valueOf(sortcode));
 		String sql1 = SQL_SELECT;
@@ -893,16 +865,8 @@ public class Account extends HBankDataAccess
 
 		openConnection();
 		String accountNumberString = temp.getAccountNumber();
-		StringBuilder myStringBuilder = new StringBuilder();
 
-		for (int i = this.getSortcode().length(); i < 6; i++)
-		{
-			myStringBuilder.append('0');
-		}
-
-		myStringBuilder.append(this.getSortcode().toString());
-
-		String sortCodeString = myStringBuilder.toString();
+		String sortCodeString = padSortCode(Integer.parseInt(this.getSortcode()));
 		String sql1 = SQL_SELECT;
 		logger.log(Level.FINE, () -> "About to issue QUERY <" + sql1 + ">");
 		String sqlUpdate = "UPDATE ACCOUNT SET ACCOUNT_ACTUAL_BALANCE = ? ,ACCOUNT_AVAILABLE_BALANCE = ? WHERE ACCOUNT_NUMBER like ? AND ACCOUNT_SORTCODE like ?";
@@ -1021,7 +985,8 @@ public class Account extends HBankDataAccess
 		logger.entering(this.getClass().getName(), GET_ACCOUNTS_WITH_LIMIT_AND_OFFSET);
 		openConnection();
 		Account[] temp = new Account[limit];
-		int i = 0, retrieved = 0;
+		int i = 0;
+		int retrieved = 0;
 		StringBuilder myStringBuilder = new StringBuilder();
 
 		for (i = sortCode.toString().length(); i < 6; i++)
@@ -1060,10 +1025,7 @@ public class Account extends HBankDataAccess
 			return null;
 		}
 		Account[] real = new Account[i];
-		for (int j = 0; j < i; j++)
-		{
-			real[j] = temp[j];
-		}
+		System.arraycopy(temp, 0, real, 0, i);
 		logger.exiting(this.getClass().getName(), GET_ACCOUNTS_WITH_LIMIT_AND_OFFSET, real);
 		return real;
 
@@ -1076,16 +1038,8 @@ public class Account extends HBankDataAccess
 		openConnection();
 		Account[] temp = new Account[250000];
 		int i = 0;
-		StringBuilder myStringBuilder = new StringBuilder();
 
-		for (i = sortCode2.toString().length(); i < 6; i++)
-		{
-			myStringBuilder.append('0');
-		}
-
-		myStringBuilder.append(sortCode2.toString());
-
-		String sortCodeString = myStringBuilder.toString();
+		String sortCodeString = padSortCode(sortCode2);
 		String sql = "SELECT * from (SELECT p.*,row_number() over() as rn from ACCOUNT as p where ACCOUNT_EYECATCHER LIKE 'ACCT' AND ACCOUNT_SORTCODE like ?";
 		if (lessThan)
 		{
@@ -1126,10 +1080,7 @@ public class Account extends HBankDataAccess
 			return null;
 		}
 		Account[] real = new Account[i];
-		for (int j = 0; j < i; j++)
-		{
-			real[j] = temp[j];
-		}
+		System.arraycopy(temp, 0, real, 0, i);
 		logger.exiting(this.getClass().getName(), GET_ACCOUNTS_BY_BALANCE_WITH_LIMIT_AND_OFFSET, real);
 		return real;
 	}
@@ -1174,16 +1125,8 @@ public class Account extends HBankDataAccess
 
 		int accountCount = 0;
 		openConnection();
-		StringBuilder myStringBuilder = new StringBuilder();
 
-		for (int i = sortCode2.toString().length(); i < 6; i++)
-		{
-			myStringBuilder.append('0');
-		}
-
-		myStringBuilder.append(sortCode2.toString());
-
-		String sortCodeString = myStringBuilder.toString();
+		String sortCodeString = padSortCode(sortCode2);
 		String sql = "SELECT COUNT(*) AS ACCOUNT_COUNT from ACCOUNT where ACCOUNT_EYECATCHER LIKE 'ACCT' AND ACCOUNT_SORTCODE like ?";
 		if (lessThan)
 		{

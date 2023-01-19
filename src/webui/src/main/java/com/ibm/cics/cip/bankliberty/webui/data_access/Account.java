@@ -353,7 +353,7 @@ public class Account
 
 		myAccountJSON.setAccountType(this.getType());
 		myAccountJSON.setInterestRate(this.getInterestRate().setScale(2, RoundingMode.HALF_UP));
-		myAccountJSON.setOverdraft(new Integer(this.getOverdraftLimit()));
+		myAccountJSON.setOverdraft(Integer.valueOf(this.getOverdraftLimit()));
 		myAccountJSON.setCustomerNumber(this.getCustomerNumber());
 		myAccountJSON.setSortCode(this.getSortcode());
 
@@ -458,11 +458,16 @@ public class Account
 	{
 		String[] dateArray = dateString.split("-");
 
-		Integer year = new Integer(dateArray[0]);
-		Integer month = new Integer(dateArray[1]);
-		Integer day = new Integer(dateArray[2]);
+		Integer year = Integer.parseInt(dateArray[0]);
+		Integer month = Integer.parseInt(dateArray[1]);
+		Integer day = Integer.parseInt(dateArray[2]);
 
-		return new Date(year - 1900, month - 1, day);
+		Calendar myCalendar = Calendar.getInstance();
+		myCalendar.set(Calendar.YEAR,year);
+		myCalendar.set(Calendar.MONTH,month-1);
+		myCalendar.set(Calendar.DATE, day);
+		Date myDate = new Date(myCalendar.getTimeInMillis());
+		return myDate;
 	}
 
 	private static void sortOutLogging()

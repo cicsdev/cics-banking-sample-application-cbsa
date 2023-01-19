@@ -356,7 +356,7 @@ public class Customer
 	public void showInfo()
 	{
 
-		if (!editingCustomer)
+		if (Boolean.FALSE.equals(editingCustomer))
 		{
 			logger.info(DASHES + this.customerNumber + ":" + this.sortcode + DASHES);
 			logger.info("Sortcode - " + this.sortcode);

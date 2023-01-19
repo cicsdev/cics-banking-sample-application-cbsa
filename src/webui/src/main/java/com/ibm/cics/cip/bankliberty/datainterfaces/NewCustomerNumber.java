@@ -77,7 +77,7 @@ public class NewCustomerNumber
 	 */
 	protected static final StringField NEWCUSNO_FAIL_CODE = factory.getStringField(1);
 
-	protected byte[] _byteBuffer;
+	protected byte[] byteBuffer;
 	// Instance variables used to cache field values
 	protected String newcusnoFunction;
 	protected Long customerNumber;
@@ -86,24 +86,24 @@ public class NewCustomerNumber
 
 	public NewCustomerNumber(byte[] buffer)
 	{
-		this._byteBuffer = buffer;
+		this.byteBuffer = buffer;
 	}
 
 	public NewCustomerNumber()
 	{
-		this._byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_LEN];
+		this.byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_LEN];
 	}
 
 	public byte[] getByteBuffer()
 	{
-		return _byteBuffer;
+		return byteBuffer;
 	}
 
 	public String getNewcusnoFunction()
 	{
 		if (newcusnoFunction == null)
 		{
-			newcusnoFunction = NEWCUSNO_FUNCTION.getString(_byteBuffer);
+			newcusnoFunction = NEWCUSNO_FUNCTION.getString(byteBuffer);
 		}
 		return newcusnoFunction;
 	}
@@ -114,7 +114,7 @@ public class NewCustomerNumber
 		{
 			return;
 		}
-		NEWCUSNO_FUNCTION.putString(newcusnoFunction, _byteBuffer);
+		NEWCUSNO_FUNCTION.putString(newcusnoFunction, byteBuffer);
 		this.newcusnoFunction = newcusnoFunction;
 	}
 
@@ -137,7 +137,7 @@ public class NewCustomerNumber
 	{
 		if (customerNumber == null)
 		{
-			customerNumber = CUSTOMER_NUMBER.getLong(_byteBuffer);
+			customerNumber = CUSTOMER_NUMBER.getLong(byteBuffer);
 		}
 		return customerNumber.longValue();
 	}
@@ -148,7 +148,7 @@ public class NewCustomerNumber
 		{
 			return;
 		}
-		CUSTOMER_NUMBER.putLong(customerNumber, _byteBuffer);
+		CUSTOMER_NUMBER.putLong(customerNumber, byteBuffer);
 		this.customerNumber = customerNumber;
 	}
 
@@ -156,7 +156,7 @@ public class NewCustomerNumber
 	{
 		if (newcusnoSuccess == null)
 		{
-			newcusnoSuccess = NEWCUSNO_SUCCESS.getString(_byteBuffer);
+			newcusnoSuccess = NEWCUSNO_SUCCESS.getString(byteBuffer);
 		}
 		return newcusnoSuccess;
 	}
@@ -167,7 +167,7 @@ public class NewCustomerNumber
 		{
 			return;
 		}
-		NEWCUSNO_SUCCESS.putString(newcusnoSuccess, _byteBuffer);
+		NEWCUSNO_SUCCESS.putString(newcusnoSuccess, byteBuffer);
 		this.newcusnoSuccess = newcusnoSuccess;
 	}
 
@@ -175,7 +175,7 @@ public class NewCustomerNumber
 	{
 		if (newcusnoFailCode == null)
 		{
-			newcusnoFailCode = NEWCUSNO_FAIL_CODE.getString(_byteBuffer);
+			newcusnoFailCode = NEWCUSNO_FAIL_CODE.getString(byteBuffer);
 		}
 		return newcusnoFailCode;
 	}
@@ -186,7 +186,7 @@ public class NewCustomerNumber
 		{
 			return;
 		}
-		NEWCUSNO_FAIL_CODE.putString(newcusnoFailCode, _byteBuffer);
+		NEWCUSNO_FAIL_CODE.putString(newcusnoFailCode, byteBuffer);
 		this.newcusnoFailCode = newcusnoFailCode;
 	}
 
