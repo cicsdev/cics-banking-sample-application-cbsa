@@ -439,10 +439,8 @@ public class Account extends HBankDataAccess
 			return null;
 		}
 		Account[] real = new Account[i];
-		for (int j = 0; j < i; j++)
-		{
-			real[j] = temp[j];
-		}
+		System.arraycopy(temp, 0, real, 0, i);
+
 		logger.exiting(this.getClass().getName(), GET_ACCOUNTS_CUSTNO + l, real);
 		return real;
 	}
@@ -485,10 +483,7 @@ public class Account extends HBankDataAccess
 			return null;
 		}
 		Account[] real = new Account[i];
-		for (int j = 0; j < i; j++)
-		{
-			real[j] = temp[j];
-		}
+		System.arraycopy(temp, 0, real, 0, i);
 		logger.exiting(this.getClass().getName(), GET_ACCOUNTS, real);
 		return real;
 	}
@@ -971,10 +966,7 @@ public class Account extends HBankDataAccess
 			return null;
 		}
 		Account[] real = new Account[i];
-		for (int j = 0; j < i; j++)
-		{
-			real[j] = temp[j];
-		}
+		System.arraycopy(temp, 0, real, 0, i);
 		logger.exiting(this.getClass().getName(), GET_ACCOUNTS_BY_BALANCE, real);
 		return real;
 

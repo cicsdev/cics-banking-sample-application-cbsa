@@ -89,7 +89,6 @@ public class Customer
 
 	private CUSTOMER myCustomer;
 
-
 	private boolean notFound;
 
 	public Customer(String custNo, String sc, String n, String a, Date d, String creditScore, Date reviewDate)
@@ -107,6 +106,7 @@ public class Customer
 	public Customer()
 	{
 		sortOutLogging();
+		customerFile = new KSDS();
 
 	}
 
@@ -205,7 +205,6 @@ public class Customer
 		logger.entering(this.getClass().getName(), GET_CUSTOMER);
 		Customer temp = null;
 
-		customerFile = new KSDS();
 		customerFile.setName(FILENAME);
 
 		myCustomer = new CUSTOMER();
@@ -312,7 +311,6 @@ public class Customer
 		Customer[] temp = new Customer[250000];
 		int i = 0;
 
-		KSDS customerFile = new KSDS();
 		customerFile.setName(FILENAME);
 
 		myCustomer = new CUSTOMER();
@@ -422,7 +420,6 @@ public class Customer
 	{
 		logger.entering(this.getClass().getName(), UPDATE_CUSTOMER, null);
 
-		customerFile = new KSDS();
 		customerFile.setName(FILENAME);
 		Customer temp;
 		RecordHolder holder = new RecordHolder();
@@ -508,7 +505,6 @@ public class Customer
 
 		Customer temp = null;
 
-		customerFile = new KSDS();
 		customerFile.setName(FILENAME);
 
 		myCustomer = new CUSTOMER();
@@ -590,8 +586,7 @@ public class Customer
 	private boolean decrementNumberOfCustomers()
 	{
 		CustomerControl myCustomerControl = new CustomerControl();
-		KSDS customerKSDS = new KSDS();
-		customerKSDS.setName(FILENAME);
+		customerFile.setName(FILENAME);
 
 		myCustomerControl.setCustomerControlSortcode(0);
 		myCustomerControl.setCustomerControlNumber(9999999999L);
@@ -614,7 +609,7 @@ public class Customer
 
 		try
 		{
-			customerKSDS.readForUpdate(key, holder);
+			customerFile.readForUpdate(key, holder);
 		}
 		catch (LogicException | InvalidRequestException | IOErrorException | InvalidSystemIdException | LockedException
 				| ChangedException | LoadingException | RecordBusyException | FileDisabledException
@@ -633,7 +628,7 @@ public class Customer
 		myCustomerControl.setNumberOfCustomers(numberOfCustomers);
 		try
 		{
-			customerKSDS.rewrite(myCustomerControl.getByteBuffer());
+			customerFile.rewrite(myCustomerControl.getByteBuffer());
 		}
 		catch (LogicException | InvalidRequestException | IOErrorException | LengthErrorException
 				| InvalidSystemIdException | ChangedException | LockedException | LoadingException | RecordBusyException
@@ -654,10 +649,9 @@ public class Customer
 
 		Customer temp = null;
 
-		customerFile = new KSDS();
 		customerFile.setName(FILENAME);
 		myCustomer = new CUSTOMER();
-		
+
 		String sortCodeString = sortCodeInteger.toString();
 		long customerNumberAsPrimitive = getNextCustomerNumber(sortCodeString);
 
@@ -781,8 +775,8 @@ public class Customer
 			return -1;
 		}
 		CustomerControl myCustomerControl = new CustomerControl();
-		KSDS customerKSDS = new KSDS();
-		customerKSDS.setName(FILENAME);
+
+		customerFile.setName(FILENAME);
 
 		myCustomerControl.setCustomerControlSortcode(0);
 		myCustomerControl.setCustomerControlNumber(9999999999L);
@@ -805,7 +799,7 @@ public class Customer
 
 		try
 		{
-			customerKSDS.readForUpdate(key, holder);
+			customerFile.readForUpdate(key, holder);
 		}
 		catch (LogicException | InvalidRequestException | IOErrorException | InvalidSystemIdException | LockedException
 				| ChangedException | LoadingException | RecordBusyException | FileDisabledException
@@ -849,8 +843,7 @@ public class Customer
 			return -1;
 		}
 		CustomerControl myCustomerControl = new CustomerControl();
-		KSDS customerKSDS = new KSDS();
-		customerKSDS.setName(FILENAME);
+		customerFile.setName(FILENAME);
 
 		myCustomerControl.setCustomerControlSortcode(0);
 		myCustomerControl.setCustomerControlNumber(9999999999L);
@@ -873,7 +866,7 @@ public class Customer
 
 		try
 		{
-			customerKSDS.readForUpdate(key, holder);
+			customerFile.readForUpdate(key, holder);
 		}
 		catch (LogicException | InvalidRequestException | IOErrorException | InvalidSystemIdException | LockedException
 				| ChangedException | LoadingException | RecordBusyException | FileDisabledException
@@ -905,7 +898,6 @@ public class Customer
 		int stored = 0;
 		int retrieved = 0;
 
-		KSDS customerFile = new KSDS();
 		customerFile.setName(FILENAME);
 
 		myCustomer = new CUSTOMER();
@@ -967,8 +959,8 @@ public class Customer
 					reviewCalendar.set(Calendar.YEAR, myCustomer.getCustomerCsReviewYear());
 					reviewCalendar.set(Calendar.MONTH, myCustomer.getCustomerCsReviewMonth());
 					reviewCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerCsReviewDay());
-					Date reviewDate = new Date(reviewCalendar.getTimeInMillis());
-					temp[stored].setReviewDate(reviewDate);
+					Date reviewDateForThisCustomer = new Date(reviewCalendar.getTimeInMillis());
+					temp[stored].setReviewDate(reviewDateForThisCustomer);
 					temp[stored].printCustomerDetails();
 					stored++;
 				}
@@ -1000,7 +992,6 @@ public class Customer
 
 		int stored = 0;
 
-		KSDS customerFile = new KSDS();
 		customerFile.setName(FILENAME);
 
 		myCustomer = new CUSTOMER();
@@ -1049,32 +1040,31 @@ public class Customer
 				// We get here because we either successfully read a record, or
 				// hit end of file. if we hit end of file then we might add the
 				// last customer twice!
-				if (!endOfFile)
+				if (!endOfFile && (myCustomer.getCustomerSortcode() == sortCode)
+						&& myCustomer.getCustomerName().contains(name))
 				{
-					if ((myCustomer.getCustomerSortcode() == sortCode) && myCustomer.getCustomerName().contains(name))
-					{
-						temp[stored] = new Customer();
-						temp[stored].setAddress(myCustomer.getCustomerAddress());
-						temp[stored].setCustomerNumber(Long.toString(myCustomer.getCustomerNumber()));
-						temp[stored].setName(myCustomer.getCustomerName());
-						temp[stored].setSortcode(Integer.toString(myCustomer.getCustomerSortcode()));
-						Calendar dobCalendar = Calendar.getInstance();
-						dobCalendar.set(Calendar.YEAR, myCustomer.getCustomerBirthYear());
-						dobCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth());
-						dobCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerBirthDay());
-						Date dob = new Date(dobCalendar.getTimeInMillis());
-						temp[stored].setDob(dob);
-						temp[stored].setCreditScore(Integer.toString(myCustomer.getCustomerCreditScore()));
-						Calendar csReviewCalendar = Calendar.getInstance();
-						csReviewCalendar.set(Calendar.YEAR, myCustomer.getCustomerCsReviewYear());
-						csReviewCalendar.set(Calendar.MONTH, myCustomer.getCustomerCsReviewMonth());
-						csReviewCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerCsReviewDay());
-						Date csReviewDate = new Date(csReviewCalendar.getTimeInMillis());
-						temp[stored].setReviewDate(csReviewDate);
-						stored++;
-					}
+					temp[stored] = new Customer();
+					temp[stored].setAddress(myCustomer.getCustomerAddress());
+					temp[stored].setCustomerNumber(Long.toString(myCustomer.getCustomerNumber()));
+					temp[stored].setName(myCustomer.getCustomerName());
+					temp[stored].setSortcode(Integer.toString(myCustomer.getCustomerSortcode()));
+					Calendar dobCalendar = Calendar.getInstance();
+					dobCalendar.set(Calendar.YEAR, myCustomer.getCustomerBirthYear());
+					dobCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth());
+					dobCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerBirthDay());
+					dob = new Date(dobCalendar.getTimeInMillis());
+					temp[stored].setDob(dob);
+					temp[stored].setCreditScore(Integer.toString(myCustomer.getCustomerCreditScore()));
+					Calendar csReviewCalendar = Calendar.getInstance();
+					csReviewCalendar.set(Calendar.YEAR, myCustomer.getCustomerCsReviewYear());
+					csReviewCalendar.set(Calendar.MONTH, myCustomer.getCustomerCsReviewMonth());
+					csReviewCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerCsReviewDay());
+					Date csReviewDate = new Date(csReviewCalendar.getTimeInMillis());
+					temp[stored].setReviewDate(csReviewDate);
+					stored++;
 				}
 			}
+
 			customerFileBrowse.end();
 
 			Customer[] real = new Customer[limit];
@@ -1102,7 +1092,6 @@ public class Customer
 		int stored = 0;
 		int retrieved = 0;
 
-		KSDS customerFile = new KSDS();
 		customerFile.setName(FILENAME);
 
 		myCustomer = new CUSTOMER();
@@ -1165,7 +1154,7 @@ public class Customer
 						dobCalendar.set(Calendar.YEAR, myCustomer.getCustomerBirthYear());
 						dobCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth());
 						dobCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerBirthDay());
-						Date dob = new Date(dobCalendar.getTimeInMillis());
+						dob = new Date(dobCalendar.getTimeInMillis());
 						temp[stored].setDob(dob);
 						temp[stored].setCreditScore(Integer.toString(myCustomer.getCustomerCreditScore()));
 						Calendar csReviewCalendar = Calendar.getInstance();
@@ -1200,13 +1189,14 @@ public class Customer
 	{
 		logger.entering(this.getClass().getName(), GET_CUSTOMERS_COUNT_ONLY);
 
-		KSDS customerFile = new KSDS();
 		customerFile.setName(FILENAME);
 
 		RecordHolder holder = new RecordHolder();
 
 		byte[] key = new byte[16];
 		// We need to convert the key to EBCDIC
+
+		// @TODO use the sort code in the key
 		String keyString = LAST_CUSTOMER;
 		try
 		{
@@ -1223,10 +1213,10 @@ public class Customer
 		{
 			customerFile.read(key, holder);
 		}
-		catch (InvalidSystemIdException | LogicException | InvalidRequestException | IOErrorException | LockedException | RecordBusyException
-				| LoadingException | ChangedException | FileDisabledException | FileNotFoundException
-				| ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException | DuplicateKeyException
-				| NotOpenException e1)
+		catch (InvalidSystemIdException | LogicException | InvalidRequestException | IOErrorException | LockedException
+				| RecordBusyException | LoadingException | ChangedException | FileDisabledException
+				| FileNotFoundException | ISCInvalidRequestException | NotAuthorisedException | RecordNotFoundException
+				| DuplicateKeyException | NotOpenException e1)
 		{
 			logger.severe("Error reading control record for customer file " + e1.getLocalizedMessage());
 			logger.exiting(this.getClass().getName(), GET_CUSTOMERS_COUNT_ONLY, -1L);
@@ -1239,14 +1229,12 @@ public class Customer
 
 	}
 
-
 	public long getCustomersByNameCountOnly(int sortCode, String name)
 	{
 		logger.entering(this.getClass().getName(), GET_CUSTOMERS_BY_NAME_COUNT_ONLY);
 
 		long matchingCustomers = 0;
 
-		KSDS customerFile = new KSDS();
 		customerFile.setName(FILENAME);
 
 		myCustomer = new CUSTOMER();
@@ -1276,7 +1264,7 @@ public class Customer
 
 			boolean carryOn = true;
 			boolean endOfFile = false;
-			for (; carryOn && !endOfFile;)
+			while (carryOn && !endOfFile)
 			{
 				try
 				{
@@ -1298,14 +1286,12 @@ public class Customer
 				// We get here because we either successfully read a record, or
 				// hit end of file. if we hit end of file then we might add the
 				// last customer twice!
-				if (!endOfFile)
+				if (!endOfFile && myCustomer.getCustomerName().contains(name))
 				{
-					if (myCustomer.getCustomerName().contains(name))
-					{
-						matchingCustomers++;
-					}
+					matchingCustomers++;
 				}
 			}
+
 			customerFileBrowse.end();
 
 			logger.exiting(this.getClass().getName(), GET_CUSTOMERS_BY_NAME_COUNT_ONLY, matchingCustomers);
@@ -1316,7 +1302,7 @@ public class Customer
 				| IOErrorException | InvalidSystemIdException | LockedException | RecordBusyException | LoadingException
 				| ChangedException | RecordNotFoundException e3)
 		{
-			logger.log(Level.FINE, () -> e3.getLocalizedMessage());
+			logger.log(Level.FINE, e3::getLocalizedMessage);
 			logger.exiting(this.getClass().getName(), GET_CUSTOMERS_BY_NAME_COUNT_ONLY, -1L);
 			return -1L;
 		}
@@ -1341,7 +1327,6 @@ public class Customer
 		Customer[] temp = new Customer[250000];
 		int i = 0;
 
-		KSDS customerFile = new KSDS();
 		customerFile.setName(FILENAME);
 
 		myCustomer = new CUSTOMER();
@@ -1397,7 +1382,7 @@ public class Customer
 				dobCalendar.set(Calendar.YEAR, myCustomer.getCustomerBirthYear());
 				dobCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth());
 				dobCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerBirthDay());
-				Date dob = new Date(dobCalendar.getTimeInMillis());
+				dob = new Date(dobCalendar.getTimeInMillis());
 				temp[j].setDob(dob);
 				temp[j].setCreditScore(Integer.toString(myCustomer.getCustomerCreditScore()));
 				Calendar csReviewCalendar = Calendar.getInstance();
@@ -1437,7 +1422,6 @@ public class Customer
 		Customer[] temp = new Customer[250000];
 		int i = 0;
 
-		KSDS customerFile = new KSDS();
 		customerFile.setName(FILENAME);
 
 		myCustomer = new CUSTOMER();
@@ -1496,7 +1480,7 @@ public class Customer
 				dobCalendar.set(Calendar.YEAR, myCustomer.getCustomerBirthYear());
 				dobCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth());
 				dobCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerBirthDay());
-				Date dob = new Date(dobCalendar.getTimeInMillis());
+				dob = new Date(dobCalendar.getTimeInMillis());
 				temp[j].setDob(dob);
 				temp[j].setCreditScore(Integer.toString(myCustomer.getCustomerCreditScore()));
 				Calendar csReviewCalendar = Calendar.getInstance();
@@ -1535,7 +1519,6 @@ public class Customer
 		Customer[] temp = new Customer[250000];
 		int i = 0;
 
-		KSDS customerFile = new KSDS();
 		customerFile.setName(FILENAME);
 
 		myCustomer = new CUSTOMER();
@@ -1596,7 +1579,7 @@ public class Customer
 				dobCalendar.set(Calendar.YEAR, myCustomer.getCustomerBirthYear());
 				dobCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth());
 				dobCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerBirthDay());
-				Date dob = new Date(dobCalendar.getTimeInMillis());
+				dob = new Date(dobCalendar.getTimeInMillis());
 				temp[j].setDob(dob);
 				temp[j].setCreditScore(Integer.toString(myCustomer.getCustomerCreditScore()));
 				Calendar csReviewCalendar = Calendar.getInstance();
@@ -1605,7 +1588,7 @@ public class Customer
 				csReviewCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerCsReviewDay());
 				Date csReviewDate = new Date(csReviewCalendar.getTimeInMillis());
 				temp[j].setReviewDate(csReviewDate);
-				if (customerAgeInYears(today, dob) == age)
+				if (customerAgeInYears(dob) == age)
 				{
 					i++;
 				}
@@ -1629,7 +1612,7 @@ public class Customer
 		}
 	}
 
-	int customerAgeInYears(Date now, Date dob)
+	int customerAgeInYears(Date dob)
 	{
 		Calendar nowCalendar = Calendar.getInstance();
 		Calendar birthCalendar = Calendar.getInstance();
@@ -1642,15 +1625,11 @@ public class Customer
 			age--;
 			return age;
 		}
-		if (birthCalendar.get(Calendar.MONTH) == nowCalendar.get(Calendar.MONTH))
-		{
-			if (birthCalendar.get(Calendar.DAY_OF_MONTH) > nowCalendar.get(Calendar.DAY_OF_MONTH))
+		if (birthCalendar.get(Calendar.MONTH) == nowCalendar.get(Calendar.MONTH) && birthCalendar.get(Calendar.DAY_OF_MONTH) > nowCalendar.get(Calendar.DAY_OF_MONTH))
 			{
 				age--;
 				return age;
 			}
-
-		}
 
 		return age;
 

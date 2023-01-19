@@ -322,7 +322,7 @@ public class AccountUI extends VerticalLayout
 		{
 			public void buttonClick(ClickEvent event)
 			{
-				if (!edit)
+				if (Boolean.FALSE.equals(edit))
 				{
 					String temp = createNewAccount();
 					if (temp.startsWith("-1"))

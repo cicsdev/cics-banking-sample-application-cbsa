@@ -20,6 +20,11 @@ import java.util.logging.Logger;
 
 public class CreditScore
 {
+	
+	private CreditScore()
+	{
+		throw new IllegalStateException("Static only");
+	}
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 

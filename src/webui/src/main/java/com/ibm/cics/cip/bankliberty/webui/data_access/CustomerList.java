@@ -113,13 +113,13 @@ public class CustomerList
 				}
 				else
 				{
-					System.err.println(myCustomerResponse.getStatus() + " " + myCustomersString);
+					logger.log(Level.SEVERE,() -> "Error getting customers");
 				}
 			}
 		}
 		catch (IOException e)
 		{
-			logger.log(Level.SEVERE,() -> e.toString());
+			logger.log(Level.SEVERE,e::toString);
 		}
 
 	}
@@ -201,7 +201,7 @@ public class CustomerList
 
 		catch (IOException e1)
 		{
-			logger.log(Level.SEVERE,() -> e1.toString());
+			logger.log(Level.SEVERE,e1::toString);
 		}
 
 	}
@@ -262,7 +262,7 @@ public class CustomerList
 		}
 		catch (SecurityException | IOException e)
 		{
-			logger.log(Level.SEVERE,() -> e.toString());
+			logger.log(Level.SEVERE,e::toString);
 		}
 	}
 

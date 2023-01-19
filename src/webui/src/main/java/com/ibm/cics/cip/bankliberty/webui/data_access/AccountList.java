@@ -29,7 +29,7 @@ public class AccountList
 
 	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.webui.dataAccess");
 
-	private List<Account> accountList = new ArrayList<>();
+	private List<Account> listOfAccounts = new ArrayList<>();
 	private static String sortcode;
 	private int count;
 	private static final String JSON_NUMBER_OF_ACCOUNTS = "numberOfAccounts";
@@ -48,7 +48,7 @@ public class AccountList
 
 	public int getCount(String filter)
 	{
-		if (this.accountList.isEmpty())
+		if (this.listOfAccounts.isEmpty())
 		{
 			howMany(filter);
 		}
@@ -80,7 +80,6 @@ public class AccountList
 
 			if (filter.contains("AND ACCOUNT_NUMBER"))
 			{
-				// ("We are filtering by account");
 				String accountNumberFilter = filter.substring(22);
 				if (accountNumberFilter.indexOf(' ') >= 0)
 				{
@@ -92,7 +91,6 @@ public class AccountList
 
 			if (filter.contains("AND ACCOUNT_CUSTOMER_NUMBER"))
 			{
-				// ("We are filtering by account_customer_number!");
 				String customerNumberFilter = filter.substring(31);
 				Long customerNumber = Long.parseLong(customerNumberFilter);
 
@@ -102,7 +100,7 @@ public class AccountList
 
 			if (filter.length() == 0)
 			{
-				// ("No filter so get the lot please!");
+
 				myAccountsResponse = myAccountsResource.getAccountsExternal(true);
 				this.count = 0;
 			}
@@ -138,7 +136,7 @@ public class AccountList
 
 			if (filter.contains(" AND ACCOUNT_AVAILABLE_BALANCE"))
 			{
-				this.accountList.clear();
+				this.listOfAccounts.clear();
 				String operator = filter.substring(31, 32);
 				BigDecimal balance = BigDecimal.valueOf(Double.parseDouble(filter.substring(34)));
 
@@ -148,7 +146,7 @@ public class AccountList
 
 			if (filter.contains(" AND ACCOUNT_NUMBER"))
 			{
-				this.accountList.clear();
+				this.listOfAccounts.clear();
 
 				String accountNumberFilter = filter.substring(22);
 				Long accountNumberFilterLong = Long.parseLong(accountNumberFilter);
@@ -159,7 +157,7 @@ public class AccountList
 			// 0123456789012345678901234567890
 			if (filter.contains(" AND ACCOUNT_CUSTOMER_NUMBER = "))
 			{
-				this.accountList.clear();
+				this.listOfAccounts.clear();
 				String customerNumberFilter = filter.substring(31);
 				Long customerNumber = Long.parseLong(customerNumberFilter);
 
@@ -168,13 +166,12 @@ public class AccountList
 
 			if (filter.length() == 0)
 			{
-				this.accountList.clear();
+				this.listOfAccounts.clear();
 				myAccountsResponse = myAccountsResource.getAccountsExternal(limit, offset, false);
 			}
 
 			if (offset == 0)
 			{
-				// ("Offset is zero to doing howMany for filter " + filter);
 				howMany(filter);
 			}
 			myAccountsString = myAccountsResponse.getEntity().toString();
@@ -220,7 +217,7 @@ public class AccountList
 					myListAccount.setSortcode(sortCode);
 					myListAccount.setType(type);
 
-					this.accountList.add(myListAccount);
+					this.listOfAccounts.add(myListAccount);
 				}
 
 			}
@@ -234,12 +231,12 @@ public class AccountList
 
 	public Account getAccount(int i)
 	{
-		return this.accountList.get(i);
+		return this.listOfAccounts.get(i);
 	}
 
 	public int size()
 	{
-		return this.accountList.size();
+		return this.listOfAccounts.size();
 	}
 
 	public AccountList()
@@ -266,7 +263,7 @@ public class AccountList
 
 	public List<Account> getList()
 	{
-		return accountList;
+		return listOfAccounts;
 	}
 
 	

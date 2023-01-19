@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.ibm.cics.cip.bankliberty.api.json.HBankDataAccess;
@@ -194,7 +195,7 @@ public class ProcessedTransaction extends HBankDataAccess
 
 		openConnection();
 		String sql = "SELECT * from (SELECT p.*,row_number() over() as rn from PROCTRAN as p where PROCTRAN_SORTCODE like ? ORDER BY PROCTRAN_DATE ASC, PROCTRAN_TIME ASC) as col where rn between ? and ?";
-		logger.fine("About to issue query SQL <" + sql + ">");
+		logger.log(Level.FINE,() ->"About to issue query SQL <" + sql + ">");
 
 		int i = 0;
 		try (PreparedStatement stmt = conn.prepareStatement(sql);)
@@ -207,7 +208,7 @@ public class ProcessedTransaction extends HBankDataAccess
 			while (rs.next())
 			{
 				Calendar myCalendar = Calendar.getInstance();
-				Date transactionDate = rs.getDate("PROCTRAN_DATE");
+				Date transactionDateFromRecord = rs.getDate("PROCTRAN_DATE");
 				String transactionTime = rs.getString("PROCTRAN_TIME");
 				long seconds = 0;
 				long minutes = 0;
@@ -234,13 +235,13 @@ public class ProcessedTransaction extends HBankDataAccess
 					hours = Integer.valueOf(transactionTime.substring(0, 2));
 				}
 
-				myCalendar.setTime(transactionDate);
+				myCalendar.setTime(transactionDateFromRecord);
 				long timeInMillis = myCalendar.getTimeInMillis();
 				timeInMillis = timeInMillis + (hours * 60 * 60 * 1000);
 				timeInMillis = timeInMillis + (minutes * 60 * 1000);
 				timeInMillis = timeInMillis + (seconds * 1000);
-				transactionDate = new Date(timeInMillis);
-				temp[i].setTransactionDate(transactionDate);
+				transactionDateFromRecord = new Date(timeInMillis);
+				temp[i].setTransactionDate(transactionDateFromRecord);
 				i++;
 			}
 		}
@@ -273,8 +274,8 @@ public class ProcessedTransaction extends HBankDataAccess
 			myCalendar.set(Calendar.YEAR, (Integer.parseInt(dateOfBirthYYYY)));
 			myCalendar.set(Calendar.MONTH, (Integer.parseInt(dateOfBirthMM) - 1));
 			myCalendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(dateOfBirthDD));
-			Date dateOfBirth = new Date(myCalendar.getTimeInMillis());
-			processedTransaction.setDateOfBirth(dateOfBirth);
+			Date dateOfBirthFromRecord = new Date(myCalendar.getTimeInMillis());
+			processedTransaction.setDateOfBirth(dateOfBirthFromRecord);
 			processedTransaction.setCustomer(deletedCustomerNumber);
 		}
 
@@ -404,7 +405,7 @@ public class ProcessedTransaction extends HBankDataAccess
 
 		openConnection();
 
-		logger.fine(ABOUT_TO_INSERT + SQL_INSERT + ">");
+		logger.log(Level.FINE,() ->ABOUT_TO_INSERT + SQL_INSERT + ">");
 		try (PreparedStatement stmt = conn.prepareStatement(SQL_INSERT);)
 		{
 			stmt.setString(1, PROCTRAN.PROC_TRAN_VALID);
@@ -435,7 +436,7 @@ public class ProcessedTransaction extends HBankDataAccess
 
 		openConnection();
 
-		logger.fine(ABOUT_TO_INSERT + SQL_INSERT + ">");
+		logger.log(Level.FINE,() ->ABOUT_TO_INSERT + SQL_INSERT + ">");
 		try (PreparedStatement stmt = conn.prepareStatement(SQL_INSERT);)
 		{
 			stmt.setString(1, PROCTRAN.PROC_TRAN_VALID);
@@ -476,7 +477,7 @@ public class ProcessedTransaction extends HBankDataAccess
 
 		openConnection();
 
-		logger.fine(ABOUT_TO_INSERT + SQL_INSERT + ">");
+		logger.log(Level.FINE,() ->ABOUT_TO_INSERT + SQL_INSERT + ">");
 
 		try (PreparedStatement stmt = conn.prepareStatement(SQL_INSERT);)
 		{
@@ -525,7 +526,7 @@ public class ProcessedTransaction extends HBankDataAccess
 
 		openConnection();
 
-		logger.fine(ABOUT_TO_INSERT + SQL_INSERT + ">");
+		logger.log(Level.FINE,() ->ABOUT_TO_INSERT + SQL_INSERT + ">");
 
 		try (PreparedStatement stmt = conn.prepareStatement(SQL_INSERT);)
 		{
@@ -567,13 +568,13 @@ public class ProcessedTransaction extends HBankDataAccess
 		myStringBuilder.append(customerName);
 		createCustomerDescription = createCustomerDescription.concat(myStringBuilder.substring(0, 14));
 
-		String customerDOBString = sortOutCustomerDOB(customerDOB);
+		String customerDOBStringForNewCustomer = sortOutCustomerDOB(customerDOB);
 
-		createCustomerDescription = createCustomerDescription + customerDOBString;
+		createCustomerDescription = createCustomerDescription + customerDOBStringForNewCustomer;
 
 		openConnection();
 
-		logger.fine(ABOUT_TO_INSERT + SQL_INSERT + ">");
+		logger.log(Level.FINE,() ->ABOUT_TO_INSERT + SQL_INSERT + ">");
 
 		try (PreparedStatement stmt = conn.prepareStatement(SQL_INSERT);)
 		{
@@ -621,13 +622,13 @@ public class ProcessedTransaction extends HBankDataAccess
 		myPROCTRAN.setProcDescDelaccCustomer(Integer.parseInt(customerNumber));
 		myPROCTRAN.setProcDescDelaccFooter(PROCTRAN.PROC_DESC_DELACC_FLAG);
 
-		String description = myPROCTRAN.getProcTranDesc();
+		String descriptionForDeletedAccount = myPROCTRAN.getProcTranDesc();
 
 		sortOutDateTimeTaskString();
 
 		openConnection();
 
-		logger.fine(ABOUT_TO_INSERT + SQL_INSERT + ">");
+		logger.log(Level.FINE,() ->ABOUT_TO_INSERT + SQL_INSERT + ">");
 		try (PreparedStatement stmt = conn.prepareStatement(SQL_INSERT);)
 		{
 			stmt.setString(1, PROCTRAN.PROC_TRAN_VALID);
@@ -637,7 +638,7 @@ public class ProcessedTransaction extends HBankDataAccess
 			stmt.setString(5, timeString);
 			stmt.setString(6, taskRef);
 			stmt.setString(7, PROCTRAN.PROC_TY_WEB_DELETE_ACCOUNT);
-			stmt.setString(8, description);
+			stmt.setString(8, descriptionForDeletedAccount);
 			stmt.setBigDecimal(9, actualBalance.setScale(2, RoundingMode.HALF_UP));
 			stmt.executeUpdate();
 		}
@@ -681,11 +682,11 @@ public class ProcessedTransaction extends HBankDataAccess
 		myPROCTRAN.setProcDescCreaccCustomer(Integer.parseInt(customerNumber));
 		myPROCTRAN.setProcDescCreaccFooter(PROCTRAN.PROC_DESC_CREACC_FLAG);
 
-		String description = myPROCTRAN.getProcTranDesc();
+		String descriptionForCreatedAccount = myPROCTRAN.getProcTranDesc();
 
 		openConnection();
 
-		logger.fine(ABOUT_TO_INSERT + SQL_INSERT + ">");
+		logger.log(Level.FINE,() ->ABOUT_TO_INSERT + SQL_INSERT + ">");
 		try (PreparedStatement stmt = conn.prepareStatement(SQL_INSERT);)
 		{
 			stmt.setString(1, PROCTRAN.PROC_TRAN_VALID);
@@ -695,7 +696,7 @@ public class ProcessedTransaction extends HBankDataAccess
 			stmt.setString(5, timeString);
 			stmt.setString(6, taskRef);
 			stmt.setString(7, PROCTRAN.PROC_TY_WEB_CREATE_ACCOUNT);
-			stmt.setString(8, description);
+			stmt.setString(8, descriptionForCreatedAccount);
 			stmt.setBigDecimal(9, actualBalance.setScale(2, RoundingMode.HALF_UP));
 			stmt.executeUpdate();
 		}
@@ -764,13 +765,13 @@ public class ProcessedTransaction extends HBankDataAccess
 	{
 		Calendar myCalendar = Calendar.getInstance();
 		myCalendar.setTime(customerDOB);
-		customerDOBString = new String();
+
 		StringBuilder myStringBuilder = new StringBuilder(Integer.valueOf(myCalendar.get(Calendar.DATE)));
 		for (int z = myStringBuilder.length(); z < 2; z++)
 		{
 			myStringBuilder = myStringBuilder.insert(0, "0");
 		}
-		customerDOBString = customerDOBString + myStringBuilder.toString();
+		String customerDOBString = myStringBuilder.toString();
 		customerDOBString = customerDOBString + "-";
 		myStringBuilder = new StringBuilder(Integer.valueOf(myCalendar.get(Calendar.MONTH) + 1));
 		for (int z = myStringBuilder.length(); z < 2; z++)

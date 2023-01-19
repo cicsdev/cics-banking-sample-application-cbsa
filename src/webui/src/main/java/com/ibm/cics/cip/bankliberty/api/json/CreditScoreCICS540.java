@@ -42,6 +42,11 @@ import com.ibm.cics.server.ChildResponse.CompletionStatus;
 
 public class CreditScoreCICS540
 {
+	
+	private CreditScoreCICS540()
+	{
+		throw new IllegalStateException("Static only");
+	}
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 

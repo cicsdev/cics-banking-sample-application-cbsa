@@ -208,7 +208,7 @@ public class Customer
 			}
 			catch (IOException e)
 			{
-				logger.log(Level.SEVERE,() -> e.toString());
+				logger.log(Level.SEVERE, e::toString);
 				myCustomerResponse.close();
 				return false;
 			}
@@ -256,7 +256,7 @@ public class Customer
 			}
 			catch (IOException e)
 			{
-				logger.log(Level.SEVERE,() -> e.toString());
+				logger.log(Level.SEVERE,e::toString);
 				myCustomerResponse.close();
 				return "-1";
 			}
@@ -304,7 +304,7 @@ public class Customer
 			}
 			catch (IOException e)
 			{
-				logger.log(Level.SEVERE,() -> e.toString());
+				logger.log(Level.SEVERE,e::toString);
 				myCustomerResponse.close();
 				return false;
 			}
@@ -359,23 +359,23 @@ public class Customer
 
 		if (Boolean.FALSE.equals(editingCustomer))
 		{
-			logger.info(DASHES + this.customerNumber + ":" + this.sortcode + DASHES);
-			logger.info("Sortcode - " + this.sortcode);
-			logger.info("Customer name - " + this.getName());
-			logger.info("Customer address - " + this.getAddress());
-			logger.info("Customer Date of Birth - " + this.getDob().toString());
-			logger.info("Customer is new");
+			logger.log(Level.INFO,() -> DASHES + this.customerNumber + ":" + this.sortcode + DASHES);
+			logger.log(Level.INFO,() -> "Sortcode - " + this.sortcode);
+			logger.log(Level.INFO,() -> "Customer name - " + this.getName());
+			logger.log(Level.INFO,() -> "Customer address - " + this.getAddress());
+			logger.log(Level.INFO,() -> "Customer Date of Birth - " + this.getDob().toString());
+			logger.log(Level.INFO,() -> "Customer is new");
 		}
 		else
 		{
-			logger.info(DASHES + this.customerNumber + ":" + this.sortcode + DASHES);
-			logger.info("Sortcode - " + this.sortcode);
-			logger.info("Customer name - " + this.getName());
-			logger.info("Customer address - " + this.getAddress());
-			logger.info("Customer Date of Birth - " + this.getDob().toString());
-			logger.info("Customer credit score - " + this.getCreditScore());
-			logger.info("Customer cs review date - " + this.getCreditScoreReviewDate().toString());
-			logger.info("Customer is being edited");
+			logger.log(Level.INFO,() -> DASHES + this.customerNumber + ":" + this.sortcode + DASHES);
+			logger.log(Level.INFO,() -> "Sortcode - " + this.sortcode);
+			logger.log(Level.INFO,() -> "Customer name - " + this.getName());
+			logger.log(Level.INFO,() -> "Customer address - " + this.getAddress());
+			logger.log(Level.INFO,() -> "Customer Date of Birth - " + this.getDob().toString());
+			logger.log(Level.INFO,() -> "Customer credit score - " + this.getCreditScore());
+			logger.log(Level.INFO,() -> "Customer cs review date - " + this.getCreditScoreReviewDate().toString());
+			logger.log(Level.INFO,() -> "Customer is being edited");
 		}
 	}
 
@@ -387,7 +387,7 @@ public class Customer
 		}
 		catch (SecurityException | IOException e)
 		{
-			logger.log(Level.SEVERE,() -> e.toString());
+			logger.log(Level.SEVERE,e::toString);
 		}
 	}
 

@@ -1150,7 +1150,7 @@ public class AccountsResource extends HBankDataAccess
 			}
 			catch (InvalidRequestException e)
 			{
-				logger.log(Level.SEVERE, () -> e.toString());
+				logger.log(Level.SEVERE, e::toString);
 			}
 			response.put(JSON_ERROR_MSG, ACCOUNT_LITERAL + accountNumber + " not found");
 			myResponse = Response.status(404).entity(response.toString()).build();
