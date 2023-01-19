@@ -44,7 +44,6 @@ import com.ibm.cics.server.RecordBusyException;
 import com.ibm.cics.server.RecordHolder;
 import com.ibm.cics.server.RecordNotFoundException;
 import com.ibm.cics.server.ResourceUnavailableException;
-import com.ibm.json.java.JSONObject;
 
 public class Customer {
 
@@ -72,15 +71,13 @@ public class Customer {
 
 	private static final String ABOUT_TO_GO_TO_SLEEP = "About to go to sleep for ";
 	private static final String MILLISECONDS = " milliseconds";
-	private static final String READ_GIVE_UP = "Cannot read CUSTOMER file after 100 attempts";
-	private static final String BROWSE_GIVE_UP = "Cannot browse CUSTOMER file after 100 attempts";
 	private static final String CODEPAGE = "Cp1047";
 
 	private static final String ERROR_START_BROWSE = "Error starting browse of file CUSTOMER ";
 	private static final String ERROR_BROWSE = "Error browsing file CUSTOMER ";
 	private static final String ERROR_END_BROWSE = "Error ending browse of file CUSTOMER ";
 	private static final String ERROR_DELETE1 = "Error deleting customer ";
-	private static final String ERROR_DELETE2 = " in CUSTOMER file ";
+
 
 	private static final String LAST_CUSTOMER = "0000009999999999";
 
@@ -656,7 +653,6 @@ public class Customer {
 
 		customerFile = new KSDS();
 		customerFile.setName(FILENAME);
-		CounterResource myCounterResource = null;
 		myCustomer = new CUSTOMER();
 		long customerNumber = 1234567890L;
 		String sortCodeString = sortCodeInteger.toString();
@@ -1688,29 +1684,4 @@ public class Customer {
 
 
 
-	private String padAccountNumber(Integer accountNumber2) {
-		// TODO Auto-generated method stub
-		StringBuilder myStringBuilder  = new StringBuilder();
-		for(int z = accountNumber2.toString().length(); z < 8;z++)
-		{
-			myStringBuilder.append("0");	
-		}
-		myStringBuilder.append(accountNumber2.toString());
-		return myStringBuilder.toString();
-	}
-
-
-
-	private String padSortCode(Integer sortcode2) {
-		// TODO Auto-generated method stub
-		StringBuilder myStringBuilder = new StringBuilder();
-		
-		for(int z =sortcode2.toString().length(); z<6;z++)
-		{
-			myStringBuilder.append("0");	
-		}
-		myStringBuilder.append(sortcode2.toString());
-		return myStringBuilder.toString();
-		
-	}
 }

@@ -48,7 +48,6 @@ public class Account extends HBankDataAccess{
 	private static final String GET_ACCOUNTS_BY_BALANCE_COUNT_ONLY = "getAccountsByBalanceCountOnly(Integer sortCode2, BigDecimal balance, boolean lessThan, Integer offset, Integer limit)";
 	
 	private static final String PRE_SELECT_MSG = "About to do SELECT <";
-	private static final String SQL_WAS = "SQL was <";
 	
 	private static final String ACCOUNT_SORTCODE = "ACCOUNT_SORTCODE";
 	private static final String ACCOUNT_CUSTOMER_NUMBER = "ACCOUNT_CUSTOMER_NUMBER";
@@ -717,7 +716,9 @@ public class Account extends HBankDataAccess{
 
 
 
-	private String padCustomerNumber(String customerNumber2) {
+	private String padCustomerNumber(String customerNumber2) 
+	{
+		// Customer Numbers are 10 digit numbers, prefixed with zeroes as required		
 		StringBuilder myStringBuilder  = new StringBuilder();
 		for(int z = customerNumber2.length(); z < 10;z++)
 		{
@@ -730,7 +731,7 @@ public class Account extends HBankDataAccess{
 
 
 	private String padAccountNumber(Integer accountNumber2) {
-		// TODO Auto-generated method stub
+		// Account Numbers are 8 digit numbers, prefixed with zeroes as required
 		StringBuilder myStringBuilder  = new StringBuilder();
 		for(int z = accountNumber2.toString().length(); z < 8;z++)
 		{
@@ -743,7 +744,7 @@ public class Account extends HBankDataAccess{
 
 
 	private String padSortCode(Integer sortcode2) {
-		// TODO Auto-generated method stub
+		// 	Sort codes are 6 digit numbers, prefixed with zeroes as required
 		StringBuilder myStringBuilder = new StringBuilder();
 		
 		for(int z =sortcode2.toString().length(); z<6;z++)

@@ -7,6 +7,7 @@ package com.ibm.cics.cip.bankliberty.webui.data_access;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -308,11 +309,16 @@ public class Customer {
 	private Date sortOutDate(String dateString) {
 		String[] dateArray = dateString.split("-");
 
-		Integer year = new Integer(dateArray[0]);
-		Integer month = new Integer(dateArray[1]);
-		Integer day = new Integer(dateArray[2]);
+		Integer year = Integer.valueOf(dateArray[0]);
+		Integer month = Integer.valueOf(dateArray[1]);
+		Integer day = Integer.valueOf(dateArray[2]);
 
-		return new Date(year - 1900,month - 1, day);
+		Calendar myCalendar = Calendar.getInstance();
+		myCalendar.set(Calendar.YEAR,year);
+		myCalendar.set(Calendar.MONTH,month-1);
+		myCalendar.set(Calendar.DATE,day);
+		
+		return new Date(myCalendar.getTimeInMillis());
 	}
 
 	
