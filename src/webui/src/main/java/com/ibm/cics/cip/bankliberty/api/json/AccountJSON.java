@@ -15,12 +15,10 @@ import javax.ws.rs.FormParam;
  * This class describes the parts of the Account record in JSON format
  */
 
+public class AccountJSON
+{
 
-public class AccountJSON {
-
-    static final String COPYRIGHT =
-      "Copyright IBM Corp. 2022";
-
+	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
 	@NotNull
 	@FormParam("accountType")
@@ -56,124 +54,138 @@ public class AccountJSON {
 	@FormParam("interestRate")
 	BigDecimal interestRate;
 
-	public BigDecimal getInterestRate() {
+	public BigDecimal getInterestRate()
+	{
 		return interestRate;
 	}
 
-	public void setInterestRate(BigDecimal interestRate) {
+	public void setInterestRate(BigDecimal interestRate)
+	{
 		this.interestRate = interestRate;
 	}
 
 	String id;
 
-
-	public String getAccountType() {
+	public String getAccountType()
+	{
 		return accountType;
 	}
 
-	public void setAccountType(String accountType) {
+	public void setAccountType(String accountType)
+	{
 		this.accountType = accountType;
 	}
 
-	public String getCustomerNumber() {
+	public String getCustomerNumber()
+	{
 		return customerNumber;
 	}
 
-	public void setCustomerNumber(String customerNumber) {
+	public void setCustomerNumber(String customerNumber)
+	{
 		this.customerNumber = customerNumber;
 	}
 
-	public Date getDateOpened() {
+	public Date getDateOpened()
+	{
 		return dateOpened;
 	}
 
-	public void setDateOpened(Date dateOpened) {
+	public void setDateOpened(Date dateOpened)
+	{
 		this.dateOpened = dateOpened;
 	}
 
-	public Date getLastStatementDate() {
+	public Date getLastStatementDate()
+	{
 		return lastStatementDate;
 	}
 
-	public void setLastStatementDate(Date lastStatement) {
+	public void setLastStatementDate(Date lastStatement)
+	{
 		this.lastStatementDate = lastStatement;
 	}
 
-	public Date getNextStatementDate() {
+	public Date getNextStatementDate()
+	{
 		return nextStatementDate;
 	}
 
-	public void setNextStatementDate(Date nextStatement) {
+	public void setNextStatementDate(Date nextStatement)
+	{
 		this.nextStatementDate = nextStatement;
 	}
 
-	public Integer getOverdraft() {
+	public Integer getOverdraft()
+	{
 		return overdraft;
 	}
 
-	public void setOverdraft(Integer overdraft) {
+	public void setOverdraft(Integer overdraft)
+	{
 		this.overdraft = overdraft;
 	}
 
-	public BigDecimal getActualBalance() {
+	public BigDecimal getActualBalance()
+	{
 		return actualBalance;
 	}
 
-	public void setActualBalance(BigDecimal actualBalance) {
+	public void setActualBalance(BigDecimal actualBalance)
+	{
 		this.actualBalance = actualBalance;
 	}
 
-	public BigDecimal getAvailableBalance() {
+	public BigDecimal getAvailableBalance()
+	{
 		return availableBalance;
 	}
 
-	public void setAvailableBalance(BigDecimal availableBalance) {
+	public void setAvailableBalance(BigDecimal availableBalance)
+	{
 		this.availableBalance = availableBalance;
 	}
 
-	public String getId() {
+	public String getId()
+	{
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(String id)
+	{
 		this.id = id;
 	}
 
-	public String getSortCode() {
+	public String getSortCode()
+	{
 		return sortCode;
 	}
 
-	public void setSortCode(String sortCode) {
+	public void setSortCode(String sortCode)
+	{
 		this.sortCode = sortCode;
 	}
 
-	//Account type must be one of the below
-	public boolean validateType(String accountType2) {
-		if(accountType2.equalsIgnoreCase("ISA")) 
+	// Account type must be one of the below
+	public boolean validateType(String accountType2)
+	{
+		if (accountType2.equalsIgnoreCase("ISA"))
 		{
 			return true;
 		}
-		if(accountType2.equalsIgnoreCase("MORTGAGE")) 
+		if (accountType2.equalsIgnoreCase("MORTGAGE"))
 		{
 			return true;
 		}
-		if(accountType2.equalsIgnoreCase("LOAN")) 
+		if (accountType2.equalsIgnoreCase("LOAN"))
 		{
 			return true;
 		}
-		if(accountType2.equalsIgnoreCase("SAVING")) 
+		if (accountType2.equalsIgnoreCase("SAVING"))
 		{
 			return true;
 		}
-		return accountType2.equalsIgnoreCase("CURRENT"); 
+		return accountType2.equalsIgnoreCase("CURRENT");
 	}
-
-
-
-
-
-
-
-
 
 }

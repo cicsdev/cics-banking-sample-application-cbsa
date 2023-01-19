@@ -8,7 +8,6 @@
  * 
  */
 
-
 package com.ibm.cics.cip.bankliberty.api.json;
 
 import java.io.IOException;
@@ -36,45 +35,43 @@ import com.ibm.cics.server.TerminalException;
 import com.ibm.json.java.JSONObject;
 
 @Path("/sortCode")
-public class SortCodeResource{
+public class SortCodeResource
+{
 
-    static final String COPYRIGHT =
-      "Copyright IBM Corp. 2022";
-    
-    private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.api.json");
-    
-    public SortCodeResource()
-    {
-    	sortOutLogging();
-    }
+	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
+	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.api.json");
+
+	public SortCodeResource()
+	{
+		sortOutLogging();
+	}
 
 	static String sortCodeString = null;
 
 	@GET
 	@Produces("application/json")
-	public Response getSortCode() {
+	public Response getSortCode()
+	{
 
-		if(sortCodeString == null)
+		if (sortCodeString == null)
 		{
 			Program getscode = new Program();
 			getscode.setName("GETSCODE");
 
 			byte[] sortCodeBytes = new byte[6];
 
-
-
-			try {
+			try
+			{
 				getscode.link(sortCodeBytes);
-			} catch (InvalidRequestException | LengthErrorException
-					| InvalidSystemIdException | NotAuthorisedException
-					| InvalidProgramIdException | RolledBackException
-					| TerminalException e) {
+			}
+			catch (InvalidRequestException | LengthErrorException | InvalidSystemIdException | NotAuthorisedException
+					| InvalidProgramIdException | RolledBackException | TerminalException e)
+			{
 				logger.severe(e.toString());
 			}
 
 			GetSortCode myGetSortCodeData = new GetSortCode(sortCodeBytes);
-
 
 			SortCodeResource.setSortCode(myGetSortCodeData.getSortcode());
 		}
@@ -82,23 +79,23 @@ public class SortCodeResource{
 		JSONObject response = new JSONObject();
 		response.put("sortCode", sortCodeString);
 
-		return Response.status(200)
-				.entity(response.toString())
-				.build();
+		return Response.status(200).entity(response.toString()).build();
 	}
-	private static void setSortCode(String sortcode) 
+
+	private static void setSortCode(String sortcode)
 	{
 		sortCodeString = sortcode;
 	}
+
 	private static void sortOutLogging()
 	{
-		try 
+		try
 		{
 			LogManager.getLogManager().readConfiguration();
-		} 
-		catch (SecurityException | IOException e) 
+		}
+		catch (SecurityException | IOException e)
 		{
 			logger.severe(e.toString());
-		} 
+		}
 	}
 }

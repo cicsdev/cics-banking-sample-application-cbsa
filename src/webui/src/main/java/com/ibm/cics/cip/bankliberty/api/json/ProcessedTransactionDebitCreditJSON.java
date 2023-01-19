@@ -11,29 +11,27 @@ import javax.validation.constraints.NotNull;
 import javax.ws.rs.FormParam;
 
 /**
- * This class describes the parts of the ProcessedTransactionDebitCreditJSON record, used by ProcessedTransaction, in JSON format
+ * This class describes the parts of the ProcessedTransactionDebitCreditJSON
+ * record, used by ProcessedTransaction, in JSON format
  */
 
+public class ProcessedTransactionDebitCreditJSON extends ProcessedTransactionJSON
+{
 
+	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
-public class ProcessedTransactionDebitCreditJSON extends ProcessedTransactionJSON{
-
-    static final String COPYRIGHT =
-      "Copyright IBM Corp. 2022";
-
-
-	
 	@NotNull
 	@FormParam("amount")
 	BigDecimal amount;
-	
-	public BigDecimal getAmount() {
+
+	public BigDecimal getAmount()
+	{
 		return amount;
 	}
 
-	public void setAmount(BigDecimal amount) {
+	public void setAmount(BigDecimal amount)
+	{
 		this.amount = amount;
 	}
-
 
 }

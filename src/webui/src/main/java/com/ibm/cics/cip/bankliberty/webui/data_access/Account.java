@@ -4,15 +4,12 @@
  *
  */
 
-
 package com.ibm.cics.cip.bankliberty.webui.data_access;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Date;
-
-
 
 import java.util.Calendar;
 import java.util.logging.LogManager;
@@ -24,29 +21,25 @@ import com.ibm.cics.cip.bankliberty.api.json.AccountJSON;
 import com.ibm.cics.cip.bankliberty.api.json.AccountsResource;
 import com.ibm.json.java.JSONObject;
 
+public class Account
+{
 
+	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
-public class Account {
+	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.webui.data_access");
 
-    static final String COPYRIGHT =
-      "Copyright IBM Corp. 2022";
+	private String customerNumber;
+	private String sortcode;
+	private String accountNumber;
+	private String type;
+	private BigDecimal interestRate;
+	private Date opened;
+	private int overdraftLimit;
+	private Date lastStatement;
+	private Date nextStatement;
+	private BigDecimal availableBalance;
+	private BigDecimal actualBalance;
 
-    private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.webui.data_access");
-	
-
-
-	private 	String 		customerNumber;
-	private 	String 		sortcode;              
-	private 	String 		accountNumber;
-	private 	String 		type;
-	private 	BigDecimal	interestRate;
-	private 	Date 		opened;
-	private 	int 		overdraftLimit;
-	private 	Date 		lastStatement;
-	private 	Date 		nextStatement;
-	private	 	BigDecimal	availableBalance;    
-	private 	BigDecimal	actualBalance;
-	
 	private static final String JSON_SORT_CODE = "sortCode";
 	private static final String JSON_CUSTOMER_NUMBER = "customerNumber";
 	private static final String JSON_ACCOUNT_TYPE = "accountType";
@@ -63,7 +56,9 @@ public class Account {
 		sortOutLogging();
 	}
 
-	public Account (String custNo, String sortCo, String accNo, String type, BigDecimal intRate, Date opened, int overdraftL, Date lastStatement, Date nextStatement, BigDecimal avBal, BigDecimal acBal) {
+	public Account(String custNo, String sortCo, String accNo, String type, BigDecimal intRate, Date opened,
+			int overdraftL, Date lastStatement, Date nextStatement, BigDecimal avBal, BigDecimal acBal)
+	{
 		setCustomerNumber(custNo);
 		setSortcode(sortCo);
 		setAccountNumber(accNo);
@@ -78,137 +73,164 @@ public class Account {
 	}
 
 	public Account(String custNo, String sortCo, String accNo, String type, BigDecimal intRate, java.util.Date opened,
-			int overdraftL, BigDecimal avBal, BigDecimal acBal) {
+			int overdraftL, BigDecimal avBal, BigDecimal acBal)
+	{
 		setCustomerNumber(custNo);
 		setSortcode(sortCo);
 		setAccountNumber(accNo);
 		setType(type);
-		setInterestRate(intRate.setScale(2,RoundingMode.HALF_UP));
+		setInterestRate(intRate.setScale(2, RoundingMode.HALF_UP));
 		setOpened(new Date(opened.getTime()));
 		setOverdraftLimit(overdraftL);
 		setLastStatement(null);
 		setNextStatement(null);
-		setAvailableBalance(avBal.setScale(2,RoundingMode.HALF_UP));
-		setActualBalance(acBal.setScale(2,RoundingMode.HALF_UP));
+		setAvailableBalance(avBal.setScale(2, RoundingMode.HALF_UP));
+		setActualBalance(acBal.setScale(2, RoundingMode.HALF_UP));
 	}
 
-	public void showInfo(){
-		logger.info("------------"+this.accountNumber+":"+this.sortcode+"------------");
-		logger.info("Customer number - "+this.customerNumber);
-		logger.info("Type - "+this.type);
-		logger.info("Interest rate - "+this.interestRate);
-		logger.info("Opened - "+this.opened.toString());
-		logger.info("Overdraft Limit - "+this.overdraftLimit);
-		logger.info("Last Statement - "+this.lastStatement.toString());
-		logger.info("Next Statement - "+this.nextStatement.toString());
-		logger.info(("Available Balance - "+this.availableBalance));
-		logger.info("Actual Balance - "+this.actualBalance);
+	public void showInfo()
+	{
+		logger.info("------------" + this.accountNumber + ":" + this.sortcode + "------------");
+		logger.info("Customer number - " + this.customerNumber);
+		logger.info("Type - " + this.type);
+		logger.info("Interest rate - " + this.interestRate);
+		logger.info("Opened - " + this.opened.toString());
+		logger.info("Overdraft Limit - " + this.overdraftLimit);
+		logger.info("Last Statement - " + this.lastStatement.toString());
+		logger.info("Next Statement - " + this.nextStatement.toString());
+		logger.info(("Available Balance - " + this.availableBalance));
+		logger.info("Actual Balance - " + this.actualBalance);
 	}
 
-	public String getCustomerNumber() {
+	public String getCustomerNumber()
+	{
 		return customerNumber;
 	}
 
-	public void setCustomerNumber(String custNo) {
+	public void setCustomerNumber(String custNo)
+	{
 		this.customerNumber = custNo;
 	}
 
-	public String getSortcode() {
+	public String getSortcode()
+	{
 		return sortcode;
 	}
 
-	public void setSortcode(String sortcode) {
+	public void setSortcode(String sortcode)
+	{
 		this.sortcode = sortcode;
 	}
 
-	public String getAccountNumber() {
+	public String getAccountNumber()
+	{
 		return accountNumber;
 	}
 
-	public void setAccountNumber(String accNo) {
+	public void setAccountNumber(String accNo)
+	{
 		this.accountNumber = accNo;
 	}
 
-	public String getType() {
+	public String getType()
+	{
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(String type)
+	{
 		this.type = type;
 	}
 
-	public BigDecimal getInterestRate() {
+	public BigDecimal getInterestRate()
+	{
 		return interestRate;
 	}
 
-	public void setInterestRate(BigDecimal intRate) {
+	public void setInterestRate(BigDecimal intRate)
+	{
 		this.interestRate = intRate;
 	}
 
-	public Date getOpened() {
+	public Date getOpened()
+	{
 		return opened;
 	}
 
-	public void setOpened(Date opened) {
+	public void setOpened(Date opened)
+	{
 		this.opened = opened;
 	}
 
-	public int getOverdraftLimit() {
+	public int getOverdraftLimit()
+	{
 		return overdraftLimit;
 	}
 
-	public void setOverdraftLimit(int overdraft) {
+	public void setOverdraftLimit(int overdraft)
+	{
 		this.overdraftLimit = overdraft;
 	}
 
-	public Date getLastStatement() {
+	public Date getLastStatement()
+	{
 		return lastStatement;
 	}
 
-	public void setLastStatement(Date last) {
-		if(last == null){
+	public void setLastStatement(Date last)
+	{
+		if (last == null)
+		{
 			this.lastStatement = this.opened;
 		}
-		else{
+		else
+		{
 			this.lastStatement = last;
 		}
 	}
 
-	public Date getNextStatement() {
+	public Date getNextStatement()
+	{
 		return nextStatement;
 	}
 
-	public void setNextStatement(Date next) {
-		if(next == null){
+	public void setNextStatement(Date next)
+	{
+		if (next == null)
+		{
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(opened);
 			cal.add(Calendar.DATE, +7);
-			this.nextStatement =  new Date(cal.getTime().getTime());
+			this.nextStatement = new Date(cal.getTime().getTime());
 		}
-		else{
+		else
+		{
 			this.nextStatement = next;
 		}
 	}
 
-
-
-	public BigDecimal getAvailableBalance() {
+	public BigDecimal getAvailableBalance()
+	{
 		return availableBalance;
 	}
 
-	public void setAvailableBalance(BigDecimal availableBalance) {
+	public void setAvailableBalance(BigDecimal availableBalance)
+	{
 		this.availableBalance = availableBalance;
 	}
 
-	public BigDecimal getActualBalance() {
+	public BigDecimal getActualBalance()
+	{
 		return actualBalance;
 	}
 
-	public void setActualBalance(BigDecimal actualBalance) {
+	public void setActualBalance(BigDecimal actualBalance)
+	{
 		this.actualBalance = actualBalance;
 	}
 
-	public boolean updateThis(){
+	public boolean updateThis()
+	{
 		AccountsResource myAccountsResource = new AccountsResource();
 
 		AccountJSON myAccountJSON = new AccountJSON();
@@ -218,19 +240,20 @@ public class Account {
 		myAccountJSON.setOverdraft(this.getOverdraftLimit());
 		myAccountJSON.setSortCode(this.getSortcode());
 
-		Response myAccountsResponse = myAccountsResource.updateAccountInternal(Long.parseLong(this.getAccountNumber()), myAccountJSON);
+		Response myAccountsResponse = myAccountsResource.updateAccountInternal(Long.parseLong(this.getAccountNumber()),
+				myAccountJSON);
 
 		String myAccountsString = null;
 		JSONObject myAccountsJSON = null;
 
-		if(myAccountsResponse.getStatus() == 200)
+		if (myAccountsResponse.getStatus() == 200)
 		{
 			myAccountsString = myAccountsResponse.getEntity().toString();
-			try 
+			try
 			{
 				myAccountsJSON = JSONObject.parse(myAccountsString);
 			}
-			catch (IOException e) 
+			catch (IOException e)
 			{
 				logger.severe(e.toString());
 				return false;
@@ -242,7 +265,6 @@ public class Account {
 			this.nextStatement = sortOutDate((String) myAccount.get(JSON_NEXT_STATEMENT_DATE));
 			this.opened = sortOutDate((String) myAccount.get(JSON_DATE_OPENED));
 
-
 			String accountNoString = (String) myAccount.get("id");
 
 			String customerNoString = (String) myAccount.get(JSON_CUSTOMER_NUMBER);
@@ -250,10 +272,13 @@ public class Account {
 			this.accountNumber = accountNoString;
 			this.customerNumber = customerNoString;
 
-			this.actualBalance = BigDecimal.valueOf((Double) myAccount.get(JSON_ACTUAL_BALANCE)).setScale(2,RoundingMode.HALF_UP);
-			this.availableBalance = BigDecimal.valueOf((Double) myAccount.get(JSON_AVAILABLE_BALANCE)).setScale(2,RoundingMode.HALF_UP);
-			this.interestRate = BigDecimal.valueOf((Double) myAccount.get(JSON_INTEREST_RATE)).setScale(2,RoundingMode.HALF_UP);
-			this.overdraftLimit = Integer.valueOf((String)myAccount.get(JSON_OVERDRAFT));
+			this.actualBalance = BigDecimal.valueOf((Double) myAccount.get(JSON_ACTUAL_BALANCE)).setScale(2,
+					RoundingMode.HALF_UP);
+			this.availableBalance = BigDecimal.valueOf((Double) myAccount.get(JSON_AVAILABLE_BALANCE)).setScale(2,
+					RoundingMode.HALF_UP);
+			this.interestRate = BigDecimal.valueOf((Double) myAccount.get(JSON_INTEREST_RATE)).setScale(2,
+					RoundingMode.HALF_UP);
+			this.overdraftLimit = Integer.valueOf((String) myAccount.get(JSON_OVERDRAFT));
 			this.sortcode = (String) myAccount.get(JSON_SORT_CODE);
 			this.type = (String) myAccount.get(JSON_ACCOUNT_TYPE);
 		}
@@ -264,7 +289,8 @@ public class Account {
 		return true;
 	}
 
-	public boolean deleteFromDB(){
+	public boolean deleteFromDB()
+	{
 		AccountsResource myAccountsResource = new AccountsResource();
 
 		Response myAccountsResponse = null;
@@ -272,14 +298,14 @@ public class Account {
 		JSONObject myAccountsJSON = null;
 
 		myAccountsResponse = myAccountsResource.deleteAccountInternal(Long.parseLong(this.accountNumber));
-		if(myAccountsResponse.getStatus() == 200)
+		if (myAccountsResponse.getStatus() == 200)
 		{
 			myAccountsString = myAccountsResponse.getEntity().toString();
-			try 
+			try
 			{
 				myAccountsJSON = JSONObject.parse(myAccountsString);
-			} 
-			catch (IOException e) 
+			}
+			catch (IOException e)
 			{
 
 				logger.severe(e.toString());
@@ -287,12 +313,11 @@ public class Account {
 				return false;
 			}
 
-			JSONObject myAccount =  myAccountsJSON;
+			JSONObject myAccount = myAccountsJSON;
 
 			this.lastStatement = sortOutDate((String) myAccount.get(JSON_LAST_STATEMENT_DATE));
 			this.nextStatement = sortOutDate((String) myAccount.get(JSON_NEXT_STATEMENT_DATE));
 			this.opened = sortOutDate((String) myAccount.get(JSON_DATE_OPENED));
-
 
 			String accountNoString = (String) myAccount.get("id");
 
@@ -301,10 +326,13 @@ public class Account {
 			this.accountNumber = accountNoString;
 			this.customerNumber = customerNoString;
 
-			this.actualBalance = BigDecimal.valueOf((Double) myAccount.get(JSON_ACTUAL_BALANCE)).setScale(2,RoundingMode.HALF_UP);
-			this.availableBalance = BigDecimal.valueOf((Double) myAccount.get(JSON_AVAILABLE_BALANCE)).setScale(2,RoundingMode.HALF_UP);
-			this.interestRate = BigDecimal.valueOf((Double) myAccount.get(JSON_INTEREST_RATE)).setScale(2,RoundingMode.HALF_UP);
-			this.overdraftLimit = Integer.valueOf((String)myAccount.get(JSON_OVERDRAFT));
+			this.actualBalance = BigDecimal.valueOf((Double) myAccount.get(JSON_ACTUAL_BALANCE)).setScale(2,
+					RoundingMode.HALF_UP);
+			this.availableBalance = BigDecimal.valueOf((Double) myAccount.get(JSON_AVAILABLE_BALANCE)).setScale(2,
+					RoundingMode.HALF_UP);
+			this.interestRate = BigDecimal.valueOf((Double) myAccount.get(JSON_INTEREST_RATE)).setScale(2,
+					RoundingMode.HALF_UP);
+			this.overdraftLimit = Integer.valueOf((String) myAccount.get(JSON_OVERDRAFT));
 			this.sortcode = (String) myAccount.get(JSON_SORT_CODE);
 			this.type = (String) myAccount.get(JSON_ACCOUNT_TYPE);
 			return true;
@@ -313,42 +341,42 @@ public class Account {
 		return false;
 	}
 
-	public int addToDB(){
+	public int addToDB()
+	{
 		AccountsResource myAccountsResource = new AccountsResource();
 
 		Response myAccountsResponse = null;
 		String myAccountsString = null;
 		JSONObject myAccountsJSON = null;
-		
+
 		AccountJSON myAccountJSON = new AccountJSON();
-		
+
 		myAccountJSON.setAccountType(this.getType());
-		myAccountJSON.setInterestRate(this.getInterestRate().setScale(2,RoundingMode.HALF_UP));
+		myAccountJSON.setInterestRate(this.getInterestRate().setScale(2, RoundingMode.HALF_UP));
 		myAccountJSON.setOverdraft(new Integer(this.getOverdraftLimit()));
 		myAccountJSON.setCustomerNumber(this.getCustomerNumber());
 		myAccountJSON.setSortCode(this.getSortcode());
 
 		myAccountsResponse = myAccountsResource.createAccountInternal(myAccountJSON);
-		if(myAccountsResponse.getStatus() == 201)
+		if (myAccountsResponse.getStatus() == 201)
 		{
 			myAccountsString = myAccountsResponse.getEntity().toString();
-			try 
+			try
 			{
 				myAccountsJSON = JSONObject.parse(myAccountsString);
 			}
-			catch (IOException e) 
+			catch (IOException e)
 			{
 				logger.severe(e.toString());
 				myAccountsResponse.close();
 				return -1;
 			}
 
-			JSONObject myAccount =  myAccountsJSON;
+			JSONObject myAccount = myAccountsJSON;
 
 			this.lastStatement = sortOutDate((String) myAccount.get(JSON_LAST_STATEMENT_DATE));
 			this.nextStatement = sortOutDate((String) myAccount.get(JSON_NEXT_STATEMENT_DATE));
 			this.opened = sortOutDate((String) myAccount.get(JSON_DATE_OPENED));
-
 
 			String accountNoString = (String) myAccount.get("id");
 
@@ -357,10 +385,13 @@ public class Account {
 			this.accountNumber = accountNoString;
 			this.customerNumber = customerNoString;
 
-			this.actualBalance = BigDecimal.valueOf((Double) myAccount.get(JSON_ACTUAL_BALANCE)).setScale(2,RoundingMode.HALF_UP);
-			this.availableBalance = BigDecimal.valueOf((Double) myAccount.get(JSON_AVAILABLE_BALANCE)).setScale(2,RoundingMode.HALF_UP);
-			this.interestRate = BigDecimal.valueOf((Double) myAccount.get(JSON_INTEREST_RATE)).setScale(2,RoundingMode.HALF_UP);
-			this.overdraftLimit = Integer.valueOf((String)myAccount.get(JSON_OVERDRAFT));
+			this.actualBalance = BigDecimal.valueOf((Double) myAccount.get(JSON_ACTUAL_BALANCE)).setScale(2,
+					RoundingMode.HALF_UP);
+			this.availableBalance = BigDecimal.valueOf((Double) myAccount.get(JSON_AVAILABLE_BALANCE)).setScale(2,
+					RoundingMode.HALF_UP);
+			this.interestRate = BigDecimal.valueOf((Double) myAccount.get(JSON_INTEREST_RATE)).setScale(2,
+					RoundingMode.HALF_UP);
+			this.overdraftLimit = Integer.valueOf((String) myAccount.get(JSON_OVERDRAFT));
 			this.sortcode = (String) myAccount.get(JSON_SORT_CODE);
 			this.type = (String) myAccount.get(JSON_ACCOUNT_TYPE);
 			myAccountsResponse.close();
@@ -369,7 +400,9 @@ public class Account {
 		myAccountsResponse.close();
 		return -1;
 	}
-	public boolean inDB(){
+
+	public boolean inDB()
+	{
 		AccountsResource myAccountsResource = new AccountsResource();
 
 		Response myAccountsResponse = null;
@@ -377,23 +410,25 @@ public class Account {
 		JSONObject myAccountsJSON = null;
 
 		myAccountsResponse = myAccountsResource.getAccountInternal(Long.parseLong(this.accountNumber));
-		if(myAccountsResponse.getStatus() == 200)
+		if (myAccountsResponse.getStatus() == 200)
 		{
 			myAccountsString = myAccountsResponse.getEntity().toString();
-			try {
+			try
+			{
 				myAccountsJSON = JSONObject.parse(myAccountsString);
-			} catch (IOException e) {
+			}
+			catch (IOException e)
+			{
 				logger.severe(e.toString());
 				myAccountsResponse.close();
 				return false;
 			}
 
-			JSONObject myAccount =  myAccountsJSON;
+			JSONObject myAccount = myAccountsJSON;
 
 			this.lastStatement = sortOutDate((String) myAccount.get(JSON_LAST_STATEMENT_DATE));
 			this.nextStatement = sortOutDate((String) myAccount.get(JSON_NEXT_STATEMENT_DATE));
 			this.opened = sortOutDate((String) myAccount.get(JSON_DATE_OPENED));
-
 
 			String accountNoString = (String) myAccount.get("id");
 
@@ -402,10 +437,13 @@ public class Account {
 			this.accountNumber = accountNoString;
 			this.customerNumber = customerNoString;
 
-			this.actualBalance = BigDecimal.valueOf((Double) myAccount.get(JSON_ACTUAL_BALANCE)).setScale(2,RoundingMode.HALF_UP);
-			this.availableBalance = BigDecimal.valueOf((Double) myAccount.get(JSON_AVAILABLE_BALANCE)).setScale(2,RoundingMode.HALF_UP);
-			this.interestRate = BigDecimal.valueOf((Double) myAccount.get(JSON_INTEREST_RATE)).setScale(2,RoundingMode.HALF_UP);
-			this.overdraftLimit = Integer.valueOf((String)myAccount.get(JSON_OVERDRAFT));
+			this.actualBalance = BigDecimal.valueOf((Double) myAccount.get(JSON_ACTUAL_BALANCE)).setScale(2,
+					RoundingMode.HALF_UP);
+			this.availableBalance = BigDecimal.valueOf((Double) myAccount.get(JSON_AVAILABLE_BALANCE)).setScale(2,
+					RoundingMode.HALF_UP);
+			this.interestRate = BigDecimal.valueOf((Double) myAccount.get(JSON_INTEREST_RATE)).setScale(2,
+					RoundingMode.HALF_UP);
+			this.overdraftLimit = Integer.valueOf((String) myAccount.get(JSON_OVERDRAFT));
 			this.sortcode = (String) myAccount.get(JSON_SORT_CODE);
 			this.type = (String) myAccount.get(JSON_ACCOUNT_TYPE);
 			myAccountsResponse.close();
@@ -414,13 +452,10 @@ public class Account {
 		myAccountsResponse.close();
 		return false;
 
-
 	}
 
-
-
-	
-	private Date sortOutDate(String dateString) {
+	private Date sortOutDate(String dateString)
+	{
 		String[] dateArray = dateString.split("-");
 
 		Integer year = new Integer(dateArray[0]);
@@ -429,16 +464,16 @@ public class Account {
 
 		return new Date(year - 1900, month - 1, day);
 	}
-	
+
 	private static void sortOutLogging()
 	{
-		try 
+		try
 		{
 			LogManager.getLogManager().readConfiguration();
-		} 
-		catch (SecurityException | IOException e) 
+		}
+		catch (SecurityException | IOException e)
 		{
 			logger.severe(e.toString());
-		} 
+		}
 	}
 }

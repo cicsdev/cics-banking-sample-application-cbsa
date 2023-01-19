@@ -11,45 +11,41 @@ import javax.validation.constraints.NotNull;
 import javax.ws.rs.FormParam;
 
 /**
- * This class describes the parts of the ProcessedTransactionTransferLocalJSON record, used by ProcessedTransaction, in JSON format
+ * This class describes the parts of the ProcessedTransactionTransferLocalJSON
+ * record, used by ProcessedTransaction, in JSON format
  */
 
+public class ProcessedTransactionTransferLocalJSON extends ProcessedTransactionJSON
+{
 
+	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
-
-public class ProcessedTransactionTransferLocalJSON extends ProcessedTransactionJSON{
-
-    static final String COPYRIGHT =
-      "Copyright IBM Corp. 2022";
-
-
-	
 	@NotNull
 	@FormParam("amount")
 	BigDecimal amount;
-	
-	public BigDecimal getAmount() {
+
+	public BigDecimal getAmount()
+	{
 		return amount;
 	}
 
-	public void setAmount(BigDecimal amount) {
+	public void setAmount(BigDecimal amount)
+	{
 		this.amount = amount;
 	}
 
-	public String getTargetAccountNumber() {
+	public String getTargetAccountNumber()
+	{
 		return targetAccountNumber;
 	}
 
-	public void setTargetAccountNumber(String targetAccountNumber) {
+	public void setTargetAccountNumber(String targetAccountNumber)
+	{
 		this.targetAccountNumber = targetAccountNumber;
 	}
 
 	@NotNull
 	@FormParam("targetAccountNumber")
 	String targetAccountNumber;
-
-
-	
-
 
 }

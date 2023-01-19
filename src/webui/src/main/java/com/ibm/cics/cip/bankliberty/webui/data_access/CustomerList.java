@@ -5,8 +5,6 @@
  */
 package com.ibm.cics.cip.bankliberty.webui.data_access;
 
-
-
 import java.io.IOException;
 
 import java.sql.Date;
@@ -26,16 +24,12 @@ import com.ibm.cics.cip.bankliberty.webui.data_access.Customer;
 import com.ibm.json.java.JSONArray;
 import com.ibm.json.java.JSONObject;
 
+public class CustomerList
+{
 
-
-public class CustomerList {
-
-	static final String COPYRIGHT =
-			"Copyright IBM Corp. 2022";
+	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
 	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.webui.dataAccess");
-
-
 
 	private List<Customer> customerList = new ArrayList<Customer>();
 
@@ -52,40 +46,41 @@ public class CustomerList {
 	private static final String JSON_CUSTOMERS = "customers";
 	private static final String JSON_NUMBER_OF_CUSTOMERS = "numberOfCustomers";
 
-
-	public int getCount(String filter){
-		if(this.customerList.isEmpty())
+	public int getCount(String filter)
+	{
+		if (this.customerList.isEmpty())
 		{
 			howMany(filter);
 		}
 		return this.count;
 	}
 
-	private void howMany(String filter){
+	private void howMany(String filter)
+	{
 
 		CustomerResource myCustomerResource = new CustomerResource();
 		Response myCustomerResponse = null;
 
-		//                0123456789012345678901234
+		// 0123456789012345678901234
 
 		try
 		{
-			if(filter.startsWith(" AND CUSTOMER_NAME like '"))
+			if (filter.startsWith(" AND CUSTOMER_NAME like '"))
 			{
 
 				String customerNameFilter = filter.substring(25);
-				customerNameFilter = customerNameFilter.substring(0,customerNameFilter.length() -1);
+				customerNameFilter = customerNameFilter.substring(0, customerNameFilter.length() - 1);
 
-				myCustomerResponse = myCustomerResource.getCustomersByNameExternal(customerNameFilter,0,0,true);
+				myCustomerResponse = myCustomerResource.getCustomersByNameExternal(customerNameFilter, 0, 0, true);
 				String myCustomersString = myCustomerResponse.getEntity().toString();
 				JSONObject myCustomersJSON;
 				myCustomersJSON = JSONObject.parse(myCustomersString);
 				long customerCount = (Long) myCustomersJSON.get(JSON_NUMBER_OF_CUSTOMERS);
-				this.count = (int)customerCount;
+				this.count = (int) customerCount;
 			}
 
-			//                    01234567890123456789012
-			if(filter.startsWith(" AND CUSTOMER_NUMBER = "))
+			// 01234567890123456789012
+			if (filter.startsWith(" AND CUSTOMER_NUMBER = "))
 			{
 				String customerNumberFilter = filter.substring(23);
 				Long customerNumber = new Long(customerNumberFilter);
@@ -93,30 +88,30 @@ public class CustomerList {
 				myCustomerResponse = myCustomerResource.getCustomerExternal(customerNumber);
 				String myCustomersString = myCustomerResponse.getEntity().toString();
 				JSONObject myCustomerJSON;
-				this.count= 0;
-				if(myCustomerResponse.getStatus() == 200)
+				this.count = 0;
+				if (myCustomerResponse.getStatus() == 200)
 				{
 					myCustomerJSON = JSONObject.parse(myCustomersString);
-					Date myDate = sortOutDate((String)myCustomerJSON.get(JSON_DATE_OF_BIRTH));
-					String id = (String)myCustomerJSON.get(JSON_ID);
-					if(id != null)
+					Date myDate = sortOutDate((String) myCustomerJSON.get(JSON_DATE_OF_BIRTH));
+					String id = (String) myCustomerJSON.get(JSON_ID);
+					if (id != null)
 					{
 						this.count = 1;
 					}
 				}
 			}
 
-			if(filter.length() ==  0)
+			if (filter.length() == 0)
 			{
 
-				myCustomerResponse = myCustomerResource.getCustomersExternal(new Integer(250000), new Integer(0),true);
+				myCustomerResponse = myCustomerResource.getCustomersExternal(new Integer(250000), new Integer(0), true);
 				String myCustomersString = myCustomerResponse.getEntity().toString();
-				if(myCustomerResponse.getStatus() == 200)
+				if (myCustomerResponse.getStatus() == 200)
 				{
 					JSONObject myCustomersJSON;
 					myCustomersJSON = JSONObject.parse(myCustomersString);
 					long customerCount = (Long) myCustomersJSON.get(JSON_NUMBER_OF_CUSTOMERS);
-					this.count = (int)customerCount;
+					this.count = (int) customerCount;
 
 				}
 				else
@@ -125,16 +120,15 @@ public class CustomerList {
 				}
 			}
 		}
-		catch (IOException e) 
+		catch (IOException e)
 		{
 			logger.severe(e.toString());
 		}
 
 	}
 
-
-	public void doGet(int limit, int offset, String filter) throws ServletException, IOException {
-
+	public void doGet(int limit, int offset, String filter) throws ServletException, IOException
+	{
 
 		CustomerResource myCustomerResource = new CustomerResource();
 
@@ -142,17 +136,15 @@ public class CustomerList {
 
 		String myCustomerString = null;
 
-
 		try
 		{
-			if(filter.length() == 0)
+			if (filter.length() == 0)
 			{
 
-				myCustomerResponse = myCustomerResource.getCustomersExternal(limit,offset,false);
-
+				myCustomerResponse = myCustomerResource.getCustomersExternal(limit, offset, false);
 
 			}
-			if(filter.startsWith(" AND CUSTOMER_NUMBER = "))
+			if (filter.startsWith(" AND CUSTOMER_NUMBER = "))
 			{
 
 				this.customerList.clear();
@@ -162,27 +154,25 @@ public class CustomerList {
 				myCustomerResponse = myCustomerResource.getCustomerExternal(customerNumber);
 			}
 
-
-			if(filter.startsWith(" AND CUSTOMER_NAME like '"))
+			if (filter.startsWith(" AND CUSTOMER_NAME like '"))
 			{
 				String customerNameFilter = filter.substring(25);
-				customerNameFilter = customerNameFilter.substring(0,customerNameFilter.length() -1);
+				customerNameFilter = customerNameFilter.substring(0, customerNameFilter.length() - 1);
 
-				myCustomerResponse = myCustomerResource.getCustomersByNameExternal(customerNameFilter,limit,offset,false);
+				myCustomerResponse = myCustomerResource.getCustomersByNameExternal(customerNameFilter, limit, offset,
+						false);
 			}
 
-
-
-			if(offset == 0)
+			if (offset == 0)
 			{
 				howMany(filter);
 			}
 
-			if(myCustomerResponse == null)
+			if (myCustomerResponse == null)
 			{
 				return;
 			}
-			if(myCustomerResponse.getStatus() == 200)
+			if (myCustomerResponse.getStatus() == 200)
 			{
 				myCustomerString = myCustomerResponse.getEntity().toString();
 				this.customerList.clear();
@@ -190,22 +180,17 @@ public class CustomerList {
 				JSONObject myCustomersJSON = JSONObject.parse(myCustomerString);
 				JSONArray myCustomersArrayJSON = (JSONArray) myCustomersJSON.get(JSON_CUSTOMERS);
 				long customerCount = myCustomersArrayJSON.size();
-				for(int i = 0;i < customerCount;i++)
+				for (int i = 0; i < customerCount; i++)
 				{
 					JSONObject myCustomer = (JSONObject) myCustomersArrayJSON.get(i);
-					Date dateOfBirth = sortOutDate((String)myCustomer.get(JSON_DATE_OF_BIRTH));
-					Date creditScoreReviewDate = sortOutDate((String)myCustomer.get(JSON_CUSTOMER_REVIEW_DATE));
+					Date dateOfBirth = sortOutDate((String) myCustomer.get(JSON_DATE_OF_BIRTH));
+					Date creditScoreReviewDate = sortOutDate((String) myCustomer.get(JSON_CUSTOMER_REVIEW_DATE));
 
-					String id = (String)myCustomer.get(JSON_ID);
+					String id = (String) myCustomer.get(JSON_ID);
 
-					Customer myListCustomer = new Customer(id, 
-							(String)myCustomer.get(JSON_SORT_CODE),
-							(String)myCustomer.get(JSON_CUSTOMER_NAME),
-							(String)myCustomer.get(JSON_CUSTOMER_ADDRESS), 
-							dateOfBirth, (String)myCustomer.get(JSON_CUSTOMER_CREDIT_SCORE), 
-							creditScoreReviewDate);
-
-
+					Customer myListCustomer = new Customer(id, (String) myCustomer.get(JSON_SORT_CODE),
+							(String) myCustomer.get(JSON_CUSTOMER_NAME), (String) myCustomer.get(JSON_CUSTOMER_ADDRESS),
+							dateOfBirth, (String) myCustomer.get(JSON_CUSTOMER_CREDIT_SCORE), creditScoreReviewDate);
 
 					this.customerList.add(myListCustomer);
 
@@ -217,15 +202,14 @@ public class CustomerList {
 			}
 		}
 
-		catch (IOException e1) 
+		catch (IOException e1)
 		{
 			logger.severe(e1.toString());
 		}
 
-
 	}
 
-	private Date sortOutDate(String dateString) 
+	private Date sortOutDate(String dateString)
 	{
 		String[] dateArray = dateString.split("-");
 
@@ -234,31 +218,33 @@ public class CustomerList {
 		Integer day = new Integer(dateArray[2]);
 
 		Calendar myCalendar = Calendar.getInstance();
-		myCalendar.set(Calendar.YEAR,year);
-		myCalendar.set(Calendar.MONTH,month-1);
+		myCalendar.set(Calendar.YEAR, year);
+		myCalendar.set(Calendar.MONTH, month - 1);
 		myCalendar.set(Calendar.DATE, day);
 
 		Date myDate = new Date(myCalendar.getTimeInMillis());
 		return myDate;
 	}
 
-
-
-	public Customer getCustomer(int i){
+	public Customer getCustomer(int i)
+	{
 		return this.customerList.get(i);
 	}
-	public int size(){
+
+	public int size()
+	{
 		return this.customerList.size();
 	}
+
 	public CustomerList()
 	{
 		sortOutLogging();
 		CustomerList.setSortcode();
 	}
 
-
-	private static void setSortcode(){
-		if(sortcode == null)
+	private static void setSortcode()
+	{
+		if (sortcode == null)
 		{
 			SortCodeResource mySortCodeResource = new SortCodeResource();
 			Response mySortCodeJSON = mySortCodeResource.getSortCode();
@@ -267,20 +253,21 @@ public class CustomerList {
 
 	}
 
-	public List<Customer> getList(){
+	public List<Customer> getList()
+	{
 		return customerList;
 	}
 
 	private static void sortOutLogging()
 	{
-		try 
+		try
 		{
 			LogManager.getLogManager().readConfiguration();
-		} 
-		catch (SecurityException | IOException e) 
+		}
+		catch (SecurityException | IOException e)
 		{
 			logger.severe(e.toString());
-		} 
+		}
 	}
 
 }

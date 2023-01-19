@@ -35,16 +35,15 @@ import com.ibm.cics.server.Task;
 import com.ibm.cics.server.ChildResponse.CompletionStatus;
 
 /**
- * This class is used with the jCICS ASYNC API to generate multiple credit scores
+ * This class is used with the jCICS ASYNC API to generate multiple credit
+ * scores
  * 
  */
 
+public class CreditScoreCICS540
+{
 
-
-public class CreditScoreCICS540 {
-
-	static final String COPYRIGHT =
-			"Copyright IBM Corp. 2022";
+	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
 	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.api.json");
 
@@ -54,7 +53,7 @@ public class CreditScoreCICS540 {
 
 		int creditAgencyCount = 5;
 
-		/*                Set up a random CS review date within the next 21 days */
+		/* Set up a random CS review date within the next 21 days */
 
 		Calendar calendar = Calendar.getInstance();
 		long nowMs = calendar.getTimeInMillis();
@@ -68,17 +67,17 @@ public class CreditScoreCICS540 {
 		List<Future<ChildResponse>> children = new ArrayList<>();
 		String[] containerID = new String[creditAgencyCount];
 		int creditScoreTotal = 0;
-		
-		try 
+
+		try
 		{
 			myCreditScoreChannel = Task.getTask().createChannel("CIPCREDCHANN");
 
 			String[] transactionID = new String[creditAgencyCount];
 
-			for(int i=0;i < creditAgencyCount;i++)
+			for (int i = 0; i < creditAgencyCount; i++)
 			{
-				transactionID[i] = "O" + "CR" + (i +1);
-				containerID[i] = "CIP" + ((char)('A'+i));
+				transactionID[i] = "O" + "CR" + (i + 1);
+				containerID[i] = "CIP" + ((char) ('A' + i));
 
 				CRECUST myCRECUST = new CRECUST();
 				myCRECUST.setCommAddress(customer.getCustomerAddress());
@@ -98,75 +97,76 @@ public class CreditScoreCICS540 {
 				Container myContainer = myCreditScoreChannel.createContainer(containerID[i]);
 				myContainer.put(myCRECUST.getByteBuffer());
 
-				children.add(asService.runTransactionId(transactionID[i],myCreditScoreChannel));
+				children.add(asService.runTransactionId(transactionID[i], myCreditScoreChannel));
 
 			}
 		}
-		catch (CCSIDErrorException | CodePageErrorException | ContainerErrorException | InvalidRequestException | InvalidTransactionIdException | NotAuthorisedException | ResourceDisabledException | ChannelErrorException e) 
+		catch (CCSIDErrorException | CodePageErrorException | ContainerErrorException | InvalidRequestException
+				| InvalidTransactionIdException | NotAuthorisedException | ResourceDisabledException
+				| ChannelErrorException e)
 		{
 			logger.severe(e.toString());
 			return null;
-		} 
+		}
 
-	int completedRequests = 0;
-	while(completedRequests < creditAgencyCount)
-	{
-		ChildResponse anyOneWillDo = null;
-		try 
+		int completedRequests = 0;
+		while (completedRequests < creditAgencyCount)
 		{
-			anyOneWillDo = asService.getAny();
-
-			if(anyOneWillDo.getCompletionStatus().equals(CompletionStatus.NORMAL))
+			ChildResponse anyOneWillDo = null;
+			try
 			{
-				Channel responseChannel = anyOneWillDo.getChannel();
-				customer.setCreditScore("123");
-				Container myContainer;
-				boolean foundIt = false;
-				for(int j = 0; !foundIt;j++)
+				anyOneWillDo = asService.getAny();
+
+				if (anyOneWillDo.getCompletionStatus().equals(CompletionStatus.NORMAL))
 				{
-					if(anyOneWillDo.equals(children.get(j)))
+					Channel responseChannel = anyOneWillDo.getChannel();
+					customer.setCreditScore("123");
+					Container myContainer;
+					boolean foundIt = false;
+					for (int j = 0; !foundIt; j++)
 					{
-						myContainer = responseChannel.getContainer(containerID[j]);
-						byte[] myContainerBytes = myContainer.get();
-						CRECUST myCRECUST = new CRECUST(myContainerBytes);
-						creditScoreTotal = creditScoreTotal + myCRECUST.getCommCreditScore();
-						foundIt = true;
-						completedRequests++;
+						if (anyOneWillDo.equals(children.get(j)))
+						{
+							myContainer = responseChannel.getContainer(containerID[j]);
+							byte[] myContainerBytes = myContainer.get();
+							CRECUST myCRECUST = new CRECUST(myContainerBytes);
+							creditScoreTotal = creditScoreTotal + myCRECUST.getCommCreditScore();
+							foundIt = true;
+							completedRequests++;
+						}
 					}
+
 				}
-
-			} 
-			else
-			{
-				logger.log(Level.SEVERE,() -> "One of the agencies didn't work");
-				creditAgencyCount--;
+				else
+				{
+					logger.log(Level.SEVERE, () -> "One of the agencies didn't work");
+					creditAgencyCount--;
+				}
 			}
-		}
-		catch (InvalidRequestException | NotFoundException | ChannelErrorException | CCSIDErrorException | CodePageErrorException | ContainerErrorException e) 
-		{
-			logger.severe(e.toString());
-			Task.getTask().abend("CRDT");
+			catch (InvalidRequestException | NotFoundException | ChannelErrorException | CCSIDErrorException
+					| CodePageErrorException | ContainerErrorException e)
+			{
+				logger.severe(e.toString());
+				Task.getTask().abend("CRDT");
+			}
+
 		}
 
+		int creditScoreAverage = creditScoreTotal / creditAgencyCount;
+		customer.setCreditScore(Integer.toString(creditScoreAverage));
+		return customer;
 	}
 
-
-
-	int creditScoreAverage = creditScoreTotal / creditAgencyCount;
-	customer.setCreditScore(Integer.toString(creditScoreAverage));
-	return customer;
-}
-
-private static void sortOutLogging()
-{
-	try 
+	private static void sortOutLogging()
 	{
-		LogManager.getLogManager().readConfiguration();
-	} 
-	catch (SecurityException | IOException e) 
-	{
-		logger.severe(e.toString());
-	} 
-}
+		try
+		{
+			LogManager.getLogManager().readConfiguration();
+		}
+		catch (SecurityException | IOException e)
+		{
+			logger.severe(e.toString());
+		}
+	}
 
 }
