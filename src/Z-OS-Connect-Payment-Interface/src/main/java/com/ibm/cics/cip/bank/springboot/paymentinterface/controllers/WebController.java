@@ -26,181 +26,188 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ibm.cics.cip.bank.springboot.paymentinterface.ConnectionInfo;
-import com.ibm.cics.cip.bank.springboot.paymentinterface.PaymentInterface;
 import com.ibm.cics.cip.bank.springboot.paymentinterface.jsonclasses.paymentinterface.PaymentInterfaceJson;
 import com.ibm.cics.cip.bank.springboot.paymentinterface.jsonclasses.paymentinterface.TransferForm;
-
 
 // The code in this file is quite repetitive, however a try/catch block would've required too much over-engineering to do
 // Ideally I'd only need to send off one class and I'd only get either an account or customer object back to deserialise,
 // but all of the objects returned have slightly different formats and/or fields.
 
 @Controller
-public class WebController implements WebMvcConfigurer {
+public class WebController implements WebMvcConfigurer
+{
 
-    static final String COPYRIGHT =
-      "Copyright IBM Corp. 2022";
+	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
+	private static final Logger log = LoggerFactory.getLogger(WebController.class);
+	private static final String FORM_NAME = "paymentInterfaceForm";
+	private static final String LARGE_TEXT = "largeText";
+	private static final String SMALL_TEXT = "smallText";
+	private static final String PAYMENT_ERROR = "Payment Error";
 
-    private static final Logger log = LoggerFactory.getLogger(WebController.class);
-    private static final String FORM_NAME = "paymentInterfaceForm";
-    private static final String LARGE_TEXT = "largeText";
-    private static final String SMALL_TEXT = "smallText";
-    private static final String PAYMENT_ERROR = "Payment Error";
+	// Payment Interface
+	@GetMapping("/")
+	public String showForm(TransferForm personForm)
+	{
+		return FORM_NAME;
+	}
 
+	@PostMapping("/paydbcr")
+	public String checkPersonInfo(@Valid TransferForm transferForm, BindingResult bindingResult, Model model)
+			throws JsonProcessingException
+	{
 
-    // Payment Interface
-    @GetMapping("/")
-    public String showForm(TransferForm personForm) {
-        return FORM_NAME;
-    }
+		// The same page is returned, this time with the errors given as an
+		// object.
+		if (bindingResult.hasErrors())
+		{
+			return FORM_NAME;
+		}
 
-    @PostMapping("/paydbcr")
-    public String checkPersonInfo(@Valid TransferForm transferForm, BindingResult bindingResult, Model model)
-            throws JsonProcessingException {
+		PaymentInterfaceJson transferjson = new PaymentInterfaceJson(transferForm);
 
-        // The same page is returned, this time with the errors given as an object.
-        if (bindingResult.hasErrors()) {
-            return FORM_NAME;
-        }
+		// Serialise the object to JSON
+		log.info("{}", transferjson);
+		String jsonString = new ObjectMapper().writeValueAsString(transferjson);
+		log.info(jsonString);
 
+		// The port is set elsewhere as it changes frequently
+		WebClient client = WebClient.create(ConnectionInfo.getAddressAndPort() + "/makepayment/dbcr");
 
-        PaymentInterfaceJson transferjson = new PaymentInterfaceJson(transferForm);
+		try
+		{
+			// Create a response object - body of json, accept json back, and
+			// insert the
+			// request body created a couple lines up
+			ResponseSpec response = client.put().header("content-type", "application/json")
+					.accept(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(jsonString)).retrieve();
+			String responseBody = response.bodyToMono(String.class).block();
+			log.info(responseBody);
 
-        // Serialise the object to JSON
-        log.info("{0}",transferjson);
-        String jsonString = new ObjectMapper().writeValueAsString(transferjson);
-        log.info(jsonString);
+			// Deserialise into a POJO
+			PaymentInterfaceJson responseObj = new ObjectMapper().readValue(responseBody, PaymentInterfaceJson.class);
+			log.info("{}", responseObj);
 
-        // The port is set elsewhere as it changes frequently
-        WebClient client = WebClient
-                .create(ConnectionInfo.getAddressAndPort() + "/makepayment/dbcr");
+			// Throws out different exceptions depending on the contents
+			checkIfResponseValidDbcr(responseObj);
 
-        try {
-            // Create a response object - body of json, accept json back, and insert the
-            // request body created a couple lines up
-            ResponseSpec response = client.put().header("content-type", "application/json")
-                    .accept(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(jsonString)).retrieve();
-            String responseBody = response.bodyToMono(String.class).block();
-            log.info(responseBody);
+			// If successful...
 
-            // Deserialise into a POJO
-            PaymentInterfaceJson responseObj = new ObjectMapper().readValue(responseBody, PaymentInterfaceJson.class);
-            log.info("{0}",responseObj);
+			if (transferForm.isDebit())
+			{
+				model.addAttribute(LARGE_TEXT, "Payment Successful");
+			}
+			else
+			{
+				model.addAttribute(LARGE_TEXT, "Credit Successful");
+			}
+			model.addAttribute(SMALL_TEXT, ("Value: " + responseObj.getPAYDBCR().getCommAmt()));
 
-            // Throws out different exceptions depending on the contents
-            checkIfResponseValidDbcr(responseObj);
+			// Otherwise...
+		}
+		catch (InsufficientFundsException | InvalidAccountTypeException e)
+		{
+			log.info(e.toString());
+			model.addAttribute(LARGE_TEXT, PAYMENT_ERROR);
+			model.addAttribute(SMALL_TEXT, e.getMessage());
+		}
+		catch (WebClientRequestException e)
+		{
+			log.info(e.toString());
+			model.addAttribute(LARGE_TEXT, PAYMENT_ERROR);
+			model.addAttribute(SMALL_TEXT,
+					"Connection refused or failed to resolve; Are you using the right address and port? Is the server running?");
+		}
+		catch (Exception e)
+		{
+			log.info(e.toString());
+			model.addAttribute(LARGE_TEXT, PAYMENT_ERROR);
+			model.addAttribute(SMALL_TEXT,
+					"There was an error processing the request; Please try again later or check logs for more info.");
+		}
 
-            // If successful...
-            
-            if(transferForm.isDebit())
-            {
-            	model.addAttribute(LARGE_TEXT, "Payment Successful");            	
-            }
-            else
-            {
-            	model.addAttribute(LARGE_TEXT, "Credit Successful");
-            }
-            model.addAttribute(SMALL_TEXT, ("Value: " + responseObj.getPAYDBCR().getCommAmt()));
+		// The HTML template includes a clause to show the box for the results
+		// if this is set to true(the page is otherwise the same)
+		model.addAttribute("results", true);
 
-            // Otherwise...
-        } catch (InsufficientFundsException | InvalidAccountTypeException e) {
-            log.info(e.toString());
-            model.addAttribute(LARGE_TEXT, PAYMENT_ERROR);
-            model.addAttribute(SMALL_TEXT, e.getMessage());
-        } catch (WebClientRequestException e) {
-            log.info(e.toString());
-            model.addAttribute(LARGE_TEXT, PAYMENT_ERROR);
-            model.addAttribute(SMALL_TEXT,
-                    "Connection refused or failed to resolve; Are you using the right address and port? Is the server running?");
-        } catch (Exception e) {
-            log.info(e.toString());
-            model.addAttribute(LARGE_TEXT, PAYMENT_ERROR);
-            model.addAttribute(SMALL_TEXT,
-                    "There was an error processing the request; Please try again later or check logs for more info.");
-        }
+		return FORM_NAME;
+	}
 
-        // The HTML template includes a clause to show the box for the results if this is set to true(the page is otherwise the same)
-        model.addAttribute("results", true);
-
-        return FORM_NAME;
-    }
-
-    public static void checkIfResponseValidDbcr(PaymentInterfaceJson response)
-            throws InsufficientFundsException, InvalidAccountTypeException {
-        switch (Integer.parseInt(response.getPAYDBCR().getCommFailCode())) {
-            case 3:
-                throw new InsufficientFundsException();
-            case 4:
-                throw new InvalidAccountTypeException();
-            default:
-                break;
-        }
-    }
+	public static void checkIfResponseValidDbcr(PaymentInterfaceJson response)
+			throws InsufficientFundsException, InvalidAccountTypeException
+	{
+		switch (Integer.parseInt(response.getPAYDBCR().getCommFailCode()))
+		{
+		case 3:
+			throw new InsufficientFundsException();
+		case 4:
+			throw new InvalidAccountTypeException();
+		default:
+			break;
+		}
+	}
 }
 
-class InsufficientFundsException extends Exception {
+class InsufficientFundsException extends Exception
+{
 
-    static final String COPYRIGHT =
-      "Copyright IBM Corp. 2022";
+	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
-
-    public InsufficientFundsException() {
-        super("Payment rejected: Insufficient funds.");
-    }
+	public InsufficientFundsException()
+	{
+		super("Payment rejected: Insufficient funds.");
+	}
 }
 
-class InvalidAccountTypeException extends Exception {
+class InvalidAccountTypeException extends Exception
+{
 
-    static final String COPYRIGHT =
-      "Copyright IBM Corp. 2022";
+	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
-
-    public InvalidAccountTypeException() {
-        super("Payment rejected: Invalid account type.");
-    }
+	public InvalidAccountTypeException()
+	{
+		super("Payment rejected: Invalid account type.");
+	}
 }
 
+class TooManyAccountsException extends Exception
+{
 
-class TooManyAccountsException extends Exception {
+	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
-    static final String COPYRIGHT =
-      "Copyright IBM Corp. 2022";
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
 
-
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
-
-    public TooManyAccountsException(int customerNumber) {
-        super("Too many accounts for customer number " + customerNumber + "; Try deleting an account first.");
-    }
+	public TooManyAccountsException(int customerNumber)
+	{
+		super("Too many accounts for customer number " + customerNumber + "; Try deleting an account first.");
+	}
 }
 
-class ItemNotFoundException extends Exception {
+class ItemNotFoundException extends Exception
+{
 
-    static final String COPYRIGHT =
-      "Copyright IBM Corp. 2022";
+	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
 
-
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
-
-    public ItemNotFoundException(String item) {
-        super("The " + item + " you searched for could not be found; Try a different " + item + " number.");
-    }
+	public ItemNotFoundException(String item)
+	{
+		super("The " + item + " you searched for could not be found; Try a different " + item + " number.");
+	}
 }

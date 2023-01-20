@@ -22,7 +22,7 @@ public class OriginJson
 	private String commUserid;
 
 	@JsonProperty("COMM_FACILITY_NAME")
-	private final String commFacilityName = "        ";
+	private String commFacilityName = "        ";
 
 	@JsonProperty("COMM_NETWRK_ID")
 	private String commNetwrkId = "        ";
