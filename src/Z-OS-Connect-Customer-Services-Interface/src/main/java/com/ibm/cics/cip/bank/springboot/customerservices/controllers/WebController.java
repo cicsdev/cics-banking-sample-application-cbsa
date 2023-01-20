@@ -53,6 +53,27 @@ public class WebController implements WebMvcConfigurer
 {
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
+	private static final String ACCOUNT_ENQUIRY_FORM = "accountEnquiryForm";
+	private static final String CUSTOMER_ENQUIRY_FORM = "customerEnquiryForm";
+	private static final String LIST_ACCOUNTS_FORM = "listAccountsForm";
+	private static final String CREATE_ACCOUNT_FORM = "createAccountForm";
+	private static final String CREATE_CUSTOMER_FORM = "createCustomerForm";
+	private static final String UPDATE_ACCOUNT_FORM = "updateAccountForm";
+	private static final String UPDATE_CUSTOMER_FORM = "updateCustomerForm";
+	private static final String DELETE_ACCOUNT_FORM = "deleteAccountForm";
+	private static final String DELETE_CUSTOMER_FORM = "deleteCustomerForm";
+	private static final String LARGE_TEXT = "largeText";
+	private static final String SMALL_TEXT = "smallText";
+	private static final String REQUEST_ERROR = "Request Error";
+	private static final String CONNECTION_ERROR_MSG = "Connection refused or failed to resolve; Are you using the right address and port? Is the server running?";
+	private static final String CONNECTION_ERROR = "Connection Error";
+	private static final String ERROR_MSG = "There was an error processing the request; Please try again later or check logs for more info.";
+	private static final String RESULTS = "results";
+	private static final String ACCOUNT = "account";
+	private static final String CUSTOMER = "customer";
+	private static final String ACCOUNT_TYPES = "accountTypes";
+	private static final String CONTENT_TYPE = "content-type";
+	private static final String APPLICATION_JSON = "application/json";
 
 	private static final Logger log = LoggerFactory.getLogger(CustomerServices.class);
 
@@ -76,7 +97,7 @@ public class WebController implements WebMvcConfigurer
 	{
 		// String relates to the page template found in
 		// /src/main/resources/templates
-		return "accountEnquiryForm";
+		return ACCOUNT_ENQUIRY_FORM;
 	}
 
 	// When the Submit button is pressed, a Post request to the same location is
@@ -97,7 +118,7 @@ public class WebController implements WebMvcConfigurer
 		// errors, extra columns are shown with the error message if applicable
 		if (bindingResult.hasErrors())
 		{
-			return "accountEnquiryForm";
+			return ACCOUNT_ENQUIRY_FORM;
 		}
 
 		// Instantiating a WebClient at either the specified address or the
@@ -125,38 +146,36 @@ public class WebController implements WebMvcConfigurer
 
 			// Set the fields that will be shown in the template. Either the
 			// details of the response, or the details of the error.
-			model.addAttribute("largeText", "Account Details:");
-			model.addAttribute("smallText", responseObj.toPrettyString());
+			model.addAttribute(LARGE_TEXT, "Account Details:");
+			model.addAttribute(SMALL_TEXT, responseObj.toPrettyString());
 			model.addAttribute("success", true);
 		}
 		catch (ItemNotFoundException e)
 		{
 			log.info(e.toString());
-			model.addAttribute("largeText", "Request Error");
-			model.addAttribute("smallText", e.getMessage());
+			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+			model.addAttribute(SMALL_TEXT, e.getMessage());
 		}
 		catch (WebClientRequestException e)
 		{
 			log.info(e.toString());
-			model.addAttribute("largeText", "Request Error");
-			model.addAttribute("smallText",
-					"Connection refused or failed to resolve; Are you using the right address and port? Is the server running?");
+			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+			model.addAttribute(SMALL_TEXT, CONNECTION_ERROR_MSG);
 		}
 		catch (Exception e)
 		{
 			log.info(e.toString());
-			model.addAttribute("largeText", "Request Error");
-			model.addAttribute("smallText",
-					"There was an error processing the request; Please try again later or check logs for more info.");
+			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+			model.addAttribute(SMALL_TEXT, ERROR_MSG);
 		}
 
 		// There's a hidden box on all templates that displays the results - it
 		// depends on the results field below.
-		model.addAttribute("results", true);
+		model.addAttribute(RESULTS, true);
 
 		// Return the same page with results now, so new enquiries can be
 		// performed without going back.
-		return "accountEnquiryForm";
+		return ACCOUNT_ENQUIRY_FORM;
 	}
 
 	// this one is a nested if statement, however most are case blocks instead.
@@ -166,7 +185,7 @@ public class WebController implements WebMvcConfigurer
 		{
 			if (response.getINQACC_COMMAREA().getINQACC_CUSTNO() == 0)
 			{
-				throw new ItemNotFoundException("account");
+				throw new ItemNotFoundException(ACCOUNT);
 			}
 		}
 	}
@@ -175,7 +194,7 @@ public class WebController implements WebMvcConfigurer
 	@GetMapping("/enqcust")
 	public String showCustForm(CustomerEnquiryForm customerEnquiryForm)
 	{
-		return "customerEnquiryForm";
+		return CUSTOMER_ENQUIRY_FORM;
 	}
 
 	@PostMapping("/enqcust")
@@ -184,7 +203,7 @@ public class WebController implements WebMvcConfigurer
 	{
 		if (bindingResult.hasErrors())
 		{
-			return "customerEnquiryForm";
+			return CUSTOMER_ENQUIRY_FORM;
 		}
 
 		WebClient client = WebClient.create(
@@ -198,39 +217,37 @@ public class WebController implements WebMvcConfigurer
 			CustomerEnquiryJson responseObj = new ObjectMapper().readValue(responseBody, CustomerEnquiryJson.class);
 			log.info(responseObj.toString());
 			checkIfResponseValidEnqCust(responseObj);
-			model.addAttribute("largeText", "Customer Details");
-			model.addAttribute("smallText", responseObj.toPrettyString());
+			model.addAttribute(LARGE_TEXT, "Customer Details");
+			model.addAttribute(SMALL_TEXT, responseObj.toPrettyString());
 		}
 		catch (ItemNotFoundException e)
 		{
 			log.info(e.toString());
-			model.addAttribute("largeText", "Request Error");
-			model.addAttribute("smallText", e.getMessage());
+			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+			model.addAttribute(SMALL_TEXT, e.getMessage());
 		}
 		catch (WebClientRequestException e)
 		{
 			log.info(e.toString());
-			model.addAttribute("largeText", "Request Error");
-			model.addAttribute("smallText",
-					"Connection refused or failed to resolve; Are you using the right address and port? Is the server running?");
+			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+			model.addAttribute(SMALL_TEXT, CONNECTION_ERROR_MSG);
 		}
 		catch (Exception e)
 		{
 			log.info(e.toString());
-			model.addAttribute("largeText", "Request Error");
-			model.addAttribute("smallText",
-					"There was an error processing the request; Please try again later or check logs for more info.");
+			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+			model.addAttribute(SMALL_TEXT, ERROR_MSG);
 		}
 
-		model.addAttribute("results", true);
-		return "customerEnquiryForm";
+		model.addAttribute(RESULTS, true);
+		return CUSTOMER_ENQUIRY_FORM;
 	}
 
 	public static void checkIfResponseValidEnqCust(CustomerEnquiryJson response) throws ItemNotFoundException
 	{
 		if (response.getINQCUSTZ().getINQCUST_INQ_SUCCESS().equals("N"))
 		{
-			throw new ItemNotFoundException("customer");
+			throw new ItemNotFoundException(CUSTOMER);
 		}
 	}
 
@@ -240,7 +257,7 @@ public class WebController implements WebMvcConfigurer
 	@GetMapping("/listacc")
 	public String showListAccForm(CustomerEnquiryForm customerEnquiryForm)
 	{
-		return "listAccountsForm";
+		return LIST_ACCOUNTS_FORM;
 	}
 
 	@PostMapping("/listacc")
@@ -249,7 +266,7 @@ public class WebController implements WebMvcConfigurer
 	{
 		if (bindingResult.hasErrors())
 		{
-			return "listAccountsForm";
+			return LIST_ACCOUNTS_FORM;
 		}
 
 		WebClient client = WebClient
@@ -263,33 +280,31 @@ public class WebController implements WebMvcConfigurer
 			ListAccJson responseObj = new ObjectMapper().readValue(responseBody, ListAccJson.class);
 			log.info(responseObj.toString());
 			checkIfResponseValidListAcc(responseObj);
-			model.addAttribute("largeText",
+			model.addAttribute(LARGE_TEXT,
 					"Accounts belonging to customer " + responseObj.getINQACCCZ().getCUSTOMER_NUMBER() + ":");
 			model.addAttribute("accounts", responseObj.getINQACCCZ().getACCOUNT_DETAILS());
 		}
 		catch (ItemNotFoundException e)
 		{
 			log.info(e.toString());
-			model.addAttribute("largeText", "Request Error");
-			model.addAttribute("smallText", e.getMessage());
+			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+			model.addAttribute(SMALL_TEXT, e.getMessage());
 		}
 		catch (WebClientRequestException e)
 		{
 			log.info(e.toString());
-			model.addAttribute("largeText", "Request Error");
-			model.addAttribute("smallText",
-					"Connection refused or failed to resolve; Are you using the right address and port? Is the server running?");
+			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+			model.addAttribute(SMALL_TEXT, CONNECTION_ERROR_MSG);
 		}
 		catch (Exception e)
 		{
 			log.info(e.toString());
-			model.addAttribute("largeText", "Request Error");
-			model.addAttribute("smallText",
-					"There was an error processing the request; Please try again later or check logs for more info.");
+			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+			model.addAttribute(SMALL_TEXT, ERROR_MSG);
 		}
 
-		model.addAttribute("results", true);
-		return "listAccountsForm";
+		model.addAttribute(RESULTS, true);
+		return LIST_ACCOUNTS_FORM;
 	}
 
 	public static void checkIfResponseValidListAcc(ListAccJson response) throws ItemNotFoundException
@@ -297,7 +312,7 @@ public class WebController implements WebMvcConfigurer
 		switch (response.getINQACCCZ().getCUSTOMER_FOUND())
 		{
 		case "N":
-			throw new ItemNotFoundException("customer");
+			throw new ItemNotFoundException(CUSTOMER);
 		default:
 			break;
 		}
@@ -307,8 +322,8 @@ public class WebController implements WebMvcConfigurer
 	@GetMapping("/createacc")
 	public String showCreateAccForm(CreateAccountForm createAccForm, Model model)
 	{
-		model.addAttribute("accountTypes", AccountType.values());
-		return "createAccountForm";
+		model.addAttribute(ACCOUNT_TYPES, AccountType.values());
+		return CREATE_ACCOUNT_FORM;
 	}
 
 	@PostMapping("/createacc")
@@ -317,8 +332,8 @@ public class WebController implements WebMvcConfigurer
 	{
 		if (bindingResult.hasErrors())
 		{
-			model.addAttribute("accountTypes", AccountType.values());
-			return "createAccountForm";
+			model.addAttribute(ACCOUNT_TYPES, AccountType.values());
+			return CREATE_ACCOUNT_FORM;
 		}
 		CreateAccountJson transferjson = new CreateAccountJson(createAccForm);
 
@@ -334,7 +349,7 @@ public class WebController implements WebMvcConfigurer
 			// Create a response object - body of json, accept json back, and
 			// insert the
 			// request body created a couple lines up
-			ResponseSpec response = client.post().header("content-type", "application/json")
+			ResponseSpec response = client.post().header(CONTENT_TYPE, APPLICATION_JSON)
 					.accept(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(jsonString)).retrieve();
 			String responseBody = response.bodyToMono(String.class).block();
 			log.info(responseBody);
@@ -347,40 +362,38 @@ public class WebController implements WebMvcConfigurer
 			checkIfResponseValidCreateAcc(responseObj);
 
 			// If successful...
-			model.addAttribute("largeText", "Account creation successful");
-			model.addAttribute("smallText", ("Details: " + responseObj.toPrettyString()));
+			model.addAttribute(LARGE_TEXT, "Account creation successful");
+			model.addAttribute(SMALL_TEXT, ("Details: " + responseObj.toPrettyString()));
 
 			// Otherwise...
 		}
 		catch (TooManyAccountsException | ItemNotFoundException e)
 		{
 			log.info(e.toString());
-			model.addAttribute("largeText", "Account Error");
-			model.addAttribute("smallText", e.getMessage());
+			model.addAttribute(LARGE_TEXT, "Account Error");
+			model.addAttribute(SMALL_TEXT, e.getMessage());
 		}
 		catch (WebClientRequestException e)
 		{
 			log.info(e.toString());
-			model.addAttribute("largeText", "Connection Error");
-			model.addAttribute("smallText",
-					"Connection refused or failed to resolve; Are you using the right address and port? Is the server running?");
+			model.addAttribute(LARGE_TEXT, CONNECTION_ERROR);
+			model.addAttribute(SMALL_TEXT, CONNECTION_ERROR_MSG);
 		}
 		catch (Exception e)
 		{
 			log.info(e.toString());
 			e.printStackTrace();
-			model.addAttribute("largeText", "Request Error");
-			model.addAttribute("smallText",
-					"There was an error processing the request; Please try again later or check logs for more info.");
+			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+			model.addAttribute(SMALL_TEXT, ERROR_MSG);
 		}
 
-		model.addAttribute("results", true);
+		model.addAttribute(RESULTS, true);
 
 		// If this isn't here, the radio buttons don't show as they're generated
 		// using this enum
-		model.addAttribute("accountTypes", AccountType.values());
+		model.addAttribute(ACCOUNT_TYPES, AccountType.values());
 
-		return "createAccountForm";
+		return CREATE_ACCOUNT_FORM;
 	}
 
 	public static void checkIfResponseValidCreateAcc(CreateAccountJson responseObj)
@@ -391,7 +404,7 @@ public class WebController implements WebMvcConfigurer
 			switch (responseObj.getCREACC().getCOMM_FAIL_CODE())
 			{
 			case "1":
-				throw new ItemNotFoundException("customer");
+				throw new ItemNotFoundException(CUSTOMER);
 			case "8":
 				throw new TooManyAccountsException(Integer.parseInt(responseObj.getCREACC().getCOMM_CUSTNO()));
 			case "A":
@@ -406,7 +419,7 @@ public class WebController implements WebMvcConfigurer
 	@GetMapping("/createcust")
 	public String showCreateCustForm(CreateCustomerForm createCustForm, Model model)
 	{
-		return "createCustomerForm";
+		return CREATE_CUSTOMER_FORM;
 	}
 
 	@PostMapping("/createcust")
@@ -415,16 +428,10 @@ public class WebController implements WebMvcConfigurer
 	{
 		if (bindingResult.hasErrors())
 		{
-			return "createCustomerForm";
+			return CREATE_CUSTOMER_FORM;
 		}
 
-		// if (!createCustForm.isValidTitle()) {
-		// model.addAttribute("largeText", "Invalid title");
-		// model.addAttribute("smallText",
-		// "Customer title must be one of: Mr, Mrs, Miss, Ms, Dr, Drs,
-		// Professor, Lord, Sir, Lady");
-		// return "createCustomerForm";
-		// }
+
 		CreateCustomerJson transferjson = new CreateCustomerJson(createCustForm);
 
 		// Serialise the object to JSON
@@ -440,7 +447,7 @@ public class WebController implements WebMvcConfigurer
 			// Create a response object - body of json, accept json back, and
 			// insert the
 			// request body created a couple lines up
-			ResponseSpec response = client.post().header("content-type", "application/json")
+			ResponseSpec response = client.post().header(CONTENT_TYPE, APPLICATION_JSON)
 					.accept(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(jsonString)).retrieve();
 			String responseBody = response.bodyToMono(String.class).block();
 			log.info("Response Body: \n" + responseBody);
@@ -453,29 +460,27 @@ public class WebController implements WebMvcConfigurer
 			checkIfResponseValidCreateCust(responseObj);
 
 			// If successful...
-			model.addAttribute("largeText", "Customer creation successful");
-			model.addAttribute("smallText", (responseObj.toPrettyString()));
+			model.addAttribute(LARGE_TEXT, "Customer creation successful");
+			model.addAttribute(SMALL_TEXT, (responseObj.toPrettyString()));
 
 			// Otherwise...
 		}
 		catch (WebClientRequestException e)
 		{
 			log.info(e.toString());
-			model.addAttribute("largeText", "Connection Error");
-			model.addAttribute("smallText",
-					"Connection refused or failed to resolve; Are you using the right address and port? Is the server running?");
+			model.addAttribute(LARGE_TEXT, CONNECTION_ERROR);
+			model.addAttribute(SMALL_TEXT, CONNECTION_ERROR_MSG);
 		}
 		catch (Exception e)
 		{
 			log.info(e.toString());
-			model.addAttribute("largeText", "Request Error");
-			model.addAttribute("smallText",
-					"There was an error processing the request; Please try again later or check logs for more info.");
+			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+			model.addAttribute(SMALL_TEXT, ERROR_MSG);
 		}
 
-		model.addAttribute("results", true);
+		model.addAttribute(RESULTS, true);
 
-		return "createCustomerForm";
+		return CREATE_CUSTOMER_FORM;
 	}
 
 	public static void checkIfResponseValidCreateCust(CreateCustomerJson responseObj) throws Exception
@@ -501,8 +506,8 @@ public class WebController implements WebMvcConfigurer
 	{
 
 		// This links the radio buttons on the template to the AccountType enum
-		model.addAttribute("accountTypes", AccountType.values());
-		return "updateAccountForm";
+		model.addAttribute(ACCOUNT_TYPES, AccountType.values());
+		return UPDATE_ACCOUNT_FORM;
 	}
 
 	@PostMapping("/updateacc")
@@ -514,8 +519,8 @@ public class WebController implements WebMvcConfigurer
 
 			// Must add the accountTypes enum here as well, otherwise the radio
 			// buttons disappear on error
-			model.addAttribute("accountTypes", AccountType.values());
-			return "updateAccountForm";
+			model.addAttribute(ACCOUNT_TYPES, AccountType.values());
+			return UPDATE_ACCOUNT_FORM;
 		}
 
 		UpdateAccountJson transferjson = new UpdateAccountJson(updateAccountForm);
@@ -533,7 +538,7 @@ public class WebController implements WebMvcConfigurer
 			// Create a response object - body of json, accept json back, and
 			// insert the
 			// request body created a couple lines up
-			ResponseSpec response = client.put().header("content-type", "application/json")
+			ResponseSpec response = client.put().header(CONTENT_TYPE, APPLICATION_JSON)
 					.accept(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(jsonString)).retrieve();
 			String responseBody = response.bodyToMono(String.class).block();
 			log.info(responseBody);
@@ -546,47 +551,45 @@ public class WebController implements WebMvcConfigurer
 			checkIfResponseValidUpdateAcc(responseObj);
 
 			// If successful...
-			model.addAttribute("largeText", "Account updated");
-			model.addAttribute("smallText", responseObj.toPrettyString());
+			model.addAttribute(LARGE_TEXT, "Account updated");
+			model.addAttribute(SMALL_TEXT, responseObj.toPrettyString());
 
 			// Otherwise...
 		}
 		catch (ItemNotFoundException e)
 		{
 			log.info(e.toString());
-			model.addAttribute("largeText", "Update Error");
-			model.addAttribute("smallText", e.getMessage());
+			model.addAttribute(LARGE_TEXT, "Update Error");
+			model.addAttribute(SMALL_TEXT, e.getMessage());
 		}
 		catch (WebClientRequestException e)
 		{
 			log.info(e.toString());
-			model.addAttribute("largeText", "Connection Error");
-			model.addAttribute("smallText",
-					"Connection refused or failed to resolve; Are you using the right address and port? Is the server running?");
+			model.addAttribute(LARGE_TEXT, CONNECTION_ERROR);
+			model.addAttribute(SMALL_TEXT, CONNECTION_ERROR_MSG);
 		}
 		catch (Exception e)
 		{
 			log.info(e.toString());
 			e.printStackTrace();
-			model.addAttribute("largeText", "Request Error");
-			model.addAttribute("smallText",
-					"There was an error processing the request; Please try again later or check logs for more info.");
+			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+			model.addAttribute(SMALL_TEXT, ERROR_MSG);
 		}
 
-		model.addAttribute("results", true);
+		model.addAttribute(RESULTS, true);
 
 		// If this isn't here, the radio buttons don't show as they're generated
 		// using this enum
-		model.addAttribute("accountTypes", AccountType.values());
+		model.addAttribute(ACCOUNT_TYPES, AccountType.values());
 
-		return "updateAccountForm";
+		return UPDATE_ACCOUNT_FORM;
 	}
 
 	public static void checkIfResponseValidUpdateAcc(UpdateAccountJson responseObj) throws ItemNotFoundException
 	{
 		if (responseObj.getUPDACC().getCOMM_SUCCESS().equals("N"))
 		{
-			throw new ItemNotFoundException("account");
+			throw new ItemNotFoundException(ACCOUNT);
 		}
 	}
 
@@ -594,8 +597,8 @@ public class WebController implements WebMvcConfigurer
 	@GetMapping("/updatecust")
 	public String showUpdateAccountForm(UpdateCustomerForm updateCustomerForm, Model model)
 	{
-		model.addAttribute("accountTypes", AccountType.values());
-		return "updateCustomerForm";
+		model.addAttribute(ACCOUNT_TYPES, AccountType.values());
+		return UPDATE_CUSTOMER_FORM;
 	}
 
 	@PostMapping("/updatecust")
@@ -604,7 +607,7 @@ public class WebController implements WebMvcConfigurer
 	{
 		if (bindingResult.hasErrors())
 		{
-			return "updateCustomerForm";
+			return UPDATE_CUSTOMER_FORM;
 		}
 
 		UpdateCustomerJson transferjson = new UpdateCustomerJson(updateCustomerForm);
@@ -622,7 +625,7 @@ public class WebController implements WebMvcConfigurer
 			// Create a response object - body of json, accept json back, and
 			// insert the
 			// request body created a couple lines up
-			ResponseSpec response = client.put().header("content-type", "application/json")
+			ResponseSpec response = client.put().header(CONTENT_TYPE, APPLICATION_JSON)
 					.accept(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(jsonString)).retrieve();
 			String responseBody = response.bodyToMono(String.class).block();
 			log.info(responseBody);
@@ -635,35 +638,33 @@ public class WebController implements WebMvcConfigurer
 			checkIfResponseValidUpdateCust(responseObj);
 
 			// If successful...
-			model.addAttribute("largeText", "Account updated");
-			model.addAttribute("smallText", responseObj.toPrettyString());
+			model.addAttribute(LARGE_TEXT, "Account updated");
+			model.addAttribute(SMALL_TEXT, responseObj.toPrettyString());
 
 			// Otherwise...
 		}
 		catch (ItemNotFoundException | IllegalArgumentException e)
 		{
 			log.info(e.toString());
-			model.addAttribute("largeText", "Update Error");
-			model.addAttribute("smallText", e.getMessage());
+			model.addAttribute(LARGE_TEXT, "Update Error");
+			model.addAttribute(SMALL_TEXT, e.getMessage());
 		}
 		catch (WebClientRequestException e)
 		{
 			log.info(e.toString());
-			model.addAttribute("largeText", "Connection Error");
-			model.addAttribute("smallText",
-					"Connection refused or failed to resolve; Are you using the right address and port? Is the server running?");
+			model.addAttribute(LARGE_TEXT, CONNECTION_ERROR);
+			model.addAttribute(SMALL_TEXT, CONNECTION_ERROR_MSG);
 		}
 		catch (Exception e)
 		{
 			log.info(e.toString());
-			model.addAttribute("largeText", "Request Error");
-			model.addAttribute("smallText",
-					"There was an error processing the request; Please try again later or check logs for more info.");
+			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+			model.addAttribute(SMALL_TEXT, ERROR_MSG);
 		}
 
-		model.addAttribute("results", true);
+		model.addAttribute(RESULTS, true);
 
-		return "updateCustomerForm";
+		return UPDATE_CUSTOMER_FORM;
 	}
 
 	public static void checkIfResponseValidUpdateCust(UpdateCustomerJson responseObj)
@@ -682,7 +683,7 @@ public class WebController implements WebMvcConfigurer
 			default:
 				break;
 			}
-			throw new ItemNotFoundException("customer");
+			throw new ItemNotFoundException(CUSTOMER);
 		}
 	}
 
@@ -690,7 +691,7 @@ public class WebController implements WebMvcConfigurer
 	@GetMapping("/delacct")
 	public String showDelAcctForm(AccountEnquiryForm accountEnquiryForm)
 	{
-		return "deleteAccountForm";
+		return DELETE_ACCOUNT_FORM;
 	}
 
 	@PostMapping("/delacct")
@@ -699,7 +700,7 @@ public class WebController implements WebMvcConfigurer
 	{
 		if (bindingResult.hasErrors())
 		{
-			return "deleteAccountForm";
+			return DELETE_ACCOUNT_FORM;
 		}
 
 		WebClient client = WebClient
@@ -713,32 +714,30 @@ public class WebController implements WebMvcConfigurer
 			DeleteAccountJson responseObj = new ObjectMapper().readValue(responseBody, DeleteAccountJson.class);
 			log.info(responseObj.toString());
 			checkIfResponseValidDeleteAcc(responseObj);
-			model.addAttribute("largeText", "Account Deleted");
-			model.addAttribute("smallText", responseObj.toPrettyString());
+			model.addAttribute(LARGE_TEXT, "Account Deleted");
+			model.addAttribute(SMALL_TEXT, responseObj.toPrettyString());
 		}
 		catch (ItemNotFoundException e)
 		{
 			log.info(e.toString());
-			model.addAttribute("largeText", "Request Error");
-			model.addAttribute("smallText", e.getMessage());
+			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+			model.addAttribute(SMALL_TEXT, e.getMessage());
 		}
 		catch (WebClientRequestException e)
 		{
 			log.info(e.toString());
-			model.addAttribute("largeText", "Request Error");
-			model.addAttribute("smallText",
-					"Connection refused or failed to resolve; Are you using the right address and port? Is the server running?");
+			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+			model.addAttribute(SMALL_TEXT, CONNECTION_ERROR_MSG);
 		}
 		catch (Exception e)
 		{
 			log.info(e.toString());
-			model.addAttribute("largeText", "Request Error");
-			model.addAttribute("smallText",
-					"There was an error processing the request; Please try again later or check logs for more info.");
+			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+			model.addAttribute(SMALL_TEXT, ERROR_MSG);
 		}
 
-		model.addAttribute("results", true);
-		return "deleteAccountForm";
+		model.addAttribute(RESULTS, true);
+		return DELETE_ACCOUNT_FORM;
 	}
 
 	public static void checkIfResponseValidDeleteAcc(DeleteAccountJson responseObj) throws ItemNotFoundException
@@ -746,7 +745,7 @@ public class WebController implements WebMvcConfigurer
 		switch (responseObj.getDELACC_COMMAREA().getDELACC_DEL_FAIL_CD())
 		{
 		case 1:
-			throw new ItemNotFoundException("account");
+			throw new ItemNotFoundException(ACCOUNT);
 		default:
 			break;
 		}
@@ -756,7 +755,7 @@ public class WebController implements WebMvcConfigurer
 	@GetMapping("/delcust")
 	public String showDelCustForm(CustomerEnquiryForm customerEnquiryForm)
 	{
-		return "deleteCustomerForm";
+		return DELETE_CUSTOMER_FORM;
 	}
 
 	@PostMapping("/delcust")
@@ -765,7 +764,7 @@ public class WebController implements WebMvcConfigurer
 	{
 		if (bindingResult.hasErrors())
 		{
-			return "deleteCustomerForm";
+			return DELETE_CUSTOMER_FORM;
 		}
 
 		WebClient client = WebClient.create(ConnectionInfo.getAddressAndPort() + "/delcus/remove/"
@@ -779,32 +778,30 @@ public class WebController implements WebMvcConfigurer
 			DeleteCustomerJson responseObj = new ObjectMapper().readValue(responseBody, DeleteCustomerJson.class);
 			log.info(responseObj.toString());
 			checkIfResponseValidDeleteCust(responseObj);
-			model.addAttribute("largeText", "Customer and associated accounts Deleted");
-			model.addAttribute("smallText", responseObj.toPrettyString());
+			model.addAttribute(LARGE_TEXT, "Customer and associated accounts Deleted");
+			model.addAttribute(SMALL_TEXT, responseObj.toPrettyString());
 		}
 		catch (ItemNotFoundException e)
 		{
 			log.info(e.toString());
-			model.addAttribute("largeText", "Request Error");
-			model.addAttribute("smallText", e.getMessage());
+			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+			model.addAttribute(SMALL_TEXT, e.getMessage());
 		}
 		catch (WebClientRequestException e)
 		{
 			log.info(e.toString());
-			model.addAttribute("largeText", "Request Error");
-			model.addAttribute("smallText",
-					"Connection refused or failed to resolve; Are you using the right address and port? Is the server running?");
+			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+			model.addAttribute(SMALL_TEXT, CONNECTION_ERROR_MSG);
 		}
 		catch (Exception e)
 		{
 			log.info(e.toString());
-			model.addAttribute("largeText", "Request Error");
-			model.addAttribute("smallText",
-					"There was an error processing the request; Please try again later or check logs for more info.");
+			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+			model.addAttribute(SMALL_TEXT, ERROR_MSG);
 		}
 
-		model.addAttribute("results", true);
-		return "deleteCustomerForm";
+		model.addAttribute(RESULTS, true);
+		return DELETE_CUSTOMER_FORM;
 	}
 
 	public static void checkIfResponseValidDeleteCust(DeleteCustomerJson responseObj) throws ItemNotFoundException
@@ -812,7 +809,7 @@ public class WebController implements WebMvcConfigurer
 		switch (responseObj.getDELCUS().getCOMM_DEL_FAIL_CD())
 		{
 		case 1:
-			throw new ItemNotFoundException("customer");
+			throw new ItemNotFoundException(CUSTOMER);
 		default:
 			break;
 		}
