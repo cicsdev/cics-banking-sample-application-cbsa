@@ -84,8 +84,6 @@ public class ProcessedTransaction extends HBankDataAccess
 
 	private String taskRef;
 
-	private String customerDOBString;
-
 	public void setDateOfBirth(Date dateOfBirth)
 	{
 		this.dateOfBirth = dateOfBirth;
@@ -509,7 +507,7 @@ public class ProcessedTransaction extends HBankDataAccess
 		logger.entering(this.getClass().getName(), WRITE_DELETE_CUSTOMER);
 
 		sortOutDateTimeTaskString();
-		customerDOBString = sortOutCustomerDOB(customerDOB);
+		String customerDOBString = sortOutCustomerDOB(customerDOB);
 		String deleteCustomerDescription = "";
 
 		deleteCustomerDescription = deleteCustomerDescription.concat(padCustomerNumber(customerNumber));

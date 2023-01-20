@@ -593,17 +593,7 @@ public class Customer
 
 		byte[] key = LAST_CUSTOMER.getBytes();
 
-		String keyString = new String(key);
-		try
-		{
-			key = keyString.getBytes(CODEPAGE);
-		}
-		catch (UnsupportedEncodingException e2)
-		{
-			logger.severe(e2.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(), DELETE_CUSTOMER, null);
-			return false;
-		}
+
 
 		RecordHolder holder = new RecordHolder();
 
@@ -1193,21 +1183,8 @@ public class Customer
 
 		RecordHolder holder = new RecordHolder();
 
-		byte[] key = new byte[16];
+		byte[] key = buildKey(0, 9999999999L);
 		// We need to convert the key to EBCDIC
-
-		// @TODO use the sort code in the key
-		String keyString = LAST_CUSTOMER;
-		try
-		{
-			key = keyString.getBytes(CODEPAGE);
-		}
-		catch (UnsupportedEncodingException e2)
-		{
-			logger.severe(e2.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(), GET_CUSTOMERS_COUNT_ONLY, -1L);
-			return -1L;
-		}
 
 		try
 		{
@@ -1264,7 +1241,7 @@ public class Customer
 
 			boolean carryOn = true;
 			boolean endOfFile = false;
-			while (carryOn && !endOfFile)
+			while (carryOn)
 			{
 				try
 				{
@@ -1549,7 +1526,6 @@ public class Customer
 
 			i = 0;
 			boolean carryOn = true;
-			Date today = new Date(Calendar.getInstance().getTimeInMillis());
 
 			for (int j = 0; j < 250000 && carryOn; j++)
 			{
