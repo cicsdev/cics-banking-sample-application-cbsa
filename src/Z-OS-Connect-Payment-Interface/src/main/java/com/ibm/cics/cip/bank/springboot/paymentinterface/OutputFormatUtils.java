@@ -9,6 +9,11 @@ public class OutputFormatUtils {
 
     static final String COPYRIGHT =
       "Copyright IBM Corp. 2022";
+    
+    private OutputFormatUtils()
+    {
+    	throw new IllegalStateException("Static only");
+    }
 
 
     public static String date(String date) {
@@ -27,7 +32,8 @@ public class OutputFormatUtils {
     // on whether the input is a string or an int - this makes it slightly quicker for account and customer numbers,
     // because the type returned can vary. Not as necessary for monetary values since they're always a float or an int.
     public static String leadingZeroes(int amount, String input) {
-        return String.format("%" + amount + "s", input).replace(" ", "0");
+    	String formatString = "%" + amount + "s";
+        return String.format(formatString, input).replace(" ", "0");
     }
 
     public static String leadingZeroes(int amount, int input) {

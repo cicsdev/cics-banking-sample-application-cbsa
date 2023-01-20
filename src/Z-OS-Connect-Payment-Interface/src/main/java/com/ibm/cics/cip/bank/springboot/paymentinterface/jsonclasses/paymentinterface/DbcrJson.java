@@ -112,23 +112,3 @@ public class DbcrJson {
 
 }
 
-// Schema to replicate:
-// {
-// "PAYDBCR": {
-// "COMM_ACCNO": "00000002",
-// "COMM_AMT": -0.10,
-// "COMM_SORTC": 0,
-// "COMM_AV_BAL": 0,
-// "COMM_ACT_BAL": 0,
-// "COMM_ORIGIN": {
-// "COMM_APPLID": "NETFLIX ",
-// "COMM_USERID": "LTD ",
-// "COMM_FACILITY_NAME": " ",
-// "COMM_NETWRK_ID": " ",
-// "COMM_FACILTYPE": 0760,
-// "FILL_0": " "
-// },
-// "COMM_SUCCESS": " ",
-// "COMM_FAIL_CODE": " "
-// }
-// }

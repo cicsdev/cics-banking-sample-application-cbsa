@@ -13,6 +13,10 @@ public class ConnectionInfo {
     static final String COPYRIGHT =
       "Copyright IBM Corp. 2022";
 
+    private ConnectionInfo()
+    {
+    	throw new IllegalStateException("Static only");
+    }
 
     @Parameter(names = {"--port", "-p"}, description = "Port to connect with")
     private static int port = 30701;

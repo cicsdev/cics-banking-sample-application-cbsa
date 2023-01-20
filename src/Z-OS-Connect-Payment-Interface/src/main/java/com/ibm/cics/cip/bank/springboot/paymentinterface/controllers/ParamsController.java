@@ -13,6 +13,8 @@ import com.ibm.cics.cip.bank.springboot.paymentinterface.PaymentInterface;
 import com.ibm.cics.cip.bank.springboot.paymentinterface.jsonclasses.paymentinterface.PaymentInterfaceJson;
 import com.ibm.cics.cip.bank.springboot.paymentinterface.jsonclasses.paymentinterface.TransferForm;
 
+import ch.qos.logback.classic.Level;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -35,7 +37,7 @@ public class ParamsController {
     // Instead of a form object, parameters required in the url
     @PostMapping("/submit")
 	public PaymentInterfaceJson submit(@RequestParam(name = "acctnum", required = true) String acctNumber, @RequestParam(name = "amount", required = true) float amount, @RequestParam(name = "organisation", required = true) String organisation) throws JsonProcessingException {
-        log.info("AcctNumber: " + acctNumber + " Amount: " + amount + " Organisation: " + organisation);
+        log.info("AcctNumber: %8d, Amount %f, Organisation %s",acctNumber,amount,organisation);
         TransferForm transferForm = new TransferForm(acctNumber, amount, organisation);
 
         PaymentInterfaceJson transferJson = new PaymentInterfaceJson(transferForm);
@@ -51,7 +53,7 @@ public class ParamsController {
             String responseBody = response.bodyToMono(String.class).block();
             log.info(responseBody);
             responseObj = new ObjectMapper().readValue(responseBody, PaymentInterfaceJson.class);
-            log.info(responseObj.toString());
+            log.info("{}",responseObj.toString());
             return responseObj;
         } catch (Exception e) {
             log.info(e.toString());

@@ -144,7 +144,6 @@
 					<execution>
 						<goals>
 							<goal>bundle-war</goal>
-							<!-- <goal>deploy</goal> -->
 						</goals>
 						<configuration>
 							<classifier>cics-bundle</classifier>

@@ -60,7 +60,7 @@ public class TransferForm {
     }
 
     public void setDebit(String type) {
-        this.debit = type == "Debit" ? true : false;
+        this.debit = type.equals("Debit") ? true : false;
     }
 
     public Float getAmount() {

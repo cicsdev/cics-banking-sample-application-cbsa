@@ -43,12 +43,16 @@ public class WebController implements WebMvcConfigurer {
 
 
     private static final Logger log = LoggerFactory.getLogger(PaymentInterface.class);
+    private static final String FORM_NAME = "paymentInterfaceForm";
+    private static final String LARGE_TEXT = "largeText";
+    private static final String SMALL_TEXT = "smallText";
+    private static final String PAYMENT_ERROR = "Payment Error";
 
 
     // Payment Interface
     @GetMapping("/")
     public String showForm(TransferForm personForm) {
-        return "paymentInterfaceForm";
+        return FORM_NAME;
     }
 
     @PostMapping("/paydbcr")
@@ -57,14 +61,14 @@ public class WebController implements WebMvcConfigurer {
 
         // The same page is returned, this time with the errors given as an object.
         if (bindingResult.hasErrors()) {
-            return "paymentInterfaceForm";
+            return FORM_NAME;
         }
 
 
         PaymentInterfaceJson transferjson = new PaymentInterfaceJson(transferForm);
 
         // Serialise the object to JSON
-        log.info(transferjson.toString());
+        log.info("{}",transferjson.toString());
         String jsonString = new ObjectMapper().writeValueAsString(transferjson);
         log.info(jsonString);
 
@@ -82,7 +86,7 @@ public class WebController implements WebMvcConfigurer {
 
             // Deserialise into a POJO
             PaymentInterfaceJson responseObj = new ObjectMapper().readValue(responseBody, PaymentInterfaceJson.class);
-            log.info(responseObj.toString());
+            log.info("{}",responseObj.toString());
 
             // Throws out different exceptions depending on the contents
             checkIfResponseValidDbcr(responseObj);
@@ -91,35 +95,35 @@ public class WebController implements WebMvcConfigurer {
             
             if(transferForm.isDebit()== true)
             {
-            	model.addAttribute("largeText", "Payment Successful");            	
+            	model.addAttribute(LARGE_TEXT, "Payment Successful");            	
             }
             else
             {
-            	model.addAttribute("largeText", "Credit Successful");
+            	model.addAttribute(LARGE_TEXT, "Credit Successful");
             }
-            model.addAttribute("smallText", ("Value: " + responseObj.getPAYDBCR().getCOMM_AMT()));
+            model.addAttribute(SMALL_TEXT, ("Value: " + responseObj.getPAYDBCR().getCOMM_AMT()));
 
             // Otherwise...
         } catch (InsufficientFundsException | InvalidAccountTypeException e) {
             log.info(e.toString());
-            model.addAttribute("largeText", "Payment Error");
-            model.addAttribute("smallText", e.getMessage());
+            model.addAttribute(LARGE_TEXT, PAYMENT_ERROR);
+            model.addAttribute(SMALL_TEXT, e.getMessage());
         } catch (WebClientRequestException e) {
             log.info(e.toString());
-            model.addAttribute("largeText", "Payment Error");
-            model.addAttribute("smallText",
+            model.addAttribute(LARGE_TEXT, PAYMENT_ERROR);
+            model.addAttribute(SMALL_TEXT,
                     "Connection refused or failed to resolve; Are you using the right address and port? Is the server running?");
         } catch (Exception e) {
             log.info(e.toString());
-            model.addAttribute("largeText", "Payment Error");
-            model.addAttribute("smallText",
+            model.addAttribute(LARGE_TEXT, PAYMENT_ERROR);
+            model.addAttribute(SMALL_TEXT,
                     "There was an error processing the request; Please try again later or check logs for more info.");
         }
 
         // The HTML template includes a clause to show the box for the results if this is set to true(the page is otherwise the same)
         model.addAttribute("results", true);
 
-        return "paymentInterfaceForm";
+        return FORM_NAME;
     }
 
     public static void checkIfResponseValidDbcr(PaymentInterfaceJson response)
