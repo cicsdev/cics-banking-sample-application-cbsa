@@ -46,7 +46,6 @@ public class CreateAccountForm
 
 	public CreateAccountForm()
 	{
-
 	}
 
 	public String getCustNumber()

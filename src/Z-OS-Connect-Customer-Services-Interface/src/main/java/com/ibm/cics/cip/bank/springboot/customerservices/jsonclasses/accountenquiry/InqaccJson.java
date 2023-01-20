@@ -30,11 +30,6 @@ public class InqaccJson
 	private String INQACC_SUCCESS;
 	private float INQACC_INT_RATE;
 
-	public InqaccJson()
-	{
-
-	}
-
 	public String getINQACC_PCB1_POINTER()
 	{
 		return INQACC_PCB1_POINTER;

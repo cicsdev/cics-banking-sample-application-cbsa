@@ -39,7 +39,6 @@ public class DelaccJson
 
 	public DelaccJson()
 	{
-
 	}
 
 	public String getDELACC_SUCCESS()

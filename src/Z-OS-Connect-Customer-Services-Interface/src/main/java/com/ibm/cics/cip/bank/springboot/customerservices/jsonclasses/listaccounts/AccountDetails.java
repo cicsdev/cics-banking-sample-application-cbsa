@@ -15,6 +15,7 @@ public class AccountDetails
 {
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
+	private static final String FLOAT_FORMAT = "%.02f";
 
 	private float COMM_ACTUAL_BAL;
 	private float COMM_AVAIL_BAL;
@@ -29,10 +30,6 @@ public class AccountDetails
 	private int COMM_ACCNO;
 	private int COMM_LAST_STMT_DT;
 
-	public AccountDetails()
-	{
-
-	}
 
 	public float getCOMM_ACTUAL_BAL()
 	{
@@ -170,9 +167,9 @@ public class AccountDetails
 		output += "Account Number:       " + OutputFormatUtils.leadingZeroes(8, COMM_ACCNO) + "\n"
 				+ "Sort Code:            " + String.format("%06d", COMM_SCODE) + "\n" + "Customer Number:      "
 				+ OutputFormatUtils.leadingZeroes(10, COMM_CUSTNO) + "\n" + "Account Type:         " + COMM_ACC_TYPE
-				+ "\n" + "Available Balance:    " + String.format("%.02f", COMM_AVAIL_BAL) + "\n"
-				+ "Actual Balance:       " + String.format("%.02f", COMM_ACTUAL_BAL) + "\n" + "Interest Rate:        "
-				+ String.format("%.02f", COMM_INT_RATE) + "\n" + "Overdraft:            " + COMM_OVERDRAFT + "\n"
+				+ "\n" + "Available Balance:    " + String.format(FLOAT_FORMAT, COMM_AVAIL_BAL) + "\n"
+				+ "Actual Balance:       " + String.format(FLOAT_FORMAT, COMM_ACTUAL_BAL) + "\n" + "Interest Rate:        "
+				+ String.format(FLOAT_FORMAT, COMM_INT_RATE) + "\n" + "Overdraft:            " + COMM_OVERDRAFT + "\n"
 				+ "Account Opened: " + OutputFormatUtils.date(COMM_OPENED) + "\n" + "Next Statement Date:  "
 				+ OutputFormatUtils.date(COMM_NEXT_STMT_DT) + "\n" + "Last Statement Date:  "
 				+ OutputFormatUtils.date(COMM_LAST_STMT_DT) + "\n";

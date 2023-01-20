@@ -24,10 +24,6 @@ public class InqAccczJson
 	private String CUSTOMER_FOUND;
 	private String COMM_SUCCESS;
 
-	public InqAccczJson()
-	{
-
-	}
 
 	public int getCOMM_FAIL_CODE()
 	{

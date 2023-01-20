@@ -28,7 +28,6 @@ public class DelcusJson
 
 	public DelcusJson()
 	{
-
 	}
 
 	public String getCOMM_ADDR()

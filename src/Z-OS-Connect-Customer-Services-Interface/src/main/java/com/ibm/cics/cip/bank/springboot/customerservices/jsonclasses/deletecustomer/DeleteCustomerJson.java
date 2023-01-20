@@ -20,7 +20,6 @@ public class DeleteCustomerJson
 
 	public DeleteCustomerJson()
 	{
-
 	}
 
 	public DelcusJson getDELCUS()

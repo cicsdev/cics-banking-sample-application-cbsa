@@ -17,10 +17,7 @@ public class ListAccJson
 
 	private InqAccczJson INQACCCZ;
 
-	public ListAccJson()
-	{
 
-	}
 
 	public InqAccczJson getINQACCCZ()
 	{

@@ -20,7 +20,6 @@ public class CreaccKeyJson
 
 	public CreaccKeyJson()
 	{
-
 	}
 
 	public int getCOMM_SORTCODE()

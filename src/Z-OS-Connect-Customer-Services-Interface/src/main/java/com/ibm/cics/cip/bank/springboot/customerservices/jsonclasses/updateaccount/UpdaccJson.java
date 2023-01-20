@@ -20,7 +20,7 @@ public class UpdaccJson
 	private String COMM_CUSTNO;
 	private String COMM_SCODE;
 	private int COMM_ACCNO;
-	private String COMM_ACC_TYPE = "        ";
+
 	private float COMM_INT_RATE = 0;
 	private String COMM_OPENED = " ";
 	private int COMM_OVERDRAFT = 0;
@@ -29,6 +29,8 @@ public class UpdaccJson
 	private float COMM_AVAIL_BAL = 0;
 	private float COMM_ACTUAL_BAL = 0;
 	private String COMM_SUCCESS = " ";
+	private static final String SPACES = "        ";
+	private String COMM_ACC_TYPE = SPACES;
 
 	public UpdaccJson(String cOMM_CUSTNO, int cOMM_ACCNO, AccountType cOMM_ACC_TYPE, float cOMM_INT_RATE,
 			String cOMM_OPENED, int cOMM_OVERDRAFT, String cOMM_LAST_STMT_DT, String cOMM_NEXT_STMT_DT,
@@ -45,7 +47,7 @@ public class UpdaccJson
 		COMM_ACTUAL_BAL = cOMM_ACTUAL_BAL;
 		if (cOMM_ACC_TYPE == null)
 		{
-			COMM_ACC_TYPE = "        ";
+			COMM_ACC_TYPE = SPACES;
 		}
 		else
 		{
@@ -112,7 +114,7 @@ public class UpdaccJson
 	{
 		if (accountType == null)
 		{
-			COMM_ACC_TYPE = "        ";
+			COMM_ACC_TYPE = SPACES;
 		}
 		else
 		{

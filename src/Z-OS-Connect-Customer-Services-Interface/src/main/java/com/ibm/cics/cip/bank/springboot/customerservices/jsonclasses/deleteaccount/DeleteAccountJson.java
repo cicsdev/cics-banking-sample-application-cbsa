@@ -15,12 +15,12 @@ public class DeleteAccountJson
 {
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
+	private static final String FLOAT_FORMAT = "%.02f";
 
 	private DelaccJson DELACC_COMMAREA;
 
 	public DeleteAccountJson()
 	{
-
 	}
 
 	public DelaccJson getDELACC_COMMAREA()
@@ -46,10 +46,10 @@ public class DeleteAccountJson
 		output += "Account Number: " + OutputFormatUtils.leadingZeroes(8, accInfo.getDELACC_ACCNO()) + "\n"
 				+ "Sort Code: " + accInfo.getDELACC_SCODE() + "\n" + "Account Type: " + accInfo.getDELACC_ACC_TYPE()
 				+ "\n" + "Customer Number: " + OutputFormatUtils.leadingZeroes(10, accInfo.getDELACC_CUSTNO()) + "\n"
-				+ "Interest Rate: " + String.format("%.02f", accInfo.getDELACC_INT_RATE()) + "\n" + "Overdraft Limit: "
+				+ "Interest Rate: " + String.format(FLOAT_FORMAT, accInfo.getDELACC_INT_RATE()) + "\n" + "Overdraft Limit: "
 				+ accInfo.getDELACC_OVERDRAFT() + "\n" + "Available Balance: "
-				+ String.format("%.02f", accInfo.getDELACC_AVAIL_BAL()) + "\n" + "Actual Balance: "
-				+ String.format("%.02f", accInfo.getDELACC_ACTUAL_BAL()) + "\n" + "Account Opened: "
+				+ String.format(FLOAT_FORMAT, accInfo.getDELACC_AVAIL_BAL()) + "\n" + "Actual Balance: "
+				+ String.format(FLOAT_FORMAT, accInfo.getDELACC_ACTUAL_BAL()) + "\n" + "Account Opened: "
 				+ OutputFormatUtils.date(accInfo.getDELACC_OPENED()) + "\n" + "Last Statement Date: "
 				+ OutputFormatUtils.date(accInfo.getDELACC_LAST_STMT_DT()) + "\n" + "Next Statement Date: "
 				+ OutputFormatUtils.date(accInfo.getDELACC_NEXT_STMT_DT()) + "\n";

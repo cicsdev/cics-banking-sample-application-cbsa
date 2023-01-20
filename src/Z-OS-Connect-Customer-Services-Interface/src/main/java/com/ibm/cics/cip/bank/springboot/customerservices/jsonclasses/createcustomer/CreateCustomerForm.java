@@ -28,7 +28,6 @@ public class CreateCustomerForm
 
 	public CreateCustomerForm()
 	{
-
 	}
 
 	public String getCustName()

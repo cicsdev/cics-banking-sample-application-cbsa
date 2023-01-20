@@ -20,7 +20,6 @@ public class CustomerEnquiryJson
 
 	public CustomerEnquiryJson()
 	{
-
 	}
 
 	public InqCustZJson getINQCUSTZ()
