@@ -24,10 +24,9 @@ public class CustomerServices
 	public static void main(String[] args)
 	{
 		final Logger log = LoggerFactory.getLogger(CustomerServices.class);
-		ConnectionInfo connectionInfo = new ConnectionInfo();
-		JCommander.newBuilder().addObject(connectionInfo).build().parse(args);
+		JCommander.newBuilder().build().parse(args);
 
-		log.info("Running with address: " + ConnectionInfo.getAddressAndPort());
+		log.info("Running with address: {}",ConnectionInfo.getAddressAndPort());
 
 		// Run the application. From here out, only the WebController and
 		// ParamsController classes really matter.

@@ -21,11 +21,6 @@ public class AccountEnquiryJson
 
 	public AccountEnquiryJson()
 	{
-
-	}
-
-	public AccountEnquiryJson(AccountEnquiryForm accountEnquiryForm)
-	{
 		INQACC_COMMAREA = new InqaccJson();
 	}
 

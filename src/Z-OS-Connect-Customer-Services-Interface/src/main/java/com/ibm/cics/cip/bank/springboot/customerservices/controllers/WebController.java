@@ -137,7 +137,7 @@ public class WebController implements WebMvcConfigurer
 			// Deserialise the response so it can be interacted with as a plain
 			// Java class
 			AccountEnquiryJson responseObj = new ObjectMapper().readValue(responseBody, AccountEnquiryJson.class);
-			log.info(responseObj.toString());
+			log.info("{}", responseObj);
 
 			// Run through the checks on error codes in the method shown
 			// directly below this and every other response method
@@ -181,12 +181,10 @@ public class WebController implements WebMvcConfigurer
 	// this one is a nested if statement, however most are case blocks instead.
 	public static void checkIfResponseValidListAcc(AccountEnquiryJson response) throws ItemNotFoundException
 	{
-		if (response.getINQACC_COMMAREA().getINQACC_SUCCESS().equals("N"))
+		if (response.getINQACC_COMMAREA().getINQACC_SUCCESS().equals("N")
+				&& response.getINQACC_COMMAREA().getINQACC_CUSTNO() == 0)
 		{
-			if (response.getINQACC_COMMAREA().getINQACC_CUSTNO() == 0)
-			{
-				throw new ItemNotFoundException(ACCOUNT);
-			}
+			throw new ItemNotFoundException(ACCOUNT);
 		}
 	}
 
@@ -215,7 +213,7 @@ public class WebController implements WebMvcConfigurer
 			String responseBody = response.bodyToMono(String.class).block();
 			log.info(responseBody);
 			CustomerEnquiryJson responseObj = new ObjectMapper().readValue(responseBody, CustomerEnquiryJson.class);
-			log.info(responseObj.toString());
+			log.info("{}", responseObj);
 			checkIfResponseValidEnqCust(responseObj);
 			model.addAttribute(LARGE_TEXT, "Customer Details");
 			model.addAttribute(SMALL_TEXT, responseObj.toPrettyString());
@@ -278,7 +276,7 @@ public class WebController implements WebMvcConfigurer
 			String responseBody = response.bodyToMono(String.class).block();
 			log.info(responseBody);
 			ListAccJson responseObj = new ObjectMapper().readValue(responseBody, ListAccJson.class);
-			log.info(responseObj.toString());
+			log.info("{}", responseObj);
 			checkIfResponseValidListAcc(responseObj);
 			model.addAttribute(LARGE_TEXT,
 					"Accounts belonging to customer " + responseObj.getINQACCCZ().getCUSTOMER_NUMBER() + ":");
@@ -338,7 +336,7 @@ public class WebController implements WebMvcConfigurer
 		CreateAccountJson transferjson = new CreateAccountJson(createAccForm);
 
 		// Serialise the object to JSON
-		log.info(transferjson.toString());
+		log.info("{}", transferjson);
 		String jsonString = new ObjectMapper().writeValueAsString(transferjson);
 		log.info(jsonString);
 
@@ -356,7 +354,7 @@ public class WebController implements WebMvcConfigurer
 
 			// Deserialise into a POJO
 			CreateAccountJson responseObj = new ObjectMapper().readValue(responseBody, CreateAccountJson.class);
-			log.info(responseObj.toString());
+			log.info("{}", responseObj);
 
 			// Throws out different exceptions depending on the contents
 			checkIfResponseValidCreateAcc(responseObj);
@@ -431,13 +429,12 @@ public class WebController implements WebMvcConfigurer
 			return CREATE_CUSTOMER_FORM;
 		}
 
-
 		CreateCustomerJson transferjson = new CreateCustomerJson(createCustForm);
 
 		// Serialise the object to JSON
-		log.info(transferjson.toString());
+		log.info("{}", transferjson.toString());
 		String jsonString = new ObjectMapper().writeValueAsString(transferjson);
-		log.info("Json to be sent:\n" + jsonString);
+		log.info("Json to be sent:\n{}", jsonString);
 
 		// The port is set elsewhere as it changes frequently
 		WebClient client = WebClient.create(ConnectionInfo.getAddressAndPort() + "/crecust/insert");
@@ -450,11 +447,11 @@ public class WebController implements WebMvcConfigurer
 			ResponseSpec response = client.post().header(CONTENT_TYPE, APPLICATION_JSON)
 					.accept(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(jsonString)).retrieve();
 			String responseBody = response.bodyToMono(String.class).block();
-			log.info("Response Body: \n" + responseBody);
+			log.info("Response Body: \n{}", responseBody);
 
 			// Deserialise into a POJO
 			CreateCustomerJson responseObj = new ObjectMapper().readValue(responseBody, CreateCustomerJson.class);
-			log.info("Response Json:\n" + responseObj.toString());
+			log.info("Response Json:\n{}", responseObj.toString());
 
 			// Throws out different exceptions depending on the contents
 			checkIfResponseValidCreateCust(responseObj);
@@ -483,7 +480,8 @@ public class WebController implements WebMvcConfigurer
 		return CREATE_CUSTOMER_FORM;
 	}
 
-	public static void checkIfResponseValidCreateCust(CreateCustomerJson responseObj) throws Exception
+	public static void checkIfResponseValidCreateCust(CreateCustomerJson responseObj)
+			throws InvalidCustomerException, NumberFormatException, TooManyAccountsException
 	{
 		if (!responseObj.getCRECUST().getCOMM_FAIL_CODE().equals(""))
 		{
@@ -495,7 +493,7 @@ public class WebController implements WebMvcConfigurer
 				break;
 			}
 
-			throw new Exception("An unexpected error occured");
+			throw new InvalidCustomerException("An unexpected error occured");
 		}
 
 	}
@@ -526,9 +524,9 @@ public class WebController implements WebMvcConfigurer
 		UpdateAccountJson transferjson = new UpdateAccountJson(updateAccountForm);
 
 		// Serialise the object to JSON
-		log.info(transferjson.toString());
+		log.info("{}", transferjson);
 		String jsonString = new ObjectMapper().writeValueAsString(transferjson);
-		log.info(jsonString);
+		log.info("{}", jsonString);
 
 		// The port is set elsewhere as it changes frequently
 		WebClient client = WebClient.create(ConnectionInfo.getAddressAndPort() + "/updacc/update");
@@ -545,7 +543,7 @@ public class WebController implements WebMvcConfigurer
 
 			// Deserialise into a POJO
 			UpdateAccountJson responseObj = new ObjectMapper().readValue(responseBody, UpdateAccountJson.class);
-			log.info(responseObj.toString());
+			log.info("{}", responseObj);
 
 			// Throws out different exceptions depending on the contents
 			checkIfResponseValidUpdateAcc(responseObj);
@@ -613,7 +611,7 @@ public class WebController implements WebMvcConfigurer
 		UpdateCustomerJson transferjson = new UpdateCustomerJson(updateCustomerForm);
 
 		// Serialise the object to JSON
-		log.info(transferjson.toString());
+		log.info("{}", transferjson);
 		String jsonString = new ObjectMapper().writeValueAsString(transferjson);
 		log.info(jsonString);
 
@@ -632,7 +630,7 @@ public class WebController implements WebMvcConfigurer
 
 			// Deserialise into a POJO
 			UpdateCustomerJson responseObj = new ObjectMapper().readValue(responseBody, UpdateCustomerJson.class);
-			log.info(responseObj.toString());
+			log.info("{}", responseObj);
 
 			// Throws out different exceptions depending on the contents
 			checkIfResponseValidUpdateCust(responseObj);
@@ -712,7 +710,7 @@ public class WebController implements WebMvcConfigurer
 			String responseBody = response.bodyToMono(String.class).block();
 			log.info(responseBody);
 			DeleteAccountJson responseObj = new ObjectMapper().readValue(responseBody, DeleteAccountJson.class);
-			log.info(responseObj.toString());
+			log.info("{}", responseObj);
 			checkIfResponseValidDeleteAcc(responseObj);
 			model.addAttribute(LARGE_TEXT, "Account Deleted");
 			model.addAttribute(SMALL_TEXT, responseObj.toPrettyString());
@@ -776,7 +774,7 @@ public class WebController implements WebMvcConfigurer
 			String responseBody = response.bodyToMono(String.class).block();
 			log.info(responseBody);
 			DeleteCustomerJson responseObj = new ObjectMapper().readValue(responseBody, DeleteCustomerJson.class);
-			log.info(responseObj.toString());
+			log.info("{}", responseObj);
 			checkIfResponseValidDeleteCust(responseObj);
 			model.addAttribute(LARGE_TEXT, "Customer and associated accounts Deleted");
 			model.addAttribute(SMALL_TEXT, responseObj.toPrettyString());
@@ -819,6 +817,10 @@ public class WebController implements WebMvcConfigurer
 class InsufficientFundsException extends Exception
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2916294528612553278L;
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
 	public InsufficientFundsException()
@@ -831,6 +833,10 @@ class InsufficientFundsException extends Exception
 class InvalidAccountTypeException extends Exception
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3342099995389507130L;
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
 	public InvalidAccountTypeException()
@@ -843,6 +849,10 @@ class InvalidAccountTypeException extends Exception
 class TooManyAccountsException extends Exception
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3421012321723845378L;
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
 	public TooManyAccountsException(int customerNumber)
@@ -855,6 +865,10 @@ class TooManyAccountsException extends Exception
 class ItemNotFoundException extends Exception
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3570840021629249034L;
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
 	public ItemNotFoundException(String item)

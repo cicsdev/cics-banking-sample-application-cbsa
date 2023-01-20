@@ -21,6 +21,11 @@ public class ConnectionInfo
 	{ "--address", "--url", "-a", "-u" }, description = "Address to use")
 	private static String address = "localhost";
 
+	private ConnectionInfo()
+	{
+		throw new IllegalStateException("Static only");
+	}
+
 	public static String getAddressAndPort()
 	{
 		return address + ":" + port;

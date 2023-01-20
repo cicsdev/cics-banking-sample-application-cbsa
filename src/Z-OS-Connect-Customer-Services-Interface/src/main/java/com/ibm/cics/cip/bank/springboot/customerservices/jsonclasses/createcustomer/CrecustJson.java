@@ -30,8 +30,6 @@ public class CrecustJson
 	{
 		COMM_NAME = custName;
 		COMM_ADDRESS = custAddress;
-		// COMM_NAME = String.format("%-61s", custName);
-		// COMM_ADDRESS = String.format("%-161s", custAddress);
 		COMM_DATE_OF_BIRTH = custDob;
 	}
 
