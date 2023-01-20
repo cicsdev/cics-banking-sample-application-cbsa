@@ -62,7 +62,7 @@ public class UpdateCustomerForm {
     }
 
     public void setCustDoB(String custDoB) {
-        if (custDoB == "") {
+        if (custDoB.equals("")) {
             return;
         }
         this.custDoB = "";

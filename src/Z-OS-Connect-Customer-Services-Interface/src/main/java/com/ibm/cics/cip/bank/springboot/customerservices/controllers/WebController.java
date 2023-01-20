@@ -423,12 +423,12 @@ public class WebController implements WebMvcConfigurer {
     }
 
     public static void checkIfResponseValidCreateCust(CreateCustomerJson responseObj) throws Exception {
-        if (responseObj.getCRECUST().getCOMM_FAIL_CODE() != "") {
+        if (!responseObj.getCRECUST().getCOMM_FAIL_CODE().equals("")) {
             switch (Integer.parseInt(responseObj.getCRECUST().getCOMM_FAIL_CODE())) {
-            // case 8:
-            //     throw new TooManyAccountsException(Integer.parseInt(responseObj.getCRECUST());
-            // default:
-            //     break;
+             case 8:
+                 throw new TooManyAccountsException(Integer.parseInt(responseObj.getCRECUST().getCOMM_FAIL_CODE()));
+             default:
+                 break;
             }
 
             throw new Exception("An unexpected error occured");

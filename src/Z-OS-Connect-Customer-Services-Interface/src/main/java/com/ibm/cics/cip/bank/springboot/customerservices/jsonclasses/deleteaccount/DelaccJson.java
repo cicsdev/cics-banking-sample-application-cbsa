@@ -92,7 +92,7 @@ public class DelaccJson {
     }
     // If you delete the same account twice, there's no value for an empty string in AccountType, so this sets it to null.
     public void setDELACC_ACC_TYPE(String dELACC_ACC_TYPE) {
-        if (dELACC_ACC_TYPE == "") {
+        if (dELACC_ACC_TYPE.equals("")) {
             DELACC_ACC_TYPE = null;
         } else {
             DELACC_ACC_TYPE = AccountType.valueOf(dELACC_ACC_TYPE.toUpperCase());

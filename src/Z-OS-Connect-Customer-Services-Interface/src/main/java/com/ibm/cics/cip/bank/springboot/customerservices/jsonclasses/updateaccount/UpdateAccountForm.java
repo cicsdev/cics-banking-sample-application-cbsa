@@ -79,7 +79,7 @@ public class UpdateAccountForm {
 
     // Counting "" as null here, as an actual value needs to be entered
     public void setAcctInterestRate(String acctInterestRate) {
-        this.acctInterestRate = acctInterestRate == "" ? null : acctInterestRate;
+        this.acctInterestRate = acctInterestRate.equals("") ? "0.00" : acctInterestRate;
     }
 
     // Overdraft
@@ -93,7 +93,7 @@ public class UpdateAccountForm {
 
     // Counting "" as null here, as an actual value needs to be entered
     public void setAcctOverdraft(String acctOverdraft) {
-        this.acctOverdraft = acctOverdraft == "" ? null : String.valueOf(Integer.parseInt(acctOverdraft));
+        this.acctOverdraft = acctOverdraft.equals("") ? "0" : String.valueOf(Integer.parseInt(acctOverdraft));
     }
 
     public String getAcctOpenedDate() {
@@ -101,7 +101,7 @@ public class UpdateAccountForm {
     }
 
     public void setAcctOpenedDate(String acctOpenedDate) {
-        if (acctOpenedDate == "") {
+        if (acctOpenedDate.equals("")) {
             return;
         }
         this.acctOpenedDate = "";
@@ -114,7 +114,7 @@ public class UpdateAccountForm {
     }
 
     public void setAcctLastStatementDate(String acctLastStatementDate) {
-        if (acctLastStatementDate == "") {
+        if (acctLastStatementDate.equals("")) {
             return;
         }
         this.acctLastStatementDate = "";
@@ -127,7 +127,7 @@ public class UpdateAccountForm {
     }
 
     public void setAcctNextStatementDate(String acctNextStatementDate) {
-        if (acctNextStatementDate == "") {
+        if (acctNextStatementDate.equals("")) {
             return;
         }
         this.acctNextStatementDate = "";

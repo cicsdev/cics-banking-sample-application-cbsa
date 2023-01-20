@@ -21,7 +21,6 @@ public class UpdcustJson {
     private String COMM_CUSTNO = " ";
     private String COMM_NAME = " ";
     private String COMM_ADDR = " ";
-    // I would prefer that dates were not stored as ints 😵‍💫
     private int COMM_DOB = 0;
     private int COMM_CREDIT_SCORE = 0;
     private int COMM_CS_REVIEW_DATE = 0;
@@ -32,12 +31,12 @@ public class UpdcustJson {
             String cOMM_CS_REVIEW_DATE) {
         // Some values need to be padded out when not full
         COMM_CUSTNO = String.format("%10s", cOMM_CUSTNO).replace(" ", "0");
-        if (cOMM_NAME != " ") COMM_NAME = String.format("%-60s", cOMM_NAME);
-        if (cOMM_ADDR != " ") COMM_ADDR = String.format("%-160s", cOMM_ADDR);
+        if (!cOMM_NAME.equals(" ")) COMM_NAME = String.format("%-60s", cOMM_NAME);
+        if (!cOMM_ADDR.equals(" ")) COMM_ADDR = String.format("%-160s", cOMM_ADDR);
 
         // These convert strings to ints - they use ternary operators to prevent a NumberFormatException on an empty String, as 0 would be okay by default.
-        COMM_DOB = cOMM_DOB == "" ? 0 : Integer.parseInt(cOMM_DOB);
-        COMM_CS_REVIEW_DATE = cOMM_CS_REVIEW_DATE == "" ? 0 : Integer.parseInt(cOMM_CS_REVIEW_DATE);
+        COMM_DOB = cOMM_DOB.equals("") ? 0 : Integer.parseInt(cOMM_DOB);
+        COMM_CS_REVIEW_DATE = cOMM_CS_REVIEW_DATE.equals("") ? 0 : Integer.parseInt(cOMM_CS_REVIEW_DATE);
 
         // Doesn't need conversion as it isn't ever not an int
         COMM_CREDIT_SCORE = cOMM_CREDIT_SCORE;

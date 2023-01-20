@@ -38,7 +38,7 @@ public class CreateCustomerForm {
     }
 
     public void setCustName(@NotNull String custName) {
-        this.custName = custName == "" ? null : custName;
+        this.custName = custName.equals("") ? "" : custName;
     }
 
     public String getCustAddress() {
@@ -46,7 +46,7 @@ public class CreateCustomerForm {
     }
 
     public void setCustAddress(@NotNull String custAddress) {
-        this.custAddress = custAddress == "" ? null : custAddress;
+        this.custAddress = custAddress.equals("") ? "" : custAddress;
     }
 
     public String getCustDob() {
