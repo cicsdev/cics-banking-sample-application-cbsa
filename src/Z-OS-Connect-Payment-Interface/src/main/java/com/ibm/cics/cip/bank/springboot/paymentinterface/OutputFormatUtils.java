@@ -19,8 +19,7 @@ public class OutputFormatUtils {
     public static String date(String date) {
 
         String unSlashedString = String.format("%8s", date).replace(" ", "0");
-        String dateToReturn = unSlashedString.substring(0, 2) + "/" + unSlashedString.substring(2, 4) + "/" + unSlashedString.substring(4, 8);
-        return dateToReturn;
+        return unSlashedString.substring(0, 2) + "/" + unSlashedString.substring(2, 4) + "/" + unSlashedString.substring(4, 8);
     }
 
     public static String date(int date) {

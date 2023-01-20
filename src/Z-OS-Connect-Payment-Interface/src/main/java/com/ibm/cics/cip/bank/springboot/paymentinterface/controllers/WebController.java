@@ -42,7 +42,7 @@ public class WebController implements WebMvcConfigurer {
       "Copyright IBM Corp. 2022";
 
 
-    private static final Logger log = LoggerFactory.getLogger(PaymentInterface.class);
+    private static final Logger log = LoggerFactory.getLogger(WebController.class);
     private static final String FORM_NAME = "paymentInterfaceForm";
     private static final String LARGE_TEXT = "largeText";
     private static final String SMALL_TEXT = "smallText";
@@ -68,7 +68,7 @@ public class WebController implements WebMvcConfigurer {
         PaymentInterfaceJson transferjson = new PaymentInterfaceJson(transferForm);
 
         // Serialise the object to JSON
-        log.info("{}",transferjson.toString());
+        log.info("{0}",transferjson);
         String jsonString = new ObjectMapper().writeValueAsString(transferjson);
         log.info(jsonString);
 
@@ -86,14 +86,14 @@ public class WebController implements WebMvcConfigurer {
 
             // Deserialise into a POJO
             PaymentInterfaceJson responseObj = new ObjectMapper().readValue(responseBody, PaymentInterfaceJson.class);
-            log.info("{}",responseObj.toString());
+            log.info("{0}",responseObj);
 
             // Throws out different exceptions depending on the contents
             checkIfResponseValidDbcr(responseObj);
 
             // If successful...
             
-            if(transferForm.isDebit()== true)
+            if(transferForm.isDebit())
             {
             	model.addAttribute(LARGE_TEXT, "Payment Successful");            	
             }
@@ -101,7 +101,7 @@ public class WebController implements WebMvcConfigurer {
             {
             	model.addAttribute(LARGE_TEXT, "Credit Successful");
             }
-            model.addAttribute(SMALL_TEXT, ("Value: " + responseObj.getPAYDBCR().getCOMM_AMT()));
+            model.addAttribute(SMALL_TEXT, ("Value: " + responseObj.getPAYDBCR().getCommAmt()));
 
             // Otherwise...
         } catch (InsufficientFundsException | InvalidAccountTypeException e) {
@@ -128,7 +128,7 @@ public class WebController implements WebMvcConfigurer {
 
     public static void checkIfResponseValidDbcr(PaymentInterfaceJson response)
             throws InsufficientFundsException, InvalidAccountTypeException {
-        switch (Integer.parseInt(response.getPAYDBCR().getCOMM_FAIL_CODE())) {
+        switch (Integer.parseInt(response.getPAYDBCR().getCommFailCode())) {
             case 3:
                 throw new InsufficientFundsException();
             case 4:

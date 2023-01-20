@@ -13,7 +13,6 @@ import com.ibm.cics.cip.bank.springboot.paymentinterface.PaymentInterface;
 import com.ibm.cics.cip.bank.springboot.paymentinterface.jsonclasses.paymentinterface.PaymentInterfaceJson;
 import com.ibm.cics.cip.bank.springboot.paymentinterface.jsonclasses.paymentinterface.TransferForm;
 
-import ch.qos.logback.classic.Level;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,13 +30,13 @@ public class ParamsController {
     static final String COPYRIGHT =
       "Copyright IBM Corp. 2022";
 
-    private static final Logger log = LoggerFactory.getLogger(PaymentInterface.class);
+    private static final Logger log = LoggerFactory.getLogger(ParamsController.class);
 
     // This follows a very similar format to the form submitting equivalents in WebController.java
     // Instead of a form object, parameters required in the url
     @PostMapping("/submit")
 	public PaymentInterfaceJson submit(@RequestParam(name = "acctnum", required = true) String acctNumber, @RequestParam(name = "amount", required = true) float amount, @RequestParam(name = "organisation", required = true) String organisation) throws JsonProcessingException {
-        log.info("AcctNumber: %8d, Amount %f, Organisation %s",acctNumber,amount,organisation);
+        log.info("AcctNumber: {0}, Amount {1}, Organisation {2}",acctNumber,amount,organisation);
         TransferForm transferForm = new TransferForm(acctNumber, amount, organisation);
 
         PaymentInterfaceJson transferJson = new PaymentInterfaceJson(transferForm);
@@ -53,7 +52,7 @@ public class ParamsController {
             String responseBody = response.bodyToMono(String.class).block();
             log.info(responseBody);
             responseObj = new ObjectMapper().readValue(responseBody, PaymentInterfaceJson.class);
-            log.info("{}",responseObj.toString());
+            log.info("{0}",responseObj);
             return responseObj;
         } catch (Exception e) {
             log.info(e.toString());

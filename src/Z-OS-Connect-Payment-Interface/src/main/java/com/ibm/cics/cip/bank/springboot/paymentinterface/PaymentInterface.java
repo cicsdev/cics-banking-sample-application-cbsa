@@ -8,7 +8,7 @@ package com.ibm.cics.cip.bank.springboot.paymentinterface;
 
 import com.beust.jcommander.JCommander;
 
-import java.util.logging.Level;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +29,7 @@ public class PaymentInterface {
 		
 		JCommander.newBuilder().build().parse(args);
 
-		log.info("Running with address: %s",ConnectionInfo.getAddressAndPort());
+		log.info("Running with address: {0}",ConnectionInfo.getAddressAndPort());
 
 		// Run the application. From here out, only the WebController and ParamsController classes really matter.
 		SpringApplication.run(PaymentInterface.class, args);

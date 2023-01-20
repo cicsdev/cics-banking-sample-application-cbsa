@@ -10,105 +10,124 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.ibm.cics.cip.bank.springboot.paymentinterface.JsonPropertyNamingStrategy;
 
 @JsonNaming(JsonPropertyNamingStrategy.class)
-public class DbcrJson {
+public class DbcrJson
+{
 
-    static final String COPYRIGHT =
-      "Copyright IBM Corp. 2022";
+	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
-    private String COMM_ACCNO;
-    private float COMM_AMT;
-    private int COMM_SORTC = 0;
-    private int COMM_AV_BAL = 0;
-    private int COMM_ACT_BAL = 0;
-    private OriginJson COMM_ORIGIN;
-    private String COMM_SUCCESS = " ";
-    private String COMM_FAIL_CODE = " ";
+	private String commAccno;
+	private float commAmt;
+	private int commSortC = 0;
+	private int commAvBal = 0;
+	private int commActBal = 0;
+	private OriginJson commOrigin;
+	private String commSuccess = " ";
+	private String commFailCode = " ";
 
-    public DbcrJson() {
+	public DbcrJson()
+	{
 
-    }
+	}
 
-    public DbcrJson(TransferForm transferForm) {
-        COMM_ORIGIN = new OriginJson(transferForm.getOrganisation());
+	public DbcrJson(TransferForm transferForm)
+	{
+		commOrigin = new OriginJson(transferForm.getOrganisation());
 
-        // accno
-        // Pads out with zeroes to the length specified
-        COMM_ACCNO = String.format("%8s", transferForm.getAcctNumber()).replace(" ", "0");
+		// accno
+		// Pads out with zeroes to the length specified
+		commAccno = String.format("%8s", transferForm.getAcctNumber()).replace(" ", "0");
 
-        // Make the amount positive or negative based on wether debit or credit is selected
-        COMM_AMT = transferForm.isDebit() ? (transferForm.getAmount() * -1) : transferForm.getAmount();
-    }
+		// Make the amount positive or negative based on wether debit or credit
+		// is selected
+		commAmt = transferForm.isDebit() ? (transferForm.getAmount() * -1) : transferForm.getAmount();
+	}
 
-    public String getCOMM_ACCNO() {
-        return COMM_ACCNO;
-    }
+	public String getCommAccno()
+	{
+		return commAccno;
+	}
 
-    public void setCOMM_ACCNO(String cOMM_ACCNO) {
-        COMM_ACCNO = cOMM_ACCNO;
-    }
+	public void setCommAccno(String commAccnoIn)
+	{
+		commAccno = commAccnoIn;
+	}
 
-    public float getCOMM_AMT() {
-        return COMM_AMT;
-    }
+	public float getCommAmt()
+	{
+		return commAmt;
+	}
 
-    public void setCOMM_AMT(float cOMM_AMT) {
-        COMM_AMT = cOMM_AMT;
-    }
+	public void setCommAmt(float commAmtIn)
+	{
+		commAmt = commAmtIn;
+	}
 
-    public int getCOMM_SORTC() {
-        return COMM_SORTC;
-    }
+	public int getCommSortC()
+	{
+		return commSortC;
+	}
 
-    public void setCOMM_SORTC(int cOMM_SORTC) {
-        COMM_SORTC = cOMM_SORTC;
-    }
+	public void setCommC(int commSortCodeIn)
+	{
+		commSortC = commSortCodeIn;
+	}
 
-    public int getCOMM_AV_BAL() {
-        return COMM_AV_BAL;
-    }
+	public int getCommAvBal()
+	{
+		return commAvBal;
+	}
 
-    public void setCOMM_AV_BAL(int cOMM_AV_BAL) {
-        COMM_AV_BAL = cOMM_AV_BAL;
-    }
+	public void setCommAvBal(int commAvBalIn)
+	{
+		commAvBal = commAvBalIn;
+	}
 
-    public int getCOMM_ACT_BAL() {
-        return COMM_ACT_BAL;
-    }
+	public int getCommActBal()
+	{
+		return commActBal;
+	}
 
-    public void setCOMM_ACT_BAL(int cOMM_ACT_BAL) {
-        COMM_ACT_BAL = cOMM_ACT_BAL;
-    }
+	public void setCommActBal(int commActBalIn)
+	{
+		commActBal = commActBalIn;
+	}
 
-    public OriginJson getCOMM_ORIGIN() {
-        return COMM_ORIGIN;
-    }
+	public OriginJson getCommOrigin()
+	{
+		return commOrigin;
+	}
 
-    public void setCOMM_ORIGIN(OriginJson cOMM_ORIGIN) {
-        COMM_ORIGIN = cOMM_ORIGIN;
-    }
+	public void setCommOrigin(OriginJson commOriginIn)
+	{
+		commOrigin = commOriginIn;
+	}
 
-    public String getCOMM_SUCCESS() {
-        return COMM_SUCCESS;
-    }
+	public String getCommSuccess()
+	{
+		return commSuccess;
+	}
 
-    public void setCOMM_SUCCESS(String cOMM_SUCCESS) {
-        COMM_SUCCESS = cOMM_SUCCESS;
-    }
+	public void setCommSuccess(String commSuccessIn)
+	{
+		commSuccess = commSuccessIn;
+	}
 
-    public String getCOMM_FAIL_CODE() {
-        return COMM_FAIL_CODE;
-    }
+	public String getCommFailCode()
+	{
+		return commFailCode;
+	}
 
-    public void setCOMM_FAIL_CODE(String cOMM_FAIL_CODE) {
-        COMM_FAIL_CODE = cOMM_FAIL_CODE;
-    }
+	public void setCommFailCode(String commFailCodeIn)
+	{
+		commFailCode = commFailCodeIn;
+	}
 
-    @Override
-    public String toString() {
-        return "DbcrJson [COMM_ACCNO=" + COMM_ACCNO + ", COMM_ACT_BAL=" + COMM_ACT_BAL + ", COMM_AMT=" + COMM_AMT
-                + ", COMM_AV_BAL=" + COMM_AV_BAL + ", COMM_FAIL_CODE=" + COMM_FAIL_CODE + ", COMM_ORIGIN="
-                + COMM_ORIGIN.toString() + ", COMM_SORTC=" + COMM_SORTC + ", COMM_SUCCESS=" + COMM_SUCCESS + "]";
-    }
+	@Override
+	public String toString()
+	{
+		return "DbcrJson [COMM_ACCNO=" + commAccno + ", COMM_ACT_BAL=" + commActBal + ", COMM_AMT=" + commAmt
+				+ ", COMM_AV_BAL=" + commAvBal + ", COMM_FAIL_CODE=" + commFailCode + ", COMM_ORIGIN="
+				+ commOrigin.toString() + ", COMM_SORTC=" + commSortC + ", COMM_SUCCESS=" + commSuccess + "]";
+	}
 
 }
-

@@ -11,94 +11,109 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.ibm.cics.cip.bank.springboot.paymentinterface.JsonPropertyNamingStrategy;
 
 @JsonNaming(JsonPropertyNamingStrategy.class)
-public class OriginJson {
+public class OriginJson
+{
 
-    static final String COPYRIGHT =
-      "Copyright IBM Corp. 2022";
+	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
+	@JsonProperty("COMM_APPLID")
+	private String commApplid;
+	@JsonProperty("COMM_USERID")
+	private String commUserid;
 
-    @JsonProperty("COMM_APPLID")
-    private String COMM_APPLID;
-    @JsonProperty("COMM_USERID")
-    private String COMM_USERID;
+	@JsonProperty("COMM_FACILITY_NAME")
+	private final String commFacilityName = "        ";
 
-    @JsonProperty("COMM_FACILITY_NAME")
-    private final String COMM_FACILITY_NAME = "        ";
+	@JsonProperty("COMM_NETWRK_ID")
+	private String commNetwrkId = "        ";
 
-    @JsonProperty("COMM_NETWRK_ID")
-    private String COMM_NETWRK_ID = "        ";
+	@JsonProperty("COMM_FACILTYPE")
+	private String commFaciltype = "0496";
 
-    @JsonProperty("COMM_FACILTYPE")
-    private String COMM_FACILTYPE = "0496";
+	@JsonProperty("FILL_0")
+	private String fill0 = "    ";
 
-    @JsonProperty("FILL_0")
-    private String FILL_0 = "    ";
+	public OriginJson()
+	{
 
-    public OriginJson() {
+	}
 
-    }
+	public OriginJson(String organisation)
+	{
+		// APPLID and USERID are both used to contain the organisation data, so
+		// it's split into two 8 char strings
+		String paddedOrg = String.format("%-16s", organisation);
+		commApplid = paddedOrg.substring(0, 8);
+		commUserid = paddedOrg.substring(8);
+	}
 
-    public OriginJson(String organisation) {
-        // APPLID and USERID are both used to contain the organisation data, so it's split into two 8 char strings
-        String paddedOrg = String.format("%-16s", organisation);
-        COMM_APPLID = paddedOrg.substring(0, 8);
-        COMM_USERID = paddedOrg.substring(8);
-    }
+	public void setOrganisation(String organisation)
+	{
+		String paddedOrg = String.format("%-16s", organisation);
+		commApplid = paddedOrg.substring(0, 8);
+		commUserid = paddedOrg.substring(8);
+	}
 
-    public void setOrganisation(String organisation) {
-        String paddedOrg = String.format("%-16s", organisation);
-        COMM_APPLID = paddedOrg.substring(0, 8);
-        COMM_USERID = paddedOrg.substring(8);
-    }
+	public String getCommApplid()
+	{
+		return commApplid;
+	}
 
-    public String getCOMM_APPLID() {
-        return COMM_APPLID;
-    }
+	public void setCommApplid(String commApplidIn)
+	{
+		commApplid = commApplidIn;
+	}
 
-    public void setCOMM_APPLID(String cOMM_APPLID) {
-        COMM_APPLID = cOMM_APPLID;
-    }
+	public String getCommUserid()
+	{
+		return commUserid;
+	}
 
-    public String getCOMM_USERID() {
-        return COMM_USERID;
-    }
+	public void setCommUserid(String commUseridIn)
+	{
+		commUserid = commUseridIn;
+	}
 
-    public void setCOMM_USERID(String cOMM_USERID) {
-        COMM_USERID = cOMM_USERID;
-    }
+	public String getCommFacilityName()
+	{
+		return commFacilityName;
+	}
 
-    public String getCOMM_FACILITY_NAME() {
-        return COMM_FACILITY_NAME;
-    }
+	public String getCommNetwrkId()
+	{
+		return commNetwrkId;
+	}
 
-    public String getCOMM_NETWRK_ID() {
-        return COMM_NETWRK_ID;
-    }
+	public void setCommNetwrkId(String commNetwrkIdIn)
+	{
+		commNetwrkId = commNetwrkIdIn;
+	}
 
-    public void setCOMM_NETWRK_ID(String cOMM_NETWRK_ID) {
-        COMM_NETWRK_ID = cOMM_NETWRK_ID;
-    }
+	public String getCommFacilType()
+	{
+		return commFaciltype;
+	}
 
-    public String getCOMM_FACILTYPE() {
-        return COMM_FACILTYPE;
-    }
+	public void setCommFacilType(String commFacilType)
+	{
+		commFaciltype = commFacilType;
+	}
 
-    public void setCOMM_FACILTYPE(String cOMM_FACILTYPE) {
-        COMM_FACILTYPE = cOMM_FACILTYPE;
-    }
+	public String getFill0()
+	{
+		return fill0;
+	}
 
-    public String getFILL_0() {
-        return FILL_0;
-    }
+	public void setFill0(String fill0In)
+	{
+		fill0 = fill0In;
+	}
 
-    public void setFILL_0(String fILL_0) {
-        FILL_0 = fILL_0;
-    }
-
-    @Override
-    public String toString() {
-        return "OriginJson [COMM_APPLID=" + COMM_APPLID + ", COMM_FACILITY_NAME=" + COMM_FACILITY_NAME
-                + ", COMM_FACILTYPE=" + COMM_FACILTYPE + ", COMM_NETWRK_ID=" + COMM_NETWRK_ID + ", COMM_USERID="
-                + COMM_USERID + ", FILL_0=" + FILL_0 + "]";
-    }
+	@Override
+	public String toString()
+	{
+		return "OriginJson [COMM_APPLID=" + commApplid + ", COMM_FACILITY_NAME=" + commFacilityName
+				+ ", COMM_FACILTYPE=" + commFaciltype + ", COMM_NETWRK_ID=" + commNetwrkId + ", COMM_USERID="
+				+ commUserid + ", FILL_0=" + fill0 + "]";
+	}
 }

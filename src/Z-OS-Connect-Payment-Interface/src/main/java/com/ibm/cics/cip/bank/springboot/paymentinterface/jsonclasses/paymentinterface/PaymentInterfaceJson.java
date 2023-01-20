@@ -11,33 +11,37 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.ibm.cics.cip.bank.springboot.paymentinterface.JsonPropertyNamingStrategy;
 
 @JsonNaming(JsonPropertyNamingStrategy.class)
-public class PaymentInterfaceJson {
+public class PaymentInterfaceJson
+{
 
-    static final String COPYRIGHT =
-      "Copyright IBM Corp. 2022";
+	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
+	@JsonProperty("PAYDBCR")
+	private DbcrJson payDbCr;
 
-    @JsonProperty("PAYDBCR")
-    private DbcrJson PAYDBCR;
+	public PaymentInterfaceJson()
+	{
 
-    public PaymentInterfaceJson() {
+	}
 
-    }
+	public PaymentInterfaceJson(TransferForm transferForm)
+	{
+		payDbCr = new DbcrJson(transferForm);
+	}
 
-    public PaymentInterfaceJson(TransferForm transferForm) {
-        PAYDBCR = new DbcrJson(transferForm);
-    }
+	public DbcrJson getPAYDBCR()
+	{
+		return payDbCr;
+	}
 
-    public DbcrJson getPAYDBCR() {
-        return PAYDBCR;
-    }
+	public void setPAYDBCR(DbcrJson payDbCrIn)
+	{
+		this.payDbCr = payDbCrIn;
+	}
 
-    public void setPAYDBCR(DbcrJson PAYDBCR) {
-        this.PAYDBCR = PAYDBCR;
-    }
-
-    @Override
-    public String toString() {
-        return "PaymentInterfaceJson [PAYDBCR=" + PAYDBCR.toString() + "]";
-    }
+	@Override
+	public String toString()
+	{
+		return "PaymentInterfaceJson [PAYDBCR=" + payDbCr.toString() + "]";
+	}
 }
