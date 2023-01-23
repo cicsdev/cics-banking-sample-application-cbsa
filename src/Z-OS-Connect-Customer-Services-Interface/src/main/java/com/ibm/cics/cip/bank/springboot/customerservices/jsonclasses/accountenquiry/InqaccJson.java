@@ -15,171 +15,171 @@ public class InqaccJson
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
-	private String INQACC_PCB1_POINTER;
-	private int INQACC_OVERDRAFT;
-	private int INQACC_LAST_STMT_DT;
-	private int INQACC_SCODE;
-	private float INQACC_ACTUAL_BAL;
-	private int INQACC_ACCNO;
-	private int INQACC_OPENED;
-	private int INQACC_CUSTNO;
-	private String INQACC_ACC_TYPE;
-	private int INQACC_NEXT_STMT_DT;
-	private float INQACC_AVAIL_BAL;
-	private String INQACC_EYE;
-	private String INQACC_SUCCESS;
-	private float INQACC_INT_RATE;
+	private String inqaccPcb1Pointer;
+	private int inqaccOverdraft;
+	private int inqaccLastStatementDate;
+	private int inqaccSortcode;
+	private float inqaccActualBalance;
+	private int inqaccAccno;
+	private int inqaccOpened;
+	private int inqaccCustno;
+	private String inqaccAccType;
+	private int inqaccNextStatementDate;
+	private float inqaccAvailableBalance;
+	private String inqaccEyecatcher;
+	private String inqaccSuccess;
+	private float inqaccInterestRate;
 
-	public String getINQACC_PCB1_POINTER()
+	public String getInqaccPcb1Pointer()
 	{
-		return INQACC_PCB1_POINTER;
+		return inqaccPcb1Pointer;
 	}
 
-	public void setINQACC_PCB1_POINTER(String iNQACC_PCB1_POINTER)
+	public void setInqaccPcb1Pointer(String inqaccPcb1PointerIn)
 	{
-		INQACC_PCB1_POINTER = iNQACC_PCB1_POINTER;
+		inqaccPcb1Pointer = inqaccPcb1PointerIn;
 	}
 
-	public int getINQACC_OVERDRAFT()
+	public int getInqaccOverdraft()
 	{
-		return INQACC_OVERDRAFT;
+		return inqaccOverdraft;
 	}
 
-	public void setINQACC_OVERDRAFT(int iNQACC_OVERDRAFT)
+	public void setInqaccOverdraft(int inqaccOverdraftIn)
 	{
-		INQACC_OVERDRAFT = iNQACC_OVERDRAFT;
+		inqaccOverdraft = inqaccOverdraftIn;
 	}
 
-	public int getINQACC_LAST_STMT_DT()
+	public int getInqaccLastStatementDate()
 	{
-		return INQACC_LAST_STMT_DT;
+		return inqaccLastStatementDate;
 	}
 
-	public void setINQACC_LAST_STMT_DT(int iNQACC_LAST_STMT_DT)
+	public void setInqaccLastStatementDate(int inqaccLastStatementDateIn)
 	{
-		INQACC_LAST_STMT_DT = iNQACC_LAST_STMT_DT;
+		inqaccLastStatementDate = inqaccLastStatementDateIn;
 	}
 
-	public int getINQACC_SCODE()
+	public int getInqaccSortcode()
 	{
-		return INQACC_SCODE;
+		return inqaccSortcode;
 	}
 
-	public void setINQACC_SCODE(int iNQACC_SCODE)
+	public void setInqaccSortcode(int inqaccSortcodeIn)
 	{
-		INQACC_SCODE = iNQACC_SCODE;
+		inqaccSortcode = inqaccSortcodeIn;
 	}
 
-	public float getINQACC_ACTUAL_BAL()
+	public float getInqaccActualBalance()
 	{
-		return INQACC_ACTUAL_BAL;
+		return inqaccActualBalance;
 	}
 
-	public void setINQACC_ACTUAL_BAL(float iNQACC_ACTUAL_BAL)
+	public void setInqaccActualBalance(float inqaccActualBalanceIn)
 	{
-		INQACC_ACTUAL_BAL = iNQACC_ACTUAL_BAL;
+		inqaccActualBalance = inqaccActualBalanceIn;
 	}
 
-	public int getINQACC_ACCNO()
+	public int getInqaccAccno()
 	{
-		return INQACC_ACCNO;
+		return inqaccAccno;
 	}
 
-	public void setINQACC_ACCNO(int iNQACC_ACCNO)
+	public void setInqaccAccno(int inqaccAccnoIn)
 	{
-		INQACC_ACCNO = iNQACC_ACCNO;
+		inqaccAccno = inqaccAccnoIn;
 	}
 
-	public int getINQACC_OPENED()
+	public int getInqaccOpened()
 	{
-		return INQACC_OPENED;
+		return inqaccOpened;
 	}
 
-	public void setINQACC_OPENED(int iNQACC_OPENED)
+	public void setInqaccOpened(int inqaccOpenedIn)
 	{
-		INQACC_OPENED = iNQACC_OPENED;
+		inqaccOpened = inqaccOpenedIn;
 	}
 
-	public int getINQACC_CUSTNO()
+	public int getInqaccCustno()
 	{
-		return INQACC_CUSTNO;
+		return inqaccCustno;
 	}
 
-	public void setINQACC_CUSTNO(int iNQACC_CUSTNO)
+	public void setInqaccCustno(int inqaccCustnoIn)
 	{
-		INQACC_CUSTNO = iNQACC_CUSTNO;
+		inqaccCustno = inqaccCustnoIn;
 	}
 
-	public String getINQACC_ACC_TYPE()
+	public String getInqaccAccType()
 	{
-		return INQACC_ACC_TYPE;
+		return inqaccAccType;
 	}
 
-	public void setINQACC_ACC_TYPE(String iNQACC_ACC_TYPE)
+	public void setInqaccAccType(String inaccAccTypeIn)
 	{
-		INQACC_ACC_TYPE = iNQACC_ACC_TYPE;
+		inqaccAccType = inaccAccTypeIn;
 	}
 
-	public int getINQACC_NEXT_STMT_DT()
+	public int getInqaccNextStatementDate()
 	{
-		return INQACC_NEXT_STMT_DT;
+		return inqaccNextStatementDate;
 	}
 
-	public void setINQACC_NEXT_STMT_DT(int iNQACC_NEXT_STMT_DT)
+	public void setInqaccNextStatementDate(int inqaccNextStatementDateIn)
 	{
-		INQACC_NEXT_STMT_DT = iNQACC_NEXT_STMT_DT;
+		inqaccNextStatementDate = inqaccNextStatementDateIn;
 	}
 
-	public float getINQACC_AVAIL_BAL()
+	public float getInqaccAvailableBalance()
 	{
-		return INQACC_AVAIL_BAL;
+		return inqaccAvailableBalance;
 	}
 
-	public void setINQACC_AVAIL_BAL(float iNQACC_AVAIL_BAL)
+	public void setInqaccAvailableBalance(float inqaccAvailableBalanceIn)
 	{
-		INQACC_AVAIL_BAL = iNQACC_AVAIL_BAL;
+		inqaccAvailableBalance = inqaccAvailableBalanceIn;
 	}
 
-	public String getINQACC_EYE()
+	public String getInqaccEyecatcher()
 	{
-		return INQACC_EYE;
+		return inqaccEyecatcher;
 	}
 
-	public void setINQACC_EYE(String iNQACC_EYE)
+	public void setInqaccEyecatcher(String inqaccEyecatcherIn)
 	{
-		INQACC_EYE = iNQACC_EYE;
+		inqaccEyecatcher = inqaccEyecatcherIn;
 	}
 
-	public String getINQACC_SUCCESS()
+	public String getInaccSuccess()
 	{
-		return INQACC_SUCCESS;
+		return inqaccSuccess;
 	}
 
-	public void setINQACC_SUCCESS(String iNQACC_SUCCESS)
+	public void setInqaccSuccess(String inqaccSuccessIn)
 	{
-		INQACC_SUCCESS = iNQACC_SUCCESS;
+		inqaccSuccess = inqaccSuccessIn;
 	}
 
-	public float getINQACC_INT_RATE()
+	public float getInqaccInterestRate()
 	{
-		return INQACC_INT_RATE;
+		return inqaccInterestRate;
 	}
 
-	public void setINQACC_INT_RATE(float iNQACC_INT_RATE)
+	public void setInqaccInterestRate(float inqaccInterestRateIn)
 	{
-		INQACC_INT_RATE = iNQACC_INT_RATE;
+		inqaccInterestRate = inqaccInterestRateIn;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "InqaccJson [INQACC_ACCNO=" + INQACC_ACCNO + ", INQACC_ACC_TYPE=" + INQACC_ACC_TYPE
-				+ ", INQACC_ACTUAL_BAL=" + INQACC_ACTUAL_BAL + ", INQACC_AVAIL_BAL=" + INQACC_AVAIL_BAL
-				+ ", INQACC_CUSTNO=" + INQACC_CUSTNO + ", INQACC_EYE=" + INQACC_EYE + ", INQACC_INT_RATE="
-				+ INQACC_INT_RATE + ", INQACC_LAST_STMT_DT=" + INQACC_LAST_STMT_DT + ", INQACC_NEXT_STMT_DT="
-				+ INQACC_NEXT_STMT_DT + ", INQACC_OPENED=" + INQACC_OPENED + ", INQACC_OVERDRAFT=" + INQACC_OVERDRAFT
-				+ ", INQACC_PCB1_POINTER=" + INQACC_PCB1_POINTER + ", INQACC_SCODE=" + INQACC_SCODE
-				+ ", INQACC_SUCCESS=" + INQACC_SUCCESS + "]";
+		return "InqaccJson [INQACC_ACCNO=" + inqaccAccno + ", INQACC_ACC_TYPE=" + inqaccAccType
+				+ ", INQACC_ACTUAL_BAL=" + inqaccActualBalance + ", INQACC_AVAIL_BAL=" + inqaccAvailableBalance
+				+ ", INQACC_CUSTNO=" + inqaccCustno + ", INQACC_EYE=" + inqaccEyecatcher + ", INQACC_INT_RATE="
+				+ inqaccInterestRate + ", INQACC_LAST_STMT_DT=" + inqaccLastStatementDate + ", INQACC_NEXT_STMT_DT="
+				+ inqaccNextStatementDate + ", INQACC_OPENED=" + inqaccOpened + ", INQACC_OVERDRAFT=" + inqaccOverdraft
+				+ ", INQACC_PCB1_POINTER=" + inqaccPcb1Pointer + ", INQACC_SCODE=" + inqaccSortcode
+				+ ", INQACC_SUCCESS=" + inqaccSuccess + "]";
 	}
 
 }

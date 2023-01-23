@@ -3,7 +3,7 @@ package com.ibm.cics.cip.bank.springboot.customerservices.controllers;
 public class InvalidCustomerException extends Exception
 {
 
-	private String errorMsg;
+	private final String errorMsg;
 	/**
 	 * General exception for a customer that does not meet standards
 	 */
@@ -13,6 +13,7 @@ public class InvalidCustomerException extends Exception
 		errorMsg = msg;
 	}
 	
+	@Override
 	public String getMessage()
 	{
 		return errorMsg;

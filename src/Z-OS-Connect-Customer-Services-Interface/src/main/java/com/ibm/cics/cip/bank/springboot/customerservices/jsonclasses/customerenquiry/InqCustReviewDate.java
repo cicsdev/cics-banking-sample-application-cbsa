@@ -21,6 +21,7 @@ public class InqCustReviewDate
 
 	public InqCustReviewDate()
 	{
+		super();
 	}
 
 	public int getINQCUST_CS_REVIEW_YYYY()

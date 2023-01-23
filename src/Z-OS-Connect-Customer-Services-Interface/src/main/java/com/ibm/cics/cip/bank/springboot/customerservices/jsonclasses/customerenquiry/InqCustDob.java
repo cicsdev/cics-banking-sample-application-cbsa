@@ -21,7 +21,7 @@ public class InqCustDob
 
 	public InqCustDob()
 	{
-
+		super();
 	}
 
 	public int getINQCUST_DOB_YYYY()

@@ -28,6 +28,7 @@ public class DelcusJson
 
 	public DelcusJson()
 	{
+		super();
 	}
 
 	public String getCOMM_ADDR()

@@ -17,44 +17,44 @@ public class AccountEnquiryJson
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 	private static final String FLOAT_FORMAT = "%.02f";
 
-	private InqaccJson INQACC_COMMAREA;
+	private InqaccJson inqaccCommarea;
 
 	public AccountEnquiryJson()
 	{
-		INQACC_COMMAREA = new InqaccJson();
+		inqaccCommarea = new InqaccJson();
 	}
 
-	public InqaccJson getINQACC_COMMAREA()
+	public InqaccJson getInqaccCommarea()
 	{
-		return INQACC_COMMAREA;
+		return inqaccCommarea;
 	}
 
-	public void setINQACC_COMMAREA(InqaccJson iNQACC_COMMAREA)
+	public void setInqaccCommarea(InqaccJson inqaccCommareaIn)
 	{
-		INQACC_COMMAREA = iNQACC_COMMAREA;
+		inqaccCommarea = inqaccCommareaIn;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "AccountEnquiryJson [INQACC_COMMAREA=" + INQACC_COMMAREA.toString() + "]";
+		return "AccountEnquiryJson [INQACC_COMMAREA=" + inqaccCommarea.toString() + "]";
 	}
 
 	public String toPrettyString()
 	{
-		InqaccJson acctInfo = INQACC_COMMAREA;
+		InqaccJson acctInfo = inqaccCommarea;
 		String output = "";
-		output += "Account Number: " + OutputFormatUtils.leadingZeroes(8, acctInfo.getINQACC_ACCNO()) + "\n"
-				+ "Customer Number: " + OutputFormatUtils.leadingZeroes(10, acctInfo.getINQACC_CUSTNO()) + "\n"
-				+ "Account Type: " + acctInfo.getINQACC_ACC_TYPE() + "\n" + "Available Balance: "
-				+ String.format(FLOAT_FORMAT, acctInfo.getINQACC_AVAIL_BAL()) + "\n" + "Actual Balance: "
-				+ String.format(FLOAT_FORMAT, acctInfo.getINQACC_ACTUAL_BAL()) + "\n" + "Interest Rate: "
-				+ String.format(FLOAT_FORMAT, acctInfo.getINQACC_INT_RATE()) + "\n" + "Overdraft: "
-				+ acctInfo.getINQACC_OVERDRAFT() + "\n" + "Account Opened: "
-				+ OutputFormatUtils.date(acctInfo.getINQACC_OPENED()) + "\n" + "Next Statement Date: "
-				+ OutputFormatUtils.date(acctInfo.getINQACC_NEXT_STMT_DT()) + "\n" + "Last Statement Date: "
-				+ OutputFormatUtils.date(acctInfo.getINQACC_LAST_STMT_DT()) + "\n" + "Sort Code: "
-				+ OutputFormatUtils.leadingZeroes(6, acctInfo.getINQACC_SCODE()) + "\n";
+		output += "Account Number: " + OutputFormatUtils.leadingZeroes(8, acctInfo.getInqaccAccno()) + "\n"
+				+ "Customer Number: " + OutputFormatUtils.leadingZeroes(10, acctInfo.getInqaccCustno()) + "\n"
+				+ "Account Type: " + acctInfo.getInqaccAccType() + "\n" + "Available Balance: "
+				+ String.format(FLOAT_FORMAT, acctInfo.getInqaccAvailableBalance()) + "\n" + "Actual Balance: "
+				+ String.format(FLOAT_FORMAT, acctInfo.getInqaccActualBalance()) + "\n" + "Interest Rate: "
+				+ String.format(FLOAT_FORMAT, acctInfo.getInqaccInterestRate()) + "\n" + "Overdraft: "
+				+ acctInfo.getInqaccOverdraft() + "\n" + "Account Opened: "
+				+ OutputFormatUtils.date(acctInfo.getInqaccOpened()) + "\n" + "Next Statement Date: "
+				+ OutputFormatUtils.date(acctInfo.getInqaccNextStatementDate()) + "\n" + "Last Statement Date: "
+				+ OutputFormatUtils.date(acctInfo.getInqaccLastStatementDate()) + "\n" + "Sort Code: "
+				+ OutputFormatUtils.leadingZeroes(6, acctInfo.getInqaccSortcode()) + "\n";
 		return output;
 	}
 }

@@ -21,6 +21,7 @@ public class DeleteAccountJson
 
 	public DeleteAccountJson()
 	{
+		super();
 	}
 
 	public DelaccJson getDELACC_COMMAREA()

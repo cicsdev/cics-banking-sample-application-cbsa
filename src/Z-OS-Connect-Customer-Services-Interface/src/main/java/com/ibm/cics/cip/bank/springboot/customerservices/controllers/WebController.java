@@ -75,11 +75,11 @@ public class WebController implements WebMvcConfigurer
 	private static final String CONTENT_TYPE = "content-type";
 	private static final String APPLICATION_JSON = "application/json";
 
-	private static final Logger log = LoggerFactory.getLogger(CustomerServices.class);
+	private static final Logger log = LoggerFactory.getLogger(WebController.class);
 
 	// Customer and account services screen
 	@GetMapping(value =
-	{ "/services", "/" })
+		{ "/services", "/" })
 	public String showCustServices(Model model)
 	{
 		model.addAttribute("contextPath", "");
@@ -116,73 +116,75 @@ public class WebController implements WebMvcConfigurer
 		// templates in the accountEnquiryForm class
 		// If it returns with errors, the same page is shown but as there are
 		// errors, extra columns are shown with the error message if applicable
-		if (bindingResult.hasErrors())
+		if (!bindingResult.hasErrors())
 		{
-			return ACCOUNT_ENQUIRY_FORM;
+
+			// Instantiating a WebClient at either the specified address or the
+			// default one
+			WebClient client = WebClient.create(
+					ConnectionInfo.getAddressAndPort() + "/inqaccz/enquiry/" + accountEnquiryForm.getAcctNumber());
+
+			try
+			{
+				ResponseSpec response = client.get().retrieve();
+				// Serialise the object and get a response. This would usually
+				// run
+				// async, however as it's done during a page load it should be
+				// synchronous, hence it's appended with .block()
+				String responseBody = response.bodyToMono(String.class).block();
+				log.info(responseBody);
+				// Deserialise the response so it can be interacted with as a
+				// plain
+				// Java class
+				AccountEnquiryJson responseObj = new ObjectMapper().readValue(responseBody, AccountEnquiryJson.class);
+				log.info("{}", responseObj);
+
+				// Run through the checks on error codes in the method shown
+				// directly below this and every other response method
+				// The method throws exceptions based on the error type
+				checkIfResponseValidListAcc(responseObj);
+
+				// Set the fields that will be shown in the template. Either the
+				// details of the response, or the details of the error.
+				model.addAttribute(LARGE_TEXT, "Account Details:");
+				model.addAttribute(SMALL_TEXT, responseObj.toPrettyString());
+				model.addAttribute("success", true);
+			}
+			catch (ItemNotFoundException e)
+			{
+				log.info(e.toString());
+				model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+				model.addAttribute(SMALL_TEXT, e.getMessage());
+			}
+			catch (WebClientRequestException e)
+			{
+				log.info(e.toString());
+				model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+				model.addAttribute(SMALL_TEXT, CONNECTION_ERROR_MSG);
+			}
+			catch (Exception e)
+			{
+				log.info(e.toString());
+				model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+				model.addAttribute(SMALL_TEXT, ERROR_MSG);
+			}
+
+			// There's a hidden box on all templates that displays the results -
+			// it
+			// depends on the results field below.
+			model.addAttribute(RESULTS, true);
+
+			// Return the same page with results now, so new enquiries can be
+			// performed without going back.
 		}
-
-		// Instantiating a WebClient at either the specified address or the
-		// default one
-		WebClient client = WebClient
-				.create(ConnectionInfo.getAddressAndPort() + "/inqaccz/enquiry/" + accountEnquiryForm.getAcctNumber());
-
-		try
-		{
-			ResponseSpec response = client.get().retrieve();
-			// Serialise the object and get a response. This would usually run
-			// async, however as it's done during a page load it should be
-			// synchronous, hence it's appended with .block()
-			String responseBody = response.bodyToMono(String.class).block();
-			log.info(responseBody);
-			// Deserialise the response so it can be interacted with as a plain
-			// Java class
-			AccountEnquiryJson responseObj = new ObjectMapper().readValue(responseBody, AccountEnquiryJson.class);
-			log.info("{}", responseObj);
-
-			// Run through the checks on error codes in the method shown
-			// directly below this and every other response method
-			// The method throws exceptions based on the error type
-			checkIfResponseValidListAcc(responseObj);
-
-			// Set the fields that will be shown in the template. Either the
-			// details of the response, or the details of the error.
-			model.addAttribute(LARGE_TEXT, "Account Details:");
-			model.addAttribute(SMALL_TEXT, responseObj.toPrettyString());
-			model.addAttribute("success", true);
-		}
-		catch (ItemNotFoundException e)
-		{
-			log.info(e.toString());
-			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
-			model.addAttribute(SMALL_TEXT, e.getMessage());
-		}
-		catch (WebClientRequestException e)
-		{
-			log.info(e.toString());
-			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
-			model.addAttribute(SMALL_TEXT, CONNECTION_ERROR_MSG);
-		}
-		catch (Exception e)
-		{
-			log.info(e.toString());
-			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
-			model.addAttribute(SMALL_TEXT, ERROR_MSG);
-		}
-
-		// There's a hidden box on all templates that displays the results - it
-		// depends on the results field below.
-		model.addAttribute(RESULTS, true);
-
-		// Return the same page with results now, so new enquiries can be
-		// performed without going back.
 		return ACCOUNT_ENQUIRY_FORM;
 	}
 
 	// this one is a nested if statement, however most are case blocks instead.
 	public static void checkIfResponseValidListAcc(AccountEnquiryJson response) throws ItemNotFoundException
 	{
-		if (response.getINQACC_COMMAREA().getINQACC_SUCCESS().equals("N")
-				&& response.getINQACC_COMMAREA().getINQACC_CUSTNO() == 0)
+		if (response.getInqaccCommarea().getInaccSuccess().equals("N")
+				&& response.getInqaccCommarea().getInqaccCustno() == 0)
 		{
 			throw new ItemNotFoundException(ACCOUNT);
 		}
@@ -199,45 +201,43 @@ public class WebController implements WebMvcConfigurer
 	public String returnCust(@Valid CustomerEnquiryForm customerEnquiryForm, BindingResult bindingResult, Model model)
 			throws JsonProcessingException
 	{
-		if (bindingResult.hasErrors())
+		if (!bindingResult.hasErrors())
 		{
-			return CUSTOMER_ENQUIRY_FORM;
-		}
+			WebClient client = WebClient.create(
+					ConnectionInfo.getAddressAndPort() + "/inqcustz/enquiry/" + customerEnquiryForm.getCustNumber());
 
-		WebClient client = WebClient.create(
-				ConnectionInfo.getAddressAndPort() + "/inqcustz/enquiry/" + customerEnquiryForm.getCustNumber());
+			try
+			{
+				ResponseSpec response = client.get().retrieve();
+				String responseBody = response.bodyToMono(String.class).block();
+				log.info(responseBody);
+				CustomerEnquiryJson responseObj = new ObjectMapper().readValue(responseBody, CustomerEnquiryJson.class);
+				log.info("{}", responseObj);
+				checkIfResponseValidEnqCust(responseObj);
+				model.addAttribute(LARGE_TEXT, "Customer Details");
+				model.addAttribute(SMALL_TEXT, responseObj.toPrettyString());
+			}
+			catch (ItemNotFoundException e)
+			{
+				log.info(e.toString());
+				model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+				model.addAttribute(SMALL_TEXT, e.getMessage());
+			}
+			catch (WebClientRequestException e)
+			{
+				log.info(e.toString());
+				model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+				model.addAttribute(SMALL_TEXT, CONNECTION_ERROR_MSG);
+			}
+			catch (Exception e)
+			{
+				log.info(e.toString());
+				model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+				model.addAttribute(SMALL_TEXT, ERROR_MSG);
+			}
 
-		try
-		{
-			ResponseSpec response = client.get().retrieve();
-			String responseBody = response.bodyToMono(String.class).block();
-			log.info(responseBody);
-			CustomerEnquiryJson responseObj = new ObjectMapper().readValue(responseBody, CustomerEnquiryJson.class);
-			log.info("{}", responseObj);
-			checkIfResponseValidEnqCust(responseObj);
-			model.addAttribute(LARGE_TEXT, "Customer Details");
-			model.addAttribute(SMALL_TEXT, responseObj.toPrettyString());
+			model.addAttribute(RESULTS, true);
 		}
-		catch (ItemNotFoundException e)
-		{
-			log.info(e.toString());
-			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
-			model.addAttribute(SMALL_TEXT, e.getMessage());
-		}
-		catch (WebClientRequestException e)
-		{
-			log.info(e.toString());
-			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
-			model.addAttribute(SMALL_TEXT, CONNECTION_ERROR_MSG);
-		}
-		catch (Exception e)
-		{
-			log.info(e.toString());
-			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
-			model.addAttribute(SMALL_TEXT, ERROR_MSG);
-		}
-
-		model.addAttribute(RESULTS, true);
 		return CUSTOMER_ENQUIRY_FORM;
 	}
 
@@ -262,57 +262,53 @@ public class WebController implements WebMvcConfigurer
 	public String returnListAcc(@Valid CustomerEnquiryForm customerEnquiryForm, BindingResult bindingResult,
 			Model model) throws JsonProcessingException
 	{
-		if (bindingResult.hasErrors())
+		if (!bindingResult.hasErrors())
 		{
-			return LIST_ACCOUNTS_FORM;
-		}
 
-		WebClient client = WebClient
-				.create(ConnectionInfo.getAddressAndPort() + "/inqacccz/list/" + customerEnquiryForm.getCustNumber());
+			WebClient client = WebClient.create(
+					ConnectionInfo.getAddressAndPort() + "/inqacccz/list/" + customerEnquiryForm.getCustNumber());
 
-		try
-		{
-			ResponseSpec response = client.get().retrieve();
-			String responseBody = response.bodyToMono(String.class).block();
-			log.info(responseBody);
-			ListAccJson responseObj = new ObjectMapper().readValue(responseBody, ListAccJson.class);
-			log.info("{}", responseObj);
-			checkIfResponseValidListAcc(responseObj);
-			model.addAttribute(LARGE_TEXT,
-					"Accounts belonging to customer " + responseObj.getINQACCCZ().getCUSTOMER_NUMBER() + ":");
-			model.addAttribute("accounts", responseObj.getINQACCCZ().getACCOUNT_DETAILS());
-		}
-		catch (ItemNotFoundException e)
-		{
-			log.info(e.toString());
-			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
-			model.addAttribute(SMALL_TEXT, e.getMessage());
-		}
-		catch (WebClientRequestException e)
-		{
-			log.info(e.toString());
-			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
-			model.addAttribute(SMALL_TEXT, CONNECTION_ERROR_MSG);
-		}
-		catch (Exception e)
-		{
-			log.info(e.toString());
-			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
-			model.addAttribute(SMALL_TEXT, ERROR_MSG);
-		}
+			try
+			{
+				ResponseSpec response = client.get().retrieve();
+				String responseBody = response.bodyToMono(String.class).block();
+				log.info(responseBody);
+				ListAccJson responseObj = new ObjectMapper().readValue(responseBody, ListAccJson.class);
+				log.info("{}", responseObj);
+				checkIfResponseValidListAcc(responseObj);
+				model.addAttribute(LARGE_TEXT,
+						"Accounts belonging to customer " + responseObj.getINQACCCZ().getCUSTOMER_NUMBER() + ":");
+				model.addAttribute("accounts", responseObj.getINQACCCZ().getACCOUNT_DETAILS());
+			}
+			catch (ItemNotFoundException e)
+			{
+				log.info(e.toString());
+				model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+				model.addAttribute(SMALL_TEXT, e.getMessage());
+			}
+			catch (WebClientRequestException e)
+			{
+				log.info(e.toString());
+				model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+				model.addAttribute(SMALL_TEXT, CONNECTION_ERROR_MSG);
+			}
+			catch (Exception e)
+			{
+				log.info(e.toString());
+				model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+				model.addAttribute(SMALL_TEXT, ERROR_MSG);
+			}
 
-		model.addAttribute(RESULTS, true);
+			model.addAttribute(RESULTS, true);
+		}
 		return LIST_ACCOUNTS_FORM;
 	}
 
 	public static void checkIfResponseValidListAcc(ListAccJson response) throws ItemNotFoundException
 	{
-		switch (response.getINQACCCZ().getCUSTOMER_FOUND())
+		if (response.getINQACCCZ().getCUSTOMER_FOUND().equals("N"))
 		{
-		case "N":
 			throw new ItemNotFoundException(CUSTOMER);
-		default:
-			break;
 		}
 	}
 
@@ -399,16 +395,17 @@ public class WebController implements WebMvcConfigurer
 	{
 		if (responseObj.getCREACC().getCOMM_SUCCESS().equals("N"))
 		{
-			switch (responseObj.getCREACC().getCOMM_FAIL_CODE())
+			if (responseObj.getCREACC().getCOMM_FAIL_CODE().equals("1"))
 			{
-			case "1":
 				throw new ItemNotFoundException(CUSTOMER);
-			case "8":
+			}
+			if (responseObj.getCREACC().getCOMM_FAIL_CODE().equals("8"))
+			{
 				throw new TooManyAccountsException(Integer.parseInt(responseObj.getCREACC().getCOMM_CUSTNO()));
-			case "A":
+			}
+			if (responseObj.getCREACC().getCOMM_FAIL_CODE().equals("A"))
+			{
 				throw new IllegalArgumentException("Invalid account type supplied.");
-			default:
-				break;
 			}
 		}
 	}
@@ -432,7 +429,7 @@ public class WebController implements WebMvcConfigurer
 		CreateCustomerJson transferjson = new CreateCustomerJson(createCustForm);
 
 		// Serialise the object to JSON
-		log.info("{}", transferjson.toString());
+		log.info("{}", transferjson);
 		String jsonString = new ObjectMapper().writeValueAsString(transferjson);
 		log.info("Json to be sent:\n{}", jsonString);
 
@@ -451,7 +448,7 @@ public class WebController implements WebMvcConfigurer
 
 			// Deserialise into a POJO
 			CreateCustomerJson responseObj = new ObjectMapper().readValue(responseBody, CreateCustomerJson.class);
-			log.info("Response Json:\n{}", responseObj.toString());
+			log.info("Response Json:\n{}", responseObj);
 
 			// Throws out different exceptions depending on the contents
 			checkIfResponseValidCreateCust(responseObj);
@@ -670,16 +667,15 @@ public class WebController implements WebMvcConfigurer
 	{
 		if (responseObj.getUPDCUST().getCOMM_UPD_SUCCESS().equals("N"))
 		{
-			switch (responseObj.getUPDCUST().getCOMM_UPD_FAIL_CD())
+			if (responseObj.getUPDCUST().getCOMM_UPD_FAIL_CD().equals("4"))
 			{
-			case "4":
 				throw new IllegalArgumentException(
 						"No name and no address supplied. (Are there spaces before both the name and the address?)");
-			case "T":
+			}
+			if (responseObj.getUPDCUST().getCOMM_UPD_FAIL_CD().equals("T"))
+			{
 				throw new IllegalArgumentException(
 						"Invalid title; Valid titles are: Professor, Mr, Mrs, Miss, Ms, Dr, Drs, Lord, Sir or Lady.");
-			default:
-				break;
 			}
 			throw new ItemNotFoundException(CUSTOMER);
 		}
@@ -696,45 +692,43 @@ public class WebController implements WebMvcConfigurer
 	public String deleteAcct(@Valid AccountEnquiryForm accountEnquiryForm, BindingResult bindingResult, Model model)
 			throws JsonProcessingException
 	{
-		if (bindingResult.hasErrors())
+		if (!bindingResult.hasErrors())
 		{
-			return DELETE_ACCOUNT_FORM;
-		}
+			WebClient client = WebClient.create(
+					ConnectionInfo.getAddressAndPort() + "/delacc/remove/" + accountEnquiryForm.getAcctNumber());
 
-		WebClient client = WebClient
-				.create(ConnectionInfo.getAddressAndPort() + "/delacc/remove/" + accountEnquiryForm.getAcctNumber());
+			try
+			{
+				ResponseSpec response = client.delete().retrieve();
+				String responseBody = response.bodyToMono(String.class).block();
+				log.info(responseBody);
+				DeleteAccountJson responseObj = new ObjectMapper().readValue(responseBody, DeleteAccountJson.class);
+				log.info("{}", responseObj);
+				checkIfResponseValidDeleteAcc(responseObj);
+				model.addAttribute(LARGE_TEXT, "Account Deleted");
+				model.addAttribute(SMALL_TEXT, responseObj.toPrettyString());
+			}
+			catch (ItemNotFoundException e)
+			{
+				log.info(e.toString());
+				model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+				model.addAttribute(SMALL_TEXT, e.getMessage());
+			}
+			catch (WebClientRequestException e)
+			{
+				log.info(e.toString());
+				model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+				model.addAttribute(SMALL_TEXT, CONNECTION_ERROR_MSG);
+			}
+			catch (Exception e)
+			{
+				log.info(e.toString());
+				model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+				model.addAttribute(SMALL_TEXT, ERROR_MSG);
+			}
 
-		try
-		{
-			ResponseSpec response = client.delete().retrieve();
-			String responseBody = response.bodyToMono(String.class).block();
-			log.info(responseBody);
-			DeleteAccountJson responseObj = new ObjectMapper().readValue(responseBody, DeleteAccountJson.class);
-			log.info("{}", responseObj);
-			checkIfResponseValidDeleteAcc(responseObj);
-			model.addAttribute(LARGE_TEXT, "Account Deleted");
-			model.addAttribute(SMALL_TEXT, responseObj.toPrettyString());
+			model.addAttribute(RESULTS, true);
 		}
-		catch (ItemNotFoundException e)
-		{
-			log.info(e.toString());
-			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
-			model.addAttribute(SMALL_TEXT, e.getMessage());
-		}
-		catch (WebClientRequestException e)
-		{
-			log.info(e.toString());
-			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
-			model.addAttribute(SMALL_TEXT, CONNECTION_ERROR_MSG);
-		}
-		catch (Exception e)
-		{
-			log.info(e.toString());
-			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
-			model.addAttribute(SMALL_TEXT, ERROR_MSG);
-		}
-
-		model.addAttribute(RESULTS, true);
 		return DELETE_ACCOUNT_FORM;
 	}
 
@@ -760,56 +754,51 @@ public class WebController implements WebMvcConfigurer
 	public String deleteCust(@Valid CustomerEnquiryForm customerEnquiryForm, BindingResult bindingResult, Model model)
 			throws JsonProcessingException
 	{
-		if (bindingResult.hasErrors())
+		if (!bindingResult.hasErrors())
 		{
-			return DELETE_CUSTOMER_FORM;
-		}
+			WebClient client = WebClient.create(ConnectionInfo.getAddressAndPort() + "/delcus/remove/"
+					+ String.format(String.format("%10s", customerEnquiryForm.getCustNumber()).replace(" ", "0")));
 
-		WebClient client = WebClient.create(ConnectionInfo.getAddressAndPort() + "/delcus/remove/"
-				+ String.format(String.format("%10s", customerEnquiryForm.getCustNumber()).replace(" ", "0")));
+			try
+			{
+				ResponseSpec response = client.delete().retrieve();
+				String responseBody = response.bodyToMono(String.class).block();
+				log.info(responseBody);
+				DeleteCustomerJson responseObj = new ObjectMapper().readValue(responseBody, DeleteCustomerJson.class);
+				log.info("{}", responseObj);
+				checkIfResponseValidDeleteCust(responseObj);
+				model.addAttribute(LARGE_TEXT, "Customer and associated accounts Deleted");
+				model.addAttribute(SMALL_TEXT, responseObj.toPrettyString());
+			}
+			catch (ItemNotFoundException e)
+			{
+				log.info(e.toString());
+				model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+				model.addAttribute(SMALL_TEXT, e.getMessage());
+			}
+			catch (WebClientRequestException e)
+			{
+				log.info(e.toString());
+				model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+				model.addAttribute(SMALL_TEXT, CONNECTION_ERROR_MSG);
+			}
+			catch (Exception e)
+			{
+				log.info(e.toString());
+				model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
+				model.addAttribute(SMALL_TEXT, ERROR_MSG);
+			}
 
-		try
-		{
-			ResponseSpec response = client.delete().retrieve();
-			String responseBody = response.bodyToMono(String.class).block();
-			log.info(responseBody);
-			DeleteCustomerJson responseObj = new ObjectMapper().readValue(responseBody, DeleteCustomerJson.class);
-			log.info("{}", responseObj);
-			checkIfResponseValidDeleteCust(responseObj);
-			model.addAttribute(LARGE_TEXT, "Customer and associated accounts Deleted");
-			model.addAttribute(SMALL_TEXT, responseObj.toPrettyString());
+			model.addAttribute(RESULTS, true);
 		}
-		catch (ItemNotFoundException e)
-		{
-			log.info(e.toString());
-			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
-			model.addAttribute(SMALL_TEXT, e.getMessage());
-		}
-		catch (WebClientRequestException e)
-		{
-			log.info(e.toString());
-			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
-			model.addAttribute(SMALL_TEXT, CONNECTION_ERROR_MSG);
-		}
-		catch (Exception e)
-		{
-			log.info(e.toString());
-			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
-			model.addAttribute(SMALL_TEXT, ERROR_MSG);
-		}
-
-		model.addAttribute(RESULTS, true);
 		return DELETE_CUSTOMER_FORM;
 	}
 
 	public static void checkIfResponseValidDeleteCust(DeleteCustomerJson responseObj) throws ItemNotFoundException
 	{
-		switch (responseObj.getDELCUS().getCOMM_DEL_FAIL_CD())
+		if(responseObj.getDELCUS().getCOMM_DEL_FAIL_CD().equals("1"))
 		{
-		case 1:
 			throw new ItemNotFoundException(CUSTOMER);
-		default:
-			break;
 		}
 	}
 }

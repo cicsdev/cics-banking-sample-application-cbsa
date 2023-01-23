@@ -29,6 +29,7 @@ public class InqCustZJson
 
 	public InqCustZJson()
 	{
+		super();
 	}
 
 	public String getINQCUST_NAME()

@@ -14,6 +14,10 @@ import com.fasterxml.jackson.databind.introspect.AnnotatedMethod;
 public class JsonPropertyNamingStrategy extends PropertyNamingStrategy
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5634229355538397996L;
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
 	@Override
@@ -25,13 +29,13 @@ public class JsonPropertyNamingStrategy extends PropertyNamingStrategy
 	@Override
 	public String nameForGetterMethod(MapperConfig<?> config, AnnotatedMethod method, String defaultName)
 	{
-		return convert(method.getName().toString());
+		return convert(method.getName());
 	}
 
 	@Override
 	public String nameForSetterMethod(MapperConfig<?> config, AnnotatedMethod method, String defaultName)
 	{
-		return convert(method.getName().toString());
+		return convert(method.getName());
 	}
 
 	private String convert(String input)
