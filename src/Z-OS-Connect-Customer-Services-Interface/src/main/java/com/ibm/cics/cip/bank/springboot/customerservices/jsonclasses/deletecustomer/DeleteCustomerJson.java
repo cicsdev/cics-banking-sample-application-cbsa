@@ -43,10 +43,10 @@ public class DeleteCustomerJson
 	{
 		String output = "";
 		output += "Customer Number:       " + OutputFormatUtils.leadingZeroes(10, delcus.getCommCustno()) + "\n"
-				+ "Sort Code:      " + delcus.getCommSortcode() + "\n" + "Customer Name:         " + delcus.getCommName()
-				+ "\n" + "Customer Address:    " + delcus.getCommAddress() + "\n" + "Date of Birth:       "
-				+ OutputFormatUtils.date(delcus.getCommDateOfBirth()) + "\n" + "Credit score:        "
-				+ delcus.getCommCreditScore() + "\n" + "Next review date:            "
+				+ "Sort Code:      " + delcus.getCommSortcode() + "\n" + "Customer Name:         "
+				+ delcus.getCommName() + "\n" + "Customer Address:    " + delcus.getCommAddress() + "\n"
+				+ "Date of Birth:       " + OutputFormatUtils.date(delcus.getCommDateOfBirth()) + "\n"
+				+ "Credit score:        " + delcus.getCommCreditScore() + "\n" + "Next review date:            "
 				+ delcus.getCommCsReviewDate() + "\n";
 		return output;
 	}

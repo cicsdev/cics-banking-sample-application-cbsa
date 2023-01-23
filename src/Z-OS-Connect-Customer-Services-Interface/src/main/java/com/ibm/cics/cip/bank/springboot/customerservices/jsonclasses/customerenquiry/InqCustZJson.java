@@ -148,9 +148,8 @@ public class InqCustZJson
 		return "InqCustZJson [INQCUST_ADDR=" + inqcustAddress + ", INQCUST_CREDIT_SCORE=" + inqcustCreditScore
 				+ ", INQCUST_CS_REVIEW_DT=" + inqcustCsReviewDate + ", INQCUST_CUSTNO=" + inqcustCustno
 				+ ", INQCUST_DOB=" + inqCustDob + ", INQCUST_EYE=" + inqcustEye + ", INQCUST_INQ_FAIL_CD="
-				+ inqcustInqFailCode + ", INQCUST_INQ_SUCCESS=" + inqcustInqSuccess + ", INQCUST_NAME="
-				+ inqcustName + ", INQCUST_PCB_POINTER=" + inqcustPcbPointer + ", INQCUST_SCODE=" + inqcustSortcode
-				+ "]";
+				+ inqcustInqFailCode + ", INQCUST_INQ_SUCCESS=" + inqcustInqSuccess + ", INQCUST_NAME=" + inqcustName
+				+ ", INQCUST_PCB_POINTER=" + inqcustPcbPointer + ", INQCUST_SCODE=" + inqcustSortcode + "]";
 	}
 
 }

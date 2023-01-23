@@ -135,9 +135,9 @@ public class DelcusJson
 	public String toString()
 	{
 		return "DelcusJson [COMM_ADDR=" + commAddress + ", COMM_CREDIT_SCORE=" + commCreditScore
-				+ ", COMM_CS_REVIEW_DATE=" + commCsReviewDate + ", COMM_CUSTNO=" + commCustno
-				+ ", COMM_DEL_FAIL_CD=" + commDelFailCode + ", COMM_DEL_SUCCESS=" + commDelSuccess + ", COMM_DOB="
-				+ commDateOfBirth + ", COMM_EYE=" + commEye + ", COMM_NAME=" + commName + ", COMM_SCODE=" + commSortcode + "]";
+				+ ", COMM_CS_REVIEW_DATE=" + commCsReviewDate + ", COMM_CUSTNO=" + commCustno + ", COMM_DEL_FAIL_CD="
+				+ commDelFailCode + ", COMM_DEL_SUCCESS=" + commDelSuccess + ", COMM_DOB=" + commDateOfBirth
+				+ ", COMM_EYE=" + commEye + ", COMM_NAME=" + commName + ", COMM_SCODE=" + commSortcode + "]";
 	}
 
 }

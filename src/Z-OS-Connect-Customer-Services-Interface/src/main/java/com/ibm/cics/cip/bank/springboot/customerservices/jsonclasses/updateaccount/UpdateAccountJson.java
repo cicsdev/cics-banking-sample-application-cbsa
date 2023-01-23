@@ -53,11 +53,11 @@ public class UpdateAccountJson
 	{
 		UpdaccJson accInfo = updacc;
 		String output = "";
-		output += "Account Number: " + OutputFormatUtils.leadingZeroes(8, accInfo.getCommAccno()) + "\n"
-				+ "Sort Code: " + accInfo.getCommSortcode() + "\n" + "Account Type: " + accInfo.getCommAccountType() + "\n"
+		output += "Account Number: " + OutputFormatUtils.leadingZeroes(8, accInfo.getCommAccno()) + "\n" + "Sort Code: "
+				+ accInfo.getCommSortcode() + "\n" + "Account Type: " + accInfo.getCommAccountType() + "\n"
 				+ "Customer Number: " + OutputFormatUtils.leadingZeroes(10, accInfo.getCommCustNo()) + "\n"
-				+ "Interest Rate: " + String.format(FLOAT_FORMAT, accInfo.getCommInterestRate()) + "\n" + "Overdraft Limit: "
-				+ accInfo.getCommOverdraft() + "\n" + "Available Balance: "
+				+ "Interest Rate: " + String.format(FLOAT_FORMAT, accInfo.getCommInterestRate()) + "\n"
+				+ "Overdraft Limit: " + accInfo.getCommOverdraft() + "\n" + "Available Balance: "
 				+ String.format(FLOAT_FORMAT, accInfo.getCommAvailableBalance()) + "\n" + "Actual Balance: "
 				+ String.format(FLOAT_FORMAT, accInfo.getCommActualBalance()) + "\n" + "Account Opened: "
 				+ OutputFormatUtils.date(accInfo.getCommOpened()) + "\n" + "Last Statement Date: "

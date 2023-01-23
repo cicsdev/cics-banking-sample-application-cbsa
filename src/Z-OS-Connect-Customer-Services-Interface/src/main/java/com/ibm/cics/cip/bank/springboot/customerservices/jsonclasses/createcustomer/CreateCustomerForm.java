@@ -94,7 +94,7 @@ public class CreateCustomerForm
 			return true;
 		if (elements[0].contentEquals("Sir"))
 			return true;
-		return(elements[0].contentEquals("Lady"));
+		return (elements[0].contentEquals("Lady"));
 	}
 
 }

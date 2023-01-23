@@ -173,10 +173,10 @@ public class InqaccJson
 	@Override
 	public String toString()
 	{
-		return "InqaccJson [INQACC_ACCNO=" + inqaccAccno + ", INQACC_ACC_TYPE=" + inqaccAccType
-				+ ", INQACC_ACTUAL_BAL=" + inqaccActualBalance + ", INQACC_AVAIL_BAL=" + inqaccAvailableBalance
-				+ ", INQACC_CUSTNO=" + inqaccCustno + ", INQACC_EYE=" + inqaccEyecatcher + ", INQACC_INT_RATE="
-				+ inqaccInterestRate + ", INQACC_LAST_STMT_DT=" + inqaccLastStatementDate + ", INQACC_NEXT_STMT_DT="
+		return "InqaccJson [INQACC_ACCNO=" + inqaccAccno + ", INQACC_ACC_TYPE=" + inqaccAccType + ", INQACC_ACTUAL_BAL="
+				+ inqaccActualBalance + ", INQACC_AVAIL_BAL=" + inqaccAvailableBalance + ", INQACC_CUSTNO="
+				+ inqaccCustno + ", INQACC_EYE=" + inqaccEyecatcher + ", INQACC_INT_RATE=" + inqaccInterestRate
+				+ ", INQACC_LAST_STMT_DT=" + inqaccLastStatementDate + ", INQACC_NEXT_STMT_DT="
 				+ inqaccNextStatementDate + ", INQACC_OPENED=" + inqaccOpened + ", INQACC_OVERDRAFT=" + inqaccOverdraft
 				+ ", INQACC_PCB1_POINTER=" + inqaccPcb1Pointer + ", INQACC_SCODE=" + inqaccSortcode
 				+ ", INQACC_SUCCESS=" + inqaccSuccess + "]";

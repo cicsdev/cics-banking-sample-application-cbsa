@@ -47,8 +47,8 @@ public class DeleteAccountJson
 		output += "Account Number: " + OutputFormatUtils.leadingZeroes(8, accInfo.getDelaccAccno()) + "\n"
 				+ "Sort Code: " + accInfo.getDelaccSortcode() + "\n" + "Account Type: " + accInfo.getDelaccAccType()
 				+ "\n" + "Customer Number: " + OutputFormatUtils.leadingZeroes(10, accInfo.getDelaccCustno()) + "\n"
-				+ "Interest Rate: " + String.format(FLOAT_FORMAT, accInfo.getDelaccInterestRate()) + "\n" + "Overdraft Limit: "
-				+ accInfo.getDelaccOverdraft() + "\n" + "Available Balance: "
+				+ "Interest Rate: " + String.format(FLOAT_FORMAT, accInfo.getDelaccInterestRate()) + "\n"
+				+ "Overdraft Limit: " + accInfo.getDelaccOverdraft() + "\n" + "Available Balance: "
 				+ String.format(FLOAT_FORMAT, accInfo.getDelaccAvailableBalance()) + "\n" + "Actual Balance: "
 				+ String.format(FLOAT_FORMAT, accInfo.getDelaccActualBalance()) + "\n" + "Account Opened: "
 				+ OutputFormatUtils.date(accInfo.getDelaccOpened()) + "\n" + "Last Statement Date: "

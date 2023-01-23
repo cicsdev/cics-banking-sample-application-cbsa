@@ -28,7 +28,6 @@ public class UpdateCustomerForm
 	int custCreditScore = 0;
 	String custReviewDate = "";
 
-
 	public String getCustNumber()
 	{
 		return custNumber;

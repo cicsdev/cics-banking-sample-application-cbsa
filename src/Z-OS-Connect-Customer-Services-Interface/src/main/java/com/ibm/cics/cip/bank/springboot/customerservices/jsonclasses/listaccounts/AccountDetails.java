@@ -30,7 +30,6 @@ public class AccountDetails
 	private int commAccno;
 	private int commLastStatementDate;
 
-
 	public float getCommActualBalance()
 	{
 		return commActualBalance;
@@ -166,11 +165,12 @@ public class AccountDetails
 		String output = "";
 		output += "Account Number:       " + OutputFormatUtils.leadingZeroes(8, commAccno) + "\n"
 				+ "Sort Code:            " + String.format("%06d", commSortcode) + "\n" + "Customer Number:      "
-				+ OutputFormatUtils.leadingZeroes(10, commCustno) + "\n" + "Account Type:         " + commAccType
-				+ "\n" + "Available Balance:    " + String.format(FLOAT_FORMAT, commAvailableBalance) + "\n"
-				+ "Actual Balance:       " + String.format(FLOAT_FORMAT, commActualBalance) + "\n" + "Interest Rate:        "
-				+ String.format(FLOAT_FORMAT, commInterestRate) + "\n" + "Overdraft:            " + commOverdraft + "\n"
-				+ "Account Opened: " + OutputFormatUtils.date(commOpened) + "\n" + "Next Statement Date:  "
+				+ OutputFormatUtils.leadingZeroes(10, commCustno) + "\n" + "Account Type:         " + commAccType + "\n"
+				+ "Available Balance:    " + String.format(FLOAT_FORMAT, commAvailableBalance) + "\n"
+				+ "Actual Balance:       " + String.format(FLOAT_FORMAT, commActualBalance) + "\n"
+				+ "Interest Rate:        " + String.format(FLOAT_FORMAT, commInterestRate) + "\n"
+				+ "Overdraft:            " + commOverdraft + "\n" + "Account Opened: "
+				+ OutputFormatUtils.date(commOpened) + "\n" + "Next Statement Date:  "
 				+ OutputFormatUtils.date(commNextStatementDate) + "\n" + "Last Statement Date:  "
 				+ OutputFormatUtils.date(commLastStatementDate) + "\n";
 		return output;

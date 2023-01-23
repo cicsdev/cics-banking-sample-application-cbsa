@@ -24,7 +24,6 @@ public class InqAccczJson
 	private String customerFound;
 	private String commSuccess;
 
-
 	public int getCommFailCode()
 	{
 		return commFailCode;

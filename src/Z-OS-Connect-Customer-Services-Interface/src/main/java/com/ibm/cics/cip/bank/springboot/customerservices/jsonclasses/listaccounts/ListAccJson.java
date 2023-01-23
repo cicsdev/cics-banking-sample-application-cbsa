@@ -17,8 +17,6 @@ public class ListAccJson
 
 	private InqAccczJson inqAcccz;
 
-
-
 	public InqAccczJson getInqacccz()
 	{
 		return inqAcccz;

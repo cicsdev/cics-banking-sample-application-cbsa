@@ -259,16 +259,15 @@ public class DelaccJson
 	@Override
 	public String toString()
 	{
-		return "DelaccJson [DELACC_ACCNO=" + delaccAccno + ", DELACC_ACC_TYPE=" + delaccAccType
-				+ ", DELACC_ACTUAL_BAL=" + delaccActualBalance + ", DELACC_AVAIL_BAL=" + delaccAvailableBalance
-				+ ", DELACC_CUSTNO=" + delaccCustno + ", DELACC_DEL_APPLID=" + delaccDelApplid
-				+ ", DELACC_DEL_FAIL_CD=" + delaccDelFailCode + ", DELACC_DEL_PCB1=" + delaccDelPcb1
-				+ ", DELACC_DEL_PCB2=" + delaccDelPcb2 + ", DELACC_DEL_PCB3=" + delaccDelPcb3
-				+ ", DELACC_DEL_SUCCESS=" + delaccDelSuccess + ", DELACC_EYE=" + delaccEye + ", DELACC_FAIL_CD="
-				+ delaccFailCode + ", DELACC_INT_RATE=" + delaccInterestRate + ", DELACC_LAST_STMT_DT="
-				+ delaccLastStatementDate + ", DELACC_NEXT_STMT_DT=" + delaccNextStatementDate + ", DELACC_OPENED="
-				+ delaccOpened + ", DELACC_OVERDRAFT=" + delaccOverdraft + ", DELACC_SCODE=" + delaccSortcode
-				+ ", DELACC_SUCCESS=" + delaccSuccess + "]";
+		return "DelaccJson [DELACC_ACCNO=" + delaccAccno + ", DELACC_ACC_TYPE=" + delaccAccType + ", DELACC_ACTUAL_BAL="
+				+ delaccActualBalance + ", DELACC_AVAIL_BAL=" + delaccAvailableBalance + ", DELACC_CUSTNO="
+				+ delaccCustno + ", DELACC_DEL_APPLID=" + delaccDelApplid + ", DELACC_DEL_FAIL_CD=" + delaccDelFailCode
+				+ ", DELACC_DEL_PCB1=" + delaccDelPcb1 + ", DELACC_DEL_PCB2=" + delaccDelPcb2 + ", DELACC_DEL_PCB3="
+				+ delaccDelPcb3 + ", DELACC_DEL_SUCCESS=" + delaccDelSuccess + ", DELACC_EYE=" + delaccEye
+				+ ", DELACC_FAIL_CD=" + delaccFailCode + ", DELACC_INT_RATE=" + delaccInterestRate
+				+ ", DELACC_LAST_STMT_DT=" + delaccLastStatementDate + ", DELACC_NEXT_STMT_DT="
+				+ delaccNextStatementDate + ", DELACC_OPENED=" + delaccOpened + ", DELACC_OVERDRAFT=" + delaccOverdraft
+				+ ", DELACC_SCODE=" + delaccSortcode + ", DELACC_SUCCESS=" + delaccSuccess + "]";
 	}
 
 }

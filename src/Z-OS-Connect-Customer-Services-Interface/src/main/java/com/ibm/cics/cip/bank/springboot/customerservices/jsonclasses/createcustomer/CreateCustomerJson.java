@@ -47,14 +47,13 @@ public class CreateCustomerJson
 	public String toPrettyString()
 	{
 		String output = "";
-		output += "Customer Number:       "
-				+ OutputFormatUtils.leadingZeroes(10, creCust.getCommKey().getCommNumber()) + "\n"
-				+ "Sort Code:      " + String.format("%06d", creCust.getCommKey().getCommSortcode()) + "\n"
+		output += "Customer Number:       " + OutputFormatUtils.leadingZeroes(10, creCust.getCommKey().getCommNumber())
+				+ "\n" + "Sort Code:      " + String.format("%06d", creCust.getCommKey().getCommSortcode()) + "\n"
 				+ "Customer Name:         " + creCust.getCommName() + "\n" + "Customer Address:    "
 				+ creCust.getCommAddress() + "\n" + "Date of Birth:       "
 				+ OutputFormatUtils.date(creCust.getCommDateOfBirth()) + "\n" + "Credit score:        "
-				+ creCust.getCommCreditScore() + "\n" + "Next review date:            "
-				+ creCust.getCommCsReviewDate() + "\n";
+				+ creCust.getCommCreditScore() + "\n" + "Next review date:            " + creCust.getCommCsReviewDate()
+				+ "\n";
 		return output;
 	}
 }

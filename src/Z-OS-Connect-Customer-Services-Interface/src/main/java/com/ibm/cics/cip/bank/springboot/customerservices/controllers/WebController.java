@@ -78,7 +78,7 @@ public class WebController implements WebMvcConfigurer
 
 	// Customer and account services screen
 	@GetMapping(value =
-		{ "/services", "/" })
+	{ "/services", "/" })
 	public String showCustServices(Model model)
 	{
 		model.addAttribute("contextPath", "");
@@ -481,7 +481,7 @@ public class WebController implements WebMvcConfigurer
 	{
 		if (!responseObj.getCreCust().getCommFailCode().equals(""))
 		{
-			if(responseObj.getCreCust().getCommFailCode().equals("8"))
+			if (responseObj.getCreCust().getCommFailCode().equals("8"))
 			{
 				throw new TooManyAccountsException(Integer.parseInt(responseObj.getCreCust().getCommFailCode()));
 			}
@@ -730,7 +730,7 @@ public class WebController implements WebMvcConfigurer
 
 	public static void checkIfResponseValidDeleteAcc(DeleteAccountJson responseObj) throws ItemNotFoundException
 	{
-		if(responseObj.getDelaccCommarea().getDelaccDelFailCode() == 1)
+		if (responseObj.getDelaccCommarea().getDelaccDelFailCode() == 1)
 		{
 			throw new ItemNotFoundException(ACCOUNT);
 		}
@@ -789,7 +789,7 @@ public class WebController implements WebMvcConfigurer
 
 	public static void checkIfResponseValidDeleteCust(DeleteCustomerJson responseObj) throws ItemNotFoundException
 	{
-		if(responseObj.getDelcus().getCommDelFailCode() == 1)
+		if (responseObj.getDelcus().getCommDelFailCode() == 1)
 		{
 			throw new ItemNotFoundException(CUSTOMER);
 		}
