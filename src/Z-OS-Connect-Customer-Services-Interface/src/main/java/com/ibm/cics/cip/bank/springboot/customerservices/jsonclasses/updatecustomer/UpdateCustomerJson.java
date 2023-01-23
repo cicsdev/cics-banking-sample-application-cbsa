@@ -16,11 +16,11 @@ public class UpdateCustomerJson
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
-	UpdcustJson UPDCUST;
+	UpdcustJson updcust;
 
 	public UpdateCustomerJson(UpdateCustomerForm updateCustomerForm)
 	{
-		UPDCUST = new UpdcustJson(updateCustomerForm.getCustNumber(), updateCustomerForm.getCustName(),
+		updcust = new UpdcustJson(updateCustomerForm.getCustNumber(), updateCustomerForm.getCustName(),
 				updateCustomerForm.getCustAddress(), updateCustomerForm.getCustDoB(),
 				updateCustomerForm.getCustCreditScore(), updateCustomerForm.getCustReviewDate());
 	}
@@ -30,31 +30,31 @@ public class UpdateCustomerJson
 
 	}
 
-	public UpdcustJson getUPDCUST()
+	public UpdcustJson getUpducst()
 	{
-		return UPDCUST;
+		return updcust;
 	}
 
-	public void setUPDCUST(UpdcustJson uPDCUST)
+	public void setUpdcust(UpdcustJson updCustIn)
 	{
-		UPDCUST = uPDCUST;
+		updcust = updCustIn;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "UpdateCustomerJson [UPDCUST=" + UPDCUST + "]";
+		return "UpdateCustomerJson [UPDCUST=" + updcust + "]";
 	}
 
 	public String toPrettyString()
 	{
 		String output = "";
-		output += "Customer Number:       " + OutputFormatUtils.leadingZeroes(10, UPDCUST.getCOMM_CUSTNO()) + "\n"
-				+ "Sort Code:      " + UPDCUST.getCOMM_SCODE() + "\n" + "Customer Name:         "
-				+ UPDCUST.getCOMM_NAME() + "\n" + "Customer Address:    " + UPDCUST.getCOMM_ADDR() + "\n"
-				+ "Date of Birth:       " + OutputFormatUtils.date(UPDCUST.getCOMM_DOB()) + "\n"
-				+ "Credit score:        " + UPDCUST.getCOMM_CREDIT_SCORE() + "\n" + "Next review date:            "
-				+ UPDCUST.getCOMM_CS_REVIEW_DATE() + "\n";
+		output += "Customer Number:       " + OutputFormatUtils.leadingZeroes(10, updcust.getCommCustno()) + "\n"
+				+ "Sort Code:      " + updcust.getCommSortcode() + "\n" + "Customer Name:         "
+				+ updcust.getCommName() + "\n" + "Customer Address:    " + updcust.getCommAddress() + "\n"
+				+ "Date of Birth:       " + OutputFormatUtils.date(updcust.getCommDateOfBirth()) + "\n"
+				+ "Credit score:        " + updcust.getCommCreditScore() + "\n" + "Next review date:            "
+				+ updcust.getCommCreditScoreReviewDate() + "\n";
 		return output;
 	}
 }

@@ -17,11 +17,11 @@ public class UpdateAccountJson
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 	private static final String FLOAT_FORMAT = "%.02f";
 
-	UpdaccJson UPDACC;
+	UpdaccJson updacc;
 
 	public UpdateAccountJson(UpdateAccountForm updateAccountForm)
 	{
-		UPDACC = new UpdaccJson(updateAccountForm.getCustNumber(), updateAccountForm.getAcctNumber(),
+		updacc = new UpdaccJson(updateAccountForm.getCustNumber(), updateAccountForm.getAcctNumber(),
 				updateAccountForm.getAcctType(), updateAccountForm.getAcctInterestRateFloat(),
 				updateAccountForm.getAcctOpenedDate(), updateAccountForm.getAcctOverdraftInt(),
 				updateAccountForm.getAcctLastStatementDate(), updateAccountForm.getAcctNextStatementDate(),
@@ -33,36 +33,36 @@ public class UpdateAccountJson
 
 	}
 
-	public UpdaccJson getUPDACC()
+	public UpdaccJson getUpdacc()
 	{
-		return UPDACC;
+		return updacc;
 	}
 
-	public void setUPDACC(UpdaccJson uPDACC)
+	public void setUpdacc(UpdaccJson updaccIn)
 	{
-		UPDACC = uPDACC;
+		updacc = updaccIn;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "UpdateAccountJson [UPDACC=" + UPDACC.toString() + "]";
+		return "UpdateAccountJson [UPDACC=" + updacc.toString() + "]";
 	}
 
 	public String toPrettyString()
 	{
-		UpdaccJson accInfo = UPDACC;
+		UpdaccJson accInfo = updacc;
 		String output = "";
-		output += "Account Number: " + OutputFormatUtils.leadingZeroes(8, accInfo.getCOMM_ACCNO()) + "\n"
-				+ "Sort Code: " + accInfo.getCOMM_SCODE() + "\n" + "Account Type: " + accInfo.getCOMM_ACC_TYPE() + "\n"
-				+ "Customer Number: " + OutputFormatUtils.leadingZeroes(10, accInfo.getCOMM_CUSTNO()) + "\n"
-				+ "Interest Rate: " + String.format(FLOAT_FORMAT, accInfo.getCOMM_INT_RATE()) + "\n" + "Overdraft Limit: "
-				+ accInfo.getCOMM_OVERDRAFT() + "\n" + "Available Balance: "
-				+ String.format(FLOAT_FORMAT, accInfo.getCOMM_AVAIL_BAL()) + "\n" + "Actual Balance: "
-				+ String.format(FLOAT_FORMAT, accInfo.getCOMM_ACTUAL_BAL()) + "\n" + "Account Opened: "
-				+ OutputFormatUtils.date(accInfo.getCOMM_OPENED()) + "\n" + "Last Statement Date: "
-				+ OutputFormatUtils.date(accInfo.getCOMM_LAST_STMT_DT()) + "\n" + "Next Statement Date: "
-				+ OutputFormatUtils.date(accInfo.getCOMM_NEXT_STMT_DT()) + "\n";
+		output += "Account Number: " + OutputFormatUtils.leadingZeroes(8, accInfo.getCommAccno()) + "\n"
+				+ "Sort Code: " + accInfo.getCommSortcode() + "\n" + "Account Type: " + accInfo.getCommAccountType() + "\n"
+				+ "Customer Number: " + OutputFormatUtils.leadingZeroes(10, accInfo.getCommCustNo()) + "\n"
+				+ "Interest Rate: " + String.format(FLOAT_FORMAT, accInfo.getCommInterestRate()) + "\n" + "Overdraft Limit: "
+				+ accInfo.getCommOverdraft() + "\n" + "Available Balance: "
+				+ String.format(FLOAT_FORMAT, accInfo.getCommAvailableBalance()) + "\n" + "Actual Balance: "
+				+ String.format(FLOAT_FORMAT, accInfo.getCommActualBalance()) + "\n" + "Account Opened: "
+				+ OutputFormatUtils.date(accInfo.getCommOpened()) + "\n" + "Last Statement Date: "
+				+ OutputFormatUtils.date(accInfo.getCommLastStatementDate()) + "\n" + "Next Statement Date: "
+				+ OutputFormatUtils.date(accInfo.getCommNextStatementDate()) + "\n";
 		return output;
 	}
 }
