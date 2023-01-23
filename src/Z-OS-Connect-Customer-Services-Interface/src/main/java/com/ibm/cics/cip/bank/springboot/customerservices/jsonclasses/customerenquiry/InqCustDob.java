@@ -15,49 +15,49 @@ public class InqCustDob
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
-	private int INQCUST_DOB_YYYY;
-	private int INQCUST_DOB_DD;
-	private int INQCUST_DOB_MM;
+	private int inqcustDobYyyy;
+	private int inqcustDobDd;
+	private int inqcustDobMm;
 
 	public InqCustDob()
 	{
 		super();
 	}
 
-	public int getINQCUST_DOB_YYYY()
+	public int getInqcustDobYyyy()
 	{
-		return INQCUST_DOB_YYYY;
+		return inqcustDobYyyy;
 	}
 
-	public void setINQCUST_DOB_YYYY(int iNQCUST_DOB_YYYY)
+	public void setInqcustDobYyyy(int inqcustDobYyyyIn)
 	{
-		INQCUST_DOB_YYYY = iNQCUST_DOB_YYYY;
+		inqcustDobYyyy = inqcustDobYyyyIn;
 	}
 
-	public int getINQCUST_DOB_DD()
+	public int getInqcustDobDd()
 	{
-		return INQCUST_DOB_DD;
+		return inqcustDobDd;
 	}
 
-	public void setINQCUST_DOB_DD(int iNQCUST_DOB_DD)
+	public void setInqcustDobDd(int inqcustDobDdIn)
 	{
-		INQCUST_DOB_DD = iNQCUST_DOB_DD;
+		inqcustDobDd = inqcustDobDdIn;
 	}
 
-	public int getINQCUST_DOB_MM()
+	public int getInqcustDobMm()
 	{
-		return INQCUST_DOB_MM;
+		return inqcustDobMm;
 	}
 
-	public void setINQCUST_DOB_MM(int iNQCUST_DOB_MM)
+	public void setInqcustDobMm(int inqcustDobMmIn)
 	{
-		INQCUST_DOB_MM = iNQCUST_DOB_MM;
+		inqcustDobMm = inqcustDobMmIn;
 	}
 
 	@Override
 	public String toString()
 	{
-		return INQCUST_DOB_DD + "/" + INQCUST_DOB_MM + "/" + INQCUST_DOB_YYYY;
+		return inqcustDobDd + "/" + inqcustDobMm + "/" + inqcustDobYyyy;
 	}
 
 }

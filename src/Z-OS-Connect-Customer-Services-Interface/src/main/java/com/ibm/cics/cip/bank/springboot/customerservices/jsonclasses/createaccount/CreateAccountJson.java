@@ -17,11 +17,11 @@ public class CreateAccountJson
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 	private static final String FLOAT_FORMAT = "%.02f";
 
-	private CreaccJson CREACC;
+	private CreaccJson creAcc;
 
 	public CreateAccountJson(CreateAccountForm createAccountForm)
 	{
-		CREACC = new CreaccJson(createAccountForm.getAccountType().toString(), createAccountForm.getCustNumber(),
+		creAcc = new CreaccJson(createAccountForm.getAccountType().toString(), createAccountForm.getCustNumber(),
 				createAccountForm.getOverdraftLimit(), createAccountForm.getInterestRate());
 
 	}
@@ -31,25 +31,25 @@ public class CreateAccountJson
 
 	}
 
-	public CreaccJson getCREACC()
+	public CreaccJson getCreAcc()
 	{
-		return CREACC;
+		return creAcc;
 	}
 
-	public void setCREACC(CreaccJson cREACC)
+	public void setCreAcc(CreaccJson creAccIn)
 	{
-		CREACC = cREACC;
+		creAcc = creAccIn;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "CreateAccountJson [CREACC=" + CREACC + "]";
+		return "CreateAccountJson [CREACC=" + creAcc + "]";
 	}
 
 	public String toPrettyString()
 	{
-		CreaccJson accInfo = CREACC;
+		CreaccJson accInfo = creAcc;
 		String output = "";
 		output += "Account Number: " + OutputFormatUtils.leadingZeroes(8, accInfo.getCommKey().getCommNumber()) + "\n"
 				+ "Sort Code: " + OutputFormatUtils.leadingZeroes(6, accInfo.getCommKey().getCommSortcode()) + "\n"

@@ -243,7 +243,7 @@ public class WebController implements WebMvcConfigurer
 
 	public static void checkIfResponseValidEnqCust(CustomerEnquiryJson response) throws ItemNotFoundException
 	{
-		if (response.getINQCUSTZ().getINQCUST_INQ_SUCCESS().equals("N"))
+		if (response.getInqCustZ().getINQCUST_INQ_SUCCESS().equals("N"))
 		{
 			throw new ItemNotFoundException(CUSTOMER);
 		}
@@ -393,17 +393,17 @@ public class WebController implements WebMvcConfigurer
 	public static void checkIfResponseValidCreateAcc(CreateAccountJson responseObj)
 			throws TooManyAccountsException, ItemNotFoundException
 	{
-		if (responseObj.getCREACC().getCommSuccess().equals("N"))
+		if (responseObj.getCreAcc().getCommSuccess().equals("N"))
 		{
-			if (responseObj.getCREACC().getCommFailCode().equals("1"))
+			if (responseObj.getCreAcc().getCommFailCode().equals("1"))
 			{
 				throw new ItemNotFoundException(CUSTOMER);
 			}
-			if (responseObj.getCREACC().getCommFailCode().equals("8"))
+			if (responseObj.getCreAcc().getCommFailCode().equals("8"))
 			{
-				throw new TooManyAccountsException(Integer.parseInt(responseObj.getCREACC().getCommCustno()));
+				throw new TooManyAccountsException(Integer.parseInt(responseObj.getCreAcc().getCommCustno()));
 			}
-			if (responseObj.getCREACC().getCommFailCode().equals("A"))
+			if (responseObj.getCreAcc().getCommFailCode().equals("A"))
 			{
 				throw new IllegalArgumentException("Invalid account type supplied.");
 			}
@@ -480,12 +480,12 @@ public class WebController implements WebMvcConfigurer
 	public static void checkIfResponseValidCreateCust(CreateCustomerJson responseObj)
 			throws InvalidCustomerException, NumberFormatException, TooManyAccountsException
 	{
-		if (!responseObj.getCRECUST().getCOMM_FAIL_CODE().equals(""))
+		if (!responseObj.getCreCust().getCommFailCode().equals(""))
 		{
-			switch (Integer.parseInt(responseObj.getCRECUST().getCOMM_FAIL_CODE()))
+			switch (Integer.parseInt(responseObj.getCreCust().getCommFailCode()))
 			{
 			case 8:
-				throw new TooManyAccountsException(Integer.parseInt(responseObj.getCRECUST().getCOMM_FAIL_CODE()));
+				throw new TooManyAccountsException(Integer.parseInt(responseObj.getCreCust().getCommFailCode()));
 			default:
 				break;
 			}

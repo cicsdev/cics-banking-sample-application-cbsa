@@ -16,11 +16,11 @@ public class CreateCustomerJson
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
-	private CrecustJson CRECUST;
+	private CrecustJson creCust;
 
 	public CreateCustomerJson(CreateCustomerForm form)
 	{
-		CRECUST = new CrecustJson(form.getCustName(), form.getCustAddress(), form.getCustDob());
+		creCust = new CrecustJson(form.getCustName(), form.getCustAddress(), form.getCustDob());
 	}
 
 	public CreateCustomerJson()
@@ -28,33 +28,33 @@ public class CreateCustomerJson
 
 	}
 
-	public CrecustJson getCRECUST()
+	public CrecustJson getCreCust()
 	{
-		return CRECUST;
+		return creCust;
 	}
 
-	public void setCRECUST(CrecustJson cRECUST)
+	public void setCreCust(CrecustJson creCustIn)
 	{
-		CRECUST = cRECUST;
+		creCust = creCustIn;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "CreateCustomerJson [CRECUST=" + CRECUST + "]";
+		return "CreateCustomerJson [CRECUST=" + creCust + "]";
 	}
 
 	public String toPrettyString()
 	{
 		String output = "";
 		output += "Customer Number:       "
-				+ OutputFormatUtils.leadingZeroes(10, CRECUST.getCOMM_KEY().getCommNumber()) + "\n"
-				+ "Sort Code:      " + String.format("%06d", CRECUST.getCOMM_KEY().getCommSortcode()) + "\n"
-				+ "Customer Name:         " + CRECUST.getCOMM_NAME() + "\n" + "Customer Address:    "
-				+ CRECUST.getCOMM_ADDRESS() + "\n" + "Date of Birth:       "
-				+ OutputFormatUtils.date(CRECUST.getCOMM_DATE_OF_BIRTH()) + "\n" + "Credit score:        "
-				+ CRECUST.getCOMM_CREDIT_SCORE() + "\n" + "Next review date:            "
-				+ CRECUST.getCOMM_CS_REVIEW_DATE() + "\n";
+				+ OutputFormatUtils.leadingZeroes(10, creCust.getCommKey().getCommNumber()) + "\n"
+				+ "Sort Code:      " + String.format("%06d", creCust.getCommKey().getCommSortcode()) + "\n"
+				+ "Customer Name:         " + creCust.getCommName() + "\n" + "Customer Address:    "
+				+ creCust.getCommAddress() + "\n" + "Date of Birth:       "
+				+ OutputFormatUtils.date(creCust.getCommDateOfBirth()) + "\n" + "Credit score:        "
+				+ creCust.getCommCreditScore() + "\n" + "Next review date:            "
+				+ creCust.getCommCsReviewDate() + "\n";
 		return output;
 	}
 }

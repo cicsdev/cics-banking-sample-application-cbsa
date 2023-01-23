@@ -16,32 +16,32 @@ public class CustomerEnquiryJson
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
-	private InqCustZJson INQCUSTZ;
+	private InqCustZJson inqCustZ;
 
 	public CustomerEnquiryJson()
 	{
 		super();
 	}
 
-	public InqCustZJson getINQCUSTZ()
+	public InqCustZJson getInqCustZ()
 	{
-		return INQCUSTZ;
+		return inqCustZ;
 	}
 
-	public void setINQCUSTZ(InqCustZJson iNQCUSTZ)
+	public void setInqCustZ(InqCustZJson inqCustZIn)
 	{
-		INQCUSTZ = iNQCUSTZ;
+		inqCustZ = inqCustZIn;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "CustomerEnquiryJson [INQCUSTZ=" + INQCUSTZ + "]";
+		return "CustomerEnquiryJson [INQCUSTZ=" + inqCustZ + "]";
 	}
 
 	public String toPrettyString()
 	{
-		InqCustZJson custInfo = INQCUSTZ;
+		InqCustZJson custInfo = inqCustZ;
 		String output = "";
 		output += "Customer Number:    " + OutputFormatUtils.leadingZeroes(10, custInfo.getINQCUST_CUSTNO()) + "\n"
 				+ "Customer Name:   " + custInfo.getINQCUST_NAME() + "\n" + "Customer Address:      "

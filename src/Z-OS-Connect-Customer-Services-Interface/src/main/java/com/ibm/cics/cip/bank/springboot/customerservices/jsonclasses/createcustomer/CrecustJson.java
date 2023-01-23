@@ -16,21 +16,21 @@ public class CrecustJson
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
-	private String COMM_EYECATCHER = "    ";
-	private CreaccKeyJson COMM_KEY = new CreaccKeyJson();
-	private String COMM_NAME;
-	private String COMM_ADDRESS;
-	private String COMM_DATE_OF_BIRTH;
-	private int COMM_CREDIT_SCORE = 0;
-	private String COMM_CS_REVIEW_DATE = "0";
-	private String COMM_SUCCESS;
-	private String COMM_FAIL_CODE;
+	private String commEyecatcher = "    ";
+	private CreaccKeyJson commKey = new CreaccKeyJson();
+	private String commName;
+	private String commAddress;
+	private String commDateOfBirth;
+	private int commCreditScore = 0;
+	private String commCsReviewDate = "0";
+	private String commSuccess;
+	private String commFailCode;
 
 	public CrecustJson(String custName, String custAddress, String custDob)
 	{
-		COMM_NAME = custName;
-		COMM_ADDRESS = custAddress;
-		COMM_DATE_OF_BIRTH = custDob;
+		commName = custName;
+		commAddress = custAddress;
+		commDateOfBirth = custDob;
 	}
 
 	public CrecustJson()
@@ -38,94 +38,94 @@ public class CrecustJson
 
 	}
 
-	public String getCOMM_EYECATCHER()
+	public String getCommEyecatcher()
 	{
-		return COMM_EYECATCHER;
+		return commEyecatcher;
 	}
 
-	public void setCOMM_EYECATCHER(String cOMM_EYECATCHER)
+	public void setCommEyecatcher(String commEyecatcherIn)
 	{
-		COMM_EYECATCHER = cOMM_EYECATCHER;
+		commEyecatcher = commEyecatcherIn;
 	}
 
-	public CreaccKeyJson getCOMM_KEY()
+	public CreaccKeyJson getCommKey()
 	{
-		return COMM_KEY;
+		return commKey;
 	}
 
-	public void setCOMM_KEY(CreaccKeyJson cOMM_KEY)
+	public void setCommKey(CreaccKeyJson commKeyIn)
 	{
-		COMM_KEY = cOMM_KEY;
+		commKey = commKeyIn;
 	}
 
-	public String getCOMM_NAME()
+	public String getCommName()
 	{
-		return COMM_NAME;
+		return commName;
 	}
 
-	public void setCOMM_NAME(String cOMM_NAME)
+	public void setCommName(String commNameIn)
 	{
-		COMM_NAME = cOMM_NAME;
+		commName = commNameIn;
 	}
 
-	public String getCOMM_ADDRESS()
+	public String getCommAddress()
 	{
-		return COMM_ADDRESS;
+		return commAddress;
 	}
 
-	public void setCOMM_ADDRESS(String cOMM_ADDRESS)
+	public void setCommAddress(String commAddressIn)
 	{
-		COMM_ADDRESS = cOMM_ADDRESS;
+		commAddress = commAddressIn;
 	}
 
-	public String getCOMM_DATE_OF_BIRTH()
+	public String getCommDateOfBirth()
 	{
-		return COMM_DATE_OF_BIRTH;
+		return commDateOfBirth;
 	}
 
-	public void setCOMM_DATE_OF_BIRTH(String cOMM_DATE_OF_BIRTH)
+	public void setCommDateOfBirth(String commDateOfBirthIn)
 	{
-		COMM_DATE_OF_BIRTH = cOMM_DATE_OF_BIRTH;
+		commDateOfBirth = commDateOfBirthIn;
 	}
 
-	public int getCOMM_CREDIT_SCORE()
+	public int getCommCreditScore()
 	{
-		return COMM_CREDIT_SCORE;
+		return commCreditScore;
 	}
 
-	public void setCOMM_CREDIT_SCORE(int cOMM_CREDIT_SCORE)
+	public void setCommCreditScore(int commCreditScoreIn)
 	{
-		COMM_CREDIT_SCORE = cOMM_CREDIT_SCORE;
+		commCreditScore = commCreditScoreIn;
 	}
 
-	public String getCOMM_CS_REVIEW_DATE()
+	public String getCommCsReviewDate()
 	{
-		return COMM_CS_REVIEW_DATE;
+		return commCsReviewDate;
 	}
 
-	public void setCOMM_CS_REVIEW_DATE(String cOMM_CS_REVIEW_DATE)
+	public void setCommCsReviewDate(String commCsReviewDateIn)
 	{
-		COMM_CS_REVIEW_DATE = cOMM_CS_REVIEW_DATE;
+		commCsReviewDate = commCsReviewDateIn;
 	}
 
-	public String getCOMM_SUCCESS()
+	public String getCommSuccess()
 	{
-		return COMM_SUCCESS;
+		return commSuccess;
 	}
 
-	public void setCOMM_SUCCESS(String cOMM_SUCCESS)
+	public void setCommSuccess(String commSuccessIn)
 	{
-		COMM_SUCCESS = cOMM_SUCCESS;
+		commSuccess = commSuccessIn;
 	}
 
-	public String getCOMM_FAIL_CODE()
+	public String getCommFailCode()
 	{
-		return COMM_FAIL_CODE;
+		return commFailCode;
 	}
 
-	public void setCOMM_FAIL_CODE(String cOMM_FAIL_CODE)
+	public void setCommFailCode(String commFailCodeIn)
 	{
-		COMM_FAIL_CODE = cOMM_FAIL_CODE;
+		commFailCode = commFailCodeIn;
 	}
 
 }
