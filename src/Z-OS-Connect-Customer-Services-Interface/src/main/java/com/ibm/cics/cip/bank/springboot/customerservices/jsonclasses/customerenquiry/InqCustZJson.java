@@ -15,141 +15,141 @@ public class InqCustZJson
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
-	private String INQCUST_NAME;
-	private int INQCUST_CREDIT_SCORE;
-	private String INQCUST_INQ_SUCCESS;
-	private String INQCUST_ADDR;
-	private int INQCUST_SCODE;
-	private int INQCUST_INQ_FAIL_CD;
-	private InqCustDob INQCUST_DOB;
-	private String INQCUST_EYE;
-	private String INQCUST_PCB_POINTER;
-	private int INQCUST_CUSTNO;
-	private InqCustReviewDate INQCUST_CS_REVIEW_DT;
+	private String inqcustName;
+	private int inqcustCreditScore;
+	private String inqcustInqSuccess;
+	private String inqcustAddress;
+	private int inqcustSortcode;
+	private int inqcustInqFailCode;
+	private InqCustDob inqCustDob;
+	private String inqcustEye;
+	private String inqcustPcbPointer;
+	private int inqcustCustno;
+	private InqCustReviewDate inqcustCsReviewDate;
 
 	public InqCustZJson()
 	{
 		super();
 	}
 
-	public String getINQCUST_NAME()
+	public String getInqcustName()
 	{
-		return INQCUST_NAME;
+		return inqcustName;
 	}
 
-	public void setINQCUST_NAME(String iNQCUST_NAME)
+	public void setInqcustName(String inqcustNameIn)
 	{
-		INQCUST_NAME = iNQCUST_NAME;
+		inqcustName = inqcustNameIn;
 	}
 
-	public int getINQCUST_CREDIT_SCORE()
+	public int getInqcustCreditScore()
 	{
-		return INQCUST_CREDIT_SCORE;
+		return inqcustCreditScore;
 	}
 
-	public void setINQCUST_CREDIT_SCORE(int iNQCUST_CREDIT_SCORE)
+	public void setInqcustCreditScore(int inqcustCreditScoreIn)
 	{
-		INQCUST_CREDIT_SCORE = iNQCUST_CREDIT_SCORE;
+		inqcustCreditScore = inqcustCreditScoreIn;
 	}
 
-	public String getINQCUST_INQ_SUCCESS()
+	public String getInqcustInqSuccess()
 	{
-		return INQCUST_INQ_SUCCESS;
+		return inqcustInqSuccess;
 	}
 
-	public void setINQCUST_INQ_SUCCESS(String iNQCUST_INQ_SUCCESS)
+	public void setInqcustInqSuccess(String inqcustInqSuccessIn)
 	{
-		INQCUST_INQ_SUCCESS = iNQCUST_INQ_SUCCESS;
+		inqcustInqSuccess = inqcustInqSuccessIn;
 	}
 
-	public String getINQCUST_ADDR()
+	public String getInqcustAddress()
 	{
-		return INQCUST_ADDR;
+		return inqcustAddress;
 	}
 
-	public void setINQCUST_ADDR(String iNQCUST_ADDR)
+	public void setInqcustAddress(String inqcustAddressIn)
 	{
-		INQCUST_ADDR = iNQCUST_ADDR;
+		inqcustAddress = inqcustAddressIn;
 	}
 
-	public int getINQCUST_SCODE()
+	public int getInqcustSortcode()
 	{
-		return INQCUST_SCODE;
+		return inqcustSortcode;
 	}
 
-	public void setINQCUST_SCODE(int iNQCUST_SCODE)
+	public void setInqcustSortcode(int inqcustSortcodeIn)
 	{
-		INQCUST_SCODE = iNQCUST_SCODE;
+		inqcustSortcode = inqcustSortcodeIn;
 	}
 
-	public int getINQCUST_INQ_FAIL_CD()
+	public int getInqcustInqFailCode()
 	{
-		return INQCUST_INQ_FAIL_CD;
+		return inqcustInqFailCode;
 	}
 
-	public void setINQCUST_INQ_FAIL_CD(int iNQCUST_INQ_FAIL_CD)
+	public void setInqcustInqFailCode(int inqcustInqFailCodeIn)
 	{
-		INQCUST_INQ_FAIL_CD = iNQCUST_INQ_FAIL_CD;
+		inqcustInqFailCode = inqcustInqFailCodeIn;
 	}
 
-	public InqCustDob getINQCUST_DOB()
+	public InqCustDob getInqcustDob()
 	{
-		return INQCUST_DOB;
+		return inqCustDob;
 	}
 
-	public void setINQCUST_DOB(InqCustDob iNQCUST_DOB)
+	public void setInqcustDob(InqCustDob inqCustDobIn)
 	{
-		INQCUST_DOB = iNQCUST_DOB;
+		inqCustDob = inqCustDobIn;
 	}
 
-	public String getINQCUST_EYE()
+	public String getInqcustEye()
 	{
-		return INQCUST_EYE;
+		return inqcustEye;
 	}
 
-	public void setINQCUST_EYE(String iNQCUST_EYE)
+	public void setInqcustEye(String inqcustEyeIn)
 	{
-		INQCUST_EYE = iNQCUST_EYE;
+		inqcustEye = inqcustEyeIn;
 	}
 
-	public String getINQCUST_PCB_POINTER()
+	public String getInqcustPcbPointer()
 	{
-		return INQCUST_PCB_POINTER;
+		return inqcustPcbPointer;
 	}
 
-	public void setINQCUST_PCB_POINTER(String iNQCUST_PCB_POINTER)
+	public void setInqcustPcbPointer(String inqcustPcbPointerIn)
 	{
-		INQCUST_PCB_POINTER = iNQCUST_PCB_POINTER;
+		inqcustPcbPointer = inqcustPcbPointerIn;
 	}
 
-	public int getINQCUST_CUSTNO()
+	public int getInqcustCustno()
 	{
-		return INQCUST_CUSTNO;
+		return inqcustCustno;
 	}
 
-	public void setINQCUST_CUSTNO(int iNQCUST_CUSTNO)
+	public void setInqcustCustno(int inqcustCustnoIn)
 	{
-		INQCUST_CUSTNO = iNQCUST_CUSTNO;
+		inqcustCustno = inqcustCustnoIn;
 	}
 
-	public InqCustReviewDate getINQCUST_CS_REVIEW_DT()
+	public InqCustReviewDate getInqcustCsReviewDate()
 	{
-		return INQCUST_CS_REVIEW_DT;
+		return inqcustCsReviewDate;
 	}
 
-	public void setINQCUST_CS_REVIEW_DT(InqCustReviewDate iNQCUST_CS_REVIEW_DT)
+	public void setInqcustCsReviewDate(InqCustReviewDate inqCustReviewDateIn)
 	{
-		INQCUST_CS_REVIEW_DT = iNQCUST_CS_REVIEW_DT;
+		inqcustCsReviewDate = inqCustReviewDateIn;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "InqCustZJson [INQCUST_ADDR=" + INQCUST_ADDR + ", INQCUST_CREDIT_SCORE=" + INQCUST_CREDIT_SCORE
-				+ ", INQCUST_CS_REVIEW_DT=" + INQCUST_CS_REVIEW_DT + ", INQCUST_CUSTNO=" + INQCUST_CUSTNO
-				+ ", INQCUST_DOB=" + INQCUST_DOB + ", INQCUST_EYE=" + INQCUST_EYE + ", INQCUST_INQ_FAIL_CD="
-				+ INQCUST_INQ_FAIL_CD + ", INQCUST_INQ_SUCCESS=" + INQCUST_INQ_SUCCESS + ", INQCUST_NAME="
-				+ INQCUST_NAME + ", INQCUST_PCB_POINTER=" + INQCUST_PCB_POINTER + ", INQCUST_SCODE=" + INQCUST_SCODE
+		return "InqCustZJson [INQCUST_ADDR=" + inqcustAddress + ", INQCUST_CREDIT_SCORE=" + inqcustCreditScore
+				+ ", INQCUST_CS_REVIEW_DT=" + inqcustCsReviewDate + ", INQCUST_CUSTNO=" + inqcustCustno
+				+ ", INQCUST_DOB=" + inqCustDob + ", INQCUST_EYE=" + inqcustEye + ", INQCUST_INQ_FAIL_CD="
+				+ inqcustInqFailCode + ", INQCUST_INQ_SUCCESS=" + inqcustInqSuccess + ", INQCUST_NAME="
+				+ inqcustName + ", INQCUST_PCB_POINTER=" + inqcustPcbPointer + ", INQCUST_SCODE=" + inqcustSortcode
 				+ "]";
 	}
 

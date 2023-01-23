@@ -243,7 +243,7 @@ public class WebController implements WebMvcConfigurer
 
 	public static void checkIfResponseValidEnqCust(CustomerEnquiryJson response) throws ItemNotFoundException
 	{
-		if (response.getInqCustZ().getINQCUST_INQ_SUCCESS().equals("N"))
+		if (response.getInqCustZ().getInqcustInqSuccess().equals("N"))
 		{
 			throw new ItemNotFoundException(CUSTOMER);
 		}

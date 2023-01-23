@@ -43,12 +43,12 @@ public class CustomerEnquiryJson
 	{
 		InqCustZJson custInfo = inqCustZ;
 		String output = "";
-		output += "Customer Number:    " + OutputFormatUtils.leadingZeroes(10, custInfo.getINQCUST_CUSTNO()) + "\n"
-				+ "Customer Name:   " + custInfo.getINQCUST_NAME() + "\n" + "Customer Address:      "
-				+ custInfo.getINQCUST_ADDR() + "\n" + "Date of Birth: " + custInfo.getINQCUST_DOB() + "\n"
-				+ "Credit Score:    " + custInfo.getINQCUST_CREDIT_SCORE() + "\n" + "Review Date:     "
-				+ custInfo.getINQCUST_CS_REVIEW_DT() + "\n" + "Sort Code:           "
-				+ String.format("%06d", custInfo.getINQCUST_SCODE()) + "\n";
+		output += "Customer Number:    " + OutputFormatUtils.leadingZeroes(10, custInfo.getInqcustCustno()) + "\n"
+				+ "Customer Name:   " + custInfo.getInqcustName() + "\n" + "Customer Address:      "
+				+ custInfo.getInqcustAddress() + "\n" + "Date of Birth: " + custInfo.getInqcustDob() + "\n"
+				+ "Credit Score:    " + custInfo.getInqcustCreditScore() + "\n" + "Review Date:     "
+				+ custInfo.getInqcustCsReviewDate() + "\n" + "Sort Code:           "
+				+ String.format("%06d", custInfo.getInqcustSortcode()) + "\n";
 		return output;
 	}
 

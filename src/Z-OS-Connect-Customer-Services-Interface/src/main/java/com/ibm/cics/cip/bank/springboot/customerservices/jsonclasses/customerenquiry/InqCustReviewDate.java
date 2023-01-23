@@ -15,49 +15,49 @@ public class InqCustReviewDate
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
-	private int INQCUST_CS_REVIEW_YYYY;
-	private int INQCUST_CS_REVIEW_MM;
-	private int INQCUST_CS_REVIEW_DD;
+	private int inqcustCsReviewYyyy;
+	private int inqcustCsReviewMm;
+	private int inqcustCsReviewDd;
 
 	public InqCustReviewDate()
 	{
 		super();
 	}
 
-	public int getINQCUST_CS_REVIEW_YYYY()
+	public int getInqcustCsReviewYyyy()
 	{
-		return INQCUST_CS_REVIEW_YYYY;
+		return inqcustCsReviewYyyy;
 	}
 
-	public void setINQCUST_CS_REVIEW_YYYY(int iNQCUST_CS_REVIEW_YYYY)
+	public void setInqcustCsReviewYyyy(int inqcustCsReviewYyyyIn)
 	{
-		INQCUST_CS_REVIEW_YYYY = iNQCUST_CS_REVIEW_YYYY;
+		inqcustCsReviewYyyy = inqcustCsReviewYyyyIn;
 	}
 
-	public int getINQCUST_CS_REVIEW_MM()
+	public int getInqcustCsReviewMm()
 	{
-		return INQCUST_CS_REVIEW_MM;
+		return inqcustCsReviewMm;
 	}
 
-	public void setINQCUST_CS_REVIEW_MM(int iNQCUST_CS_REVIEW_MM)
+	public void setInqcustCsReviewMm(int inqcustCsReviewMmIn)
 	{
-		INQCUST_CS_REVIEW_MM = iNQCUST_CS_REVIEW_MM;
+		inqcustCsReviewMm = inqcustCsReviewMmIn;
 	}
 
-	public int getINQCUST_CS_REVIEW_DD()
+	public int getInqcustCsReviewDd()
 	{
-		return INQCUST_CS_REVIEW_DD;
+		return inqcustCsReviewDd;
 	}
 
-	public void setINQCUST_CS_REVIEW_DD(int iNQCUST_CS_REVIEW_DD)
+	public void setInqcustCsReviewDd(int inqcustCsReviewDdIn)
 	{
-		INQCUST_CS_REVIEW_DD = iNQCUST_CS_REVIEW_DD;
+		inqcustCsReviewDd = inqcustCsReviewDdIn;
 	}
 
 	@Override
 	public String toString()
 	{
-		return INQCUST_CS_REVIEW_DD + "/" + INQCUST_CS_REVIEW_MM + "/" + INQCUST_CS_REVIEW_YYYY;
+		return inqcustCsReviewDd + "/" + inqcustCsReviewMm + "/" + inqcustCsReviewYyyy;
 	}
 
 }
