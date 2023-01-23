@@ -33,7 +33,8 @@ public class CRECUST
 	    03 COMM-EYECATCHER                 PIC X(4).
 	 * </pre>
 	 */
-	protected static final StringField COMM_EYECATCHER = factory.getStringField(4);
+	protected static final StringField COMM_EYECATCHER = factory
+			.getStringField(4);
 
 	/**
 	 * <pre>
@@ -41,6 +42,7 @@ public class CRECUST
 	 * </pre>
 	 */
 	public static final int COMM_KEY_LEN = 16;
+
 	public static final int COMM_KEY_OFFSET = factory.getOffset();
 
 	/**
@@ -48,16 +50,16 @@ public class CRECUST
 	       05 COMM-SORTCODE                PIC 9(6) DISPLAY.
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsIntField COMM_SORTCODE = factory.getExternalDecimalAsIntField(6, false,
-			false, false, false);
+	protected static final ExternalDecimalAsIntField COMM_SORTCODE = factory
+			.getExternalDecimalAsIntField(6, false, false, false, false);
 
 	/**
 	 * <pre>
 	       05 COMM-NUMBER                  PIC 9(10) DISPLAY.
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsLongField COMM_NUMBER = factory.getExternalDecimalAsLongField(10, false,
-			false, false, false);
+	protected static final ExternalDecimalAsLongField COMM_NUMBER = factory
+			.getExternalDecimalAsLongField(10, false, false, false, false);
 
 	/**
 	 * <pre>
@@ -71,15 +73,16 @@ public class CRECUST
 	    03 COMM-ADDRESS                    PIC X(160).
 	 * </pre>
 	 */
-	protected static final StringField COMM_ADDRESS = factory.getStringField(160);
+	protected static final StringField COMM_ADDRESS = factory
+			.getStringField(160);
 
 	/**
 	 * <pre>
 	    03 COMM-DATE-OF-BIRTH              PIC 9(8).
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsIntField COMM_DATE_OF_BIRTH = factory.getExternalDecimalAsIntField(8, false,
-			false, false, false);
+	protected static final ExternalDecimalAsIntField COMM_DATE_OF_BIRTH = factory
+			.getExternalDecimalAsIntField(8, false, false, false, false);
 
 	/**
 	 * <pre>
@@ -94,7 +97,9 @@ public class CRECUST
 	{
 		factory.setOffset(COMM_DATE_OF_BIRTH.getOffset());
 	}
+
 	public static final int COMM_DOB_GROUP_LEN = 8;
+
 	public static final int COMM_DOB_GROUP_OFFSET = factory.getOffset();
 
 	/**
@@ -102,24 +107,24 @@ public class CRECUST
 	       05 COMM-BIRTH-DAY               PIC 99.
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsIntField COMM_BIRTH_DAY = factory.getExternalDecimalAsIntField(2, false,
-			false, false, false);
+	protected static final ExternalDecimalAsIntField COMM_BIRTH_DAY = factory
+			.getExternalDecimalAsIntField(2, false, false, false, false);
 
 	/**
 	 * <pre>
 	       05 COMM-BIRTH-MONTH             PIC 99.
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsIntField COMM_BIRTH_MONTH = factory.getExternalDecimalAsIntField(2, false,
-			false, false, false);
+	protected static final ExternalDecimalAsIntField COMM_BIRTH_MONTH = factory
+			.getExternalDecimalAsIntField(2, false, false, false, false);
 
 	/**
 	 * <pre>
 	       05 COMM-BIRTH-YEAR              PIC 9999.
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsIntField COMM_BIRTH_YEAR = factory.getExternalDecimalAsIntField(4, false,
-			false, false, false);
+	protected static final ExternalDecimalAsIntField COMM_BIRTH_YEAR = factory
+			.getExternalDecimalAsIntField(4, false, false, false, false);
 	static
 	{
 		factory.popOffset();
@@ -130,16 +135,16 @@ public class CRECUST
 	    03 COMM-CREDIT-SCORE               PIC 999.
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsIntField COMM_CREDIT_SCORE = factory.getExternalDecimalAsIntField(3, false,
-			false, false, false);
+	protected static final ExternalDecimalAsIntField COMM_CREDIT_SCORE = factory
+			.getExternalDecimalAsIntField(3, false, false, false, false);
 
 	/**
 	 * <pre>
 	    03 COMM-CS-REVIEW-DATE             PIC 9(8).
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsIntField COMM_CS_REVIEW_DATE = factory.getExternalDecimalAsIntField(8,
-			false, false, false, false);
+	protected static final ExternalDecimalAsIntField COMM_CS_REVIEW_DATE = factory
+			.getExternalDecimalAsIntField(8, false, false, false, false);
 
 	/**
 	 * <pre>
@@ -154,32 +159,35 @@ public class CRECUST
 	{
 		factory.setOffset(COMM_CS_REVIEW_DATE.getOffset());
 	}
+
 	public static final int COMM_CS_REVIEW_DATE_GROUP_LEN = 8;
-	public static final int COMM_CS_REVIEW_DATE_GROUP_OFFSET = factory.getOffset();
+
+	public static final int COMM_CS_REVIEW_DATE_GROUP_OFFSET = factory
+			.getOffset();
 
 	/**
 	 * <pre>
 	       05 COMM-CS-REVIEW-DD            PIC 99.
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsIntField COMM_CS_REVIEW_DD = factory.getExternalDecimalAsIntField(2, false,
-			false, false, false);
+	protected static final ExternalDecimalAsIntField COMM_CS_REVIEW_DD = factory
+			.getExternalDecimalAsIntField(2, false, false, false, false);
 
 	/**
 	 * <pre>
 	       05 COMM-CS-REVIEW-MM            PIC 99.
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsIntField COMM_CS_REVIEW_MM = factory.getExternalDecimalAsIntField(2, false,
-			false, false, false);
+	protected static final ExternalDecimalAsIntField COMM_CS_REVIEW_MM = factory
+			.getExternalDecimalAsIntField(2, false, false, false, false);
 
 	/**
 	 * <pre>
 	       05 COMM-CS-REVIEW-YYYY          PIC 9999.
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsIntField COMM_CS_REVIEW_YYYY = factory.getExternalDecimalAsIntField(4,
-			false, false, false, false);
+	protected static final ExternalDecimalAsIntField COMM_CS_REVIEW_YYYY = factory
+			.getExternalDecimalAsIntField(4, false, false, false, false);
 	static
 	{
 		factory.popOffset();
@@ -197,33 +205,46 @@ public class CRECUST
 	    03 COMM-FAIL-CODE                  PIC X.
 	 * </pre>
 	 */
-	protected static final StringField COMM_FAIL_CODE = factory.getStringField(1);
+	protected static final StringField COMM_FAIL_CODE = factory
+			.getStringField(1);
 
 	protected byte[] byteBuffer;
+
 	// Instance variables used to cache field values
 	protected String commEyecatcher;
+
 	protected Integer commSortcode;
+
 	protected Long commNumber;
+
 	protected String commName;
+
 	protected String commAddress;
+
 	protected Integer commCreditScore;
+
 	protected String commSuccess;
+
 	protected String commFailCode;
+
 
 	public CRECUST(byte[] buffer)
 	{
 		this.byteBuffer = buffer;
 	}
 
+
 	public CRECUST()
 	{
 		this.byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_LEN];
 	}
 
+
 	public byte[] getByteBuffer()
 	{
 		return byteBuffer;
 	}
+
 
 	public String getCommEyecatcher()
 	{
@@ -233,6 +254,7 @@ public class CRECUST
 		}
 		return commEyecatcher;
 	}
+
 
 	public void setCommEyecatcher(String commEyecatcher)
 	{
@@ -244,6 +266,7 @@ public class CRECUST
 		this.commEyecatcher = commEyecatcher;
 	}
 
+
 	public int getCommSortcode()
 	{
 		if (commSortcode == null)
@@ -252,6 +275,7 @@ public class CRECUST
 		}
 		return commSortcode.intValue();
 	}
+
 
 	public void setCommSortcode(int commSortcode)
 	{
@@ -263,6 +287,7 @@ public class CRECUST
 		this.commSortcode = commSortcode;
 	}
 
+
 	public long getCommNumber()
 	{
 		if (commNumber == null)
@@ -271,6 +296,7 @@ public class CRECUST
 		}
 		return commNumber.longValue();
 	}
+
 
 	public void setCommNumber(long commNumber)
 	{
@@ -282,6 +308,7 @@ public class CRECUST
 		this.commNumber = commNumber;
 	}
 
+
 	public String getCommName()
 	{
 		if (commName == null)
@@ -290,6 +317,7 @@ public class CRECUST
 		}
 		return commName;
 	}
+
 
 	public void setCommName(String commName)
 	{
@@ -301,6 +329,7 @@ public class CRECUST
 		this.commName = commName;
 	}
 
+
 	public String getCommAddress()
 	{
 		if (commAddress == null)
@@ -309,6 +338,7 @@ public class CRECUST
 		}
 		return commAddress;
 	}
+
 
 	public void setCommAddress(String commAddress)
 	{
@@ -320,45 +350,54 @@ public class CRECUST
 		this.commAddress = commAddress;
 	}
 
+
 	public int getCommDateOfBirth()
 	{
 		return COMM_DATE_OF_BIRTH.getInt(byteBuffer);
 	}
+
 
 	public void setCommDateOfBirth(int commDateOfBirth)
 	{
 		COMM_DATE_OF_BIRTH.putInt(commDateOfBirth, byteBuffer);
 	}
 
+
 	public int getCommBirthDay()
 	{
 		return COMM_BIRTH_DAY.getInt(byteBuffer);
 	}
+
 
 	public void setCommBirthDay(int commBirthDay)
 	{
 		COMM_BIRTH_DAY.putInt(commBirthDay, byteBuffer);
 	}
 
+
 	public int getCommBirthMonth()
 	{
 		return COMM_BIRTH_MONTH.getInt(byteBuffer);
 	}
+
 
 	public void setCommBirthMonth(int commBirthMonth)
 	{
 		COMM_BIRTH_MONTH.putInt(commBirthMonth, byteBuffer);
 	}
 
+
 	public int getCommBirthYear()
 	{
 		return COMM_BIRTH_YEAR.getInt(byteBuffer);
 	}
 
+
 	public void setCommBirthYear(int commBirthYear)
 	{
 		COMM_BIRTH_YEAR.putInt(commBirthYear, byteBuffer);
 	}
+
 
 	public int getCommCreditScore()
 	{
@@ -368,6 +407,7 @@ public class CRECUST
 		}
 		return commCreditScore.intValue();
 	}
+
 
 	public void setCommCreditScore(int commCreditScore)
 	{
@@ -379,45 +419,54 @@ public class CRECUST
 		this.commCreditScore = commCreditScore;
 	}
 
+
 	public int getCommCsReviewDate()
 	{
 		return COMM_CS_REVIEW_DATE.getInt(byteBuffer);
 	}
+
 
 	public void setCommCsReviewDate(int commCsReviewDate)
 	{
 		COMM_CS_REVIEW_DATE.putInt(commCsReviewDate, byteBuffer);
 	}
 
+
 	public int getCommCsReviewDd()
 	{
 		return COMM_CS_REVIEW_DD.getInt(byteBuffer);
 	}
+
 
 	public void setCommCsReviewDd(int commCsReviewDd)
 	{
 		COMM_CS_REVIEW_DD.putInt(commCsReviewDd, byteBuffer);
 	}
 
+
 	public int getCommCsReviewMm()
 	{
 		return COMM_CS_REVIEW_MM.getInt(byteBuffer);
 	}
+
 
 	public void setCommCsReviewMm(int commCsReviewMm)
 	{
 		COMM_CS_REVIEW_MM.putInt(commCsReviewMm, byteBuffer);
 	}
 
+
 	public int getCommCsReviewYyyy()
 	{
 		return COMM_CS_REVIEW_YYYY.getInt(byteBuffer);
 	}
 
+
 	public void setCommCsReviewYyyy(int commCsReviewYyyy)
 	{
 		COMM_CS_REVIEW_YYYY.putInt(commCsReviewYyyy, byteBuffer);
 	}
+
 
 	public String getCommSuccess()
 	{
@@ -427,6 +476,7 @@ public class CRECUST
 		}
 		return commSuccess;
 	}
+
 
 	public void setCommSuccess(String commSuccess)
 	{
@@ -438,6 +488,7 @@ public class CRECUST
 		this.commSuccess = commSuccess;
 	}
 
+
 	public String getCommFailCode()
 	{
 		if (commFailCode == null)
@@ -446,6 +497,7 @@ public class CRECUST
 		}
 		return commFailCode;
 	}
+
 
 	public void setCommFailCode(String commFailCode)
 	{

@@ -23,30 +23,46 @@ public class Customer
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
-	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.webui.dataAccess");
+	private static Logger logger = Logger
+			.getLogger("com.ibm.cics.cip.bankliberty.webui.dataAccess");
 
 	private static final String JSON_SORT_CODE = "sortCode";
+
 	private static final String JSON_ID = "id";
+
 	private static final String JSON_CUSTOMER_NAME = "customerName";
+
 	private static final String JSON_CUSTOMER_ADDRESS = "customerAddress";
+
 	private static final String JSON_CUSTOMER_CREDIT_SCORE = "customerCreditScore";
+
 	private static final String JSON_CUSTOMER_REVIEW_DATE = "customerCreditScoreReviewDate";
+
 	private static final String JSON_DATE_OF_BIRTH = "dateOfBirth";
 
 	private static final String DASHES = "------------";
 
 	// String ACCOUNT_EYECATCHER CHAR(4),
 	private String customerNumber;
+
 	private String sortcode;
+
 	private String name;
+
 	private String address;
+
 	private Date dob;
+
 	private String creditScore;
+
 	private Date creditScoreReviewDate;
+
 	private Boolean editingCustomer;
 
+
 	// NEW CUSTOMER
-	public Customer(String custNo, String sortCode, String name, String address, Date dob)
+	public Customer(String custNo, String sortCode, String name, String address,
+			Date dob)
 	{
 		sortOutLogging();
 		editingCustomer = false;
@@ -57,9 +73,10 @@ public class Customer
 		setDob(dob);
 	}
 
+
 	// EDITING CUSTOMER
-	public Customer(String custNo, String sortCode, String name, String address, Date dob, String creditScore,
-			Date creditScoreReviewDate)
+	public Customer(String custNo, String sortCode, String name, String address,
+			Date dob, String creditScore, Date creditScoreReviewDate)
 	{
 		sortOutLogging();
 		editingCustomer = true;
@@ -72,75 +89,90 @@ public class Customer
 		setCreditScoreReviewDate(creditScoreReviewDate);
 	}
 
+
 	public String getCustomerNumber()
 	{
 		return customerNumber;
 	}
+
 
 	public void setCustomerNumber(String custNo)
 	{
 		this.customerNumber = custNo;
 	}
 
+
 	public String getSortcode()
 	{
 		return sortcode;
 	}
+
 
 	public void setSortcode(String sortcode)
 	{
 		this.sortcode = sortcode;
 	}
 
+
 	public String getName()
 	{
 		return name;
 	}
+
 
 	public void setName(String name)
 	{
 		this.name = name;
 	}
 
+
 	public String getAddress()
 	{
 		return address;
 	}
+
 
 	public void setAddress(String address)
 	{
 		this.address = address;
 	}
 
+
 	public Date getDob()
 	{
 		return dob;
 	}
+
 
 	public void setDob(Date dob)
 	{
 		this.dob = dob;
 	}
 
+
 	public String getCreditScore()
 	{
 		return creditScore;
 	}
+
 
 	public void setCreditScore(String creditScore)
 	{
 		this.creditScore = creditScore;
 	}
 
+
 	public Date getCreditScoreReviewDate()
 	{
 		return creditScoreReviewDate;
 	}
 
+
 	public void setCreditScoreReviewDate(Date creditScoreReviewDate)
 	{
 		this.creditScoreReviewDate = creditScoreReviewDate;
 	}
+
 
 	public boolean updateThis()
 	{
@@ -153,8 +185,8 @@ public class Customer
 		myCustomerJSON.setSortCode(this.getSortcode());
 		myCustomerJSON.setSortCode(this.getSortcode());
 
-		Response myCustomerResponse = myCustomerResource
-				.updateCustomerExternal(Long.parseLong(this.getCustomerNumber()), myCustomerJSON);
+		Response myCustomerResponse = myCustomerResource.updateCustomerExternal(
+				Long.parseLong(this.getCustomerNumber()), myCustomerJSON);
 
 		String myCustomerString = null;
 		JSONObject myCustomer = null;
@@ -172,7 +204,8 @@ public class Customer
 				return false;
 			}
 
-			this.setDob(sortOutDate((String) myCustomer.get(JSON_DATE_OF_BIRTH)));
+			this.setDob(
+					sortOutDate((String) myCustomer.get(JSON_DATE_OF_BIRTH)));
 			this.setAddress((String) myCustomer.get(JSON_CUSTOMER_ADDRESS));
 			this.setName((String) myCustomer.get(JSON_CUSTOMER_NAME));
 			this.setSortcode((String) myCustomer.get(JSON_SORT_CODE));
@@ -189,12 +222,13 @@ public class Customer
 		return true;
 	}
 
+
 	public boolean deleteFromDB()
 	{
 		CustomerResource myCustomerResource = new CustomerResource();
 
-		Response myCustomerResponse = myCustomerResource
-				.deleteCustomerExternal(Long.parseLong(this.getCustomerNumber()));
+		Response myCustomerResponse = myCustomerResource.deleteCustomerExternal(
+				Long.parseLong(this.getCustomerNumber()));
 
 		String myCustomerString = null;
 		JSONObject myCustomer = null;
@@ -213,12 +247,15 @@ public class Customer
 				return false;
 			}
 
-			this.setDob(sortOutDate((String) myCustomer.get(JSON_DATE_OF_BIRTH)));
+			this.setDob(
+					sortOutDate((String) myCustomer.get(JSON_DATE_OF_BIRTH)));
 			this.setAddress((String) myCustomer.get(JSON_CUSTOMER_ADDRESS));
 			this.setName((String) myCustomer.get(JSON_CUSTOMER_NAME));
 			this.setSortcode((String) myCustomer.get(JSON_SORT_CODE));
-			this.setCreditScore((String) myCustomer.get(JSON_CUSTOMER_CREDIT_SCORE));
-			this.setCreditScoreReviewDate(sortOutDate((String) myCustomer.get(JSON_CUSTOMER_REVIEW_DATE)));
+			this.setCreditScore(
+					(String) myCustomer.get(JSON_CUSTOMER_CREDIT_SCORE));
+			this.setCreditScoreReviewDate(sortOutDate(
+					(String) myCustomer.get(JSON_CUSTOMER_REVIEW_DATE)));
 			String customerNoString = (String) myCustomer.get(JSON_ID);
 
 			this.setCustomerNumber(customerNoString);
@@ -232,6 +269,7 @@ public class Customer
 		return true;
 	}
 
+
 	public String addToDB()
 	{
 		CustomerResource myCustomerResource = new CustomerResource();
@@ -242,7 +280,8 @@ public class Customer
 		myCustomerJSON.setCustomerName(this.getName());
 		myCustomerJSON.setDateOfBirth(this.getDob());
 		myCustomerJSON.setSortCode(this.getSortcode());
-		Response myCustomerResponse = myCustomerResource.createCustomerExternal(myCustomerJSON);
+		Response myCustomerResponse = myCustomerResource
+				.createCustomerExternal(myCustomerJSON);
 
 		String myCustomerString = null;
 		JSONObject myCustomer = null;
@@ -256,12 +295,13 @@ public class Customer
 			}
 			catch (IOException e)
 			{
-				logger.log(Level.SEVERE,e::toString);
+				logger.log(Level.SEVERE, e::toString);
 				myCustomerResponse.close();
 				return "-1";
 			}
 
-			this.setDob(sortOutDate((String) myCustomer.get(JSON_DATE_OF_BIRTH)));
+			this.setDob(
+					sortOutDate((String) myCustomer.get(JSON_DATE_OF_BIRTH)));
 			this.setAddress((String) myCustomer.get(JSON_CUSTOMER_ADDRESS));
 			this.setName((String) myCustomer.get(JSON_CUSTOMER_NAME));
 			this.setSortcode((String) myCustomer.get(JSON_SORT_CODE));
@@ -273,11 +313,13 @@ public class Customer
 		}
 		else
 		{
-			logger.log(Level.SEVERE,() -> myCustomerResponse.getStatus() + " " + myCustomerResponse.getEntity().toString());
+			logger.log(Level.SEVERE, () -> myCustomerResponse.getStatus() + " "
+					+ myCustomerResponse.getEntity().toString());
 			myCustomerResponse.close();
 			return "-1";
 		}
 	}
+
 
 	/**
 	 * inDB
@@ -294,7 +336,8 @@ public class Customer
 		String myCustomerString = null;
 		JSONObject myCustomer = null;
 
-		myCustomerResponse = myCustomerResource.getCustomerExternal(Long.parseLong(this.customerNumber));
+		myCustomerResponse = myCustomerResource
+				.getCustomerExternal(Long.parseLong(this.customerNumber));
 		if (myCustomerResponse.getStatus() == 200)
 		{
 			myCustomerString = myCustomerResponse.getEntity().toString();
@@ -304,12 +347,13 @@ public class Customer
 			}
 			catch (IOException e)
 			{
-				logger.log(Level.SEVERE,e::toString);
+				logger.log(Level.SEVERE, e::toString);
 				myCustomerResponse.close();
 				return false;
 			}
 
-			this.setDob(sortOutDate((String) myCustomer.get(JSON_DATE_OF_BIRTH)));
+			this.setDob(
+					sortOutDate((String) myCustomer.get(JSON_DATE_OF_BIRTH)));
 
 			String customerNoString = (String) myCustomer.get(JSON_ID);
 			this.setCustomerNumber(customerNoString);
@@ -322,6 +366,7 @@ public class Customer
 		myCustomerResponse.close();
 		return false;
 	}
+
 
 	/**
 	 * sortOutDate
@@ -347,6 +392,7 @@ public class Customer
 		return new Date(myCalendar.getTimeInMillis());
 	}
 
+
 	/**
 	 * showInfo
 	 * 
@@ -359,25 +405,34 @@ public class Customer
 
 		if (Boolean.FALSE.equals(editingCustomer))
 		{
-			logger.log(Level.INFO,() -> DASHES + this.customerNumber + ":" + this.sortcode + DASHES);
-			logger.log(Level.INFO,() -> "Sortcode - " + this.sortcode);
-			logger.log(Level.INFO,() -> "Customer name - " + this.getName());
-			logger.log(Level.INFO,() -> "Customer address - " + this.getAddress());
-			logger.log(Level.INFO,() -> "Customer Date of Birth - " + this.getDob().toString());
-			logger.log(Level.INFO,() -> "Customer is new");
+			logger.log(Level.INFO, () -> DASHES + this.customerNumber + ":"
+					+ this.sortcode + DASHES);
+			logger.log(Level.INFO, () -> "Sortcode - " + this.sortcode);
+			logger.log(Level.INFO, () -> "Customer name - " + this.getName());
+			logger.log(Level.INFO,
+					() -> "Customer address - " + this.getAddress());
+			logger.log(Level.INFO, () -> "Customer Date of Birth - "
+					+ this.getDob().toString());
+			logger.log(Level.INFO, () -> "Customer is new");
 		}
 		else
 		{
-			logger.log(Level.INFO,() -> DASHES + this.customerNumber + ":" + this.sortcode + DASHES);
-			logger.log(Level.INFO,() -> "Sortcode - " + this.sortcode);
-			logger.log(Level.INFO,() -> "Customer name - " + this.getName());
-			logger.log(Level.INFO,() -> "Customer address - " + this.getAddress());
-			logger.log(Level.INFO,() -> "Customer Date of Birth - " + this.getDob().toString());
-			logger.log(Level.INFO,() -> "Customer credit score - " + this.getCreditScore());
-			logger.log(Level.INFO,() -> "Customer cs review date - " + this.getCreditScoreReviewDate().toString());
-			logger.log(Level.INFO,() -> "Customer is being edited");
+			logger.log(Level.INFO, () -> DASHES + this.customerNumber + ":"
+					+ this.sortcode + DASHES);
+			logger.log(Level.INFO, () -> "Sortcode - " + this.sortcode);
+			logger.log(Level.INFO, () -> "Customer name - " + this.getName());
+			logger.log(Level.INFO,
+					() -> "Customer address - " + this.getAddress());
+			logger.log(Level.INFO, () -> "Customer Date of Birth - "
+					+ this.getDob().toString());
+			logger.log(Level.INFO,
+					() -> "Customer credit score - " + this.getCreditScore());
+			logger.log(Level.INFO, () -> "Customer cs review date - "
+					+ this.getCreditScoreReviewDate().toString());
+			logger.log(Level.INFO, () -> "Customer is being edited");
 		}
 	}
+
 
 	private static void sortOutLogging()
 	{
@@ -387,7 +442,7 @@ public class Customer
 		}
 		catch (SecurityException | IOException e)
 		{
-			logger.log(Level.SEVERE,e::toString);
+			logger.log(Level.SEVERE, e::toString);
 		}
 	}
 

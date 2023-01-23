@@ -15,7 +15,8 @@ import javax.ws.rs.FormParam;
  * record, used by ProcessedTransaction, in JSON format
  */
 
-public class ProcessedTransactionDebitCreditJSON extends ProcessedTransactionJSON
+public class ProcessedTransactionDebitCreditJSON
+		extends ProcessedTransactionJSON
 {
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
@@ -24,10 +25,12 @@ public class ProcessedTransactionDebitCreditJSON extends ProcessedTransactionJSO
 	@FormParam("amount")
 	BigDecimal amount;
 
+
 	public BigDecimal getAmount()
 	{
 		return amount;
 	}
+
 
 	public void setAmount(BigDecimal amount)
 	{

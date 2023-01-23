@@ -22,10 +22,12 @@ public class DebitCreditAccountJSON
 	@FormParam("amount")
 	BigDecimal amount;
 
+
 	public BigDecimal getAmount()
 	{
 		return amount;
 	}
+
 
 	public void setAmount(BigDecimal amount)
 	{

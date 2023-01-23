@@ -15,7 +15,8 @@ import javax.ws.rs.FormParam;
  * record, used by ProcessedTransaction, in JSON format
  */
 
-public class ProcessedTransactionTransferLocalJSON extends ProcessedTransactionJSON
+public class ProcessedTransactionTransferLocalJSON
+		extends ProcessedTransactionJSON
 {
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
@@ -24,20 +25,24 @@ public class ProcessedTransactionTransferLocalJSON extends ProcessedTransactionJ
 	@FormParam("amount")
 	BigDecimal amount;
 
+
 	public BigDecimal getAmount()
 	{
 		return amount;
 	}
+
 
 	public void setAmount(BigDecimal amount)
 	{
 		this.amount = amount;
 	}
 
+
 	public String getTargetAccountNumber()
 	{
 		return targetAccountNumber;
 	}
+
 
 	public void setTargetAccountNumber(String targetAccountNumber)
 	{

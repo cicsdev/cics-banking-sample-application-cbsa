@@ -33,6 +33,7 @@ public class GetCompany
 	 * </pre>
 	 */
 	public static final int GETCOMPANYOPERATION_LEN = 40;
+
 	public static final int GETCOMPANYOPERATION_OFFSET = factory.getOffset();
 
 	/**
@@ -44,25 +45,30 @@ public class GetCompany
 
 	protected byte[] byteBuffer;
 
+
 	public GetCompany(byte[] buffer)
 	{
 		this.byteBuffer = buffer;
 	}
+
 
 	public GetCompany()
 	{
 		this.byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_LEN];
 	}
 
+
 	public byte[] getByteBuffer()
 	{
 		return byteBuffer;
 	}
 
+
 	public String getCompanyName()
 	{
 		return companyName.getString(byteBuffer);
 	}
+
 
 	public void setCompanyName(String companyNameIn)
 	{

@@ -20,6 +20,7 @@ public class HbFooter extends HorizontalLayout
 
 	private static final long serialVersionUID = -3638937118776518241L;
 
+
 	public HbFooter()
 	{
 		/**
@@ -27,15 +28,15 @@ public class HbFooter extends HorizontalLayout
 		 */
 
 	}
-	
+
+
 	@Override
 	public boolean equals(Object obj)
 	{
 		return super.equals(obj);
 	}
-	
-	
-	
+
+
 	@Override
 	public int hashCode()
 	{

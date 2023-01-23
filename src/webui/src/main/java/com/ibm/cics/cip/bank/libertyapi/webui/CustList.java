@@ -11,7 +11,6 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.text.SimpleDateFormat;
 
-
 import com.ibm.cics.cip.bankliberty.webui.data_access.CustomerList;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CheckBox;
@@ -41,22 +40,40 @@ public class CustList extends VerticalLayout
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static Logger logger = Logger.getLogger("com.example.com_ibm_cics_cip_bank_libertyapi_webui.Cust_list");
+
+	private static Logger logger = Logger.getLogger(
+			"com.example.com_ibm_cics_cip_bank_libertyapi_webui.Cust_list");
+
 	private transient CustomerList cList = new CustomerList();
+
 	private UI ui;
+
 	private int limit = 50;
+
 	private int offset = 0;
+
 	Label page = new Label();
+
 	private VerticalLayout vl = new VerticalLayout();
+
 	TextField cusNumT;
+
 	TextField cusNameT;
+
 	CheckBox lt;
+
 	CheckBox mt;
+
 	Slider balance;
+
 	String filter = "";
+
 	int cur = 1;
+
 	int next;
+
 	private String welcome = "Welcome";
+
 
 	public CustList(UI ui, Welcome back)
 	{
@@ -91,6 +108,7 @@ public class CustList extends VerticalLayout
 			 */
 			private static final long serialVersionUID = -8897971980390983605L;
 
+
 			// Go back a page: offset from UI should now be + offset
 			public void buttonClick(ClickEvent event)
 			{
@@ -112,6 +130,7 @@ public class CustList extends VerticalLayout
 			 * 
 			 */
 			private static final long serialVersionUID = -140037750120660537L;
+
 
 			// Go back 10 pages
 			public void buttonClick(ClickEvent event)
@@ -137,6 +156,7 @@ public class CustList extends VerticalLayout
 			 */
 			private static final long serialVersionUID = 2306302397999195316L;
 
+
 			// Go forward a page
 			public void buttonClick(ClickEvent event)
 			{
@@ -158,6 +178,7 @@ public class CustList extends VerticalLayout
 			 * 
 			 */
 			private static final long serialVersionUID = -1097487417126789780L;
+
 
 			// Go forward 10 pages
 			public void buttonClick(ClickEvent event)
@@ -201,6 +222,7 @@ public class CustList extends VerticalLayout
 
 	}
 
+
 	private void createSearch()
 	{
 		// Create a new container "searchL"
@@ -226,19 +248,22 @@ public class CustList extends VerticalLayout
 
 			private static final long serialVersionUID = -2311472772099591790L;
 
+
 			public void buttonClick(ClickEvent event)
 			{
 				// Set filter contents
 				filter = "";
 				if (cusNumT.getValue().length() > 0)
 				{
-					filter = " AND CUSTOMER_NUMBER = " + String.format("%010d", Long.valueOf(cusNumT.getValue()));
+					filter = " AND CUSTOMER_NUMBER = " + String.format("%010d",
+							Long.valueOf(cusNumT.getValue()));
 				}
 				else
 				{
 					if (cusNameT.getValue().length() > 0)
 					{
-						filter = " AND CUSTOMER_NAME like '" + cusNameT.getValue() + "'";
+						filter = " AND CUSTOMER_NAME like '"
+								+ cusNameT.getValue() + "'";
 					}
 				}
 				limit = 50;
@@ -254,6 +279,7 @@ public class CustList extends VerticalLayout
 		// Add searchL container to the UI
 		this.addComponent(searchL);
 	}
+
 
 	private void createCusList(String filter)
 	{
@@ -271,7 +297,8 @@ public class CustList extends VerticalLayout
 				offset = total;
 			}
 
-			page.setValue(((offset / limit) + 1) + "/" + ((int) Math.ceil((total / limit)) + 1));
+			page.setValue(((offset / limit) + 1) + "/"
+					+ ((int) Math.ceil((total / limit)) + 1));
 			if (((int) Math.ceil((cList.getCount(filter) / limit))) == 0)
 			{
 				page.setValue("0/0");
@@ -300,11 +327,13 @@ public class CustList extends VerticalLayout
 
 			// Create new labels and populate to show customer number, name,
 			// address, DOB
-			Label cusNumb = new Label(this.cList.getCustomer(i).getCustomerNumber());
+			Label cusNumb = new Label(
+					this.cList.getCustomer(i).getCustomerNumber());
 			Label name = new Label(this.cList.getCustomer(i).getName());
 			Label address = new Label(this.cList.getCustomer(i).getAddress());
 			SimpleDateFormat ddMyyyy = new SimpleDateFormat("dd-M-yyyy");
-			Label dob = new Label(ddMyyyy.format(this.cList.getCustomer(i).getDob()));
+			Label dob = new Label(
+					ddMyyyy.format(this.cList.getCustomer(i).getDob()));
 
 			// Add labels to hl container
 			hl.addComponent(cusNumb);
@@ -344,9 +373,11 @@ public class CustList extends VerticalLayout
 				 */
 				private static final long serialVersionUID = 3139185739387258242L;
 
+
 				public void buttonClick(ClickEvent event)
 				{
-					ui.setContent(new AccList(ui, new Welcome(ui, welcome), cList.getCustomer(temp)));
+					ui.setContent(new AccList(ui, new Welcome(ui, welcome),
+							cList.getCustomer(temp)));
 				}
 			});
 			edit.addClickListener(new Button.ClickListener()
@@ -356,9 +387,11 @@ public class CustList extends VerticalLayout
 				 */
 				private static final long serialVersionUID = -4092770723316728200L;
 
+
 				public void buttonClick(ClickEvent event)
 				{
-					ui.setContent(new CustomerUI(ui, new Welcome(ui, welcome), cList.getCustomer(temp)));
+					ui.setContent(new CustomerUI(ui, new Welcome(ui, welcome),
+							cList.getCustomer(temp)));
 				}
 			});
 			delete.addClickListener(new Button.ClickListener()
@@ -367,6 +400,7 @@ public class CustList extends VerticalLayout
 				 * delete customer from database
 				 */
 				private static final long serialVersionUID = -6352320168324201352L;
+
 
 				public void buttonClick(ClickEvent event)
 				{
@@ -379,6 +413,7 @@ public class CustList extends VerticalLayout
 		}
 	}
 
+
 	private void sortOutLogging()
 	{
 		try
@@ -390,13 +425,15 @@ public class CustList extends VerticalLayout
 			logger.severe(e.toString());
 		}
 	}
-	
+
+
 	@Override
 	public boolean equals(Object obj)
 	{
 		return super.equals(obj);
 	}
-	
+
+
 	@Override
 	public int hashCode()
 	{

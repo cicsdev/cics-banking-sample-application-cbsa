@@ -25,63 +25,102 @@ public class Account extends HBankDataAccess
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
-	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.web.db2");
+	private static Logger logger = Logger
+			.getLogger("com.ibm.cics.cip.bankliberty.web.db2");
 
 	private static final String GET_ACCOUNT = "getAccount(int accountNumber, int sortCode) for account ";
+
 	private static final String GET_ACCOUNTS_CUSTNO = "getAccounts(long l, int sortCode) for customer ";
+
 	private static final String GET_ACCOUNTS = "getAccounts(int sortCode)";
+
 	private static final String GET_ACCOUNTS_COUNT_ONLY = "getAccountsCountOnly(int sortCode)";
+
 	private static final String DELETE_ACCOUNT = "deleteAccount(int account, int sortCode)";
+
 	private static final String CREATE_ACCOUNT = "createAccount(AccountJSON account, Integer sortcode, boolean use NamedCounter)";
+
 	private static final String UPDATE_ACCOUNT = "updateAccount(AccountJSON account)";
+
 	private static final String DEBIT_CREDIT_ACCOUNT = "debitCredit(BigDecimal apiAmount)";
+
 	private static final String GET_ACCOUNTS_BY_BALANCE = "getAccountsByBalance(Integer sortCode2, BigDecimal balance, boolean lessThan)";
+
 	private static final String GET_ACCOUNTS_WITH_LIMIT_AND_OFFSET = "getAccounts(Integer sortCode, int limit, int offset)";
+
 	private static final String GET_ACCOUNTS_BY_BALANCE_WITH_LIMIT_AND_OFFSET = "getAccountsByBalance(Integer sortCode2, BigDecimal balance, boolean lessThan, int offset, int limit)";
+
 	private static final String GET_ACCOUNTS_COUNT_ONLY2 = "getAccountsCountOnly(Integer sortCode2)";
+
 	private static final String GET_ACCOUNTS_BY_BALANCE_COUNT_ONLY = "getAccountsByBalanceCountOnly(Integer sortCode2, BigDecimal balance, boolean lessThan, Integer offset, Integer limit)";
 
 	private static final String PRE_SELECT_MSG = "About to do SELECT <";
 
 	private static final String ACCOUNT_SORTCODE = "ACCOUNT_SORTCODE";
+
 	private static final String ACCOUNT_CUSTOMER_NUMBER = "ACCOUNT_CUSTOMER_NUMBER";
+
 	private static final String ACCOUNT_NUMBER = "ACCOUNT_NUMBER";
+
 	private static final String ACCOUNT_TYPE = "ACCOUNT_TYPE";
+
 	private static final String ACCOUNT_INTEREST_RATE = "ACCOUNT_INTEREST_RATE";
+
 	private static final String ACCOUNT_LAST_STATEMENT = "ACCOUNT_LAST_STATEMENT";
+
 	private static final String ACCOUNT_NEXT_STATEMENT = "ACCOUNT_NEXT_STATEMENT";
+
 	private static final String ACCOUNT_OVERDRAFT_LIMIT = "ACCOUNT_OVERDRAFT_LIMIT";
+
 	private static final String ACCOUNT_OPENED = "ACCOUNT_OPENED";
+
 	private static final String ACCOUNT_AVAILABLE_BALANCE = "ACCOUNT_AVAILABLE_BALANCE";
+
 	private static final String ACCOUNT_ACTUAL_BALANCE = "ACCOUNT_ACTUAL_BALANCE";
+
 	private static final String ACCOUNT_COUNT = "ACCOUNT_COUNT";
 
 	private static final String SQL_SELECT = "SELECT * from ACCOUNT where ACCOUNT_EYECATCHER LIKE 'ACCT' AND ACCOUNT_NUMBER like ? and ACCOUNT_SORTCODE like ?";
+
 	private static final String SQL_LESS_THAN = " AND ACCOUNT_ACTUAL_BALANCE <= ?";
+
 	private static final String SQL_MORE_THAN = " AND ACCOUNT_ACTUAL_BALANCE >= ?";
 
 	// </copyright>
 
 	// String ACCOUNT_EYECATCHER CHAR(4),
 	private String customerNumber;
+
 	private String sortcode;
+
 	private String accountNumber;
+
 	private String type;
+
 	private double interestRate;
+
 	private Date opened;
+
 	private int overdraftLimit;
+
 	private Date lastStatement;
+
 	private Date nextStatement;
+
 	private double availableBalance;
+
 	private double actualBalance;
+
 
 	public Account()
 	{
 		sortOutLogging();
 	}
 
-	public Account(String custNo, String sortCo, String accNo, String type, double intRate, Date opened, int overdraft,
-			Date lastStatement, Date nextStatement, double avBal, double acBal)
+
+	public Account(String custNo, String sortCo, String accNo, String type,
+			double intRate, Date opened, int overdraft, Date lastStatement,
+			Date nextStatement, double avBal, double acBal)
 	{
 		setCustomerNumber(custNo);
 		setSortcode(sortCo);
@@ -97,8 +136,10 @@ public class Account extends HBankDataAccess
 		sortOutLogging();
 	}
 
-	public Account(String custNo, String sortCo, String accNo, String type, double intRate, java.util.Date opened,
-			int overdraft, Date lastStatement, Date nextStatement, double avBal, double acBal)
+
+	public Account(String custNo, String sortCo, String accNo, String type,
+			double intRate, java.util.Date opened, int overdraft,
+			Date lastStatement, Date nextStatement, double avBal, double acBal)
 	{
 		setCustomerNumber(custNo);
 		setSortcode(sortCo);
@@ -114,19 +155,27 @@ public class Account extends HBankDataAccess
 		sortOutLogging();
 	}
 
+
 	public void showInfo()
 	{
-		logger.log(Level.FINE, () -> "------------" + this.accountNumber + ":" + this.sortcode + "------------");
-		logger.log(Level.FINE, () -> "Customer number - " + this.customerNumber);
+		logger.log(Level.FINE, () -> "------------" + this.accountNumber + ":"
+				+ this.sortcode + "------------");
+		logger.log(Level.FINE,
+				() -> "Customer number - " + this.customerNumber);
 		logger.log(Level.FINE, () -> "Type - " + this.type);
 		logger.log(Level.FINE, () -> "Interest rate - " + this.interestRate);
 		logger.log(Level.FINE, () -> "Opened - " + this.opened.toString());
-		logger.log(Level.FINE, () -> "Overdraft Limit - " + this.overdraftLimit);
-		logger.log(Level.FINE, () -> "Last Statement - " + this.lastStatement.toString());
-		logger.log(Level.FINE, () -> "Next Statement - " + this.nextStatement.toString());
-		logger.log(Level.FINE, () -> "Available Balance - " + this.availableBalance);
+		logger.log(Level.FINE,
+				() -> "Overdraft Limit - " + this.overdraftLimit);
+		logger.log(Level.FINE,
+				() -> "Last Statement - " + this.lastStatement.toString());
+		logger.log(Level.FINE,
+				() -> "Next Statement - " + this.nextStatement.toString());
+		logger.log(Level.FINE,
+				() -> "Available Balance - " + this.availableBalance);
 		logger.log(Level.FINE, () -> "Actual Balance - " + this.actualBalance);
 	}
+
 
 	public String getCustomerNumber()
 	{
@@ -143,6 +192,7 @@ public class Account extends HBankDataAccess
 		}
 		return this.customerNumber;
 	}
+
 
 	public void setCustomerNumber(String custNo)
 	{
@@ -162,15 +212,18 @@ public class Account extends HBankDataAccess
 		this.customerNumber = custNo;
 	}
 
+
 	public String getSortcode()
 	{
 		return sortcode;
 	}
 
+
 	public void setSortcode(String sortcode)
 	{
 		this.sortcode = sortcode;
 	}
+
 
 	public String getAccountNumber()
 	{
@@ -185,6 +238,7 @@ public class Account extends HBankDataAccess
 		return this.accountNumber;
 	}
 
+
 	public void setAccountNumber(String accNo)
 	{
 		StringBuilder myStringBuilder = new StringBuilder();
@@ -197,50 +251,60 @@ public class Account extends HBankDataAccess
 		this.accountNumber = myStringBuilder.toString();
 	}
 
+
 	public String getType()
 	{
 		return type;
 	}
+
 
 	public void setType(String type)
 	{
 		this.type = type;
 	}
 
+
 	public double getInterestRate()
 	{
 		return interestRate;
 	}
+
 
 	public void setInterestRate(double interestRate)
 	{
 		this.interestRate = interestRate;
 	}
 
+
 	public Date getOpened()
 	{
 		return opened;
 	}
+
 
 	public void setOpened(Date opened)
 	{
 		this.opened = opened;
 	}
 
+
 	public int getOverdraftLimit()
 	{
 		return overdraftLimit;
 	}
+
 
 	public void setOverdraftLimit(int overdraftLimit)
 	{
 		this.overdraftLimit = overdraftLimit;
 	}
 
+
 	public Date getLastStatement()
 	{
 		return lastStatement;
 	}
+
 
 	public void setLastStatement(Date lastStatement)
 	{
@@ -254,10 +318,12 @@ public class Account extends HBankDataAccess
 		}
 	}
 
+
 	public Date getNextStatement()
 	{
 		return nextStatement;
 	}
+
 
 	public void setNextStatement(Date nextStatement)
 	{
@@ -274,25 +340,30 @@ public class Account extends HBankDataAccess
 		}
 	}
 
+
 	public double getAvailableBalance()
 	{
 		return availableBalance;
 	}
+
 
 	public void setAvailableBalance(double availableBalance)
 	{
 		this.availableBalance = availableBalance;
 	}
 
+
 	public double getActualBalance()
 	{
 		return actualBalance;
 	}
 
+
 	public void setActualBalance(double actualBalance)
 	{
 		this.actualBalance = actualBalance;
 	}
+
 
 	public void updateThis()
 	{
@@ -318,6 +389,7 @@ public class Account extends HBankDataAccess
 		}
 	}
 
+
 	public Account getAccount(int accountNumber, int sortCode)
 	{
 		logger.entering(this.getClass().getName(), GET_ACCOUNT + accountNumber);
@@ -339,20 +411,27 @@ public class Account extends HBankDataAccess
 				ResultSet rs = stmt9999.executeQuery();
 				if (rs.next())
 				{
-					temp = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER), rs.getString(ACCOUNT_SORTCODE),
-							rs.getString(ACCOUNT_NUMBER), rs.getString(ACCOUNT_TYPE),
-							rs.getDouble(ACCOUNT_INTEREST_RATE), rs.getDate(ACCOUNT_OPENED),
-							rs.getInt(ACCOUNT_OVERDRAFT_LIMIT), rs.getDate(ACCOUNT_LAST_STATEMENT),
-							rs.getDate(ACCOUNT_NEXT_STATEMENT), rs.getDouble(ACCOUNT_AVAILABLE_BALANCE),
+					temp = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER),
+							rs.getString(ACCOUNT_SORTCODE),
+							rs.getString(ACCOUNT_NUMBER),
+							rs.getString(ACCOUNT_TYPE),
+							rs.getDouble(ACCOUNT_INTEREST_RATE),
+							rs.getDate(ACCOUNT_OPENED),
+							rs.getInt(ACCOUNT_OVERDRAFT_LIMIT),
+							rs.getDate(ACCOUNT_LAST_STATEMENT),
+							rs.getDate(ACCOUNT_NEXT_STATEMENT),
+							rs.getDouble(ACCOUNT_AVAILABLE_BALANCE),
 							rs.getDouble(ACCOUNT_ACTUAL_BALANCE));
 					rs.close();
-					logger.exiting(this.getClass().getName(), GET_ACCOUNT + accountNumber, temp);
+					logger.exiting(this.getClass().getName(),
+							GET_ACCOUNT + accountNumber, temp);
 					return temp;
 				}
 				else
 				{
 					logger.log(Level.WARNING, () -> "No results found");
-					logger.exiting(this.getClass().getName(), GET_ACCOUNT + accountNumber, null);
+					logger.exiting(this.getClass().getName(),
+							GET_ACCOUNT + accountNumber, null);
 					return null;
 				}
 
@@ -369,21 +448,29 @@ public class Account extends HBankDataAccess
 				if (rs.isClosed())
 				{
 					logger.log(Level.WARNING, () -> "Result set is closed");
-					logger.exiting(this.getClass().getName(), GET_ACCOUNT + accountNumber, temp);
+					logger.exiting(this.getClass().getName(),
+							GET_ACCOUNT + accountNumber, temp);
 					return temp;
 				}
 				else
 				{
 					while (rs.next())
 					{
-						temp = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER), rs.getString(ACCOUNT_SORTCODE),
-								rs.getString(ACCOUNT_NUMBER), rs.getString(ACCOUNT_TYPE),
-								rs.getDouble(ACCOUNT_INTEREST_RATE), rs.getDate(ACCOUNT_OPENED),
-								rs.getInt(ACCOUNT_OVERDRAFT_LIMIT), rs.getDate(ACCOUNT_LAST_STATEMENT),
-								rs.getDate(ACCOUNT_NEXT_STATEMENT), rs.getDouble(ACCOUNT_AVAILABLE_BALANCE),
+						temp = new Account(
+								rs.getString(ACCOUNT_CUSTOMER_NUMBER),
+								rs.getString(ACCOUNT_SORTCODE),
+								rs.getString(ACCOUNT_NUMBER),
+								rs.getString(ACCOUNT_TYPE),
+								rs.getDouble(ACCOUNT_INTEREST_RATE),
+								rs.getDate(ACCOUNT_OPENED),
+								rs.getInt(ACCOUNT_OVERDRAFT_LIMIT),
+								rs.getDate(ACCOUNT_LAST_STATEMENT),
+								rs.getDate(ACCOUNT_NEXT_STATEMENT),
+								rs.getDouble(ACCOUNT_AVAILABLE_BALANCE),
 								rs.getDouble(ACCOUNT_ACTUAL_BALANCE));
 						rs.close();
-						logger.exiting(this.getClass().getName(), GET_ACCOUNT + accountNumber, temp);
+						logger.exiting(this.getClass().getName(),
+								GET_ACCOUNT + accountNumber, temp);
 						return temp;
 					}
 
@@ -395,12 +482,15 @@ public class Account extends HBankDataAccess
 		catch (SQLException e)
 		{
 			logger.severe(e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(), GET_ACCOUNT + accountNumber, null);
+			logger.exiting(this.getClass().getName(),
+					GET_ACCOUNT + accountNumber, null);
 			return null;
 		}
-		logger.exiting(this.getClass().getName(), GET_ACCOUNT + accountNumber, temp);
+		logger.exiting(this.getClass().getName(), GET_ACCOUNT + accountNumber,
+				temp);
 		return temp;
 	}
+
 
 	public Account[] getAccounts(long l, int sortCode)
 	{
@@ -424,26 +514,35 @@ public class Account extends HBankDataAccess
 
 			while (rs.next())
 			{
-				temp[i] = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER), rs.getString(ACCOUNT_SORTCODE),
-						rs.getString(ACCOUNT_NUMBER), rs.getString(ACCOUNT_TYPE), rs.getDouble(ACCOUNT_INTEREST_RATE),
-						rs.getDate(ACCOUNT_OPENED), rs.getInt(ACCOUNT_OVERDRAFT_LIMIT),
-						rs.getDate(ACCOUNT_LAST_STATEMENT), rs.getDate(ACCOUNT_NEXT_STATEMENT),
-						rs.getDouble(ACCOUNT_AVAILABLE_BALANCE), rs.getDouble(ACCOUNT_ACTUAL_BALANCE));
+				temp[i] = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER),
+						rs.getString(ACCOUNT_SORTCODE),
+						rs.getString(ACCOUNT_NUMBER),
+						rs.getString(ACCOUNT_TYPE),
+						rs.getDouble(ACCOUNT_INTEREST_RATE),
+						rs.getDate(ACCOUNT_OPENED),
+						rs.getInt(ACCOUNT_OVERDRAFT_LIMIT),
+						rs.getDate(ACCOUNT_LAST_STATEMENT),
+						rs.getDate(ACCOUNT_NEXT_STATEMENT),
+						rs.getDouble(ACCOUNT_AVAILABLE_BALANCE),
+						rs.getDouble(ACCOUNT_ACTUAL_BALANCE));
 				i++;
 			}
 		}
 		catch (SQLException e)
 		{
 			logger.severe(e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(), GET_ACCOUNTS_CUSTNO + l, null);
+			logger.exiting(this.getClass().getName(), GET_ACCOUNTS_CUSTNO + l,
+					null);
 			return null;
 		}
 		Account[] real = new Account[i];
 		System.arraycopy(temp, 0, real, 0, i);
 
-		logger.exiting(this.getClass().getName(), GET_ACCOUNTS_CUSTNO + l, real);
+		logger.exiting(this.getClass().getName(), GET_ACCOUNTS_CUSTNO + l,
+				real);
 		return real;
 	}
+
 
 	public Account[] getAccounts(int sortCode)
 	{
@@ -468,11 +567,17 @@ public class Account extends HBankDataAccess
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next())
 			{
-				temp[i] = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER), rs.getString(ACCOUNT_SORTCODE),
-						rs.getString(ACCOUNT_NUMBER), rs.getString(ACCOUNT_TYPE), rs.getDouble(ACCOUNT_INTEREST_RATE),
-						rs.getDate(ACCOUNT_OPENED), rs.getInt(ACCOUNT_OVERDRAFT_LIMIT),
-						rs.getDate(ACCOUNT_LAST_STATEMENT), rs.getDate(ACCOUNT_NEXT_STATEMENT),
-						rs.getDouble(ACCOUNT_AVAILABLE_BALANCE), rs.getDouble(ACCOUNT_ACTUAL_BALANCE));
+				temp[i] = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER),
+						rs.getString(ACCOUNT_SORTCODE),
+						rs.getString(ACCOUNT_NUMBER),
+						rs.getString(ACCOUNT_TYPE),
+						rs.getDouble(ACCOUNT_INTEREST_RATE),
+						rs.getDate(ACCOUNT_OPENED),
+						rs.getInt(ACCOUNT_OVERDRAFT_LIMIT),
+						rs.getDate(ACCOUNT_LAST_STATEMENT),
+						rs.getDate(ACCOUNT_NEXT_STATEMENT),
+						rs.getDouble(ACCOUNT_AVAILABLE_BALANCE),
+						rs.getDouble(ACCOUNT_ACTUAL_BALANCE));
 				i++;
 			}
 		}
@@ -487,6 +592,7 @@ public class Account extends HBankDataAccess
 		logger.exiting(this.getClass().getName(), GET_ACCOUNTS, real);
 		return real;
 	}
+
 
 	public int getAccountsCountOnly(int sortCode)
 	{
@@ -508,22 +614,26 @@ public class Account extends HBankDataAccess
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next())
 			{
-				logger.exiting(this.getClass().getName(), GET_ACCOUNTS_COUNT_ONLY, rs.getInt(ACCOUNT_COUNT));
+				logger.exiting(this.getClass().getName(),
+						GET_ACCOUNTS_COUNT_ONLY, rs.getInt(ACCOUNT_COUNT));
 				return rs.getInt(ACCOUNT_COUNT);
 			}
 			else
 			{
-				logger.exiting(this.getClass().getName(), GET_ACCOUNTS_COUNT_ONLY, -1);
+				logger.exiting(this.getClass().getName(),
+						GET_ACCOUNTS_COUNT_ONLY, -1);
 				return -1;
 			}
 		}
 		catch (SQLException e)
 		{
 			logger.severe(e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(), GET_ACCOUNTS_COUNT_ONLY, -1);
+			logger.exiting(this.getClass().getName(), GET_ACCOUNTS_COUNT_ONLY,
+					-1);
 			return -1;
 		}
 	}
+
 
 	public Account deleteAccount(int account, int sortcode)
 	{
@@ -565,13 +675,20 @@ public class Account extends HBankDataAccess
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next())
 			{
-				temp = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER), rs.getString(ACCOUNT_SORTCODE),
-						rs.getString(ACCOUNT_NUMBER), rs.getString(ACCOUNT_TYPE), rs.getDouble(ACCOUNT_INTEREST_RATE),
-						rs.getDate(ACCOUNT_OPENED), rs.getInt(ACCOUNT_OVERDRAFT_LIMIT),
-						rs.getDate(ACCOUNT_LAST_STATEMENT), rs.getDate(ACCOUNT_NEXT_STATEMENT),
-						rs.getDouble(ACCOUNT_AVAILABLE_BALANCE), rs.getDouble(ACCOUNT_ACTUAL_BALANCE));
+				temp = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER),
+						rs.getString(ACCOUNT_SORTCODE),
+						rs.getString(ACCOUNT_NUMBER),
+						rs.getString(ACCOUNT_TYPE),
+						rs.getDouble(ACCOUNT_INTEREST_RATE),
+						rs.getDate(ACCOUNT_OPENED),
+						rs.getInt(ACCOUNT_OVERDRAFT_LIMIT),
+						rs.getDate(ACCOUNT_LAST_STATEMENT),
+						rs.getDate(ACCOUNT_NEXT_STATEMENT),
+						rs.getDouble(ACCOUNT_AVAILABLE_BALANCE),
+						rs.getDouble(ACCOUNT_ACTUAL_BALANCE));
 				db2Account = temp;
-				logger.log(Level.FINE, () -> "About to issue delete SQL <" + sql2 + ">");
+				logger.log(Level.FINE,
+						() -> "About to issue delete SQL <" + sql2 + ">");
 				stmt2.setString(1, accountNumberString);
 				stmt2.setString(2, sortCodeString);
 				stmt2.execute();
@@ -588,6 +705,7 @@ public class Account extends HBankDataAccess
 		logger.exiting(this.getClass().getName(), DELETE_ACCOUNT, db2Account);
 		return db2Account;
 	}
+
 
 	public Account createAccount(AccountJSON account, Integer sortcode)
 	{
@@ -606,7 +724,8 @@ public class Account extends HBankDataAccess
 		String sqlControl = "SELECT * from CONTROL where CONTROL_NAME = ?";
 		controlString = sortcode.toString() + "-" + "ACCOUNT-LAST";
 		sqlControl = "SELECT * from CONTROL where CONTROL_NAME LIKE ?";
-		String sqlUpdate = "UPDATE CONTROL " + "SET" + " CONTROL_VALUE_NUM = ?" + " WHERE CONTROL_NAME = ?";
+		String sqlUpdate = "UPDATE CONTROL " + "SET" + " CONTROL_VALUE_NUM = ?"
+				+ " WHERE CONTROL_NAME = ?";
 		String sqlInsert = "INSERT INTO ACCOUNT (ACCOUNT_EYECATCHER, ACCOUNT_CUSTOMER_NUMBER, ACCOUNT_SORTCODE, ACCOUNT_NUMBER, ACCOUNT_TYPE, ACCOUNT_INTEREST_RATE, ACCOUNT_OPENED, ACCOUNT_OVERDRAFT_LIMIT, ACCOUNT_LAST_STATEMENT, ACCOUNT_NEXT_STATEMENT, ACCOUNT_AVAILABLE_BALANCE, ACCOUNT_ACTUAL_BALANCE) VALUES ('ACCT',?,?,?,?,?,?,?,?,?,0.00,0.00)";
 
 		try (PreparedStatement stmtC = conn.prepareStatement(sqlControl);
@@ -652,9 +771,11 @@ public class Account extends HBankDataAccess
 
 				temp.setNextStatement(nextStatementForNewCustomer);
 
-				String customerNumberString = padCustomerNumber(account.getCustomerNumber());
+				String customerNumberString = padCustomerNumber(
+						account.getCustomerNumber());
 
-				logger.log(Level.FINE, () -> "About to insert record SQL <" + sqlInsert + ">");
+				logger.log(Level.FINE,
+						() -> "About to insert record SQL <" + sqlInsert + ">");
 
 				stmt.setString(1, customerNumberString);
 				stmt.setString(2, sortCodeString);
@@ -681,7 +802,8 @@ public class Account extends HBankDataAccess
 				rs = stmt2.executeQuery();
 				rs.next();
 
-				logger.log(Level.FINE, () -> "About to execute update SQL <" + sqlUpdate + ">");
+				logger.log(Level.FINE, () -> "About to execute update SQL <"
+						+ sqlUpdate + ">");
 				stmt3.setLong(1, accountNumberInteger);
 				stmt3.setString(2, controlString);
 				stmt3.execute();
@@ -706,6 +828,7 @@ public class Account extends HBankDataAccess
 		}
 	}
 
+
 	private String padCustomerNumber(String customerNumber2)
 	{
 		// Customer Numbers are 10 digit numbers, prefixed with zeroes as
@@ -719,6 +842,7 @@ public class Account extends HBankDataAccess
 		return myStringBuilder.toString();
 	}
 
+
 	private String padAccountNumber(Integer accountNumber2)
 	{
 		// Account Numbers are 8 digit numbers, prefixed with zeroes as required
@@ -730,6 +854,7 @@ public class Account extends HBankDataAccess
 		myStringBuilder.append(accountNumber2.toString());
 		return myStringBuilder.toString();
 	}
+
 
 	private String padSortCode(Integer sortcode2)
 	{
@@ -744,6 +869,7 @@ public class Account extends HBankDataAccess
 		return myStringBuilder.toString();
 
 	}
+
 
 	private long getNextMonth(Date today)
 	{
@@ -791,37 +917,49 @@ public class Account extends HBankDataAccess
 
 	}
 
+
 	public Account updateAccount(AccountJSON account)
 	{
 		logger.entering(this.getClass().getName(), UPDATE_ACCOUNT);
-		Account db2Account = this.getAccount(Integer.parseInt(account.getId()), Integer.parseInt(sortcode));
+		Account db2Account = this.getAccount(Integer.parseInt(account.getId()),
+				Integer.parseInt(sortcode));
 		if (db2Account == null)
 		{
-			logger.log(Level.WARNING, () -> "Unable to access DB2 account " + account.getId());
+			logger.log(Level.WARNING,
+					() -> "Unable to access DB2 account " + account.getId());
 			logger.exiting(this.getClass().getName(), UPDATE_ACCOUNT, null);
 			return null;
 		}
 		Account temp = null;
 		openConnection();
-		String accountNumberString = padAccountNumber(Integer.parseInt(db2Account.getAccountNumber()));
+		String accountNumberString = padAccountNumber(
+				Integer.parseInt(db2Account.getAccountNumber()));
 
 		String sortCodeString = padSortCode(Integer.valueOf(sortcode));
 		String sql1 = SQL_SELECT;
-		logger.log(Level.FINE, () -> "About to perform query SQL <" + sql1 + ">");
+		logger.log(Level.FINE,
+				() -> "About to perform query SQL <" + sql1 + ">");
 		String sqlUpdateSafe = "UPDATE ACCOUNT SET ACCOUNT_TYPE = ?,ACCOUNT_INTEREST_RATE = ? ,ACCOUNT_OVERDRAFT_LIMIT = ? WHERE ACCOUNT_NUMBER like ? AND ACCOUNT_SORTCODE like ?";
 		try (PreparedStatement stmt = conn.prepareStatement(sql1);
-				PreparedStatement myPreparedStatement = conn.prepareStatement(sqlUpdateSafe);)
+				PreparedStatement myPreparedStatement = conn
+						.prepareStatement(sqlUpdateSafe);)
 		{
 			stmt.setString(1, accountNumberString);
 			stmt.setString(2, sortCodeString);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next())
 			{
-				temp = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER), rs.getString(ACCOUNT_SORTCODE),
-						rs.getString(ACCOUNT_NUMBER), rs.getString(ACCOUNT_TYPE), rs.getDouble(ACCOUNT_INTEREST_RATE),
-						rs.getDate(ACCOUNT_OPENED), rs.getInt(ACCOUNT_OVERDRAFT_LIMIT),
-						rs.getDate(ACCOUNT_LAST_STATEMENT), rs.getDate(ACCOUNT_NEXT_STATEMENT),
-						rs.getDouble(ACCOUNT_AVAILABLE_BALANCE), rs.getDouble(ACCOUNT_ACTUAL_BALANCE));
+				temp = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER),
+						rs.getString(ACCOUNT_SORTCODE),
+						rs.getString(ACCOUNT_NUMBER),
+						rs.getString(ACCOUNT_TYPE),
+						rs.getDouble(ACCOUNT_INTEREST_RATE),
+						rs.getDate(ACCOUNT_OPENED),
+						rs.getInt(ACCOUNT_OVERDRAFT_LIMIT),
+						rs.getDate(ACCOUNT_LAST_STATEMENT),
+						rs.getDate(ACCOUNT_NEXT_STATEMENT),
+						rs.getDouble(ACCOUNT_AVAILABLE_BALANCE),
+						rs.getDouble(ACCOUNT_ACTUAL_BALANCE));
 				db2Account = temp;
 
 				myPreparedStatement.setString(1, account.getAccountType());
@@ -829,7 +967,8 @@ public class Account extends HBankDataAccess
 				myPreparedStatement.setInt(3, account.getOverdraft());
 				myPreparedStatement.setString(4, accountNumberString);
 				myPreparedStatement.setString(5, account.getSortCode());
-				logger.log(Level.FINE, () -> "About to execute update SQL <" + sqlUpdateSafe + ">");
+				logger.log(Level.FINE, () -> "About to execute update SQL <"
+						+ sqlUpdateSafe + ">");
 				myPreparedStatement.execute();
 
 				logger.exiting(this.getClass().getName(), UPDATE_ACCOUNT, temp);
@@ -846,22 +985,27 @@ public class Account extends HBankDataAccess
 		return temp;
 	}
 
+
 	public boolean debitCredit(BigDecimal apiAmount)
 	{
 		logger.entering(this.getClass().getName(), DEBIT_CREDIT_ACCOUNT);
-		Account temp = this.getAccount(Integer.parseInt(this.getAccountNumber()),
+		Account temp = this.getAccount(
+				Integer.parseInt(this.getAccountNumber()),
 				Integer.parseInt(this.getSortcode()));
 		if (temp == null)
 		{
-			logger.log(Level.WARNING, () -> "Unable to find account " + this.getAccountNumber());
-			logger.exiting(this.getClass().getName(), DEBIT_CREDIT_ACCOUNT, false);
+			logger.log(Level.WARNING,
+					() -> "Unable to find account " + this.getAccountNumber());
+			logger.exiting(this.getClass().getName(), DEBIT_CREDIT_ACCOUNT,
+					false);
 			return false;
 		}
 
 		openConnection();
 		String accountNumberString = temp.getAccountNumber();
 
-		String sortCodeString = padSortCode(Integer.parseInt(this.getSortcode()));
+		String sortCodeString = padSortCode(
+				Integer.parseInt(this.getSortcode()));
 		String sql1 = SQL_SELECT;
 		logger.log(Level.FINE, () -> "About to issue QUERY <" + sql1 + ">");
 		String sqlUpdate = "UPDATE ACCOUNT SET ACCOUNT_ACTUAL_BALANCE = ? ,ACCOUNT_AVAILABLE_BALANCE = ? WHERE ACCOUNT_NUMBER like ? AND ACCOUNT_SORTCODE like ?";
@@ -873,17 +1017,24 @@ public class Account extends HBankDataAccess
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next())
 			{
-				temp = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER), rs.getString(ACCOUNT_SORTCODE),
-						rs.getString(ACCOUNT_NUMBER), rs.getString(ACCOUNT_TYPE), rs.getDouble(ACCOUNT_INTEREST_RATE),
-						rs.getDate(ACCOUNT_OPENED), rs.getInt(ACCOUNT_OVERDRAFT_LIMIT),
-						rs.getDate(ACCOUNT_LAST_STATEMENT), rs.getDate(ACCOUNT_NEXT_STATEMENT),
-						rs.getDouble(ACCOUNT_AVAILABLE_BALANCE), rs.getDouble(ACCOUNT_ACTUAL_BALANCE));
+				temp = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER),
+						rs.getString(ACCOUNT_SORTCODE),
+						rs.getString(ACCOUNT_NUMBER),
+						rs.getString(ACCOUNT_TYPE),
+						rs.getDouble(ACCOUNT_INTEREST_RATE),
+						rs.getDate(ACCOUNT_OPENED),
+						rs.getInt(ACCOUNT_OVERDRAFT_LIMIT),
+						rs.getDate(ACCOUNT_LAST_STATEMENT),
+						rs.getDate(ACCOUNT_NEXT_STATEMENT),
+						rs.getDouble(ACCOUNT_AVAILABLE_BALANCE),
+						rs.getDouble(ACCOUNT_ACTUAL_BALANCE));
 
 			}
 			else
 			{
 				logger.log(Level.WARNING, () -> "Result set had no results");
-				logger.exiting(this.getClass().getName(), DEBIT_CREDIT_ACCOUNT, false);
+				logger.exiting(this.getClass().getName(), DEBIT_CREDIT_ACCOUNT,
+						false);
 				return false;
 			}
 
@@ -900,22 +1051,27 @@ public class Account extends HBankDataAccess
 			stmt2.setDouble(2, newAvailableBalance);
 			stmt2.setString(3, accountNumberString);
 			stmt2.setString(4, sortCodeString);
-			logger.log(Level.FINE, () -> "About to issue update SQL <" + sqlUpdate + ">");
+			logger.log(Level.FINE,
+					() -> "About to issue update SQL <" + sqlUpdate + ">");
 			stmt2.execute();
 
-			logger.exiting(this.getClass().getName(), DEBIT_CREDIT_ACCOUNT, true);
+			logger.exiting(this.getClass().getName(), DEBIT_CREDIT_ACCOUNT,
+					true);
 			return true;
 
 		}
 		catch (SQLException e)
 		{
 			logger.severe(e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(), DEBIT_CREDIT_ACCOUNT, false);
+			logger.exiting(this.getClass().getName(), DEBIT_CREDIT_ACCOUNT,
+					false);
 			return false;
 		}
 	}
 
-	public Account[] getAccountsByBalance(Integer sortCode2, BigDecimal balance, boolean lessThan)
+
+	public Account[] getAccountsByBalance(Integer sortCode2, BigDecimal balance,
+			boolean lessThan)
 	{
 		logger.entering(this.getClass().getName(), GET_ACCOUNTS_BY_BALANCE);
 		openConnection();
@@ -951,30 +1107,40 @@ public class Account extends HBankDataAccess
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next())
 			{
-				temp[i] = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER), rs.getString(ACCOUNT_SORTCODE),
-						rs.getString(ACCOUNT_NUMBER), rs.getString(ACCOUNT_TYPE), rs.getDouble(ACCOUNT_INTEREST_RATE),
-						rs.getDate(ACCOUNT_OPENED), rs.getInt(ACCOUNT_OVERDRAFT_LIMIT),
-						rs.getDate(ACCOUNT_LAST_STATEMENT), rs.getDate(ACCOUNT_NEXT_STATEMENT),
-						rs.getDouble(ACCOUNT_AVAILABLE_BALANCE), rs.getDouble(ACCOUNT_ACTUAL_BALANCE));
+				temp[i] = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER),
+						rs.getString(ACCOUNT_SORTCODE),
+						rs.getString(ACCOUNT_NUMBER),
+						rs.getString(ACCOUNT_TYPE),
+						rs.getDouble(ACCOUNT_INTEREST_RATE),
+						rs.getDate(ACCOUNT_OPENED),
+						rs.getInt(ACCOUNT_OVERDRAFT_LIMIT),
+						rs.getDate(ACCOUNT_LAST_STATEMENT),
+						rs.getDate(ACCOUNT_NEXT_STATEMENT),
+						rs.getDouble(ACCOUNT_AVAILABLE_BALANCE),
+						rs.getDouble(ACCOUNT_ACTUAL_BALANCE));
 				i++;
 			}
 		}
 		catch (SQLException e)
 		{
 			logger.severe(e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(), GET_ACCOUNTS_BY_BALANCE, null);
+			logger.exiting(this.getClass().getName(), GET_ACCOUNTS_BY_BALANCE,
+					null);
 			return null;
 		}
 		Account[] real = new Account[i];
 		System.arraycopy(temp, 0, real, 0, i);
-		logger.exiting(this.getClass().getName(), GET_ACCOUNTS_BY_BALANCE, real);
+		logger.exiting(this.getClass().getName(), GET_ACCOUNTS_BY_BALANCE,
+				real);
 		return real;
 
 	}
 
+
 	public Account[] getAccounts(Integer sortCode, int limit, int offset)
 	{
-		logger.entering(this.getClass().getName(), GET_ACCOUNTS_WITH_LIMIT_AND_OFFSET);
+		logger.entering(this.getClass().getName(),
+				GET_ACCOUNTS_WITH_LIMIT_AND_OFFSET);
 		openConnection();
 		Account[] temp = new Account[limit];
 		int i = 0;
@@ -999,11 +1165,16 @@ public class Account extends HBankDataAccess
 			{
 				if (retrieved >= offset)
 				{
-					temp[i] = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER), rs.getString(ACCOUNT_SORTCODE),
-							rs.getString(ACCOUNT_NUMBER), rs.getString(ACCOUNT_TYPE),
-							rs.getDouble(ACCOUNT_INTEREST_RATE), rs.getDate(ACCOUNT_OPENED),
-							rs.getInt(ACCOUNT_OVERDRAFT_LIMIT), rs.getDate(ACCOUNT_LAST_STATEMENT),
-							rs.getDate(ACCOUNT_NEXT_STATEMENT), rs.getDouble(ACCOUNT_AVAILABLE_BALANCE),
+					temp[i] = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER),
+							rs.getString(ACCOUNT_SORTCODE),
+							rs.getString(ACCOUNT_NUMBER),
+							rs.getString(ACCOUNT_TYPE),
+							rs.getDouble(ACCOUNT_INTEREST_RATE),
+							rs.getDate(ACCOUNT_OPENED),
+							rs.getInt(ACCOUNT_OVERDRAFT_LIMIT),
+							rs.getDate(ACCOUNT_LAST_STATEMENT),
+							rs.getDate(ACCOUNT_NEXT_STATEMENT),
+							rs.getDouble(ACCOUNT_AVAILABLE_BALANCE),
 							rs.getDouble(ACCOUNT_ACTUAL_BALANCE));
 					i++;
 				}
@@ -1013,20 +1184,24 @@ public class Account extends HBankDataAccess
 		catch (SQLException e)
 		{
 			logger.severe(e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(), GET_ACCOUNTS_WITH_LIMIT_AND_OFFSET, null);
+			logger.exiting(this.getClass().getName(),
+					GET_ACCOUNTS_WITH_LIMIT_AND_OFFSET, null);
 			return null;
 		}
 		Account[] real = new Account[i];
 		System.arraycopy(temp, 0, real, 0, i);
-		logger.exiting(this.getClass().getName(), GET_ACCOUNTS_WITH_LIMIT_AND_OFFSET, real);
+		logger.exiting(this.getClass().getName(),
+				GET_ACCOUNTS_WITH_LIMIT_AND_OFFSET, real);
 		return real;
 
 	}
 
-	public Account[] getAccountsByBalance(Integer sortCode2, BigDecimal balance, boolean lessThan, int offset,
-			int limit)
+
+	public Account[] getAccountsByBalance(Integer sortCode2, BigDecimal balance,
+			boolean lessThan, int offset, int limit)
 	{
-		logger.entering(this.getClass().getName(), GET_ACCOUNTS_BY_BALANCE_WITH_LIMIT_AND_OFFSET);
+		logger.entering(this.getClass().getName(),
+				GET_ACCOUNTS_BY_BALANCE_WITH_LIMIT_AND_OFFSET);
 		openConnection();
 		Account[] temp = new Account[250000];
 		int i = 0;
@@ -1057,25 +1232,34 @@ public class Account extends HBankDataAccess
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next())
 			{
-				temp[i] = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER), rs.getString(ACCOUNT_SORTCODE),
-						rs.getString(ACCOUNT_NUMBER), rs.getString(ACCOUNT_TYPE), rs.getDouble(ACCOUNT_INTEREST_RATE),
-						rs.getDate(ACCOUNT_OPENED), rs.getInt(ACCOUNT_OVERDRAFT_LIMIT),
-						rs.getDate(ACCOUNT_LAST_STATEMENT), rs.getDate(ACCOUNT_NEXT_STATEMENT),
-						rs.getDouble(ACCOUNT_AVAILABLE_BALANCE), rs.getDouble(ACCOUNT_ACTUAL_BALANCE));
+				temp[i] = new Account(rs.getString(ACCOUNT_CUSTOMER_NUMBER),
+						rs.getString(ACCOUNT_SORTCODE),
+						rs.getString(ACCOUNT_NUMBER),
+						rs.getString(ACCOUNT_TYPE),
+						rs.getDouble(ACCOUNT_INTEREST_RATE),
+						rs.getDate(ACCOUNT_OPENED),
+						rs.getInt(ACCOUNT_OVERDRAFT_LIMIT),
+						rs.getDate(ACCOUNT_LAST_STATEMENT),
+						rs.getDate(ACCOUNT_NEXT_STATEMENT),
+						rs.getDouble(ACCOUNT_AVAILABLE_BALANCE),
+						rs.getDouble(ACCOUNT_ACTUAL_BALANCE));
 				i++;
 			}
 		}
 		catch (SQLException e)
 		{
 			logger.severe(e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(), GET_ACCOUNTS_BY_BALANCE_WITH_LIMIT_AND_OFFSET, null);
+			logger.exiting(this.getClass().getName(),
+					GET_ACCOUNTS_BY_BALANCE_WITH_LIMIT_AND_OFFSET, null);
 			return null;
 		}
 		Account[] real = new Account[i];
 		System.arraycopy(temp, 0, real, 0, i);
-		logger.exiting(this.getClass().getName(), GET_ACCOUNTS_BY_BALANCE_WITH_LIMIT_AND_OFFSET, real);
+		logger.exiting(this.getClass().getName(),
+				GET_ACCOUNTS_BY_BALANCE_WITH_LIMIT_AND_OFFSET, real);
 		return real;
 	}
+
 
 	public int getAccountsCountOnly(Integer sortCode2)
 	{
@@ -1097,23 +1281,29 @@ public class Account extends HBankDataAccess
 			}
 			else
 			{
-				logger.exiting(this.getClass().getName(), GET_ACCOUNTS_COUNT_ONLY2, -1);
+				logger.exiting(this.getClass().getName(),
+						GET_ACCOUNTS_COUNT_ONLY2, -1);
 				return -1;
 			}
 		}
 		catch (SQLException e)
 		{
 			logger.severe(e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(), GET_ACCOUNTS_COUNT_ONLY2, -1);
+			logger.exiting(this.getClass().getName(), GET_ACCOUNTS_COUNT_ONLY2,
+					-1);
 			return -1;
 		}
-		logger.exiting(this.getClass().getName(), GET_ACCOUNTS_COUNT_ONLY2, accountCount);
+		logger.exiting(this.getClass().getName(), GET_ACCOUNTS_COUNT_ONLY2,
+				accountCount);
 		return accountCount;
 	}
 
-	public int getAccountsByBalanceCountOnly(Integer sortCode2, BigDecimal balance, boolean lessThan)
+
+	public int getAccountsByBalanceCountOnly(Integer sortCode2,
+			BigDecimal balance, boolean lessThan)
 	{
-		logger.entering(this.getClass().getName(), GET_ACCOUNTS_BY_BALANCE_COUNT_ONLY);
+		logger.entering(this.getClass().getName(),
+				GET_ACCOUNTS_BY_BALANCE_COUNT_ONLY);
 
 		int accountCount = 0;
 		openConnection();
@@ -1140,17 +1330,20 @@ public class Account extends HBankDataAccess
 			}
 			else
 			{
-				logger.exiting(this.getClass().getName(), GET_ACCOUNTS_BY_BALANCE_COUNT_ONLY, -1);
+				logger.exiting(this.getClass().getName(),
+						GET_ACCOUNTS_BY_BALANCE_COUNT_ONLY, -1);
 				return -1;
 			}
 		}
 		catch (SQLException e)
 		{
 			logger.severe(e.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(), GET_ACCOUNTS_BY_BALANCE_COUNT_ONLY, -1);
+			logger.exiting(this.getClass().getName(),
+					GET_ACCOUNTS_BY_BALANCE_COUNT_ONLY, -1);
 			return -1;
 		}
-		logger.exiting(this.getClass().getName(), GET_ACCOUNTS_BY_BALANCE_COUNT_ONLY, accountCount);
+		logger.exiting(this.getClass().getName(),
+				GET_ACCOUNTS_BY_BALANCE_COUNT_ONLY, accountCount);
 		return accountCount;
 	}
 }

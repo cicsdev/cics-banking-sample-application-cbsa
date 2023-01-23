@@ -44,30 +44,43 @@ public class CounterResource extends HBankDataAccess
 	 */
 
 	private static final String NEWACCNO = "NEWACCNO";
+
 	private static final String NEWCUSNO = "NEWCUSNO";
 
 	private static final String JSON_ERROR_MSG = "errorMessage";
+
 	private static final String JSON_SUCCESS = "success";
+
 	private static final String JSON_ACCOUNT_NUMBER = "accountNumber";
+
 	private static final String JSON_CUSTOMER_NUMBER = "customerNumber";
 
 	private static final String GET_ACCOUNT_COUNTER = "getAccountCounter()";
+
 	private static final String GET_CUSTOMER_COUNTER = "getCustomerCounter()";
+
 	private static final String INCREMENT_CUSTOMER_COUNTER = "incrementCustomerCounter()";
+
 	private static final String INCREMENT_ACCOUNT_COUNTER = "incrementAccountCounter()";
+
 	private static final String DECREMENT_CUSTOMER_COUNTER = "decrementCustomerCounter()";
+
 	private static final String DECREMENT_ACCOUNT_COUNTER = "decrementAccountCounter()";
 
 	private static final String NEW_ACCNO_PREFIX = "Account number from NEWACCNO is ";
+
 	private static final String NEW_CUSNO_PREFIX = "Customer number from NEWCUSNO is ";
 
-	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.api.json");
+	private static Logger logger = Logger
+			.getLogger("com.ibm.cics.cip.bankliberty.api.json");
 	// </copyright>
+
 
 	public CounterResource()
 	{
 		sortOutLogging();
 	}
+
 
 	@GET
 	@Path("/account")
@@ -92,21 +105,28 @@ public class CounterResource extends HBankDataAccess
 			logger.fine(NEW_ACCNO_PREFIX + myNEWACCNO.getAccountNumber());
 			response.put(JSON_ACCOUNT_NUMBER, myNEWACCNO.getAccountNumber());
 			response.put(JSON_SUCCESS, "Y");
-			myResponse = Response.status(200).entity(response.toString()).build();
-			logger.exiting(this.getClass().getName(), GET_ACCOUNT_COUNTER, myResponse);
+			myResponse = Response.status(200).entity(response.toString())
+					.build();
+			logger.exiting(this.getClass().getName(), GET_ACCOUNT_COUNTER,
+					myResponse);
 			return myResponse;
 		}
-		catch (InvalidRequestException | LengthErrorException | InvalidSystemIdException | NotAuthorisedException
-				| InvalidProgramIdException | RolledBackException | TerminalException e)
+		catch (InvalidRequestException | LengthErrorException
+				| InvalidSystemIdException | NotAuthorisedException
+				| InvalidProgramIdException | RolledBackException
+				| TerminalException e)
 		{
 			logger.severe(e.getLocalizedMessage());
 			response.put(JSON_ERROR_MSG, e.toString());
 			response.put(JSON_SUCCESS, "N");
-			myResponse = Response.status(500).entity(response.toString()).build();
-			logger.exiting(this.getClass().getName(), GET_ACCOUNT_COUNTER, myResponse);
+			myResponse = Response.status(500).entity(response.toString())
+					.build();
+			logger.exiting(this.getClass().getName(), GET_ACCOUNT_COUNTER,
+					myResponse);
 			return myResponse;
 		}
 	}
+
 
 	@GET
 	@Path("/customer")
@@ -132,21 +152,28 @@ public class CounterResource extends HBankDataAccess
 			logger.fine(NEW_CUSNO_PREFIX + myNEWCUSNO.getCustomerNumber());
 			response.put(JSON_CUSTOMER_NUMBER, myNEWCUSNO.getCustomerNumber());
 			response.put(JSON_SUCCESS, "Y");
-			myResponse = Response.status(200).entity(response.toString()).build();
-			logger.exiting(this.getClass().getName(), GET_CUSTOMER_COUNTER, myResponse);
+			myResponse = Response.status(200).entity(response.toString())
+					.build();
+			logger.exiting(this.getClass().getName(), GET_CUSTOMER_COUNTER,
+					myResponse);
 			return myResponse;
 		}
-		catch (InvalidRequestException | LengthErrorException | InvalidSystemIdException | NotAuthorisedException
-				| InvalidProgramIdException | RolledBackException | TerminalException e)
+		catch (InvalidRequestException | LengthErrorException
+				| InvalidSystemIdException | NotAuthorisedException
+				| InvalidProgramIdException | RolledBackException
+				| TerminalException e)
 		{
 			logger.severe(e.getLocalizedMessage());
 			response.put(JSON_ERROR_MSG, e.toString());
 			response.put(JSON_SUCCESS, "N");
-			myResponse = Response.status(500).entity(response.toString()).build();
-			logger.exiting(this.getClass().getName(), GET_CUSTOMER_COUNTER, myResponse);
+			myResponse = Response.status(500).entity(response.toString())
+					.build();
+			logger.exiting(this.getClass().getName(), GET_CUSTOMER_COUNTER,
+					myResponse);
 			return myResponse;
 		}
 	}
+
 
 	@POST
 	@Path("/customer")
@@ -173,21 +200,28 @@ public class CounterResource extends HBankDataAccess
 			logger.fine(NEW_CUSNO_PREFIX + myNEWCUSNO.getCustomerNumber());
 			response.put(JSON_CUSTOMER_NUMBER, myNEWCUSNO.getCustomerNumber());
 			response.put(JSON_SUCCESS, "Y");
-			myResponse = Response.status(200).entity(response.toString()).build();
-			logger.exiting(this.getClass().getName(), INCREMENT_CUSTOMER_COUNTER, myResponse);
+			myResponse = Response.status(200).entity(response.toString())
+					.build();
+			logger.exiting(this.getClass().getName(),
+					INCREMENT_CUSTOMER_COUNTER, myResponse);
 			return myResponse;
 		}
-		catch (InvalidRequestException | LengthErrorException | InvalidSystemIdException | NotAuthorisedException
-				| InvalidProgramIdException | RolledBackException | TerminalException e)
+		catch (InvalidRequestException | LengthErrorException
+				| InvalidSystemIdException | NotAuthorisedException
+				| InvalidProgramIdException | RolledBackException
+				| TerminalException e)
 		{
 			logger.severe(e.getLocalizedMessage());
 			response.put(JSON_ERROR_MSG, e.toString());
 			response.put(JSON_SUCCESS, "N");
-			myResponse = Response.status(500).entity(response.toString()).build();
-			logger.exiting(this.getClass().getName(), INCREMENT_CUSTOMER_COUNTER, myResponse);
+			myResponse = Response.status(500).entity(response.toString())
+					.build();
+			logger.exiting(this.getClass().getName(),
+					INCREMENT_CUSTOMER_COUNTER, myResponse);
 			return myResponse;
 		}
 	}
+
 
 	@DELETE
 	@Path("/customer")
@@ -217,22 +251,29 @@ public class CounterResource extends HBankDataAccess
 			logger.fine(NEW_CUSNO_PREFIX + myNEWCUSNO.getCustomerNumber());
 			response.put(JSON_CUSTOMER_NUMBER, myNEWCUSNO.getCustomerNumber());
 			response.put(JSON_SUCCESS, "Y");
-			myResponse = Response.status(200).entity(response.toString()).build();
-			logger.exiting(this.getClass().getName(), DECREMENT_CUSTOMER_COUNTER, myResponse);
+			myResponse = Response.status(200).entity(response.toString())
+					.build();
+			logger.exiting(this.getClass().getName(),
+					DECREMENT_CUSTOMER_COUNTER, myResponse);
 			return myResponse;
 		}
-		catch (InvalidRequestException | LengthErrorException | InvalidSystemIdException | NotAuthorisedException
-				| InvalidProgramIdException | RolledBackException | TerminalException e)
+		catch (InvalidRequestException | LengthErrorException
+				| InvalidSystemIdException | NotAuthorisedException
+				| InvalidProgramIdException | RolledBackException
+				| TerminalException e)
 		{
 			logger.severe(e.getLocalizedMessage());
 			response.put(JSON_ERROR_MSG, e.toString());
 			response.put(JSON_SUCCESS, "N");
-			myResponse = Response.status(500).entity(response.toString()).build();
-			logger.exiting(this.getClass().getName(), DECREMENT_CUSTOMER_COUNTER, myResponse);
+			myResponse = Response.status(500).entity(response.toString())
+					.build();
+			logger.exiting(this.getClass().getName(),
+					DECREMENT_CUSTOMER_COUNTER, myResponse);
 			return myResponse;
 		}
 
 	}
+
 
 	@POST
 	@Path("/account")
@@ -258,21 +299,28 @@ public class CounterResource extends HBankDataAccess
 			logger.fine(NEW_ACCNO_PREFIX + myNEWACCNO.getAccountNumber());
 			response.put(JSON_ACCOUNT_NUMBER, myNEWACCNO.getAccountNumber());
 			response.put(JSON_SUCCESS, "Y");
-			myResponse = Response.status(200).entity(response.toString()).build();
-			logger.exiting(this.getClass().getName(), INCREMENT_ACCOUNT_COUNTER, myResponse);
+			myResponse = Response.status(200).entity(response.toString())
+					.build();
+			logger.exiting(this.getClass().getName(), INCREMENT_ACCOUNT_COUNTER,
+					myResponse);
 			return myResponse;
 		}
-		catch (InvalidRequestException | LengthErrorException | InvalidSystemIdException | NotAuthorisedException
-				| InvalidProgramIdException | RolledBackException | TerminalException e)
+		catch (InvalidRequestException | LengthErrorException
+				| InvalidSystemIdException | NotAuthorisedException
+				| InvalidProgramIdException | RolledBackException
+				| TerminalException e)
 		{
 			logger.severe(e.getLocalizedMessage());
 			response.put(JSON_ERROR_MSG, e.toString());
 			response.put(JSON_SUCCESS, "N");
-			myResponse = Response.status(500).entity(response.toString()).build();
-			logger.exiting(this.getClass().getName(), INCREMENT_ACCOUNT_COUNTER, myResponse);
+			myResponse = Response.status(500).entity(response.toString())
+					.build();
+			logger.exiting(this.getClass().getName(), INCREMENT_ACCOUNT_COUNTER,
+					myResponse);
 			return myResponse;
 		}
 	}
+
 
 	@DELETE
 	@Path("/account")
@@ -301,18 +349,24 @@ public class CounterResource extends HBankDataAccess
 			logger.fine(NEW_ACCNO_PREFIX + myNEWACCNO.getAccountNumber());
 			response.put(JSON_ACCOUNT_NUMBER, myNEWACCNO.getAccountNumber());
 			response.put(JSON_SUCCESS, "Y");
-			myResponse = Response.status(200).entity(response.toString()).build();
-			logger.exiting(this.getClass().getName(), DECREMENT_ACCOUNT_COUNTER, myResponse);
+			myResponse = Response.status(200).entity(response.toString())
+					.build();
+			logger.exiting(this.getClass().getName(), DECREMENT_ACCOUNT_COUNTER,
+					myResponse);
 			return myResponse;
 		}
-		catch (InvalidRequestException | LengthErrorException | InvalidSystemIdException | NotAuthorisedException
-				| InvalidProgramIdException | RolledBackException | TerminalException e)
+		catch (InvalidRequestException | LengthErrorException
+				| InvalidSystemIdException | NotAuthorisedException
+				| InvalidProgramIdException | RolledBackException
+				| TerminalException e)
 		{
 			logger.severe(e.getLocalizedMessage());
 			response.put(JSON_ERROR_MSG, e.toString());
 			response.put(JSON_SUCCESS, "N");
-			myResponse = Response.status(500).entity(response.toString()).build();
-			logger.exiting(this.getClass().getName(), DECREMENT_ACCOUNT_COUNTER, myResponse);
+			myResponse = Response.status(500).entity(response.toString())
+					.build();
+			logger.exiting(this.getClass().getName(), DECREMENT_ACCOUNT_COUNTER,
+					myResponse);
 			return myResponse;
 		}
 

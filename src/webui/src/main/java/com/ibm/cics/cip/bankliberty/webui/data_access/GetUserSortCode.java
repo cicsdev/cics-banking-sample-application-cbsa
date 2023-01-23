@@ -33,6 +33,7 @@ public class GetUserSortCode
 	 * </pre>
 	 */
 	public static final int GETSORTCODEOPERATION_LEN = 6;
+
 	public static final int GETSORTCODEOPERATION_OFFSET = factory.getOffset();
 
 	/**
@@ -44,25 +45,30 @@ public class GetUserSortCode
 
 	protected byte[] byteBuffer;
 
+
 	public GetUserSortCode(byte[] buffer)
 	{
 		this.byteBuffer = buffer;
 	}
+
 
 	public GetUserSortCode()
 	{
 		this.byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_LEN];
 	}
 
+
 	public byte[] getByteBuffer()
 	{
 		return byteBuffer;
 	}
 
+
 	public String getSortcode()
 	{
 		return sortCode.getString(byteBuffer);
 	}
+
 
 	public void setSortcode(String sortcode)
 	{

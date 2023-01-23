@@ -37,23 +37,39 @@ public class AccountUI extends VerticalLayout
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
 	private static final long serialVersionUID = 1L;
+
 	private transient Account a;
+
 	private UI ui;
+
 	private Boolean edit = false;
 
 	private TextField cusNumT;
+
 	private TextField sCodeT;
+
 	private ComboBox typeT;
+
 	private TextField interestT;
+
 	private TextField overdraftT;
+
 	private TextField balanceT;
+
 	private static String sortcode;
+
 	private static final String TYPE_CURRENT = "CURRENT";
+
 	private static final String TYPE_ISA = "ISA";
+
 	private static final String TYPE_LOAN = "LOAN";
+
 	private static final String TYPE_MORTGAGE = "MORTGAGE";
+
 	private static final String TYPE_SAVING = "SAVING";
+
 	private static final String EDITING_STRING = "Editing account ";
+
 
 	public AccountUI(UI ui, Welcome back)
 	{
@@ -63,6 +79,7 @@ public class AccountUI extends VerticalLayout
 		setSortcode();
 
 	}
+
 
 	public AccountUI(UI ui, Welcome back, Account acc)
 	{
@@ -74,6 +91,7 @@ public class AccountUI extends VerticalLayout
 		setSortcode();
 
 	}
+
 
 	/**
 	 * The two functions, createAccUI and editAccUI are nearly identical, so
@@ -154,7 +172,8 @@ public class AccountUI extends VerticalLayout
 
 		// Set interest rate
 		interestT = new TextField("Interest");
-		interestT.setValue(acc.getInterestRate().setScale(2, RoundingMode.HALF_UP).toString());
+		interestT.setValue(acc.getInterestRate()
+				.setScale(2, RoundingMode.HALF_UP).toString());
 
 		// Add to container and align
 		typeL.addComponent(typeT);
@@ -201,6 +220,7 @@ public class AccountUI extends VerticalLayout
 			 */
 			private static final long serialVersionUID = 3760485465663201508L;
 
+
 			public void buttonClick(ClickEvent event)
 			{
 				if (Boolean.FALSE.equals(edit))
@@ -209,11 +229,14 @@ public class AccountUI extends VerticalLayout
 					String temp = createNewAccount();
 					if (temp.startsWith("-1"))
 					{
-						event.getButton().setCaption("Create new account failed");
+						event.getButton()
+								.setCaption("Create new account failed");
 					}
 					else
 					{
-						event.getButton().setCaption("Create new account successful for account " + temp);
+						event.getButton().setCaption(
+								"Create new account successful for account "
+										+ temp);
 					}
 				}
 				else
@@ -221,11 +244,13 @@ public class AccountUI extends VerticalLayout
 					// Editing an account
 					if (Boolean.FALSE.equals(editAccount()))
 					{
-						event.getButton().setCaption(EDITING_STRING + a.getAccountNumber() + " failed");
+						event.getButton().setCaption(EDITING_STRING
+								+ a.getAccountNumber() + " failed");
 					}
 					else
 					{
-						event.getButton().setCaption(EDITING_STRING + a.getAccountNumber() + " successful");
+						event.getButton().setCaption(EDITING_STRING
+								+ a.getAccountNumber() + " successful");
 					}
 				}
 			}
@@ -244,16 +269,20 @@ public class AccountUI extends VerticalLayout
 
 	}
 
+
 	private void setFields(Account acc)
 	{
 		// Set values for the fields by using acc
 		cusNumT.setValue(acc.getCustomerNumber());
 		sCodeT.setValue(acc.getSortcode());
 		typeT.setValue(acc.getType().trim());
-		interestT.setValue(String.valueOf(acc.getInterestRate().setScale(2, RoundingMode.HALF_UP)));
+		interestT.setValue(String.valueOf(
+				acc.getInterestRate().setScale(2, RoundingMode.HALF_UP)));
 		overdraftT.setValue(String.valueOf(acc.getOverdraftLimit()));
-		balanceT.setValue(String.valueOf(acc.getActualBalance().setScale(2, RoundingMode.HALF_UP)));
+		balanceT.setValue(String.valueOf(
+				acc.getActualBalance().setScale(2, RoundingMode.HALF_UP)));
 	}
+
 
 	@SuppressWarnings("serial")
 	private void createAccUI(UI ui, Welcome back, String user)
@@ -327,11 +356,14 @@ public class AccountUI extends VerticalLayout
 					String temp = createNewAccount();
 					if (temp.startsWith("-1"))
 					{
-						event.getButton().setCaption("Create new account failed");
+						event.getButton()
+								.setCaption("Create new account failed");
 					}
 					else
 					{
-						event.getButton().setCaption("Create new account successful for account " + temp);
+						event.getButton().setCaption(
+								"Create new account successful for account "
+										+ temp);
 					}
 				}
 				else
@@ -339,11 +371,13 @@ public class AccountUI extends VerticalLayout
 
 					if (!editAccount())
 					{
-						event.getButton().setCaption(EDITING_STRING + a.getAccountNumber() + " failed");
+						event.getButton().setCaption(EDITING_STRING
+								+ a.getAccountNumber() + " failed");
 					}
 					else
 					{
-						event.getButton().setCaption(EDITING_STRING + a.getAccountNumber() + " successful");
+						event.getButton().setCaption(EDITING_STRING
+								+ a.getAccountNumber() + " successful");
 					}
 
 				}
@@ -362,6 +396,7 @@ public class AccountUI extends VerticalLayout
 
 	}
 
+
 	// Create a new account object and add to the database
 	private String createNewAccount()
 	{
@@ -369,12 +404,15 @@ public class AccountUI extends VerticalLayout
 		if (validateSimple())
 		{
 			int temp = 0;
-			BigDecimal tempBD = BigDecimal.valueOf(Double.parseDouble(interestT.getValue()));
+			BigDecimal tempBD = BigDecimal
+					.valueOf(Double.parseDouble(interestT.getValue()));
 			// Create a new account object
-			Account newAcc = new Account(cusNumT.getValue(), sCodeT.getValue(), String.format("%08d", temp),
-					typeT.getValue().toString(), tempBD, new Date(), Integer.valueOf(overdraftT.getValue()),
+			Account newAcc = new Account(cusNumT.getValue(), sCodeT.getValue(),
+					String.format("%08d", temp), typeT.getValue().toString(),
+					tempBD, new Date(), Integer.valueOf(overdraftT.getValue()),
 					BigDecimal.valueOf(Double.parseDouble(balanceT.getValue())),
-					BigDecimal.valueOf(Double.parseDouble(balanceT.getValue())));
+					BigDecimal
+							.valueOf(Double.parseDouble(balanceT.getValue())));
 
 			// Add the new account to the database
 			newAcc.addToDB();
@@ -391,18 +429,22 @@ public class AccountUI extends VerticalLayout
 		return "-1";
 	}
 
+
 	// edit account "a"
 	private boolean editAccount()
 	{
 		a.setType(typeT.getValue().toString());
-		a.setInterestRate(BigDecimal.valueOf(Double.parseDouble(interestT.getValue())));
+		a.setInterestRate(
+				BigDecimal.valueOf(Double.parseDouble(interestT.getValue())));
 		BigDecimal temp = a.getInterestRate().setScale(2, RoundingMode.HALF_UP);
 		a.setInterestRate(temp);
 		a.setOverdraftLimit(Integer.valueOf(overdraftT.getValue()));
-		a.setActualBalance(BigDecimal.valueOf(Double.valueOf(balanceT.getValue())));
+		a.setActualBalance(
+				BigDecimal.valueOf(Double.valueOf(balanceT.getValue())));
 		a.setSortcode(sCodeT.getValue());
 		return a.updateThis();
 	}
+
 
 	private boolean validateSimple()
 	{
@@ -436,7 +478,8 @@ public class AccountUI extends VerticalLayout
 		}
 		try
 		{
-			BigDecimal tempBD = BigDecimal.valueOf(Double.parseDouble(interestT.getValue()));
+			BigDecimal tempBD = BigDecimal
+					.valueOf(Double.parseDouble(interestT.getValue()));
 			if (tempBD.doubleValue() < 0)
 			{
 				return false;
@@ -466,6 +509,7 @@ public class AccountUI extends VerticalLayout
 		return !(balanceT.getValue().isEmpty());
 	}
 
+
 	// Get sortcode
 	private static String getSortcode()
 	{
@@ -478,6 +522,7 @@ public class AccountUI extends VerticalLayout
 		return sortcode;
 	}
 
+
 	// Set sortcode
 	private static void setSortcode()
 	{
@@ -489,13 +534,15 @@ public class AccountUI extends VerticalLayout
 		}
 
 	}
-	
+
+
 	@Override
 	public boolean equals(Object obj)
 	{
 		return super.equals(obj);
 	}
-	
+
+
 	@Override
 	public int hashCode()
 	{

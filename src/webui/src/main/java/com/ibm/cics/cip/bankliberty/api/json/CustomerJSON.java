@@ -39,20 +39,24 @@ public class CustomerJSON
 	@FormParam("customerCreditScore")
 	String customerCreditScore;
 
+
 	public String getCreditScore()
 	{
 		return customerCreditScore;
 	}
+
 
 	public void setCreditScore(String customerCreditScore)
 	{
 		this.customerCreditScore = customerCreditScore;
 	}
 
+
 	public Date getReviewDate()
 	{
 		return customerCreditScoreReviewDate;
 	}
+
 
 	public void setReviewDate(Date customerCreditScoreReviewDate)
 	{
@@ -65,55 +69,66 @@ public class CustomerJSON
 
 	String id;
 
+
 	public String getId()
 	{
 		return id;
 	}
+
 
 	public void setId(String id)
 	{
 		this.id = id;
 	}
 
+
 	public String getSortCode()
 	{
 		return sortCode;
 	}
+
 
 	public void setSortCode(String sortCode)
 	{
 		this.sortCode = sortCode;
 	}
 
+
 	public String getCustomerName()
 	{
 		return customerName;
 	}
+
 
 	public void setCustomerName(String customerName)
 	{
 		this.customerName = customerName;
 	}
 
+
 	public String getCustomerAddress()
 	{
 		return customerAddress;
 	}
+
 
 	public void setCustomerAddress(String customerAddress)
 	{
 		this.customerAddress = customerAddress;
 	}
 
+
 	public Date getDateOfBirth()
 	{
 		return dateOfBirth;
 	}
 
+
 	public void setDateOfBirth(Date dateOfBirth)
 	{
 		this.dateOfBirth = dateOfBirth;
 	}
+
 
 	// Customer title must be one of the following
 	public boolean validateTitle(String title)

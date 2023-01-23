@@ -13,6 +13,7 @@ public class CustomerControl
 {
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
+
 	protected static CobolDatatypeFactory factory = new CobolDatatypeFactory();
 	static
 	{
@@ -32,14 +33,17 @@ public class CustomerControl
 	 * </pre>
 	 */
 	public static final int CUSTOMER_CONTROL_RECORD_LEN = 329;
-	public static final int CUSTOMER_CONTROL_RECORD_OFFSET = factory.getOffset();
+
+	public static final int CUSTOMER_CONTROL_RECORD_OFFSET = factory
+			.getOffset();
 
 	/**
 	 * <pre>
 	        05 CUSTOMER-CONTROL-EYECATCHER             PIC X(4).
 	 * </pre>
 	 */
-	protected static final StringField CUSTOMER_CONTROL_EYECATCHER = factory.getStringField(4);
+	protected static final StringField CUSTOMER_CONTROL_EYECATCHER = factory
+			.getStringField(4);
 
 	/**
 	 * <pre>
@@ -54,6 +58,7 @@ public class CustomerControl
 	 * </pre>
 	 */
 	public static final int CUSTOMER_CONTROL_KEY_LEN = 16;
+
 	public static final int CUSTOMER_CONTROL_KEY_OFFSET = factory.getOffset();
 
 	/**
@@ -61,8 +66,8 @@ public class CustomerControl
 	           07 CUSTOMER-CONTROL-SORTCODE        PIC 9(6) DISPLAY.
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsIntField CUSTOMER_CONTROL_SORTCODE = factory.getExternalDecimalAsIntField(6,
-			false, false, false, false);
+	protected static final ExternalDecimalAsIntField CUSTOMER_CONTROL_SORTCODE = factory
+			.getExternalDecimalAsIntField(6, false, false, false, false);
 
 	/**
 	 * <pre>
@@ -77,23 +82,24 @@ public class CustomerControl
 	        05 NUMBER-OF-CUSTOMERS                 PIC 9(10) DISPLAY.
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsLongField NUMBER_OF_CUSTOMERS = factory.getExternalDecimalAsLongField(10,
-			false, false, false, false);
+	protected static final ExternalDecimalAsLongField NUMBER_OF_CUSTOMERS = factory
+			.getExternalDecimalAsLongField(10, false, false, false, false);
 
 	/**
 	 * <pre>
 	        05 LAST-CUSTOMER-NUMBER                PIC 9(10) DISPLAY.
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsLongField LAST_CUSTOMER_NUMBER = factory.getExternalDecimalAsLongField(10,
-			false, false, false, false);
+	protected static final ExternalDecimalAsLongField LAST_CUSTOMER_NUMBER = factory
+			.getExternalDecimalAsLongField(10, false, false, false, false);
 
 	/**
 	 * <pre>
 	        05 CUSTOMER-CONTROL-SUCCESS-FLAG       PIC X.
 	 * </pre>
 	 */
-	protected static final StringField CUSTOMER_CONTROL_SUCCESS_FLAG = factory.getStringField(1);
+	protected static final StringField CUSTOMER_CONTROL_SUCCESS_FLAG = factory
+			.getStringField(1);
 
 	/**
 	 * <pre>
@@ -107,7 +113,8 @@ public class CustomerControl
 	        05 CUSTOMER-CONTROL-FAIL-CODE PIC X.
 	 * </pre>
 	 */
-	protected static final StringField CUSTOMER_CONTROL_FAIL_CODE = factory.getStringField(1);
+	protected static final StringField CUSTOMER_CONTROL_FAIL_CODE = factory
+			.getStringField(1);
 
 	/**
 	 * <pre>
@@ -128,32 +135,32 @@ public class CustomerControl
 	        05 FILLER                              PIC 9(8).
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsIntField FILLER_3 = factory.getExternalDecimalAsIntField(8, false, false,
-			false, false);
+	protected static final ExternalDecimalAsIntField FILLER_3 = factory
+			.getExternalDecimalAsIntField(8, false, false, false, false);
 
 	/**
 	 * <pre>
 	        05 FILLER                              PIC 999.
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsIntField FILLER_4 = factory.getExternalDecimalAsIntField(3, false, false,
-			false, false);
+	protected static final ExternalDecimalAsIntField FILLER_4 = factory
+			.getExternalDecimalAsIntField(3, false, false, false, false);
 
 	/**
 	 * <pre>
 	        05 FILLER                              PIC 9(8).
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsIntField FILLER_5 = factory.getExternalDecimalAsIntField(8, false, false,
-			false, false);
+	protected static final ExternalDecimalAsIntField FILLER_5 = factory
+			.getExternalDecimalAsIntField(8, false, false, false, false);
 
 	/**
 	 * <pre>
 	        05 FILLER                              PIC 9(11).
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsLongField FILLER_6 = factory.getExternalDecimalAsLongField(11, false, false,
-			false, false);
+	protected static final ExternalDecimalAsLongField FILLER_6 = factory
+			.getExternalDecimalAsLongField(11, false, false, false, false);
 
 	/**
 	 * <pre>
@@ -170,72 +177,94 @@ public class CustomerControl
 	protected static final StringField FILLER_8 = factory.getStringField(9);
 
 	protected byte[] byteBuffer;
+
 	// Instance variables used to cache field values
 	protected String customerControlEyecatcher;
+
 	protected Integer customerControlSortcode;
+
 	protected Long customerControlNumber;
+
 	protected Long numberOfCustomers;
+
 	protected Long lastCustomerNumber;
+
 	protected String customerControlSuccessFlag;
+
 	protected String customerControlFailCode;
+
 
 	public CustomerControl(byte[] buffer)
 	{
 		this.byteBuffer = buffer;
 	}
 
+
 	public CustomerControl()
 	{
 		this.byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_LEN];
 	}
+
 
 	public byte[] getByteBuffer()
 	{
 		return byteBuffer;
 	}
 
+
 	public String getCustomerControlEyecatcher()
 	{
 		if (customerControlEyecatcher == null)
 		{
-			customerControlEyecatcher = CUSTOMER_CONTROL_EYECATCHER.getString(byteBuffer);
+			customerControlEyecatcher = CUSTOMER_CONTROL_EYECATCHER
+					.getString(byteBuffer);
 		}
 		return customerControlEyecatcher;
 	}
 
+
 	public void setCustomerControlEyecatcher(String customerControlEyecatcher)
 	{
-		if (CUSTOMER_CONTROL_EYECATCHER.equals(this.customerControlEyecatcher, customerControlEyecatcher))
+		if (CUSTOMER_CONTROL_EYECATCHER.equals(this.customerControlEyecatcher,
+				customerControlEyecatcher))
 		{
 			return;
 		}
-		CUSTOMER_CONTROL_EYECATCHER.putString(customerControlEyecatcher, byteBuffer);
+		CUSTOMER_CONTROL_EYECATCHER.putString(customerControlEyecatcher,
+				byteBuffer);
 		this.customerControlEyecatcher = customerControlEyecatcher;
 	}
 
+
 	public boolean isCustomerControlEyecatcherV()
 	{
-		return getCustomerControlEyecatcher().equals(CUSTOMER_CONTROL_EYECATCHER_V);
+		return getCustomerControlEyecatcher()
+				.equals(CUSTOMER_CONTROL_EYECATCHER_V);
 	}
+
 
 	public int getCustomerControlSortcode()
 	{
 		if (customerControlSortcode == null)
 		{
-			customerControlSortcode = CUSTOMER_CONTROL_SORTCODE.getInt(byteBuffer);
+			customerControlSortcode = CUSTOMER_CONTROL_SORTCODE
+					.getInt(byteBuffer);
 		}
 		return customerControlSortcode.intValue();
 	}
 
+
 	public void setCustomerControlSortcode(int customerControlSortcode)
 	{
-		if (CUSTOMER_CONTROL_SORTCODE.equals(this.customerControlSortcode, customerControlSortcode))
+		if (CUSTOMER_CONTROL_SORTCODE.equals(this.customerControlSortcode,
+				customerControlSortcode))
 		{
 			return;
 		}
 		CUSTOMER_CONTROL_SORTCODE.putInt(customerControlSortcode, byteBuffer);
 		this.customerControlSortcode = customerControlSortcode;
 	}
+
 
 	public long getCustomerControlNumber()
 	{
@@ -246,15 +275,18 @@ public class CustomerControl
 		return customerControlNumber.longValue();
 	}
 
+
 	public void setCustomerControlNumber(long customerControlNumber)
 	{
-		if (CUSTOMER_CONTROL_NUMBER.equals(this.customerControlNumber, customerControlNumber))
+		if (CUSTOMER_CONTROL_NUMBER.equals(this.customerControlNumber,
+				customerControlNumber))
 		{
 			return;
 		}
 		CUSTOMER_CONTROL_NUMBER.putLong(customerControlNumber, byteBuffer);
 		this.customerControlNumber = customerControlNumber;
 	}
+
 
 	public long getNumberOfCustomers()
 	{
@@ -265,15 +297,18 @@ public class CustomerControl
 		return numberOfCustomers.longValue();
 	}
 
+
 	public void setNumberOfCustomers(long numberOfCustomers)
 	{
-		if (NUMBER_OF_CUSTOMERS.equals(this.numberOfCustomers, numberOfCustomers))
+		if (NUMBER_OF_CUSTOMERS.equals(this.numberOfCustomers,
+				numberOfCustomers))
 		{
 			return;
 		}
 		NUMBER_OF_CUSTOMERS.putLong(numberOfCustomers, byteBuffer);
 		this.numberOfCustomers = numberOfCustomers;
 	}
+
 
 	public long getLastCustomerNumber()
 	{
@@ -284,9 +319,11 @@ public class CustomerControl
 		return lastCustomerNumber.longValue();
 	}
 
+
 	public void setLastCustomerNumber(long lastCustomerNumber)
 	{
-		if (LAST_CUSTOMER_NUMBER.equals(this.lastCustomerNumber, lastCustomerNumber))
+		if (LAST_CUSTOMER_NUMBER.equals(this.lastCustomerNumber,
+				lastCustomerNumber))
 		{
 			return;
 		}
@@ -294,46 +331,57 @@ public class CustomerControl
 		this.lastCustomerNumber = lastCustomerNumber;
 	}
 
+
 	public String getCustomerControlSuccessFlag()
 	{
 		if (customerControlSuccessFlag == null)
 		{
-			customerControlSuccessFlag = CUSTOMER_CONTROL_SUCCESS_FLAG.getString(byteBuffer);
+			customerControlSuccessFlag = CUSTOMER_CONTROL_SUCCESS_FLAG
+					.getString(byteBuffer);
 		}
 		return customerControlSuccessFlag;
 	}
 
+
 	public void setCustomerControlSuccessFlag(String customerControlSuccessFlag)
 	{
-		if (CUSTOMER_CONTROL_SUCCESS_FLAG.equals(this.customerControlSuccessFlag, customerControlSuccessFlag))
+		if (CUSTOMER_CONTROL_SUCCESS_FLAG.equals(
+				this.customerControlSuccessFlag, customerControlSuccessFlag))
 		{
 			return;
 		}
-		CUSTOMER_CONTROL_SUCCESS_FLAG.putString(customerControlSuccessFlag, byteBuffer);
+		CUSTOMER_CONTROL_SUCCESS_FLAG.putString(customerControlSuccessFlag,
+				byteBuffer);
 		this.customerControlSuccessFlag = customerControlSuccessFlag;
 	}
+
 
 	public boolean isCustomerControlSuccess()
 	{
 		return getCustomerControlSuccessFlag().equals(CUSTOMER_CONTROL_SUCCESS);
 	}
 
+
 	public String getCustomerControlFailCode()
 	{
 		if (customerControlFailCode == null)
 		{
-			customerControlFailCode = CUSTOMER_CONTROL_FAIL_CODE.getString(byteBuffer);
+			customerControlFailCode = CUSTOMER_CONTROL_FAIL_CODE
+					.getString(byteBuffer);
 		}
 		return customerControlFailCode;
 	}
 
+
 	public void setCustomerControlFailCode(String customerControlFailCode)
 	{
-		if (CUSTOMER_CONTROL_FAIL_CODE.equals(this.customerControlFailCode, customerControlFailCode))
+		if (CUSTOMER_CONTROL_FAIL_CODE.equals(this.customerControlFailCode,
+				customerControlFailCode))
 		{
 			return;
 		}
-		CUSTOMER_CONTROL_FAIL_CODE.putString(customerControlFailCode, byteBuffer);
+		CUSTOMER_CONTROL_FAIL_CODE.putString(customerControlFailCode,
+				byteBuffer);
 		this.customerControlFailCode = customerControlFailCode;
 	}
 

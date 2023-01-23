@@ -32,7 +32,8 @@ public class NewAccountNumber
 	    03 NEWACCNO-FUNCTION  PIC X.
 	 * </pre>
 	 */
-	protected static final StringField NEWACCNO_FUNCTION = factory.getStringField(1);
+	protected static final StringField NEWACCNO_FUNCTION = factory
+			.getStringField(1);
 
 	/**
 	 * <pre>
@@ -60,44 +61,54 @@ public class NewAccountNumber
 	    03 ACCOUNT-NUMBER                  PIC 9(8) DISPLAY.
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsIntField ACCOUNT_NUMBER = factory.getExternalDecimalAsIntField(8, false,
-			false, false, false);
+	protected static final ExternalDecimalAsIntField ACCOUNT_NUMBER = factory
+			.getExternalDecimalAsIntField(8, false, false, false, false);
 
 	/**
 	 * <pre>
 	    03 NEWACCNO-SUCCESS                    PIC X.
 	 * </pre>
 	 */
-	protected static final StringField NEWACCNO_SUCCESS = factory.getStringField(1);
+	protected static final StringField NEWACCNO_SUCCESS = factory
+			.getStringField(1);
 
 	/**
 	 * <pre>
 	    03 NEWACCNO-FAIL-CODE                  PIC X.
 	 * </pre>
 	 */
-	protected static final StringField NEWACCNO_FAIL_CODE = factory.getStringField(1);
+	protected static final StringField NEWACCNO_FAIL_CODE = factory
+			.getStringField(1);
 
 	protected byte[] byteBuffer;
+
 	// Instance variables used to cache field values
 	protected String newaccnoFunction;
+
 	protected Integer accountNumber;
+
 	protected String newaccnoSuccess;
+
 	protected String newaccnoFailCode;
+
 
 	public NewAccountNumber(byte[] buffer)
 	{
 		this.byteBuffer = buffer;
 	}
 
+
 	public NewAccountNumber()
 	{
 		this.byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_LEN];
 	}
 
+
 	public byte[] getByteBuffer()
 	{
 		return byteBuffer;
 	}
+
 
 	public String getNewaccnoFunction()
 	{
@@ -107,6 +118,7 @@ public class NewAccountNumber
 		}
 		return newaccnoFunction;
 	}
+
 
 	public void setNewaccnoFunction(String newaccnoFunction)
 	{
@@ -118,20 +130,24 @@ public class NewAccountNumber
 		this.newaccnoFunction = newaccnoFunction;
 	}
 
+
 	public boolean isNewaccnoFunctionGetnew()
 	{
 		return getNewaccnoFunction().equals(NEWACCNO_FUNCTION_GETNEW);
 	}
+
 
 	public boolean isNewaccnoFunctionRollback()
 	{
 		return getNewaccnoFunction().equals(NEWACCNO_FUNCTION_ROLLBACK);
 	}
 
+
 	public boolean isNewaccnoFunctionCurrent()
 	{
 		return getNewaccnoFunction().equals(NEWACCNO_FUNCTION_CURRENT);
 	}
+
 
 	public int getAccountNumber()
 	{
@@ -141,6 +157,7 @@ public class NewAccountNumber
 		}
 		return accountNumber.intValue();
 	}
+
 
 	public void setAccountNumber(int accountNumber)
 	{
@@ -152,6 +169,7 @@ public class NewAccountNumber
 		this.accountNumber = accountNumber;
 	}
 
+
 	public String getNewaccnoSuccess()
 	{
 		if (newaccnoSuccess == null)
@@ -160,6 +178,7 @@ public class NewAccountNumber
 		}
 		return newaccnoSuccess;
 	}
+
 
 	public void setNewaccnoSuccess(String newaccnoSuccess)
 	{
@@ -171,6 +190,7 @@ public class NewAccountNumber
 		this.newaccnoSuccess = newaccnoSuccess;
 	}
 
+
 	public String getNewaccnoFailCode()
 	{
 		if (newaccnoFailCode == null)
@@ -179,6 +199,7 @@ public class NewAccountNumber
 		}
 		return newaccnoFailCode;
 	}
+
 
 	public void setNewaccnoFailCode(String newaccnoFailCode)
 	{

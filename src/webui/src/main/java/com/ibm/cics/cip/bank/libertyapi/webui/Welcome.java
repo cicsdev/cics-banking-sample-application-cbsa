@@ -46,9 +46,13 @@ public class Welcome extends VerticalLayout
 	 * This screen's UI
 	 */
 	private static final long serialVersionUID = 1L;
-	private static Logger logger = Logger.getLogger("com.example.com_ibm_cics_cip_bank_libertyapi_webui.Welcome");
+
+	private static Logger logger = Logger.getLogger(
+			"com.example.com_ibm_cics_cip_bank_libertyapi_webui.Welcome");
+
 	// overall ui, needed to change content view
 	private UI ui;
+
 
 	public Welcome(UI ui, String user)
 	{
@@ -65,6 +69,7 @@ public class Welcome extends VerticalLayout
 
 	}
 
+
 	private void addLabels(String user)
 	{
 
@@ -77,7 +82,8 @@ public class Welcome extends VerticalLayout
 
 		if (myCompanyNameResponse.getStatus() == 200)
 		{
-			String myCompanyNameString = myCompanyNameResponse.getEntity().toString();
+			String myCompanyNameString = myCompanyNameResponse.getEntity()
+					.toString();
 
 			JSONObject myCompanyNameJSON;
 			try
@@ -85,21 +91,26 @@ public class Welcome extends VerticalLayout
 				// Set welcome message to use company name and user name
 				myCompanyNameJSON = JSONObject.parse(myCompanyNameString);
 
-				String companyName = (String) myCompanyNameJSON.get("companyName");
-				welcomeText = new Label("Welcome to " + companyName + " " + user);
+				String companyName = (String) myCompanyNameJSON
+						.get("companyName");
+				welcomeText = new Label(
+						"Welcome to " + companyName + " " + user);
 			}
 			catch (IOException e)
 			{
 				// Set welcome message to use just user name
 				logger.severe(e.toString());
-				welcomeText = new Label("Welcome to CICS Bank Sample Application " + user + "!");
+				welcomeText = new Label(
+						"Welcome to CICS Bank Sample Application " + user
+								+ "!");
 			}
 
 		}
 		else
 		{
 			// Set welcome message to use just user name
-			welcomeText = new Label("Welcome to CICS Bank Sample Application " + user + "!");
+			welcomeText = new Label(
+					"Welcome to CICS Bank Sample Application " + user + "!");
 		}
 
 		Label selectText = new Label("Please select an option");
@@ -123,6 +134,7 @@ public class Welcome extends VerticalLayout
 		this.setExpandRatio(labels, 0.2f);
 		this.setHeight("100%");
 	}
+
 
 	private void addButtons()
 	{
@@ -161,7 +173,8 @@ public class Welcome extends VerticalLayout
 			}
 			else
 			{
-				hl.setComponentAlignment(buttons.get(i), Alignment.MIDDLE_RIGHT);
+				hl.setComponentAlignment(buttons.get(i),
+						Alignment.MIDDLE_RIGHT);
 			}
 			hl.addComponent(buttons.get(i));
 
@@ -176,6 +189,7 @@ public class Welcome extends VerticalLayout
 				 */
 				private static final long serialVersionUID = 2410530021932378287L;
 
+
 				@SuppressWarnings("unused")
 				public void buttonClick(ClickEvent event)
 				{
@@ -189,7 +203,8 @@ public class Welcome extends VerticalLayout
 						}
 						catch (NumberFormatException nfe)
 						{
-							event.getButton().setCaption("Could not get load account list: GETSORTCODE link failed");
+							event.getButton().setCaption(
+									"Could not get load account list: GETSORTCODE link failed");
 						}
 						break;
 					case 1: // Create Account
@@ -202,7 +217,8 @@ public class Welcome extends VerticalLayout
 						}
 						catch (NumberFormatException nfe)
 						{
-							event.getButton().setCaption("Could not get load customer list: GETSORTCODE link failed");
+							event.getButton().setCaption(
+									"Could not get load customer list: GETSORTCODE link failed");
 						}
 						break;
 					case 3: // Create Customer
@@ -218,6 +234,7 @@ public class Welcome extends VerticalLayout
 		this.setExpandRatio(optionsVl, 0.7f);
 	}
 
+
 	private void sortOutLogging()
 	{
 		try
@@ -229,13 +246,15 @@ public class Welcome extends VerticalLayout
 			logger.severe(e.toString());
 		}
 	}
-	
+
+
 	@Override
 	public boolean equals(Object obj)
 	{
 		return super.equals(obj);
 	}
-	
+
+
 	@Override
 	public int hashCode()
 	{

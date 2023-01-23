@@ -23,6 +23,7 @@ public class ComIbmCicsCipBankLibertyapiWebuiUI extends UI
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
+
 	@Override
 	protected void init(VaadinRequest request)
 	{

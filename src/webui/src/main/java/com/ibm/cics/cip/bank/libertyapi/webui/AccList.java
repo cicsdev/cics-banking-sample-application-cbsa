@@ -6,23 +6,21 @@
  */
 package com.ibm.cics.cip.bank.libertyapi.webui;
 
-import java.io.IOException;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
-
-
 import com.ibm.cics.cip.bankliberty.webui.data_access.AccountList;
 import com.ibm.cics.cip.bankliberty.webui.data_access.Customer;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Slider;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.CheckBox;
+import java.io.IOException;
+import java.util.logging.Logger;
+import java.util.logging.LogManager;
 
 /**
  * @author georgerushton This class is part of the "Vaadin" user interface. It
@@ -35,31 +33,52 @@ public class AccList extends VerticalLayout
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
 	private static final long serialVersionUID = 1L;
-	private static Logger logger = Logger.getLogger("com.example.com_ibm_cics_cip_bank_libertyapi_webui.Acc_list");
+
+	private static Logger logger = Logger.getLogger(
+			"com.example.com_ibm_cics_cip_bank_libertyapi_webui.Acc_list");
+
 	private transient AccountList aList = new AccountList();
+
 	private UI ui;
+
 	private int limit = 50;
+
 	private int offset = 0;
+
 	Label page = new Label();
+
 	private VerticalLayout vl = new VerticalLayout();
+
 	TextField cusNumT;
+
 	TextField accNumT;
+
 	CheckBox lt;
+
 	CheckBox mt;
+
 	Slider balance;
+
 	String filter = "";
+
 	int cur = 1;
+
 	int next;
 
 	private static String accountNumberFilter = " AND ACCOUNT_NUMBER = ";
+
 	private static String customerNumberFilter = " AND ACCOUNT_CUSTOMER_NUMBER = ";
+
 	private static String customerNumberFormat = "%010d";
+
 	private static String accountNumberFormat = "%08d";
+
 
 	public AccList(UI ui, Welcome back)
 	{
 		sortOutLogging();
-		logger.entering(this.getClass().getName(), "Acc_list(UI ui,  welcome back)");
+		logger.entering(this.getClass().getName(),
+				"Acc_list(UI ui,  welcome back)");
 		this.ui = ui;
 		HbHeader header = new HbHeader(ui, back);
 		this.addComponent(header);
@@ -91,6 +110,7 @@ public class AccList extends VerticalLayout
 			 */
 			private static final long serialVersionUID = -2915663639842484327L;
 
+
 			public void buttonClick(ClickEvent event)
 			{
 				if (offset != 0)
@@ -111,6 +131,7 @@ public class AccList extends VerticalLayout
 			 * 
 			 */
 			private static final long serialVersionUID = 7702513785219853137L;
+
 
 			public void buttonClick(ClickEvent event)
 			{
@@ -133,6 +154,7 @@ public class AccList extends VerticalLayout
 			 */
 			private static final long serialVersionUID = -8009915481013975422L;
 
+
 			public void buttonClick(ClickEvent event)
 			{
 				if (cur < next)
@@ -153,6 +175,7 @@ public class AccList extends VerticalLayout
 			 * 
 			 */
 			private static final long serialVersionUID = -922311815047591792L;
+
 
 			public void buttonClick(ClickEvent event)
 			{
@@ -189,15 +212,18 @@ public class AccList extends VerticalLayout
 		this.addComponent(head);
 		this.addComponent(vl);
 		createAccList(filter);
-		logger.exiting(this.getClass().getName(), "Acc_list(UI ui,  welcome back)");
+		logger.exiting(this.getClass().getName(),
+				"Acc_list(UI ui,  welcome back)");
 
 	}
+
 
 	public AccList(UI ui, Welcome back, Customer customer)
 	{
 		sortOutLogging();
 		logger.entering(this.getClass().getName(),
-				"Acc_list(UI ui,  welcome back, Customer customer) for customer " + customer.getName());
+				"Acc_list(UI ui,  welcome back, Customer customer) for customer "
+						+ customer.getName());
 		this.ui = ui;
 
 		// Create a header, add to the UI and scale
@@ -229,6 +255,7 @@ public class AccList extends VerticalLayout
 			 */
 			private static final long serialVersionUID = -2915663639842484327L;
 
+
 			public void buttonClick(ClickEvent event)
 			{
 				if (offset != 0)
@@ -250,6 +277,7 @@ public class AccList extends VerticalLayout
 			 * 
 			 */
 			private static final long serialVersionUID = 7702513785219853137L;
+
 
 			public void buttonClick(ClickEvent event)
 			{
@@ -273,6 +301,7 @@ public class AccList extends VerticalLayout
 			 */
 			private static final long serialVersionUID = -8009915481013975422L;
 
+
 			public void buttonClick(ClickEvent event)
 			{
 				if (cur < next)
@@ -294,6 +323,7 @@ public class AccList extends VerticalLayout
 			 * 
 			 */
 			private static final long serialVersionUID = -922311815047591792L;
+
 
 			public void buttonClick(ClickEvent event)
 			{
@@ -326,19 +356,24 @@ public class AccList extends VerticalLayout
 		this.addComponent(head);
 		this.addComponent(vl);
 		String thisFilter = customerNumberFilter
-				+ String.format(customerNumberFormat, Integer.valueOf(customer.getCustomerNumber())) + "";
+				+ String.format(customerNumberFormat,
+						Integer.valueOf(customer.getCustomerNumber()))
+				+ "";
 		createAccList(thisFilter);
 		logger.exiting(this.getClass().getName(),
-				"Acc_list(UI ui, String string, welcome back, Customer customer) for customer " + customer.getName());
+				"Acc_list(UI ui, String string, welcome back, Customer customer) for customer "
+						+ customer.getName());
 
 	}
+
 
 	private void createSearch(String custNo)
 	{
 		// Search for a customer using customer number
 		sortOutLogging();
 		logger.entering(this.getClass().getName(),
-				"createSearch(String customer_number) for customer number " + custNo);
+				"createSearch(String customer_number) for customer number "
+						+ custNo);
 		HorizontalLayout searchL = new HorizontalLayout();
 		VerticalLayout cvl = new VerticalLayout();
 		searchL.setWidth("100%");
@@ -386,6 +421,7 @@ public class AccList extends VerticalLayout
 			 */
 			private static final long serialVersionUID = -5604047422477446846L;
 
+
 			public void valueChange(ValueChangeEvent event)
 			{
 				// If lt (<) selected, set mt (>) to false
@@ -401,6 +437,7 @@ public class AccList extends VerticalLayout
 			 * 
 			 */
 			private static final long serialVersionUID = -1045075489262886096L;
+
 
 			public void valueChange(ValueChangeEvent event)
 			{
@@ -419,37 +456,44 @@ public class AccList extends VerticalLayout
 			 */
 			private static final long serialVersionUID = 7623423428229097831L;
 
+
 			public void buttonClick(ClickEvent event)
 			{
 				filter = "";
 				// Set the filter value
-				if (!cusNumT.getValue().isEmpty() && !accNumT.getValue().isEmpty())
+				if (!cusNumT.getValue().isEmpty()
+						&& !accNumT.getValue().isEmpty())
 				{
 					// use account number
 					filter = accountNumberFilter
-							+ String.format(accountNumberFormat, Integer.valueOf(accNumT.getValue()));
+							+ String.format(accountNumberFormat,
+									Integer.valueOf(accNumT.getValue()));
 				}
 				if (!cusNumT.getValue().isEmpty())
 				{
 					// use customer number
 					filter = customerNumberFilter
-							+ String.format(customerNumberFormat, Long.valueOf(cusNumT.getValue()));
+							+ String.format(customerNumberFormat,
+									Long.valueOf(cusNumT.getValue()));
 				}
 				if (!accNumT.getValue().isEmpty())
 				{
 					// use account number
 					filter = accountNumberFilter
-							+ String.format(accountNumberFormat, Integer.valueOf(accNumT.getValue()));
+							+ String.format(accountNumberFormat,
+									Integer.valueOf(accNumT.getValue()));
 				}
 				if (Boolean.TRUE.equals(lt.getValue()))
 				{
 					// use balance < than selected
-					filter = " AND ACCOUNT_AVAILABLE_BALANCE <= " + balance.getValue();
+					filter = " AND ACCOUNT_AVAILABLE_BALANCE <= "
+							+ balance.getValue();
 				}
 				if (Boolean.TRUE.equals(mt.getValue()))
 				{
 					// use balance > than selected
-					filter = " AND ACCOUNT_AVAILABLE_BALANCE >= " + balance.getValue();
+					filter = " AND ACCOUNT_AVAILABLE_BALANCE >= "
+							+ balance.getValue();
 				}
 				limit = 50;
 				offset = 0;
@@ -465,9 +509,12 @@ public class AccList extends VerticalLayout
 		this.addComponent(searchL);
 		limit = 50;
 		offset = 0;
-		logger.exiting(this.getClass().getName(), "createSearch(String customer_number) for customer number " + custNo);
+		logger.exiting(this.getClass().getName(),
+				"createSearch(String customer_number) for customer number "
+						+ custNo);
 
 	}
+
 
 	private void createSearch()
 	{
@@ -518,6 +565,7 @@ public class AccList extends VerticalLayout
 		{
 			private static final long serialVersionUID = -5604047422477446846L;
 
+
 			// If lt (<) selected then mt (>) set to false
 			public void valueChange(ValueChangeEvent event)
 			{
@@ -530,6 +578,7 @@ public class AccList extends VerticalLayout
 		mt.addValueChangeListener(new CheckBox.ValueChangeListener()
 		{
 			private static final long serialVersionUID = -1045075489262886096L;
+
 
 			// If mt (>) selected then lt (<) set to false
 			public void valueChange(ValueChangeEvent event)
@@ -546,36 +595,43 @@ public class AccList extends VerticalLayout
 			// Set the filter
 			private static final long serialVersionUID = 7623423428229097831L;
 
+
 			public void buttonClick(ClickEvent event)
 			{
 				filter = "";
-				if (!cusNumT.getValue().isEmpty() && !accNumT.getValue().isEmpty())
+				if (!cusNumT.getValue().isEmpty()
+						&& !accNumT.getValue().isEmpty())
 				{
 					// Use account number
 					filter = accountNumberFilter
-							+ String.format(accountNumberFormat, Integer.valueOf(accNumT.getValue()));
+							+ String.format(accountNumberFormat,
+									Integer.valueOf(accNumT.getValue()));
 				}
 				else if (!cusNumT.getValue().isEmpty())
 				{
 					// Use customer number
 					filter = customerNumberFilter
-							+ String.format(customerNumberFormat, Integer.valueOf(cusNumT.getValue()));
+							+ String.format(customerNumberFormat,
+									Integer.valueOf(cusNumT.getValue()));
 				}
 				else if (!accNumT.getValue().isEmpty())
 				{
 					// Use account number
 					filter = accountNumberFilter
-							+ String.format(accountNumberFormat, Integer.valueOf(accNumT.getValue()));
+							+ String.format(accountNumberFormat,
+									Integer.valueOf(accNumT.getValue()));
 				}
 				if (Boolean.TRUE.equals(lt.getValue()))
 				{
 					// where account balance < input balance
-					filter = " AND ACCOUNT_AVAILABLE_BALANCE <= " + balance.getValue();
+					filter = " AND ACCOUNT_AVAILABLE_BALANCE <= "
+							+ balance.getValue();
 				}
 				if (Boolean.TRUE.equals(mt.getValue()))
 				{
 					// where account balance > input balance
-					filter = " AND ACCOUNT_AVAILABLE_BALANCE >= " + balance.getValue();
+					filter = " AND ACCOUNT_AVAILABLE_BALANCE >= "
+							+ balance.getValue();
 				}
 				limit = 50;
 				offset = 0;
@@ -593,10 +649,12 @@ public class AccList extends VerticalLayout
 		logger.exiting(this.getClass().getName(), "createSearch()");
 	}
 
+
 	private void createAccList(final String filter)
 	{
 		sortOutLogging();
-		logger.entering(this.getClass().getName(), "createAccList(final String filter) for filter " + filter);
+		logger.entering(this.getClass().getName(),
+				"createAccList(final String filter) for filter " + filter);
 		if (offset < 0)
 			offset = 0;
 		vl.removeAllComponents();
@@ -609,7 +667,8 @@ public class AccList extends VerticalLayout
 
 			int total = aList.howMany(filter);
 
-			page.setValue(((offset / limit) + 1) + "/" + ((int) Math.ceil((total / limit)) + 1));
+			page.setValue(((offset / limit) + 1) + "/"
+					+ ((int) Math.ceil((total / limit)) + 1));
 			if ((int) Math.ceil((aList.getCount(filter) / limit)) == 0)
 			{
 				page.setValue("0/0");
@@ -632,10 +691,14 @@ public class AccList extends VerticalLayout
 			HorizontalLayout hl = new HorizontalLayout();
 			hl.setWidth("100%");
 
-			final Label accNumb = new Label(this.aList.getAccount(i).getAccountNumber());
-			Label cusNumb = new Label(this.aList.getAccount(i).getCustomerNumber());
-			Label avb = new Label(String.valueOf(this.aList.getAccount(i).getAvailableBalance()));
-			Label acb = new Label(String.valueOf(this.aList.getAccount(i).getActualBalance()));
+			final Label accNumb = new Label(
+					this.aList.getAccount(i).getAccountNumber());
+			Label cusNumb = new Label(
+					this.aList.getAccount(i).getCustomerNumber());
+			Label avb = new Label(String
+					.valueOf(this.aList.getAccount(i).getAvailableBalance()));
+			Label acb = new Label(String
+					.valueOf(this.aList.getAccount(i).getActualBalance()));
 			hl.addComponent(accNumb);
 			hl.addComponent(cusNumb);
 			hl.addComponent(avb);
@@ -670,14 +733,17 @@ public class AccList extends VerticalLayout
 				 */
 				private static final long serialVersionUID = 8881026371623070226L;
 
+
 				public void buttonClick(ClickEvent event)
 				{
-					ui.setContent(new AccountUI(ui, new Welcome(ui, "Welcome"), aList.getAccount(temp)));
+					ui.setContent(new AccountUI(ui, new Welcome(ui, "Welcome"),
+							aList.getAccount(temp)));
 				}
 			});
 			delete.addClickListener(new Button.ClickListener()
 			{
 				private static final long serialVersionUID = -7523168693466039285L;
+
 
 				// Set UI to account UI
 				public void buttonClick(ClickEvent event)
@@ -692,8 +758,10 @@ public class AccList extends VerticalLayout
 			});
 
 		}
-		logger.exiting(this.getClass().getName(), "createAccList(final String filter) for filter " + filter);
+		logger.exiting(this.getClass().getName(),
+				"createAccList(final String filter) for filter " + filter);
 	}
+
 
 	private void sortOutLogging()
 	{
@@ -706,13 +774,15 @@ public class AccList extends VerticalLayout
 			logger.severe(e.toString());
 		}
 	}
-	
+
+
 	@Override
 	public boolean equals(Object obj)
 	{
 		return super.equals(obj);
 	}
-	
+
+
 	@Override
 	public int hashCode()
 	{

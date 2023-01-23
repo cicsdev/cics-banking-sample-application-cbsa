@@ -44,17 +44,22 @@ public class CompanyNameResource
 
 	static String companyNameString = null;
 
-	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.api.json.CompanyNameResource");
+	private static Logger logger = Logger.getLogger(
+			"com.ibm.cics.cip.bankliberty.api.json.CompanyNameResource");
 	// </copyright>
 
 	private static final String GET_COMPANY_NAME = "getCompanyName()";
+
 	private static final String ERROR_MSG_PREFIX = "CompanyNameResource.getCompanyName() has experienced error ";
+
 	private static final String ERROR_MSG_SUFFIX = " linking to program GETCOMPY";
+
 
 	public CompanyNameResource()
 	{
 		sortOutLogging();
 	}
+
 
 	@GET
 	@Produces("application/json")
@@ -74,24 +79,33 @@ public class CompanyNameResource
 			{
 				getCompy.link(companyNameBytes);
 				GetCompany myGetCompanyData = new GetCompany(companyNameBytes);
-				CompanyNameResource.setCompanyName(myGetCompanyData.getCompanyName().trim());
+				CompanyNameResource.setCompanyName(
+						myGetCompanyData.getCompanyName().trim());
 			}
-			catch (InvalidRequestException | LengthErrorException | InvalidSystemIdException | NotAuthorisedException
-					| InvalidProgramIdException | RolledBackException | TerminalException e)
+			catch (InvalidRequestException | LengthErrorException
+					| InvalidSystemIdException | NotAuthorisedException
+					| InvalidProgramIdException | RolledBackException
+					| TerminalException e)
 			{
-				Response myResponse = Response.status(500).entity(ERROR_MSG_PREFIX + e.toString() + ERROR_MSG_SUFFIX)
+				Response myResponse = Response.status(500).entity(
+						ERROR_MSG_PREFIX + e.toString() + ERROR_MSG_SUFFIX)
 						.build();
-				logger.warning(ERROR_MSG_PREFIX + e.toString() + ERROR_MSG_SUFFIX);
-				logger.exiting(this.getClass().getName(), GET_COMPANY_NAME, myResponse);
+				logger.warning(
+						ERROR_MSG_PREFIX + e.toString() + ERROR_MSG_SUFFIX);
+				logger.exiting(this.getClass().getName(), GET_COMPANY_NAME,
+						myResponse);
 				return myResponse;
 			}
 			catch (AbendException e)
 			{
-				logger.severe("CompanyNameResource.getCompanyName() has experienced abend " + e.toString()
-						+ ERROR_MSG_SUFFIX);
-				Response myResponse = Response.status(500).entity(ERROR_MSG_PREFIX + e.toString() + ERROR_MSG_SUFFIX)
+				logger.severe(
+						"CompanyNameResource.getCompanyName() has experienced abend "
+								+ e.toString() + ERROR_MSG_SUFFIX);
+				Response myResponse = Response.status(500).entity(
+						ERROR_MSG_PREFIX + e.toString() + ERROR_MSG_SUFFIX)
 						.build();
-				logger.exiting(this.getClass().getName(), GET_COMPANY_NAME, myResponse);
+				logger.exiting(this.getClass().getName(), GET_COMPANY_NAME,
+						myResponse);
 				return myResponse;
 			}
 
@@ -100,11 +114,13 @@ public class CompanyNameResource
 		JSONObject response = new JSONObject();
 		response.put("companyName", companyNameString);
 
-		Response myResponse = Response.status(200).entity(response.toString()).build();
+		Response myResponse = Response.status(200).entity(response.toString())
+				.build();
 		logger.exiting(this.getClass().getName(), GET_COMPANY_NAME, myResponse);
 
 		return myResponse;
 	}
+
 
 	private void sortOutLogging()
 	{
@@ -117,6 +133,7 @@ public class CompanyNameResource
 			logger.severe(e.toString());
 		}
 	}
+
 
 	private static void setCompanyName(String companyName)
 	{

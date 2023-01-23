@@ -54,10 +54,12 @@ public class AccountJSON
 	@FormParam("interestRate")
 	BigDecimal interestRate;
 
+
 	public BigDecimal getInterestRate()
 	{
 		return interestRate;
 	}
+
 
 	public void setInterestRate(BigDecimal interestRate)
 	{
@@ -66,105 +68,126 @@ public class AccountJSON
 
 	String id;
 
+
 	public String getAccountType()
 	{
 		return accountType;
 	}
+
 
 	public void setAccountType(String accountType)
 	{
 		this.accountType = accountType;
 	}
 
+
 	public String getCustomerNumber()
 	{
 		return customerNumber;
 	}
+
 
 	public void setCustomerNumber(String customerNumber)
 	{
 		this.customerNumber = customerNumber;
 	}
 
+
 	public Date getDateOpened()
 	{
 		return dateOpened;
 	}
+
 
 	public void setDateOpened(Date dateOpened)
 	{
 		this.dateOpened = dateOpened;
 	}
 
+
 	public Date getLastStatementDate()
 	{
 		return lastStatementDate;
 	}
+
 
 	public void setLastStatementDate(Date lastStatement)
 	{
 		this.lastStatementDate = lastStatement;
 	}
 
+
 	public Date getNextStatementDate()
 	{
 		return nextStatementDate;
 	}
+
 
 	public void setNextStatementDate(Date nextStatement)
 	{
 		this.nextStatementDate = nextStatement;
 	}
 
+
 	public Integer getOverdraft()
 	{
 		return overdraft;
 	}
+
 
 	public void setOverdraft(Integer overdraft)
 	{
 		this.overdraft = overdraft;
 	}
 
+
 	public BigDecimal getActualBalance()
 	{
 		return actualBalance;
 	}
+
 
 	public void setActualBalance(BigDecimal actualBalance)
 	{
 		this.actualBalance = actualBalance;
 	}
 
+
 	public BigDecimal getAvailableBalance()
 	{
 		return availableBalance;
 	}
+
 
 	public void setAvailableBalance(BigDecimal availableBalance)
 	{
 		this.availableBalance = availableBalance;
 	}
 
+
 	public String getId()
 	{
 		return id;
 	}
+
 
 	public void setId(String id)
 	{
 		this.id = id;
 	}
 
+
 	public String getSortCode()
 	{
 		return sortCode;
 	}
 
+
 	public void setSortCode(String sortCode)
 	{
 		this.sortCode = sortCode;
 	}
+
 
 	// Account type must be one of the below
 	public boolean validateType(String accountType2)

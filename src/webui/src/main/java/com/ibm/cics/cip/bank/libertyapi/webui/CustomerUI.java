@@ -33,18 +33,31 @@ public class CustomerUI extends VerticalLayout
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
 	private static final long serialVersionUID = 1L;
+
 	private transient Customer c;
+
 	private UI ui;
+
 	private Boolean edit = false;
+
 	private TextField cusNumT;
+
 	private TextField cusNameT;
+
 	private TextArea cusAddressT;
+
 	private TextField sCodeT;
+
 	private DateField cusDoBT;
+
 	private TextField cusCreditScoreT;
+
 	private DateField cusCreditScoreReviewDateT;
+
 	private static String sortcode;
+
 	private static String editing = "Editing customer ";
+
 
 	public CustomerUI(UI ui, Welcome back)
 	{
@@ -53,6 +66,7 @@ public class CustomerUI extends VerticalLayout
 		edit = false;
 		setSortcode();
 	}
+
 
 	public CustomerUI(UI ui, Welcome back, Customer cust)
 	{
@@ -63,6 +77,7 @@ public class CustomerUI extends VerticalLayout
 		setFields(cust);
 		setSortcode();
 	}
+
 
 	/**
 	 * The two functions editCustUI and createCustUI are nearly identical, so
@@ -170,6 +185,7 @@ public class CustomerUI extends VerticalLayout
 		{
 			private static final long serialVersionUID = 3760485465663201508L;
 
+
 			public void buttonClick(ClickEvent event)
 			{
 				// Determine what to set the button label to
@@ -179,11 +195,14 @@ public class CustomerUI extends VerticalLayout
 					String temp = createNewCustomer();
 					if (temp.startsWith("-1"))
 					{
-						event.getButton().setCaption("Create new customer failed");
+						event.getButton()
+								.setCaption("Create new customer failed");
 					}
 					else
 					{
-						event.getButton().setCaption("Create new customer successful for customer " + temp);
+						event.getButton().setCaption(
+								"Create new customer successful for customer "
+										+ temp);
 					}
 				}
 				else
@@ -191,11 +210,13 @@ public class CustomerUI extends VerticalLayout
 					// if editing a customer
 					if (!editCustomer())
 					{
-						event.getButton().setCaption(editing + c.getCustomerNumber() + " failed");
+						event.getButton().setCaption(
+								editing + c.getCustomerNumber() + " failed");
 					}
 					else
 					{
-						event.getButton().setCaption(editing + c.getCustomerNumber() + " successful");
+						event.getButton().setCaption(editing
+								+ c.getCustomerNumber() + " successful");
 					}
 				}
 			}
@@ -211,6 +232,7 @@ public class CustomerUI extends VerticalLayout
 
 	}
 
+
 	private void setFields(Customer cust)
 	{
 		// Set each component's value to the relevant value held in the 'cust'
@@ -224,6 +246,7 @@ public class CustomerUI extends VerticalLayout
 		cusCreditScoreReviewDateT.setValue(cust.getCreditScoreReviewDate());
 
 	}
+
 
 	@SuppressWarnings("serial")
 	// Build the customer creation UI
@@ -295,22 +318,27 @@ public class CustomerUI extends VerticalLayout
 					String temp = createNewCustomer();
 					if (temp.startsWith("-1"))
 					{
-						event.getButton().setCaption("Create new customer failed");
+						event.getButton()
+								.setCaption("Create new customer failed");
 					}
 					else
 					{
-						event.getButton().setCaption("Create new customer successful for customer " + temp);
+						event.getButton().setCaption(
+								"Create new customer successful for customer "
+										+ temp);
 					}
 				}
 				else
 				{
 					if (!editCustomer())
 					{
-						event.getButton().setCaption(editing + c.getCustomerNumber() + " failed");
+						event.getButton().setCaption(
+								editing + c.getCustomerNumber() + " failed");
 					}
 					else
 					{
-						event.getButton().setCaption(editing + c.getCustomerNumber() + " successful");
+						event.getButton().setCaption(editing
+								+ c.getCustomerNumber() + " successful");
 					}
 				}
 			}
@@ -325,6 +353,7 @@ public class CustomerUI extends VerticalLayout
 
 	}
 
+
 	// Create a new customer object, then add the customer to the database. If
 	// customer already in database then return "-1"
 	private String createNewCustomer()
@@ -333,8 +362,10 @@ public class CustomerUI extends VerticalLayout
 		{
 			Customer newCust;
 			// create a new customer
-			newCust = new Customer("0", sCodeT.getValue(), cusNameT.getValue().replace("\n", ""),
-					cusAddressT.getValue().replace("\n", ""), new java.sql.Date(cusDoBT.getValue().getTime()));
+			newCust = new Customer("0", sCodeT.getValue(),
+					cusNameT.getValue().replace("\n", ""),
+					cusAddressT.getValue().replace("\n", ""),
+					new java.sql.Date(cusDoBT.getValue().getTime()));
 
 			// add customer to the database
 			cusNumT.setValue(newCust.addToDB());
@@ -352,6 +383,7 @@ public class CustomerUI extends VerticalLayout
 		return "-1";
 	}
 
+
 	private boolean editCustomer()
 	{
 		c.setName(cusNameT.getValue().replace("\n", ""));
@@ -359,6 +391,7 @@ public class CustomerUI extends VerticalLayout
 
 		return c.updateThis();
 	}
+
 
 	private boolean validateSimple()
 	{
@@ -379,6 +412,7 @@ public class CustomerUI extends VerticalLayout
 		return !cusDoBT.isEmpty();
 	}
 
+
 	/// get sortcode
 	private static String getSortcode()
 	{
@@ -388,6 +422,7 @@ public class CustomerUI extends VerticalLayout
 		}
 		return sortcode;
 	}
+
 
 	// set sortcode
 	private static void setSortcode()
@@ -399,13 +434,15 @@ public class CustomerUI extends VerticalLayout
 			sortcode = ((String) mySortCodeJSON.getEntity()).substring(13, 19);
 		}
 	}
-	
+
+
 	@Override
 	public boolean equals(Object obj)
 	{
 		return super.equals(obj);
 	}
-	
+
+
 	@Override
 	public int hashCode()
 	{

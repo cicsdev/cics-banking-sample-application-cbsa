@@ -31,16 +31,22 @@ public class HbHeader extends HorizontalLayout
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
-	private static Logger logger = Logger.getLogger("com.example.com_ibm_cics_cip_bank_libertyapi_webui.HB_Header");
+	private static Logger logger = Logger.getLogger(
+			"com.example.com_ibm_cics_cip_bank_libertyapi_webui.HB_Header");
+
 	private static final long serialVersionUID = -5542630839520498092L;
+
 	Button back;
+
 	Label label;
+
 
 	public HbHeader()
 	{
 		setup();
 		this.setComponentAlignment(label, Alignment.MIDDLE_CENTER);
 	}
+
 
 	public HbHeader(final UI ui, final Welcome wlc)
 	{
@@ -52,12 +58,14 @@ public class HbHeader extends HorizontalLayout
 			// Set screen to welcome screen
 			private static final long serialVersionUID = 3078798822184263174L;
 
+
 			public void buttonClick(ClickEvent event)
 			{
 				ui.setContent(wlc);
 			}
 		});
 	}
+
 
 	public HbHeader(final UI ui, final ComIbmCicsCipBankLibertyapiWebuiUI exit)
 	{
@@ -70,12 +78,14 @@ public class HbHeader extends HorizontalLayout
 
 			private static final long serialVersionUID = 5051598750473268539L;
 
+
 			public void buttonClick(ClickEvent event)
 			{
 				ui.setContent(exit);
 			}
 		});
 	}
+
 
 	public HbHeader(final UI ui, final AccList accList)
 	{
@@ -87,12 +97,14 @@ public class HbHeader extends HorizontalLayout
 		{
 			private static final long serialVersionUID = -4825345661184875623L;
 
+
 			public void buttonClick(ClickEvent event)
 			{
 				ui.setContent(accList);
 			}
 		});
 	}
+
 
 	private void setup()
 	{
@@ -109,7 +121,8 @@ public class HbHeader extends HorizontalLayout
 		{
 			// If we get a valid status from myCompanyNameResponse, set
 			// myCompanyNameString to the name held in myCompanyNameResponse
-			String myCompanyNameString = myCompanyNameResponse.getEntity().toString();
+			String myCompanyNameString = myCompanyNameResponse.getEntity()
+					.toString();
 
 			JSONObject myCompanyNameJSON;
 			try
@@ -118,7 +131,8 @@ public class HbHeader extends HorizontalLayout
 				// companyName to the string held in myCompanyNameJSON
 				myCompanyNameJSON = JSONObject.parse(myCompanyNameString);
 
-				String companyName = (String) myCompanyNameJSON.get("companyName");
+				String companyName = (String) myCompanyNameJSON
+						.get("companyName");
 				// Set the label to the company name
 				label = new Label(companyName);
 			}
@@ -143,6 +157,7 @@ public class HbHeader extends HorizontalLayout
 		this.setComponentAlignment(label, Alignment.MIDDLE_LEFT);
 	}
 
+
 	// Setup the back button
 	private void setupBack()
 	{
@@ -150,6 +165,7 @@ public class HbHeader extends HorizontalLayout
 		this.addComponent(back);
 		this.setComponentAlignment(back, Alignment.MIDDLE_LEFT);
 	}
+
 
 	private void sortOutLogging()
 	{
@@ -162,13 +178,15 @@ public class HbHeader extends HorizontalLayout
 			logger.severe(e.toString());
 		}
 	}
-	
+
+
 	@Override
 	public boolean equals(Object obj)
 	{
 		return super.equals(obj);
 	}
-	
+
+
 	@Override
 	public int hashCode()
 	{

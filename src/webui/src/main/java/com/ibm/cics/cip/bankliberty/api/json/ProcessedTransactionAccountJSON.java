@@ -41,50 +41,60 @@ public class ProcessedTransactionAccountJSON extends ProcessedTransactionJSON
 	@FormParam("actualBalance")
 	BigDecimal actualBalance;
 
+
 	public String getCustomerNumber()
 	{
 		return customerNumber;
 	}
+
 
 	public void setCustomerNumber(String customerNumber)
 	{
 		this.customerNumber = customerNumber;
 	}
 
+
 	public String getType()
 	{
 		return type;
 	}
+
 
 	public void setType(String type)
 	{
 		this.type = type;
 	}
 
+
 	public Date getLastStatement()
 	{
 		return lastStatement;
 	}
+
 
 	public void setLastStatement(Date lastStatement)
 	{
 		this.lastStatement = lastStatement;
 	}
 
+
 	public Date getNextStatement()
 	{
 		return nextStatement;
 	}
+
 
 	public void setNextStatement(Date nextStatement)
 	{
 		this.nextStatement = nextStatement;
 	}
 
+
 	public BigDecimal getActualBalance()
 	{
 		return actualBalance;
 	}
+
 
 	public void setActualBalance(BigDecimal actualBalance)
 	{

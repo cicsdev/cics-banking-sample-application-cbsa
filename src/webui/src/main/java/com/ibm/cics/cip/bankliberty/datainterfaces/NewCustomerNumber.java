@@ -32,7 +32,8 @@ public class NewCustomerNumber
 	    03 NEWCUSNO-FUNCTION  PIC X.
 	 * </pre>
 	 */
-	protected static final StringField NEWCUSNO_FUNCTION = factory.getStringField(1);
+	protected static final StringField NEWCUSNO_FUNCTION = factory
+			.getStringField(1);
 
 	/**
 	 * <pre>
@@ -60,44 +61,54 @@ public class NewCustomerNumber
 	    03 CUSTOMER-NUMBER                  PIC 9(10) DISPLAY.
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsLongField CUSTOMER_NUMBER = factory.getExternalDecimalAsLongField(10, false,
-			false, false, false);
+	protected static final ExternalDecimalAsLongField CUSTOMER_NUMBER = factory
+			.getExternalDecimalAsLongField(10, false, false, false, false);
 
 	/**
 	 * <pre>
 	    03 NEWCUSNO-SUCCESS                    PIC X.
 	 * </pre>
 	 */
-	protected static final StringField NEWCUSNO_SUCCESS = factory.getStringField(1);
+	protected static final StringField NEWCUSNO_SUCCESS = factory
+			.getStringField(1);
 
 	/**
 	 * <pre>
 	    03 NEWCUSNO-FAIL-CODE                  PIC X.
 	 * </pre>
 	 */
-	protected static final StringField NEWCUSNO_FAIL_CODE = factory.getStringField(1);
+	protected static final StringField NEWCUSNO_FAIL_CODE = factory
+			.getStringField(1);
 
 	protected byte[] byteBuffer;
+
 	// Instance variables used to cache field values
 	protected String newcusnoFunction;
+
 	protected Long customerNumber;
+
 	protected String newcusnoSuccess;
+
 	protected String newcusnoFailCode;
+
 
 	public NewCustomerNumber(byte[] buffer)
 	{
 		this.byteBuffer = buffer;
 	}
 
+
 	public NewCustomerNumber()
 	{
 		this.byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_LEN];
 	}
 
+
 	public byte[] getByteBuffer()
 	{
 		return byteBuffer;
 	}
+
 
 	public String getNewcusnoFunction()
 	{
@@ -107,6 +118,7 @@ public class NewCustomerNumber
 		}
 		return newcusnoFunction;
 	}
+
 
 	public void setNewcusnoFunction(String newcusnoFunction)
 	{
@@ -118,20 +130,24 @@ public class NewCustomerNumber
 		this.newcusnoFunction = newcusnoFunction;
 	}
 
+
 	public boolean isNewcusnoFunctionGetnew()
 	{
 		return getNewcusnoFunction().equals(NEWCUSNO_FUNCTION_GETNEW);
 	}
+
 
 	public boolean isNewcusnoFunctionRollback()
 	{
 		return getNewcusnoFunction().equals(NEWCUSNO_FUNCTION_ROLLBACK);
 	}
 
+
 	public boolean isNewcusnoFunctionCurrent()
 	{
 		return getNewcusnoFunction().equals(NEWCUSNO_FUNCTION_CURRENT);
 	}
+
 
 	public long getCustomerNumber()
 	{
@@ -141,6 +157,7 @@ public class NewCustomerNumber
 		}
 		return customerNumber.longValue();
 	}
+
 
 	public void setCustomerNumber(long customerNumber)
 	{
@@ -152,6 +169,7 @@ public class NewCustomerNumber
 		this.customerNumber = customerNumber;
 	}
 
+
 	public String getNewcusnoSuccess()
 	{
 		if (newcusnoSuccess == null)
@@ -160,6 +178,7 @@ public class NewCustomerNumber
 		}
 		return newcusnoSuccess;
 	}
+
 
 	public void setNewcusnoSuccess(String newcusnoSuccess)
 	{
@@ -171,6 +190,7 @@ public class NewCustomerNumber
 		this.newcusnoSuccess = newcusnoSuccess;
 	}
 
+
 	public String getNewcusnoFailCode()
 	{
 		if (newcusnoFailCode == null)
@@ -179,6 +199,7 @@ public class NewCustomerNumber
 		}
 		return newcusnoFailCode;
 	}
+
 
 	public void setNewcusnoFailCode(String newcusnoFailCode)
 	{

@@ -40,7 +40,9 @@ public class SortCodeResource
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
-	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.api.json");
+	private static Logger logger = Logger
+			.getLogger("com.ibm.cics.cip.bankliberty.api.json");
+
 
 	public SortCodeResource()
 	{
@@ -48,6 +50,7 @@ public class SortCodeResource
 	}
 
 	static String sortCodeString = null;
+
 
 	@GET
 	@Produces("application/json")
@@ -65,8 +68,10 @@ public class SortCodeResource
 			{
 				getscode.link(sortCodeBytes);
 			}
-			catch (InvalidRequestException | LengthErrorException | InvalidSystemIdException | NotAuthorisedException
-					| InvalidProgramIdException | RolledBackException | TerminalException e)
+			catch (InvalidRequestException | LengthErrorException
+					| InvalidSystemIdException | NotAuthorisedException
+					| InvalidProgramIdException | RolledBackException
+					| TerminalException e)
 			{
 				logger.severe(e.toString());
 			}
@@ -82,10 +87,12 @@ public class SortCodeResource
 		return Response.status(200).entity(response.toString()).build();
 	}
 
+
 	private static void setSortCode(String sortcode)
 	{
 		sortCodeString = sortcode;
 	}
+
 
 	private static void sortOutLogging()
 	{

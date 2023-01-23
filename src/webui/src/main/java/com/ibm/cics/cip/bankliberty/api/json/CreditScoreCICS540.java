@@ -42,7 +42,7 @@ import com.ibm.cics.server.ChildResponse.CompletionStatus;
 
 public class CreditScoreCICS540
 {
-	
+
 	private CreditScoreCICS540()
 	{
 		throw new IllegalStateException("Static only");
@@ -50,9 +50,12 @@ public class CreditScoreCICS540
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
-	private static Logger logger = Logger.getLogger("com.ibm.cics.cip.bankliberty.api.json");
+	private static Logger logger = Logger
+			.getLogger("com.ibm.cics.cip.bankliberty.api.json");
 
-	public static CustomerJSON populateCreditScoreAndReviewDate(CustomerJSON customer)
+
+	public static CustomerJSON populateCreditScoreAndReviewDate(
+			CustomerJSON customer)
 	{
 		sortOutLogging();
 
@@ -88,27 +91,33 @@ public class CreditScoreCICS540
 				myCRECUST.setCommAddress(customer.getCustomerAddress());
 				Calendar myCalendar = Calendar.getInstance();
 				myCalendar.setTime(customer.getDateOfBirth());
-				myCRECUST.setCommBirthDay(myCalendar.get(Calendar.DAY_OF_MONTH));
+				myCRECUST
+						.setCommBirthDay(myCalendar.get(Calendar.DAY_OF_MONTH));
 				myCRECUST.setCommBirthMonth(myCalendar.get(Calendar.MONTH) + 1);
 				myCRECUST.setCommBirthYear(myCalendar.get(Calendar.YEAR));
 				myCRECUST.setCommName(customer.getCustomerName());
 				myCRECUST.setCommNumber(Long.parseLong(customer.getId()));
 				myCalendar.setTime(customer.getReviewDate());
-				myCRECUST.setCommCsReviewDd(myCalendar.get(Calendar.DAY_OF_MONTH));
+				myCRECUST.setCommCsReviewDd(
+						myCalendar.get(Calendar.DAY_OF_MONTH));
 				myCRECUST.setCommCsReviewMm(myCalendar.get(Calendar.MONTH) + 1);
 				myCRECUST.setCommCsReviewYyyy(myCalendar.get(Calendar.YEAR));
-				myCRECUST.setCommSortcode(Integer.parseInt(customer.getSortCode()));
+				myCRECUST.setCommSortcode(
+						Integer.parseInt(customer.getSortCode()));
 
-				Container myContainer = myCreditScoreChannel.createContainer(containerID[i]);
+				Container myContainer = myCreditScoreChannel
+						.createContainer(containerID[i]);
 				myContainer.put(myCRECUST.getByteBuffer());
 
-				children.add(asService.runTransactionId(transactionID[i], myCreditScoreChannel));
+				children.add(asService.runTransactionId(transactionID[i],
+						myCreditScoreChannel));
 
 			}
 		}
-		catch (CCSIDErrorException | CodePageErrorException | ContainerErrorException | InvalidRequestException
-				| InvalidTransactionIdException | NotAuthorisedException | ResourceDisabledException
-				| ChannelErrorException e)
+		catch (CCSIDErrorException | CodePageErrorException
+				| ContainerErrorException | InvalidRequestException
+				| InvalidTransactionIdException | NotAuthorisedException
+				| ResourceDisabledException | ChannelErrorException e)
 		{
 			logger.severe(e.toString());
 			return null;
@@ -122,7 +131,8 @@ public class CreditScoreCICS540
 			{
 				anyOneWillDo = asService.getAny();
 
-				if (anyOneWillDo.getCompletionStatus().equals(CompletionStatus.NORMAL))
+				if (anyOneWillDo.getCompletionStatus()
+						.equals(CompletionStatus.NORMAL))
 				{
 					Channel responseChannel = anyOneWillDo.getChannel();
 					customer.setCreditScore("123");
@@ -132,10 +142,12 @@ public class CreditScoreCICS540
 					{
 						if (anyOneWillDo.equals(children.get(j)))
 						{
-							myContainer = responseChannel.getContainer(containerID[j]);
+							myContainer = responseChannel
+									.getContainer(containerID[j]);
 							byte[] myContainerBytes = myContainer.get();
 							CRECUST myCRECUST = new CRECUST(myContainerBytes);
-							creditScoreTotal = creditScoreTotal + myCRECUST.getCommCreditScore();
+							creditScoreTotal = creditScoreTotal
+									+ myCRECUST.getCommCreditScore();
 							foundIt = true;
 							completedRequests++;
 						}
@@ -144,11 +156,13 @@ public class CreditScoreCICS540
 				}
 				else
 				{
-					logger.log(Level.SEVERE, () -> "One of the agencies didn't work");
+					logger.log(Level.SEVERE,
+							() -> "One of the agencies didn't work");
 					creditAgencyCount--;
 				}
 			}
-			catch (InvalidRequestException | NotFoundException | ChannelErrorException | CCSIDErrorException
+			catch (InvalidRequestException | NotFoundException
+					| ChannelErrorException | CCSIDErrorException
 					| CodePageErrorException | ContainerErrorException e)
 			{
 				logger.severe(e.toString());
@@ -161,6 +175,7 @@ public class CreditScoreCICS540
 		customer.setCreditScore(Integer.toString(creditScoreAverage));
 		return customer;
 	}
+
 
 	private static void sortOutLogging()
 	{

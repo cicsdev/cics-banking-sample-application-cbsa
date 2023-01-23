@@ -26,20 +26,24 @@ public class ProcessedTransactionJSON
 	@FormParam("accountNumber")
 	String accountNumber;
 
+
 	public String getSortCode()
 	{
 		return sortCode;
 	}
+
 
 	public void setSortCode(String sortCode)
 	{
 		this.sortCode = sortCode;
 	}
 
+
 	public String getAccountNumber()
 	{
 		return accountNumber;
 	}
+
 
 	public void setAccountNumber(String accountNumber)
 	{

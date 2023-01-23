@@ -19,10 +19,12 @@ public class TransferLocalJSON extends DebitCreditAccountJSON
 	@FormParam("targetAccount")
 	Integer targetAccount;
 
+
 	public Integer getTargetAccount()
 	{
 		return targetAccount;
 	}
+
 
 	public void setTargetAccount(Integer targetAccount)
 	{

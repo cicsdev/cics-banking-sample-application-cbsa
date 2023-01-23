@@ -34,6 +34,7 @@ public class CUSTOMER
 	 * </pre>
 	 */
 	public static final int CUSTOMER_RECORD_LEN = 259;
+
 	public static final int CUSTOMER_RECORD_OFFSET = factory.getOffset();
 
 	/**
@@ -41,7 +42,8 @@ public class CUSTOMER
 	        05 CUSTOMER-EYECATCHER                 PIC X(4).
 	 * </pre>
 	 */
-	protected static final StringField CUSTOMER_EYECATCHER = factory.getStringField(4);
+	protected static final StringField CUSTOMER_EYECATCHER = factory
+			.getStringField(4);
 
 	/**
 	 * <pre>
@@ -56,6 +58,7 @@ public class CUSTOMER
 	 * </pre>
 	 */
 	public static final int CUSTOMER_KEY_LEN = 16;
+
 	public static final int CUSTOMER_KEY_OFFSET = factory.getOffset();
 
 	/**
@@ -63,23 +66,24 @@ public class CUSTOMER
 	           07 CUSTOMER-SORTCODE                PIC 9(6) DISPLAY.
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsIntField CUSTOMER_SORTCODE = factory.getExternalDecimalAsIntField(6, false,
-			false, false, false);
+	protected static final ExternalDecimalAsIntField CUSTOMER_SORTCODE = factory
+			.getExternalDecimalAsIntField(6, false, false, false, false);
 
 	/**
 	 * <pre>
 	           07 CUSTOMER-NUMBER                  PIC 9(10) DISPLAY.
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsLongField CUSTOMER_NUMBER = factory.getExternalDecimalAsLongField(10, false,
-			false, false, false);
+	protected static final ExternalDecimalAsLongField CUSTOMER_NUMBER = factory
+			.getExternalDecimalAsLongField(10, false, false, false, false);
 
 	/**
 	 * <pre>
 	        05 CUSTOMER-NAME                       PIC X(60).
 	 * </pre>
 	 */
-	protected static final StringField CUSTOMER_NAME = factory.getStringField(60);
+	protected static final StringField CUSTOMER_NAME = factory
+			.getStringField(60);
 
 	/**
 	 * <pre>
@@ -90,7 +94,8 @@ public class CUSTOMER
 	        05 CUSTOMER-ADDRESS                    PIC X(160).
 	 * </pre>
 	 */
-	protected static final StringField CUSTOMER_ADDRESS = factory.getStringField(160);
+	protected static final StringField CUSTOMER_ADDRESS = factory
+			.getStringField(160);
 
 	/**
 	 * <pre>
@@ -101,8 +106,8 @@ public class CUSTOMER
 	        05 CUSTOMER-DATE-OF-BIRTH              PIC 9(8).
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsIntField CUSTOMER_DATE_OF_BIRTH = factory.getExternalDecimalAsIntField(8,
-			false, false, false, false);
+	protected static final ExternalDecimalAsIntField CUSTOMER_DATE_OF_BIRTH = factory
+			.getExternalDecimalAsIntField(8, false, false, false, false);
 
 	/**
 	 * <pre>
@@ -117,7 +122,9 @@ public class CUSTOMER
 	{
 		factory.setOffset(CUSTOMER_DATE_OF_BIRTH.getOffset());
 	}
+
 	public static final int CUSTOMER_DOB_GROUP_LEN = 8;
+
 	public static final int CUSTOMER_DOB_GROUP_OFFSET = factory.getOffset();
 
 	/**
@@ -125,24 +132,24 @@ public class CUSTOMER
 	           07 CUSTOMER-BIRTH-DAY               PIC 99.
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsIntField CUSTOMER_BIRTH_DAY = factory.getExternalDecimalAsIntField(2, false,
-			false, false, false);
+	protected static final ExternalDecimalAsIntField CUSTOMER_BIRTH_DAY = factory
+			.getExternalDecimalAsIntField(2, false, false, false, false);
 
 	/**
 	 * <pre>
 	           07 CUSTOMER-BIRTH-MONTH             PIC 99.
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsIntField CUSTOMER_BIRTH_MONTH = factory.getExternalDecimalAsIntField(2,
-			false, false, false, false);
+	protected static final ExternalDecimalAsIntField CUSTOMER_BIRTH_MONTH = factory
+			.getExternalDecimalAsIntField(2, false, false, false, false);
 
 	/**
 	 * <pre>
 	           07 CUSTOMER-BIRTH-YEAR              PIC 9999.
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsIntField CUSTOMER_BIRTH_YEAR = factory.getExternalDecimalAsIntField(4,
-			false, false, false, false);
+	protected static final ExternalDecimalAsIntField CUSTOMER_BIRTH_YEAR = factory
+			.getExternalDecimalAsIntField(4, false, false, false, false);
 	static
 	{
 		factory.popOffset();
@@ -153,16 +160,16 @@ public class CUSTOMER
 	        05 CUSTOMER-CREDIT-SCORE               PIC 999.
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsIntField CUSTOMER_CREDIT_SCORE = factory.getExternalDecimalAsIntField(3,
-			false, false, false, false);
+	protected static final ExternalDecimalAsIntField CUSTOMER_CREDIT_SCORE = factory
+			.getExternalDecimalAsIntField(3, false, false, false, false);
 
 	/**
 	 * <pre>
 	        05 CUSTOMER-CS-REVIEW-DATE             PIC 9(8).
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsIntField CUSTOMER_CS_REVIEW_DATE = factory.getExternalDecimalAsIntField(8,
-			false, false, false, false);
+	protected static final ExternalDecimalAsIntField CUSTOMER_CS_REVIEW_DATE = factory
+			.getExternalDecimalAsIntField(8, false, false, false, false);
 
 	/**
 	 * <pre>
@@ -178,7 +185,9 @@ public class CUSTOMER
 	{
 		factory.setOffset(CUSTOMER_CS_REVIEW_DATE.getOffset());
 	}
+
 	public static final int CUSTOMER_CS_GROUP_LEN = 8;
+
 	public static final int CUSTOMER_CS_GROUP_OFFSET = factory.getOffset();
 
 	/**
@@ -186,52 +195,62 @@ public class CUSTOMER
 	           07 CUSTOMER-CS-REVIEW-DAY           PIC 99.
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsIntField CUSTOMER_CS_REVIEW_DAY = factory.getExternalDecimalAsIntField(2,
-			false, false, false, false);
+	protected static final ExternalDecimalAsIntField CUSTOMER_CS_REVIEW_DAY = factory
+			.getExternalDecimalAsIntField(2, false, false, false, false);
 
 	/**
 	 * <pre>
 	           07 CUSTOMER-CS-REVIEW-MONTH         PIC 99.
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsIntField CUSTOMER_CS_REVIEW_MONTH = factory.getExternalDecimalAsIntField(2,
-			false, false, false, false);
+	protected static final ExternalDecimalAsIntField CUSTOMER_CS_REVIEW_MONTH = factory
+			.getExternalDecimalAsIntField(2, false, false, false, false);
 
 	/**
 	 * <pre>
 	           07 CUSTOMER-CS-REVIEW-YEAR          PIC 9999.
 	 * </pre>
 	 */
-	protected static final ExternalDecimalAsIntField CUSTOMER_CS_REVIEW_YEAR = factory.getExternalDecimalAsIntField(4,
-			false, false, false, false);
+	protected static final ExternalDecimalAsIntField CUSTOMER_CS_REVIEW_YEAR = factory
+			.getExternalDecimalAsIntField(4, false, false, false, false);
 	static
 	{
 		factory.popOffset();
 	}
 
 	protected byte[] byteBuffer;
+
 	// Instance variables used to cache field values
 	protected String customerEyecatcher;
+
 	protected Integer customerSortcode;
+
 	protected Long customerNumber;
+
 	protected String customerName;
+
 	protected String customerAddress;
+
 	protected Integer customerCreditScore;
+
 
 	public CUSTOMER(byte[] buffer)
 	{
 		this.byteBuffer = buffer;
 	}
 
+
 	public CUSTOMER()
 	{
 		this.byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_LEN];
 	}
 
+
 	public byte[] getByteBuffer()
 	{
 		return byteBuffer;
 	}
+
 
 	public String getCustomerEyecatcher()
 	{
@@ -242,9 +261,11 @@ public class CUSTOMER
 		return customerEyecatcher;
 	}
 
+
 	public void setCustomerEyecatcher(String customerEyecatcher)
 	{
-		if (CUSTOMER_EYECATCHER.equals(this.customerEyecatcher, customerEyecatcher))
+		if (CUSTOMER_EYECATCHER.equals(this.customerEyecatcher,
+				customerEyecatcher))
 		{
 			return;
 		}
@@ -252,10 +273,12 @@ public class CUSTOMER
 		this.customerEyecatcher = customerEyecatcher;
 	}
 
+
 	public boolean isCustomerEyecatcherValue()
 	{
 		return getCustomerEyecatcher().equals(CUSTOMER_EYECATCHER_VALUE);
 	}
+
 
 	public int getCustomerSortcode()
 	{
@@ -265,6 +288,7 @@ public class CUSTOMER
 		}
 		return customerSortcode.intValue();
 	}
+
 
 	public void setCustomerSortcode(int customerSortcode)
 	{
@@ -276,6 +300,7 @@ public class CUSTOMER
 		this.customerSortcode = customerSortcode;
 	}
 
+
 	public long getCustomerNumber()
 	{
 		if (customerNumber == null)
@@ -284,6 +309,7 @@ public class CUSTOMER
 		}
 		return customerNumber.longValue();
 	}
+
 
 	public void setCustomerNumber(long customerNumber)
 	{
@@ -295,6 +321,7 @@ public class CUSTOMER
 		this.customerNumber = customerNumber;
 	}
 
+
 	public String getCustomerName()
 	{
 		if (customerName == null)
@@ -303,6 +330,7 @@ public class CUSTOMER
 		}
 		return customerName;
 	}
+
 
 	public void setCustomerName(String customerName)
 	{
@@ -314,6 +342,7 @@ public class CUSTOMER
 		this.customerName = customerName;
 	}
 
+
 	public String getCustomerAddress()
 	{
 		if (customerAddress == null)
@@ -322,6 +351,7 @@ public class CUSTOMER
 		}
 		return customerAddress;
 	}
+
 
 	public void setCustomerAddress(String customerAddress)
 	{
@@ -333,45 +363,54 @@ public class CUSTOMER
 		this.customerAddress = customerAddress;
 	}
 
+
 	public int getCustomerDateOfBirth()
 	{
 		return CUSTOMER_DATE_OF_BIRTH.getInt(byteBuffer);
 	}
+
 
 	public void setCustomerDateOfBirth(int customerDateOfBirth)
 	{
 		CUSTOMER_DATE_OF_BIRTH.putInt(customerDateOfBirth, byteBuffer);
 	}
 
+
 	public int getCustomerBirthDay()
 	{
 		return CUSTOMER_BIRTH_DAY.getInt(byteBuffer);
 	}
+
 
 	public void setCustomerBirthDay(int customerBirthDay)
 	{
 		CUSTOMER_BIRTH_DAY.putInt(customerBirthDay, byteBuffer);
 	}
 
+
 	public int getCustomerBirthMonth()
 	{
 		return CUSTOMER_BIRTH_MONTH.getInt(byteBuffer);
 	}
+
 
 	public void setCustomerBirthMonth(int customerBirthMonth)
 	{
 		CUSTOMER_BIRTH_MONTH.putInt(customerBirthMonth, byteBuffer);
 	}
 
+
 	public int getCustomerBirthYear()
 	{
 		return CUSTOMER_BIRTH_YEAR.getInt(byteBuffer);
 	}
 
+
 	public void setCustomerBirthYear(int customerBirthYear)
 	{
 		CUSTOMER_BIRTH_YEAR.putInt(customerBirthYear, byteBuffer);
 	}
+
 
 	public int getCustomerCreditScore()
 	{
@@ -382,9 +421,11 @@ public class CUSTOMER
 		return customerCreditScore.intValue();
 	}
 
+
 	public void setCustomerCreditScore(int customerCreditScore)
 	{
-		if (CUSTOMER_CREDIT_SCORE.equals(this.customerCreditScore, customerCreditScore))
+		if (CUSTOMER_CREDIT_SCORE.equals(this.customerCreditScore,
+				customerCreditScore))
 		{
 			return;
 		}
@@ -392,40 +433,48 @@ public class CUSTOMER
 		this.customerCreditScore = customerCreditScore;
 	}
 
+
 	public int getCustomerCsReviewDate()
 	{
 		return CUSTOMER_CS_REVIEW_DATE.getInt(byteBuffer);
 	}
+
 
 	public void setCustomerCsReviewDate(int customerCsReviewDate)
 	{
 		CUSTOMER_CS_REVIEW_DATE.putInt(customerCsReviewDate, byteBuffer);
 	}
 
+
 	public int getCustomerCsReviewDay()
 	{
 		return CUSTOMER_CS_REVIEW_DAY.getInt(byteBuffer);
 	}
+
 
 	public void setCustomerCsReviewDay(int customerCsReviewDay)
 	{
 		CUSTOMER_CS_REVIEW_DAY.putInt(customerCsReviewDay, byteBuffer);
 	}
 
+
 	public int getCustomerCsReviewMonth()
 	{
 		return CUSTOMER_CS_REVIEW_MONTH.getInt(byteBuffer);
 	}
+
 
 	public void setCustomerCsReviewMonth(int customerCsReviewMonth)
 	{
 		CUSTOMER_CS_REVIEW_MONTH.putInt(customerCsReviewMonth, byteBuffer);
 	}
 
+
 	public int getCustomerCsReviewYear()
 	{
 		return CUSTOMER_CS_REVIEW_YEAR.getInt(byteBuffer);
 	}
+
 
 	public void setCustomerCsReviewYear(int customerCsReviewYear)
 	{
