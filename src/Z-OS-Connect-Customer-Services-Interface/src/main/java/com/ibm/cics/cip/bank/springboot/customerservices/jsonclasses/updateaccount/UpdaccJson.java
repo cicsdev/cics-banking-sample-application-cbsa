@@ -21,14 +21,14 @@ public class UpdaccJson
 	private String commSortcode;
 	private int commAccno;
 
-	private float commInterestRate = 0;
-	private String commOpened = " ";
-	private int commOverdraft = 0;
-	private String commLastStatementDate = " ";
-	private String commNextStatementDate = " ";
-	private float commAvailableBalance = 0;
-	private float commActualBalance = 0;
-	private String commSuccess = " ";
+	private float commInterestRate;
+	private String commOpened;
+	private int commOverdraft;
+	private String commLastStatementDate;
+	private String commNextStatementDate;
+	private float commAvailableBalance;
+	private float commActualBalance;
+	private String commSuccess;
 	private static final String SPACES = "        ";
 	private String commAccountType = SPACES;
 

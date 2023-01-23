@@ -18,16 +18,16 @@ public class CreaccJson
 	private String commAccType;
 	private String commCustno;
 	private String commEyecatcher;
-	private CreaccKeyJson commKey = new CreaccKeyJson();
-	private float commInterestRate = 0;
-	private int commOpened = 0;
-	private float commOverdraftLimit = 0;
-	private int commLastStatementDate = 0;
-	private int commNextStatementDate = 0;
-	private float commAvailableBalance = 0;
-	private float commActualBalance = 0;
-	private String commSuccess = " ";
-	private String commFailCode = " ";
+	private CreaccKeyJson commKey;
+	private float commInterestRate;
+	private int commOpened;
+	private float commOverdraftLimit;
+	private int commLastStatementDate;
+	private int commNextStatementDate;
+	private float commAvailableBalance;
+	private float commActualBalance;
+	private String commSuccess;
+	private String commFailCode;
 
 	public CreaccJson(String accountType, String accountNumber, float overdraftLimit, float interestRate)
 	{
