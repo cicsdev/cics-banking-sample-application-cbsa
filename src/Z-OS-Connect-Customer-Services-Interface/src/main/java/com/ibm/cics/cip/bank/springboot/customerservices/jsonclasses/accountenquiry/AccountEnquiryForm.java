@@ -18,25 +18,30 @@ public class AccountEnquiryForm
 	@Size(max = 8)
 	private String acctNumber;
 
+
 	public AccountEnquiryForm()
 	{
 
 	}
+
 
 	public AccountEnquiryForm(@NotNull @Size(max = 8) String acctNumber)
 	{
 		this.acctNumber = acctNumber;
 	}
 
+
 	public String getAcctNumber()
 	{
 		return acctNumber;
 	}
 
+
 	public void setAcctNumber(String acctNumber)
 	{
 		this.acctNumber = acctNumber;
 	}
+
 
 	@Override
 	public String toString()

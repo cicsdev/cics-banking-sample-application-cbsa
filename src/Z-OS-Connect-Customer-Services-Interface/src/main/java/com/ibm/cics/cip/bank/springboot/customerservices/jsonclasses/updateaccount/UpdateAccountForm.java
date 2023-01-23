@@ -43,35 +43,42 @@ public class UpdateAccountForm
 
 	private float acctActualBalance;
 
+
 	public String getCustNumber()
 	{
 		return custNumber;
 	}
+
 
 	public void setCustNumber(String custNumber)
 	{
 		this.custNumber = custNumber;
 	}
 
+
 	public int getAcctNumber()
 	{
 		return acctNumber;
 	}
+
 
 	public void setAcctNumber(int acctNumber)
 	{
 		this.acctNumber = acctNumber;
 	}
 
+
 	public AccountType getAcctType()
 	{
 		return acctType;
 	}
 
+
 	public void setAcctType(AccountType acctType)
 	{
 		this.acctType = acctType;
 	}
+
 
 	// Interest Rate
 	public String getAcctInterestRate()
@@ -79,16 +86,20 @@ public class UpdateAccountForm
 		return acctInterestRate;
 	}
 
+
 	public float getAcctInterestRateFloat()
 	{
 		return Float.parseFloat(acctInterestRate);
 	}
 
+
 	// Counting "" as null here, as an actual value needs to be entered
 	public void setAcctInterestRate(String acctInterestRate)
 	{
-		this.acctInterestRate = acctInterestRate.equals("") ? "0.00" : acctInterestRate;
+		this.acctInterestRate = acctInterestRate.equals("") ? "0.00"
+				: acctInterestRate;
 	}
+
 
 	// Overdraft
 	public String getAcctOverdraft()
@@ -96,21 +107,26 @@ public class UpdateAccountForm
 		return acctOverdraft;
 	}
 
+
 	public int getAcctOverdraftInt()
 	{
 		return Integer.parseInt(acctOverdraft);
 	}
 
+
 	// Counting "" as null here, as an actual value needs to be entered
 	public void setAcctOverdraft(String acctOverdraft)
 	{
-		this.acctOverdraft = acctOverdraft.equals("") ? "0" : String.valueOf(Integer.parseInt(acctOverdraft));
+		this.acctOverdraft = acctOverdraft.equals("") ? "0"
+				: String.valueOf(Integer.parseInt(acctOverdraft));
 	}
+
 
 	public String getAcctOpenedDate()
 	{
 		return acctOpenedDate;
 	}
+
 
 	public void setAcctOpenedDate(String acctOpenedDate)
 	{
@@ -119,14 +135,17 @@ public class UpdateAccountForm
 			return;
 		}
 		this.acctOpenedDate = "";
-		this.acctOpenedDate += acctOpenedDate.substring(8, 10) + acctOpenedDate.substring(5, 7)
+		this.acctOpenedDate += acctOpenedDate.substring(8, 10)
+				+ acctOpenedDate.substring(5, 7)
 				+ acctOpenedDate.substring(0, 4);
 	}
+
 
 	public String getAcctLastStatementDate()
 	{
 		return acctLastStatementDate;
 	}
+
 
 	public void setAcctLastStatementDate(String acctLastStatementDate)
 	{
@@ -135,14 +154,17 @@ public class UpdateAccountForm
 			return;
 		}
 		this.acctLastStatementDate = "";
-		this.acctLastStatementDate += acctLastStatementDate.substring(8, 10) + acctLastStatementDate.substring(5, 7)
+		this.acctLastStatementDate += acctLastStatementDate.substring(8, 10)
+				+ acctLastStatementDate.substring(5, 7)
 				+ acctLastStatementDate.substring(0, 4);
 	}
+
 
 	public String getAcctNextStatementDate()
 	{
 		return acctNextStatementDate;
 	}
+
 
 	public void setAcctNextStatementDate(String acctNextStatementDate)
 	{
@@ -151,38 +173,47 @@ public class UpdateAccountForm
 			return;
 		}
 		this.acctNextStatementDate = "";
-		this.acctNextStatementDate += acctNextStatementDate.substring(8, 10) + acctNextStatementDate.substring(5, 7)
+		this.acctNextStatementDate += acctNextStatementDate.substring(8, 10)
+				+ acctNextStatementDate.substring(5, 7)
 				+ acctNextStatementDate.substring(0, 4);
 	}
+
 
 	public float getAcctAvailableBalance()
 	{
 		return acctAvailableBalance;
 	}
 
+
 	public void setAcctAvailableBalance(float acctAvailableBalance)
 	{
 		this.acctAvailableBalance = acctAvailableBalance;
 	}
+
 
 	public float getAcctActualBalance()
 	{
 		return acctActualBalance;
 	}
 
+
 	public void setAcctActualBalance(float acctActualBalance)
 	{
 		this.acctActualBalance = acctActualBalance;
 	}
 
+
 	@Override
 	public String toString()
 	{
-		return "UpdateAccountForm [acctActualBalance=" + acctActualBalance + ", acctAvailableBalance="
-				+ acctAvailableBalance + ", acctInterestRate=" + acctInterestRate + ", acctLastStatementDate="
-				+ acctLastStatementDate + ", acctNextStatementDate=" + acctNextStatementDate + ", acctNumber="
-				+ acctNumber + ", acctOpenedDate=" + acctOpenedDate + ", acctOverdraft=" + acctOverdraft + ", acctType="
-				+ acctType + ", custNumber=" + custNumber + "]";
+		return "UpdateAccountForm [acctActualBalance=" + acctActualBalance
+				+ ", acctAvailableBalance=" + acctAvailableBalance
+				+ ", acctInterestRate=" + acctInterestRate
+				+ ", acctLastStatementDate=" + acctLastStatementDate
+				+ ", acctNextStatementDate=" + acctNextStatementDate
+				+ ", acctNumber=" + acctNumber + ", acctOpenedDate="
+				+ acctOpenedDate + ", acctOverdraft=" + acctOverdraft
+				+ ", acctType=" + acctType + ", custNumber=" + custNumber + "]";
 	}
 
 }

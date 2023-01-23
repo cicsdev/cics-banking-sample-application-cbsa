@@ -18,20 +18,24 @@ public class CustomerEnquiryJson
 
 	private InqCustZJson inqCustZ;
 
+
 	public CustomerEnquiryJson()
 	{
 		super();
 	}
+
 
 	public InqCustZJson getInqCustZ()
 	{
 		return inqCustZ;
 	}
 
+
 	public void setInqCustZ(InqCustZJson inqCustZIn)
 	{
 		inqCustZ = inqCustZIn;
 	}
+
 
 	@Override
 	public String toString()
@@ -39,15 +43,20 @@ public class CustomerEnquiryJson
 		return "CustomerEnquiryJson [INQCUSTZ=" + inqCustZ + "]";
 	}
 
+
 	public String toPrettyString()
 	{
 		InqCustZJson custInfo = inqCustZ;
 		String output = "";
-		output += "Customer Number:    " + OutputFormatUtils.leadingZeroes(10, custInfo.getInqcustCustno()) + "\n"
-				+ "Customer Name:   " + custInfo.getInqcustName() + "\n" + "Customer Address:      "
-				+ custInfo.getInqcustAddress() + "\n" + "Date of Birth: " + custInfo.getInqcustDob() + "\n"
-				+ "Credit Score:    " + custInfo.getInqcustCreditScore() + "\n" + "Review Date:     "
-				+ custInfo.getInqcustCsReviewDate() + "\n" + "Sort Code:           "
+		output += "Customer Number:    "
+				+ OutputFormatUtils.leadingZeroes(10,
+						custInfo.getInqcustCustno())
+				+ "\n" + "Customer Name:   " + custInfo.getInqcustName() + "\n"
+				+ "Customer Address:      " + custInfo.getInqcustAddress()
+				+ "\n" + "Date of Birth: " + custInfo.getInqcustDob() + "\n"
+				+ "Credit Score:    " + custInfo.getInqcustCreditScore() + "\n"
+				+ "Review Date:     " + custInfo.getInqcustCsReviewDate() + "\n"
+				+ "Sort Code:           "
 				+ String.format("%06d", custInfo.getInqcustSortcode()) + "\n";
 		return output;
 	}

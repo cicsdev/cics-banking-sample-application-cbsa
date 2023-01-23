@@ -18,25 +18,31 @@ public class CreateCustomerJson
 
 	private CrecustJson creCust;
 
+
 	public CreateCustomerJson(CreateCustomerForm form)
 	{
-		creCust = new CrecustJson(form.getCustName(), form.getCustAddress(), form.getCustDob());
+		creCust = new CrecustJson(form.getCustName(), form.getCustAddress(),
+				form.getCustDob());
 	}
+
 
 	public CreateCustomerJson()
 	{
 
 	}
 
+
 	public CrecustJson getCreCust()
 	{
 		return creCust;
 	}
 
+
 	public void setCreCust(CrecustJson creCustIn)
 	{
 		creCust = creCustIn;
 	}
+
 
 	@Override
 	public String toString()
@@ -44,16 +50,22 @@ public class CreateCustomerJson
 		return "CreateCustomerJson [CRECUST=" + creCust + "]";
 	}
 
+
 	public String toPrettyString()
 	{
 		String output = "";
-		output += "Customer Number:       " + OutputFormatUtils.leadingZeroes(10, creCust.getCommKey().getCommNumber())
-				+ "\n" + "Sort Code:      " + String.format("%06d", creCust.getCommKey().getCommSortcode()) + "\n"
-				+ "Customer Name:         " + creCust.getCommName() + "\n" + "Customer Address:    "
-				+ creCust.getCommAddress() + "\n" + "Date of Birth:       "
-				+ OutputFormatUtils.date(creCust.getCommDateOfBirth()) + "\n" + "Credit score:        "
-				+ creCust.getCommCreditScore() + "\n" + "Next review date:            " + creCust.getCommCsReviewDate()
-				+ "\n";
+		output += "Customer Number:       "
+				+ OutputFormatUtils.leadingZeroes(10,
+						creCust.getCommKey().getCommNumber())
+				+ "\n" + "Sort Code:      "
+				+ String.format("%06d", creCust.getCommKey().getCommSortcode())
+				+ "\n" + "Customer Name:         " + creCust.getCommName()
+				+ "\n" + "Customer Address:    " + creCust.getCommAddress()
+				+ "\n" + "Date of Birth:       "
+				+ OutputFormatUtils.date(creCust.getCommDateOfBirth()) + "\n"
+				+ "Credit score:        " + creCust.getCommCreditScore() + "\n"
+				+ "Next review date:            "
+				+ creCust.getCommCsReviewDate() + "\n";
 		return output;
 	}
 }

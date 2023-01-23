@@ -25,43 +25,53 @@ public class UpdateCustomerForm
 	String custAddress = "";
 
 	String custDoB = "";
+
 	int custCreditScore = 0;
+
 	String custReviewDate = "";
+
 
 	public String getCustNumber()
 	{
 		return custNumber;
 	}
 
+
 	public void setCustNumber(String custNumber)
 	{
 		this.custNumber = custNumber;
 	}
+
 
 	public String getCustName()
 	{
 		return custName;
 	}
 
+
 	public void setCustName(String custName)
 	{
 		this.custName = custName;
 	}
+
 
 	public String getCustAddress()
 	{
 		return custAddress;
 	}
 
+
 	public void setCustAddress(String custAddress)
 	{
 		this.custAddress = custAddress;
 	}
 
+
 	public String getCustDoB()
 	{
 		return custDoB;
 	}
+
 
 	public void setCustDoB(String custDoB)
 	{
@@ -70,35 +80,42 @@ public class UpdateCustomerForm
 			return;
 		}
 		this.custDoB = "";
-		this.custDoB += custDoB.substring(8, 10) + custDoB.substring(5, 7) + custDoB.substring(0, 4);
+		this.custDoB += custDoB.substring(8, 10) + custDoB.substring(5, 7)
+				+ custDoB.substring(0, 4);
 	}
+
 
 	public int getCustCreditScore()
 	{
 		return custCreditScore;
 	}
 
+
 	public void setCustCreditScore(int custCreditScore)
 	{
 		this.custCreditScore = custCreditScore;
 	}
+
 
 	public String getCustReviewDate()
 	{
 		return custReviewDate;
 	}
 
+
 	public void setCustReviewDate(String custReviewDate)
 	{
 		this.custReviewDate = custReviewDate;
 	}
 
+
 	@Override
 	public String toString()
 	{
-		return "UpdateCustomerForm [custAddress=" + custAddress + ", custCreditScore=" + custCreditScore + ", custDoB="
-				+ custDoB + ", custName=" + custName + ", custNumber=" + custNumber + ", custReviewDate="
-				+ custReviewDate + "]";
+		return "UpdateCustomerForm [custAddress=" + custAddress
+				+ ", custCreditScore=" + custCreditScore + ", custDoB="
+				+ custDoB + ", custName=" + custName + ", custNumber="
+				+ custNumber + ", custReviewDate=" + custReviewDate + "]";
 	}
 
 }

@@ -18,25 +18,31 @@ public class CustomerEnquiryForm
 	@Size(min = 1, max = 10)
 	private String custNumber;
 
+
 	public CustomerEnquiryForm()
 	{
 
 	}
 
-	public CustomerEnquiryForm(@NotNull @Size(min = 1, max = 10) String custNumber)
+
+	public CustomerEnquiryForm(
+			@NotNull @Size(min = 1, max = 10) String custNumber)
 	{
 		this.custNumber = custNumber;
 	}
+
 
 	public String getCustNumber()
 	{
 		return custNumber;
 	}
 
+
 	public void setCustNumber(String custNumber)
 	{
 		this.custNumber = custNumber;
 	}
+
 
 	@Override
 	public String toString()

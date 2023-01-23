@@ -17,15 +17,18 @@ public class ListAccJson
 
 	private InqAccczJson inqAcccz;
 
+
 	public InqAccczJson getInqacccz()
 	{
 		return inqAcccz;
 	}
 
+
 	public void setInqacccz(InqAccczJson inqAccczIn)
 	{
 		inqAcccz = inqAccczIn;
 	}
+
 
 	@Override
 	public String toString()

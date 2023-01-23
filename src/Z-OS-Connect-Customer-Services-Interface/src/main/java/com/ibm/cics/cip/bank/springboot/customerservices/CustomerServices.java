@@ -21,12 +21,14 @@ public class CustomerServices
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
+
 	public static void main(String[] args)
 	{
 		final Logger log = LoggerFactory.getLogger(CustomerServices.class);
 		JCommander.newBuilder().build().parse(args);
 
-		log.info("Running with address: {}", ConnectionInfo.getAddressAndPort());
+		log.info("Running with address: {}",
+				ConnectionInfo.getAddressAndPort());
 
 		// Run the application. From here out, only the WebController and
 		// ParamsController classes really matter.

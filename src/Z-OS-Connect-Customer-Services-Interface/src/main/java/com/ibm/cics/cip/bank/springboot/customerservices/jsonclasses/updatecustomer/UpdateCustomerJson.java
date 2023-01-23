@@ -18,27 +18,35 @@ public class UpdateCustomerJson
 
 	UpdcustJson updcust;
 
+
 	public UpdateCustomerJson(UpdateCustomerForm updateCustomerForm)
 	{
-		updcust = new UpdcustJson(updateCustomerForm.getCustNumber(), updateCustomerForm.getCustName(),
-				updateCustomerForm.getCustAddress(), updateCustomerForm.getCustDoB(),
-				updateCustomerForm.getCustCreditScore(), updateCustomerForm.getCustReviewDate());
+		updcust = new UpdcustJson(updateCustomerForm.getCustNumber(),
+				updateCustomerForm.getCustName(),
+				updateCustomerForm.getCustAddress(),
+				updateCustomerForm.getCustDoB(),
+				updateCustomerForm.getCustCreditScore(),
+				updateCustomerForm.getCustReviewDate());
 	}
+
 
 	public UpdateCustomerJson()
 	{
 
 	}
 
+
 	public UpdcustJson getUpducst()
 	{
 		return updcust;
 	}
 
+
 	public void setUpdcust(UpdcustJson updCustIn)
 	{
 		updcust = updCustIn;
 	}
+
 
 	@Override
 	public String toString()
@@ -46,14 +54,19 @@ public class UpdateCustomerJson
 		return "UpdateCustomerJson [UPDCUST=" + updcust + "]";
 	}
 
+
 	public String toPrettyString()
 	{
 		String output = "";
-		output += "Customer Number:       " + OutputFormatUtils.leadingZeroes(10, updcust.getCommCustno()) + "\n"
-				+ "Sort Code:      " + updcust.getCommSortcode() + "\n" + "Customer Name:         "
-				+ updcust.getCommName() + "\n" + "Customer Address:    " + updcust.getCommAddress() + "\n"
-				+ "Date of Birth:       " + OutputFormatUtils.date(updcust.getCommDateOfBirth()) + "\n"
-				+ "Credit score:        " + updcust.getCommCreditScore() + "\n" + "Next review date:            "
+		output += "Customer Number:       "
+				+ OutputFormatUtils.leadingZeroes(10, updcust.getCommCustno())
+				+ "\n" + "Sort Code:      " + updcust.getCommSortcode() + "\n"
+				+ "Customer Name:         " + updcust.getCommName() + "\n"
+				+ "Customer Address:    " + updcust.getCommAddress() + "\n"
+				+ "Date of Birth:       "
+				+ OutputFormatUtils.date(updcust.getCommDateOfBirth()) + "\n"
+				+ "Credit score:        " + updcust.getCommCreditScore() + "\n"
+				+ "Next review date:            "
 				+ updcust.getCommCreditScoreReviewDate() + "\n";
 		return output;
 	}

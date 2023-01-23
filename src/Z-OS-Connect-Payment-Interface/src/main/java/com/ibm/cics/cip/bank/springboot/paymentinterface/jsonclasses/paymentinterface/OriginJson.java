@@ -18,6 +18,7 @@ public class OriginJson
 
 	@JsonProperty("COMM_APPLID")
 	private String commApplid;
+
 	@JsonProperty("COMM_USERID")
 	private String commUserid;
 
@@ -33,10 +34,12 @@ public class OriginJson
 	@JsonProperty("FILL_0")
 	private String fill0 = "    ";
 
+
 	public OriginJson()
 	{
 
 	}
+
 
 	public OriginJson(String organisation)
 	{
@@ -47,6 +50,7 @@ public class OriginJson
 		commUserid = paddedOrg.substring(8);
 	}
 
+
 	public void setOrganisation(String organisation)
 	{
 		String paddedOrg = String.format("%-16s", organisation);
@@ -54,66 +58,79 @@ public class OriginJson
 		commUserid = paddedOrg.substring(8);
 	}
 
+
 	public String getCommApplid()
 	{
 		return commApplid;
 	}
+
 
 	public void setCommApplid(String commApplidIn)
 	{
 		commApplid = commApplidIn;
 	}
 
+
 	public String getCommUserid()
 	{
 		return commUserid;
 	}
+
 
 	public void setCommUserid(String commUseridIn)
 	{
 		commUserid = commUseridIn;
 	}
 
+
 	public String getCommFacilityName()
 	{
 		return commFacilityName;
 	}
+
 
 	public String getCommNetwrkId()
 	{
 		return commNetwrkId;
 	}
 
+
 	public void setCommNetwrkId(String commNetwrkIdIn)
 	{
 		commNetwrkId = commNetwrkIdIn;
 	}
+
 
 	public String getCommFacilType()
 	{
 		return commFaciltype;
 	}
 
+
 	public void setCommFacilType(String commFacilType)
 	{
 		commFaciltype = commFacilType;
 	}
+
 
 	public String getFill0()
 	{
 		return fill0;
 	}
 
+
 	public void setFill0(String fill0In)
 	{
 		fill0 = fill0In;
 	}
 
+
 	@Override
 	public String toString()
 	{
-		return "OriginJson [COMM_APPLID=" + commApplid + ", COMM_FACILITY_NAME=" + commFacilityName
-				+ ", COMM_FACILTYPE=" + commFaciltype + ", COMM_NETWRK_ID=" + commNetwrkId + ", COMM_USERID="
+		return "OriginJson [COMM_APPLID=" + commApplid + ", COMM_FACILITY_NAME="
+				+ commFacilityName + ", COMM_FACILTYPE=" + commFaciltype
+				+ ", COMM_NETWRK_ID=" + commNetwrkId + ", COMM_USERID="
 				+ commUserid + ", FILL_0=" + fill0 + "]";
 	}
 }

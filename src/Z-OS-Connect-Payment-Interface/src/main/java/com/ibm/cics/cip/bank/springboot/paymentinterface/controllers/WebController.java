@@ -39,11 +39,17 @@ public class WebController implements WebMvcConfigurer
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
-	private static final Logger log = LoggerFactory.getLogger(WebController.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(WebController.class);
+
 	private static final String FORM_NAME = "paymentInterfaceForm";
+
 	private static final String LARGE_TEXT = "largeText";
+
 	private static final String SMALL_TEXT = "smallText";
+
 	private static final String PAYMENT_ERROR = "Payment Error";
+
 
 	// Payment Interface
 	@GetMapping("/")
@@ -52,8 +58,10 @@ public class WebController implements WebMvcConfigurer
 		return FORM_NAME;
 	}
 
+
 	@PostMapping("/paydbcr")
-	public String checkPersonInfo(@Valid TransferForm transferForm, BindingResult bindingResult, Model model)
+	public String checkPersonInfo(@Valid TransferForm transferForm,
+			BindingResult bindingResult, Model model)
 			throws JsonProcessingException
 	{
 
@@ -64,7 +72,8 @@ public class WebController implements WebMvcConfigurer
 			return FORM_NAME;
 		}
 
-		PaymentInterfaceJson transferjson = new PaymentInterfaceJson(transferForm);
+		PaymentInterfaceJson transferjson = new PaymentInterfaceJson(
+				transferForm);
 
 		// Serialise the object to JSON
 		log.info("{}", transferjson);
@@ -72,20 +81,24 @@ public class WebController implements WebMvcConfigurer
 		log.info(jsonString);
 
 		// The port is set elsewhere as it changes frequently
-		WebClient client = WebClient.create(ConnectionInfo.getAddressAndPort() + "/makepayment/dbcr");
+		WebClient client = WebClient.create(
+				ConnectionInfo.getAddressAndPort() + "/makepayment/dbcr");
 
 		try
 		{
 			// Create a response object - body of json, accept json back, and
 			// insert the
 			// request body created a couple lines up
-			ResponseSpec response = client.put().header("content-type", "application/json")
-					.accept(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(jsonString)).retrieve();
+			ResponseSpec response = client.put()
+					.header("content-type", "application/json")
+					.accept(MediaType.APPLICATION_JSON)
+					.body(BodyInserters.fromValue(jsonString)).retrieve();
 			String responseBody = response.bodyToMono(String.class).block();
 			log.info(responseBody);
 
 			// Deserialise into a POJO
-			PaymentInterfaceJson responseObj = new ObjectMapper().readValue(responseBody, PaymentInterfaceJson.class);
+			PaymentInterfaceJson responseObj = new ObjectMapper()
+					.readValue(responseBody, PaymentInterfaceJson.class);
 			log.info("{}", responseObj);
 
 			// Throws out different exceptions depending on the contents
@@ -101,7 +114,8 @@ public class WebController implements WebMvcConfigurer
 			{
 				model.addAttribute(LARGE_TEXT, "Credit Successful");
 			}
-			model.addAttribute(SMALL_TEXT, ("Value: " + responseObj.getPAYDBCR().getCommAmt()));
+			model.addAttribute(SMALL_TEXT,
+					("Value: " + responseObj.getPAYDBCR().getCommAmt()));
 
 			// Otherwise...
 		}
@@ -133,6 +147,7 @@ public class WebController implements WebMvcConfigurer
 		return FORM_NAME;
 	}
 
+
 	public static void checkIfResponseValidDbcr(PaymentInterfaceJson response)
 			throws InsufficientFundsException, InvalidAccountTypeException
 	{
@@ -158,6 +173,7 @@ class InsufficientFundsException extends Exception
 	 */
 	private static final long serialVersionUID = 1L;
 
+
 	public InsufficientFundsException()
 	{
 		super("Payment rejected: Insufficient funds.");
@@ -173,6 +189,7 @@ class InvalidAccountTypeException extends Exception
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
+
 
 	public InvalidAccountTypeException()
 	{
@@ -190,9 +207,11 @@ class TooManyAccountsException extends Exception
 	 */
 	private static final long serialVersionUID = 1L;
 
+
 	public TooManyAccountsException(int customerNumber)
 	{
-		super("Too many accounts for customer number " + customerNumber + "; Try deleting an account first.");
+		super("Too many accounts for customer number " + customerNumber
+				+ "; Try deleting an account first.");
 	}
 }
 
@@ -206,8 +225,11 @@ class ItemNotFoundException extends Exception
 	 */
 	private static final long serialVersionUID = 1L;
 
+
 	public ItemNotFoundException(String item)
 	{
-		super("The " + item + " you searched for could not be found; Try a different " + item + " number.");
+		super("The " + item
+				+ " you searched for could not be found; Try a different "
+				+ item + " number.");
 	}
 }

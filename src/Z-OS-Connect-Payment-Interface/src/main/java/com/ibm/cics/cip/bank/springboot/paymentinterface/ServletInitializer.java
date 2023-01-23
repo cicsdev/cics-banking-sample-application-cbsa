@@ -14,8 +14,10 @@ public class ServletInitializer extends SpringBootServletInitializer
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
+
 	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application)
+	protected SpringApplicationBuilder configure(
+			SpringApplicationBuilder application)
 	{
 		return application.sources(PaymentInterface.class);
 	}

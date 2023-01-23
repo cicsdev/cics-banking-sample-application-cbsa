@@ -26,48 +26,58 @@ public class CreateCustomerForm
 	@Size(min = 8, max = 8)
 	private String custDob;
 
+
 	public CreateCustomerForm()
 	{
 		super();
 	}
+
 
 	public String getCustName()
 	{
 		return custName;
 	}
 
+
 	public void setCustName(@NotNull String custName)
 	{
 		this.custName = custName.equals("") ? "" : custName;
 	}
+
 
 	public String getCustAddress()
 	{
 		return custAddress;
 	}
 
+
 	public void setCustAddress(@NotNull String custAddress)
 	{
 		this.custAddress = custAddress.equals("") ? "" : custAddress;
 	}
+
 
 	public String getCustDob()
 	{
 		return custDob;
 	}
 
+
 	public void setCustDob(String custDob)
 	{
 		this.custDob = "";
-		this.custDob += custDob.substring(8, 10) + custDob.substring(5, 7) + custDob.substring(0, 4);
+		this.custDob += custDob.substring(8, 10) + custDob.substring(5, 7)
+				+ custDob.substring(0, 4);
 	}
+
 
 	@Override
 	public String toString()
 	{
-		return "CreateCustomerForm [custAddress=" + custAddress + ", custDob=" + custDob + ", custName=" + custName
-				+ "]";
+		return "CreateCustomerForm [custAddress=" + custAddress + ", custDob="
+				+ custDob + ", custName=" + custName + "]";
 	}
+
 
 	public boolean isValidTitle()
 	{

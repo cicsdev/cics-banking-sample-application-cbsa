@@ -19,25 +19,30 @@ public class PaymentInterfaceJson
 	@JsonProperty("PAYDBCR")
 	private DbcrJson payDbCr;
 
+
 	public PaymentInterfaceJson()
 	{
 
 	}
+
 
 	public PaymentInterfaceJson(TransferForm transferForm)
 	{
 		payDbCr = new DbcrJson(transferForm);
 	}
 
+
 	public DbcrJson getPAYDBCR()
 	{
 		return payDbCr;
 	}
 
+
 	public void setPAYDBCR(DbcrJson payDbCrIn)
 	{
 		this.payDbCr = payDbCrIn;
 	}
+
 
 	@Override
 	public String toString()
