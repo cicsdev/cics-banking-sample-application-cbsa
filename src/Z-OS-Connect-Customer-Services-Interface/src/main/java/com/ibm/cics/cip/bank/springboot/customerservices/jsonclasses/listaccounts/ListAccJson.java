@@ -15,23 +15,23 @@ public class ListAccJson
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
-	private InqAccczJson INQACCCZ;
+	private InqAccczJson inqAcccz;
 
 
 
-	public InqAccczJson getINQACCCZ()
+	public InqAccczJson getInqacccz()
 	{
-		return INQACCCZ;
+		return inqAcccz;
 	}
 
-	public void setINQACCCZ(InqAccczJson iNQACCCZ)
+	public void setInqacccz(InqAccczJson inqAccczIn)
 	{
-		INQACCCZ = iNQACCCZ;
+		inqAcccz = inqAccczIn;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "ListAccJson [INQACCCZ=" + INQACCCZ + "]";
+		return "ListAccJson [INQACCCZ=" + inqAcccz + "]";
 	}
 }

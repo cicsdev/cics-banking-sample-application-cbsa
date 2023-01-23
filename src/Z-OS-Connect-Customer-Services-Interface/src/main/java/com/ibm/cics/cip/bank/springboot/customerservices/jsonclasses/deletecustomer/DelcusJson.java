@@ -15,129 +15,129 @@ public class DelcusJson
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
-	private String COMM_ADDR;
-	private int COMM_SCODE;
-	private String COMM_NAME;
-	private String COMM_DEL_SUCCESS;
-	private String COMM_EYE;
-	private String COMM_CS_REVIEW_DATE;
-	private int COMM_CUSTNO;
-	private int COMM_DEL_FAIL_CD;
-	private int COMM_CREDIT_SCORE;
-	private String COMM_DOB;
+	private String commAddress;
+	private int commSortcode;
+	private String commName;
+	private String commDelSuccess;
+	private String commEye;
+	private String commCsReviewDate;
+	private int commCustno;
+	private int commDelFailCode;
+	private int commCreditScore;
+	private String commDateOfBirth;
 
 	public DelcusJson()
 	{
 		super();
 	}
 
-	public String getCOMM_ADDR()
+	public String getCommAddress()
 	{
-		return COMM_ADDR;
+		return commAddress;
 	}
 
-	public void setCOMM_ADDR(String cOMM_ADDR)
+	public void setCommAddress(String commAddressIn)
 	{
-		COMM_ADDR = cOMM_ADDR;
+		commAddress = commAddressIn;
 	}
 
-	public int getCOMM_SCODE()
+	public int getCommSortcode()
 	{
-		return COMM_SCODE;
+		return commSortcode;
 	}
 
-	public void setCOMM_SCODE(int cOMM_SCODE)
+	public void setCommSortcode(int commSortcodeIn)
 	{
-		COMM_SCODE = cOMM_SCODE;
+		commSortcode = commSortcodeIn;
 	}
 
-	public String getCOMM_NAME()
+	public String getCommName()
 	{
-		return COMM_NAME;
+		return commName;
 	}
 
-	public void setCOMM_NAME(String cOMM_NAME)
+	public void setCommName(String commNameIn)
 	{
-		COMM_NAME = cOMM_NAME;
+		commName = commNameIn;
 	}
 
-	public String getCOMM_DEL_SUCCESS()
+	public String getCommDelSuccess()
 	{
-		return COMM_DEL_SUCCESS;
+		return commDelSuccess;
 	}
 
-	public void setCOMM_DEL_SUCCESS(String cOMM_DEL_SUCCESS)
+	public void setCommDelSuccess(String commDelSuccessIn)
 	{
-		COMM_DEL_SUCCESS = cOMM_DEL_SUCCESS;
+		commDelSuccess = commDelSuccessIn;
 	}
 
-	public String getCOMM_EYE()
+	public String getCommEye()
 	{
-		return COMM_EYE;
+		return commEye;
 	}
 
-	public void setCOMM_EYE(String cOMM_EYE)
+	public void setCommEye(String commEyeIn)
 	{
-		COMM_EYE = cOMM_EYE;
+		commEye = commEyeIn;
 	}
 
-	public String getCOMM_CS_REVIEW_DATE()
+	public String getCommCsReviewDate()
 	{
-		return COMM_CS_REVIEW_DATE;
+		return commCsReviewDate;
 	}
 
-	public void setCOMM_CS_REVIEW_DATE(String cOMM_CS_REVIEW_DATE)
+	public void setCommCsReviewDate(String commCsReviewDateIn)
 	{
-		COMM_CS_REVIEW_DATE = cOMM_CS_REVIEW_DATE;
+		commCsReviewDate = commCsReviewDateIn;
 	}
 
-	public int getCOMM_CUSTNO()
+	public int getCommCustno()
 	{
-		return COMM_CUSTNO;
+		return commCustno;
 	}
 
-	public void setCOMM_CUSTNO(int cOMM_CUSTNO)
+	public void setCommCustno(int commCustnoIn)
 	{
-		COMM_CUSTNO = cOMM_CUSTNO;
+		commCustno = commCustnoIn;
 	}
 
-	public int getCOMM_DEL_FAIL_CD()
+	public int getCommDelFailCode()
 	{
-		return COMM_DEL_FAIL_CD;
+		return commDelFailCode;
 	}
 
-	public void setCOMM_DEL_FAIL_CD(int cOMM_DEL_FAIL_CD)
+	public void setCommDelFailCode(int commDelFailCodeIn)
 	{
-		COMM_DEL_FAIL_CD = cOMM_DEL_FAIL_CD;
+		commDelFailCode = commDelFailCodeIn;
 	}
 
-	public int getCOMM_CREDIT_SCORE()
+	public int getCommCreditScore()
 	{
-		return COMM_CREDIT_SCORE;
+		return commCreditScore;
 	}
 
-	public void setCOMM_CREDIT_SCORE(int cOMM_CREDIT_SCORE)
+	public void setCommCreditScore(int commCreditScoreIn)
 	{
-		COMM_CREDIT_SCORE = cOMM_CREDIT_SCORE;
+		commCreditScore = commCreditScoreIn;
 	}
 
-	public String getCOMM_DOB()
+	public String getCommDateOfBirth()
 	{
-		return COMM_DOB;
+		return commDateOfBirth;
 	}
 
-	public void setCOMM_DOB(String cOMM_DOB)
+	public void setCommDateOfBirth(String commDateOfBirthIn)
 	{
-		COMM_DOB = cOMM_DOB;
+		commDateOfBirth = commDateOfBirthIn;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "DelcusJson [COMM_ADDR=" + COMM_ADDR + ", COMM_CREDIT_SCORE=" + COMM_CREDIT_SCORE
-				+ ", COMM_CS_REVIEW_DATE=" + COMM_CS_REVIEW_DATE + ", COMM_CUSTNO=" + COMM_CUSTNO
-				+ ", COMM_DEL_FAIL_CD=" + COMM_DEL_FAIL_CD + ", COMM_DEL_SUCCESS=" + COMM_DEL_SUCCESS + ", COMM_DOB="
-				+ COMM_DOB + ", COMM_EYE=" + COMM_EYE + ", COMM_NAME=" + COMM_NAME + ", COMM_SCODE=" + COMM_SCODE + "]";
+		return "DelcusJson [COMM_ADDR=" + commAddress + ", COMM_CREDIT_SCORE=" + commCreditScore
+				+ ", COMM_CS_REVIEW_DATE=" + commCsReviewDate + ", COMM_CUSTNO=" + commCustno
+				+ ", COMM_DEL_FAIL_CD=" + commDelFailCode + ", COMM_DEL_SUCCESS=" + commDelSuccess + ", COMM_DOB="
+				+ commDateOfBirth + ", COMM_EYE=" + commEye + ", COMM_NAME=" + commName + ", COMM_SCODE=" + commSortcode + "]";
 	}
 
 }

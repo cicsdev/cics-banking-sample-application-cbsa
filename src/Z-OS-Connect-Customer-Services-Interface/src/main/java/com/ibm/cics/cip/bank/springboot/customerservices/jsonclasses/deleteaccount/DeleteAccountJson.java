@@ -17,43 +17,43 @@ public class DeleteAccountJson
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 	private static final String FLOAT_FORMAT = "%.02f";
 
-	private DelaccJson DELACC_COMMAREA;
+	private DelaccJson delaccCommarea;
 
 	public DeleteAccountJson()
 	{
 		super();
 	}
 
-	public DelaccJson getDELACC_COMMAREA()
+	public DelaccJson getDelaccCommarea()
 	{
-		return DELACC_COMMAREA;
+		return delaccCommarea;
 	}
 
-	public void setDELACC_COMMAREA(DelaccJson dELACC_COMMAREA)
+	public void setDelaccCommarea(DelaccJson delaccCommareaIn)
 	{
-		DELACC_COMMAREA = dELACC_COMMAREA;
+		delaccCommarea = delaccCommareaIn;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "DeleteAccountJson [DELACC_COMMAREA=" + DELACC_COMMAREA.toString() + "]";
+		return "DeleteAccountJson [DELACC_COMMAREA=" + delaccCommarea.toString() + "]";
 	}
 
 	public String toPrettyString()
 	{
-		DelaccJson accInfo = DELACC_COMMAREA;
+		DelaccJson accInfo = delaccCommarea;
 		String output = "";
-		output += "Account Number: " + OutputFormatUtils.leadingZeroes(8, accInfo.getDELACC_ACCNO()) + "\n"
-				+ "Sort Code: " + accInfo.getDELACC_SCODE() + "\n" + "Account Type: " + accInfo.getDELACC_ACC_TYPE()
-				+ "\n" + "Customer Number: " + OutputFormatUtils.leadingZeroes(10, accInfo.getDELACC_CUSTNO()) + "\n"
-				+ "Interest Rate: " + String.format(FLOAT_FORMAT, accInfo.getDELACC_INT_RATE()) + "\n" + "Overdraft Limit: "
-				+ accInfo.getDELACC_OVERDRAFT() + "\n" + "Available Balance: "
-				+ String.format(FLOAT_FORMAT, accInfo.getDELACC_AVAIL_BAL()) + "\n" + "Actual Balance: "
-				+ String.format(FLOAT_FORMAT, accInfo.getDELACC_ACTUAL_BAL()) + "\n" + "Account Opened: "
-				+ OutputFormatUtils.date(accInfo.getDELACC_OPENED()) + "\n" + "Last Statement Date: "
-				+ OutputFormatUtils.date(accInfo.getDELACC_LAST_STMT_DT()) + "\n" + "Next Statement Date: "
-				+ OutputFormatUtils.date(accInfo.getDELACC_NEXT_STMT_DT()) + "\n";
+		output += "Account Number: " + OutputFormatUtils.leadingZeroes(8, accInfo.getDelaccAccno()) + "\n"
+				+ "Sort Code: " + accInfo.getDelaccSortcode() + "\n" + "Account Type: " + accInfo.getDelaccAccType()
+				+ "\n" + "Customer Number: " + OutputFormatUtils.leadingZeroes(10, accInfo.getDelaccCustno()) + "\n"
+				+ "Interest Rate: " + String.format(FLOAT_FORMAT, accInfo.getDelaccInterestRate()) + "\n" + "Overdraft Limit: "
+				+ accInfo.getDelaccOverdraft() + "\n" + "Available Balance: "
+				+ String.format(FLOAT_FORMAT, accInfo.getDelaccAvailableBalance()) + "\n" + "Actual Balance: "
+				+ String.format(FLOAT_FORMAT, accInfo.getDelaccActualBalance()) + "\n" + "Account Opened: "
+				+ OutputFormatUtils.date(accInfo.getDelaccOpened()) + "\n" + "Last Statement Date: "
+				+ OutputFormatUtils.date(accInfo.getDelaccLastStatementDate()) + "\n" + "Next Statement Date: "
+				+ OutputFormatUtils.date(accInfo.getDelaccNextStatementDate()) + "\n";
 		return output;
 	}
 }

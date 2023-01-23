@@ -26,7 +26,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ibm.cics.cip.bank.springboot.customerservices.ConnectionInfo;
-import com.ibm.cics.cip.bank.springboot.customerservices.CustomerServices;
 import com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.accountenquiry.AccountEnquiryForm;
 import com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.accountenquiry.AccountEnquiryJson;
 import com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.createaccount.AccountType;
@@ -277,8 +276,8 @@ public class WebController implements WebMvcConfigurer
 				log.info("{}", responseObj);
 				checkIfResponseValidListAcc(responseObj);
 				model.addAttribute(LARGE_TEXT,
-						"Accounts belonging to customer " + responseObj.getINQACCCZ().getCUSTOMER_NUMBER() + ":");
-				model.addAttribute("accounts", responseObj.getINQACCCZ().getACCOUNT_DETAILS());
+						"Accounts belonging to customer " + responseObj.getInqacccz().getCustomerNumber() + ":");
+				model.addAttribute("accounts", responseObj.getInqacccz().getAccountDetails());
 			}
 			catch (ItemNotFoundException e)
 			{
@@ -306,7 +305,7 @@ public class WebController implements WebMvcConfigurer
 
 	public static void checkIfResponseValidListAcc(ListAccJson response) throws ItemNotFoundException
 	{
-		if (response.getINQACCCZ().getCUSTOMER_FOUND().equals("N"))
+		if (response.getInqacccz().getCustomerFound().equals("N"))
 		{
 			throw new ItemNotFoundException(CUSTOMER);
 		}
@@ -482,12 +481,9 @@ public class WebController implements WebMvcConfigurer
 	{
 		if (!responseObj.getCreCust().getCommFailCode().equals(""))
 		{
-			switch (Integer.parseInt(responseObj.getCreCust().getCommFailCode()))
+			if(responseObj.getCreCust().getCommFailCode().equals("8"))
 			{
-			case 8:
 				throw new TooManyAccountsException(Integer.parseInt(responseObj.getCreCust().getCommFailCode()));
-			default:
-				break;
 			}
 
 			throw new InvalidCustomerException("An unexpected error occured");
@@ -734,12 +730,9 @@ public class WebController implements WebMvcConfigurer
 
 	public static void checkIfResponseValidDeleteAcc(DeleteAccountJson responseObj) throws ItemNotFoundException
 	{
-		switch (responseObj.getDELACC_COMMAREA().getDELACC_DEL_FAIL_CD())
+		if(responseObj.getDelaccCommarea().getDelaccDelFailCode() == 1)
 		{
-		case 1:
 			throw new ItemNotFoundException(ACCOUNT);
-		default:
-			break;
 		}
 	}
 
@@ -796,7 +789,7 @@ public class WebController implements WebMvcConfigurer
 
 	public static void checkIfResponseValidDeleteCust(DeleteCustomerJson responseObj) throws ItemNotFoundException
 	{
-		if(responseObj.getDELCUS().getCOMM_DEL_FAIL_CD() == 1)
+		if(responseObj.getDelcus().getCommDelFailCode() == 1)
 		{
 			throw new ItemNotFoundException(CUSTOMER);
 		}

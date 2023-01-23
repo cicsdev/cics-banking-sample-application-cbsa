@@ -16,38 +16,38 @@ public class DeleteCustomerJson
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
-	private DelcusJson DELCUS;
+	private DelcusJson delcus;
 
 	public DeleteCustomerJson()
 	{
 		super();
 	}
 
-	public DelcusJson getDELCUS()
+	public DelcusJson getDelcus()
 	{
-		return DELCUS;
+		return delcus;
 	}
 
-	public void setDELCUS(DelcusJson dELCUS)
+	public void setDelcus(DelcusJson delcusIn)
 	{
-		DELCUS = dELCUS;
+		delcus = delcusIn;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "DeleteCustomerJson [DELCUS=" + DELCUS.toString() + "]";
+		return "DeleteCustomerJson [DELCUS=" + delcus.toString() + "]";
 	}
 
 	public String toPrettyString()
 	{
 		String output = "";
-		output += "Customer Number:       " + OutputFormatUtils.leadingZeroes(10, DELCUS.getCOMM_CUSTNO()) + "\n"
-				+ "Sort Code:      " + DELCUS.getCOMM_SCODE() + "\n" + "Customer Name:         " + DELCUS.getCOMM_NAME()
-				+ "\n" + "Customer Address:    " + DELCUS.getCOMM_ADDR() + "\n" + "Date of Birth:       "
-				+ OutputFormatUtils.date(DELCUS.getCOMM_DOB()) + "\n" + "Credit score:        "
-				+ DELCUS.getCOMM_CREDIT_SCORE() + "\n" + "Next review date:            "
-				+ DELCUS.getCOMM_CS_REVIEW_DATE() + "\n";
+		output += "Customer Number:       " + OutputFormatUtils.leadingZeroes(10, delcus.getCommCustno()) + "\n"
+				+ "Sort Code:      " + delcus.getCommSortcode() + "\n" + "Customer Name:         " + delcus.getCommName()
+				+ "\n" + "Customer Address:    " + delcus.getCommAddress() + "\n" + "Date of Birth:       "
+				+ OutputFormatUtils.date(delcus.getCommDateOfBirth()) + "\n" + "Credit score:        "
+				+ delcus.getCommCreditScore() + "\n" + "Next review date:            "
+				+ delcus.getCommCsReviewDate() + "\n";
 		return output;
 	}
 }

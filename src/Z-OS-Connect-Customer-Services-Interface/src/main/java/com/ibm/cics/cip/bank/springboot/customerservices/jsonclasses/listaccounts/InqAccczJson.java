@@ -17,79 +17,79 @@ public class InqAccczJson
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
-	private int COMM_FAIL_CODE;
-	private int CUSTOMER_NUMBER;
-	private List<AccountDetails> ACCOUNT_DETAILS;
-	private String COMM_PCB_POINTER;
-	private String CUSTOMER_FOUND;
-	private String COMM_SUCCESS;
+	private int commFailCode;
+	private int customerNumber;
+	private List<AccountDetails> accountDetails;
+	private String commPcbPointer;
+	private String customerFound;
+	private String commSuccess;
 
 
-	public int getCOMM_FAIL_CODE()
+	public int getCommFailCode()
 	{
-		return COMM_FAIL_CODE;
+		return commFailCode;
 	}
 
-	public void setCOMM_FAIL_CODE(int cOMM_FAIL_CODE)
+	public void setCommFailCode(int commFailCodeIn)
 	{
-		COMM_FAIL_CODE = cOMM_FAIL_CODE;
+		commFailCode = commFailCodeIn;
 	}
 
-	public int getCUSTOMER_NUMBER()
+	public int getCustomerNumber()
 	{
-		return CUSTOMER_NUMBER;
+		return customerNumber;
 	}
 
-	public void setCUSTOMER_NUMBER(int cUSTOMER_NUMBER)
+	public void setCustomerNumber(int customerNumberIn)
 	{
-		CUSTOMER_NUMBER = cUSTOMER_NUMBER;
+		customerNumber = customerNumberIn;
 	}
 
-	public List<AccountDetails> getACCOUNT_DETAILS()
+	public List<AccountDetails> getAccountDetails()
 	{
-		return ACCOUNT_DETAILS;
+		return accountDetails;
 	}
 
-	public void setACCOUNT_DETAILS(List<AccountDetails> aCCOUNT_DETAILS)
+	public void setAccountDetails(List<AccountDetails> accountDetailsIn)
 	{
-		ACCOUNT_DETAILS = aCCOUNT_DETAILS;
+		accountDetails = accountDetailsIn;
 	}
 
-	public String getCOMM_PCB_POINTER()
+	public String getCommPcbPointer()
 	{
-		return COMM_PCB_POINTER;
+		return commPcbPointer;
 	}
 
-	public void setCOMM_PCB_POINTER(String cOMM_PCB_POINTER)
+	public void setCommPcbPointer(String commPcbPointerIn)
 	{
-		COMM_PCB_POINTER = cOMM_PCB_POINTER;
+		commPcbPointer = commPcbPointerIn;
 	}
 
-	public String getCUSTOMER_FOUND()
+	public String getCustomerFound()
 	{
-		return CUSTOMER_FOUND;
+		return customerFound;
 	}
 
-	public void setCUSTOMER_FOUND(String cUSTOMER_FOUND)
+	public void setCustomerFound(String customerFoundIn)
 	{
-		CUSTOMER_FOUND = cUSTOMER_FOUND;
+		customerFound = customerFoundIn;
 	}
 
-	public String getCOMM_SUCCESS()
+	public String getCommSuccess()
 	{
-		return COMM_SUCCESS;
+		return commSuccess;
 	}
 
-	public void setCOMM_SUCCESS(String cOMM_SUCCESS)
+	public void setCommSuccess(String commSuccessIn)
 	{
-		COMM_SUCCESS = cOMM_SUCCESS;
+		commSuccess = commSuccessIn;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "InqAccczJson [ACCOUNT_DETAILS=" + ACCOUNT_DETAILS + ", COMM_FAIL_CODE=" + COMM_FAIL_CODE
-				+ ", COMM_PCB_POINTER=" + COMM_PCB_POINTER + ", COMM_SUCCESS=" + COMM_SUCCESS + ", CUSTOMER_FOUND="
-				+ CUSTOMER_FOUND + ", CUSTOMER_NUMBER=" + CUSTOMER_NUMBER + "]";
+		return "InqAccczJson [ACCOUNT_DETAILS=" + accountDetails + ", COMM_FAIL_CODE=" + commFailCode
+				+ ", COMM_PCB_POINTER=" + commPcbPointer + ", COMM_SUCCESS=" + commSuccess + ", CUSTOMER_FOUND="
+				+ customerFound + ", CUSTOMER_NUMBER=" + customerNumber + "]";
 	}
 }

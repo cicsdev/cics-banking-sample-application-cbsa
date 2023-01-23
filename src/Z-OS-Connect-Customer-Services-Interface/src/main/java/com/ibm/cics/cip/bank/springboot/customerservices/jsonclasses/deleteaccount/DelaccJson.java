@@ -16,258 +16,259 @@ public class DelaccJson
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
-	private String DELACC_SUCCESS;
-	private String DELACC_LAST_STMT_DT;
-	private float DELACC_INT_RATE;
-	private int DELACC_DEL_FAIL_CD;
-	private String DELACC_SCODE;
-	private String DELACC_DEL_PCB1;
-	private String DELACC_OPENED;
-	private AccountType DELACC_ACC_TYPE;
-	private String DELACC_NEXT_STMT_DT;
-	private float DELACC_ACTUAL_BAL;
-	private float DELACC_AVAIL_BAL;
-	private String DELACC_CUSTNO;
-	private String DELACC_DEL_PCB3;
-	private String DELACC_DEL_PCB2;
-	private int DELACC_ACCNO;
-	private int DELACC_OVERDRAFT;
-	private int DELACC_FAIL_CD;
-	private String DELACC_EYE;
-	private String DELACC_DEL_APPLID;
-	private String DELACC_DEL_SUCCESS;
+	private String delaccSuccess;
+	private String delaccLastStatementDate;
+	private float delaccInterestRate;
+	private int delaccDelFailCode;
+	private String delaccSortcode;
+	private String delaccDelPcb1;
+	private String delaccOpened;
+	private AccountType delaccAccType;
+	private String delaccNextStatementDate;
+	private float delaccActualBalance;
+	private float delaccAvailableBalance;
+	private String delaccCustno;
+	private String delaccDelPcb3;
+	private String delaccDelPcb2;
+	private int delaccAccno;
+	private int delaccOverdraft;
+	private int delaccFailCode;
+	private String delaccEye;
+	private String delaccDelApplid;
+	private String delaccDelSuccess;
 
 	public DelaccJson()
 	{
+		super();
 	}
 
-	public String getDELACC_SUCCESS()
+	public String getDelaccSuccess()
 	{
-		return DELACC_SUCCESS;
+		return delaccSuccess;
 	}
 
-	public void setDELACC_SUCCESS(String dELACC_SUCCESS)
+	public void setDelaccSuccess(String delaccSuccessIn)
 	{
-		DELACC_SUCCESS = dELACC_SUCCESS;
+		delaccSuccess = delaccSuccessIn;
 	}
 
-	public String getDELACC_LAST_STMT_DT()
+	public String getDelaccLastStatementDate()
 	{
-		return DELACC_LAST_STMT_DT;
+		return delaccLastStatementDate;
 	}
 
-	public void setDELACC_LAST_STMT_DT(String dELACC_LAST_STMT_DT)
+	public void setDelAccLastStatementDate(String delaccLastStatementDateIn)
 	{
-		DELACC_LAST_STMT_DT = dELACC_LAST_STMT_DT;
+		delaccLastStatementDate = delaccLastStatementDateIn;
 	}
 
-	public float getDELACC_INT_RATE()
+	public float getDelaccInterestRate()
 	{
-		return DELACC_INT_RATE;
+		return delaccInterestRate;
 	}
 
-	public void setDELACC_INT_RATE(float dELACC_INT_RATE)
+	public void setDelaccInterestRate(float delaccInterestRateIn)
 	{
-		DELACC_INT_RATE = dELACC_INT_RATE;
+		delaccInterestRate = delaccInterestRateIn;
 	}
 
-	public int getDELACC_DEL_FAIL_CD()
+	public int getDelaccDelFailCode()
 	{
-		return DELACC_DEL_FAIL_CD;
+		return delaccDelFailCode;
 	}
 
-	public void setDELACC_DEL_FAIL_CD(int dELACC_DEL_FAIL_CD)
+	public void delaccDelFailCode(int delaccDelFailCodeIn)
 	{
-		DELACC_DEL_FAIL_CD = dELACC_DEL_FAIL_CD;
+		delaccDelFailCode = delaccDelFailCodeIn;
 	}
 
-	public String getDELACC_SCODE()
+	public String getDelaccSortcode()
 	{
-		return DELACC_SCODE;
+		return delaccSortcode;
 	}
 
-	public void setDELACC_SCODE(String dELACC_SCODE)
+	public void setDelaccSortcode(String delaccSortcodeIn)
 	{
-		DELACC_SCODE = dELACC_SCODE;
+		delaccSortcode = delaccSortcodeIn;
 	}
 
-	public String getDELACC_DEL_PCB1()
+	public String getDelaccDelPcb1()
 	{
-		return DELACC_DEL_PCB1;
+		return delaccDelPcb1;
 	}
 
-	public void setDELACC_DEL_PCB1(String dELACC_DEL_PCB1)
+	public void setDelaccDelPcb1(String delaccDelPcb1In)
 	{
-		DELACC_DEL_PCB1 = dELACC_DEL_PCB1;
+		delaccDelPcb1 = delaccDelPcb1In;
 	}
 
-	public String getDELACC_OPENED()
+	public String getDelaccOpened()
 	{
-		return DELACC_OPENED;
+		return delaccOpened;
 	}
 
-	public void setDELACC_OPENED(String dELACC_OPENED)
+	public void setDelaccOpened(String delaccOpenedIn)
 	{
-		DELACC_OPENED = dELACC_OPENED;
+		delaccOpened = delaccOpenedIn;
 	}
 
-	public AccountType getDELACC_ACC_TYPE()
+	public AccountType getDelaccAccType()
 	{
-		return DELACC_ACC_TYPE;
+		return delaccAccType;
 	}
 
-	public void setDELACC_ACC_TYPE(AccountType dELACC_ACC_TYPE)
+	public void setDelaccAccType(AccountType delaccAccTypeIn)
 	{
-		DELACC_ACC_TYPE = dELACC_ACC_TYPE;
+		delaccAccType = delaccAccTypeIn;
 	}
 
 	// If you delete the same account twice, there's no value for an empty
 	// string in AccountType, so this sets it to null.
-	public void setDELACC_ACC_TYPE(String dELACC_ACC_TYPE)
+	public void setDelaccAccType(String delaccAccTypeIn)
 	{
-		if (dELACC_ACC_TYPE.equals(""))
+		if (delaccAccTypeIn.equals(""))
 		{
-			DELACC_ACC_TYPE = null;
+			delaccAccType = null;
 		}
 		else
 		{
-			DELACC_ACC_TYPE = AccountType.valueOf(dELACC_ACC_TYPE.toUpperCase());
+			delaccAccType = AccountType.valueOf(delaccAccTypeIn.toUpperCase());
 		}
 	}
 
-	public String getDELACC_NEXT_STMT_DT()
+	public String getDelaccNextStatementDate()
 	{
-		return DELACC_NEXT_STMT_DT;
+		return delaccNextStatementDate;
 	}
 
-	public void setDELACC_NEXT_STMT_DT(String dELACC_NEXT_STMT_DT)
+	public void setDelaccNextStatementDate(String delaccNextStatementDateIn)
 	{
-		DELACC_NEXT_STMT_DT = dELACC_NEXT_STMT_DT;
+		delaccNextStatementDate = delaccNextStatementDateIn;
 	}
 
-	public float getDELACC_ACTUAL_BAL()
+	public float getDelaccActualBalance()
 	{
-		return DELACC_ACTUAL_BAL;
+		return delaccActualBalance;
 	}
 
-	public void setDELACC_ACTUAL_BAL(float dELACC_ACTUAL_BAL)
+	public void setDelaccActualBalance(float delaccActualBalanceIn)
 	{
-		DELACC_ACTUAL_BAL = dELACC_ACTUAL_BAL;
+		delaccActualBalance = delaccActualBalanceIn;
 	}
 
-	public float getDELACC_AVAIL_BAL()
+	public float getDelaccAvailableBalance()
 	{
-		return DELACC_AVAIL_BAL;
+		return delaccAvailableBalance;
 	}
 
-	public void setDELACC_AVAIL_BAL(float dELACC_AVAIL_BAL)
+	public void setDelaccAvailableBalance(float delaccAvailableBalanceIn)
 	{
-		DELACC_AVAIL_BAL = dELACC_AVAIL_BAL;
+		delaccAvailableBalance = delaccAvailableBalanceIn;
 	}
 
-	public String getDELACC_CUSTNO()
+	public String getDelaccCustno()
 	{
-		return DELACC_CUSTNO;
+		return delaccCustno;
 	}
 
-	public void setDELACC_CUSTNO(String dELACC_CUSTNO)
+	public void setDelaccCustno(String delAccCustnoIn)
 	{
-		DELACC_CUSTNO = dELACC_CUSTNO;
+		delaccCustno = delAccCustnoIn;
 	}
 
-	public String getDELACC_DEL_PCB3()
+	public String getDelaccDelPcb3()
 	{
-		return DELACC_DEL_PCB3;
+		return delaccDelPcb3;
 	}
 
-	public void setDELACC_DEL_PCB3(String dELACC_DEL_PCB3)
+	public void setDelaccDelPcb3(String delaccDelPcb3In)
 	{
-		DELACC_DEL_PCB3 = dELACC_DEL_PCB3;
+		delaccDelPcb3 = delaccDelPcb3In;
 	}
 
-	public String getDELACC_DEL_PCB2()
+	public String getDelaccDelPcb2()
 	{
-		return DELACC_DEL_PCB2;
+		return delaccDelPcb2;
 	}
 
-	public void setDELACC_DEL_PCB2(String dELACC_DEL_PCB2)
+	public void setDelaccDelPcb2(String delaccDelPcb2In)
 	{
-		DELACC_DEL_PCB2 = dELACC_DEL_PCB2;
+		delaccDelPcb2 = delaccDelPcb2In;
 	}
 
-	public int getDELACC_ACCNO()
+	public int getDelaccAccno()
 	{
-		return DELACC_ACCNO;
+		return delaccAccno;
 	}
 
-	public void setDELACC_ACCNO(int dELACC_ACCNO)
+	public void setDelaccAccno(int delaccAccnoIn)
 	{
-		DELACC_ACCNO = dELACC_ACCNO;
+		delaccAccno = delaccAccnoIn;
 	}
 
-	public int getDELACC_OVERDRAFT()
+	public int getDelaccOverdraft()
 	{
-		return DELACC_OVERDRAFT;
+		return delaccOverdraft;
 	}
 
-	public void setDELACC_OVERDRAFT(int dELACC_OVERDRAFT)
+	public void setDelaccOverdraft(int delaccOverdraftIn)
 	{
-		DELACC_OVERDRAFT = dELACC_OVERDRAFT;
+		delaccOverdraft = delaccOverdraftIn;
 	}
 
-	public int getDELACC_FAIL_CD()
+	public int getDelaccFailCode()
 	{
-		return DELACC_FAIL_CD;
+		return delaccFailCode;
 	}
 
-	public void setDELACC_FAIL_CD(int dELACC_FAIL_CD)
+	public void setDelaccFailCode(int delaccFailCodeIn)
 	{
-		DELACC_FAIL_CD = dELACC_FAIL_CD;
+		delaccFailCode = delaccFailCodeIn;
 	}
 
-	public String getDELACC_EYE()
+	public String getDelaccEye()
 	{
-		return DELACC_EYE;
+		return delaccEye;
 	}
 
-	public void setDELACC_EYE(String dELACC_EYE)
+	public void setDelaccEye(String delaccEyeIn)
 	{
-		DELACC_EYE = dELACC_EYE;
+		delaccEye = delaccEyeIn;
 	}
 
-	public String getDELACC_DEL_APPLID()
+	public String getDelaccDelApplid()
 	{
-		return DELACC_DEL_APPLID;
+		return delaccDelApplid;
 	}
 
-	public void setDELACC_DEL_APPLID(String dELACC_DEL_APPLID)
+	public void setDelaccDelApplid(String delaccDelApplidIn)
 	{
-		DELACC_DEL_APPLID = dELACC_DEL_APPLID;
+		delaccDelApplid = delaccDelApplidIn;
 	}
 
-	public String getDELACC_DEL_SUCCESS()
+	public String getDelaccDelSuccess()
 	{
-		return DELACC_DEL_SUCCESS;
+		return delaccDelSuccess;
 	}
 
-	public void setDELACC_DEL_SUCCESS(String dELACC_DEL_SUCCESS)
+	public void setDelaccDelSuccess(String delaccDelSuccessIn)
 	{
-		DELACC_DEL_SUCCESS = dELACC_DEL_SUCCESS;
+		delaccDelSuccess = delaccDelSuccessIn;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "DelaccJson [DELACC_ACCNO=" + DELACC_ACCNO + ", DELACC_ACC_TYPE=" + DELACC_ACC_TYPE
-				+ ", DELACC_ACTUAL_BAL=" + DELACC_ACTUAL_BAL + ", DELACC_AVAIL_BAL=" + DELACC_AVAIL_BAL
-				+ ", DELACC_CUSTNO=" + DELACC_CUSTNO + ", DELACC_DEL_APPLID=" + DELACC_DEL_APPLID
-				+ ", DELACC_DEL_FAIL_CD=" + DELACC_DEL_FAIL_CD + ", DELACC_DEL_PCB1=" + DELACC_DEL_PCB1
-				+ ", DELACC_DEL_PCB2=" + DELACC_DEL_PCB2 + ", DELACC_DEL_PCB3=" + DELACC_DEL_PCB3
-				+ ", DELACC_DEL_SUCCESS=" + DELACC_DEL_SUCCESS + ", DELACC_EYE=" + DELACC_EYE + ", DELACC_FAIL_CD="
-				+ DELACC_FAIL_CD + ", DELACC_INT_RATE=" + DELACC_INT_RATE + ", DELACC_LAST_STMT_DT="
-				+ DELACC_LAST_STMT_DT + ", DELACC_NEXT_STMT_DT=" + DELACC_NEXT_STMT_DT + ", DELACC_OPENED="
-				+ DELACC_OPENED + ", DELACC_OVERDRAFT=" + DELACC_OVERDRAFT + ", DELACC_SCODE=" + DELACC_SCODE
-				+ ", DELACC_SUCCESS=" + DELACC_SUCCESS + "]";
+		return "DelaccJson [DELACC_ACCNO=" + delaccAccno + ", DELACC_ACC_TYPE=" + delaccAccType
+				+ ", DELACC_ACTUAL_BAL=" + delaccActualBalance + ", DELACC_AVAIL_BAL=" + delaccAvailableBalance
+				+ ", DELACC_CUSTNO=" + delaccCustno + ", DELACC_DEL_APPLID=" + delaccDelApplid
+				+ ", DELACC_DEL_FAIL_CD=" + delaccDelFailCode + ", DELACC_DEL_PCB1=" + delaccDelPcb1
+				+ ", DELACC_DEL_PCB2=" + delaccDelPcb2 + ", DELACC_DEL_PCB3=" + delaccDelPcb3
+				+ ", DELACC_DEL_SUCCESS=" + delaccDelSuccess + ", DELACC_EYE=" + delaccEye + ", DELACC_FAIL_CD="
+				+ delaccFailCode + ", DELACC_INT_RATE=" + delaccInterestRate + ", DELACC_LAST_STMT_DT="
+				+ delaccLastStatementDate + ", DELACC_NEXT_STMT_DT=" + delaccNextStatementDate + ", DELACC_OPENED="
+				+ delaccOpened + ", DELACC_OVERDRAFT=" + delaccOverdraft + ", DELACC_SCODE=" + delaccSortcode
+				+ ", DELACC_SUCCESS=" + delaccSuccess + "]";
 	}
 
 }

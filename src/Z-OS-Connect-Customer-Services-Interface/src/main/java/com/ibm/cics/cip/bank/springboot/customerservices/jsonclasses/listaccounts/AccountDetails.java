@@ -17,162 +17,162 @@ public class AccountDetails
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 	private static final String FLOAT_FORMAT = "%.02f";
 
-	private float COMM_ACTUAL_BAL;
-	private float COMM_AVAIL_BAL;
-	private int COMM_SCODE;
-	private float COMM_INT_RATE;
-	private String COMM_EYE;
-	private int COMM_OPENED;
-	private int COMM_CUSTNO;
-	private int COMM_NEXT_STMT_DT;
-	private String COMM_ACC_TYPE;
-	private int COMM_OVERDRAFT;
-	private int COMM_ACCNO;
-	private int COMM_LAST_STMT_DT;
+	private float commActualBalance;
+	private float commAvailableBalance;
+	private int commSortcode;
+	private float commInterestRate;
+	private String commEye;
+	private int commOpened;
+	private int commCustno;
+	private int commNextStatementDate;
+	private String commAccType;
+	private int commOverdraft;
+	private int commAccno;
+	private int commLastStatementDate;
 
 
-	public float getCOMM_ACTUAL_BAL()
+	public float getCommActualBalance()
 	{
-		return COMM_ACTUAL_BAL;
+		return commActualBalance;
 	}
 
-	public void setCOMM_ACTUAL_BAL(float cOMM_ACTUAL_BAL)
+	public void setCommActualBalance(float commActualBalanceIn)
 	{
-		COMM_ACTUAL_BAL = cOMM_ACTUAL_BAL;
+		commActualBalance = commActualBalanceIn;
 	}
 
-	public float getCOMM_AVAIL_BAL()
+	public float getCommAvailableBalance()
 	{
-		return COMM_AVAIL_BAL;
+		return commAvailableBalance;
 	}
 
-	public void setCOMM_AVAIL_BAL(float cOMM_AVAIL_BAL)
+	public void setCommAvailableBalance(float commAvailableBalanceIn)
 	{
-		COMM_AVAIL_BAL = cOMM_AVAIL_BAL;
+		commAvailableBalance = commAvailableBalanceIn;
 	}
 
-	public int getCOMM_SCODE()
+	public int getCommSortcode()
 	{
-		return COMM_SCODE;
+		return commSortcode;
 	}
 
-	public void setCOMM_SCODE(int cOMM_SCODE)
+	public void setCommSortcode(int commSortcodeIn)
 	{
-		COMM_SCODE = cOMM_SCODE;
+		commSortcode = commSortcodeIn;
 	}
 
-	public float getCOMM_INT_RATE()
+	public float getCommInterestRate()
 	{
-		return COMM_INT_RATE;
+		return commInterestRate;
 	}
 
-	public void setCOMM_INT_RATE(float cOMM_INT_RATE)
+	public void setCommInterestRate(float commInterestRateIn)
 	{
-		COMM_INT_RATE = cOMM_INT_RATE;
+		commInterestRate = commInterestRateIn;
 	}
 
-	public String getCOMM_EYE()
+	public String getCommEye()
 	{
-		return COMM_EYE;
+		return commEye;
 	}
 
-	public void setCOMM_EYE(String cOMM_EYE)
+	public void setCommEye(String commEyeIn)
 	{
-		COMM_EYE = cOMM_EYE;
+		commEye = commEyeIn;
 	}
 
-	public int getCOMM_OPENED()
+	public int getCommOpened()
 	{
-		return COMM_OPENED;
+		return commOpened;
 	}
 
-	public void setCOMM_OPENED(int cOMM_OPENED)
+	public void setCommOpened(int commOpenedIn)
 	{
-		COMM_OPENED = cOMM_OPENED;
+		commOpened = commOpenedIn;
 	}
 
-	public int getCOMM_CUSTNO()
+	public int getCommCustno()
 	{
-		return COMM_CUSTNO;
+		return commCustno;
 	}
 
-	public void setCOMM_CUSTNO(int cOMM_CUSTNO)
+	public void setCommCustno(int commCustnoIn)
 	{
-		COMM_CUSTNO = cOMM_CUSTNO;
+		commCustno = commCustnoIn;
 	}
 
-	public int getCOMM_NEXT_STMT_DT()
+	public int getCommNextStatementDate()
 	{
-		return COMM_NEXT_STMT_DT;
+		return commNextStatementDate;
 	}
 
-	public void setCOMM_NEXT_STMT_DT(int cOMM_NEXT_STMT_DT)
+	public void setCommNextStatementDate(int commNextStatementDateIn)
 	{
-		COMM_NEXT_STMT_DT = cOMM_NEXT_STMT_DT;
+		commNextStatementDate = commNextStatementDateIn;
 	}
 
-	public String getCOMM_ACC_TYPE()
+	public String getCommAccType()
 	{
-		return COMM_ACC_TYPE;
+		return commAccType;
 	}
 
-	public void setCOMM_ACC_TYPE(String cOMM_ACC_TYPE)
+	public void setCommAccType(String commAccTypeIn)
 	{
-		COMM_ACC_TYPE = cOMM_ACC_TYPE;
+		commAccType = commAccTypeIn;
 	}
 
-	public int getCOMM_OVERDRAFT()
+	public int getCommOverdraft()
 	{
-		return COMM_OVERDRAFT;
+		return commOverdraft;
 	}
 
-	public void setCOMM_OVERDRAFT(int cOMM_OVERDRAFT)
+	public void setCommOverdraft(int commOverdraftIn)
 	{
-		COMM_OVERDRAFT = cOMM_OVERDRAFT;
+		commOverdraft = commOverdraftIn;
 	}
 
-	public int getCOMM_ACCNO()
+	public int getCommAccno()
 	{
-		return COMM_ACCNO;
+		return commAccno;
 	}
 
-	public void setCOMM_ACCNO(int cOMM_ACCNO)
+	public void setCommAccno(int commAccnoIn)
 	{
-		COMM_ACCNO = cOMM_ACCNO;
+		commAccno = commAccnoIn;
 	}
 
-	public int getCOMM_LAST_STMT_DT()
+	public int getCommLastStatementDate()
 	{
-		return COMM_LAST_STMT_DT;
+		return commLastStatementDate;
 	}
 
-	public void setCOMM_LAST_STMT_DT(int cOMM_LAST_STMT_DT)
+	public void setCommLastStatementDate(int commLastStatementDateIn)
 	{
-		COMM_LAST_STMT_DT = cOMM_LAST_STMT_DT;
+		commLastStatementDate = commLastStatementDateIn;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "AccountDetails [COMM_ACCNO=" + COMM_ACCNO + ", COMM_ACC_TYPE=" + COMM_ACC_TYPE + ", COMM_ACTUAL_BAL="
-				+ COMM_ACTUAL_BAL + ", COMM_CUSTNO=" + COMM_CUSTNO + ", COMM_EYE=" + COMM_EYE + ", COMM_INT_RATE="
-				+ COMM_INT_RATE + ", COMM_LAST_STMT_DT=" + COMM_LAST_STMT_DT + ", COMM_NEXT_STMT_DT="
-				+ COMM_NEXT_STMT_DT + ", COMM_OPENED=" + COMM_OPENED + ", COMM_OVERDRAFT=" + COMM_OVERDRAFT
-				+ ", COMM_SCODE=" + COMM_SCODE + "]";
+		return "AccountDetails [COMM_ACCNO=" + commAccno + ", COMM_ACC_TYPE=" + commAccType + ", COMM_ACTUAL_BAL="
+				+ commActualBalance + ", COMM_CUSTNO=" + commCustno + ", COMM_EYE=" + commEye + ", COMM_INT_RATE="
+				+ commInterestRate + ", COMM_LAST_STMT_DT=" + commLastStatementDate + ", COMM_NEXT_STMT_DT="
+				+ commNextStatementDate + ", COMM_OPENED=" + commOpened + ", COMM_OVERDRAFT=" + commOverdraft
+				+ ", COMM_SCODE=" + commSortcode + "]";
 	}
 
 	public String toPrettyString()
 	{
 		String output = "";
-		output += "Account Number:       " + OutputFormatUtils.leadingZeroes(8, COMM_ACCNO) + "\n"
-				+ "Sort Code:            " + String.format("%06d", COMM_SCODE) + "\n" + "Customer Number:      "
-				+ OutputFormatUtils.leadingZeroes(10, COMM_CUSTNO) + "\n" + "Account Type:         " + COMM_ACC_TYPE
-				+ "\n" + "Available Balance:    " + String.format(FLOAT_FORMAT, COMM_AVAIL_BAL) + "\n"
-				+ "Actual Balance:       " + String.format(FLOAT_FORMAT, COMM_ACTUAL_BAL) + "\n" + "Interest Rate:        "
-				+ String.format(FLOAT_FORMAT, COMM_INT_RATE) + "\n" + "Overdraft:            " + COMM_OVERDRAFT + "\n"
-				+ "Account Opened: " + OutputFormatUtils.date(COMM_OPENED) + "\n" + "Next Statement Date:  "
-				+ OutputFormatUtils.date(COMM_NEXT_STMT_DT) + "\n" + "Last Statement Date:  "
-				+ OutputFormatUtils.date(COMM_LAST_STMT_DT) + "\n";
+		output += "Account Number:       " + OutputFormatUtils.leadingZeroes(8, commAccno) + "\n"
+				+ "Sort Code:            " + String.format("%06d", commSortcode) + "\n" + "Customer Number:      "
+				+ OutputFormatUtils.leadingZeroes(10, commCustno) + "\n" + "Account Type:         " + commAccType
+				+ "\n" + "Available Balance:    " + String.format(FLOAT_FORMAT, commAvailableBalance) + "\n"
+				+ "Actual Balance:       " + String.format(FLOAT_FORMAT, commActualBalance) + "\n" + "Interest Rate:        "
+				+ String.format(FLOAT_FORMAT, commInterestRate) + "\n" + "Overdraft:            " + commOverdraft + "\n"
+				+ "Account Opened: " + OutputFormatUtils.date(commOpened) + "\n" + "Next Statement Date:  "
+				+ OutputFormatUtils.date(commNextStatementDate) + "\n" + "Last Statement Date:  "
+				+ OutputFormatUtils.date(commLastStatementDate) + "\n";
 		return output;
 	}
 
