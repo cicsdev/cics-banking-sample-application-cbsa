@@ -48,8 +48,8 @@ public class CreateCustomerJson
 	{
 		String output = "";
 		output += "Customer Number:       "
-				+ OutputFormatUtils.leadingZeroes(10, CRECUST.getCOMM_KEY().getCOMM_NUMBER()) + "\n"
-				+ "Sort Code:      " + String.format("%06d", CRECUST.getCOMM_KEY().getCOMM_SORTCODE()) + "\n"
+				+ OutputFormatUtils.leadingZeroes(10, CRECUST.getCOMM_KEY().getCommNumber()) + "\n"
+				+ "Sort Code:      " + String.format("%06d", CRECUST.getCOMM_KEY().getCommSortcode()) + "\n"
 				+ "Customer Name:         " + CRECUST.getCOMM_NAME() + "\n" + "Customer Address:    "
 				+ CRECUST.getCOMM_ADDRESS() + "\n" + "Date of Birth:       "
 				+ OutputFormatUtils.date(CRECUST.getCOMM_DATE_OF_BIRTH()) + "\n" + "Credit score:        "

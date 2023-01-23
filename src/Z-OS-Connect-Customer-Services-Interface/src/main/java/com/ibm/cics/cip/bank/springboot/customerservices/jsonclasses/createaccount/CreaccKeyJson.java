@@ -15,38 +15,38 @@ public class CreaccKeyJson
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
-	private int COMM_SORTCODE = 0;
-	private int COMM_NUMBER = 0;
+	private int commSortcode = 0;
+	private int commNumber = 0;
 
 	public CreaccKeyJson()
 	{
 		super();
 	}
 
-	public int getCOMM_SORTCODE()
+	public int getCommSortcode()
 	{
-		return COMM_SORTCODE;
+		return commSortcode;
 	}
 
-	public void setCOMM_SORTCODE(int cOMM_SORTCODE)
+	public void setCommSortcode(int commSortcodeIn)
 	{
-		COMM_SORTCODE = cOMM_SORTCODE;
+		commSortcode = commSortcodeIn;
 	}
 
-	public int getCOMM_NUMBER()
+	public int getCommNumber()
 	{
-		return COMM_NUMBER;
+		return commNumber;
 	}
 
-	public void setCOMM_NUMBER(int cOMM_NUMBER)
+	public void setCommNumber(int commNumberIn)
 	{
-		COMM_NUMBER = cOMM_NUMBER;
+		commNumber = commNumberIn;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "CreaccKeyJson [COMM_NUMBER=" + COMM_NUMBER + ", COMM_SORTCODE=" + COMM_SORTCODE + "]";
+		return "CreaccKeyJson [COMM_NUMBER=" + commNumber + ", COMM_SORTCODE=" + commSortcode + "]";
 	}
 
 }

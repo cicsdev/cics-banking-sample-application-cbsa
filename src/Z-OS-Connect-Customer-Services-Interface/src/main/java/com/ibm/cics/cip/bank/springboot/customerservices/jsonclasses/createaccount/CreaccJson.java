@@ -15,30 +15,30 @@ public class CreaccJson
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
-	private String COMM_ACC_TYPE;
-	private String COMM_CUSTNO;
-	private String COMM_EYECATCHER;
-	private CreaccKeyJson COMM_KEY = new CreaccKeyJson();
-	private float COMM_INT_RT = 0;
-	private int COMM_OPENED = 0;
-	private float COMM_OVERDR_LIM = 0;
-	private int COMM_LAST_STMT_DT = 0;
-	private int COMM_NEXT_STMT_DT = 0;
-	private float COMM_AVAIL_BAL = 0;
-	private float COMM_ACT_BAL = 0;
-	private String COMM_SUCCESS = " ";
-	private String COMM_FAIL_CODE = " ";
+	private String commAccType;
+	private String commCustno;
+	private String commEyecatcher;
+	private CreaccKeyJson commKey = new CreaccKeyJson();
+	private float commInterestRate = 0;
+	private int commOpened = 0;
+	private float commOverdraftLimit = 0;
+	private int commLastStatementDate = 0;
+	private int commNextStatementDate = 0;
+	private float commAvailableBalance = 0;
+	private float commActualBalance = 0;
+	private String commSuccess = " ";
+	private String commFailCode = " ";
 
 	public CreaccJson(String accountType, String accountNumber, float overdraftLimit, float interestRate)
 	{
-		COMM_ACC_TYPE = String.format("%-8s", accountType);
-		COMM_CUSTNO = String.format("%8s", accountNumber).replace(" ", "0");
+		commAccType = String.format("%-8s", accountType);
+		commCustno = String.format("%8s", accountNumber).replace(" ", "0");
 
-		COMM_OVERDR_LIM = overdraftLimit;
-		COMM_INT_RT = interestRate;
+		commOverdraftLimit = overdraftLimit;
+		commInterestRate = interestRate;
 
-		COMM_EYECATCHER = "    ";
-		COMM_KEY = new CreaccKeyJson();
+		commEyecatcher = "    ";
+		commKey = new CreaccKeyJson();
 
 	}
 
@@ -47,134 +47,134 @@ public class CreaccJson
 
 	}
 
-	public String getCOMM_EYECATCHER()
+	public String getCommEyecatcher()
 	{
-		return COMM_EYECATCHER;
+		return commEyecatcher;
 	}
 
-	public void setCOMM_EYECATCHER(String cOMM_EYECATCHER)
+	public void setCommEyecatcher(String commEyecatcherIn)
 	{
-		COMM_EYECATCHER = cOMM_EYECATCHER;
+		commEyecatcher = commEyecatcherIn;
 	}
 
-	public String getCOMM_CUSTNO()
+	public String getCommCustno()
 	{
-		return COMM_CUSTNO;
+		return commCustno;
 	}
 
-	public void setCOMM_CUSTNO(String cOMM_CUSTNO)
+	public void setCommCustno(String commCustnoIn)
 	{
-		COMM_CUSTNO = cOMM_CUSTNO;
+		commCustno = commCustnoIn;
 	}
 
-	public CreaccKeyJson getCOMM_KEY()
+	public CreaccKeyJson getCommKey()
 	{
-		return COMM_KEY;
+		return commKey;
 	}
 
-	public void setCOMM_KEY(CreaccKeyJson cOMM_KEY)
+	public void setCommKey(CreaccKeyJson commKeyIn)
 	{
-		COMM_KEY = cOMM_KEY;
+		commKey = commKeyIn;
 	}
 
-	public String getCOMM_ACC_TYPE()
+	public String getCommAccType()
 	{
-		return COMM_ACC_TYPE;
+		return commAccType;
 	}
 
-	public void setCOMM_ACC_TYPE(String cOMM_ACC_TYPE)
+	public void setCommAccType(String commAccTypeIn)
 	{
-		COMM_ACC_TYPE = cOMM_ACC_TYPE;
+		commAccType = commAccTypeIn;
 	}
 
-	public float getCOMM_INT_RT()
+	public float getCommInterestRate()
 	{
-		return COMM_INT_RT;
+		return commInterestRate;
 	}
 
-	public void setCOMM_INT_RT(float cOMM_INT_RT)
+	public void setCommInterestRate(float commInterestRateIn)
 	{
-		COMM_INT_RT = cOMM_INT_RT;
+		commInterestRate = commInterestRateIn;
 	}
 
-	public int getCOMM_OPENED()
+	public int getCommOpened()
 	{
-		return COMM_OPENED;
+		return commOpened;
 	}
 
-	public void setCOMM_OPENED(int cOMM_OPENED)
+	public void setCommOpened(int commOpenedIn)
 	{
-		COMM_OPENED = cOMM_OPENED;
+		commOpened = commOpenedIn;
 	}
 
-	public float getCOMM_OVERDR_LIM()
+	public float getCommOverdraftLimit()
 	{
-		return COMM_OVERDR_LIM;
+		return commOverdraftLimit;
 	}
 
-	public void setCOMM_OVERDR_LIM(float cOMM_OVERDR_LIM)
+	public void setCommOverdraftLimit(float commOverdraftLimitIn)
 	{
-		COMM_OVERDR_LIM = cOMM_OVERDR_LIM;
+		commOverdraftLimit = commOverdraftLimitIn;
 	}
 
-	public int getCOMM_LAST_STMT_DT()
+	public int getCommLastStatementDate()
 	{
-		return COMM_LAST_STMT_DT;
+		return commLastStatementDate;
 	}
 
-	public void setCOMM_LAST_STMT_DT(int cOMM_LAST_STMT_DT)
+	public void setCommLastStatementDate(int setCommLastStatementDateIn)
 	{
-		COMM_LAST_STMT_DT = cOMM_LAST_STMT_DT;
+		commLastStatementDate = setCommLastStatementDateIn;
 	}
 
-	public int getCOMM_NEXT_STMT_DT()
+	public int getCommNextStatementDate()
 	{
-		return COMM_NEXT_STMT_DT;
+		return commNextStatementDate;
 	}
 
-	public void setCOMM_NEXT_STMT_DT(int cOMM_NEXT_STMT_DT)
+	public void setCommNextStatementDate(int commNextStatementDateIn)
 	{
-		COMM_NEXT_STMT_DT = cOMM_NEXT_STMT_DT;
+		commNextStatementDate = commNextStatementDateIn;
 	}
 
-	public float getCOMM_AVAIL_BAL()
+	public float getCommAvailableBalance()
 	{
-		return COMM_AVAIL_BAL;
+		return commAvailableBalance;
 	}
 
-	public void setCOMM_AVAIL_BAL(float cOMM_AVAIL_BAL)
+	public void setCommAvailableBalance(float commAvailableBalanceIn)
 	{
-		COMM_AVAIL_BAL = cOMM_AVAIL_BAL;
+		commAvailableBalance = commAvailableBalanceIn;
 	}
 
-	public float getCOMM_ACT_BAL()
+	public float getCommActualBalance()
 	{
-		return COMM_ACT_BAL;
+		return commActualBalance;
 	}
 
-	public void setCOMM_ACT_BAL(float cOMM_ACT_BAL)
+	public void setCommActualBalance(float commActualBalanceIn)
 	{
-		COMM_ACT_BAL = cOMM_ACT_BAL;
+		commActualBalance = commActualBalanceIn;
 	}
 
-	public String getCOMM_SUCCESS()
+	public String getCommSuccess()
 	{
-		return COMM_SUCCESS;
+		return commSuccess;
 	}
 
-	public void setCOMM_SUCCESS(String cOMM_SUCCESS)
+	public void setCommSuccess(String commSuccessIn)
 	{
-		COMM_SUCCESS = cOMM_SUCCESS;
+		commSuccess = commSuccessIn;
 	}
 
-	public String getCOMM_FAIL_CODE()
+	public String getCommFailCode()
 	{
-		return COMM_FAIL_CODE;
+		return commFailCode;
 	}
 
-	public void setCOMM_FAIL_CODE(String cOMM_FAIL_CODE)
+	public void setCommFailCode(String commFailCodeIn)
 	{
-		COMM_FAIL_CODE = cOMM_FAIL_CODE;
+		commFailCode = commFailCodeIn;
 	}
 
 }

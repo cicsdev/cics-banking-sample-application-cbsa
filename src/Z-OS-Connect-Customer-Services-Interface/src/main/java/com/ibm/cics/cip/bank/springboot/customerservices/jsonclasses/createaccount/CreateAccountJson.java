@@ -51,17 +51,17 @@ public class CreateAccountJson
 	{
 		CreaccJson accInfo = CREACC;
 		String output = "";
-		output += "Account Number: " + OutputFormatUtils.leadingZeroes(8, accInfo.getCOMM_KEY().getCOMM_NUMBER()) + "\n"
-				+ "Sort Code: " + OutputFormatUtils.leadingZeroes(6, accInfo.getCOMM_KEY().getCOMM_SORTCODE()) + "\n"
-				+ "Account Type: " + accInfo.getCOMM_ACC_TYPE() + "\n" + "Customer Number: "
-				+ OutputFormatUtils.leadingZeroes(10, accInfo.getCOMM_CUSTNO()) + "\n" + "Interest Rate: "
-				+ String.format(FLOAT_FORMAT, accInfo.getCOMM_INT_RT()) + "\n" + "Overdraft Limit: "
-				+ accInfo.getCOMM_OVERDR_LIM() + "\n" + "Available Balance: "
-				+ String.format(FLOAT_FORMAT, accInfo.getCOMM_AVAIL_BAL()) + "\n" + "Actual Balance: "
-				+ String.format(FLOAT_FORMAT, accInfo.getCOMM_ACT_BAL()) + "\n" + "Account Opened: "
-				+ OutputFormatUtils.date(accInfo.getCOMM_OPENED()) + "\n" + "Last Statement Date: "
-				+ OutputFormatUtils.date(accInfo.getCOMM_LAST_STMT_DT()) + "\n" + "Next Statement Date: "
-				+ OutputFormatUtils.date(accInfo.getCOMM_NEXT_STMT_DT()) + "\n";
+		output += "Account Number: " + OutputFormatUtils.leadingZeroes(8, accInfo.getCommKey().getCommNumber()) + "\n"
+				+ "Sort Code: " + OutputFormatUtils.leadingZeroes(6, accInfo.getCommKey().getCommSortcode()) + "\n"
+				+ "Account Type: " + accInfo.getCommAccType() + "\n" + "Customer Number: "
+				+ OutputFormatUtils.leadingZeroes(10, accInfo.getCommCustno()) + "\n" + "Interest Rate: "
+				+ String.format(FLOAT_FORMAT, accInfo.getCommInterestRate()) + "\n" + "Overdraft Limit: "
+				+ accInfo.getCommOverdraftLimit() + "\n" + "Available Balance: "
+				+ String.format(FLOAT_FORMAT, accInfo.getCommAvailableBalance()) + "\n" + "Actual Balance: "
+				+ String.format(FLOAT_FORMAT, accInfo.getCommActualBalance()) + "\n" + "Account Opened: "
+				+ OutputFormatUtils.date(accInfo.getCommOpened()) + "\n" + "Last Statement Date: "
+				+ OutputFormatUtils.date(accInfo.getCommLastStatementDate()) + "\n" + "Next Statement Date: "
+				+ OutputFormatUtils.date(accInfo.getCommNextStatementDate()) + "\n";
 		return output;
 	}
 

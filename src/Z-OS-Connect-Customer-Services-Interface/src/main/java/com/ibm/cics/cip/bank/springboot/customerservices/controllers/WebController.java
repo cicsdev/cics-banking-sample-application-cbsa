@@ -393,17 +393,17 @@ public class WebController implements WebMvcConfigurer
 	public static void checkIfResponseValidCreateAcc(CreateAccountJson responseObj)
 			throws TooManyAccountsException, ItemNotFoundException
 	{
-		if (responseObj.getCREACC().getCOMM_SUCCESS().equals("N"))
+		if (responseObj.getCREACC().getCommSuccess().equals("N"))
 		{
-			if (responseObj.getCREACC().getCOMM_FAIL_CODE().equals("1"))
+			if (responseObj.getCREACC().getCommFailCode().equals("1"))
 			{
 				throw new ItemNotFoundException(CUSTOMER);
 			}
-			if (responseObj.getCREACC().getCOMM_FAIL_CODE().equals("8"))
+			if (responseObj.getCREACC().getCommFailCode().equals("8"))
 			{
-				throw new TooManyAccountsException(Integer.parseInt(responseObj.getCREACC().getCOMM_CUSTNO()));
+				throw new TooManyAccountsException(Integer.parseInt(responseObj.getCREACC().getCommCustno()));
 			}
-			if (responseObj.getCREACC().getCOMM_FAIL_CODE().equals("A"))
+			if (responseObj.getCREACC().getCommFailCode().equals("A"))
 			{
 				throw new IllegalArgumentException("Invalid account type supplied.");
 			}
@@ -796,7 +796,7 @@ public class WebController implements WebMvcConfigurer
 
 	public static void checkIfResponseValidDeleteCust(DeleteCustomerJson responseObj) throws ItemNotFoundException
 	{
-		if(responseObj.getDELCUS().getCOMM_DEL_FAIL_CD().equals("1"))
+		if(responseObj.getDELCUS().getCOMM_DEL_FAIL_CD() == 1)
 		{
 			throw new ItemNotFoundException(CUSTOMER);
 		}
