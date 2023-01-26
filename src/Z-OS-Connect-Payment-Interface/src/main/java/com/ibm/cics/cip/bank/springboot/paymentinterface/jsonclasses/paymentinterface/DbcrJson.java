@@ -153,11 +153,11 @@ public class DbcrJson
 	@Override
 	public String toString()
 	{
-		return "DbcrJson [COMM_ACCNO=" + commAccno + ", COMM_ACT_BAL="
-				+ commActBal + ", COMM_AMT=" + commAmt + ", COMM_AV_BAL="
-				+ commAvBal + ", COMM_FAIL_CODE=" + commFailCode
-				+ ", COMM_ORIGIN=" + commOrigin.toString() + ", COMM_SORTC="
-				+ commSortC + ", COMM_SUCCESS=" + commSuccess + "]";
+		return "DbcrJson [CommAccno=" + commAccno + ", CommActBal="
+				+ commActBal + ", CommAmt=" + commAmt + ", CommAvBal="
+				+ commAvBal + ", CommFailCode=" + commFailCode
+				+ ", CommOrigin=" + commOrigin.toString() + ", CommSortC="
+				+ commSortC + ", CommSuccess=" + commSuccess + "]";
 	}
 
 }

@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!--
-
-        Copyright IBM Corp. 2022
-
-
--->
 <service xmlns:ns2="http://www.ibm.com/ims/Transaction">
     <shallow>true</shallow>
     <serviceName>Pay</serviceName>
@@ -19,21 +13,21 @@
             <interface>
                 <segment segmentName="COMMAREA">
                     <interfaceField included="Y" fieldName="PAYDBCR">
-                        <field included="Y" fieldName="COMM_ACCNO"/>
-                        <field included="Y" fieldName="COMM_AMT"/>
-                        <field included="Y" fieldName="COMM_SORTC"/>
-                        <field included="Y" fieldName="COMM_AV_BAL"/>
-                        <field included="Y" fieldName="COMM_ACT_BAL"/>
-                        <field included="Y" fieldName="COMM_ORIGIN">
-                            <field included="Y" fieldName="COMM_APPLID"/>
-                            <field included="Y" fieldName="COMM_USERID"/>
-                            <field included="Y" fieldName="COMM_FACILITY_NAME"/>
-                            <field included="Y" fieldName="COMM_NETWRK_ID"/>
-                            <field included="Y" fieldName="COMM_FACILTYPE"/>
-                            <field included="Y" fieldName="FILL_0"/>
+                        <field included="Y" fieldName="CommAccno" isHex="false"/>
+                        <field included="Y" fieldName="CommAmt" isHex="false"/>
+                        <field included="Y" fieldName="mSortC" isHex="false"/>
+                        <field included="Y" fieldName="CommAvBal" isHex="false"/>
+                        <field included="Y" fieldName="CommActBal" isHex="false"/>
+                        <field included="Y" fieldName="CommOrigin">
+                            <field included="Y" fieldName="CommApplid" isHex="false"/>
+                            <field included="Y" fieldName="CommUserid" isHex="false"/>
+                            <field included="Y" fieldName="CommFacilityName" isHex="false"/>
+                            <field included="Y" fieldName="CommNetwrkId" isHex="false"/>
+                            <field included="Y" fieldName="CommFaciltype" isHex="false"/>
+                            <field included="Y" fieldName="Fill0" isHex="false"/>
                         </field>
-                        <field included="Y" fieldName="COMM_SUCCESS"/>
-                        <field included="Y" fieldName="COMM_FAIL_CODE"/>
+                        <field included="Y" fieldName="CommSuccess" isHex="false"/>
+                        <field included="Y" fieldName="CommFailCode" isHex="false"/>
                     </interfaceField>
                 </segment>
             </interface>
@@ -46,21 +40,21 @@
             <interface>
                 <segment segmentName="COMMAREA">
                     <interfaceField included="Y" fieldName="PAYDBCR">
-                        <field included="Y" fieldName="COMM_ACCNO"/>
-                        <field included="Y" fieldName="COMM_AMT"/>
-                        <field included="Y" fieldName="COMM_SORTC"/>
-                        <field included="Y" fieldName="COMM_AV_BAL"/>
-                        <field included="Y" fieldName="COMM_ACT_BAL"/>
-                        <field included="Y" fieldName="COMM_ORIGIN">
-                            <field included="Y" fieldName="COMM_APPLID"/>
-                            <field included="Y" fieldName="COMM_USERID"/>
-                            <field included="Y" fieldName="COMM_FACILITY_NAME"/>
-                            <field included="Y" fieldName="COMM_NETWRK_ID"/>
-                            <field included="Y" fieldName="COMM_FACILTYPE"/>
-                            <field included="Y" fieldName="FILL_0"/>
+                        <field included="Y" fieldName="CommAccno" isHex="false"/>
+                        <field included="Y" fieldName="CommAmt" isHex="false"/>
+                        <field included="Y" fieldName="mSortC" isHex="false"/>
+                        <field included="Y" fieldName="CommAvBal" isHex="false"/>
+                        <field included="Y" fieldName="CommActBal" isHex="false"/>
+                        <field included="Y" fieldName="CommOrigin">
+                            <field included="Y" fieldName="CommApplid" isHex="false"/>
+                            <field included="Y" fieldName="CommUserid" isHex="false"/>
+                            <field included="Y" fieldName="CommFacilityName" isHex="false"/>
+                            <field included="Y" fieldName="CommNetwrkId" isHex="false"/>
+                            <field included="Y" fieldName="CommFaciltype" isHex="false"/>
+                            <field included="Y" fieldName="Fill0" isHex="false"/>
                         </field>
-                        <field included="Y" fieldName="COMM_SUCCESS"/>
-                        <field included="Y" fieldName="COMM_FAIL_CODE"/>
+                        <field included="Y" fieldName="CommSuccess" isHex="false"/>
+                        <field included="Y" fieldName="CommFailCode" isHex="false"/>
                     </interfaceField>
                 </segment>
             </interface>
@@ -84,4 +78,5 @@
     <enforceMinArrayOccurrenceResponse>false</enforceMinArrayOccurrenceResponse>
     <ldsStartsWithLLZZTRANCODE>false</ldsStartsWithLLZZTRANCODE>
     <ldsStartsWithLLZZ>false</ldsStartsWithLLZZ>
+    <truncateInputLastCharField>false</truncateInputLastCharField>
 </service>

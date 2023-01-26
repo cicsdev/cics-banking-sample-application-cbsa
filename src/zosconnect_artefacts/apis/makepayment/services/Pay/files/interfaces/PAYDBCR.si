@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-<!--                                                                 -->
-<!--  Copyright IBM Corp. 2022                                       -->
-<!--                                                                 -->
-<!--                                                                 -->
-<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 <ns2:message xmlns:ns2="http://www.ibm.com/ims/Transaction" transactionCode="" messageName="PAYDBCR" direction="0" serviceType="CICS_COMM_AREA">
     <message id="1" name="PAYDBCR">
         <segment id="1" name="COMMAREA" originalName="COMMAREA">
@@ -13,102 +7,116 @@
                 <bytes>92</bytes>
                 <maxBytes>92</maxBytes>
                 <applicationDatatype datatype="STRUCT"/>
-                <field name="COMM_ACCNO" originalName="COMM_ACCNO" included="Y" path="PAYDBCR.COMM_ACCNO">
+                <field name="CommAccno" originalName="COMM_ACCNO" included="Y" defaultValue="" isHex="false" path="PAYDBCR.CommAccno" codepageConversion="Y">
                     <startPos>1</startPos>
                     <bytes>8</bytes>
                     <maxBytes>8</maxBytes>
+                    <remarks></remarks>
                     <applicationDatatype datatype="CHAR"/>
                 </field>
-                <field name="COMM_AMT" originalName="COMM_AMT" included="Y" path="PAYDBCR.COMM_AMT">
+                <field name="CommAmt" originalName="COMM_AMT" included="Y" defaultValue="" isHex="false" path="PAYDBCR.CommAmt" codepageConversion="Y">
                     <startPos>9</startPos>
                     <bytes>12</bytes>
                     <maxBytes>12</maxBytes>
+                    <remarks></remarks>
                     <marshaller isSigned="Y" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
                         <typeConverter>ZONEDDECIMAL</typeConverter>
                     </marshaller>
                     <applicationDatatype datatype="DECIMAL" precision="12" scale="2"/>
                 </field>
-                <field name="COMM_SORTC" originalName="COMM_SORTC" included="Y" path="PAYDBCR.COMM_SORTC">
+                <field name="mSortC" originalName="COMM_SORTC" included="Y" defaultValue="" isHex="false" path="PAYDBCR.mSortC" codepageConversion="Y">
                     <startPos>21</startPos>
                     <bytes>6</bytes>
                     <maxBytes>6</maxBytes>
+                    <remarks></remarks>
                     <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
                         <typeConverter>ZONEDDECIMAL</typeConverter>
                     </marshaller>
                     <applicationDatatype datatype="DECIMAL" precision="6" scale="0"/>
                 </field>
-                <field name="COMM_AV_BAL" originalName="COMM_AV_BAL" included="Y" path="PAYDBCR.COMM_AV_BAL">
+                <field name="CommAvBal" originalName="COMM_AV_BAL" included="Y" defaultValue="" isHex="false" path="PAYDBCR.CommAvBal" codepageConversion="Y">
                     <startPos>27</startPos>
                     <bytes>12</bytes>
                     <maxBytes>12</maxBytes>
+                    <remarks></remarks>
                     <marshaller isSigned="Y" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
                         <typeConverter>ZONEDDECIMAL</typeConverter>
                     </marshaller>
                     <applicationDatatype datatype="DECIMAL" precision="12" scale="2"/>
                 </field>
-                <field name="COMM_ACT_BAL" originalName="COMM_ACT_BAL" included="Y" path="PAYDBCR.COMM_ACT_BAL">
+                <field name="CommActBal" originalName="COMM_ACT_BAL" included="Y" defaultValue="" isHex="false" path="PAYDBCR.CommActBal" codepageConversion="Y">
                     <startPos>39</startPos>
                     <bytes>12</bytes>
                     <maxBytes>12</maxBytes>
+                    <remarks></remarks>
                     <marshaller isSigned="Y" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
                         <typeConverter>ZONEDDECIMAL</typeConverter>
                     </marshaller>
                     <applicationDatatype datatype="DECIMAL" precision="12" scale="2"/>
                 </field>
-                <field name="COMM_ORIGIN" originalName="COMM_ORIGIN" included="Y" path="PAYDBCR.COMM_ORIGIN">
+                <field name="CommOrigin" originalName="COMM_ORIGIN" included="Y" path="PAYDBCR.CommOrigin">
                     <startPos>51</startPos>
                     <bytes>40</bytes>
                     <maxBytes>40</maxBytes>
+                    <remarks></remarks>
                     <marshaller alignment="NATURAL"/>
                     <applicationDatatype datatype="STRUCT"/>
-                    <field name="COMM_APPLID" originalName="COMM_APPLID" included="Y" path="PAYDBCR.COMM_ORIGIN.COMM_APPLID">
+                    <field name="CommApplid" originalName="COMM_APPLID" included="Y" defaultValue="" isHex="false" path="PAYDBCR.CommOrigin.CommApplid" codepageConversion="Y">
                         <startPos>51</startPos>
                         <bytes>8</bytes>
                         <maxBytes>8</maxBytes>
+                        <remarks></remarks>
                         <applicationDatatype datatype="CHAR"/>
                     </field>
-                    <field name="COMM_USERID" originalName="COMM_USERID" included="Y" path="PAYDBCR.COMM_ORIGIN.COMM_USERID">
+                    <field name="CommUserid" originalName="COMM_USERID" included="Y" defaultValue="" isHex="false" path="PAYDBCR.CommOrigin.CommUserid" codepageConversion="Y">
                         <startPos>59</startPos>
                         <bytes>8</bytes>
                         <maxBytes>8</maxBytes>
+                        <remarks></remarks>
                         <applicationDatatype datatype="CHAR"/>
                     </field>
-                    <field name="COMM_FACILITY_NAME" originalName="COMM_FACILITY_NAME" included="Y" path="PAYDBCR.COMM_ORIGIN.COMM_FACILITY_NAME">
+                    <field name="CommFacilityName" originalName="COMM_FACILITY_NAME" included="Y" defaultValue="" isHex="false" path="PAYDBCR.CommOrigin.CommFacilityName" codepageConversion="Y">
                         <startPos>67</startPos>
                         <bytes>8</bytes>
                         <maxBytes>8</maxBytes>
+                        <remarks></remarks>
                         <applicationDatatype datatype="CHAR"/>
                     </field>
-                    <field name="COMM_NETWRK_ID" originalName="COMM_NETWRK_ID" included="Y" path="PAYDBCR.COMM_ORIGIN.COMM_NETWRK_ID">
+                    <field name="CommNetwrkId" originalName="COMM_NETWRK_ID" included="Y" defaultValue="" isHex="false" path="PAYDBCR.CommOrigin.CommNetwrkId" codepageConversion="Y">
                         <startPos>75</startPos>
                         <bytes>8</bytes>
                         <maxBytes>8</maxBytes>
+                        <remarks></remarks>
                         <applicationDatatype datatype="CHAR"/>
                     </field>
-                    <field name="COMM_FACILTYPE" originalName="COMM_FACILTYPE" included="Y" path="PAYDBCR.COMM_ORIGIN.COMM_FACILTYPE">
+                    <field name="CommFaciltype" originalName="COMM_FACILTYPE" included="Y" defaultValue="" isHex="false" path="PAYDBCR.CommOrigin.CommFaciltype" codepageConversion="Y">
                         <startPos>83</startPos>
                         <bytes>4</bytes>
                         <maxBytes>4</maxBytes>
+                        <remarks></remarks>
                         <marshaller isNativeInteger="N" alignment="NATURAL"/>
                         <applicationDatatype datatype="INT" precision="8"/>
                     </field>
-                    <field name="FILL_0" originalName="FILL_0" included="Y" path="PAYDBCR.COMM_ORIGIN.FILL_0">
+                    <field name="Fill0" originalName="FILL_0" included="Y" defaultValue="" isHex="false" path="PAYDBCR.CommOrigin.Fill0" codepageConversion="Y">
                         <startPos>87</startPos>
                         <bytes>4</bytes>
                         <maxBytes>4</maxBytes>
+                        <remarks></remarks>
                         <applicationDatatype datatype="CHAR"/>
                     </field>
                 </field>
-                <field name="COMM_SUCCESS" originalName="COMM_SUCCESS" included="Y" path="PAYDBCR.COMM_SUCCESS">
+                <field name="CommSuccess" originalName="COMM_SUCCESS" included="Y" defaultValue="" isHex="false" path="PAYDBCR.CommSuccess" codepageConversion="Y">
                     <startPos>91</startPos>
                     <bytes>1</bytes>
                     <maxBytes>1</maxBytes>
+                    <remarks></remarks>
                     <applicationDatatype datatype="CHAR"/>
                 </field>
-                <field name="COMM_FAIL_CODE" originalName="COMM_FAIL_CODE" included="Y" path="PAYDBCR.COMM_FAIL_CODE">
+                <field name="CommFailCode" originalName="COMM_FAIL_CODE" included="Y" defaultValue="" isHex="false" path="PAYDBCR.CommFailCode" codepageConversion="Y">
                     <startPos>92</startPos>
                     <bytes>1</bytes>
                     <maxBytes>1</maxBytes>
+                    <remarks></remarks>
                     <applicationDatatype datatype="CHAR"/>
                 </field>
             </field>

@@ -262,7 +262,7 @@ Copy the war file from the target directory into the apps directory.
 > Access the Liberty UI using the following URL, you should utilise the
 > hostname and port number that you have assigned:
 >
-> [http://*your-chosen-host-name*:*your-chosen-port-number*/com.ibm.cics.cip.bank.LibertyAPI.webUI/](http://your-chosen-host-name:your-chosen-port-number/com.ibm.cics.cip.bank.LibertyAPI.webUI/)
+> [http://*your-chosen-host-name*:*your-chosen-port-number*/webui-1.0/](http://your-chosen-host-name:your-chosen-port-number/webui-1.0/)
 >
 > **Please note** that on lower powered machines, it may take up
 > to 5 minutes for the JVM server to restart.

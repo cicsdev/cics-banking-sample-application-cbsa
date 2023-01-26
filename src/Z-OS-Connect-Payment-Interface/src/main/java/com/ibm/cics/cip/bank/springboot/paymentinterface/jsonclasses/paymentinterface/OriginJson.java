@@ -16,22 +16,22 @@ public class OriginJson
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
-	@JsonProperty("COMM_APPLID")
+	@JsonProperty("CommApplid")
 	private String commApplid;
 
-	@JsonProperty("COMM_USERID")
+	@JsonProperty("CommUserid")
 	private String commUserid;
 
-	@JsonProperty("COMM_FACILITY_NAME")
+	@JsonProperty("CommFacilityName")
 	private String commFacilityName = "        ";
 
-	@JsonProperty("COMM_NETWRK_ID")
+	@JsonProperty("CommNetwrkId")
 	private String commNetwrkId = "        ";
 
-	@JsonProperty("COMM_FACILTYPE")
+	@JsonProperty("CommFaciltype")
 	private String commFaciltype = "0496";
 
-	@JsonProperty("FILL_0")
+	@JsonProperty("Fill0")
 	private String fill0 = "    ";
 
 
@@ -128,9 +128,9 @@ public class OriginJson
 	@Override
 	public String toString()
 	{
-		return "OriginJson [COMM_APPLID=" + commApplid + ", COMM_FACILITY_NAME="
-				+ commFacilityName + ", COMM_FACILTYPE=" + commFaciltype
-				+ ", COMM_NETWRK_ID=" + commNetwrkId + ", COMM_USERID="
-				+ commUserid + ", FILL_0=" + fill0 + "]";
+		return "OriginJson [CommApplid=" + commApplid + ", CommFacilityName="
+				+ commFacilityName + ", CommFaciltype=" + commFaciltype
+				+ ", CommNetwrkId=" + commNetwrkId + ", CommUserid="
+				+ commUserid + ", Fill0=" + fill0 + "]";
 	}
 }
