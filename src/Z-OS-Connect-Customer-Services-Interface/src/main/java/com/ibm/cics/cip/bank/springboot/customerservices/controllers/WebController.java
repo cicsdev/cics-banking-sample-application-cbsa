@@ -429,7 +429,6 @@ public class WebController implements WebMvcConfigurer
 		catch (Exception e)
 		{
 			log.info(e.toString());
-			e.printStackTrace();
 			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
 			model.addAttribute(SMALL_TEXT, ERROR_MSG);
 		}
@@ -641,7 +640,6 @@ public class WebController implements WebMvcConfigurer
 		catch (Exception e)
 		{
 			log.info(e.toString());
-			e.printStackTrace();
 			model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
 			model.addAttribute(SMALL_TEXT, ERROR_MSG);
 		}
