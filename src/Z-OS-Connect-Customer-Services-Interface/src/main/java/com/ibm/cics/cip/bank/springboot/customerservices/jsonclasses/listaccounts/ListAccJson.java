@@ -6,6 +6,7 @@
  */
 package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.listaccounts;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.ibm.cics.cip.bank.springboot.customerservices.JsonPropertyNamingStrategy;
 
@@ -15,6 +16,7 @@ public class ListAccJson
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
+	@JsonProperty("InqAccZ")
 	private InqAccczJson inqAcccz;
 
 

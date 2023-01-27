@@ -6,6 +6,7 @@
  */
 package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.deleteaccount;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.ibm.cics.cip.bank.springboot.customerservices.JsonPropertyNamingStrategy;
 import com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.createaccount.AccountType;
@@ -16,44 +17,64 @@ public class DelaccJson
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
+	@JsonProperty("DelAccSuccess")
 	private String delaccSuccess;
 
+	@JsonProperty("DelAccLastStmtDt")
 	private String delaccLastStatementDate;
 
+	@JsonProperty("DelAccIntRate")
 	private float delaccInterestRate;
 
+	@JsonProperty("DelAccDelFailCd")
 	private int delaccDelFailCode;
 
+	@JsonProperty("DelAccScode")
 	private String delaccSortcode;
 
+	@JsonProperty("DelAccDelPcb1")
 	private String delaccDelPcb1;
 
+	@JsonProperty("DelAccOpened")
 	private String delaccOpened;
 
+	@JsonProperty("DelAccAccType")
 	private AccountType delaccAccType;
 
+	@JsonProperty("DelAccNextStmtDt")
 	private String delaccNextStatementDate;
 
+	@JsonProperty("DelAccActualBal")
 	private float delaccActualBalance;
 
+	@JsonProperty("DelAccAvailBal")
 	private float delaccAvailableBalance;
 
+	@JsonProperty("DelAccCustno")
 	private String delaccCustno;
 
+	@JsonProperty("DelAccDelPcb3")
 	private String delaccDelPcb3;
 
+	@JsonProperty("DelAccDelPcb2")
 	private String delaccDelPcb2;
 
+	@JsonProperty("DelAccAccno")
 	private int delaccAccno;
 
+	@JsonProperty("DelAccOverdraft")
 	private int delaccOverdraft;
-
+	
+	@JsonProperty("DelAccFailCd")
 	private int delaccFailCode;
 
+	@JsonProperty("DelAccEye")
 	private String delaccEye;
 
+	@JsonProperty("DelAccDelApplid")
 	private String delaccDelApplid;
 
+	@JsonProperty("DelAccDelSuccess")
 	private String delaccDelSuccess;
 
 
@@ -321,21 +342,21 @@ public class DelaccJson
 	@Override
 	public String toString()
 	{
-		return "DelaccJson [DELACC_ACCNO=" + delaccAccno + ", DELACC_ACC_TYPE="
-				+ delaccAccType + ", DELACC_ACTUAL_BAL=" + delaccActualBalance
-				+ ", DELACC_AVAIL_BAL=" + delaccAvailableBalance
-				+ ", DELACC_CUSTNO=" + delaccCustno + ", DELACC_DEL_APPLID="
-				+ delaccDelApplid + ", DELACC_DEL_FAIL_CD=" + delaccDelFailCode
-				+ ", DELACC_DEL_PCB1=" + delaccDelPcb1 + ", DELACC_DEL_PCB2="
-				+ delaccDelPcb2 + ", DELACC_DEL_PCB3=" + delaccDelPcb3
-				+ ", DELACC_DEL_SUCCESS=" + delaccDelSuccess + ", DELACC_EYE="
-				+ delaccEye + ", DELACC_FAIL_CD=" + delaccFailCode
-				+ ", DELACC_INT_RATE=" + delaccInterestRate
-				+ ", DELACC_LAST_STMT_DT=" + delaccLastStatementDate
-				+ ", DELACC_NEXT_STMT_DT=" + delaccNextStatementDate
-				+ ", DELACC_OPENED=" + delaccOpened + ", DELACC_OVERDRAFT="
-				+ delaccOverdraft + ", DELACC_SCODE=" + delaccSortcode
-				+ ", DELACC_SUCCESS=" + delaccSuccess + "]";
+		return "DelaccJson [DelAccAccno=" + delaccAccno + ", DelAccAccType="
+				+ delaccAccType + ", DelAccActualBal=" + delaccActualBalance
+				+ ", DelAccAvailBal=" + delaccAvailableBalance
+				+ ", DelAccCustno=" + delaccCustno + ", DelAccDelApplid="
+				+ delaccDelApplid + ", DelAccDelFailCd=" + delaccDelFailCode
+				+ ", DelAccDelPcb1=" + delaccDelPcb1 + ", DelAccDelPcb2="
+				+ delaccDelPcb2 + ", DelAccDelPcb3=" + delaccDelPcb3
+				+ ", DelAccDelSuccess=" + delaccDelSuccess + ", DelAccEye="
+				+ delaccEye + ", DelAccDelFailCd=" + delaccFailCode
+				+ ", DelAccIntRate=" + delaccInterestRate
+				+ ", DelAccLastStmtDt=" + delaccLastStatementDate
+				+ ", DelAccNextStmtDt=" + delaccNextStatementDate
+				+ ", DelAccOpened=" + delaccOpened + ", DelAccOverdraft="
+				+ delaccOverdraft + ", DelAccScode=" + delaccSortcode
+				+ ", DelAccDelSuccess=" + delaccSuccess + "]";
 	}
 
 }

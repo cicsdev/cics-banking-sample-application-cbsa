@@ -12,27 +12,27 @@
         <serviceInterface>
             <interface>
                 <segment segmentName="COMMAREA">
-                    <interfaceField included="Y" fieldName="UPDCUST">
-                        <field included="Y" fieldName="COMM_EYE"/>
-                        <field included="Y" fieldName="COMM_SCODE"/>
-                        <field included="Y" fieldName="COMM_CUSTNO"/>
-                        <field included="Y" fieldName="COMM_NAME"/>
-                        <field included="Y" fieldName="COMM_ADDR"/>
-                        <field included="Y" fieldName="COMM_DOB"/>
-                        <field included="N" fieldName="COMM_DOB_GROUP">
-                            <field included="N" fieldName="COMM_BIRTH_DAY"/>
-                            <field included="N" fieldName="COMM_BIRTH_MONTH"/>
-                            <field included="N" fieldName="COMM_BIRTH_YEAR"/>
+                    <interfaceField included="Y" fieldName="UpdCust">
+                        <field included="Y" fieldName="CommEye" isHex="false"/>
+                        <field included="Y" fieldName="CommScode" isHex="false"/>
+                        <field included="Y" fieldName="CommCustno" isHex="false"/>
+                        <field included="Y" fieldName="CommName" isHex="false"/>
+                        <field included="Y" fieldName="CommAddress" isHex="false"/>
+                        <field included="Y" fieldName="CommDob" isHex="false"/>
+                        <field included="N" fieldName="CommDobGroup">
+                            <field included="N" fieldName="CommBirthDay" isHex="false"/>
+                            <field included="N" fieldName="CommBirthMonth" isHex="false"/>
+                            <field included="N" fieldName="CommBirthYear" isHex="false"/>
                         </field>
-                        <field included="Y" fieldName="COMM_CREDIT_SCORE"/>
-                        <field included="Y" fieldName="COMM_CS_REVIEW_DATE"/>
-                        <field included="N" fieldName="COMM_CS_GROUP">
-                            <field included="N" fieldName="COMM_CS_DAY"/>
-                            <field included="N" fieldName="COMM_CS_MONTH"/>
-                            <field included="N" fieldName="COMM_CS_YEAR"/>
+                        <field included="Y" fieldName="CommCreditScore" isHex="false"/>
+                        <field included="Y" fieldName="CommCsReviewDate" isHex="false"/>
+                        <field included="N" fieldName="CommCsGroup">
+                            <field included="N" fieldName="CommCsDay" isHex="false"/>
+                            <field included="N" fieldName="CommCsMonth" isHex="false"/>
+                            <field included="N" fieldName="CommCsYear" isHex="false"/>
                         </field>
-                        <field included="Y" fieldName="COMM_UPD_SUCCESS"/>
-                        <field included="Y" fieldName="COMM_UPD_FAIL_CD"/>
+                        <field included="Y" fieldName="CommUpdSuccess" isHex="false"/>
+                        <field included="Y" fieldName="CommUpdFailCd" isHex="false"/>
                     </interfaceField>
                 </segment>
             </interface>
@@ -44,27 +44,27 @@
         <serviceInterface>
             <interface>
                 <segment segmentName="COMMAREA">
-                    <interfaceField included="Y" fieldName="UPDCUST">
-                        <field included="Y" fieldName="COMM_EYE"/>
-                        <field included="Y" fieldName="COMM_SCODE"/>
-                        <field included="Y" fieldName="COMM_CUSTNO"/>
-                        <field included="Y" fieldName="COMM_NAME"/>
-                        <field included="Y" fieldName="COMM_ADDR"/>
-                        <field included="Y" fieldName="COMM_DOB"/>
-                        <field included="N" fieldName="COMM_DOB_GROUP">
-                            <field included="N" fieldName="COMM_BIRTH_DAY"/>
-                            <field included="N" fieldName="COMM_BIRTH_MONTH"/>
-                            <field included="N" fieldName="COMM_BIRTH_YEAR"/>
+                    <interfaceField included="Y" fieldName="UpdCust">
+                        <field included="Y" fieldName="CommEye" isHex="false"/>
+                        <field included="Y" fieldName="CommScode" isHex="false"/>
+                        <field included="Y" fieldName="CommCustno" isHex="false"/>
+                        <field included="Y" fieldName="CommName" isHex="false"/>
+                        <field included="Y" fieldName="CommAddress" isHex="false"/>
+                        <field included="Y" fieldName="CommDob" isHex="false"/>
+                        <field included="N" fieldName="CommDobGroup">
+                            <field included="N" fieldName="CommBirthDay" isHex="false"/>
+                            <field included="N" fieldName="CommBirthMonth" isHex="false"/>
+                            <field included="N" fieldName="CommBirthYear" isHex="false"/>
                         </field>
-                        <field included="Y" fieldName="COMM_CREDIT_SCORE"/>
-                        <field included="Y" fieldName="COMM_CS_REVIEW_DATE"/>
-                        <field included="N" fieldName="COMM_CS_GROUP">
-                            <field included="N" fieldName="COMM_CS_DAY"/>
-                            <field included="N" fieldName="COMM_CS_MONTH"/>
-                            <field included="N" fieldName="COMM_CS_YEAR"/>
+                        <field included="Y" fieldName="CommCreditScore" isHex="false"/>
+                        <field included="Y" fieldName="CommCsReviewDate" isHex="false"/>
+                        <field included="N" fieldName="CommCsGroup">
+                            <field included="N" fieldName="CommCsDay" isHex="false"/>
+                            <field included="N" fieldName="CommCsMonth" isHex="false"/>
+                            <field included="N" fieldName="CommCsYear" isHex="false"/>
                         </field>
-                        <field included="Y" fieldName="COMM_UPD_SUCCESS"/>
-                        <field included="Y" fieldName="COMM_UPD_FAIL_CD"/>
+                        <field included="Y" fieldName="CommUpdSuccess" isHex="false"/>
+                        <field included="Y" fieldName="CommUpdFailCd" isHex="false"/>
                     </interfaceField>
                 </segment>
             </interface>

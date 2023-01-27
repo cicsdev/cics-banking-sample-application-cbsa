@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!--
-
-        Copyright IBM Corp. 2022
-
-
--->
 <ns2:ZosConnectServiceMapping xmlns:ns2="http://www.ibm.com/zosConnect/2.0/zosConnectServiceMapping" mappingSpecVersion="1.0">
     <mappingContext basePath="/delacc" relativePath="/remove/{accno}" method="DELETE" serviceName="CSaccdel" defaultResponseCode="200"/>
     <requestMessage>
         <mappingRootModel type="MSL" location="api/remove/{accno}/DELETE/request.map"/>
     </requestMessage>
-    <responseMessages code="200" description="OK"/>
+    <responseMessages code="200" description="OK">
+        <mappingRootModel type="MSL" location="api/remove/{accno}/DELETE/response.map"/>
+    </responseMessages>
 </ns2:ZosConnectServiceMapping>

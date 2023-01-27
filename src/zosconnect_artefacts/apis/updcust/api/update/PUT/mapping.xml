@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!--
-
-        Copyright IBM Corp. 2022
-
-
--->
 <ns2:ZosConnectServiceMapping xmlns:ns2="http://www.ibm.com/zosConnect/2.0/zosConnectServiceMapping" mappingSpecVersion="1.0">
     <mappingContext basePath="/updcust" relativePath="/update" method="PUT" serviceName="CScustupd" defaultResponseCode="200"/>
-    <responseMessages code="200" description="OK"/>
+    <requestMessage>
+        <mappingRootModel type="MSL" location="api/update/PUT/request.map"/>
+    </requestMessage>
+    <responseMessages code="200" description="OK">
+        <mappingRootModel type="MSL" location="api/update/PUT/response.map"/>
+    </responseMessages>
 </ns2:ZosConnectServiceMapping>

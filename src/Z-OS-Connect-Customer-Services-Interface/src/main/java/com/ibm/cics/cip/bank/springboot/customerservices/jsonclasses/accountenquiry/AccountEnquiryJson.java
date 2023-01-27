@@ -6,6 +6,7 @@
  */
 package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.accountenquiry;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.ibm.cics.cip.bank.springboot.customerservices.JsonPropertyNamingStrategy;
 import com.ibm.cics.cip.bank.springboot.customerservices.OutputFormatUtils;
@@ -18,6 +19,7 @@ public class AccountEnquiryJson
 
 	private static final String FLOAT_FORMAT = "%.02f";
 
+	@JsonProperty("InqAcc")
 	private InqaccJson inqaccCommarea;
 
 

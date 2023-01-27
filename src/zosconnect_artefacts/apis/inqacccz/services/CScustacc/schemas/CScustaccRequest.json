@@ -1,93 +1,89 @@
 {
   "type" : "object",
   "properties" : {
-    "INQACCCZ" : {
+    "InqAccZ" : {
       "type" : "object",
       "properties" : {
-        "CUSTOMER_NUMBER" : {
+        "CustomerNumber" : {
           "minimum" : 0,
           "maximum" : 9999999999,
           "type" : "integer"
         },
-        "COMM_SUCCESS" : {
+        "CommSuccess" : {
           "maxLength" : 1,
           "type" : "string"
         },
-        "COMM_FAIL_CODE" : {
+        "CommFailCode" : {
           "maxLength" : 1,
           "type" : "string"
         },
-        "CUSTOMER_FOUND" : {
+        "CustomerFound" : {
           "maxLength" : 1,
           "type" : "string"
         },
-        "COMM_PCB_POINTER" : {
+        "CommPcbPointer" : {
           "maxLength" : 4,
           "type" : "string"
         },
-        "ACCOUNT_DETAILS" : {
+        "AccountDetails" : {
           "type" : "array",
           "maxItems" : 20,
           "minItems" : 1,
           "items" : {
             "type" : "object",
             "properties" : {
-              "COMM_EYE" : {
+              "CommEye" : {
                 "maxLength" : 4,
                 "type" : "string"
               },
-              "COMM_CUSTNO" : {
+              "CommCustno" : {
                 "maxLength" : 10,
                 "type" : "string"
               },
-              "COMM_SCODE" : {
-                "maxLength" : 6,
-                "type" : "string"
-              },
-              "COMM_ACCNO" : {
+              "CommAccno" : {
                 "minimum" : 0,
                 "maximum" : 99999999,
                 "type" : "integer"
               },
-              "COMM_ACC_TYPE" : {
+              "CommAccType" : {
                 "maxLength" : 8,
                 "type" : "string"
               },
-              "COMM_INT_RATE" : {
+              "CommIntRate" : {
                 "multipleOf" : 0.01,
                 "minimum" : 0,
                 "maximum" : 9999.99,
                 "type" : "number",
                 "format" : "decimal"
               },
-              "COMM_OPENED" : {
+              "CommOpened" : {
                 "minimum" : 0,
                 "maximum" : 99999999,
                 "type" : "integer"
               },
-              "COMM_OVERDRAFT" : {
+              "CommOverdraft" : {
                 "minimum" : 0,
                 "maximum" : 99999999,
                 "type" : "integer"
               },
-              "COMM_LAST_STMT_DT" : {
+              "CommLastStmtDt" : {
                 "minimum" : 0,
                 "maximum" : 99999999,
                 "type" : "integer"
               },
-              "COMM_NEXT_STMT_DT" : {
+              "CommNextStmtDt" : {
                 "minimum" : 0,
                 "maximum" : 99999999,
                 "type" : "integer"
               },
-              "COMM_AVAIL_BAL" : {
+              "CommAvailBal" : {
                 "multipleOf" : 0.01,
                 "minimum" : -9999999999.99,
                 "maximum" : 9999999999.99,
                 "type" : "number",
                 "format" : "decimal"
               },
-              "COMM_ACTUAL_BAL" : {
+              "CommActualBal" : {
                 "multipleOf" : 0.01,
                 "minimum" : -9999999999.99,
                 "maximum" : 9999999999.99,

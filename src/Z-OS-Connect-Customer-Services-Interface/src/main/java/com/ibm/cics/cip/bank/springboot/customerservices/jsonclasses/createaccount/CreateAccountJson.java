@@ -6,6 +6,7 @@
  */
 package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.createaccount;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.ibm.cics.cip.bank.springboot.customerservices.JsonPropertyNamingStrategy;
 import com.ibm.cics.cip.bank.springboot.customerservices.OutputFormatUtils;
@@ -18,6 +19,7 @@ public class CreateAccountJson
 
 	private static final String FLOAT_FORMAT = "%.02f";
 
+	@JsonProperty("CreAcc")	
 	private CreaccJson creAcc;
 
 
@@ -52,7 +54,7 @@ public class CreateAccountJson
 	@Override
 	public String toString()
 	{
-		return "CreateAccountJson [CREACC=" + creAcc + "]";
+		return "CreateAccountJson [CreAcc=" + creAcc + "]";
 	}
 
 

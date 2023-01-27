@@ -6,6 +6,7 @@
  */
 package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.createaccount;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.ibm.cics.cip.bank.springboot.customerservices.JsonPropertyNamingStrategy;
 
@@ -15,30 +16,43 @@ public class CreaccJson
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
+	@JsonProperty("CommAccType")
 	private String commAccType;
 
+	@JsonProperty("CommCustno")
 	private String commCustno;
 
+	@JsonProperty("CommEyecatcher")
 	private String commEyecatcher;
 
+	@JsonProperty("CommKey")
 	private CreaccKeyJson commKey;
 
+	@JsonProperty("CommIntRt")
 	private float commInterestRate;
 
+	@JsonProperty("CommOpened")
 	private int commOpened;
 
+	@JsonProperty("CommOverdrLim")
 	private float commOverdraftLimit;
 
+	@JsonProperty("CommLastStmtDt")
 	private int commLastStatementDate;
 
+	@JsonProperty("CommNextStmtDt")
 	private int commNextStatementDate;
 
+	@JsonProperty("CommAvailBal")
 	private float commAvailableBalance;
 
+	@JsonProperty("CommActBal")
 	private float commActualBalance;
 
+	@JsonProperty("CommSuccess")
 	private String commSuccess;
 
+	@JsonProperty("CommFailCode")
 	private String commFailCode;
 
 

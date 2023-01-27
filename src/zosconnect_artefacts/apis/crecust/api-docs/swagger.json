@@ -16,6 +16,11 @@
         "tags" : [ "crecust" ],
         "operationId" : "postCScustcre",
         "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "required" : false,
+          "type" : "string"
+        }, {
           "in" : "body",
           "name" : "postCScustcre_request",
           "description" : "request body",
@@ -39,56 +44,56 @@
     "postCScustcre_request" : {
       "type" : "object",
       "properties" : {
-        "CRECUST" : {
+        "CreCust" : {
           "type" : "object",
           "properties" : {
-            "COMM_EYECATCHER" : {
+            "CommEyecatcher" : {
               "type" : "string",
               "maxLength" : 4
             },
-            "COMM_KEY" : {
+            "CommKey" : {
               "type" : "object",
               "properties" : {
-                "COMM_SORTCODE" : {
+                "CommSortcode" : {
                   "type" : "integer",
                   "minimum" : 0,
                   "maximum" : 999999
                 },
-                "COMM_NUMBER" : {
+                "CommNumber" : {
                   "type" : "integer",
                   "minimum" : 0,
                   "maximum" : 9999999999
                 }
               }
             },
-            "COMM_NAME" : {
+            "CommName" : {
               "type" : "string",
               "maxLength" : 60
             },
-            "COMM_ADDRESS" : {
+            "CommAddress" : {
               "type" : "string",
               "maxLength" : 160
             },
-            "COMM_DATE_OF_BIRTH" : {
+            "CommDateOfBirth" : {
               "type" : "integer",
               "minimum" : 0,
               "maximum" : 99999999
             },
-            "COMM_CREDIT_SCORE" : {
+            "CommCreditScore" : {
               "type" : "integer",
               "minimum" : 0,
               "maximum" : 999
             },
-            "COMM_CS_REVIEW_DATE" : {
+            "CommCsReviewDate" : {
               "type" : "integer",
               "minimum" : 0,
               "maximum" : 99999999
             },
-            "COMM_SUCCESS" : {
+            "CommSuccess" : {
               "type" : "string",
               "maxLength" : 1
             },
-            "COMM_FAIL_CODE" : {
+            "CommFailCode" : {
               "type" : "string",
               "maxLength" : 1
             }
@@ -99,56 +104,56 @@
     "postCScustcre_response_200" : {
       "type" : "object",
       "properties" : {
-        "CRECUST" : {
+        "CreCust" : {
           "type" : "object",
           "properties" : {
-            "COMM_EYECATCHER" : {
+            "CommEyecatcher" : {
               "type" : "string",
               "maxLength" : 4
             },
-            "COMM_KEY" : {
+            "CommKey" : {
               "type" : "object",
               "properties" : {
-                "COMM_SORTCODE" : {
+                "CommSortcode" : {
                   "type" : "integer",
                   "minimum" : 0,
                   "maximum" : 999999
                 },
-                "COMM_NUMBER" : {
+                "CommNumber" : {
                   "type" : "integer",
                   "minimum" : 0,
                   "maximum" : 9999999999
                 }
               }
             },
-            "COMM_NAME" : {
+            "CommName" : {
               "type" : "string",
               "maxLength" : 60
             },
-            "COMM_ADDRESS" : {
+            "CommAddress" : {
               "type" : "string",
               "maxLength" : 160
             },
-            "COMM_DATE_OF_BIRTH" : {
+            "CommDateOfBirth" : {
               "type" : "integer",
               "minimum" : 0,
               "maximum" : 99999999
             },
-            "COMM_CREDIT_SCORE" : {
+            "CommCreditScore" : {
               "type" : "integer",
               "minimum" : 0,
               "maximum" : 999
             },
-            "COMM_CS_REVIEW_DATE" : {
+            "CommCsReviewDate" : {
               "type" : "integer",
               "minimum" : 0,
               "maximum" : 99999999
             },
-            "COMM_SUCCESS" : {
+            "CommSuccess" : {
               "type" : "string",
               "maxLength" : 1
             },
-            "COMM_FAIL_CODE" : {
+            "CommFailCode" : {
               "type" : "string",
               "maxLength" : 1
             }

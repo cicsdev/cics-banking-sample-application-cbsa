@@ -6,6 +6,7 @@
  */
 package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.deletecustomer;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.ibm.cics.cip.bank.springboot.customerservices.JsonPropertyNamingStrategy;
 
@@ -15,24 +16,34 @@ public class DelcusJson
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
+	@JsonProperty("CommAddr")
 	private String commAddress;
 
+	@JsonProperty("CommScode")
 	private int commSortcode;
 
+	@JsonProperty("CommName")
 	private String commName;
 
+	@JsonProperty("CommDelSuccess")
 	private String commDelSuccess;
 
+	@JsonProperty("CommEye")
 	private String commEye;
 
+	@JsonProperty("CommCsReviewDate")
 	private String commCsReviewDate;
 
+	@JsonProperty("CommCustno")
 	private int commCustno;
 
+	@JsonProperty("CommDelFailCd")
 	private int commDelFailCode;
 
+	@JsonProperty("CommCreditScore")
 	private int commCreditScore;
 
+	@JsonProperty("CommDob")
 	private String commDateOfBirth;
 
 
@@ -165,12 +176,12 @@ public class DelcusJson
 	@Override
 	public String toString()
 	{
-		return "DelcusJson [COMM_ADDR=" + commAddress + ", COMM_CREDIT_SCORE="
-				+ commCreditScore + ", COMM_CS_REVIEW_DATE=" + commCsReviewDate
-				+ ", COMM_CUSTNO=" + commCustno + ", COMM_DEL_FAIL_CD="
-				+ commDelFailCode + ", COMM_DEL_SUCCESS=" + commDelSuccess
-				+ ", COMM_DOB=" + commDateOfBirth + ", COMM_EYE=" + commEye
-				+ ", COMM_NAME=" + commName + ", COMM_SCODE=" + commSortcode
+		return "DelcusJson [CommAddr=" + commAddress + ", CommCreditScore="
+				+ commCreditScore + ", CommCsReviewDate=" + commCsReviewDate
+				+ ", CommCustno=" + commCustno + ", CommDelFailCd="
+				+ commDelFailCode + ", CommDelSuccess=" + commDelSuccess
+				+ ", CommDob=" + commDateOfBirth + ", CommEye=" + commEye
+				+ ", CommName=" + commName + ", CommScode=" + commSortcode
 				+ "]";
 	}
 

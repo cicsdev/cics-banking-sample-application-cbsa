@@ -723,7 +723,7 @@ public class WebController implements WebMvcConfigurer
 			model.addAttribute(LARGE_TEXT, "Account updated");
 			model.addAttribute(SMALL_TEXT, responseObj.toPrettyString());
 
-			// Otherwise...
+			// Otherwise... 
 		}
 		catch (ItemNotFoundException | IllegalArgumentException e)
 		{
@@ -754,14 +754,14 @@ public class WebController implements WebMvcConfigurer
 			UpdateCustomerJson responseObj)
 			throws ItemNotFoundException, IllegalArgumentException
 	{
-		if (responseObj.getUpducst().getCommUpdateSuccess().equals("N"))
+		if (responseObj.getUpdcust().getCommUpdateSuccess().equals("N"))
 		{
-			if (responseObj.getUpducst().getCommUpdateFailCode().equals("4"))
+			if (responseObj.getUpdcust().getCommUpdateFailCode().equals("4"))
 			{
 				throw new IllegalArgumentException(
 						"No name and no address supplied. (Are there spaces before both the name and the address?)");
 			}
-			if (responseObj.getUpducst().getCommUpdateFailCode().equals("T"))
+			if (responseObj.getUpdcust().getCommUpdateFailCode().equals("T"))
 			{
 				throw new IllegalArgumentException(
 						"Invalid title; Valid titles are: Professor, Mr, Mrs, Miss, Ms, Dr, Drs, Lord, Sir or Lady.");

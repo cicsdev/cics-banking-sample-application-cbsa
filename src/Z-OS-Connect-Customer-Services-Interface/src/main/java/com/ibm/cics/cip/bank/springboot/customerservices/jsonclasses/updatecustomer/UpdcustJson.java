@@ -6,6 +6,7 @@
  */
 package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.updatecustomer;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.ibm.cics.cip.bank.springboot.customerservices.JsonPropertyNamingStrategy;
 
@@ -15,24 +16,34 @@ public class UpdcustJson
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
+	@JsonProperty("CommEye")
 	private String commEye = "    ";
 
+	@JsonProperty("CommScode")
 	private String commSortcode = "";
 
+	@JsonProperty("CommCustno")
 	private String commCustno = " ";
 
+	@JsonProperty("CommName")
 	private String commName = " ";
 
+	@JsonProperty("CommAddress")
 	private String commAddress = " ";
 
+	@JsonProperty("CommDob")
 	private int commDateOfBirth = 0;
 
+	@JsonProperty("CommCreditScore")
 	private int commCreditScore = 0;
 
+	@JsonProperty("CommCsReviewDate")
 	private int commCreditScoreReviewDate = 0;
 
+	@JsonProperty("CommUpdSuccess")
 	private String commUpdateSuccess = " ";
 
+	@JsonProperty("CommUpdFailCd")
 	private String commUpdateFailCode = " ";
 
 
@@ -189,13 +200,13 @@ public class UpdcustJson
 	@Override
 	public String toString()
 	{
-		return "UpdcustJson [COMM_ADDR=" + commAddress + ", COMM_CREDIT_SCORE="
-				+ commCreditScore + ", COMM_CS_REVIEW_DATE="
-				+ commCreditScoreReviewDate + ", COMM_CUSTNO=" + commCustno
-				+ ", COMM_DOB=" + commDateOfBirth + ", COMM_EYE=" + commEye
-				+ ", COMM_NAME=" + commName + ", COMM_SCODE=" + commSortcode
-				+ ", COMM_UPD_FAIL_CD=" + commUpdateFailCode
-				+ ", COMM_UPD_SUCCESS=" + commUpdateSuccess + "]";
+		return "UpdcustJson [CommAddress=" + commAddress + ", CommCreditScore="
+				+ commCreditScore + ", CommCsReviewDate="
+				+ commCreditScoreReviewDate + ", CommCustno=" + commCustno
+				+ ", CommDob=" + commDateOfBirth + ", CommEye=" + commEye
+				+ ", CommName=" + commName + ", CommScode=" + commSortcode
+				+ ", CommUpdFailCd=" + commUpdateFailCode
+				+ ", CommmUpdSuccess=" + commUpdateSuccess + "]";
 	}
 
 }

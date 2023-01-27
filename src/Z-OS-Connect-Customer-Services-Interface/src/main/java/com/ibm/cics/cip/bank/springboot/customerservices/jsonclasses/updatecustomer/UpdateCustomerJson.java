@@ -6,6 +6,7 @@
  */
 package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.updatecustomer;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.ibm.cics.cip.bank.springboot.customerservices.JsonPropertyNamingStrategy;
 import com.ibm.cics.cip.bank.springboot.customerservices.OutputFormatUtils;
@@ -16,6 +17,7 @@ public class UpdateCustomerJson
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
+	@JsonProperty("UpdCust")
 	UpdcustJson updcust;
 
 
@@ -36,7 +38,7 @@ public class UpdateCustomerJson
 	}
 
 
-	public UpdcustJson getUpducst()
+	public UpdcustJson getUpdcust()
 	{
 		return updcust;
 	}
@@ -51,7 +53,7 @@ public class UpdateCustomerJson
 	@Override
 	public String toString()
 	{
-		return "UpdateCustomerJson [UPDCUST=" + updcust + "]";
+		return "UpdateCustomerJson [UpdCust=" + updcust + "]";
 	}
 
 

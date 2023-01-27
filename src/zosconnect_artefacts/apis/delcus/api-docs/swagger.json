@@ -50,45 +50,45 @@
     "deleteCScustdel_request" : {
       "type" : "object",
       "properties" : {
-        "DELCUS" : {
+        "DelCus" : {
           "type" : "object",
           "properties" : {
-            "COMM_EYE" : {
+            "CommEye" : {
               "type" : "string",
               "maxLength" : 4
             },
-            "COMM_SCODE" : {
+            "CommScode" : {
               "type" : "string",
               "maxLength" : 6
             },
-            "COMM_NAME" : {
+            "CommName" : {
               "type" : "string",
               "maxLength" : 60
             },
-            "COMM_ADDR" : {
+            "CommAddr" : {
               "type" : "string",
               "maxLength" : 160
             },
-            "COMM_DOB" : {
+            "CommDob" : {
               "type" : "integer",
               "minimum" : 0,
               "maximum" : 99999999
             },
-            "COMM_CREDIT_SCORE" : {
+            "CommCreditScore" : {
               "type" : "integer",
               "minimum" : 0,
               "maximum" : 999
             },
-            "COMM_CS_REVIEW_DATE" : {
+            "CommCsReviewDate" : {
               "type" : "integer",
               "minimum" : 0,
               "maximum" : 99999999
             },
-            "COMM_DEL_SUCCESS" : {
+            "CommDelSuccess" : {
               "type" : "string",
               "maxLength" : 1
             },
-            "COMM_DEL_FAIL_CD" : {
+            "CommDelFailCd" : {
               "type" : "string",
               "maxLength" : 1
             }
@@ -99,49 +99,49 @@
     "deleteCScustdel_response_200" : {
       "type" : "object",
       "properties" : {
-        "DELCUS" : {
+        "DelCus" : {
           "type" : "object",
           "properties" : {
-            "COMM_EYE" : {
+            "CommEye" : {
               "type" : "string",
               "maxLength" : 4
             },
-            "COMM_SCODE" : {
+            "CommScode" : {
               "type" : "string",
               "maxLength" : 6
             },
-            "COMM_CUSTNO" : {
+            "CommCustno" : {
               "type" : "string",
               "maxLength" : 10
             },
-            "COMM_NAME" : {
+            "CommName" : {
               "type" : "string",
               "maxLength" : 60
             },
-            "COMM_ADDR" : {
+            "CommAddr" : {
               "type" : "string",
               "maxLength" : 160
             },
-            "COMM_DOB" : {
+            "CommDob" : {
               "type" : "integer",
               "minimum" : 0,
               "maximum" : 99999999
             },
-            "COMM_CREDIT_SCORE" : {
+            "CommCreditScore" : {
               "type" : "integer",
               "minimum" : 0,
               "maximum" : 999
             },
-            "COMM_CS_REVIEW_DATE" : {
+            "CommCsReviewDate" : {
               "type" : "integer",
               "minimum" : 0,
               "maximum" : 99999999
             },
-            "COMM_DEL_SUCCESS" : {
+            "CommDelSuccess" : {
               "type" : "string",
               "maxLength" : 1
             },
-            "COMM_DEL_FAIL_CD" : {
+            "CommDelFailCd" : {
               "type" : "string",
               "maxLength" : 1
             }

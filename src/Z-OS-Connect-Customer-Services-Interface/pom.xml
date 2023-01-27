@@ -42,20 +42,16 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<scope>compile</scope>
-                        <version>2.13.4.2</version>
 		</dependency>
 
 		<dependency>
 			  <groupId>io.projectreactor.netty</groupId>
 			  <artifactId>reactor-netty-http</artifactId>
-			  <version>1.1.1</version>
-		</dependency>
+			  </dependency>
 
     <dependency>
       <groupId>io.netty</groupId>
       <artifactId>netty-codec-http</artifactId>
-      <version>4.1.86.Final</version>
       <scope>compile</scope>
       <exclusions>
         <exclusion>
@@ -67,8 +63,6 @@
     <dependency>
       <groupId>io.netty</groupId>
       <artifactId>netty-codec-http2</artifactId>
-      <version>4.1.86.Final</version>
-      <scope>compile</scope>
       <exclusions>
         <exclusion>
           <artifactId>commons-logging</artifactId>
@@ -80,8 +74,7 @@
 		<dependency>
 			  <groupId>io.projectreactor.netty</groupId>
 			  <artifactId>reactor-netty-core</artifactId>
-			  <version>1.1.0</version>
-		</dependency>
+			  </dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -12,26 +12,26 @@
         <serviceInterface>
             <interface>
                 <segment segmentName="COMMAREA">
-                    <interfaceField included="Y" fieldName="INQCUSTZ">
-                        <field included="Y" fieldName="INQCUST_EYE"/>
-                        <field included="Y" fieldName="INQCUST_SCODE"/>
-                        <field included="Y" fieldName="INQCUST_CUSTNO"/>
-                        <field included="Y" fieldName="INQCUST_NAME"/>
-                        <field included="Y" fieldName="INQCUST_ADDR"/>
-                        <field included="Y" fieldName="INQCUST_DOB">
-                            <field included="Y" fieldName="INQCUST_DOB_DD"/>
-                            <field included="Y" fieldName="INQCUST_DOB_MM"/>
-                            <field included="Y" fieldName="INQCUST_DOB_YYYY"/>
+                    <interfaceField included="Y" fieldName="InqCustZ">
+                        <field included="Y" fieldName="InqCustEye" isHex="false"/>
+                        <field included="Y" fieldName="InqCustScode" isHex="false"/>
+                        <field included="Y" fieldName="InqCustCustno" isHex="false"/>
+                        <field included="Y" fieldName="InqCustName" isHex="false"/>
+                        <field included="Y" fieldName="InqCustAddr" isHex="false"/>
+                        <field included="Y" fieldName="InqCustDob">
+                            <field included="Y" fieldName="InqCustDobDd" isHex="false"/>
+                            <field included="Y" fieldName="InqCustDobMm" isHex="false"/>
+                            <field included="Y" fieldName="InqCustDobYyyy" isHex="false"/>
                         </field>
-                        <field included="Y" fieldName="INQCUST_CREDIT_SCORE"/>
-                        <field included="Y" fieldName="INQCUST_CS_REVIEW_DT">
-                            <field included="Y" fieldName="INQCUST_CS_REVIEW_DD"/>
-                            <field included="Y" fieldName="INQCUST_CS_REVIEW_MM"/>
-                            <field included="Y" fieldName="INQCUST_CS_REVIEW_YYYY"/>
+                        <field included="Y" fieldName="InqCustCreditScore" isHex="false"/>
+                        <field included="Y" fieldName="InqCustCsReviewDt">
+                            <field included="Y" fieldName="InqCustCsReviewDd" isHex="false"/>
+                            <field included="Y" fieldName="InqCustCsReviewMm" isHex="false"/>
+                            <field included="Y" fieldName="InqCustCsReviewYyyy" isHex="false"/>
                         </field>
-                        <field included="Y" fieldName="INQCUST_INQ_SUCCESS"/>
-                        <field included="Y" fieldName="INQCUST_INQ_FAIL_CD"/>
-                        <field included="Y" fieldName="INQCUST_PCB_POINTER"/>
+                        <field included="Y" fieldName="InqCustInqSuccess" isHex="false"/>
+                        <field included="Y" fieldName="InqCustInqFailCd" isHex="false"/>
+                        <field included="Y" fieldName="InqCustPcbPointer" isHex="false"/>
                     </interfaceField>
                 </segment>
             </interface>
@@ -43,26 +43,26 @@
         <serviceInterface>
             <interface>
                 <segment segmentName="COMMAREA">
-                    <interfaceField included="Y" fieldName="INQCUSTZ">
-                        <field included="Y" fieldName="INQCUST_EYE"/>
-                        <field included="Y" fieldName="INQCUST_SCODE"/>
-                        <field included="Y" fieldName="INQCUST_CUSTNO"/>
-                        <field included="Y" fieldName="INQCUST_NAME"/>
-                        <field included="Y" fieldName="INQCUST_ADDR"/>
-                        <field included="Y" fieldName="INQCUST_DOB">
-                            <field included="Y" fieldName="INQCUST_DOB_DD"/>
-                            <field included="Y" fieldName="INQCUST_DOB_MM"/>
-                            <field included="Y" fieldName="INQCUST_DOB_YYYY"/>
+                    <interfaceField included="Y" fieldName="InqCustZ">
+                        <field included="Y" fieldName="InqCustEye" isHex="false"/>
+                        <field included="Y" fieldName="InqCustScode" isHex="false"/>
+                        <field included="Y" fieldName="InqCustCustno" isHex="false"/>
+                        <field included="Y" fieldName="InqCustName" isHex="false"/>
+                        <field included="Y" fieldName="InqCustAddr" isHex="false"/>
+                        <field included="Y" fieldName="InqCustDob">
+                            <field included="Y" fieldName="InqCustDobDd" isHex="false"/>
+                            <field included="Y" fieldName="InqCustDobMm" isHex="false"/>
+                            <field included="Y" fieldName="InqCustDobYyyy" isHex="false"/>
                         </field>
-                        <field included="Y" fieldName="INQCUST_CREDIT_SCORE"/>
-                        <field included="Y" fieldName="INQCUST_CS_REVIEW_DT">
-                            <field included="Y" fieldName="INQCUST_CS_REVIEW_DD"/>
-                            <field included="Y" fieldName="INQCUST_CS_REVIEW_MM"/>
-                            <field included="Y" fieldName="INQCUST_CS_REVIEW_YYYY"/>
+                        <field included="Y" fieldName="InqCustCreditScore" isHex="false"/>
+                        <field included="Y" fieldName="InqCustCsReviewDt">
+                            <field included="Y" fieldName="InqCustCsReviewDd" isHex="false"/>
+                            <field included="Y" fieldName="InqCustCsReviewMm" isHex="false"/>
+                            <field included="Y" fieldName="InqCustCsReviewYyyy" isHex="false"/>
                         </field>
-                        <field included="Y" fieldName="INQCUST_INQ_SUCCESS"/>
-                        <field included="Y" fieldName="INQCUST_INQ_FAIL_CD"/>
-                        <field included="Y" fieldName="INQCUST_PCB_POINTER"/>
+                        <field included="Y" fieldName="InqCustInqSuccess" isHex="false"/>
+                        <field included="Y" fieldName="InqCustInqFailCd" isHex="false"/>
+                        <field included="Y" fieldName="InqCustPcbPointer" isHex="false"/>
                     </interfaceField>
                 </segment>
             </interface>

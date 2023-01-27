@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!--
-
-        Copyright IBM Corp. 2022
-
-
--->
 <zosConnectApi xmlns="http://www.ibm.com/zosConnect/2.0/zosConnectApi" id="inqcustz">
     <apiSpec title="inqcustz" basePath="/inqcustz" description="enquiry about a customer on the CScustenq service" version="1.0.0">
         <path relativePath="/enquiry/{custno}">

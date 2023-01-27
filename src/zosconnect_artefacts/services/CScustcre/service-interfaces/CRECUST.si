@@ -1,163 +1,177 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-<!--                                                                 -->
-<!--  Copyright IBM Corp. 2022                                       -->
-<!--                                                                 -->
-<!--                                                                 -->
-<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 <ns2:message xmlns:ns2="http://www.ibm.com/ims/Transaction" transactionCode="" messageName="CRECUST" direction="0" serviceType="CICS_COMM_AREA">
     <message id="1" name="CRECUST">
         <segment id="1" name="COMMAREA" originalName="COMMAREA">
-            <field name="CRECUST" originalName="CRECUST" included="Y" path="CRECUST">
+            <field name="CreCust" originalName="CRECUST" included="Y" path="CreCust">
                 <startPos>1</startPos>
                 <bytes>261</bytes>
                 <maxBytes>261</maxBytes>
+                <remarks></remarks>
                 <applicationDatatype datatype="STRUCT"/>
-                <field name="COMM_EYECATCHER" originalName="COMM_EYECATCHER" included="Y" path="CRECUST.COMM_EYECATCHER">
+                <field name="CommEyecatcher" originalName="COMM_EYECATCHER" included="Y" defaultValue="" isHex="false" path="CreCust.CommEyecatcher" codepageConversion="Y">
                     <startPos>1</startPos>
                     <bytes>4</bytes>
                     <maxBytes>4</maxBytes>
+                    <remarks></remarks>
                     <applicationDatatype datatype="CHAR"/>
                 </field>
-                <field name="COMM_KEY" originalName="COMM_KEY" included="Y" path="CRECUST.COMM_KEY">
+                <field name="CommKey" originalName="COMM_KEY" included="Y" path="CreCust.CommKey">
                     <startPos>5</startPos>
                     <bytes>16</bytes>
                     <maxBytes>16</maxBytes>
+                    <remarks></remarks>
                     <applicationDatatype datatype="STRUCT"/>
-                    <field name="COMM_SORTCODE" originalName="COMM_SORTCODE" included="Y" path="CRECUST.COMM_KEY.COMM_SORTCODE">
+                    <field name="CommSortcode" originalName="COMM_SORTCODE" included="Y" defaultValue="" isHex="false" path="CreCust.CommKey.CommSortcode" codepageConversion="Y">
                         <startPos>5</startPos>
                         <bytes>6</bytes>
                         <maxBytes>6</maxBytes>
+                        <remarks></remarks>
                         <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
                             <typeConverter>ZONEDDECIMAL</typeConverter>
                         </marshaller>
                         <applicationDatatype datatype="DECIMAL" precision="6" scale="0"/>
                     </field>
-                    <field name="COMM_NUMBER" originalName="COMM_NUMBER" included="Y" path="CRECUST.COMM_KEY.COMM_NUMBER">
+                    <field name="CommNumber" originalName="COMM_NUMBER" included="Y" defaultValue="" isHex="false" path="CreCust.CommKey.CommNumber" codepageConversion="Y">
                         <startPos>11</startPos>
                         <bytes>10</bytes>
                         <maxBytes>10</maxBytes>
+                        <remarks></remarks>
                         <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
                             <typeConverter>ZONEDDECIMAL</typeConverter>
                         </marshaller>
                         <applicationDatatype datatype="DECIMAL" precision="10" scale="0"/>
                     </field>
                 </field>
-                <field name="COMM_NAME" originalName="COMM_NAME" included="Y" path="CRECUST.COMM_NAME">
+                <field name="CommName" originalName="COMM_NAME" included="Y" defaultValue="" isHex="false" path="CreCust.CommName" codepageConversion="Y">
                     <startPos>21</startPos>
                     <bytes>60</bytes>
                     <maxBytes>60</maxBytes>
+                    <remarks></remarks>
                     <applicationDatatype datatype="CHAR"/>
                 </field>
-                <field name="COMM_ADDRESS" originalName="COMM_ADDRESS" included="Y" path="CRECUST.COMM_ADDRESS">
+                <field name="CommAddress" originalName="COMM_ADDRESS" included="Y" defaultValue="" isHex="false" path="CreCust.CommAddress" codepageConversion="Y">
                     <startPos>81</startPos>
                     <bytes>160</bytes>
                     <maxBytes>160</maxBytes>
+                    <remarks></remarks>
                     <applicationDatatype datatype="CHAR"/>
                 </field>
-                <field name="COMM_DATE_OF_BIRTH" originalName="COMM_DATE_OF_BIRTH" included="Y" path="CRECUST.COMM_DATE_OF_BIRTH">
+                <field name="CommDateOfBirth" originalName="COMM_DATE_OF_BIRTH" included="Y" defaultValue="" isHex="false" path="CreCust.CommDateOfBirth" codepageConversion="Y">
                     <startPos>241</startPos>
                     <bytes>8</bytes>
                     <maxBytes>8</maxBytes>
+                    <remarks></remarks>
                     <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
                         <typeConverter>ZONEDDECIMAL</typeConverter>
                     </marshaller>
                     <applicationDatatype datatype="DECIMAL" precision="8" scale="0"/>
                 </field>
-                <field name="COMM_DOB_GROUP" originalName="COMM_DOB_GROUP" included="N" path="CRECUST.COMM_DOB_GROUP" redefines="COMM_DATE_OF_BIRTH">
+                <field name="CommDobGroup" originalName="COMM_DOB_GROUP" included="N" path="CreCust.CommDobGroup" redefines="COMM_DATE_OF_BIRTH">
                     <startPos>241</startPos>
                     <bytes>8</bytes>
                     <maxBytes>8</maxBytes>
+                    <remarks></remarks>
                     <applicationDatatype datatype="STRUCT"/>
-                    <field name="COMM_BIRTH_DAY" originalName="COMM_BIRTH_DAY" included="N" path="CRECUST.COMM_DOB_GROUP.COMM_BIRTH_DAY">
+                    <field name="CommBirthDay" originalName="COMM_BIRTH_DAY" included="N" defaultValue="" isHex="false" path="CreCust.CommDobGroup.CommBirthDay" codepageConversion="Y">
                         <startPos>241</startPos>
                         <bytes>2</bytes>
                         <maxBytes>2</maxBytes>
+                        <remarks></remarks>
                         <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
                             <typeConverter>ZONEDDECIMAL</typeConverter>
                         </marshaller>
                         <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
                     </field>
-                    <field name="COMM_BIRTH_MONTH" originalName="COMM_BIRTH_MONTH" included="N" path="CRECUST.COMM_DOB_GROUP.COMM_BIRTH_MONTH">
+                    <field name="CommBirthMonth" originalName="COMM_BIRTH_MONTH" included="N" defaultValue="" isHex="false" path="CreCust.CommDobGroup.CommBirthMonth" codepageConversion="Y">
                         <startPos>243</startPos>
                         <bytes>2</bytes>
                         <maxBytes>2</maxBytes>
+                        <remarks></remarks>
                         <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
                             <typeConverter>ZONEDDECIMAL</typeConverter>
                         </marshaller>
                         <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
                     </field>
-                    <field name="COMM_BIRTH_YEAR" originalName="COMM_BIRTH_YEAR" included="N" path="CRECUST.COMM_DOB_GROUP.COMM_BIRTH_YEAR">
+                    <field name="CommBirthYear" originalName="COMM_BIRTH_YEAR" included="N" defaultValue="" isHex="false" path="CreCust.CommDobGroup.CommBirthYear" codepageConversion="Y">
                         <startPos>245</startPos>
                         <bytes>4</bytes>
                         <maxBytes>4</maxBytes>
+                        <remarks></remarks>
                         <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
                             <typeConverter>ZONEDDECIMAL</typeConverter>
                         </marshaller>
                         <applicationDatatype datatype="DECIMAL" precision="4" scale="0"/>
                     </field>
                 </field>
-                <field name="COMM_CREDIT_SCORE" originalName="COMM_CREDIT_SCORE" included="Y" path="CRECUST.COMM_CREDIT_SCORE">
+                <field name="CommCreditScore" originalName="COMM_CREDIT_SCORE" included="Y" defaultValue="" isHex="false" path="CreCust.CommCreditScore" codepageConversion="Y">
                     <startPos>249</startPos>
                     <bytes>3</bytes>
                     <maxBytes>3</maxBytes>
+                    <remarks></remarks>
                     <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
                         <typeConverter>ZONEDDECIMAL</typeConverter>
                     </marshaller>
                     <applicationDatatype datatype="DECIMAL" precision="3" scale="0"/>
                 </field>
-                <field name="COMM_CS_REVIEW_DATE" originalName="COMM_CS_REVIEW_DATE" included="Y" path="CRECUST.COMM_CS_REVIEW_DATE">
+                <field name="CommCsReviewDate" originalName="COMM_CS_REVIEW_DATE" included="Y" defaultValue="" isHex="false" path="CreCust.CommCsReviewDate" codepageConversion="Y">
                     <startPos>252</startPos>
                     <bytes>8</bytes>
                     <maxBytes>8</maxBytes>
+                    <remarks></remarks>
                     <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
                         <typeConverter>ZONEDDECIMAL</typeConverter>
                     </marshaller>
                     <applicationDatatype datatype="DECIMAL" precision="8" scale="0"/>
                 </field>
-                <field name="COMM_CS_REVIEW_DATE_GROUP" originalName="COMM_CS_REVIEW_DATE_GROUP" included="N" path="CRECUST.COMM_CS_REVIEW_DATE_GROUP" redefines="COMM_CS_REVIEW_DATE">
+                <field name="CommCsReviewDateGroup" originalName="COMM_CS_REVIEW_DATE_GROUP" included="N" path="CreCust.CommCsReviewDateGroup" redefines="COMM_CS_REVIEW_DATE">
                     <startPos>252</startPos>
                     <bytes>8</bytes>
                     <maxBytes>8</maxBytes>
+                    <remarks></remarks>
                     <applicationDatatype datatype="STRUCT"/>
-                    <field name="COMM_CS_REVIEW_DD" originalName="COMM_CS_REVIEW_DD" included="N" path="CRECUST.COMM_CS_REVIEW_DATE_GROUP.COMM_CS_REVIEW_DD">
+                    <field name="CommCsReviewDd" originalName="COMM_CS_REVIEW_DD" included="N" defaultValue="" isHex="false" path="CreCust.CommCsReviewDateGroup.CommCsReviewDd" codepageConversion="Y">
                         <startPos>252</startPos>
                         <bytes>2</bytes>
                         <maxBytes>2</maxBytes>
+                        <remarks></remarks>
                         <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
                             <typeConverter>ZONEDDECIMAL</typeConverter>
                         </marshaller>
                         <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
                     </field>
-                    <field name="COMM_CS_REVIEW_MM" originalName="COMM_CS_REVIEW_MM" included="N" path="CRECUST.COMM_CS_REVIEW_DATE_GROUP.COMM_CS_REVIEW_MM">
+                    <field name="CommCsReviewMm" originalName="COMM_CS_REVIEW_MM" included="N" defaultValue="" isHex="false" path="CreCust.CommCsReviewDateGroup.CommCsReviewMm" codepageConversion="Y">
                         <startPos>254</startPos>
                         <bytes>2</bytes>
                         <maxBytes>2</maxBytes>
+                        <remarks></remarks>
                         <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
                             <typeConverter>ZONEDDECIMAL</typeConverter>
                         </marshaller>
                         <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
                     </field>
-                    <field name="COMM_CS_REVIEW_YYYY" originalName="COMM_CS_REVIEW_YYYY" included="N" path="CRECUST.COMM_CS_REVIEW_DATE_GROUP.COMM_CS_REVIEW_YYYY">
+                    <field name="CommCsReviewYyyy" originalName="COMM_CS_REVIEW_YYYY" included="N" defaultValue="" isHex="false" path="CreCust.CommCsReviewDateGroup.CommCsReviewYyyy" codepageConversion="Y">
                         <startPos>256</startPos>
                         <bytes>4</bytes>
                         <maxBytes>4</maxBytes>
+                        <remarks></remarks>
                         <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
                             <typeConverter>ZONEDDECIMAL</typeConverter>
                         </marshaller>
                         <applicationDatatype datatype="DECIMAL" precision="4" scale="0"/>
                     </field>
                 </field>
-                <field name="COMM_SUCCESS" originalName="COMM_SUCCESS" included="Y" path="CRECUST.COMM_SUCCESS">
+                <field name="CommSuccess" originalName="COMM_SUCCESS" included="Y" defaultValue="" isHex="false" path="CreCust.CommSuccess" codepageConversion="Y">
                     <startPos>260</startPos>
                     <bytes>1</bytes>
                     <maxBytes>1</maxBytes>
+                    <remarks></remarks>
                     <applicationDatatype datatype="CHAR"/>
                 </field>
-                <field name="COMM_FAIL_CODE" originalName="COMM_FAIL_CODE" included="Y" path="CRECUST.COMM_FAIL_CODE">
+                <field name="CommFailCode" originalName="COMM_FAIL_CODE" included="Y" defaultValue="" isHex="false" path="CreCust.CommFailCode" codepageConversion="Y">
                     <startPos>261</startPos>
                     <bytes>1</bytes>
                     <maxBytes>1</maxBytes>
+                    <remarks></remarks>
                     <applicationDatatype datatype="CHAR"/>
                 </field>
             </field>

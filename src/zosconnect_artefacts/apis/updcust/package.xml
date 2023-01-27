@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!--
-
-        Copyright IBM Corp. 2022
-
-
--->
 <zosConnectApi xmlns="http://www.ibm.com/zosConnect/2.0/zosConnectApi" id="updcust">
     <apiSpec title="updcust" basePath="/updcust" description="Update a customer's details on the CScustupd Service" version="1.0.0">
         <path relativePath="/update">

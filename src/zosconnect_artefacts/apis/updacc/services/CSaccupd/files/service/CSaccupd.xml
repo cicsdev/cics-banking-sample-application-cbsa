@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!--
-
-        Copyright IBM Corp. 2022
-
-
--->
 <service xmlns:ns2="http://www.ibm.com/ims/Transaction">
     <shallow>true</shallow>
     <serviceName>CSaccupd</serviceName>
@@ -18,35 +12,35 @@
         <serviceInterface>
             <interface>
                 <segment segmentName="COMMAREA">
-                    <interfaceField included="Y" fieldName="UPDACC">
-                        <field included="Y" fieldName="COMM_EYE"/>
-                        <field included="Y" fieldName="COMM_CUSTNO"/>
-                        <field included="Y" fieldName="COMM_SCODE"/>
-                        <field included="Y" fieldName="COMM_ACCNO"/>
-                        <field included="Y" fieldName="COMM_ACC_TYPE"/>
-                        <field included="Y" fieldName="COMM_INT_RATE"/>
-                        <field included="Y" fieldName="COMM_OPENED"/>
-                        <field included="N" fieldName="COMM_OPENED_GROUP">
-                            <field included="N" fieldName="COMM_OPENED_DAY"/>
-                            <field included="N" fieldName="COMM_OPENED_MONTH"/>
-                            <field included="N" fieldName="COMM_OPENED_YEAR"/>
+                    <interfaceField included="Y" fieldName="UpdAcc">
+                        <field included="Y" fieldName="CommEye" isHex="false"/>
+                        <field included="Y" fieldName="CommCustno" isHex="false"/>
+                        <field included="Y" fieldName="CommScode" isHex="false"/>
+                        <field included="Y" fieldName="CommAccno" isHex="false"/>
+                        <field included="Y" fieldName="CommAccType" isHex="false"/>
+                        <field included="Y" fieldName="CommIntRate" isHex="false"/>
+                        <field included="Y" fieldName="CommOpened" isHex="false"/>
+                        <field included="N" fieldName="CommOpenedGroup">
+                            <field included="N" fieldName="CommOpenedDay" isHex="false"/>
+                            <field included="N" fieldName="CommOpenedMonth" isHex="false"/>
+                            <field included="N" fieldName="CommOpenedYear" isHex="false"/>
                         </field>
-                        <field included="Y" fieldName="COMM_OVERDRAFT"/>
-                        <field included="Y" fieldName="COMM_LAST_STMT_DT"/>
-                        <field included="N" fieldName="COMM_LAST_STMNT_GROUP">
-                            <field included="N" fieldName="COMM_LASTST_DAY"/>
-                            <field included="N" fieldName="COMM_LASTST_MONTH"/>
-                            <field included="N" fieldName="COMM_LASTST_YEAR"/>
+                        <field included="Y" fieldName="CommOverdraft" isHex="false"/>
+                        <field included="Y" fieldName="CommLastStmtDt" isHex="false"/>
+                        <field included="N" fieldName="CommLastStmntGroup">
+                            <field included="N" fieldName="CommLaststDay" isHex="false"/>
+                            <field included="N" fieldName="CommLaststMonth" isHex="false"/>
+                            <field included="N" fieldName="CommLaststYear" isHex="false"/>
                         </field>
-                        <field included="Y" fieldName="COMM_NEXT_STMT_DT"/>
-                        <field included="N" fieldName="COMM_NEXT_STMNT_GROUP">
-                            <field included="N" fieldName="COMM_NEXTST_DAY"/>
-                            <field included="N" fieldName="COMM_NEXTST_MONTH"/>
-                            <field included="N" fieldName="COMM_NEXTST_YEAR"/>
+                        <field included="Y" fieldName="CommNextStmtDt" isHex="false"/>
+                        <field included="N" fieldName="CommNextStmntGroup">
+                            <field included="N" fieldName="CommNextstDay" isHex="false"/>
+                            <field included="N" fieldName="CommNextstMonth" isHex="false"/>
+                            <field included="N" fieldName="CommNextstYear" isHex="false"/>
                         </field>
-                        <field included="Y" fieldName="COMM_AVAIL_BAL"/>
-                        <field included="Y" fieldName="COMM_ACTUAL_BAL"/>
-                        <field included="Y" fieldName="COMM_SUCCESS"/>
+                        <field included="Y" fieldName="CommAvailBal" isHex="false"/>
+                        <field included="Y" fieldName="CommActualBal" isHex="false"/>
+                        <field included="Y" fieldName="CommSuccess" isHex="false"/>
                     </interfaceField>
                 </segment>
             </interface>
@@ -58,35 +52,35 @@
         <serviceInterface>
             <interface>
                 <segment segmentName="COMMAREA">
-                    <interfaceField included="Y" fieldName="UPDACC">
-                        <field included="Y" fieldName="COMM_EYE"/>
-                        <field included="Y" fieldName="COMM_CUSTNO"/>
-                        <field included="Y" fieldName="COMM_SCODE"/>
-                        <field included="Y" fieldName="COMM_ACCNO"/>
-                        <field included="Y" fieldName="COMM_ACC_TYPE"/>
-                        <field included="Y" fieldName="COMM_INT_RATE"/>
-                        <field included="Y" fieldName="COMM_OPENED"/>
-                        <field included="N" fieldName="COMM_OPENED_GROUP">
-                            <field included="N" fieldName="COMM_OPENED_DAY"/>
-                            <field included="N" fieldName="COMM_OPENED_MONTH"/>
-                            <field included="N" fieldName="COMM_OPENED_YEAR"/>
+                    <interfaceField included="Y" fieldName="UpdAcc">
+                        <field included="Y" fieldName="CommEye" isHex="false"/>
+                        <field included="Y" fieldName="CommCustno" isHex="false"/>
+                        <field included="Y" fieldName="CommScode" isHex="false"/>
+                        <field included="Y" fieldName="CommAccno" isHex="false"/>
+                        <field included="Y" fieldName="CommAccType" isHex="false"/>
+                        <field included="Y" fieldName="CommIntRate" isHex="false"/>
+                        <field included="Y" fieldName="CommOpened" isHex="false"/>
+                        <field included="N" fieldName="CommOpenedGroup">
+                            <field included="N" fieldName="CommOpenedDay" isHex="false"/>
+                            <field included="N" fieldName="CommOpenedMonth" isHex="false"/>
+                            <field included="N" fieldName="CommOpenedYear" isHex="false"/>
                         </field>
-                        <field included="Y" fieldName="COMM_OVERDRAFT"/>
-                        <field included="Y" fieldName="COMM_LAST_STMT_DT"/>
-                        <field included="N" fieldName="COMM_LAST_STMNT_GROUP">
-                            <field included="N" fieldName="COMM_LASTST_DAY"/>
-                            <field included="N" fieldName="COMM_LASTST_MONTH"/>
-                            <field included="N" fieldName="COMM_LASTST_YEAR"/>
+                        <field included="Y" fieldName="CommOverdraft" isHex="false"/>
+                        <field included="Y" fieldName="CommLastStmtDt" isHex="false"/>
+                        <field included="N" fieldName="CommLastStmntGroup">
+                            <field included="N" fieldName="CommLaststDay" isHex="false"/>
+                            <field included="N" fieldName="CommLaststMonth" isHex="false"/>
+                            <field included="N" fieldName="CommLaststYear" isHex="false"/>
                         </field>
-                        <field included="Y" fieldName="COMM_NEXT_STMT_DT"/>
-                        <field included="N" fieldName="COMM_NEXT_STMNT_GROUP">
-                            <field included="N" fieldName="COMM_NEXTST_DAY"/>
-                            <field included="N" fieldName="COMM_NEXTST_MONTH"/>
-                            <field included="N" fieldName="COMM_NEXTST_YEAR"/>
+                        <field included="Y" fieldName="CommNextStmtDt" isHex="false"/>
+                        <field included="N" fieldName="CommNextStmntGroup">
+                            <field included="N" fieldName="CommNextstDay" isHex="false"/>
+                            <field included="N" fieldName="CommNextstMonth" isHex="false"/>
+                            <field included="N" fieldName="CommNextstYear" isHex="false"/>
                         </field>
-                        <field included="Y" fieldName="COMM_AVAIL_BAL"/>
-                        <field included="Y" fieldName="COMM_ACTUAL_BAL"/>
-                        <field included="Y" fieldName="COMM_SUCCESS"/>
+                        <field included="Y" fieldName="CommAvailBal" isHex="false"/>
+                        <field included="Y" fieldName="CommActualBal" isHex="false"/>
+                        <field included="Y" fieldName="CommSuccess" isHex="false"/>
                     </interfaceField>
                 </segment>
             </interface>
@@ -110,4 +104,5 @@
     <enforceMinArrayOccurrenceResponse>false</enforceMinArrayOccurrenceResponse>
     <ldsStartsWithLLZZTRANCODE>false</ldsStartsWithLLZZTRANCODE>
     <ldsStartsWithLLZZ>false</ldsStartsWithLLZZ>
+    <truncateInputLastCharField>false</truncateInputLastCharField>
 </service>

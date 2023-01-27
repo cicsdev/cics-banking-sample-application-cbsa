@@ -8,5 +8,5 @@ package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.createacco
 
 public enum AccountType
 {
-	CURRENT, LOAN, ISA, MORTGAGE, SAVINGS
+	CURRENT, LOAN, ISA, MORTGAGE, SAVING
 }

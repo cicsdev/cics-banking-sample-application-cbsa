@@ -6,6 +6,7 @@
  */
 package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.deletecustomer;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.ibm.cics.cip.bank.springboot.customerservices.JsonPropertyNamingStrategy;
 import com.ibm.cics.cip.bank.springboot.customerservices.OutputFormatUtils;
@@ -16,6 +17,7 @@ public class DeleteCustomerJson
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
+	@JsonProperty("DelCus")
 	private DelcusJson delcus;
 
 
@@ -40,7 +42,7 @@ public class DeleteCustomerJson
 	@Override
 	public String toString()
 	{
-		return "DeleteCustomerJson [DELCUS=" + delcus.toString() + "]";
+		return "DeleteCustomerJson [DelCus=" + delcus.toString() + "]";
 	}
 
 

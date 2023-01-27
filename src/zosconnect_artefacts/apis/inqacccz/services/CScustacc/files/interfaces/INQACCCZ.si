@@ -1,230 +1,255 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-<!--                                                                 -->
-<!--  Copyright IBM Corp. 2022                                       -->
-<!--                                                                 -->
-<!--                                                                 -->
-<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 <ns2:message xmlns:ns2="http://www.ibm.com/ims/Transaction" transactionCode="" messageName="INQACCCZ" direction="0" serviceType="CICS_COMM_AREA">
     <message id="1" name="INQACCCZ">
         <segment id="1" name="COMMAREA" originalName="COMMAREA">
-            <field name="INQACCCZ" originalName="INQACCCZ" included="Y" path="INQACCCZ">
+            <field name="InqAccZ" originalName="INQACCCZ" included="Y" path="InqAccZ">
                 <startPos>1</startPos>
                 <bytes>1981</bytes>
                 <maxBytes>0</maxBytes>
+                <remarks></remarks>
                 <marshaller alignment="NATURAL"/>
                 <applicationDatatype datatype="STRUCT"/>
-                <field name="NUMBER_OF_ACCOUNTS" originalName="NUMBER_OF_ACCOUNTS" included="N" path="INQACCCZ.NUMBER_OF_ACCOUNTS" dependedOn="true">
+                <field name="NUMBER_OF_ACCOUNTS" originalName="NUMBER_OF_ACCOUNTS" included="N" path="InqAccZ.NUMBER_OF_ACCOUNTS" dependedOn="true">
                     <startPos>1</startPos>
                     <bytes>4</bytes>
                     <maxBytes>4</maxBytes>
                     <marshaller isNativeInteger="N" alignment="NATURAL"/>
                     <applicationDatatype datatype="INT" precision="8"/>
                 </field>
-                <field name="CUSTOMER_NUMBER" originalName="CUSTOMER_NUMBER" included="Y" path="INQACCCZ.CUSTOMER_NUMBER">
+                <field name="CustomerNumber" originalName="CUSTOMER_NUMBER" included="Y" defaultValue="" isHex="false" path="InqAccZ.CustomerNumber" codepageConversion="Y">
                     <startPos>5</startPos>
                     <bytes>10</bytes>
                     <maxBytes>10</maxBytes>
+                    <remarks></remarks>
                     <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
                         <typeConverter>ZONEDDECIMAL</typeConverter>
                     </marshaller>
                     <applicationDatatype datatype="DECIMAL" precision="10" scale="0"/>
                 </field>
-                <field name="COMM_SUCCESS" originalName="COMM_SUCCESS" included="Y" path="INQACCCZ.COMM_SUCCESS">
+                <field name="CommSuccess" originalName="COMM_SUCCESS" included="Y" defaultValue="" isHex="false" path="InqAccZ.CommSuccess" codepageConversion="Y">
                     <startPos>15</startPos>
                     <bytes>1</bytes>
                     <maxBytes>1</maxBytes>
+                    <remarks></remarks>
                     <applicationDatatype datatype="CHAR"/>
                 </field>
-                <field name="COMM_FAIL_CODE" originalName="COMM_FAIL_CODE" included="Y" path="INQACCCZ.COMM_FAIL_CODE">
+                <field name="CommFailCode" originalName="COMM_FAIL_CODE" included="Y" defaultValue="" isHex="false" path="InqAccZ.CommFailCode" codepageConversion="Y">
                     <startPos>16</startPos>
                     <bytes>1</bytes>
                     <maxBytes>1</maxBytes>
+                    <remarks></remarks>
                     <applicationDatatype datatype="CHAR"/>
                 </field>
-                <field name="CUSTOMER_FOUND" originalName="CUSTOMER_FOUND" included="Y" path="INQACCCZ.CUSTOMER_FOUND">
+                <field name="CustomerFound" originalName="CUSTOMER_FOUND" included="Y" defaultValue="" isHex="false" path="InqAccZ.CustomerFound" codepageConversion="Y">
                     <startPos>17</startPos>
                     <bytes>1</bytes>
                     <maxBytes>1</maxBytes>
+                    <remarks></remarks>
                     <applicationDatatype datatype="CHAR"/>
                 </field>
-                <field name="COMM_PCB_POINTER" originalName="COMM_PCB_POINTER" included="Y" path="INQACCCZ.COMM_PCB_POINTER">
+                <field name="CommPcbPointer" originalName="COMM_PCB_POINTER" included="Y" defaultValue="" isHex="false" path="InqAccZ.CommPcbPointer" codepageConversion="Y">
                     <startPos>18</startPos>
                     <bytes>4</bytes>
                     <maxBytes>4</maxBytes>
+                    <remarks></remarks>
                     <applicationDatatype datatype="CHAR"/>
                 </field>
-                <field name="ACCOUNT_DETAILS" originalName="ACCOUNT_DETAILS" included="Y" path="INQACCCZ.ACCOUNT_DETAILS" dependsOn="NUMBER_OF_ACCOUNTS" dependsOnPath="INQACCCZ.NUMBER_OF_ACCOUNTS" minOccurs="1" maxOccurs="20">
+                <field name="AccountDetails" originalName="ACCOUNT_DETAILS" included="Y" path="InqAccZ.AccountDetails" dependsOn="NUMBER_OF_ACCOUNTS" dependsOnPath="InqAccZ.NUMBER_OF_ACCOUNTS" minOccurs="1" maxOccurs="20">
                     <startPos>22</startPos>
                     <bytes>1960</bytes>
                     <maxBytes>0</maxBytes>
+                    <remarks></remarks>
                     <applicationDatatype datatype="ARRAY"/>
-                    <field name="COMM_EYE" originalName="COMM_EYE" included="Y" path="INQACCCZ.ACCOUNT_DETAILS.COMM_EYE">
+                    <field name="CommEye" originalName="COMM_EYE" included="Y" defaultValue="" isHex="false" path="InqAccZ.AccountDetails.CommEye" codepageConversion="Y">
                         <bytes>4</bytes>
                         <maxBytes>4</maxBytes>
+                        <remarks></remarks>
                         <applicationDatatype datatype="CHAR"/>
                     </field>
-                    <field name="COMM_CUSTNO" originalName="COMM_CUSTNO" included="Y" path="INQACCCZ.ACCOUNT_DETAILS.COMM_CUSTNO">
+                    <field name="CommCustno" originalName="COMM_CUSTNO" included="Y" defaultValue="" isHex="false" path="InqAccZ.AccountDetails.CommCustno" codepageConversion="Y">
                         <bytes>10</bytes>
                         <maxBytes>10</maxBytes>
+                        <remarks></remarks>
                         <applicationDatatype datatype="CHAR"/>
                     </field>
-                    <field name="COMM_SCODE" originalName="COMM_SCODE" included="Y" path="INQACCCZ.ACCOUNT_DETAILS.COMM_SCODE">
+                    <field name="CommScode" originalName="COMM_SCODE" included="N" defaultValue="" isHex="false" path="InqAccZ.AccountDetails.CommScode" codepageConversion="Y">
                         <bytes>6</bytes>
                         <maxBytes>6</maxBytes>
+                        <remarks></remarks>
                         <applicationDatatype datatype="CHAR"/>
                     </field>
-                    <field name="COMM_ACCNO" originalName="COMM_ACCNO" included="Y" path="INQACCCZ.ACCOUNT_DETAILS.COMM_ACCNO">
+                    <field name="CommAccno" originalName="COMM_ACCNO" included="Y" defaultValue="" isHex="false" path="InqAccZ.AccountDetails.CommAccno" codepageConversion="Y">
                         <bytes>8</bytes>
                         <maxBytes>8</maxBytes>
+                        <remarks></remarks>
                         <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
                             <typeConverter>ZONEDDECIMAL</typeConverter>
                         </marshaller>
                         <applicationDatatype datatype="DECIMAL" precision="8" scale="0"/>
                     </field>
-                    <field name="COMM_ACC_TYPE" originalName="COMM_ACC_TYPE" included="Y" path="INQACCCZ.ACCOUNT_DETAILS.COMM_ACC_TYPE">
+                    <field name="CommAccType" originalName="COMM_ACC_TYPE" included="Y" defaultValue="" isHex="false" path="InqAccZ.AccountDetails.CommAccType" codepageConversion="Y">
                         <bytes>8</bytes>
                         <maxBytes>8</maxBytes>
+                        <remarks></remarks>
                         <applicationDatatype datatype="CHAR"/>
                     </field>
-                    <field name="COMM_INT_RATE" originalName="COMM_INT_RATE" included="Y" path="INQACCCZ.ACCOUNT_DETAILS.COMM_INT_RATE">
+                    <field name="CommIntRate" originalName="COMM_INT_RATE" included="Y" defaultValue="" isHex="false" path="InqAccZ.AccountDetails.CommIntRate" codepageConversion="Y">
                         <bytes>6</bytes>
                         <maxBytes>6</maxBytes>
+                        <remarks></remarks>
                         <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
                             <typeConverter>ZONEDDECIMAL</typeConverter>
                         </marshaller>
                         <applicationDatatype datatype="DECIMAL" precision="6" scale="2"/>
                     </field>
-                    <field name="COMM_OPENED" originalName="COMM_OPENED" included="Y" path="INQACCCZ.ACCOUNT_DETAILS.COMM_OPENED">
+                    <field name="CommOpened" originalName="COMM_OPENED" included="Y" defaultValue="" isHex="false" path="InqAccZ.AccountDetails.CommOpened" codepageConversion="Y">
                         <bytes>8</bytes>
                         <maxBytes>8</maxBytes>
+                        <remarks></remarks>
                         <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
                             <typeConverter>ZONEDDECIMAL</typeConverter>
                         </marshaller>
                         <applicationDatatype datatype="DECIMAL" precision="8" scale="0"/>
                     </field>
-                    <field name="COMM_OPENED_GROUP" originalName="COMM_OPENED_GROUP" included="N" path="INQACCCZ.ACCOUNT_DETAILS.COMM_OPENED_GROUP" redefines="COMM_OPENED">
+                    <field name="CommOpenedGroup" originalName="COMM_OPENED_GROUP" included="N" path="InqAccZ.AccountDetails.CommOpenedGroup" redefines="COMM_OPENED">
                         <bytes>8</bytes>
                         <maxBytes>8</maxBytes>
+                        <remarks></remarks>
                         <applicationDatatype datatype="STRUCT"/>
-                        <field name="COMM_OPENED_DAY" originalName="COMM_OPENED_DAY" included="N" path="INQACCCZ.ACCOUNT_DETAILS.COMM_OPENED_GROUP.COMM_OPENED_DAY">
+                        <field name="CommOpenedDay" originalName="COMM_OPENED_DAY" included="N" defaultValue="" isHex="false" path="InqAccZ.AccountDetails.CommOpenedGroup.CommOpenedDay" codepageConversion="Y">
                             <bytes>2</bytes>
                             <maxBytes>2</maxBytes>
+                            <remarks></remarks>
                             <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
 <typeConverter>ZONEDDECIMAL</typeConverter>
                             </marshaller>
                             <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
                         </field>
-                        <field name="COMM_OPENED_MONTH" originalName="COMM_OPENED_MONTH" included="N" path="INQACCCZ.ACCOUNT_DETAILS.COMM_OPENED_GROUP.COMM_OPENED_MONTH">
+                        <field name="CommOpenedMonth" originalName="COMM_OPENED_MONTH" included="N" defaultValue="" isHex="false" path="InqAccZ.AccountDetails.CommOpenedGroup.CommOpenedMonth" codepageConversion="Y">
                             <bytes>2</bytes>
                             <maxBytes>2</maxBytes>
+                            <remarks></remarks>
                             <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
 <typeConverter>ZONEDDECIMAL</typeConverter>
                             </marshaller>
                             <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
                         </field>
-                        <field name="COMM_OPENED_YEAR" originalName="COMM_OPENED_YEAR" included="N" path="INQACCCZ.ACCOUNT_DETAILS.COMM_OPENED_GROUP.COMM_OPENED_YEAR">
+                        <field name="CommOpenedYear" originalName="COMM_OPENED_YEAR" included="N" defaultValue="" isHex="false" path="InqAccZ.AccountDetails.CommOpenedGroup.CommOpenedYear" codepageConversion="Y">
                             <bytes>4</bytes>
                             <maxBytes>4</maxBytes>
+                            <remarks></remarks>
                             <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
 <typeConverter>ZONEDDECIMAL</typeConverter>
                             </marshaller>
                             <applicationDatatype datatype="DECIMAL" precision="4" scale="0"/>
                         </field>
                     </field>
-                    <field name="COMM_OVERDRAFT" originalName="COMM_OVERDRAFT" included="Y" path="INQACCCZ.ACCOUNT_DETAILS.COMM_OVERDRAFT">
+                    <field name="CommOverdraft" originalName="COMM_OVERDRAFT" included="Y" defaultValue="" isHex="false" path="InqAccZ.AccountDetails.CommOverdraft" codepageConversion="Y">
                         <bytes>8</bytes>
                         <maxBytes>8</maxBytes>
+                        <remarks></remarks>
                         <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
                             <typeConverter>ZONEDDECIMAL</typeConverter>
                         </marshaller>
                         <applicationDatatype datatype="DECIMAL" precision="8" scale="0"/>
                     </field>
-                    <field name="COMM_LAST_STMT_DT" originalName="COMM_LAST_STMT_DT" included="Y" path="INQACCCZ.ACCOUNT_DETAILS.COMM_LAST_STMT_DT">
+                    <field name="CommLastStmtDt" originalName="COMM_LAST_STMT_DT" included="Y" defaultValue="" isHex="false" path="InqAccZ.AccountDetails.CommLastStmtDt" codepageConversion="Y">
                         <bytes>8</bytes>
                         <maxBytes>8</maxBytes>
+                        <remarks></remarks>
                         <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
                             <typeConverter>ZONEDDECIMAL</typeConverter>
                         </marshaller>
                         <applicationDatatype datatype="DECIMAL" precision="8" scale="0"/>
                     </field>
-                    <field name="COMM_LAST_STMT_GROUP" originalName="COMM_LAST_STMT_GROUP" included="N" path="INQACCCZ.ACCOUNT_DETAILS.COMM_LAST_STMT_GROUP" redefines="COMM_LAST_STMT_DT">
+                    <field name="CommLastStmtGroup" originalName="COMM_LAST_STMT_GROUP" included="N" path="InqAccZ.AccountDetails.CommLastStmtGroup" redefines="COMM_LAST_STMT_DT">
                         <bytes>8</bytes>
                         <maxBytes>8</maxBytes>
+                        <remarks></remarks>
                         <applicationDatatype datatype="STRUCT"/>
-                        <field name="COMM_LAST_STMT_DAY" originalName="COMM_LAST_STMT_DAY" included="N" path="INQACCCZ.ACCOUNT_DETAILS.COMM_LAST_STMT_GROUP.COMM_LAST_STMT_DAY">
+                        <field name="CommLastStmtDay" originalName="COMM_LAST_STMT_DAY" included="N" defaultValue="" isHex="false" path="InqAccZ.AccountDetails.CommLastStmtGroup.CommLastStmtDay" codepageConversion="Y">
                             <bytes>2</bytes>
                             <maxBytes>2</maxBytes>
+                            <remarks></remarks>
                             <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
 <typeConverter>ZONEDDECIMAL</typeConverter>
                             </marshaller>
                             <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
                         </field>
-                        <field name="COMM_LAST_STMT_MONTH" originalName="COMM_LAST_STMT_MONTH" included="N" path="INQACCCZ.ACCOUNT_DETAILS.COMM_LAST_STMT_GROUP.COMM_LAST_STMT_MONTH">
+                        <field name="CommLastStmtMonth" originalName="COMM_LAST_STMT_MONTH" included="N" defaultValue="" isHex="false" path="InqAccZ.AccountDetails.CommLastStmtGroup.CommLastStmtMonth" codepageConversion="Y">
                             <bytes>2</bytes>
                             <maxBytes>2</maxBytes>
+                            <remarks></remarks>
                             <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
 <typeConverter>ZONEDDECIMAL</typeConverter>
                             </marshaller>
                             <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
                         </field>
-                        <field name="COMM_LAST_STMT_YEAR" originalName="COMM_LAST_STMT_YEAR" included="N" path="INQACCCZ.ACCOUNT_DETAILS.COMM_LAST_STMT_GROUP.COMM_LAST_STMT_YEAR">
+                        <field name="CommLastStmtYear" originalName="COMM_LAST_STMT_YEAR" included="N" defaultValue="" isHex="false" path="InqAccZ.AccountDetails.CommLastStmtGroup.CommLastStmtYear" codepageConversion="Y">
                             <bytes>4</bytes>
                             <maxBytes>4</maxBytes>
+                            <remarks></remarks>
                             <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
 <typeConverter>ZONEDDECIMAL</typeConverter>
                             </marshaller>
                             <applicationDatatype datatype="DECIMAL" precision="4" scale="0"/>
                         </field>
                     </field>
-                    <field name="COMM_NEXT_STMT_DT" originalName="COMM_NEXT_STMT_DT" included="Y" path="INQACCCZ.ACCOUNT_DETAILS.COMM_NEXT_STMT_DT">
+                    <field name="CommNextStmtDt" originalName="COMM_NEXT_STMT_DT" included="Y" defaultValue="" isHex="false" path="InqAccZ.AccountDetails.CommNextStmtDt" codepageConversion="Y">
                         <bytes>8</bytes>
                         <maxBytes>8</maxBytes>
+                        <remarks></remarks>
                         <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
                             <typeConverter>ZONEDDECIMAL</typeConverter>
                         </marshaller>
                         <applicationDatatype datatype="DECIMAL" precision="8" scale="0"/>
                     </field>
-                    <field name="COMM_NEXT_STMT_GROUP" originalName="COMM_NEXT_STMT_GROUP" included="N" path="INQACCCZ.ACCOUNT_DETAILS.COMM_NEXT_STMT_GROUP" redefines="COMM_NEXT_STMT_DT">
+                    <field name="CommNextStmtGroup" originalName="COMM_NEXT_STMT_GROUP" included="N" path="InqAccZ.AccountDetails.CommNextStmtGroup" redefines="COMM_NEXT_STMT_DT">
                         <bytes>8</bytes>
                         <maxBytes>8</maxBytes>
+                        <remarks></remarks>
                         <applicationDatatype datatype="STRUCT"/>
-                        <field name="COMM_NEXT_STMT_DAY" originalName="COMM_NEXT_STMT_DAY" included="N" path="INQACCCZ.ACCOUNT_DETAILS.COMM_NEXT_STMT_GROUP.COMM_NEXT_STMT_DAY">
+                        <field name="CommNextStmtDay" originalName="COMM_NEXT_STMT_DAY" included="N" defaultValue="" isHex="false" path="InqAccZ.AccountDetails.CommNextStmtGroup.CommNextStmtDay" codepageConversion="Y">
                             <bytes>2</bytes>
                             <maxBytes>2</maxBytes>
+                            <remarks></remarks>
                             <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
 <typeConverter>ZONEDDECIMAL</typeConverter>
                             </marshaller>
                             <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
                         </field>
-                        <field name="COMM_NEXT_STMT_MONTH" originalName="COMM_NEXT_STMT_MONTH" included="N" path="INQACCCZ.ACCOUNT_DETAILS.COMM_NEXT_STMT_GROUP.COMM_NEXT_STMT_MONTH">
+                        <field name="CommNextStmtMonth" originalName="COMM_NEXT_STMT_MONTH" included="N" defaultValue="" isHex="false" path="InqAccZ.AccountDetails.CommNextStmtGroup.CommNextStmtMonth" codepageConversion="Y">
                             <bytes>2</bytes>
                             <maxBytes>2</maxBytes>
+                            <remarks></remarks>
                             <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
 <typeConverter>ZONEDDECIMAL</typeConverter>
                             </marshaller>
                             <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
                         </field>
-                        <field name="COMM_NEXT_STMT_YEAR" originalName="COMM_NEXT_STMT_YEAR" included="N" path="INQACCCZ.ACCOUNT_DETAILS.COMM_NEXT_STMT_GROUP.COMM_NEXT_STMT_YEAR">
+                        <field name="CommNextStmtYear" originalName="COMM_NEXT_STMT_YEAR" included="N" defaultValue="" isHex="false" path="InqAccZ.AccountDetails.CommNextStmtGroup.CommNextStmtYear" codepageConversion="Y">
                             <bytes>4</bytes>
                             <maxBytes>4</maxBytes>
+                            <remarks></remarks>
                             <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
 <typeConverter>ZONEDDECIMAL</typeConverter>
                             </marshaller>
                             <applicationDatatype datatype="DECIMAL" precision="4" scale="0"/>
                         </field>
                     </field>
-                    <field name="COMM_AVAIL_BAL" originalName="COMM_AVAIL_BAL" included="Y" path="INQACCCZ.ACCOUNT_DETAILS.COMM_AVAIL_BAL">
+                    <field name="CommAvailBal" originalName="COMM_AVAIL_BAL" included="Y" defaultValue="" isHex="false" path="InqAccZ.AccountDetails.CommAvailBal" codepageConversion="Y">
                         <bytes>12</bytes>
                         <maxBytes>12</maxBytes>
+                        <remarks></remarks>
                         <marshaller isSigned="Y" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
                             <typeConverter>ZONEDDECIMAL</typeConverter>
                         </marshaller>
                         <applicationDatatype datatype="DECIMAL" precision="12" scale="2"/>
                     </field>
-                    <field name="COMM_ACTUAL_BAL" originalName="COMM_ACTUAL_BAL" included="Y" path="INQACCCZ.ACCOUNT_DETAILS.COMM_ACTUAL_BAL">
+                    <field name="CommActualBal" originalName="COMM_ACTUAL_BAL" included="Y" defaultValue="" isHex="false" path="InqAccZ.AccountDetails.CommActualBal" codepageConversion="Y">
                         <bytes>12</bytes>
                         <maxBytes>12</maxBytes>
+                        <remarks></remarks>
                         <marshaller isSigned="Y" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
                             <typeConverter>ZONEDDECIMAL</typeConverter>
                         </marshaller>

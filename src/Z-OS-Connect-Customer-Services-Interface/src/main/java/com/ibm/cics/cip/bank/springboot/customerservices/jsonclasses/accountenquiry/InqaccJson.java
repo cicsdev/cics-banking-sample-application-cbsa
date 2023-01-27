@@ -6,6 +6,7 @@
  */
 package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.accountenquiry;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.ibm.cics.cip.bank.springboot.customerservices.JsonPropertyNamingStrategy;
 
@@ -15,32 +16,46 @@ public class InqaccJson
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
+	@JsonProperty("InqAccPcb1Pointer")
 	private String inqaccPcb1Pointer;
 
+	@JsonProperty("InqAccOverdraft")
 	private int inqaccOverdraft;
 
+	@JsonProperty("InqAccLastStmtDt")
 	private int inqaccLastStatementDate;
 
+	@JsonProperty("InqAccScode")
 	private int inqaccSortcode;
 
+	@JsonProperty("InqAccActualBal")
 	private float inqaccActualBalance;
 
+	@JsonProperty("InqAccAccno")
 	private int inqaccAccno;
 
+	@JsonProperty("InqAccOpened")
 	private int inqaccOpened;
 
+	@JsonProperty("InqAccCustno")
 	private int inqaccCustno;
 
+	@JsonProperty("InqAccAccType")
 	private String inqaccAccType;
 
+	@JsonProperty("InqAccNextStmtDt")
 	private int inqaccNextStatementDate;
 
+	@JsonProperty("InqAccAvailBal")
 	private float inqaccAvailableBalance;
 
+	@JsonProperty("InqAccEye")
 	private String inqaccEyecatcher;
 
+	@JsonProperty("InqAccSuccess")
 	private String inqaccSuccess;
 
+	@JsonProperty("InqAccIntRate")
 	private float inqaccInterestRate;
 
 
@@ -215,16 +230,16 @@ public class InqaccJson
 	@Override
 	public String toString()
 	{
-		return "InqaccJson [INQACC_ACCNO=" + inqaccAccno + ", INQACC_ACC_TYPE="
-				+ inqaccAccType + ", INQACC_ACTUAL_BAL=" + inqaccActualBalance
-				+ ", INQACC_AVAIL_BAL=" + inqaccAvailableBalance
-				+ ", INQACC_CUSTNO=" + inqaccCustno + ", INQACC_EYE="
-				+ inqaccEyecatcher + ", INQACC_INT_RATE=" + inqaccInterestRate
-				+ ", INQACC_LAST_STMT_DT=" + inqaccLastStatementDate
-				+ ", INQACC_NEXT_STMT_DT=" + inqaccNextStatementDate
-				+ ", INQACC_OPENED=" + inqaccOpened + ", INQACC_OVERDRAFT="
-				+ inqaccOverdraft + ", INQACC_PCB1_POINTER=" + inqaccPcb1Pointer
-				+ ", INQACC_SCODE=" + inqaccSortcode + ", INQACC_SUCCESS="
+		return "InqaccJson [InqAccAccno=" + inqaccAccno + ", InqAccAccType="
+				+ inqaccAccType + ", InqAccActualBal=" + inqaccActualBalance
+				+ ", InqAccAvailBal=" + inqaccAvailableBalance
+				+ ", InqAccCustno=" + inqaccCustno + ", InqAccEye="
+				+ inqaccEyecatcher + ", InqAccIntRate=" + inqaccInterestRate
+				+ ", InqAccLastStmtDt=" + inqaccLastStatementDate
+				+ ", InqAccNextStmtDt=" + inqaccNextStatementDate
+				+ ", InqAccOpened=" + inqaccOpened + ", InqAccOverdraft="
+				+ inqaccOverdraft + ", InqAccPcb1Pointer=" + inqaccPcb1Pointer
+				+ ", InqAccScode=" + inqaccSortcode + ", InqAccSuccess="
 				+ inqaccSuccess + "]";
 	}
 

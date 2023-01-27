@@ -49,92 +49,92 @@
     "deleteCSaccdel_request" : {
       "type" : "object",
       "properties" : {
-        "DELACC_COMMAREA" : {
+        "DelAcc" : {
           "type" : "object",
           "properties" : {
-            "DELACC_EYE" : {
+            "DelAccEye" : {
               "type" : "string",
               "maxLength" : 4
             },
-            "DELACC_CUSTNO" : {
+            "DelAccCustno" : {
               "type" : "string",
               "maxLength" : 10
             },
-            "DELACC_SCODE" : {
+            "DelAccScode" : {
               "type" : "string",
               "maxLength" : 6
             },
-            "DELACC_ACC_TYPE" : {
+            "DelAccAccType" : {
               "type" : "string",
               "maxLength" : 8
             },
-            "DELACC_INT_RATE" : {
+            "DelAccIntRate" : {
               "type" : "number",
               "format" : "decimal",
               "minimum" : 0,
               "maximum" : 9999.99
             },
-            "DELACC_OPENED" : {
+            "DelAccOpened" : {
               "type" : "integer",
               "minimum" : 0,
               "maximum" : 99999999
             },
-            "DELACC_OVERDRAFT" : {
+            "DelAccOverdraft" : {
               "type" : "integer",
               "minimum" : 0,
               "maximum" : 99999999
             },
-            "DELACC_LAST_STMT_DT" : {
+            "DelAccLastStmtDt" : {
               "type" : "integer",
               "minimum" : 0,
               "maximum" : 99999999
             },
-            "DELACC_NEXT_STMT_DT" : {
+            "DelAccNextStmtDt" : {
               "type" : "integer",
               "minimum" : 0,
               "maximum" : 99999999
             },
-            "DELACC_AVAIL_BAL" : {
+            "DelAccAvailBal" : {
               "type" : "number",
               "format" : "decimal",
               "minimum" : -9999999999.99,
               "maximum" : 9999999999.99
             },
-            "DELACC_ACTUAL_BAL" : {
+            "DelAccActualBal" : {
               "type" : "number",
               "format" : "decimal",
               "minimum" : -9999999999.99,
               "maximum" : 9999999999.99
             },
-            "DELACC_SUCCESS" : {
+            "DelAccSuccess" : {
               "type" : "string",
               "maxLength" : 1
             },
-            "DELACC_FAIL_CD" : {
+            "DelAccFailCd" : {
               "type" : "string",
               "maxLength" : 1
             },
-            "DELACC_DEL_SUCCESS" : {
+            "DelAccDelSuccess" : {
               "type" : "string",
               "maxLength" : 1
             },
-            "DELACC_DEL_FAIL_CD" : {
+            "DelAccDelFailCd" : {
               "type" : "string",
               "maxLength" : 1
             },
-            "DELACC_DEL_APPLID" : {
+            "DelAccDelApplid" : {
               "type" : "string",
               "maxLength" : 8
             },
-            "DELACC_DEL_PCB1" : {
+            "DelAccDelPcb1" : {
               "type" : "string",
               "maxLength" : 4
             },
-            "DELACC_DEL_PCB2" : {
+            "DelAccDelPcb2" : {
               "type" : "string",
               "maxLength" : 4
             },
-            "DELACC_DEL_PCB3" : {
+            "DelAccDelPcb3" : {
               "type" : "string",
               "maxLength" : 4
             }
@@ -145,97 +145,97 @@
     "deleteCSaccdel_response_200" : {
       "type" : "object",
       "properties" : {
-        "DELACC_COMMAREA" : {
+        "DelAcc" : {
           "type" : "object",
           "properties" : {
-            "DELACC_EYE" : {
+            "DelAccEye" : {
               "type" : "string",
               "maxLength" : 4
             },
-            "DELACC_CUSTNO" : {
+            "DelAccCustno" : {
               "type" : "string",
               "maxLength" : 10
             },
-            "DELACC_SCODE" : {
+            "DelAccScode" : {
               "type" : "string",
               "maxLength" : 6
             },
-            "DELACC_ACCNO" : {
+            "DelAccAccno" : {
               "type" : "integer",
               "minimum" : 0,
               "maximum" : 99999999
             },
-            "DELACC_ACC_TYPE" : {
+            "DelAccAccType" : {
               "type" : "string",
               "maxLength" : 8
             },
-            "DELACC_INT_RATE" : {
+            "DelAccIntRate" : {
               "type" : "number",
               "format" : "decimal",
               "minimum" : 0,
               "maximum" : 9999.99
             },
-            "DELACC_OPENED" : {
+            "DelAccOpened" : {
               "type" : "integer",
               "minimum" : 0,
               "maximum" : 99999999
             },
-            "DELACC_OVERDRAFT" : {
+            "DelAccOverdraft" : {
               "type" : "integer",
               "minimum" : 0,
               "maximum" : 99999999
             },
-            "DELACC_LAST_STMT_DT" : {
+            "DelAccLastStmtDt" : {
               "type" : "integer",
               "minimum" : 0,
               "maximum" : 99999999
             },
-            "DELACC_NEXT_STMT_DT" : {
+            "DelAccNextStmtDt" : {
               "type" : "integer",
               "minimum" : 0,
               "maximum" : 99999999
             },
-            "DELACC_AVAIL_BAL" : {
+            "DelAccAvailBal" : {
               "type" : "number",
               "format" : "decimal",
               "minimum" : -9999999999.99,
               "maximum" : 9999999999.99
             },
-            "DELACC_ACTUAL_BAL" : {
+            "DelAccActualBal" : {
               "type" : "number",
               "format" : "decimal",
               "minimum" : -9999999999.99,
               "maximum" : 9999999999.99
             },
-            "DELACC_SUCCESS" : {
+            "DelAccSuccess" : {
               "type" : "string",
               "maxLength" : 1
             },
-            "DELACC_FAIL_CD" : {
+            "DelAccFailCd" : {
               "type" : "string",
               "maxLength" : 1
             },
-            "DELACC_DEL_SUCCESS" : {
+            "DelAccDelSuccess" : {
               "type" : "string",
               "maxLength" : 1
             },
-            "DELACC_DEL_FAIL_CD" : {
+            "DelAccDelFailCd" : {
               "type" : "string",
               "maxLength" : 1
             },
-            "DELACC_DEL_APPLID" : {
+            "DelAccDelApplid" : {
               "type" : "string",
               "maxLength" : 8
             },
-            "DELACC_DEL_PCB1" : {
+            "DelAccDelPcb1" : {
               "type" : "string",
               "maxLength" : 4
             },
-            "DELACC_DEL_PCB2" : {
+            "DelAccDelPcb2" : {
               "type" : "string",
               "maxLength" : 4
             },
-            "DELACC_DEL_PCB3" : {
+            "DelAccDelPcb3" : {
               "type" : "string",
               "maxLength" : 4
             }

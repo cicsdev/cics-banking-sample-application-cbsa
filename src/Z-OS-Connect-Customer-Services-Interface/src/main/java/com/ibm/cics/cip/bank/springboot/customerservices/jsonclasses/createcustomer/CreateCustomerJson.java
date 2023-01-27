@@ -6,6 +6,7 @@
  */
 package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.createcustomer;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.ibm.cics.cip.bank.springboot.customerservices.JsonPropertyNamingStrategy;
 import com.ibm.cics.cip.bank.springboot.customerservices.OutputFormatUtils;
@@ -16,6 +17,7 @@ public class CreateCustomerJson
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
+	@JsonProperty("CreCust")
 	private CrecustJson creCust;
 
 
@@ -47,7 +49,7 @@ public class CreateCustomerJson
 	@Override
 	public String toString()
 	{
-		return "CreateCustomerJson [CRECUST=" + creCust + "]";
+		return "CreateCustomerJson [CreCust=" + creCust + "]";
 	}
 
 

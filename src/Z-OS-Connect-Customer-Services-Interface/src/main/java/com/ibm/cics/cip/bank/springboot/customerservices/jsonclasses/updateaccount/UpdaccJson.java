@@ -6,6 +6,7 @@
  */
 package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.updateaccount;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.ibm.cics.cip.bank.springboot.customerservices.JsonPropertyNamingStrategy;
 import com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.createaccount.AccountType;
@@ -16,32 +17,45 @@ public class UpdaccJson
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
+	@JsonProperty("CommEye")
 	private String commEye;
 
+	@JsonProperty("CommCustno")
 	private String commCustno;
 
+	@JsonProperty("CommScode")
 	private String commSortcode;
 
+	@JsonProperty("CommAccno")
 	private int commAccno;
 
+	@JsonProperty("CommIntRate")
 	private float commInterestRate;
 
+	@JsonProperty("CommOpened")
 	private String commOpened;
 
+	@JsonProperty("CommOverdraft")
 	private int commOverdraft;
 
+	@JsonProperty("CommLastStmtDt")
 	private String commLastStatementDate;
 
+	@JsonProperty("CommNextStmtDt")
 	private String commNextStatementDate;
 
+	@JsonProperty("CommAvailBal")
 	private float commAvailableBalance;
 
+	@JsonProperty("CommActualBal")
 	private float commActualBalance;
 
+	@JsonProperty("CommSuccess")
 	private String commSuccess;
 
 	private static final String SPACES = "        ";
 
+	@JsonProperty("CommAccType")
 	private String commAccountType = SPACES;
 
 
@@ -250,15 +264,15 @@ public class UpdaccJson
 	@Override
 	public String toString()
 	{
-		return "UpdaccJson [COMM_ACCNO=" + commAccno + ", COMM_ACC_TYPE="
-				+ commAccountType + ", COMM_ACTUAL_BAL=" + commActualBalance
-				+ ", COMM_AVAIL_BAL=" + commAvailableBalance + ", COMM_CUSTNO="
-				+ commCustno + ", COMM_EYE=" + commEye + ", COMM_INT_RATE="
-				+ commInterestRate + ", COMM_LAST_STMT_DT="
-				+ commLastStatementDate + ", COMM_NEXT_STMT_DT="
-				+ commNextStatementDate + ", COMM_OPENED=" + commOpened
-				+ ", COMM_OVERDRAFT=" + commOverdraft + ", COMM_SCODE="
-				+ commSortcode + ", COMM_SUCCESS=" + commSuccess + "]";
+		return "UpdaccJson [CommAccno=" + commAccno + ", CommAccType="
+				+ commAccountType + ", CommActualBal=" + commActualBalance
+				+ ", CommAvailBal=" + commAvailableBalance + ", CommCustno="
+				+ commCustno + ", CommEye=" + commEye + ", CommIntRate="
+				+ commInterestRate + ", CommLastStmtDt="
+				+ commLastStatementDate + ", CommNextStmtDt="
+				+ commNextStatementDate + ", CommOpened=" + commOpened
+				+ ", CommOverdraft=" + commOverdraft + ", CommScode="
+				+ commSortcode + ", CommSuccess=" + commSuccess + "]";
 	}
 
 }

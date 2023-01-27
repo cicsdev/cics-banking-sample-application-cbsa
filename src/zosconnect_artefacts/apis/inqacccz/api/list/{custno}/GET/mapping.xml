@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!--
-
-        Copyright IBM Corp. 2022
-
-
--->
 <ns2:ZosConnectServiceMapping xmlns:ns2="http://www.ibm.com/zosConnect/2.0/zosConnectServiceMapping" mappingSpecVersion="1.0">
     <mappingContext basePath="/inqacccz" relativePath="/list/{custno}" method="GET" serviceName="CScustacc" defaultResponseCode="200"/>
     <requestMessage>

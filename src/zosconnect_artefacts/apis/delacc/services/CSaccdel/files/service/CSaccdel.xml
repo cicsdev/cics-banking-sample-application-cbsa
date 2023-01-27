@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!--
-
-        Copyright IBM Corp. 2022
-
-
--->
 <service xmlns:ns2="http://www.ibm.com/ims/Transaction">
     <shallow>true</shallow>
     <serviceName>CSaccdel</serviceName>
@@ -18,42 +12,42 @@
         <serviceInterface>
             <interface>
                 <segment segmentName="COMMAREA">
-                    <interfaceField included="Y" fieldName="DELACC_COMMAREA">
-                        <field included="Y" fieldName="DELACC_EYE"/>
-                        <field included="Y" fieldName="DELACC_CUSTNO"/>
-                        <field included="Y" fieldName="DELACC_SCODE"/>
-                        <field included="Y" fieldName="DELACC_ACCNO"/>
-                        <field included="Y" fieldName="DELACC_ACC_TYPE"/>
-                        <field included="Y" fieldName="DELACC_INT_RATE"/>
-                        <field included="Y" fieldName="DELACC_OPENED"/>
-                        <field included="N" fieldName="DELACC_OPENED_GROUP">
-                            <field included="N" fieldName="DELACC_OPENED_DAY"/>
-                            <field included="N" fieldName="DELACC_OPENED_MONTH"/>
-                            <field included="N" fieldName="DELACC_OPENED_YEAR"/>
+                    <interfaceField included="Y" fieldName="DelAcc">
+                        <field included="Y" fieldName="DelAccEye" isHex="false"/>
+                        <field included="Y" fieldName="DelAccCustno" isHex="false"/>
+                        <field included="Y" fieldName="DelAccScode" isHex="false"/>
+                        <field included="Y" fieldName="DelAccAccno" isHex="false"/>
+                        <field included="Y" fieldName="DelAccAccType" isHex="false"/>
+                        <field included="Y" fieldName="DelAccIntRate" isHex="false"/>
+                        <field included="Y" fieldName="DelAccOpened" isHex="false"/>
+                        <field included="N" fieldName="DelAccOpenedGroup">
+                            <field included="N" fieldName="DelAccOpenedDay" isHex="false"/>
+                            <field included="N" fieldName="DelAccOpenedMonth" isHex="false"/>
+                            <field included="N" fieldName="DelAccOpenedYear" isHex="false"/>
                         </field>
-                        <field included="Y" fieldName="DELACC_OVERDRAFT"/>
-                        <field included="Y" fieldName="DELACC_LAST_STMT_DT"/>
-                        <field included="N" fieldName="DELACC_LAST_STMT_GROUP">
-                            <field included="N" fieldName="DELACC_LAST_STMT_DAY"/>
-                            <field included="N" fieldName="DELACC_LAST_STMT_MONTH"/>
-                            <field included="N" fieldName="DELACC_LAST_STMT_YEAR"/>
+                        <field included="Y" fieldName="DelAccOverdraft" isHex="false"/>
+                        <field included="Y" fieldName="DelAccLastStmtDt" isHex="false"/>
+                        <field included="N" fieldName="DelAccLastStmtGroup">
+                            <field included="N" fieldName="DelAccLastStmtDay" isHex="false"/>
+                            <field included="N" fieldName="DelAccLastStmtMonth" isHex="false"/>
+                            <field included="N" fieldName="DelAccLastStmtYear" isHex="false"/>
                         </field>
-                        <field included="Y" fieldName="DELACC_NEXT_STMT_DT"/>
-                        <field included="N" fieldName="DELACC_NEXT_STMT_GROUP">
-                            <field included="N" fieldName="DELACC_NEXT_STMT_DAY"/>
-                            <field included="N" fieldName="DELACC_NEXT_STMT_MONTH"/>
-                            <field included="N" fieldName="DELACC_NEXT_STMT_YEAR"/>
+                        <field included="Y" fieldName="DelAccNextStmtDt" isHex="false"/>
+                        <field included="N" fieldName="DelAccNextStmtGroup">
+                            <field included="N" fieldName="DelAccNextStmtDay" isHex="false"/>
+                            <field included="N" fieldName="DelAccNextStmtMonth" isHex="false"/>
+                            <field included="N" fieldName="DelAccNextStmtYear" isHex="false"/>
                         </field>
-                        <field included="Y" fieldName="DELACC_AVAIL_BAL"/>
-                        <field included="Y" fieldName="DELACC_ACTUAL_BAL"/>
-                        <field included="Y" fieldName="DELACC_SUCCESS"/>
-                        <field included="Y" fieldName="DELACC_FAIL_CD"/>
-                        <field included="Y" fieldName="DELACC_DEL_SUCCESS"/>
-                        <field included="Y" fieldName="DELACC_DEL_FAIL_CD"/>
-                        <field included="Y" fieldName="DELACC_DEL_APPLID"/>
-                        <field included="Y" fieldName="DELACC_DEL_PCB1"/>
-                        <field included="Y" fieldName="DELACC_DEL_PCB2"/>
-                        <field included="Y" fieldName="DELACC_DEL_PCB3"/>
+                        <field included="Y" fieldName="DelAccAvailBal" isHex="false"/>
+                        <field included="Y" fieldName="DelAccActualBal" isHex="false"/>
+                        <field included="Y" fieldName="DelAccSuccess" isHex="false"/>
+                        <field included="Y" fieldName="DelAccFailCd" isHex="false"/>
+                        <field included="Y" fieldName="DelAccDelSuccess" isHex="false"/>
+                        <field included="Y" fieldName="DelAccDelFailCd" isHex="false"/>
+                        <field included="Y" fieldName="DelAccDelApplid" isHex="false"/>
+                        <field included="Y" fieldName="DelAccDelPcb1" isHex="false"/>
+                        <field included="Y" fieldName="DelAccDelPcb2" isHex="false"/>
+                        <field included="Y" fieldName="DelAccDelPcb3" isHex="false"/>
                     </interfaceField>
                 </segment>
             </interface>
@@ -65,42 +59,42 @@
         <serviceInterface>
             <interface>
                 <segment segmentName="COMMAREA">
-                    <interfaceField included="Y" fieldName="DELACC_COMMAREA">
-                        <field included="Y" fieldName="DELACC_EYE"/>
-                        <field included="Y" fieldName="DELACC_CUSTNO"/>
-                        <field included="Y" fieldName="DELACC_SCODE"/>
-                        <field included="Y" fieldName="DELACC_ACCNO"/>
-                        <field included="Y" fieldName="DELACC_ACC_TYPE"/>
-                        <field included="Y" fieldName="DELACC_INT_RATE"/>
-                        <field included="Y" fieldName="DELACC_OPENED"/>
-                        <field included="N" fieldName="DELACC_OPENED_GROUP">
-                            <field included="N" fieldName="DELACC_OPENED_DAY"/>
-                            <field included="N" fieldName="DELACC_OPENED_MONTH"/>
-                            <field included="N" fieldName="DELACC_OPENED_YEAR"/>
+                    <interfaceField included="Y" fieldName="DelAcc">
+                        <field included="Y" fieldName="DelAccEye" isHex="false"/>
+                        <field included="Y" fieldName="DelAccCustno" isHex="false"/>
+                        <field included="Y" fieldName="DelAccScode" isHex="false"/>
+                        <field included="Y" fieldName="DelAccAccno" isHex="false"/>
+                        <field included="Y" fieldName="DelAccAccType" isHex="false"/>
+                        <field included="Y" fieldName="DelAccIntRate" isHex="false"/>
+                        <field included="Y" fieldName="DelAccOpened" isHex="false"/>
+                        <field included="N" fieldName="DelAccOpenedGroup">
+                            <field included="N" fieldName="DelAccOpenedDay" isHex="false"/>
+                            <field included="N" fieldName="DelAccOpenedMonth" isHex="false"/>
+                            <field included="N" fieldName="DelAccOpenedYear" isHex="false"/>
                         </field>
-                        <field included="Y" fieldName="DELACC_OVERDRAFT"/>
-                        <field included="Y" fieldName="DELACC_LAST_STMT_DT"/>
-                        <field included="N" fieldName="DELACC_LAST_STMT_GROUP">
-                            <field included="N" fieldName="DELACC_LAST_STMT_DAY"/>
-                            <field included="N" fieldName="DELACC_LAST_STMT_MONTH"/>
-                            <field included="N" fieldName="DELACC_LAST_STMT_YEAR"/>
+                        <field included="Y" fieldName="DelAccOverdraft" isHex="false"/>
+                        <field included="Y" fieldName="DelAccLastStmtDt" isHex="false"/>
+                        <field included="N" fieldName="DelAccLastStmtGroup">
+                            <field included="N" fieldName="DelAccLastStmtDay" isHex="false"/>
+                            <field included="N" fieldName="DelAccLastStmtMonth" isHex="false"/>
+                            <field included="N" fieldName="DelAccLastStmtYear" isHex="false"/>
                         </field>
-                        <field included="Y" fieldName="DELACC_NEXT_STMT_DT"/>
-                        <field included="N" fieldName="DELACC_NEXT_STMT_GROUP">
-                            <field included="N" fieldName="DELACC_NEXT_STMT_DAY"/>
-                            <field included="N" fieldName="DELACC_NEXT_STMT_MONTH"/>
-                            <field included="N" fieldName="DELACC_NEXT_STMT_YEAR"/>
+                        <field included="Y" fieldName="DelAccNextStmtDt" isHex="false"/>
+                        <field included="N" fieldName="DelAccNextStmtGroup">
+                            <field included="N" fieldName="DelAccNextStmtDay" isHex="false"/>
+                            <field included="N" fieldName="DelAccNextStmtMonth" isHex="false"/>
+                            <field included="N" fieldName="DelAccNextStmtYear" isHex="false"/>
                         </field>
-                        <field included="Y" fieldName="DELACC_AVAIL_BAL"/>
-                        <field included="Y" fieldName="DELACC_ACTUAL_BAL"/>
-                        <field included="Y" fieldName="DELACC_SUCCESS"/>
-                        <field included="Y" fieldName="DELACC_FAIL_CD"/>
-                        <field included="Y" fieldName="DELACC_DEL_SUCCESS"/>
-                        <field included="Y" fieldName="DELACC_DEL_FAIL_CD"/>
-                        <field included="Y" fieldName="DELACC_DEL_APPLID"/>
-                        <field included="Y" fieldName="DELACC_DEL_PCB1"/>
-                        <field included="Y" fieldName="DELACC_DEL_PCB2"/>
-                        <field included="Y" fieldName="DELACC_DEL_PCB3"/>
+                        <field included="Y" fieldName="DelAccAvailBal" isHex="false"/>
+                        <field included="Y" fieldName="DelAccActualBal" isHex="false"/>
+                        <field included="Y" fieldName="DelAccSuccess" isHex="false"/>
+                        <field included="Y" fieldName="DelAccFailCd" isHex="false"/>
+                        <field included="Y" fieldName="DelAccDelSuccess" isHex="false"/>
+                        <field included="Y" fieldName="DelAccDelFailCd" isHex="false"/>
+                        <field included="Y" fieldName="DelAccDelApplid" isHex="false"/>
+                        <field included="Y" fieldName="DelAccDelPcb1" isHex="false"/>
+                        <field included="Y" fieldName="DelAccDelPcb2" isHex="false"/>
+                        <field included="Y" fieldName="DelAccDelPcb3" isHex="false"/>
                     </interfaceField>
                 </segment>
             </interface>
@@ -124,4 +118,5 @@
     <enforceMinArrayOccurrenceResponse>false</enforceMinArrayOccurrenceResponse>
     <ldsStartsWithLLZZTRANCODE>false</ldsStartsWithLLZZTRANCODE>
     <ldsStartsWithLLZZ>false</ldsStartsWithLLZZ>
+    <truncateInputLastCharField>false</truncateInputLastCharField>
 </service>

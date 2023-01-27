@@ -6,6 +6,7 @@
  */
 package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.customerenquiry;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.ibm.cics.cip.bank.springboot.customerservices.JsonPropertyNamingStrategy;
 
@@ -15,26 +16,37 @@ public class InqCustZJson
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
+	@JsonProperty("InqCustName")
 	private String inqcustName;
 
+	@JsonProperty("InqCustCreditScore")
 	private int inqcustCreditScore;
 
+	@JsonProperty("InqCustInqSuccess")
 	private String inqcustInqSuccess;
 
+	@JsonProperty("InqCustAddr")
 	private String inqcustAddress;
 
+	@JsonProperty("InqCustScode")
 	private int inqcustSortcode;
 
+	@JsonProperty("InqCustInqFailCd")
 	private int inqcustInqFailCode;
 
+	@JsonProperty("InqCustDob")
 	private InqCustDob inqCustDob;
 
+	@JsonProperty("InqCustEye")
 	private String inqcustEye;
 
+	@JsonProperty("InqCustPcbPointer")
 	private String inqcustPcbPointer;
 
+	@JsonProperty("InqCustCustno")
 	private int inqcustCustno;
 
+	@JsonProperty("InqCustCsReviewDt")
 	private InqCustReviewDate inqcustCsReviewDate;
 
 
@@ -179,15 +191,15 @@ public class InqCustZJson
 	@Override
 	public String toString()
 	{
-		return "InqCustZJson [INQCUST_ADDR=" + inqcustAddress
-				+ ", INQCUST_CREDIT_SCORE=" + inqcustCreditScore
-				+ ", INQCUST_CS_REVIEW_DT=" + inqcustCsReviewDate
-				+ ", INQCUST_CUSTNO=" + inqcustCustno + ", INQCUST_DOB="
-				+ inqCustDob + ", INQCUST_EYE=" + inqcustEye
-				+ ", INQCUST_INQ_FAIL_CD=" + inqcustInqFailCode
-				+ ", INQCUST_INQ_SUCCESS=" + inqcustInqSuccess
-				+ ", INQCUST_NAME=" + inqcustName + ", INQCUST_PCB_POINTER="
-				+ inqcustPcbPointer + ", INQCUST_SCODE=" + inqcustSortcode
+		return "InqCustZJson [InqCustAddr=" + inqcustAddress
+				+ ", InqCustCreditScore=" + inqcustCreditScore
+				+ ", InqCustCsReviewDt=" + inqcustCsReviewDate
+				+ ", InqCustCustno=" + inqcustCustno + ", InqCustDob="
+				+ inqCustDob + ", InqCustEye=" + inqcustEye
+				+ ", InqCustInqFailCd=" + inqcustInqFailCode
+				+ ", InqCustInqSuccess=" + inqcustInqSuccess
+				+ ", InqCustName=" + inqcustName + ", InqCustPcbPointer="
+				+ inqcustPcbPointer + ", InqCustScode=" + inqcustSortcode
 				+ "]";
 	}
 

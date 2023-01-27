@@ -8,6 +8,7 @@ package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.listaccoun
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.ibm.cics.cip.bank.springboot.customerservices.JsonPropertyNamingStrategy;
 
@@ -17,19 +18,25 @@ public class InqAccczJson
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
+	@JsonProperty("CommFailCode")
 	private int commFailCode;
 
+	@JsonProperty("CustomerNumber")
 	private int customerNumber;
 
+	@JsonProperty("AccountDetails")
 	private List<AccountDetails> accountDetails;
 
+	@JsonProperty("CommPcbPointer")
 	private String commPcbPointer;
 
+	@JsonProperty("CustomerFound")
 	private String customerFound;
 
+	@JsonProperty("CommSuccess")
 	private String commSuccess;
 
-
+	
 	public int getCommFailCode()
 	{
 		return commFailCode;
@@ -105,10 +112,10 @@ public class InqAccczJson
 	@Override
 	public String toString()
 	{
-		return "InqAccczJson [ACCOUNT_DETAILS=" + accountDetails
-				+ ", COMM_FAIL_CODE=" + commFailCode + ", COMM_PCB_POINTER="
-				+ commPcbPointer + ", COMM_SUCCESS=" + commSuccess
-				+ ", CUSTOMER_FOUND=" + customerFound + ", CUSTOMER_NUMBER="
+		return "InqAccczJson [AccountDetails=" + accountDetails
+				+ ", CommFailCode=" + commFailCode + ", CommPcbPointer="
+				+ commPcbPointer + ", CommSuccess=" + commSuccess
+				+ ", CustomerFound=" + customerFound + ", CustomerNumber="
 				+ customerNumber + "]";
 	}
 }

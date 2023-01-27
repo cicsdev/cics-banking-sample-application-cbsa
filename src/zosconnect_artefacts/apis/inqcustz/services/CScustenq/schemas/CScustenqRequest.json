@@ -1,84 +1,84 @@
 {
   "type" : "object",
   "properties" : {
-    "INQCUSTZ" : {
+    "InqCustZ" : {
       "type" : "object",
       "properties" : {
-        "INQCUST_EYE" : {
+        "InqCustEye" : {
           "maxLength" : 4,
           "type" : "string"
         },
-        "INQCUST_SCODE" : {
+        "InqCustScode" : {
           "maxLength" : 6,
           "type" : "string"
         },
-        "INQCUST_CUSTNO" : {
+        "InqCustCustno" : {
           "minimum" : 0,
           "maximum" : 9999999999,
           "type" : "integer"
         },
-        "INQCUST_NAME" : {
+        "InqCustName" : {
           "maxLength" : 60,
           "type" : "string"
         },
-        "INQCUST_ADDR" : {
+        "InqCustAddr" : {
           "maxLength" : 160,
           "type" : "string"
         },
-        "INQCUST_DOB" : {
+        "InqCustDob" : {
           "type" : "object",
           "properties" : {
-            "INQCUST_DOB_DD" : {
+            "InqCustDobDd" : {
               "minimum" : 0,
               "maximum" : 99,
               "type" : "integer"
             },
-            "INQCUST_DOB_MM" : {
+            "InqCustDobMm" : {
               "minimum" : 0,
               "maximum" : 99,
               "type" : "integer"
             },
-            "INQCUST_DOB_YYYY" : {
+            "InqCustDobYyyy" : {
               "minimum" : 0,
               "maximum" : 9999,
               "type" : "integer"
             }
           }
         },
-        "INQCUST_CREDIT_SCORE" : {
+        "InqCustCreditScore" : {
           "minimum" : 0,
           "maximum" : 999,
           "type" : "integer"
         },
-        "INQCUST_CS_REVIEW_DT" : {
+        "InqCustCsReviewDt" : {
           "type" : "object",
           "properties" : {
-            "INQCUST_CS_REVIEW_DD" : {
+            "InqCustCsReviewDd" : {
               "minimum" : 0,
               "maximum" : 99,
               "type" : "integer"
             },
-            "INQCUST_CS_REVIEW_MM" : {
+            "InqCustCsReviewMm" : {
               "minimum" : 0,
               "maximum" : 99,
               "type" : "integer"
             },
-            "INQCUST_CS_REVIEW_YYYY" : {
+            "InqCustCsReviewYyyy" : {
               "minimum" : 0,
               "maximum" : 9999,
               "type" : "integer"
             }
           }
         },
-        "INQCUST_INQ_SUCCESS" : {
+        "InqCustInqSuccess" : {
           "maxLength" : 1,
           "type" : "string"
         },
-        "INQCUST_INQ_FAIL_CD" : {
+        "InqCustInqFailCd" : {
           "maxLength" : 1,
           "type" : "string"
         },
-        "INQCUST_PCB_POINTER" : {
+        "InqCustPcbPointer" : {
           "maxLength" : 4,
           "type" : "string"
         }

@@ -6,6 +6,7 @@
  */
 package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.updateaccount;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.ibm.cics.cip.bank.springboot.customerservices.JsonPropertyNamingStrategy;
 import com.ibm.cics.cip.bank.springboot.customerservices.OutputFormatUtils;
@@ -18,6 +19,7 @@ public class UpdateAccountJson
 
 	private static final String FLOAT_FORMAT = "%.02f";
 
+	@JsonProperty("UpdAcc")
 	UpdaccJson updacc;
 
 
@@ -57,7 +59,7 @@ public class UpdateAccountJson
 	@Override
 	public String toString()
 	{
-		return "UpdateAccountJson [UPDACC=" + updacc.toString() + "]";
+		return "UpdateAccountJson [UpdAcc=" + updacc.toString() + "]";
 	}
 
 

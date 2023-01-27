@@ -40,7 +40,7 @@ public class CustomerEnquiryJson
 	@Override
 	public String toString()
 	{
-		return "CustomerEnquiryJson [INQCUSTZ=" + inqCustZ + "]";
+		return "CustomerEnquiryJson [InqCustZ=" + inqCustZ + "]";
 	}
 
 

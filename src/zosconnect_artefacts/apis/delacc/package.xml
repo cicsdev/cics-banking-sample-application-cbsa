@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!--
-
-        Copyright IBM Corp. 2022
-
-
--->
 <zosConnectApi xmlns="http://www.ibm.com/zosConnect/2.0/zosConnectApi" id="delacc">
     <apiSpec title="delacc" basePath="/delacc" description="Deletes an account on the CSaccdel Service" version="1.0.0">
         <path relativePath="/remove/{accno}">

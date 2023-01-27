@@ -16,6 +16,11 @@
         "tags" : [ "updcust" ],
         "operationId" : "putCScustupd",
         "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "required" : false,
+          "type" : "string"
+        }, {
           "in" : "body",
           "name" : "putCScustupd_request",
           "description" : "request body",
@@ -39,49 +44,49 @@
     "putCScustupd_request" : {
       "type" : "object",
       "properties" : {
-        "UPDCUST" : {
+        "UpdCust" : {
           "type" : "object",
           "properties" : {
-            "COMM_EYE" : {
+            "CommEye" : {
               "type" : "string",
               "maxLength" : 4
             },
-            "COMM_SCODE" : {
+            "CommScode" : {
               "type" : "string",
               "maxLength" : 6
             },
-            "COMM_CUSTNO" : {
+            "CommCustno" : {
               "type" : "string",
               "maxLength" : 10
             },
-            "COMM_NAME" : {
+            "CommName" : {
               "type" : "string",
               "maxLength" : 60
             },
-            "COMM_ADDR" : {
+            "CommAddress" : {
               "type" : "string",
               "maxLength" : 160
             },
-            "COMM_DOB" : {
+            "CommDob" : {
               "type" : "integer",
               "minimum" : 0,
               "maximum" : 99999999
             },
-            "COMM_CREDIT_SCORE" : {
+            "CommCreditScore" : {
               "type" : "integer",
               "minimum" : 0,
               "maximum" : 999
             },
-            "COMM_CS_REVIEW_DATE" : {
+            "CommCsReviewDate" : {
               "type" : "integer",
               "minimum" : 0,
               "maximum" : 99999999
             },
-            "COMM_UPD_SUCCESS" : {
+            "CommUpdSuccess" : {
               "type" : "string",
               "maxLength" : 1
             },
-            "COMM_UPD_FAIL_CD" : {
+            "CommUpdFailCd" : {
               "type" : "string",
               "maxLength" : 1
             }
@@ -92,49 +97,49 @@
     "putCScustupd_response_200" : {
       "type" : "object",
       "properties" : {
-        "UPDCUST" : {
+        "UpdCust" : {
           "type" : "object",
           "properties" : {
-            "COMM_EYE" : {
+            "CommEye" : {
               "type" : "string",
               "maxLength" : 4
             },
-            "COMM_SCODE" : {
+            "CommScode" : {
               "type" : "string",
               "maxLength" : 6
             },
-            "COMM_CUSTNO" : {
+            "CommCustno" : {
               "type" : "string",
               "maxLength" : 10
             },
-            "COMM_NAME" : {
+            "CommName" : {
               "type" : "string",
               "maxLength" : 60
             },
-            "COMM_ADDR" : {
+            "CommAddress" : {
               "type" : "string",
               "maxLength" : 160
             },
-            "COMM_DOB" : {
+            "CommDob" : {
               "type" : "integer",
               "minimum" : 0,
               "maximum" : 99999999
             },
-            "COMM_CREDIT_SCORE" : {
+            "CommCreditScore" : {
               "type" : "integer",
               "minimum" : 0,
               "maximum" : 999
             },
-            "COMM_CS_REVIEW_DATE" : {
+            "CommCsReviewDate" : {
               "type" : "integer",
               "minimum" : 0,
               "maximum" : 99999999
             },
-            "COMM_UPD_SUCCESS" : {
+            "CommUpdSuccess" : {
               "type" : "string",
               "maxLength" : 1
             },
-            "COMM_UPD_FAIL_CD" : {
+            "CommUpdFailCd" : {
               "type" : "string",
               "maxLength" : 1
             }

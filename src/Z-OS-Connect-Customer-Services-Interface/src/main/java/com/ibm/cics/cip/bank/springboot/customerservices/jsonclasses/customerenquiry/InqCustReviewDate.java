@@ -6,6 +6,7 @@
  */
 package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.customerenquiry;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.ibm.cics.cip.bank.springboot.customerservices.JsonPropertyNamingStrategy;
 
@@ -15,10 +16,13 @@ public class InqCustReviewDate
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
+	@JsonProperty("InqCustCsReviewYyyy")
 	private int inqcustCsReviewYyyy;
 
+	@JsonProperty("InqCustCsReviewMm")
 	private int inqcustCsReviewMm;
 
+	@JsonProperty("InqCustCsReviewDd")
 	private int inqcustCsReviewDd;
 
 
