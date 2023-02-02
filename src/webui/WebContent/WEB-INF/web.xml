@@ -19,5 +19,5 @@
         <param-name>productionMode</param-name>
         <param-value>true</param-value>
     </context-param>
-  <display-name>com.ibm.cics.cip.bank.LibertyAPI.webUI</display-name>
+    <display-name>com.ibm.cics.cip.bank.LibertyAPI.webUI</display-name>
 </web-app>

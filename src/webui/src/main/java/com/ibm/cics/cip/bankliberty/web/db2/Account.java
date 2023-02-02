@@ -1154,6 +1154,7 @@ public class Account extends HBankDataAccess
 
 		myStringBuilder.append(sortCode.toString());
 
+
 		String sortCodeString = myStringBuilder.toString();
 		String sql = "SELECT * from ACCOUNT where ACCOUNT_EYECATCHER LIKE 'ACCT' AND ACCOUNT_SORTCODE like ? ORDER BY ACCOUNT_NUMBER";
 		logger.log(Level.FINE, () -> PRE_SELECT_MSG + sql + ">");
@@ -1161,6 +1162,7 @@ public class Account extends HBankDataAccess
 		{
 			stmt.setString(1, sortCodeString);
 			ResultSet rs = stmt.executeQuery();
+			i=0;
 			while (rs.next() && i < limit)
 			{
 				if (retrieved >= offset)

@@ -6,9 +6,12 @@
  */
 package com.ibm.cics.cip.bank.libertyapi.webui;
 
-import com.vaadin.annotations.Theme;
+import javax.servlet.annotation.WebServlet;
 
+import com.vaadin.annotations.Theme;
+import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 
 /**
@@ -18,10 +21,17 @@ import com.vaadin.ui.UI;
 @SuppressWarnings("serial")
 @Theme("com_ibm_cics_cip_bank_libertyapi_webui")
 
-public class ComIbmCicsCipBankLibertyapiWebuiUI extends UI
+public class Com_ibm_cics_cip_bank_libertyapi_webuiUI extends UI
 {
 
 	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
+	
+	@WebServlet(value = "/*", asyncSupported = true)
+	@VaadinServletConfiguration(productionMode = false, ui = Com_ibm_cics_cip_bank_libertyapi_webuiUI.class)
+	public static class Servlet extends VaadinServlet
+	{
+		
+	}
 
 
 	@Override

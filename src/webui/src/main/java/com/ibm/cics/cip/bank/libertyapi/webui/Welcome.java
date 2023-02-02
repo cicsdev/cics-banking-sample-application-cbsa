@@ -170,13 +170,15 @@ public class Welcome extends VerticalLayout
 			{
 				hl = new HorizontalLayout();
 				hl.setWidth("80%");
+				hl.addComponent(buttons.get(i));
 			}
 			else
 			{
+				hl.addComponent(buttons.get(i));
 				hl.setComponentAlignment(buttons.get(i),
 						Alignment.MIDDLE_RIGHT);
 			}
-			hl.addComponent(buttons.get(i));
+			
 
 			hls.add(hl);
 			optionsVl.addComponent(hl);

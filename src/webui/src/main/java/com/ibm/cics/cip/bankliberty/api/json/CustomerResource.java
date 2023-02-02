@@ -139,7 +139,7 @@ public class CustomerResource
 
 		Integer inputSortCode = Integer.parseInt(customer.getSortCode());
 
-		if (inputSortCode.equals(this.getSortCode()))
+		if (!inputSortCode.equals(this.getSortCode()))
 		{
 			JSONObject error = new JSONObject();
 			error.put(JSON_ERROR_MSG, "Sortcode " + inputSortCode
@@ -798,7 +798,7 @@ public class CustomerResource
 					((String) mySortCodeJSON.getEntity()).substring(13, 19));
 		}
 		logger.exiting(this.getClass().getName(), "getSortCode()",
-				this.getSortCode());
+				sortcode);
 		return Integer.parseInt(sortcode);
 	}
 

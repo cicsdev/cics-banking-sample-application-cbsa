@@ -618,19 +618,6 @@ public class Customer
 		{
 			holder = new RecordHolder();
 			key = buildKey(sortCode, customerNumber);
-
-			keyString = new String(key);
-			try
-			{
-				key = keyString.getBytes(CODEPAGE);
-			}
-			catch (UnsupportedEncodingException e2)
-			{
-				logger.severe(e2.getLocalizedMessage());
-				logger.exiting(this.getClass().getName(), DELETE_CUSTOMER,
-						null);
-				return null;
-			}
 		}
 		try
 		{
@@ -759,17 +746,7 @@ public class Customer
 		}
 
 		byte[] key = buildKey(sortCodeInteger, customerNumberLong);
-		String keyString = new String(key);
-		try
-		{
-			key = keyString.getBytes(CODEPAGE);
-		}
-		catch (UnsupportedEncodingException e2)
-		{
-			logger.severe(e2.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(), CREATE_CUSTOMER, null);
-			return null;
-		}
+
 		myCustomer = new CUSTOMER();
 		myCustomer.setCustomerEyecatcher(CUSTOMER.CUSTOMER_EYECATCHER_VALUE);
 		myCustomer.setCustomerAddress(customer.getCustomerAddress().trim());
@@ -911,30 +888,30 @@ public class Customer
 		try
 		{
 			customerFile.readForUpdate(key, holder);
+			myCustomerControl = new CustomerControl(holder.getValue());
+			long lastCustomerNumber = myCustomerControl.getLastCustomerNumber();
+			lastCustomerNumber++;
+
+			long numberOfCustomers = myCustomerControl.getNumberOfCustomers();
+			numberOfCustomers++;
+
+			myCustomerControl.setLastCustomerNumber(lastCustomerNumber);
+			myCustomerControl.setNumberOfCustomers(numberOfCustomers);
+			customerFile.rewrite(myCustomerControl.getByteBuffer());
 		}
 		catch (LogicException | InvalidRequestException | IOErrorException
 				| InvalidSystemIdException | LockedException | ChangedException
 				| LoadingException | RecordBusyException | FileDisabledException
 				| DuplicateKeyException | FileNotFoundException
 				| ISCInvalidRequestException | NotAuthorisedException
-				| RecordNotFoundException | NotOpenException e)
+				| RecordNotFoundException | NotOpenException | LengthErrorException | DuplicateRecordException | NoSpaceException e)
 		{
 			logger.severe(e.getLocalizedMessage());
 			logger.exiting(this.getClass().getName(), CREATE_CUSTOMER, null);
 			return -1;
 		}
 
-		myCustomerControl = new CustomerControl(holder.getValue());
-
-		long lastCustomerNumber = myCustomerControl.getLastCustomerNumber();
-		lastCustomerNumber++;
-
-		long numberOfCustomers = myCustomerControl.getNumberOfCustomers();
-		numberOfCustomers++;
-
-		myCustomerControl.setLastCustomerNumber(lastCustomerNumber);
-		myCustomerControl.setNumberOfCustomers(numberOfCustomers);
-		return lastCustomerNumber;
+		return myCustomerControl.getLastCustomerNumber();
 	}
 
 
@@ -981,30 +958,32 @@ public class Customer
 		try
 		{
 			customerFile.readForUpdate(key, holder);
+			myCustomerControl = new CustomerControl(holder.getValue());
+
+			long lastCustomerNumber = myCustomerControl.getLastCustomerNumber();
+			lastCustomerNumber--;
+
+			long numberOfCustomers = myCustomerControl.getNumberOfCustomers();
+			numberOfCustomers--;
+
+			myCustomerControl.setLastCustomerNumber(lastCustomerNumber);
+			myCustomerControl.setNumberOfCustomers(numberOfCustomers);
+			customerFile.rewrite(myCustomerControl.getByteBuffer());
 		}
 		catch (LogicException | InvalidRequestException | IOErrorException
 				| InvalidSystemIdException | LockedException | ChangedException
 				| LoadingException | RecordBusyException | FileDisabledException
 				| DuplicateKeyException | FileNotFoundException
 				| ISCInvalidRequestException | NotAuthorisedException
-				| RecordNotFoundException | NotOpenException e)
+				| RecordNotFoundException | NotOpenException | LengthErrorException | DuplicateRecordException | NoSpaceException e)
 		{
 			logger.severe(e.getLocalizedMessage());
 			logger.exiting(this.getClass().getName(), CREATE_CUSTOMER, null);
 			return -1;
 		}
 
-		myCustomerControl = new CustomerControl(holder.getValue());
 
-		long lastCustomerNumber = myCustomerControl.getLastCustomerNumber();
-		lastCustomerNumber--;
-
-		long numberOfCustomers = myCustomerControl.getNumberOfCustomers();
-		numberOfCustomers--;
-
-		myCustomerControl.setLastCustomerNumber(lastCustomerNumber);
-		myCustomerControl.setNumberOfCustomers(numberOfCustomers);
-		return lastCustomerNumber;
+		return myCustomerControl.getLastCustomerNumber();
 	}
 
 
@@ -1158,7 +1137,7 @@ public class Customer
 			customerFileBrowse = customerFile.startBrowse(key);
 			boolean carryOn = true;
 			boolean endOfFile = false;
-			while (carryOn)
+			while (carryOn && stored  < limit)
 			{
 				try
 				{
@@ -1215,9 +1194,9 @@ public class Customer
 
 			customerFileBrowse.end();
 
-			Customer[] real = new Customer[limit];
+			Customer[] real = new Customer[stored];
 
-			System.arraycopy(temp, 0, real, 0, limit);
+			System.arraycopy(temp, 0, real, 0, stored);
 
 			logger.exiting(this.getClass().getName(),
 					GET_CUSTOMERS_BY_NAME_WITH_OFFSET_AND_LIMIT, real);
@@ -1863,7 +1842,7 @@ public class Customer
 	}
 
 
-	byte[] buildKey(int sortCode2, long customerNumber2)
+	byte[] buildKey(int sortCode2, long customerNumber2) 
 	{
 		StringBuilder myStringBuilder = new StringBuilder();
 
@@ -1878,7 +1857,15 @@ public class Customer
 		}
 		myStringBuilder.append(Long.toString(customerNumber2));
 
-		return myStringBuilder.toString().getBytes();
+		try
+		{
+			return myStringBuilder.toString().getBytes(CODEPAGE);
+		}
+		catch (UnsupportedEncodingException e)
+		{
+			logger.log(Level.SEVERE,e.toString());
+			return null;
+		}
 	}
 
 

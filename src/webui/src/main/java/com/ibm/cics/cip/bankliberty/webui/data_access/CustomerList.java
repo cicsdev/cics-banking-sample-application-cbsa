@@ -204,11 +204,37 @@ public class CustomerList
 				JSONObject myCustomersJSON = JSONObject.parse(myCustomerString);
 				JSONArray myCustomersArrayJSON = (JSONArray) myCustomersJSON
 						.get(JSON_CUSTOMERS);
-				long customerCount = myCustomersArrayJSON.size();
-				for (int i = 0; i < customerCount; i++)
+				long customerCount = 1;
+				if (myCustomersArrayJSON != null)
 				{
-					JSONObject myCustomer = (JSONObject) myCustomersArrayJSON
-							.get(i);
+					customerCount = myCustomersArrayJSON.size();
+					for (int i = 0; i < customerCount; i++)
+					{
+						JSONObject myCustomer = (JSONObject) myCustomersArrayJSON
+								.get(i);
+						Date dateOfBirth = sortOutDate(
+								(String) myCustomer.get(JSON_DATE_OF_BIRTH));
+						Date creditScoreReviewDate = sortOutDate(
+								(String) myCustomer
+										.get(JSON_CUSTOMER_REVIEW_DATE));
+
+						String id = (String) myCustomer.get(JSON_ID);
+
+						Customer myListCustomer = new Customer(id,
+								(String) myCustomer.get(JSON_SORT_CODE),
+								(String) myCustomer.get(JSON_CUSTOMER_NAME),
+								(String) myCustomer.get(JSON_CUSTOMER_ADDRESS),
+								dateOfBirth,
+								(String) myCustomer
+										.get(JSON_CUSTOMER_CREDIT_SCORE),
+								creditScoreReviewDate);
+
+						this.listOfCustomers.add(myListCustomer);
+					}
+				}
+				else
+				{
+					JSONObject myCustomer = JSONObject.parse(myCustomerString);
 					Date dateOfBirth = sortOutDate(
 							(String) myCustomer.get(JSON_DATE_OF_BIRTH));
 					Date creditScoreReviewDate = sortOutDate(
@@ -228,6 +254,7 @@ public class CustomerList
 
 				}
 			}
+
 			else
 			{
 				logger.log(Level.SEVERE, () -> "Failed to get customer");

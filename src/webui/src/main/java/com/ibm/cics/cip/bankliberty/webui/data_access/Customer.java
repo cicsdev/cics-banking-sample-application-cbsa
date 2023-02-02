@@ -262,10 +262,8 @@ public class Customer
 		}
 		else
 		{
-			myCustomerResponse.close();
 			return false;
 		}
-		myCustomerResponse.close();
 		return true;
 	}
 
@@ -308,14 +306,12 @@ public class Customer
 
 			String customerNoString = (String) myCustomer.get(JSON_ID);
 			this.setCustomerNumber(customerNoString);
-			myCustomerResponse.close();
 			return customerNoString;
 		}
 		else
 		{
 			logger.log(Level.SEVERE, () -> myCustomerResponse.getStatus() + " "
 					+ myCustomerResponse.getEntity().toString());
-			myCustomerResponse.close();
 			return "-1";
 		}
 	}
@@ -360,10 +356,8 @@ public class Customer
 			this.setAddress((String) myCustomer.get(JSON_CUSTOMER_ADDRESS));
 			this.setName((String) myCustomer.get(JSON_CUSTOMER_NAME));
 			this.setSortcode((String) myCustomer.get(JSON_SORT_CODE));
-			myCustomerResponse.close();
 			return true;
 		}
-		myCustomerResponse.close();
 		return false;
 	}
 

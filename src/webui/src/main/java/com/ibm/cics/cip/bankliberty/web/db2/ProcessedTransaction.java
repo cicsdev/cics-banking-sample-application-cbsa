@@ -663,6 +663,7 @@ public class ProcessedTransaction extends HBankDataAccess
 			String customerNumber)
 	{
 		logger.entering(this.getClass().getName(), WRITE_CREATE_CUSTOMER);
+		System.out.println("customerDOB is " + customerDOB);
 		sortOutDateTimeTaskString();
 		String createCustomerDescription = "";
 		createCustomerDescription = createCustomerDescription
@@ -689,6 +690,10 @@ public class ProcessedTransaction extends HBankDataAccess
 
 		logger.log(Level.FINE, () -> ABOUT_TO_INSERT + SQL_INSERT + ">");
 
+		System.out.println("dateString is " + dateString);
+		System.out.println("timeString is " + timeString);
+		System.out.println("createCustomerDescription is " + createCustomerDescription);
+		System.out.println("createCustomerDescription length is " + createCustomerDescription.length());
 		try (PreparedStatement stmt = conn.prepareStatement(SQL_INSERT);)
 		{
 			stmt.setString(1, PROCTRAN.PROC_TRAN_VALID);
@@ -846,16 +851,16 @@ public class ProcessedTransaction extends HBankDataAccess
 		{
 			myStringBuilder = myStringBuilder.insert(0, "0");
 		}
-		timeString = timeString.concat(myStringBuilder.toString());
+		timeString = myStringBuilder.toString();
 		myStringBuilder = new StringBuilder(
-				Integer.valueOf(now.get(Calendar.MINUTE)));
+				Integer.toString(now.get(Calendar.MINUTE)));
 		for (int z = myStringBuilder.length(); z < 2; z++)
 		{
 			myStringBuilder = myStringBuilder.insert(0, "0");
 		}
 		timeString = timeString.concat(myStringBuilder.toString());
 		myStringBuilder = new StringBuilder(
-				Integer.valueOf(now.get(Calendar.SECOND)));
+				Integer.toString(now.get(Calendar.SECOND)));
 		for (int z = myStringBuilder.length(); z < 2; z++)
 		{
 			myStringBuilder = myStringBuilder.insert(0, "0");
@@ -863,28 +868,30 @@ public class ProcessedTransaction extends HBankDataAccess
 		timeString = timeString.concat(myStringBuilder.toString());
 
 		myStringBuilder = new StringBuilder(
-				Integer.valueOf(now.get(Calendar.DATE)));
+				Integer.toString(now.get(Calendar.DATE)));
 		for (int z = myStringBuilder.length(); z < 2; z++)
 		{
 			myStringBuilder = myStringBuilder.insert(0, "0");
 		}
-		dateString = timeString.concat(myStringBuilder.toString());
+		dateString = myStringBuilder.toString();
+		dateString = dateString.concat(".");
 
 		myStringBuilder = new StringBuilder(
-				Integer.valueOf(now.get(Calendar.MONTH) + 1));
+				Integer.toString(now.get(Calendar.MONTH) + 1));
 		for (int z = myStringBuilder.length(); z < 2; z++)
 		{
 			myStringBuilder = myStringBuilder.insert(0, "0");
 		}
-		dateString = timeString.concat(myStringBuilder.toString());
+		dateString = dateString.concat(myStringBuilder.toString());
+		dateString = dateString.concat(".");
 
 		myStringBuilder = new StringBuilder(
-				Integer.valueOf(now.get(Calendar.YEAR)));
+				Integer.toString(now.get(Calendar.YEAR)));
 		for (int z = myStringBuilder.length(); z < 4; z++)
 		{
 			myStringBuilder = myStringBuilder.insert(0, "0");
 		}
-		dateString = timeString.concat(myStringBuilder.toString());
+		dateString = dateString.concat(myStringBuilder.toString());
 
 		myStringBuilder = new StringBuilder(
 				Integer.toString(Task.getTask().getTaskNumber()));

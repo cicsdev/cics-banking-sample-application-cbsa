@@ -81,6 +81,7 @@ public class AccountList
 
 		AccountsResource myAccountsResource = new AccountsResource();
 		Response myAccountsResponse = null;
+		this.count = 0;
 
 		try
 		{
@@ -127,7 +128,17 @@ public class AccountList
 
 				myAccountsResponse = myAccountsResource
 						.getAccountsExternal(true);
-				this.count = 0;
+				String myAccountsString = myAccountsResponse.getEntity()
+						.toString();
+
+				JSONObject myAccountsJSON = JSONObject.parse(myAccountsString);
+				if (myAccountsJSON.get(JSON_NUMBER_OF_ACCOUNTS) != null)
+				{
+					long accountCount = (Long) myAccountsJSON
+							.get(JSON_NUMBER_OF_ACCOUNTS);
+					this.count = (int) accountCount;
+				}
+
 			}
 			if (myAccountsResponse != null
 					&& myAccountsResponse.getStatus() == 200)
@@ -137,9 +148,14 @@ public class AccountList
 						.toString();
 
 				JSONObject myAccountsJSON = JSONObject.parse(myAccountsString);
-				long accountCount = (Long) myAccountsJSON
-						.get(JSON_NUMBER_OF_ACCOUNTS);
-				this.count = (int) accountCount;
+				this.count = 1;
+				if (myAccountsJSON.get(JSON_NUMBER_OF_ACCOUNTS) != null)
+				{
+					long accountCount = (Long) myAccountsJSON
+							.get(JSON_NUMBER_OF_ACCOUNTS);
+					this.count = (int) accountCount;
+				}
+
 			}
 		}
 		catch (IOException e)
@@ -215,16 +231,72 @@ public class AccountList
 			{
 
 				myAccountsJSON = JSONObject.parse(myAccountsString);
-				long accountCount = (Long) myAccountsJSON
-						.get(JSON_NUMBER_OF_ACCOUNTS);
-				this.count = (int) accountCount;
-				JSONArray myAccountsArrayJSON = (JSONArray) myAccountsJSON
-						.get(JSON_ACCOUNTS);
-
-				for (int i = 0; i < accountCount; i++)
+				long accountCount = 1;
+				if (myAccountsJSON.get(JSON_NUMBER_OF_ACCOUNTS) != null)
 				{
-					JSONObject myAccount = (JSONObject) myAccountsArrayJSON
-							.get(i);
+					accountCount = (Long) myAccountsJSON
+							.get(JSON_NUMBER_OF_ACCOUNTS);
+					this.count = (int) accountCount;
+					JSONArray myAccountsArrayJSON = (JSONArray) myAccountsJSON
+							.get(JSON_ACCOUNTS);
+
+					for (int i = 0; i < accountCount; i++)
+					{
+						JSONObject myAccount = (JSONObject) myAccountsArrayJSON
+								.get(i);
+
+						Date lastStatement = sortOutDate((String) myAccount
+								.get(JSON_LAST_STATEMENT_DATE));
+						Date nextStatement = sortOutDate((String) myAccount
+								.get(JSON_NEXT_STATEMENT_DATE));
+						Date dateOpened = sortOutDate(
+								(String) myAccount.get(JSON_DATE_OPENED));
+						String id = (String) myAccount.get(JSON_ID);
+						String customerNumberString = (String) myAccount
+								.get(JSON_CUSTOMER_NUMBER);
+
+						BigDecimal actualBalance = BigDecimal.valueOf(
+								(Double) myAccount.get(JSON_ACTUAL_BALANCE))
+								.setScale(2, RoundingMode.HALF_UP);
+						BigDecimal availableBalance = BigDecimal.valueOf(
+								(Double) myAccount.get(JSON_AVAILABLE_BALANCE))
+								.setScale(2, RoundingMode.HALF_UP);
+						BigDecimal interestRate = BigDecimal.valueOf(
+								(Double) myAccount.get(JSON_INTEREST_RATE))
+								.setScale(2, RoundingMode.HALF_UP);
+						Long overdraft = (Long) myAccount.get(JSON_OVERDRAFT);
+						String sortCode = (String) myAccount
+								.get(JSON_SORT_CODE);
+						String type = (String) myAccount.get(JSON_ACCOUNT_TYPE);
+
+						Account myListAccount = new Account();
+						myListAccount.setAccountNumber(id);
+						myListAccount.setActualBalance(actualBalance.setScale(2,
+								RoundingMode.HALF_UP));
+						myListAccount.setAvailableBalance(availableBalance
+								.setScale(2, RoundingMode.HALF_UP));
+						myListAccount.setCustomerNumber(customerNumberString);
+						myListAccount.setInterestRate(
+								interestRate.setScale(2, RoundingMode.HALF_UP));
+						myListAccount.setLastStatement(lastStatement);
+						myListAccount.setNextStatement(nextStatement);
+						myListAccount.setOpened(dateOpened);
+						myListAccount.setOverdraftLimit(overdraft.intValue());
+						myListAccount.setSortcode(sortCode);
+						myListAccount.setType(type);
+
+						this.listOfAccounts.add(myListAccount);
+					}
+
+				}
+				else
+				{
+					myAccountsString = myAccountsResponse.getEntity()
+							.toString();
+					myAccountsJSON = JSONObject.parse(myAccountsString);
+					// TODO check response, what if there is no account at all?
+					this.count = 1;
+					JSONObject myAccount = (JSONObject) myAccountsJSON;
 
 					Date lastStatement = sortOutDate(
 							(String) myAccount.get(JSON_LAST_STATEMENT_DATE));
@@ -233,19 +305,17 @@ public class AccountList
 					Date dateOpened = sortOutDate(
 							(String) myAccount.get(JSON_DATE_OPENED));
 					String id = (String) myAccount.get(JSON_ID);
-					String customerNumberString = (String) myAccount
+					String customerNumber = (String) myAccount
 							.get(JSON_CUSTOMER_NUMBER);
-
-					BigDecimal actualBalance = BigDecimal
-							.valueOf(
-									(Double) myAccount.get(JSON_ACTUAL_BALANCE))
-							.setScale(2, RoundingMode.HALF_UP);
-					BigDecimal availableBalance = BigDecimal.valueOf(
+					BigDecimal actual_balance = new BigDecimal(
+							(Double) myAccount.get(JSON_ACTUAL_BALANCE)).setScale(2,
+									RoundingMode.HALF_UP);
+					BigDecimal available_balance = new BigDecimal(
 							(Double) myAccount.get(JSON_AVAILABLE_BALANCE))
-							.setScale(2, RoundingMode.HALF_UP);
-					BigDecimal interestRate = BigDecimal
-							.valueOf((Double) myAccount.get(JSON_INTEREST_RATE))
-							.setScale(2, RoundingMode.HALF_UP);
+									.setScale(2, RoundingMode.HALF_UP);
+					BigDecimal interest_rate = new BigDecimal(
+							(Double) myAccount.get(JSON_INTEREST_RATE)).setScale(2,
+									RoundingMode.HALF_UP);
 					Long overdraft = (Long) myAccount.get(JSON_OVERDRAFT);
 					String sortCode = (String) myAccount.get(JSON_SORT_CODE);
 					String type = (String) myAccount.get(JSON_ACCOUNT_TYPE);
@@ -253,12 +323,12 @@ public class AccountList
 					Account myListAccount = new Account();
 					myListAccount.setAccountNumber(id);
 					myListAccount.setActualBalance(
-							actualBalance.setScale(2, RoundingMode.HALF_UP));
-					myListAccount.setAvailableBalance(
-							availableBalance.setScale(2, RoundingMode.HALF_UP));
-					myListAccount.setCustomerNumber(customerNumberString);
+							actual_balance.setScale(2, RoundingMode.HALF_UP));
+					myListAccount.setAvailableBalance(available_balance
+							.setScale(2, RoundingMode.HALF_UP));
+					myListAccount.setCustomerNumber(customerNumber);
 					myListAccount.setInterestRate(
-							interestRate.setScale(2, RoundingMode.HALF_UP));
+							interest_rate.setScale(2, RoundingMode.HALF_UP));
 					myListAccount.setLastStatement(lastStatement);
 					myListAccount.setNextStatement(nextStatement);
 					myListAccount.setOpened(dateOpened);
