@@ -294,9 +294,8 @@ public class AccountList
 					myAccountsString = myAccountsResponse.getEntity()
 							.toString();
 					myAccountsJSON = JSONObject.parse(myAccountsString);
-					// TODO check response, what if there is no account at all?
 					this.count = 1;
-					JSONObject myAccount = (JSONObject) myAccountsJSON;
+					JSONObject myAccount = myAccountsJSON;
 
 					Date lastStatement = sortOutDate(
 							(String) myAccount.get(JSON_LAST_STATEMENT_DATE));
@@ -307,15 +306,16 @@ public class AccountList
 					String id = (String) myAccount.get(JSON_ID);
 					String customerNumber = (String) myAccount
 							.get(JSON_CUSTOMER_NUMBER);
-					BigDecimal actual_balance = new BigDecimal(
-							(Double) myAccount.get(JSON_ACTUAL_BALANCE)).setScale(2,
-									RoundingMode.HALF_UP);
-					BigDecimal available_balance = new BigDecimal(
+					BigDecimal actualBalance = BigDecimal
+							.valueOf(
+									(Double) myAccount.get(JSON_ACTUAL_BALANCE))
+							.setScale(2, RoundingMode.HALF_UP);
+					BigDecimal availableBalance = BigDecimal.valueOf(
 							(Double) myAccount.get(JSON_AVAILABLE_BALANCE))
-									.setScale(2, RoundingMode.HALF_UP);
-					BigDecimal interest_rate = new BigDecimal(
-							(Double) myAccount.get(JSON_INTEREST_RATE)).setScale(2,
-									RoundingMode.HALF_UP);
+							.setScale(2, RoundingMode.HALF_UP);
+					BigDecimal interestRate = BigDecimal
+							.valueOf((Double) myAccount.get(JSON_INTEREST_RATE))
+							.setScale(2, RoundingMode.HALF_UP);
 					Long overdraft = (Long) myAccount.get(JSON_OVERDRAFT);
 					String sortCode = (String) myAccount.get(JSON_SORT_CODE);
 					String type = (String) myAccount.get(JSON_ACCOUNT_TYPE);
@@ -323,12 +323,12 @@ public class AccountList
 					Account myListAccount = new Account();
 					myListAccount.setAccountNumber(id);
 					myListAccount.setActualBalance(
-							actual_balance.setScale(2, RoundingMode.HALF_UP));
-					myListAccount.setAvailableBalance(available_balance
+							actualBalance.setScale(2, RoundingMode.HALF_UP));
+					myListAccount.setAvailableBalance(availableBalance
 							.setScale(2, RoundingMode.HALF_UP));
 					myListAccount.setCustomerNumber(customerNumber);
 					myListAccount.setInterestRate(
-							interest_rate.setScale(2, RoundingMode.HALF_UP));
+							interestRate.setScale(2, RoundingMode.HALF_UP));
 					myListAccount.setLastStatement(lastStatement);
 					myListAccount.setNextStatement(nextStatement);
 					myListAccount.setOpened(dateOpened);

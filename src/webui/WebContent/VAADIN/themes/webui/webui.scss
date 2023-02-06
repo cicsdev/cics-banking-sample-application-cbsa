@@ -30,7 +30,7 @@
 
 @import "../valo/valo.scss";
 
-@mixin com_ibm_cics_cip_bank_libertyapi_webui {
+@mixin webui {
   @include valo;
 
   // Insert your own theme rules here

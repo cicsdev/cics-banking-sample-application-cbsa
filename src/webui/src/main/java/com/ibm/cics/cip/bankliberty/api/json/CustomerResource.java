@@ -748,7 +748,6 @@ public class CustomerResource
 				"getCustomersAgeInternalInternal(String age) for age " + age);
 
 		JSONArray allCustomers = new JSONArray();
-
 		JSONObject response = new JSONObject();
 
 		com.ibm.cics.cip.bankliberty.web.vsam.Customer myCustomer = new Customer();
@@ -758,9 +757,10 @@ public class CustomerResource
 
 		for (int i = 0; i < vsamCustomers.length; i++)
 		{
-			response.put(JSON_ID, vsamCustomers[i].getCustomerNumber().trim());
-			response.put(JSON_CUSTOMER_NAME, vsamCustomers[i].getName().trim());
-			response.put(JSON_CUSTOMER_ADDRESS,
+			JSONObject customer = new JSONObject();
+			customer.put(JSON_ID, vsamCustomers[i].getCustomerNumber().trim());
+			customer.put(JSON_CUSTOMER_NAME, vsamCustomers[i].getName().trim());
+			customer.put(JSON_CUSTOMER_ADDRESS,
 					vsamCustomers[i].getAddress().trim());
 
 			Calendar myCalendar = Calendar.getInstance();
@@ -776,14 +776,16 @@ public class CustomerResource
 			Integer dobYYYY = myCalendar.get(Calendar.YEAR);
 			dateOfBirth = dateOfBirth.concat(dobYYYY.toString());
 
-			response.put(JSON_DATE_OF_BIRTH, dateOfBirth);
-			allCustomers.add(response);
+			customer.put(JSON_DATE_OF_BIRTH, dateOfBirth);
+			allCustomers.add(customer);
 		}
 
 		logger.exiting(this.getClass().getName(),
 				"getCustomersAgeInternal(String age)",
 				Response.status(200).entity(allCustomers.toString()).build());
-		return Response.status(200).entity(allCustomers.toString()).build();
+		response.put(JSON_CUSTOMERS, allCustomers);
+		response.put(JSON_NUMBER_OF_CUSTOMERS, allCustomers.size());
+		return Response.status(200).entity(response.toString()).build();
 	}
 
 
@@ -797,8 +799,7 @@ public class CustomerResource
 			CustomerResource.setSortcode(
 					((String) mySortCodeJSON.getEntity()).substring(13, 19));
 		}
-		logger.exiting(this.getClass().getName(), "getSortCode()",
-				sortcode);
+		logger.exiting(this.getClass().getName(), "getSortCode()", sortcode);
 		return Integer.parseInt(sortcode);
 	}
 

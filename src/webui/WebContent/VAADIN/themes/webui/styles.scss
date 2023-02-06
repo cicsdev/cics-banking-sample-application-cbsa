@@ -1,0 +1,9 @@
+@import "addons.scss";
+@import "webui.scss";
+
+/* This file prefixes all rules with the theme name to avoid causing conflicts with other themes. */
+/* The actual styles should be defined in webui.scss */
+.webui {
+  @include addons;
+  @include webui;
+}

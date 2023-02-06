@@ -113,6 +113,10 @@ public class Customer
 
 	private boolean notFound;
 
+	private RecordHolder holder;
+
+	private KeyHolder keyHolder;
+
 
 	public Customer(String custNo, String sc, String n, String a, Date d,
 			String creditScore, Date reviewDate)
@@ -602,7 +606,6 @@ public class Customer
 
 		RecordHolder holder = null;
 		byte[] key = new byte[16];
-		String keyString = null;
 
 		if (customerNumber == 9999999999L)
 		{
@@ -904,7 +907,9 @@ public class Customer
 				| LoadingException | RecordBusyException | FileDisabledException
 				| DuplicateKeyException | FileNotFoundException
 				| ISCInvalidRequestException | NotAuthorisedException
-				| RecordNotFoundException | NotOpenException | LengthErrorException | DuplicateRecordException | NoSpaceException e)
+				| RecordNotFoundException | NotOpenException
+				| LengthErrorException | DuplicateRecordException
+				| NoSpaceException e)
 		{
 			logger.severe(e.getLocalizedMessage());
 			logger.exiting(this.getClass().getName(), CREATE_CUSTOMER, null);
@@ -975,13 +980,14 @@ public class Customer
 				| LoadingException | RecordBusyException | FileDisabledException
 				| DuplicateKeyException | FileNotFoundException
 				| ISCInvalidRequestException | NotAuthorisedException
-				| RecordNotFoundException | NotOpenException | LengthErrorException | DuplicateRecordException | NoSpaceException e)
+				| RecordNotFoundException | NotOpenException
+				| LengthErrorException | DuplicateRecordException
+				| NoSpaceException e)
 		{
 			logger.severe(e.getLocalizedMessage());
 			logger.exiting(this.getClass().getName(), CREATE_CUSTOMER, null);
 			return -1;
 		}
-
 
 		return myCustomerControl.getLastCustomerNumber();
 	}
@@ -1137,7 +1143,7 @@ public class Customer
 			customerFileBrowse = customerFile.startBrowse(key);
 			boolean carryOn = true;
 			boolean endOfFile = false;
-			while (carryOn && stored  < limit)
+			while (carryOn && stored < limit)
 			{
 				try
 				{
@@ -1713,8 +1719,8 @@ public class Customer
 
 		Integer sortCodeInteger = Integer.parseInt(this.getSortcode());
 
-		RecordHolder holder = new RecordHolder();
-		KeyHolder keyHolder = new KeyHolder();
+		holder = new RecordHolder();
+		keyHolder = new KeyHolder();
 		byte[] key = buildKey(sortCodeInteger, 0L);
 
 		// We need to convert the key to EBCDIC
@@ -1741,58 +1747,53 @@ public class Customer
 
 			for (int j = 0; j < 250000 && carryOn; j++)
 			{
-				try
+
+				customerFileBrowse = getNextRecord(customerFileBrowse);
+				if (holder != null)
 				{
-					customerFileBrowse.next(holder, keyHolder);
+					myCustomer = new CUSTOMER(holder.getValue());
+					Calendar dobCalendar = Calendar.getInstance();
+					dobCalendar.set(Calendar.YEAR,
+							myCustomer.getCustomerBirthYear());
+					dobCalendar.set(Calendar.MONTH,
+							myCustomer.getCustomerBirthMonth());
+					dobCalendar.set(Calendar.DAY_OF_MONTH,
+							myCustomer.getCustomerBirthDay());
+					dob = new Date(dobCalendar.getTimeInMillis());
+					if (customerAgeInYears(dob) == age)
+					{
+						temp[i] = new Customer();
+						temp[i].setAddress(myCustomer.getCustomerAddress());
+						temp[i].setCustomerNumber(
+								Long.toString(myCustomer.getCustomerNumber()));
+						temp[i].setName(myCustomer.getCustomerName());
+						temp[i].setSortcode(Integer
+								.toString(myCustomer.getCustomerSortcode()));
+						temp[i].setDob(dob);
+						temp[i].setCreditScore(Integer
+								.toString(myCustomer.getCustomerCreditScore()));
+						Calendar csReviewCalendar = Calendar.getInstance();
+						csReviewCalendar.set(Calendar.YEAR,
+								myCustomer.getCustomerCsReviewYear());
+						csReviewCalendar.set(Calendar.MONTH,
+								myCustomer.getCustomerCsReviewMonth());
+						csReviewCalendar.set(Calendar.DAY_OF_MONTH,
+								myCustomer.getCustomerCsReviewDay());
+						Date csReviewDate = new Date(
+								csReviewCalendar.getTimeInMillis());
+						temp[i].setReviewDate(csReviewDate);
+						i++;
+					}
 				}
-				catch (DuplicateKeyException e)
+				else
 				{
-					// we don't care about this one
-				}
-				catch (EndOfFileException e)
-				{
-					// This one we do care about but we expect it
 					carryOn = false;
-
 				}
 
-				myCustomer = new CUSTOMER(holder.getValue());
-
-				temp[j] = new Customer();
-				temp[j].setAddress(myCustomer.getCustomerAddress());
-				temp[j].setCustomerNumber(
-						Long.toString(myCustomer.getCustomerNumber()));
-				temp[j].setName(myCustomer.getCustomerName());
-				temp[j].setSortcode(
-						Integer.toString(myCustomer.getCustomerSortcode()));
-				Calendar dobCalendar = Calendar.getInstance();
-				dobCalendar.set(Calendar.YEAR,
-						myCustomer.getCustomerBirthYear());
-				dobCalendar.set(Calendar.MONTH,
-						myCustomer.getCustomerBirthMonth());
-				dobCalendar.set(Calendar.DAY_OF_MONTH,
-						myCustomer.getCustomerBirthDay());
-				dob = new Date(dobCalendar.getTimeInMillis());
-				temp[j].setDob(dob);
-				temp[j].setCreditScore(
-						Integer.toString(myCustomer.getCustomerCreditScore()));
-				Calendar csReviewCalendar = Calendar.getInstance();
-				csReviewCalendar.set(Calendar.YEAR,
-						myCustomer.getCustomerCsReviewYear());
-				csReviewCalendar.set(Calendar.MONTH,
-						myCustomer.getCustomerCsReviewMonth());
-				csReviewCalendar.set(Calendar.DAY_OF_MONTH,
-						myCustomer.getCustomerCsReviewDay());
-				Date csReviewDate = new Date(
-						csReviewCalendar.getTimeInMillis());
-				temp[j].setReviewDate(csReviewDate);
-				if (customerAgeInYears(dob) == age)
-				{
-					i++;
-				}
 			}
 
 			customerFileBrowse.end();
+
 
 			Customer[] real = new Customer[i];
 			System.arraycopy(temp, 0, real, 0, i);
@@ -1800,7 +1801,7 @@ public class Customer
 					real);
 			return real;
 		}
-		catch (LengthErrorException | InvalidSystemIdException | LogicException
+		catch (InvalidSystemIdException | LogicException
 				| InvalidRequestException | IOErrorException | LockedException
 				| RecordBusyException | LoadingException | ChangedException
 				| FileDisabledException | FileNotFoundException
@@ -1812,6 +1813,41 @@ public class Customer
 					null);
 			return null;
 		}
+	}
+
+
+	private KeyedFileBrowse getNextRecord(
+			KeyedFileBrowse localCustomerFileBrowse)
+	{
+		try
+		{
+			localCustomerFileBrowse.next(holder, keyHolder);
+
+		}
+		catch (DuplicateKeyException e)
+		{
+			// we don't care about this one
+		}
+		catch (EndOfFileException e)
+		{
+			// This one we do care about but we expect it
+			holder = null;
+
+		}
+		catch (LogicException | InvalidRequestException | IOErrorException
+				| LengthErrorException | InvalidSystemIdException
+				| ChangedException | LockedException | LoadingException
+				| RecordBusyException | FileDisabledException
+				| FileNotFoundException | ISCInvalidRequestException
+				| NotAuthorisedException | RecordNotFoundException
+				| NotOpenException e)
+		{
+			// TODO Auto-generated catch block
+			logger.log(Level.SEVERE, e.toString());
+			holder = null;
+		}
+		return localCustomerFileBrowse;
+
 	}
 
 
@@ -1842,7 +1878,7 @@ public class Customer
 	}
 
 
-	byte[] buildKey(int sortCode2, long customerNumber2) 
+	byte[] buildKey(int sortCode2, long customerNumber2)
 	{
 		StringBuilder myStringBuilder = new StringBuilder();
 
@@ -1863,7 +1899,7 @@ public class Customer
 		}
 		catch (UnsupportedEncodingException e)
 		{
-			logger.log(Level.SEVERE,e.toString());
+			logger.log(Level.SEVERE, e.toString());
 			return null;
 		}
 	}

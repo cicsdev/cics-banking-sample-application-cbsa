@@ -19,7 +19,7 @@ import com.vaadin.ui.UI;
  */
 
 @SuppressWarnings("serial")
-@Theme("com_ibm_cics_cip_bank_libertyapi_webui")
+@Theme("webui")
 
 public class Com_ibm_cics_cip_bank_libertyapi_webuiUI extends UI
 {
@@ -40,7 +40,7 @@ public class Com_ibm_cics_cip_bank_libertyapi_webuiUI extends UI
 		UI ui = this;
 
 		// Set the theme of the program
-		setTheme("com_ibm_cics_cip_bank_libertyapi_webui");
+		setTheme("webui");
 		// Set the content to be shown on launch
 		setContent(new Welcome(ui, ""));
 

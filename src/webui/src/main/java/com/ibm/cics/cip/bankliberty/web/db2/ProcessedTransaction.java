@@ -663,7 +663,6 @@ public class ProcessedTransaction extends HBankDataAccess
 			String customerNumber)
 	{
 		logger.entering(this.getClass().getName(), WRITE_CREATE_CUSTOMER);
-		System.out.println("customerDOB is " + customerDOB);
 		sortOutDateTimeTaskString();
 		String createCustomerDescription = "";
 		createCustomerDescription = createCustomerDescription
@@ -690,10 +689,6 @@ public class ProcessedTransaction extends HBankDataAccess
 
 		logger.log(Level.FINE, () -> ABOUT_TO_INSERT + SQL_INSERT + ">");
 
-		System.out.println("dateString is " + dateString);
-		System.out.println("timeString is " + timeString);
-		System.out.println("createCustomerDescription is " + createCustomerDescription);
-		System.out.println("createCustomerDescription length is " + createCustomerDescription.length());
 		try (PreparedStatement stmt = conn.prepareStatement(SQL_INSERT);)
 		{
 			stmt.setString(1, PROCTRAN.PROC_TRAN_VALID);

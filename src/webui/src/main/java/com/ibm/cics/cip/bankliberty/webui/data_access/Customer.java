@@ -290,13 +290,8 @@ public class Customer
 			try
 			{
 				myCustomer = JSONObject.parse(myCustomerString);
-			}
-			catch (IOException e)
-			{
-				logger.log(Level.SEVERE, e::toString);
-				myCustomerResponse.close();
-				return "-1";
-			}
+
+
 
 			this.setDob(
 					sortOutDate((String) myCustomer.get(JSON_DATE_OF_BIRTH)));
@@ -307,6 +302,17 @@ public class Customer
 			String customerNoString = (String) myCustomer.get(JSON_ID);
 			this.setCustomerNumber(customerNoString);
 			return customerNoString;
+			}
+			catch (IOException e)
+			{
+				logger.log(Level.SEVERE, e::toString);
+				myCustomerResponse.close();
+				return "-1";
+			}
+			finally
+			{
+				myCustomerResponse.close();
+			}
 		}
 		else
 		{
@@ -314,6 +320,7 @@ public class Customer
 					+ myCustomerResponse.getEntity().toString());
 			return "-1";
 		}
+
 	}
 
 
