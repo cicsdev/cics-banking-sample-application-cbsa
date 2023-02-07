@@ -48,6 +48,12 @@ public class ProcessedTransaction extends HBankDataAccess
 
 	private static final String ABOUT_TO_INSERT = "About to insert record SQL <";
 
+	private static final int SORT_CODE_LENGTH = 6;
+
+	private static final int ACCOUNT_NUMBER_LENGTH = 8;
+
+	private static final int CUSTOMER_NUMBER_LENGTH = 10;
+
 	// String ACCOUNT_EYECATCHER CHAR(4),
 	private String sortcode;
 
@@ -227,7 +233,7 @@ public class ProcessedTransaction extends HBankDataAccess
 
 		StringBuilder myStringBuilder = new StringBuilder();
 
-		for (int i = Integer.toString(sortCode).length(); i < 6; i++)
+		for (int i = Integer.toString(sortCode).length(); i < SORT_CODE_LENGTH; i++)
 		{
 			myStringBuilder.append('0');
 		}
@@ -933,7 +939,7 @@ public class ProcessedTransaction extends HBankDataAccess
 	private String padCustomerNumber(String customerNumber2)
 	{
 		StringBuilder myStringBuilder = new StringBuilder();
-		for (int z = customerNumber2.length(); z < 10; z++)
+		for (int z = customerNumber2.length(); z < CUSTOMER_NUMBER_LENGTH; z++)
 		{
 			myStringBuilder.append("0");
 		}
@@ -945,7 +951,7 @@ public class ProcessedTransaction extends HBankDataAccess
 	private String padAccountNumber(Integer accountNumber2)
 	{
 		StringBuilder myStringBuilder = new StringBuilder();
-		for (int z = accountNumber2.toString().length(); z < 8; z++)
+		for (int z = accountNumber2.toString().length(); z < ACCOUNT_NUMBER_LENGTH; z++)
 		{
 			myStringBuilder.append("0");
 		}
@@ -958,7 +964,7 @@ public class ProcessedTransaction extends HBankDataAccess
 	{
 		StringBuilder myStringBuilder = new StringBuilder();
 
-		for (int z = sortcode2.toString().length(); z < 6; z++)
+		for (int z = sortcode2.toString().length(); z < SORT_CODE_LENGTH; z++)
 		{
 			myStringBuilder.append("0");
 		}

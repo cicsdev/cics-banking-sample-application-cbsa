@@ -92,7 +92,12 @@ public class Customer
 
 	private static final String LAST_CUSTOMER = "0000009999999999";
 
-	// String ACCOUNT_EYECATCHER CHAR(4),
+	private static final int VSAM_KEY_LENGTH = 16;
+
+	private static final int CUSTOMER_NUMBER_LENGTH = 10;
+
+	private static final int SORT_CODE_LENGTH = 6;
+
 	private String customerNumber;
 
 	private String sortcode;
@@ -142,7 +147,7 @@ public class Customer
 
 	public String getCustomerNumber()
 	{
-		if (this.customerNumber.length() < 10)
+		if (this.customerNumber.length() < CUSTOMER_NUMBER_LENGTH)
 		{
 			this.customerNumber = padCustomerNumber(this.customerNumber);
 		}
@@ -333,9 +338,9 @@ public class Customer
 		KeyHolder keyHolder = new KeyHolder();
 
 		// We need to set the key to high values. This is awkward in Java
-		byte[] key = new byte[16];
+		byte[] key = new byte[VSAM_KEY_LENGTH];
 
-		for (int z = 0; z < 16; z++)
+		for (int z = 0; z < VSAM_KEY_LENGTH; z++)
 		{
 
 			key[z] = (byte) -1;
@@ -605,7 +610,7 @@ public class Customer
 		myCustomer = new CUSTOMER();
 
 		RecordHolder holder = null;
-		byte[] key = new byte[16];
+		byte[] key = new byte[VSAM_KEY_LENGTH];
 
 		if (customerNumber == 9999999999L)
 		{
@@ -1882,12 +1887,12 @@ public class Customer
 	{
 		StringBuilder myStringBuilder = new StringBuilder();
 
-		for (int i = Integer.toString(sortCode2).length(); i < 6; i++)
+		for (int i = Integer.toString(sortCode2).length(); i < SORT_CODE_LENGTH; i++)
 		{
 			myStringBuilder.append('0');
 		}
 		myStringBuilder.append(Integer.toString(sortCode2));
-		for (int z = Long.toString(customerNumber2).length(); z < 10; z++)
+		for (int z = Long.toString(customerNumber2).length(); z < CUSTOMER_NUMBER_LENGTH; z++)
 		{
 			myStringBuilder = myStringBuilder.append('0');
 		}
@@ -1908,7 +1913,7 @@ public class Customer
 	private String padCustomerNumber(String customerNumber2)
 	{
 		StringBuilder myStringBuilder = new StringBuilder();
-		for (int z = customerNumber2.length(); z < 10; z++)
+		for (int z = customerNumber2.length(); z < CUSTOMER_NUMBER_LENGTH; z++)
 		{
 			myStringBuilder.append("0");
 		}

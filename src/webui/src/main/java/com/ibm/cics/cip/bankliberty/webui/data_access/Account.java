@@ -340,8 +340,11 @@ public class Account
 			this.interestRate = BigDecimal
 					.valueOf((Double) myAccount.get(JSON_INTEREST_RATE))
 					.setScale(2, RoundingMode.HALF_UP);
-			this.overdraftLimit = Integer
-					.valueOf((String) myAccount.get(JSON_OVERDRAFT));
+
+			Long myLong = (Long) myAccount.get(JSON_OVERDRAFT);
+
+			this.overdraftLimit = myLong.intValue();
+
 			this.sortcode = (String) myAccount.get(JSON_SORT_CODE);
 			this.type = (String) myAccount.get(JSON_ACCOUNT_TYPE);
 		}
@@ -374,7 +377,6 @@ public class Account
 			{
 
 				logger.severe(e.toString());
-				myAccountsResponse.close();
 				return false;
 			}
 
@@ -403,13 +405,15 @@ public class Account
 			this.interestRate = BigDecimal
 					.valueOf((Double) myAccount.get(JSON_INTEREST_RATE))
 					.setScale(2, RoundingMode.HALF_UP);
-			this.overdraftLimit = Integer
-					.valueOf((String) myAccount.get(JSON_OVERDRAFT));
+
+			Long myLong = (Long) myAccount.get(JSON_OVERDRAFT);
+
+			this.overdraftLimit = myLong.intValue();
+			
 			this.sortcode = (String) myAccount.get(JSON_SORT_CODE);
 			this.type = (String) myAccount.get(JSON_ACCOUNT_TYPE);
 			return true;
 		}
-		myAccountsResponse.close();
 		return false;
 	}
 
@@ -433,6 +437,7 @@ public class Account
 
 		myAccountsResponse = myAccountsResource
 				.createAccountInternal(myAccountJSON);
+
 		if (myAccountsResponse.getStatus() == 201)
 		{
 			myAccountsString = myAccountsResponse.getEntity().toString();
@@ -443,7 +448,6 @@ public class Account
 			catch (IOException e)
 			{
 				logger.severe(e.toString());
-				myAccountsResponse.close();
 				return -1;
 			}
 
@@ -472,14 +476,15 @@ public class Account
 			this.interestRate = BigDecimal
 					.valueOf((Double) myAccount.get(JSON_INTEREST_RATE))
 					.setScale(2, RoundingMode.HALF_UP);
-			this.overdraftLimit = Integer
-					.valueOf((String) myAccount.get(JSON_OVERDRAFT));
+
+			Long myLong = (Long) myAccount.get(JSON_OVERDRAFT);
+
+			this.overdraftLimit = myLong.intValue();
+
 			this.sortcode = (String) myAccount.get(JSON_SORT_CODE);
 			this.type = (String) myAccount.get(JSON_ACCOUNT_TYPE);
-			myAccountsResponse.close();
 			return Integer.parseInt(this.accountNumber);
 		}
-		myAccountsResponse.close();
 		return -1;
 	}
 
@@ -504,7 +509,6 @@ public class Account
 			catch (IOException e)
 			{
 				logger.severe(e.toString());
-				myAccountsResponse.close();
 				return false;
 			}
 
@@ -533,14 +537,14 @@ public class Account
 			this.interestRate = BigDecimal
 					.valueOf((Double) myAccount.get(JSON_INTEREST_RATE))
 					.setScale(2, RoundingMode.HALF_UP);
-			this.overdraftLimit = Integer
-					.valueOf((String) myAccount.get(JSON_OVERDRAFT));
+
+			Long myLong = (Long) myAccount.get(JSON_OVERDRAFT);
+			this.overdraftLimit = myLong.intValue();
+			
 			this.sortcode = (String) myAccount.get(JSON_SORT_CODE);
 			this.type = (String) myAccount.get(JSON_ACCOUNT_TYPE);
-			myAccountsResponse.close();
 			return true;
 		}
-		myAccountsResponse.close();
 		return false;
 
 	}

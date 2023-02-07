@@ -86,6 +86,14 @@ public class Account extends HBankDataAccess
 
 	private static final String SQL_MORE_THAN = " AND ACCOUNT_ACTUAL_BALANCE >= ?";
 
+	private static final int MAXIMUM_ACCOUNTS_PER_CUSTOMER = 10;
+
+	private static final int CUSTOMER_NUMBER_LENGTH = 10;
+
+	private static final int ACCOUNT_NUMBER_LENGTH = 8;
+
+	private static final int SORT_CODE_LENGTH = 6;
+
 	// </copyright>
 
 	// String ACCOUNT_EYECATCHER CHAR(4),
@@ -179,11 +187,12 @@ public class Account extends HBankDataAccess
 
 	public String getCustomerNumber()
 	{
-		if (this.customerNumber.length() < 10)
+		if (this.customerNumber.length() < CUSTOMER_NUMBER_LENGTH)
 		{
 			StringBuilder myStringBuilder = new StringBuilder();
 
-			for (int i = this.customerNumber.length(); i < 10; i++)
+			for (int i = this.customerNumber
+					.length(); i < CUSTOMER_NUMBER_LENGTH; i++)
 			{
 				myStringBuilder.append('0');
 			}
@@ -197,11 +206,11 @@ public class Account extends HBankDataAccess
 	public void setCustomerNumber(String custNo)
 	{
 
-		if (custNo.length() < 10)
+		if (custNo.length() < CUSTOMER_NUMBER_LENGTH)
 		{
 			StringBuilder myStringBuilder = new StringBuilder();
 
-			for (int i = custNo.length(); i < 10; i++)
+			for (int i = custNo.length(); i < CUSTOMER_NUMBER_LENGTH; i++)
 			{
 				myStringBuilder.append('0');
 			}
@@ -229,7 +238,8 @@ public class Account extends HBankDataAccess
 	{
 		StringBuilder myStringBuilder = new StringBuilder();
 
-		for (int i = this.accountNumber.length(); i < 8; i++)
+		for (int i = this.accountNumber
+				.length(); i < ACCOUNT_NUMBER_LENGTH; i++)
 		{
 			myStringBuilder.append('0');
 		}
@@ -243,7 +253,7 @@ public class Account extends HBankDataAccess
 	{
 		StringBuilder myStringBuilder = new StringBuilder();
 
-		for (int i = accNo.length(); i < 8; i++)
+		for (int i = accNo.length(); i < ACCOUNT_NUMBER_LENGTH; i++)
 		{
 			myStringBuilder.append('0');
 		}
@@ -496,7 +506,7 @@ public class Account extends HBankDataAccess
 	{
 		logger.entering(this.getClass().getName(), GET_ACCOUNTS_CUSTNO + l);
 		openConnection();
-		Account[] temp = new Account[10];
+		Account[] temp = new Account[MAXIMUM_ACCOUNTS_PER_CUSTOMER];
 
 		String customerNumberString = padCustomerNumber(Long.toString(l));
 
@@ -552,7 +562,7 @@ public class Account extends HBankDataAccess
 		int i = 0;
 		StringBuilder myStringBuilder = new StringBuilder();
 
-		for (i = Integer.toString(sortCode).length(); i < 6; i++)
+		for (i = Integer.toString(sortCode).length(); i < SORT_CODE_LENGTH; i++)
 		{
 			myStringBuilder.append('0');
 		}
@@ -600,7 +610,7 @@ public class Account extends HBankDataAccess
 		openConnection();
 		StringBuilder myStringBuilder = new StringBuilder();
 		int i;
-		for (i = Integer.toString(sortCode).length(); i < 6; i++)
+		for (i = Integer.toString(sortCode).length(); i < SORT_CODE_LENGTH; i++)
 		{
 			myStringBuilder.append('0');
 		}
@@ -648,7 +658,8 @@ public class Account extends HBankDataAccess
 		openConnection();
 		StringBuilder myStringBuilder = new StringBuilder();
 
-		for (int i = Integer.toString(account).length(); i < 8; i++)
+		for (int i = Integer.toString(account)
+				.length(); i < ACCOUNT_NUMBER_LENGTH; i++)
 		{
 			myStringBuilder.append('0');
 		}
@@ -656,7 +667,8 @@ public class Account extends HBankDataAccess
 		String accountNumberString = myStringBuilder.toString();
 
 		myStringBuilder = new StringBuilder();
-		for (int i = Integer.toString(sortcode).length(); i < 6; i++)
+		for (int i = Integer.toString(sortcode)
+				.length(); i < SORT_CODE_LENGTH; i++)
 		{
 			myStringBuilder.append('0');
 		}
@@ -722,16 +734,15 @@ public class Account extends HBankDataAccess
 		Integer accountNumberInteger = 0;
 		String controlString = sortcode.toString() + "-" + "ACCOUNT-LAST";
 		String sqlControl = "SELECT * from CONTROL where CONTROL_NAME = ?";
-		controlString = sortcode.toString() + "-" + "ACCOUNT-LAST";
-		sqlControl = "SELECT * from CONTROL where CONTROL_NAME LIKE ?";
+		controlString = sortCodeString + "-" + "ACCOUNT-LAST";
+		sqlControl = "SELECT * from CONTROL where CONTROL_NAME = ?";
 		String sqlUpdate = "UPDATE CONTROL " + "SET" + " CONTROL_VALUE_NUM = ?"
 				+ " WHERE CONTROL_NAME = ?";
 		String sqlInsert = "INSERT INTO ACCOUNT (ACCOUNT_EYECATCHER, ACCOUNT_CUSTOMER_NUMBER, ACCOUNT_SORTCODE, ACCOUNT_NUMBER, ACCOUNT_TYPE, ACCOUNT_INTEREST_RATE, ACCOUNT_OPENED, ACCOUNT_OVERDRAFT_LIMIT, ACCOUNT_LAST_STATEMENT, ACCOUNT_NEXT_STATEMENT, ACCOUNT_AVAILABLE_BALANCE, ACCOUNT_ACTUAL_BALANCE) VALUES ('ACCT',?,?,?,?,?,?,?,?,?,0.00,0.00)";
 
 		try (PreparedStatement stmtC = conn.prepareStatement(sqlControl);
-				PreparedStatement stmt = conn.prepareStatement(sqlInsert);
-				PreparedStatement stmt2 = conn.prepareStatement(sqlControl);
-				PreparedStatement stmt3 = conn.prepareStatement(sqlUpdate);)
+				PreparedStatement stmtI = conn.prepareStatement(sqlInsert);
+				PreparedStatement stmtU = conn.prepareStatement(sqlUpdate);)
 		{
 			stmtC.setString(1, controlString);
 			ResultSet rs = stmtC.executeQuery();
@@ -777,16 +788,15 @@ public class Account extends HBankDataAccess
 				logger.log(Level.FINE,
 						() -> "About to insert record SQL <" + sqlInsert + ">");
 
-				stmt.setString(1, customerNumberString);
-				stmt.setString(2, sortCodeString);
-				stmt.setString(3, accountNumberString);
-				stmt.setString(4, account.getAccountType());
-				stmt.setBigDecimal(5, account.getInterestRate());
-				stmt.setDate(6, dateOpened);
-				stmt.setInt(7, account.getOverdraft());
-				stmt.setDate(8, lastStatementforNewCustomer);
-				stmt.setDate(9, nextStatementForNewCustomer);
-				stmt.execute();
+				stmtI.setString(1, customerNumberString);
+				stmtI.setString(2, sortCodeString);
+				stmtI.setString(3, accountNumberString);
+				stmtI.setString(4, account.getAccountType());
+				stmtI.setBigDecimal(5, account.getInterestRate());
+				stmtI.setDate(6, dateOpened);
+				stmtI.setInt(7, account.getOverdraft());
+				stmtI.setDate(8, lastStatementforNewCustomer);
+				stmtI.setDate(9, nextStatementForNewCustomer);
 				temp.setAccountNumber(accountNumberString);
 				temp.setActualBalance(0.00);
 				temp.setAvailableBalance(0.00);
@@ -799,16 +809,15 @@ public class Account extends HBankDataAccess
 				temp.setType(account.getAccountType());
 				temp.setOpened(dateOpened);
 
-				rs = stmt2.executeQuery();
-				rs.next();
-
+				stmtI.execute();
 				logger.log(Level.FINE, () -> "About to execute update SQL <"
 						+ sqlUpdate + ">");
-				stmt3.setLong(1, accountNumberInteger);
-				stmt3.setString(2, controlString);
-				stmt3.execute();
+				stmtU.setLong(1, accountNumberInteger);
+				stmtU.setString(2, controlString);
+				stmtU.execute();
 
 				return temp;
+
 			}
 			return null;
 		}
@@ -834,7 +843,7 @@ public class Account extends HBankDataAccess
 		// Customer Numbers are 10 digit numbers, prefixed with zeroes as
 		// required
 		StringBuilder myStringBuilder = new StringBuilder();
-		for (int z = customerNumber2.length(); z < 10; z++)
+		for (int z = customerNumber2.length(); z < CUSTOMER_NUMBER_LENGTH; z++)
 		{
 			myStringBuilder.append("0");
 		}
@@ -847,7 +856,8 @@ public class Account extends HBankDataAccess
 	{
 		// Account Numbers are 8 digit numbers, prefixed with zeroes as required
 		StringBuilder myStringBuilder = new StringBuilder();
-		for (int z = accountNumber2.toString().length(); z < 8; z++)
+		for (int z = accountNumber2.toString()
+				.length(); z < ACCOUNT_NUMBER_LENGTH; z++)
 		{
 			myStringBuilder.append("0");
 		}
@@ -861,7 +871,7 @@ public class Account extends HBankDataAccess
 		// Sort codes are 6 digit numbers, prefixed with zeroes as required
 		StringBuilder myStringBuilder = new StringBuilder();
 
-		for (int z = sortcode2.toString().length(); z < 6; z++)
+		for (int z = sortcode2.toString().length(); z < SORT_CODE_LENGTH; z++)
 		{
 			myStringBuilder.append("0");
 		}
@@ -1079,7 +1089,7 @@ public class Account extends HBankDataAccess
 		int i = 0;
 		StringBuilder myStringBuilder = new StringBuilder();
 
-		for (i = sortCode2.toString().length(); i < 6; i++)
+		for (i = sortCode2.toString().length(); i < SORT_CODE_LENGTH; i++)
 		{
 			myStringBuilder.append('0');
 		}
@@ -1147,13 +1157,12 @@ public class Account extends HBankDataAccess
 		int retrieved = 0;
 		StringBuilder myStringBuilder = new StringBuilder();
 
-		for (i = sortCode.toString().length(); i < 6; i++)
+		for (i = sortCode.toString().length(); i < SORT_CODE_LENGTH; i++)
 		{
 			myStringBuilder.append('0');
 		}
 
 		myStringBuilder.append(sortCode.toString());
-
 
 		String sortCodeString = myStringBuilder.toString();
 		String sql = "SELECT * from ACCOUNT where ACCOUNT_EYECATCHER LIKE 'ACCT' AND ACCOUNT_SORTCODE like ? ORDER BY ACCOUNT_NUMBER";
@@ -1162,7 +1171,7 @@ public class Account extends HBankDataAccess
 		{
 			stmt.setString(1, sortCodeString);
 			ResultSet rs = stmt.executeQuery();
-			i=0;
+			i = 0;
 			while (rs.next() && i < limit)
 			{
 				if (retrieved >= offset)

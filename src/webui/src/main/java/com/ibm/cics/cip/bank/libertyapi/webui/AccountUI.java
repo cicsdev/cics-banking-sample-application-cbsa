@@ -119,8 +119,8 @@ public class AccountUI extends VerticalLayout
 
 		// Create a new container and scale - components can be added to it
 		// using cusNumL.addComponent()
-		HorizontalLayout cusNumL = new HorizontalLayout();
-		cusNumL.setWidth("60%");
+		HorizontalLayout accNumL = new HorizontalLayout();
+		accNumL.setWidth("60%");
 
 		// The following components get their respective data from 'acc'
 
@@ -137,6 +137,10 @@ public class AccountUI extends VerticalLayout
 		sCodeT = new TextField("Sortcode");
 		sCodeT.setValue(getSortcode());
 		sCodeT.setEnabled(false);
+		
+		// Set interest rate
+		interestT = new TextField("Interest");
+
 
 		if (acc.getAccountNumber() == null)
 		{
@@ -149,12 +153,36 @@ public class AccountUI extends VerticalLayout
 			cusNumT.setValue("");
 		}
 
+		// Textfield for overdraft limit
+		overdraftT = new TextField("Overdraft Limit");
+		// Textfield for balance
+		balanceT = new TextField("Balance");
+		if(edit)
+		{
+			title.setValue("Account Update");
+			accNumT.setValue(acc.getAccountNumber());
+			cusNumT.setValue(acc.getCustomerNumber());
+			interestT.setValue(acc.getInterestRate()
+					.setScale(2, RoundingMode.HALF_UP).toString());
+			overdraftT.setValue(Integer.valueOf(acc.getOverdraftLimit()).toString());
+			balanceT.setValue((acc.getActualBalance()).setScale(2, RoundingMode.HALF_UP).toString());
+		}
+		else
+		{
+			title.setValue("Account Creation");
+			interestT.setValue(BigDecimal.valueOf(0.00).setScale(2, RoundingMode.HALF_UP).toString());
+			accNumT.setValue("00000000");
+			cusNumT.setValue("");
+			overdraftT.setValue("0");
+			balanceT.setValue("0.00");
+		}
+		
 		// Add the components to the container and align
-		cusNumL.addComponent(accNumT);
-		cusNumL.addComponent(cusNumT);
+		accNumL.addComponent(accNumT);
+		accNumL.addComponent(cusNumT);
 		cusNumT.setEnabled(Boolean.FALSE.equals(edit));
-		cusNumL.addComponent(sCodeT);
-		cusNumL.setComponentAlignment(sCodeT, Alignment.MIDDLE_RIGHT);
+		accNumL.addComponent(sCodeT);
+		accNumL.setComponentAlignment(sCodeT, Alignment.MIDDLE_RIGHT);
 
 		// Create a new container and scale
 		HorizontalLayout typeL = new HorizontalLayout();
@@ -170,10 +198,7 @@ public class AccountUI extends VerticalLayout
 		typeT.setValue(TYPE_CURRENT);
 		typeT.setNullSelectionAllowed(false);
 
-		// Set interest rate
-		interestT = new TextField("Interest");
-		interestT.setValue(acc.getInterestRate()
-				.setScale(2, RoundingMode.HALF_UP).toString());
+
 
 		// Add to container and align
 		typeL.addComponent(typeT);
@@ -184,11 +209,9 @@ public class AccountUI extends VerticalLayout
 		HorizontalLayout overdraftL = new HorizontalLayout();
 		overdraftL.setWidth("60%");
 
-		// Textfield for overdraft limit
-		overdraftT = new TextField("Overdraft Limit");
 
-		// Textfield for balance
-		balanceT = new TextField("Balance");
+
+
 		balanceT.setEnabled(false);
 
 		// Add to container and align
@@ -257,13 +280,13 @@ public class AccountUI extends VerticalLayout
 		});
 
 		// Add containers to ui and align
-		this.addComponent(cusNumL);
+		this.addComponent(accNumL);
 		this.addComponent(typeL);
 		this.addComponent(overdraftL);
 		this.addComponent(buttonL);
 
 		this.setComponentAlignment(buttonL, Alignment.MIDDLE_CENTER);
-		this.setComponentAlignment(cusNumL, Alignment.MIDDLE_CENTER);
+		this.setComponentAlignment(accNumL, Alignment.MIDDLE_CENTER);
 		this.setComponentAlignment(typeL, Alignment.MIDDLE_CENTER);
 		this.setComponentAlignment(overdraftL, Alignment.MIDDLE_CENTER);
 
@@ -281,119 +304,6 @@ public class AccountUI extends VerticalLayout
 		overdraftT.setValue(String.valueOf(acc.getOverdraftLimit()));
 		balanceT.setValue(String.valueOf(
 				acc.getActualBalance().setScale(2, RoundingMode.HALF_UP)));
-	}
-
-
-	@SuppressWarnings("serial")
-	private void createAccUI(UI ui, Welcome back, String user)
-	{
-
-		this.ui = ui;
-		HbHeader header = new HbHeader(ui, back);
-		this.addComponent(header);
-		this.setExpandRatio(header, 0.1f);
-
-		Label title = new Label("Account Creation / Update");
-		this.addComponent(title);
-
-		HorizontalLayout cusNumL = new HorizontalLayout();
-		cusNumL.setWidth("60%");
-		cusNumT = new TextField("Customer Number");
-		sCodeT = new TextField("Sortcode");
-		sCodeT.setValue(getSortcode());
-		sCodeT.setEnabled(false);
-		cusNumL.addComponent(cusNumT);
-		cusNumT.setEnabled(!edit);
-		cusNumL.addComponent(sCodeT);
-		cusNumL.setComponentAlignment(sCodeT, Alignment.MIDDLE_RIGHT);
-
-		HorizontalLayout typeL = new HorizontalLayout();
-		typeL.setWidth("60%");
-
-		/// Create combobox with type options and set the type to 'CURRENT'
-		typeT = new ComboBox("Type");
-		typeT.addItem(TYPE_CURRENT);
-		typeT.addItem(TYPE_ISA);
-		typeT.addItem(TYPE_LOAN);
-		typeT.addItem(TYPE_MORTGAGE);
-		typeT.addItem(TYPE_SAVING);
-		typeT.setValue(TYPE_CURRENT);
-		typeT.setNullSelectionAllowed(false);
-
-		// Create interest textfield and set to '0.00'
-		interestT = new TextField("Interest");
-		interestT.setValue("0.00");
-		typeL.addComponent(typeT);
-		typeL.addComponent(interestT);
-		typeL.setComponentAlignment(interestT, Alignment.MIDDLE_RIGHT);
-
-		// Create overdraft textfield and set to '0'
-		HorizontalLayout overdraftL = new HorizontalLayout();
-		overdraftL.setWidth("60%");
-		overdraftT = new TextField("Overdraft Limit");
-		overdraftT.setValue("0");
-
-		// Create balance textfield and set to '0'
-		balanceT = new TextField("Balance");
-		balanceT.setEnabled(false);
-		balanceT.setValue("0.00");
-		overdraftL.addComponent(overdraftT);
-		overdraftL.addComponent(balanceT);
-		overdraftL.setComponentAlignment(balanceT, Alignment.MIDDLE_RIGHT);
-
-		Button submit = new Button("Create account");
-		HorizontalLayout buttonL = new HorizontalLayout();
-		buttonL.setWidth("60%");
-		buttonL.addComponent(submit);
-		submit.setWidth("100%");
-
-		submit.addClickListener(new Button.ClickListener()
-		{
-			public void buttonClick(ClickEvent event)
-			{
-				if (Boolean.FALSE.equals(edit))
-				{
-					String temp = createNewAccount();
-					if (temp.startsWith("-1"))
-					{
-						event.getButton()
-								.setCaption("Create new account failed");
-					}
-					else
-					{
-						event.getButton().setCaption(
-								"Create new account successful for account "
-										+ temp);
-					}
-				}
-				else
-				{
-
-					if (!editAccount())
-					{
-						event.getButton().setCaption(EDITING_STRING
-								+ a.getAccountNumber() + " failed");
-					}
-					else
-					{
-						event.getButton().setCaption(EDITING_STRING
-								+ a.getAccountNumber() + " successful");
-					}
-
-				}
-			}
-		});
-
-		this.addComponent(cusNumL);
-		this.addComponent(typeL);
-		this.addComponent(overdraftL);
-		this.addComponent(buttonL);
-
-		this.setComponentAlignment(buttonL, Alignment.MIDDLE_CENTER);
-		this.setComponentAlignment(cusNumL, Alignment.MIDDLE_CENTER);
-		this.setComponentAlignment(typeL, Alignment.MIDDLE_CENTER);
-		this.setComponentAlignment(overdraftL, Alignment.MIDDLE_CENTER);
-
 	}
 
 
