@@ -135,6 +135,10 @@ public class AccountsResource extends HBankDataAccess
 	private static final String JSON_ACCOUNTS = "accounts";
 
 	private static final String JSON_ERROR_MSG = "errorMessage";
+	
+	private static final int MAXIMUM_ACCOUNTS_PER_CUSTOMER = 10;
+	
+	private static final int CUSTOMER_NUMBER_LENGTH = 10;
 
 
 	public AccountsResource()
@@ -249,7 +253,7 @@ public class AccountsResource extends HBankDataAccess
 
 		// Does the customer have ten or more accounts?
 
-		if (accountCount >= 10)
+		if (accountCount >= MAXIMUM_ACCOUNTS_PER_CUSTOMER)
 		{
 			error = new JSONObject();
 			error.put(JSON_ERROR_MSG,
@@ -688,7 +692,7 @@ public class AccountsResource extends HBankDataAccess
 		}
 		StringBuilder myStringBuilder = new StringBuilder();
 
-		for (int i = customerNumber.toString().length(); i < 10; i++)
+		for (int i = customerNumber.toString().length(); i < CUSTOMER_NUMBER_LENGTH; i++)
 		{
 			myStringBuilder.append('0');
 		}
