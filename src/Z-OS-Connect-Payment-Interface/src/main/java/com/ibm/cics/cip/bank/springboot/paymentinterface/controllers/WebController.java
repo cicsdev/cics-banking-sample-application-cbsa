@@ -119,7 +119,7 @@ public class WebController implements WebMvcConfigurer
 
 			// Otherwise...
 		}
-		catch (InsufficientFundsException | InvalidAccountTypeException e)
+		catch (AccountNotFoundException | InsufficientFundsException | InvalidAccountTypeException e)
 		{
 			log.info(e.toString());
 			model.addAttribute(LARGE_TEXT, PAYMENT_ERROR);
@@ -149,10 +149,12 @@ public class WebController implements WebMvcConfigurer
 
 
 	public static void checkIfResponseValidDbcr(PaymentInterfaceJson response)
-			throws InsufficientFundsException, InvalidAccountTypeException
+			throws InsufficientFundsException, InvalidAccountTypeException, AccountNotFoundException
 	{
 		switch (Integer.parseInt(response.getPAYDBCR().getCommFailCode()))
 		{
+		case 1:
+			throw new AccountNotFoundException();
 		case 3:
 			throw new InsufficientFundsException();
 		case 4:
@@ -194,6 +196,23 @@ class InvalidAccountTypeException extends Exception
 	public InvalidAccountTypeException()
 	{
 		super("Payment rejected: Invalid account type.");
+	}
+}
+
+class AccountNotFoundException extends Exception
+{
+
+	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
+
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+
+
+	public AccountNotFoundException()
+	{
+		super("Payment rejected: Account does not exist.");
 	}
 }
 
