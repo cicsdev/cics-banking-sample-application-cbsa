@@ -1,7 +1,7 @@
 # cics-banking-sample-application-cbsa
 The **C**ICS **B**ank **S**ample **A**pplication (CBSA) is an application which simulates the operation of a bank, from the point of view of the Bank Teller. CBSA has multiple uses 
 here are a few examples:
-  - CBSA can be used as a teaching/learning aid, as all source code is provided. It demonstrates how various technologies can be integrated together; CICS, COBOL, BMS, Db2, SQL, Java, Liberty, SpringBoot etc. 
+  - CBSA can be used as a teaching/learning aid, as all source code is provided. It demonstrates how various technologies can be integrated together; CICS, COBOL, BMS, Db2, SQL, Java, Liberty, Spring Boot etc. 
   - CBSA provides an example of a traditionally written CICS application that has been extended over time, and is structured in a way that is recognisable to most CICS TS customers - so 
     it can be used a conversation piece for discussions around the application development lifecycle.
   - CBSA can be used straight out of the box for testing purposes. For example: the testing of CICS interactions, or for testing verification/validation/interaction of IBM and vendor tool offerings.
@@ -58,7 +58,7 @@ The interfaces are designed to exploit the underlying banking functionality, whi
 - Java 8 or later
 - Apache Maven on the workstation (to utilise the Customer Services and Payment interfaces)
 - Various VSAM files (set up and configured during the installation process)
-- A zOS Connect server (if the RESTful API or the Customer Services or Payment interfaces are required)
+- A z/OS Connect server (if the RESTful API or the Customer Services or Payment interfaces are required)
 
 
 ## Downloading
