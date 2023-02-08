@@ -227,9 +227,9 @@ Start the command prompt.
 
 Change directory to the cics-banking-sample-application-cbsa/src/webui/ folder
 
-At this point we are missing the JARs for the IBM Record Generator(IRG) and the IBM JZOS toolkit. 
+At this point we are missing the JARs for the IBM Record Generator for Java (IRG) and the IBM JZOS toolkit. 
 
-You will need to go to the following URL to download the Record Generator:
+You will need to go to the following URL to download the IBM Record Generator for Java:
 
 > https://ibm.github.io/mainframe-downloads/IBM-Record-Generator-for-Java.html
 
@@ -237,11 +237,11 @@ Issue the following command from the command line:
 
 mvn install:install-file -Dfile="*download location*/ibm-recgen/ibm-recgen.jar" -DgroupId=ibm.recgen -DartifactId=ibm-recgen -Dversion=1.0.0 -Dpackaging=jar
 
-Then you need to goto your installation of Java, typically this can be found in:
+Then you need to goto your installation of IBM Java for z/OS, typically this can be found in:
 
 > /usr/lpp/java/lib/ext
 
-Issue the following command from the command line:
+Issue the following command from the command line to add the IBM JZOS toolkit JAR:
 
 > mvn install:install-file -Dfile="*download location*/ibmjzos.jar" -DgroupId=jzos -DartifactId=ibmjzos -Dversion=1.0.0 -Dpackaging=jar
 
