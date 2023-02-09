@@ -620,7 +620,7 @@ public class WebController implements WebMvcConfigurer
 			checkIfResponseValidUpdateAcc(responseObj);
 
 			// If successful...
-			model.addAttribute(LARGE_TEXT, "Account updated");
+			model.addAttribute(LARGE_TEXT, "");
 			model.addAttribute(SMALL_TEXT, responseObj.toPrettyString());
 
 			// Otherwise...
@@ -718,7 +718,7 @@ public class WebController implements WebMvcConfigurer
 			checkIfResponseValidUpdateCust(responseObj);
 
 			// If successful...
-			model.addAttribute(LARGE_TEXT, "Account updated");
+			model.addAttribute(LARGE_TEXT, "Customer updated");
 			model.addAttribute(SMALL_TEXT, responseObj.toPrettyString());
 
 			// Otherwise... 

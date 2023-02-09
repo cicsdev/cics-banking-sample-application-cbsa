@@ -72,7 +72,6 @@ public class CustList extends VerticalLayout
 
 	int next;
 
-	private String welcome = "Welcome";
 
 
 	public CustList(UI ui, Welcome back)
@@ -376,7 +375,7 @@ public class CustList extends VerticalLayout
 
 				public void buttonClick(ClickEvent event)
 				{
-					ui.setContent(new AccList(ui, new Welcome(ui, welcome),
+					ui.setContent(new AccList(ui, new Welcome(ui, ""),
 							cList.getCustomer(temp)));
 				}
 			});
@@ -390,7 +389,7 @@ public class CustList extends VerticalLayout
 
 				public void buttonClick(ClickEvent event)
 				{
-					ui.setContent(new CustomerUI(ui, new Welcome(ui, welcome),
+					ui.setContent(new CustomerUI(ui, new Welcome(ui, ""),
 							cList.getCustomer(temp)));
 				}
 			});

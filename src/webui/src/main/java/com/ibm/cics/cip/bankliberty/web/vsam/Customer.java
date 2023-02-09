@@ -514,17 +514,6 @@ public class Customer
 		byte[] key = buildKey(Integer.valueOf(customer.getSortCode()),
 				Long.valueOf(customer.getId()));
 
-		String keyString = new String(key);
-		try
-		{
-			key = keyString.getBytes(CODEPAGE);
-		}
-		catch (UnsupportedEncodingException e2)
-		{
-			logger.severe(e2.getLocalizedMessage());
-			logger.exiting(this.getClass().getName(), UPDATE_CUSTOMER, null);
-			return null;
-		}
 		try
 		{
 			customerFile.readForUpdate(key, holder);

@@ -200,7 +200,6 @@ public class Customer
 			}
 			catch (IOException e)
 			{
-				myCustomerResponse.close();
 				return false;
 			}
 
@@ -211,14 +210,12 @@ public class Customer
 			this.setSortcode((String) myCustomer.get(JSON_SORT_CODE));
 			String customerNoString = (String) myCustomer.get(JSON_ID);
 			this.setCustomerNumber(customerNoString);
-
 		}
 		else
 		{
-			myCustomerResponse.close();
 			return false;
 		}
-		myCustomerResponse.close();
+
 		return true;
 	}
 
@@ -243,7 +240,7 @@ public class Customer
 			catch (IOException e)
 			{
 				logger.log(Level.SEVERE, e::toString);
-				myCustomerResponse.close();
+
 				return false;
 			}
 
@@ -291,27 +288,21 @@ public class Customer
 			{
 				myCustomer = JSONObject.parse(myCustomerString);
 
+				this.setDob(sortOutDate(
+						(String) myCustomer.get(JSON_DATE_OF_BIRTH)));
+				this.setAddress((String) myCustomer.get(JSON_CUSTOMER_ADDRESS));
+				this.setName((String) myCustomer.get(JSON_CUSTOMER_NAME));
+				this.setSortcode((String) myCustomer.get(JSON_SORT_CODE));
 
-
-			this.setDob(
-					sortOutDate((String) myCustomer.get(JSON_DATE_OF_BIRTH)));
-			this.setAddress((String) myCustomer.get(JSON_CUSTOMER_ADDRESS));
-			this.setName((String) myCustomer.get(JSON_CUSTOMER_NAME));
-			this.setSortcode((String) myCustomer.get(JSON_SORT_CODE));
-
-			String customerNoString = (String) myCustomer.get(JSON_ID);
-			this.setCustomerNumber(customerNoString);
-			return customerNoString;
+				String customerNoString = (String) myCustomer.get(JSON_ID);
+				this.setCustomerNumber(customerNoString);
+				return customerNoString;
 			}
 			catch (IOException e)
 			{
 				logger.log(Level.SEVERE, e::toString);
-				myCustomerResponse.close();
+
 				return "-1";
-			}
-			finally
-			{
-				myCustomerResponse.close();
 			}
 		}
 		else
@@ -351,7 +342,7 @@ public class Customer
 			catch (IOException e)
 			{
 				logger.log(Level.SEVERE, e::toString);
-				myCustomerResponse.close();
+
 				return false;
 			}
 

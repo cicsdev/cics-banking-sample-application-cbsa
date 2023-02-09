@@ -736,7 +736,7 @@ public class AccList extends VerticalLayout
 
 				public void buttonClick(ClickEvent event)
 				{
-					ui.setContent(new AccountUI(ui, new Welcome(ui, "Welcome"),
+					ui.setContent(new AccountUI(ui, new Welcome(ui, ""),
 							aList.getAccount(temp)));
 				}
 			});

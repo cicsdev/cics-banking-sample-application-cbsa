@@ -40,7 +40,7 @@ public class AccountUI extends VerticalLayout
 
 	private transient Account a;
 
-	private UI ui;
+//	private UI ui;
 
 	private Boolean edit = false;
 
@@ -105,7 +105,7 @@ public class AccountUI extends VerticalLayout
 		// ui is passed in so that containers can be added to it later using
 		// this.addComponent()
 		// acc is passed in so that it can be used to populate the components
-		this.ui = ui;
+//		this.ui = ui;
 		HbHeader header = new HbHeader(ui, back);
 		this.addComponent(header);
 		this.setExpandRatio(header, 0.1f);

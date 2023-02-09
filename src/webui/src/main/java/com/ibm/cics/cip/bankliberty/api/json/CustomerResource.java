@@ -266,7 +266,7 @@ public class CustomerResource
 
 		Integer inputSortCode = Integer.parseInt(customer.getSortCode());
 
-		if (inputSortCode.equals(this.getSortCode()))
+		if (!inputSortCode.equals(this.getSortCode()))
 		// Sortcode invalid
 		{
 			JSONObject error = new JSONObject();
