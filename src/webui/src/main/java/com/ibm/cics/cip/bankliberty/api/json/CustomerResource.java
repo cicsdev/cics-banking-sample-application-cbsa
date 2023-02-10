@@ -859,7 +859,7 @@ public class CustomerResource
 		{
 			com.ibm.cics.cip.bankliberty.web.vsam.Customer vsamCustomer = new com.ibm.cics.cip.bankliberty.web.vsam.Customer();
 			long customerCount = vsamCustomer
-					.getCustomersCountOnly(sortCode.intValue());
+					.getCustomersCountOnly();
 			response.put(JSON_NUMBER_OF_CUSTOMERS, customerCount);
 		}
 		else

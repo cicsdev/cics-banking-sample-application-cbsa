@@ -448,6 +448,7 @@ public class Account
 			catch (IOException e)
 			{
 				logger.severe(e.toString());
+				myAccountsResponse.close();
 				return -1;
 			}
 
@@ -483,8 +484,10 @@ public class Account
 
 			this.sortcode = (String) myAccount.get(JSON_SORT_CODE);
 			this.type = (String) myAccount.get(JSON_ACCOUNT_TYPE);
+			myAccountsResponse.close();
 			return Integer.parseInt(this.accountNumber);
 		}
+		myAccountsResponse.close();
 		return -1;
 	}
 
@@ -509,6 +512,7 @@ public class Account
 			catch (IOException e)
 			{
 				logger.severe(e.toString());
+				myAccountsResponse.close();
 				return false;
 			}
 
@@ -543,8 +547,10 @@ public class Account
 			
 			this.sortcode = (String) myAccount.get(JSON_SORT_CODE);
 			this.type = (String) myAccount.get(JSON_ACCOUNT_TYPE);
+			myAccountsResponse.close();
 			return true;
 		}
+		myAccountsResponse.close();
 		return false;
 
 	}

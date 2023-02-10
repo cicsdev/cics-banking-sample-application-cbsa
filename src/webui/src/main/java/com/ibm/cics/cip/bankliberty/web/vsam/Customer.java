@@ -262,11 +262,11 @@ public class Customer
 
 		if (customerNumber == 9999999999L)
 		{
-			RecordHolder recHolder = getLastCustomer();
+			holder = getLastCustomer();
 			byte[] lastCustomerBytes;
-			if (recHolder != null)
+			if (holder != null)
 			{
-				lastCustomerBytes = recHolder.getValue();
+				lastCustomerBytes = holder.getValue();
 			}
 			else
 				return null;
@@ -284,7 +284,7 @@ public class Customer
 
 		if (customerNumber > 0 && customerNumber < 9999999999L)
 		{
-			RecordHolder holder = new RecordHolder();
+			holder = new RecordHolder();
 			byte[] key = buildKey(sortCode, customerNumber);
 			try
 			{
@@ -334,8 +334,8 @@ public class Customer
 	{
 		// The last customer in the file is accessed by reading backwards from
 		// the end
-		RecordHolder holder = new RecordHolder();
-		KeyHolder keyHolder = new KeyHolder();
+		holder = new RecordHolder();
+		keyHolder = new KeyHolder();
 
 		// We need to set the key to high values. This is awkward in Java
 		byte[] key = new byte[VSAM_KEY_LENGTH];
@@ -381,7 +381,7 @@ public class Customer
 
 		myCustomer = new CUSTOMER();
 
-		RecordHolder holder = new RecordHolder();
+		holder = new RecordHolder();
 		KeyHolder keyHolder = new KeyHolder();
 		byte[] key = buildKey(sortCode, 0);
 
@@ -505,7 +505,7 @@ public class Customer
 
 		customerFile.setName(FILENAME);
 		Customer temp;
-		RecordHolder holder = new RecordHolder();
+		holder = new RecordHolder();
 
 		Long customerNumberLong = Long.parseLong(customer.getId());
 
@@ -598,7 +598,7 @@ public class Customer
 
 		myCustomer = new CUSTOMER();
 
-		RecordHolder holder = null;
+		holder = null;
 		byte[] key = new byte[VSAM_KEY_LENGTH];
 
 		if (customerNumber == 9999999999L)
@@ -679,7 +679,7 @@ public class Customer
 
 		byte[] key = LAST_CUSTOMER.getBytes();
 
-		RecordHolder holder = new RecordHolder();
+		holder = new RecordHolder();
 
 		try
 		{
@@ -880,7 +880,7 @@ public class Customer
 			return -1;
 		}
 
-		RecordHolder holder = new RecordHolder();
+		holder = new RecordHolder();
 
 		try
 		{
@@ -952,7 +952,7 @@ public class Customer
 			return -1;
 		}
 
-		RecordHolder holder = new RecordHolder();
+		holder = new RecordHolder();
 
 		try
 		{
@@ -999,8 +999,8 @@ public class Customer
 
 		myCustomer = new CUSTOMER();
 
-		RecordHolder holder = new RecordHolder();
-		KeyHolder keyHolder = new KeyHolder();
+		holder = new RecordHolder();
+		keyHolder = new KeyHolder();
 		byte[] key = buildKey(sortCode, 0L);
 
 		// We need to convert the key to EBCDIC
@@ -1112,8 +1112,8 @@ public class Customer
 
 		myCustomer = new CUSTOMER();
 
-		RecordHolder holder = new RecordHolder();
-		KeyHolder keyHolder = new KeyHolder();
+		holder = new RecordHolder();
+		keyHolder = new KeyHolder();
 		byte[] key = buildKey(sortCode, 0);
 
 		// We need to convert the key to EBCDIC
@@ -1229,8 +1229,8 @@ public class Customer
 
 		myCustomer = new CUSTOMER();
 
-		RecordHolder holder = new RecordHolder();
-		KeyHolder keyHolder = new KeyHolder();
+		holder = new RecordHolder();
+		keyHolder = new KeyHolder();
 		byte[] key = buildKey(sortCode, 0);
 
 		// We need to convert the key to EBCDIC
@@ -1336,13 +1336,13 @@ public class Customer
 	}
 
 
-	public long getCustomersCountOnly(int sortCode)
+	public long getCustomersCountOnly()
 	{
 		logger.entering(this.getClass().getName(), GET_CUSTOMERS_COUNT_ONLY);
 
 		customerFile.setName(FILENAME);
 
-		RecordHolder holder = new RecordHolder();
+		holder = new RecordHolder();
 
 		byte[] key = buildKey(0, 9999999999L);
 		// We need to convert the key to EBCDIC
@@ -1386,8 +1386,8 @@ public class Customer
 
 		myCustomer = new CUSTOMER();
 
-		RecordHolder holder = new RecordHolder();
-		KeyHolder keyHolder = new KeyHolder();
+		holder = new RecordHolder();
+		keyHolder = new KeyHolder();
 		byte[] key = buildKey(sortCode, 0);
 
 		// We need to convert the key to EBCDIC
@@ -1486,8 +1486,8 @@ public class Customer
 
 		myCustomer = new CUSTOMER();
 
-		RecordHolder holder = new RecordHolder();
-		KeyHolder keyHolder = new KeyHolder();
+		holder = new RecordHolder();
+		keyHolder = new KeyHolder();
 		byte[] key = buildKey(Integer.valueOf(this.getSortcode()), 0L);
 
 		// We need to convert the key to EBCDIC
@@ -1600,8 +1600,8 @@ public class Customer
 
 		Integer sortCodeInteger = Integer.parseInt(this.getSortcode());
 
-		RecordHolder holder = new RecordHolder();
-		KeyHolder keyHolder = new KeyHolder();
+		holder = new RecordHolder();
+		keyHolder = new KeyHolder();
 		byte[] key = buildKey(sortCodeInteger, 0L);
 
 		// We need to convert the key to EBCDIC
@@ -1836,7 +1836,6 @@ public class Customer
 				| NotAuthorisedException | RecordNotFoundException
 				| NotOpenException e)
 		{
-			// TODO Auto-generated catch block
 			logger.log(Level.SEVERE, e.toString());
 			holder = null;
 		}

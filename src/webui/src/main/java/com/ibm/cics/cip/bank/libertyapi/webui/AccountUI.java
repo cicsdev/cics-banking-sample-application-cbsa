@@ -40,8 +40,6 @@ public class AccountUI extends VerticalLayout
 
 	private transient Account a;
 
-//	private UI ui;
-
 	private Boolean edit = false;
 
 	private TextField cusNumT;
@@ -105,7 +103,6 @@ public class AccountUI extends VerticalLayout
 		// ui is passed in so that containers can be added to it later using
 		// this.addComponent()
 		// acc is passed in so that it can be used to populate the components
-//		this.ui = ui;
 		HbHeader header = new HbHeader(ui, back);
 		this.addComponent(header);
 		this.setExpandRatio(header, 0.1f);
@@ -142,29 +139,19 @@ public class AccountUI extends VerticalLayout
 		interestT = new TextField("Interest");
 
 
-		if (acc.getAccountNumber() == null)
-		{
-			accNumT.setValue(acc.getAccountNumber());
-			cusNumT.setValue(acc.getCustomerNumber());
-		}
-		else
-		{
-			accNumT.setValue("00000000");
-			cusNumT.setValue("");
-		}
 
 		// Textfield for overdraft limit
 		overdraftT = new TextField("Overdraft Limit");
 		// Textfield for balance
 		balanceT = new TextField("Balance");
-		if(edit)
+		if(Boolean.TRUE.equals(edit))
 		{
 			title.setValue("Account Update");
 			accNumT.setValue(acc.getAccountNumber());
 			cusNumT.setValue(acc.getCustomerNumber());
 			interestT.setValue(acc.getInterestRate()
 					.setScale(2, RoundingMode.HALF_UP).toString());
-			overdraftT.setValue(Integer.valueOf(acc.getOverdraftLimit()).toString());
+			overdraftT.setValue(Integer.toString(acc.getOverdraftLimit()));
 			balanceT.setValue((acc.getActualBalance()).setScale(2, RoundingMode.HALF_UP).toString());
 		}
 		else

@@ -1,11 +1,3 @@
-/* <copyright                                     */
-/* notice="copyright-cip-java"                    */
-/* pids=""                                        */
-/* years="2016"                                   */
-/* crc="" >                                       */
-/*  (C) Copyright IBM Corp. 2016                  */
-/*  FOR IBM INTERNAL TEST PURPOSES ONLY           */
-/* </copyright>                                   */
 84363BFA8D1ACE40C6650B0CADF5C9B8.cache.js
 ClientBundle.enableInlining true
 audioElementSupport maybe

@@ -36,8 +36,6 @@ public class CustomerUI extends VerticalLayout
 
 	private transient Customer c;
 
-//	private UI ui;
-
 	private Boolean edit = false;
 
 	private TextField cusNumT;
@@ -92,7 +90,6 @@ public class CustomerUI extends VerticalLayout
 		// UI using .addComponent()
 		// cust is passed to the template - it's used to populate the relevant
 		// fields, such as customer number etc.
-//		this.ui = ui;
 		HbHeader header = new HbHeader(ui, back);
 		this.addComponent(header);
 		this.setExpandRatio(header, 0.1f);
@@ -253,7 +250,6 @@ public class CustomerUI extends VerticalLayout
 	private void createCustUI(UI ui, Welcome back)
 	{
 
-//		this.ui = ui;
 		HbHeader header = new HbHeader(ui, back);
 		this.addComponent(header);
 		this.setExpandRatio(header, 0.1f);

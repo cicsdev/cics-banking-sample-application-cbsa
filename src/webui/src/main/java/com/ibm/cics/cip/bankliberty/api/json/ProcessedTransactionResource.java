@@ -249,7 +249,7 @@ public class ProcessedTransactionResource
 		Response mySortCodeJSON = mySortCodeResource.getSortCode();
 		String mySortCode = ((String) mySortCodeJSON.getEntity()).substring(13,
 				19);
-		return Integer.getInteger(mySortCode);
+		return Integer.valueOf(mySortCode);
 	}
 
 

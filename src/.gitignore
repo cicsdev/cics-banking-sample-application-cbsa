@@ -3,3 +3,4 @@
 *.jar
 *.war
 appscan-config.xml
+scanIt*.bat
