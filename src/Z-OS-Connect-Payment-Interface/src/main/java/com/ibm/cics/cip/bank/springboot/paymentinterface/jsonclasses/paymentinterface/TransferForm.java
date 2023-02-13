@@ -1,9 +1,6 @@
-/*
- *
- *    Copyright IBM Corp. 2022
- *
- *
- */
+/*                                                                        */
+/* Copyright IBM Corp. 2023                                               */
+/*                                                                        */
 package com.ibm.cics.cip.bank.springboot.paymentinterface.jsonclasses.paymentinterface;
 
 import javax.validation.constraints.NotNull;
@@ -12,7 +9,7 @@ import javax.validation.constraints.Size;
 public class TransferForm
 {
 
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
+
 
 	// accno
 	@NotNull

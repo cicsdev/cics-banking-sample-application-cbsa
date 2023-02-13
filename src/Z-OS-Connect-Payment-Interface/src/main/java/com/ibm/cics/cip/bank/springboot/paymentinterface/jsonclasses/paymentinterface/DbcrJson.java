@@ -1,9 +1,6 @@
-/*
- *
- *    Copyright IBM Corp. 2022
- *
- *
- */
+/*                                                                        */
+/* Copyright IBM Corp. 2023                                               */
+/*                                                                        */
 package com.ibm.cics.cip.bank.springboot.paymentinterface.jsonclasses.paymentinterface;
 
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -13,7 +10,7 @@ import com.ibm.cics.cip.bank.springboot.paymentinterface.JsonPropertyNamingStrat
 public class DbcrJson
 {
 
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
+
 
 	private String commAccno;
 

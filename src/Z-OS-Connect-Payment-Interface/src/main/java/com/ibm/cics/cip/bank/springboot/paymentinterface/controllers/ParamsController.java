@@ -1,9 +1,6 @@
-/*
- *
- *    Copyright IBM Corp. 2022
- *
- *
- */
+/*                                                                        */
+/* Copyright IBM Corp. 2023                                               */
+/*                                                                        */
 package com.ibm.cics.cip.bank.springboot.paymentinterface.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -26,7 +23,7 @@ import org.springframework.web.reactive.function.client.WebClient.ResponseSpec;
 public class ParamsController
 {
 
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
+
 
 	private static final Logger log = LoggerFactory
 			.getLogger(ParamsController.class);

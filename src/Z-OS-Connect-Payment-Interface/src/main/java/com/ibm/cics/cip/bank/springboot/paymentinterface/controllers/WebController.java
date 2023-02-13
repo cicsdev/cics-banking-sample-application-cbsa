@@ -1,9 +1,6 @@
-/*
- *
- *    Copyright IBM Corp. 2022
- *
- *
- */
+/*                                                                        */
+/* Copyright IBM Corp. 2023                                               */
+/*                                                                        */
 package com.ibm.cics.cip.bank.springboot.paymentinterface.controllers;
 
 import javax.validation.Valid;
@@ -37,7 +34,6 @@ import com.ibm.cics.cip.bank.springboot.paymentinterface.jsonclasses.paymentinte
 public class WebController implements WebMvcConfigurer
 {
 
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
 	private static final Logger log = LoggerFactory
 			.getLogger(WebController.class);
@@ -168,7 +164,7 @@ public class WebController implements WebMvcConfigurer
 class InsufficientFundsException extends Exception
 {
 
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
+
 
 	/**
 	 *
@@ -185,7 +181,7 @@ class InsufficientFundsException extends Exception
 class InvalidAccountTypeException extends Exception
 {
 
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
+
 
 	/**
 	 *
@@ -202,7 +198,7 @@ class InvalidAccountTypeException extends Exception
 class AccountNotFoundException extends Exception
 {
 
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
+
 
 	/**
 	 *
@@ -219,7 +215,7 @@ class AccountNotFoundException extends Exception
 class TooManyAccountsException extends Exception
 {
 
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
+
 
 	/**
 	 *
@@ -237,7 +233,6 @@ class TooManyAccountsException extends Exception
 class ItemNotFoundException extends Exception
 {
 
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
 	/**
 	 *

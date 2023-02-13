@@ -1,9 +1,6 @@
-/*
- *
- *    Copyright IBM Corp. 2022
- *
- *
- */
+/*                                                                        */
+/* Copyright IBM Corp. 2023                                               */
+/*                                                                        */
 package com.ibm.cics.cip.bank.springboot.paymentinterface.jsonclasses.paymentinterface;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,7 +11,6 @@ import com.ibm.cics.cip.bank.springboot.paymentinterface.JsonPropertyNamingStrat
 public class OriginJson
 {
 
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
 	@JsonProperty("CommApplid")
 	private String commApplid;

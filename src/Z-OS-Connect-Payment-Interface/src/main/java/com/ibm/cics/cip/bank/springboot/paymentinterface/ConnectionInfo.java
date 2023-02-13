@@ -1,9 +1,6 @@
-/*
- *
- *    Copyright IBM Corp. 2022
- *
- *
- */
+/*                                                                        */
+/* Copyright IBM Corp. 2023                                               */
+/*                                                                        */
 package com.ibm.cics.cip.bank.springboot.paymentinterface;
 
 import com.beust.jcommander.Parameter;
@@ -11,7 +8,7 @@ import com.beust.jcommander.Parameter;
 public class ConnectionInfo
 {
 
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
+
 
 
 	private ConnectionInfo()

@@ -1,14 +1,12 @@
-/*
- *
- *    Copyright IBM Corp. 2022
- * *
- */
+/*                                                                        */
+/* Copyright IBM Corp. 2023                                               */
+/*                                                                        */
 package com.ibm.cics.cip.bank.springboot.paymentinterface;
 
 public class OutputFormatUtils
 {
 
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
+
 
 
 	private OutputFormatUtils()

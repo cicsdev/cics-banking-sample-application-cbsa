@@ -1,9 +1,6 @@
-/*
- *
- *    Copyright IBM Corp. 2022
- *
- *
- */
+/*                                                                        */
+/* Copyright IBM Corp. 2023                                               */
+/*                                                                        */
 package com.ibm.cics.cip.bank.springboot.paymentinterface;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
@@ -14,7 +11,7 @@ import com.fasterxml.jackson.databind.introspect.AnnotatedMethod;
 public class JsonPropertyNamingStrategy extends PropertyNamingStrategy
 {
 
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
+
 
 	/**
 	 *
