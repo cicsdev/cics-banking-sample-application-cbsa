@@ -1,6 +1,6 @@
 /*
  *
- *    Copyright IBM Corp. 2022
+ *    Copyright IBM Corp. 2023
  *
  */
 package com.ibm.cics.cip.bankliberty.api.json;
@@ -25,8 +25,6 @@ public class CreditScore
 	{
 		throw new IllegalStateException("Static only");
 	}
-
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
 	private static Logger logger = Logger
 			.getLogger("com.ibm.cics.cip.bankliberty.api.json");

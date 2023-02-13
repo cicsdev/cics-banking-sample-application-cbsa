@@ -1,6 +1,6 @@
 /*
  *
- *    Copyright IBM Corp. 2022
+ *    Copyright IBM Corp. 2023
  *
  *
  */
@@ -24,7 +24,6 @@ import com.vaadin.ui.UI;
 public class Com_ibm_cics_cip_bank_libertyapi_webuiUI extends UI
 {
 
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 	
 	@WebServlet(value = "/*", asyncSupported = true)
 	@VaadinServletConfiguration(productionMode = false, ui = Com_ibm_cics_cip_bank_libertyapi_webuiUI.class)

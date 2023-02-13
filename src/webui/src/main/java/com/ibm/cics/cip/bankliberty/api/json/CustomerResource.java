@@ -1,6 +1,6 @@
 /*
  *
- *    Copyright IBM Corp. 2022
+ *    Copyright IBM Corp. 2023
  *
  */
 
@@ -34,7 +34,6 @@ import com.ibm.json.java.JSONObject;
 public class CustomerResource
 {
 
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
 	/**
 	 * This class describes the methods of the Customer Resource

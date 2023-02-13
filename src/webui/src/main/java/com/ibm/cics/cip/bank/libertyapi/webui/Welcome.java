@@ -1,6 +1,6 @@
 /*
  *
- *    Copyright IBM Corp. 2022
+ *    Copyright IBM Corp. 2023
  *
  *
  */
@@ -39,8 +39,6 @@ import com.vaadin.ui.Button.ClickEvent;
 
 public class Welcome extends VerticalLayout
 {
-
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
 	/**
 	 * This screen's UI

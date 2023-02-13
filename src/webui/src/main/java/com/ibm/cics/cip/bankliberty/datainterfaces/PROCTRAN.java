@@ -1,6 +1,6 @@
 /*
  *
- *    Copyright IBM Corp. 2022
+ *    Copyright IBM Corp. 2023
  *
  */
 package com.ibm.cics.cip.bankliberty.datainterfaces;
@@ -13,7 +13,6 @@ import java.math.*;
 public class PROCTRAN
 {
 
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
 	protected static CobolDatatypeFactory factory = new CobolDatatypeFactory();
 	static

@@ -1,6 +1,6 @@
 /*
  *
- *    Copyright IBM Corp. 2022
+ *    Copyright IBM Corp. 2023
  *
  */
 
@@ -25,7 +25,6 @@ import com.ibm.json.java.JSONObject;
 public class Account
 {
 
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
 	private static Logger logger = Logger
 			.getLogger("com.ibm.cics.cip.bankliberty.webui.data_access");

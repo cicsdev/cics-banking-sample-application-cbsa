@@ -1,6 +1,6 @@
 /*
  *
- *    Copyright IBM Corp. 2022
+ *    Copyright IBM Corp. 2023
  *
  */
 
@@ -39,8 +39,6 @@ import com.ibm.json.java.JSONObject;
 @Path("/companyName")
 public class CompanyNameResource
 {
-
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
 	static String companyNameString = null;
 

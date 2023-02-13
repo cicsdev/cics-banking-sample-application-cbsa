@@ -1,6 +1,6 @@
 /*
  *
- *    Copyright IBM Corp. 2022
+ *    Copyright IBM Corp. 2023
  *
  *
  */
@@ -29,8 +29,6 @@ import java.util.logging.LogManager;
 
 public class AccList extends VerticalLayout
 {
-
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
 	private static final long serialVersionUID = 1L;
 

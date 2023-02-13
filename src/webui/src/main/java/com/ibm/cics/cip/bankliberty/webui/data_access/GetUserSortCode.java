@@ -1,6 +1,6 @@
 /*
  *
- *    Copyright IBM Corp. 2022
+ *    Copyright IBM Corp. 2023
  *
  */
 package com.ibm.cics.cip.bankliberty.webui.data_access;
@@ -11,8 +11,6 @@ import com.ibm.jzos.fields.*;
 
 public class GetUserSortCode
 {
-
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
 	protected static CobolDatatypeFactory factory = new CobolDatatypeFactory();
 	static

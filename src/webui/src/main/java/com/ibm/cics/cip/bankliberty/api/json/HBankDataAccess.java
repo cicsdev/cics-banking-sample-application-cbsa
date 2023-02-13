@@ -1,6 +1,6 @@
 /*
  *
- *    Copyright IBM Corp. 2022
+ *    Copyright IBM Corp. 2023
  *
  */
 package com.ibm.cics.cip.bankliberty.api.json;
@@ -24,14 +24,13 @@ import com.ibm.cics.server.RolledBackException;
 import com.ibm.cics.server.Task;
 
 /**
- * This class is used to hold a HashTable which in turn holds DB2 Connections
+ * This class is used to hold a HashTable which in turn holds Db2 Connections
  * 
  */
 
 public class HBankDataAccess
 {
 
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
 	protected Connection conn = null;
 

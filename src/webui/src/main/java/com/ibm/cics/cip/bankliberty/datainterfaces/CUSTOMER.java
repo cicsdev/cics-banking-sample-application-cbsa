@@ -1,6 +1,6 @@
 /*
  *
- *    Copyright IBM Corp. 2022
+ *    Copyright IBM Corp. 2023
  *
  *
  */
@@ -13,7 +13,6 @@ import com.ibm.jzos.fields.*;
 public class CUSTOMER
 {
 
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
 	protected static CobolDatatypeFactory factory = new CobolDatatypeFactory();
 	static

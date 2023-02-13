@@ -1,6 +1,6 @@
 /*
  *
- *    Copyright IBM Corp. 2022
+ *    Copyright IBM Corp. 2023
  *
  */
 package com.ibm.cics.cip.bankliberty.api.json;
@@ -17,7 +17,6 @@ import javax.ws.rs.FormParam;
 public class DebitCreditAccountJSON
 {
 
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
 	@FormParam("amount")
 	BigDecimal amount;

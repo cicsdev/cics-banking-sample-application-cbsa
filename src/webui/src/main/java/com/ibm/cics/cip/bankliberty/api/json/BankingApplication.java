@@ -5,7 +5,7 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 /**
- * Copyright IBM Corp. 2016, 2022
+ * Copyright IBM Corp. 2023
  *
  */
 

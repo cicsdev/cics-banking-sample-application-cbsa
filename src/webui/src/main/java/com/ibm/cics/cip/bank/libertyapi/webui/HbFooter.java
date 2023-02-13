@@ -1,6 +1,6 @@
 /*
  *
- *    Copyright IBM Corp. 2022
+ *    Copyright IBM Corp. 2023
  *
  *
  */
@@ -16,7 +16,6 @@ import com.vaadin.ui.HorizontalLayout;
 public class HbFooter extends HorizontalLayout
 {
 
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
 	private static final long serialVersionUID = -3638937118776518241L;
 
