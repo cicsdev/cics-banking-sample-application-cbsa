@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="zosconnect" jsonWrapped="false" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/PUT" version="8.0.5.0" xmlns:map="http://www.ibm.com/zosConnect/2.0/mapping/PUT">
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Copyright IBM Corp. 2023   -->
+<mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="zosconnect" jsonWrapped="false" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/PUT" version="8.0.5.0" xmlns:map="http://www.ibm.com/zosConnect/2.0/mapping/PUT">
     <inlinedXMLSchema targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/PUT"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/PUT" xmlns:tns="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/PUT">  
   <xsd:element name="UpdCust" type="tns:UpdCust"/>  
   <xsd:complexType name="UpdCust">  

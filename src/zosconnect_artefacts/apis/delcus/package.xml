@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--  Copyright IBM Corp. 2023   -->
 <zosConnectApi xmlns="http://www.ibm.com/zosConnect/2.0/zosConnectApi" id="delcus">
     <apiSpec title="delcus" basePath="/delcus" description="Deletes a customer and their accounts on the CScustdel Service" version="1.0.0">
         <path relativePath="/remove/{custno}">

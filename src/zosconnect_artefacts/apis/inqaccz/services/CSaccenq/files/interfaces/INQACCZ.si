@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--  Copyright IBM Corp. 2023   -->
 <ns2:message xmlns:ns2="http://www.ibm.com/ims/Transaction" transactionCode="" messageName="INQACCZ" direction="0" serviceType="CICS_COMM_AREA">
     <message id="1" name="INQACCZ">
         <segment id="1" name="COMMAREA" originalName="COMMAREA">

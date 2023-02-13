@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="zosconnect" jsonWrapped="false" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/GET" version="8.0.5.0" xmlns:map="http://www.ibm.com/zosConnect/2.0/mapping/GET">
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Copyright IBM Corp. 2023   --><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="zosconnect" jsonWrapped="false" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/GET" version="8.0.5.0" xmlns:map="http://www.ibm.com/zosConnect/2.0/mapping/GET">
     <inlinedXMLSchema targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/GET"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/GET" xmlns:tns="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/GET">  
   <xsd:element name="InqCustZ" type="tns:InqCustZ"/>  
   <xsd:complexType name="InqCustZ">  

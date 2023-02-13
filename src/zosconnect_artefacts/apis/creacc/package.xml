@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--  Copyright IBM Corp. 2023   -->
 <zosConnectApi xmlns="http://www.ibm.com/zosConnect/2.0/zosConnectApi" id="creacc">
     <apiSpec title="creacc" basePath="/creacc" description="Creates an account on the CSacccre Service" version="1.0.0">
         <path relativePath="/insert">

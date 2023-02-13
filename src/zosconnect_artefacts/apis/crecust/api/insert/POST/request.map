@@ -8,7 +8,7 @@
 	jsonWrapped="false"
 	 
 	>
-
+<!--  Copyright IBM Corp. 2023   -->
 	<inlinedXMLSchema targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/POST"><![CDATA[
 
 	<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/POST" xmlns:tns="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/POST">

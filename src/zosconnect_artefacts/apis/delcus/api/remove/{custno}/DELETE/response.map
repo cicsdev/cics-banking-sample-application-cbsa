@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="zosconnect" jsonWrapped="false" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/DELETE" version="8.0.5.0" xmlns:map="http://www.ibm.com/zosConnect/2.0/mapping/DELETE">
+<?xml version="1.0" encoding="UTF-8"?><!--  Copyright IBM Corp. 2023   --><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="zosconnect" jsonWrapped="false" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/DELETE" version="8.0.5.0" xmlns:map="http://www.ibm.com/zosConnect/2.0/mapping/DELETE">
     <inlinedXMLSchema targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/input/DELETE"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/input/DELETE" xmlns:tns="http://www.ibm.com/zosConnect/2.0/mapping/JSON/input/DELETE">  
   <xsd:element name="DelCus" type="tns:DelCus"/>  
   <xsd:complexType name="DelCus">  

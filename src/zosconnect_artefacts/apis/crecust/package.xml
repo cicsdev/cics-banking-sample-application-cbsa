@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--  Copyright IBM Corp. 2023   -->
 <zosConnectApi xmlns="http://www.ibm.com/zosConnect/2.0/zosConnectApi" id="crecust">
     <apiSpec title="crecust" basePath="/crecust" description="Creates a customer on the CScustcre Service" version="1.0.0">
         <path relativePath="/insert">
