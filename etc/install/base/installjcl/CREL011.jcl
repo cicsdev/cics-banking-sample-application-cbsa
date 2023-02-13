@@ -1,9 +1,6 @@
-//* Licensed Materials - Property of IBM
 //*
-//* (c) Copyright IBM Corp. 2020.
+//* Copyright IBM Corp. 2023       
 //*
-//* US Government Users Restricted Rights - Use, duplication or
-//* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
 //*CREL011 JOB ,,CLASS=A,MSGCLASS=H,                                    00000113
 //*  NOTIFY=&SYSUID,                                                    00000200
 //*  MSGLEVEL=(1,1)                  

@@ -1,8 +1,6 @@
-//*********************************************************************
-//*                                                                   *
-//*   Copyright IBM Corp. 2022                                        *
-//*                                                                   *
-//*********************************************************************
+//*
+//* Copyright IBM Corp. 2023       
+//*
 //TEST JOB ,CLASS=A,MSGCLASS=A,NOTIFY=&SYSUID
 //*
 // JCLLIB ORDER=CBSA.CICSBSA.BUILDJCL

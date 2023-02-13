@@ -1,10 +1,6 @@
-* Licensed Materials - Property of IBM
 *
-* (c) Copyright IBM Corp. 2015,2020.
-*
-* US Government Users Restricted Rights - Use, duplication or 
-* disclosure restricted by GSA ADP Schedule Contract 
-* with IBM Corp.    
+* Copyright IBM Corp. 2023       
+*  
     INCLUDE CBSAMOD(INQCUST)
     ENTRY INQCUST
     NAME INQCUST(R)

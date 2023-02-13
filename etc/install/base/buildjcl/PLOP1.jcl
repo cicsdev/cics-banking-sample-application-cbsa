@@ -1,8 +1,6 @@
-//*********************************************************************
-//*                                                                   *
-//*   Copyright IBM Corp. 2022                                        *
-//*                                                                   *
-//*********************************************************************
+//*
+//* Copyright IBM Corp. 2023       
+//*
 //PLOP1 JOB ,CLASS=A,MSGCLASS=A,NOTIFY=&SYSUID,TYPRUN=SCAN
 //*
 // JCLLIB ORDER=CBSA.CICSBSA.BUILDJCL
