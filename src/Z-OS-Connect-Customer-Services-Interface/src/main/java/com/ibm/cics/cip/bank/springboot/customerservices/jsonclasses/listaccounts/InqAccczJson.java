@@ -1,9 +1,6 @@
-/*
- *
- *    Copyright IBM Corp. 2022
- *
- *
- */
+/*                                                                        */
+/* Copyright IBM Corp. 2023                                               */
+/*                                                                        */
 package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.listaccounts;
 
 import java.util.List;
@@ -16,7 +13,7 @@ import com.ibm.cics.cip.bank.springboot.customerservices.JsonPropertyNamingStrat
 public class InqAccczJson
 {
 
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
+
 
 	@JsonProperty("CommFailCode")
 	private int commFailCode;

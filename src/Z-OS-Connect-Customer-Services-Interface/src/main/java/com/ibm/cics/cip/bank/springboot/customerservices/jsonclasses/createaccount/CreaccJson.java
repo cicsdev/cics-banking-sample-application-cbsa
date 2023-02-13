@@ -1,9 +1,6 @@
-/*
- *
- *    Copyright IBM Corp. 2022
- *
- *
- */
+/*                                                                        */
+/* Copyright IBM Corp. 2023                                               */
+/*                                                                        */
 package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.createaccount;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,7 +11,7 @@ import com.ibm.cics.cip.bank.springboot.customerservices.JsonPropertyNamingStrat
 public class CreaccJson
 {
 
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
+
 
 	@JsonProperty("CommAccType")
 	private String commAccType;

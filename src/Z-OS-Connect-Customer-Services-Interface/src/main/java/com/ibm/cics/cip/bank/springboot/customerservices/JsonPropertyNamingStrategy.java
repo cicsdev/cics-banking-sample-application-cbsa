@@ -1,9 +1,6 @@
-/*
- *
- *    Copyright IBM Corp. 2022
- *
- *
- */
+/*                                                                        */
+/* Copyright IBM Corp. 2023                                               */
+/*                                                                        */
 package com.ibm.cics.cip.bank.springboot.customerservices;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
@@ -19,7 +16,7 @@ public class JsonPropertyNamingStrategy extends PropertyNamingStrategy
 	 */
 	private static final long serialVersionUID = -5634229355538397996L;
 
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
+
 
 
 	@Override

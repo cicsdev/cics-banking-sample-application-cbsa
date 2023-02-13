@@ -1,9 +1,6 @@
-/*
- *
- *    Copyright IBM Corp. 2022
- *
- *
- */
+/*                                                                        */
+/* Copyright IBM Corp. 2023                                               */
+/*                                                                        */
 package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.createaccount;
 
 import javax.validation.constraints.*;
@@ -11,7 +8,6 @@ import javax.validation.constraints.*;
 public class CreateAccountForm
 {
 
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
 	@NotNull
 	@Size(max = 8)

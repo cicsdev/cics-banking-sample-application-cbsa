@@ -1,9 +1,6 @@
-/*
- *
- *    Copyright IBM Corp. 2022
- *
- *
- */
+/*                                                                        */
+/* Copyright IBM Corp. 2023                                               */
+/*                                                                        */
 package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.customerenquiry;
 
 import javax.validation.constraints.NotNull;
@@ -12,7 +9,6 @@ import javax.validation.constraints.Size;
 public class CustomerEnquiryForm
 {
 
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
 	@NotNull
 	@Size(min = 1, max = 10)

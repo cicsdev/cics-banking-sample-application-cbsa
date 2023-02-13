@@ -1,9 +1,6 @@
-/*
- *
- *    Copyright IBM Corp. 2022
- *
- *
- */
+/*                                                                        */
+/* Copyright IBM Corp. 2023                                               */
+/*                                                                        */
 package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.customerenquiry;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,7 +11,6 @@ import com.ibm.cics.cip.bank.springboot.customerservices.JsonPropertyNamingStrat
 public class InqCustDob
 {
 
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
 
 	@JsonProperty("InqCustDobYyyy")
 	private int inqcustDobYyyy;

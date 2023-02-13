@@ -5,4 +5,4 @@ The project is written in Java with Spring Boot, with Thymeleaf templates poweri
 
 The controllers folder contains a class with all page mappings, and a small class providing a utility to initiate a payments transfer using an GET request.
 
-*(Max sizes of values (i.e. Account number) can be quickly changed by using find and replace on `%8s` , `leadingZeroes(8` and `max = 8` )*
+

@@ -1,9 +1,6 @@
-/*
- *
- *    Copyright IBM Corp. 2022
- *
- *
- */
+/*                                                                        */
+/* Copyright IBM Corp. 2023                                               */
+/*                                                                        */
 package com.ibm.cics.cip.bank.springboot.customerservices;
 
 import com.beust.jcommander.JCommander;
@@ -19,7 +16,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CustomerServices
 {
 
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
+
 
 
 	public static void main(String[] args)

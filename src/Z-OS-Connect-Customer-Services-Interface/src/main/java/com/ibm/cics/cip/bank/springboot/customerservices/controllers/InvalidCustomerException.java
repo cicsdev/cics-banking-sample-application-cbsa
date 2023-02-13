@@ -1,5 +1,9 @@
 package com.ibm.cics.cip.bank.springboot.customerservices.controllers;
 
+/*                                                                        */
+/* Copyright IBM Corp. 2023                                               */
+/*                                                                        */
+
 public class InvalidCustomerException extends Exception
 {
 

@@ -1,9 +1,6 @@
-/*
- *
- *    Copyright IBM Corp. 2022
- *
- *
- */
+/*                                                                        */
+/* Copyright IBM Corp. 2023                                               */
+/*                                                                        */
 package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.updateaccount;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +12,7 @@ import com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.createaccou
 public class UpdaccJson
 {
 
-	static final String COPYRIGHT = "Copyright IBM Corp. 2022";
+
 
 	@JsonProperty("CommEye")
 	private String commEye;
