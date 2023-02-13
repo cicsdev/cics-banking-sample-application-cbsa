@@ -1,6 +1,6 @@
       ******************************************************************
       *                                                                *
-      *  Copyright IBM Corp. 2022                                      *
+      *  Copyright IBM Corp. 2023                                      *
       *                                                                *
       ******************************************************************
        CBL CICS('SP,EDF')
@@ -37,9 +37,6 @@
        FILE SECTION.
 
        WORKING-STORAGE SECTION.
-      * Copyright statement as a literal to go into the load module
-       77 FILLER PIC X(24) VALUE 'Copyright IBM Corp. 2022'. 
-
 
        COPY SORTCODE.
 

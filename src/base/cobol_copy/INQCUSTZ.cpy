@@ -1,8 +1,6 @@
       ******************************************************************
       *                                                                *
-      *  Copyright IBM Corp. 2022                                      *
-      *                                                                *
-      *  Copyright contributors to the CICS Banking Sample Application *
+      *  Copyright IBM Corp. 2023                                      *
       *                                                                *
       ******************************************************************
           03 INQCUST-EYE                  PIC X(4).

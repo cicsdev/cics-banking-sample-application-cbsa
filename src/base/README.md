@@ -19,6 +19,10 @@ You can use the CICS bank sample application to explore the following:
 
 * As supplied, the application runs is a 3270 application that runs in a single CICS region. It reads and writes to VSAM files and Db2 tables. This configuration can be changed to embrace CICS Multi-Region Operation (MRO).
 
+### bms_src
+
+The Basic Mapping Support (BMS) maps for the 3270 interface.
+
 ### cobol_src
 
 This contains the programs that are part of the CBSA base application. These are both online CICS programs and batch programs.

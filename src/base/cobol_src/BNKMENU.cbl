@@ -1,6 +1,6 @@
       ******************************************************************
       *                                                                *
-      *  Copyright IBM Corp. 2022                                      *
+      *  Copyright IBM Corp. 2023                                      *
       *                                                                *
       ******************************************************************
        PROCESS CICS,NODYNAM,NSYMBOL(NATIONAL),TRUNC(STD)
@@ -29,9 +29,6 @@
 
        DATA DIVISION.
        WORKING-STORAGE SECTION.
-      * Copyright statement as a literal to go into the load module
-       77 FILLER PIC X(24) VALUE 'Copyright IBM Corp. 2022'. 
-
 
        01 WS-CICS-WORK-AREA.
           03 WS-CICS-RESP              PIC S9(8) COMP VALUE 0.

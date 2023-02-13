@@ -1,16 +1,16 @@
       ******************************************************************
       *                                                                *
-      *  Copyright IBM Corp. 2022                                      *
+      *  Copyright IBM Corp. 2023                                      *
       *                                                                *
       ******************************************************************
-       CBL CICS('SP,EDF,DLI')
+       CBL CICS('SP,EDF')
        CBL SQL
 
       ******************************************************************
       * This program takes customer information from the BMS
       * application (name, address and DOB) and should get the SORTCODE,
       * determine which datastore to use (VSAM or DB2), then enqueue
-      * the Named Counter for CUSTOMER, increment the counter and get
+      * the counter for CUSTOMER, increment the counter and get
       * that number.
       *
       * It then performs a credit check on multiple
@@ -51,8 +51,6 @@
        FILE SECTION.
 
        WORKING-STORAGE SECTION.
-      * Copyright statement as a literal to go into the load module
-       77 FILLER PIC X(24) VALUE 'Copyright IBM Corp. 2022'. 
 
 
        COPY SORTCODE.
