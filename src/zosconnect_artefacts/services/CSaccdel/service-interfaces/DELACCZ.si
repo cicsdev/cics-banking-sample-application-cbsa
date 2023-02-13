@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--  Copyright IBM Corp. 2023   -->
 <ns2:message xmlns:ns2="http://www.ibm.com/ims/Transaction" transactionCode="" messageName="DELACCZ" direction="0" serviceType="CICS_COMM_AREA">
+
     <message id="1" name="DELACCZ">
         <segment id="1" name="COMMAREA" originalName="COMMAREA">
             <field name="DelAcc" originalName="DELACC_COMMAREA" included="Y" path="DelAcc">
