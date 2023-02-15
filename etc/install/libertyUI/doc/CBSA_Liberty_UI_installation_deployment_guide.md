@@ -160,6 +160,12 @@ If you have already installed the Liberty UI, you can skip this step.
     "CICSUSER" has access to. For example:
 
 >> /u/cicsuser/
+
+>6. At CICS TS 5.5, CICS TS 5.6 and CICS TS 6.1, add the following to the JVM profile to prevent CICS adding "wab" support.
+
+>> -Dcom.ibm.cics.jvmserver.wlp.wab=false
+
+
 ## 
 
 ## CICS Resources:
@@ -209,10 +215,15 @@ If you have already installed the Liberty UI, you can skip this step.
 
 3.  Within the \<featureManager\> tag, add the following lines:
 
-> \<feature\>jaxrs-1.1\</feature\>
+> \<feature\>jaxrs-2.1\</feature\>
 >
 > \<feature\>json-1.0\</feature\>
+>
+> \<feature\>jspn-2.3\</feature\>
 
+4. Add the following to allow the Liberty UI to be deployed in the next step.
+
+> \<webApplication location="webui-1.0.war"/> 
 
 ## 
 

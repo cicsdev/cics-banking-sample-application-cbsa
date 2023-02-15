@@ -19,17 +19,17 @@
 	</properties>
 
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>com.ibm.cics</groupId>
-				<artifactId>com.ibm.cics.ts.bom</artifactId>
-				<version>5.5-20200519131930-PH25409</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>com.ibm.cics</groupId>
+            <artifactId>com.ibm.cics.ts.bom</artifactId>
+            <version>5.6-20200609123739</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
 
 	<dependencies>
 		<dependency>
@@ -92,6 +92,7 @@
 			<groupId>ibm.recgen</groupId>
 			<artifactId>ibm-recgen</artifactId>
 			<version>1.0.0</version>
+<scope>provided</scope>
 		</dependency>
 
 
