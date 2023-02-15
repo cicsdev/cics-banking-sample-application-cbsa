@@ -16,7 +16,7 @@ public class GetSortCode {
 
 	/** <pre>
 	 LINKAGE SECTION. </pre> */
-	public static final int DFHCOMMAREA_len = 6; 
+	public static final int DFHCOMMAREA_LEN = 6; 
 
 	/** <pre>
 	 01 DFHCOMMAREA.
@@ -28,44 +28,44 @@ public class GetSortCode {
     *
     *
 	     03 GETSORTCODEOperation. </pre> */
-	public static final int GETSORTCODEOPERATION_len = 6; 
-	public static final int GETSORTCODEOPERATION_offset = factory.getOffset();
+	public static final int GETSORTCODEOPERATION_LEN = 6; 
+	public static final int GETSORTCODEOPERATION_OFFSET = factory.getOffset();
 
 	/** <pre>
 	     03 GETSORTCODEOperation. </pre> */
 	protected static final StringField SORTCODE = factory.getStringField(6);
 
-	protected byte[] _byteBuffer;
+	protected byte[] byteBuffer;
 	// Instance variables used to cache field values
-	protected String sortcode;
+	protected String sortcodeString;
 
 
 	public GetSortCode (byte[] buffer) {
-		this._byteBuffer = buffer;
+		this.byteBuffer = buffer;
 	}
 
 	public GetSortCode () {
-		this._byteBuffer = new byte[DFHCOMMAREA_len];
+		this.byteBuffer = new byte[DFHCOMMAREA_LEN];
 	}
 
 	public byte[] getByteBuffer() {
-		return _byteBuffer;
+		return byteBuffer;
 	}
 
 
 	public String getSortcode() {
-		if (sortcode == null) {
-			sortcode = SORTCODE.getString(_byteBuffer);
+		if (sortcodeString == null) {
+			sortcodeString = SORTCODE.getString(byteBuffer);
 		}
-		return sortcode;
+		return sortcodeString;
 	}
 
 	public void setSortcode(String sortcode) {
-		if (SORTCODE.equals(this.sortcode, sortcode)) {
+		if (SORTCODE.equals(this.sortcodeString, sortcode)) {
 			return;
 		}
-		SORTCODE.putString(sortcode, _byteBuffer);
-		this.sortcode = sortcode;
+		SORTCODE.putString(sortcode, byteBuffer);
+		this.sortcodeString = sortcode;
 	}
 
 }

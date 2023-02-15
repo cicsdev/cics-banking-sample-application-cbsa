@@ -16,7 +16,7 @@ public class NewAccountNumber {
 
 	/** <pre>
 	 01 COBOL-LANGUAGE-STRUCTURE. </pre> */
-	public static final int COBOL_LANGUAGE_STRUCTURE_len = 11; 
+	public static final int COBOL_LANGUAGE_STRUCTURE_LEN = 11; 
 
 	/** <pre>
 	     03 NEWACCNO-FUNCTION  PIC X. </pre> */
@@ -46,7 +46,7 @@ public class NewAccountNumber {
 	     03 NEWACCNO-FAIL-CODE                  PIC X. </pre> */
 	protected static final StringField NEWACCNO_FAIL_CODE = factory.getStringField(1);
 
-	protected byte[] _byteBuffer;
+	protected byte[] byteBuffer;
 	// Instance variables used to cache field values
 	protected String newaccnoFunction;
 	protected int accountNumber;
@@ -56,21 +56,21 @@ public class NewAccountNumber {
 
 
 	public NewAccountNumber (byte[] buffer) {
-		this._byteBuffer = buffer;
+		this.byteBuffer = buffer;
 	}
 
 	public NewAccountNumber () {
-		this._byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_len];
+		this.byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_LEN];
 	}
 
 	public byte[] getByteBuffer() {
-		return _byteBuffer;
+		return byteBuffer;
 	}
 
 
 	public String getNewaccnoFunction() {
 		if (newaccnoFunction == null) {
-			newaccnoFunction = NEWACCNO_FUNCTION.getString(_byteBuffer);
+			newaccnoFunction = NEWACCNO_FUNCTION.getString(byteBuffer);
 		}
 		return newaccnoFunction;
 	}
@@ -79,7 +79,7 @@ public class NewAccountNumber {
 		if (NEWACCNO_FUNCTION.equals(this.newaccnoFunction, newaccnoFunction)) {
 			return;
 		}
-		NEWACCNO_FUNCTION.putString(newaccnoFunction, _byteBuffer);
+		NEWACCNO_FUNCTION.putString(newaccnoFunction, byteBuffer);
 		this.newaccnoFunction = newaccnoFunction;
 	}
 
@@ -97,7 +97,7 @@ public class NewAccountNumber {
 
 	public int getAccountNumber() {
 		if (!accountNumberIsSet) {
-			accountNumber = ACCOUNT_NUMBER.getInt(_byteBuffer);
+			accountNumber = ACCOUNT_NUMBER.getInt(byteBuffer);
 			accountNumberIsSet = true;
 		}
 		return accountNumber;
@@ -107,14 +107,14 @@ public class NewAccountNumber {
 		if (accountNumberIsSet && ACCOUNT_NUMBER.equals(this.accountNumber, accountNumber)) {
 			return;
 		}
-		ACCOUNT_NUMBER.putInt(accountNumber, _byteBuffer);
+		ACCOUNT_NUMBER.putInt(accountNumber, byteBuffer);
 		this.accountNumber = accountNumber;
 		accountNumberIsSet = true;
 	}
 
 	public String getNewaccnoSuccess() {
 		if (newaccnoSuccess == null) {
-			newaccnoSuccess = NEWACCNO_SUCCESS.getString(_byteBuffer);
+			newaccnoSuccess = NEWACCNO_SUCCESS.getString(byteBuffer);
 		}
 		return newaccnoSuccess;
 	}
@@ -123,13 +123,13 @@ public class NewAccountNumber {
 		if (NEWACCNO_SUCCESS.equals(this.newaccnoSuccess, newaccnoSuccess)) {
 			return;
 		}
-		NEWACCNO_SUCCESS.putString(newaccnoSuccess, _byteBuffer);
+		NEWACCNO_SUCCESS.putString(newaccnoSuccess, byteBuffer);
 		this.newaccnoSuccess = newaccnoSuccess;
 	}
 
 	public String getNewaccnoFailCode() {
 		if (newaccnoFailCode == null) {
-			newaccnoFailCode = NEWACCNO_FAIL_CODE.getString(_byteBuffer);
+			newaccnoFailCode = NEWACCNO_FAIL_CODE.getString(byteBuffer);
 		}
 		return newaccnoFailCode;
 	}
@@ -138,7 +138,7 @@ public class NewAccountNumber {
 		if (NEWACCNO_FAIL_CODE.equals(this.newaccnoFailCode, newaccnoFailCode)) {
 			return;
 		}
-		NEWACCNO_FAIL_CODE.putString(newaccnoFailCode, _byteBuffer);
+		NEWACCNO_FAIL_CODE.putString(newaccnoFailCode, byteBuffer);
 		this.newaccnoFailCode = newaccnoFailCode;
 	}
 

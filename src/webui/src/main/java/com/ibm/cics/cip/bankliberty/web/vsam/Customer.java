@@ -381,7 +381,7 @@ public class Customer
 		myCustomer = new CUSTOMER();
 
 		holder = new RecordHolder();
-		KeyHolder keyHolder = new KeyHolder();
+		keyHolder = new KeyHolder();
 		byte[] key = buildKey(sortCode, 0);
 
 		// We need to convert the key to EBCDIC

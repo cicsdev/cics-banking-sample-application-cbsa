@@ -16,7 +16,7 @@ public class CUSTOMER {
 
 	/** <pre>
 	 01 WS-EXIT-RETRY-LOOP            PIC X         VALUE ' '. </pre> */
-	public static final int OUTPUT_DATA_len = 259; 
+	public static final int OUTPUT_DATA_LEN = 259; 
 
 	/** <pre>
 	 01 OUTPUT-DATA.
@@ -28,8 +28,8 @@ public class CUSTOMER {
     *
     *
 	     03 CUSTOMER-RECORD. </pre> */
-	public static final int CUSTOMER_RECORD_len = 259; 
-	public static final int CUSTOMER_RECORD_offset = factory.getOffset();
+	public static final int CUSTOMER_RECORD_LEN = 259; 
+	public static final int CUSTOMER_RECORD_OFFSET = factory.getOffset();
 
 	/** <pre>
 	******************************************************************
@@ -42,8 +42,8 @@ public class CUSTOMER {
 
 	/** <pre>
 	        05 CUSTOMER-EYECATCHER                 PIC X(4). </pre> */
-	public static final int CUSTOMER_KEY_len = 16; 
-	public static final int CUSTOMER_KEY_offset = factory.getOffset();
+	public static final int CUSTOMER_KEY_LEN = 16; 
+	public static final int CUSTOMER_KEY_OFFSET = factory.getOffset();
 
 	/** <pre>
 	           88 CUSTOMER-EYECATCHER-VALUE        VALUE 'CUST'. </pre> */
@@ -77,8 +77,8 @@ public class CUSTOMER {
 	*          07 CUSTOMER-POSTCODE-OR-ZIP         PIC X(10). </pre> */
 	static { factory.pushOffset(); } 
 	static { factory.setOffset(CUSTOMER_DATE_OF_BIRTH.getOffset()); } 
-	public static final int CUSTOMER_DOB_GROUP_len = 8; 
-	public static final int CUSTOMER_DOB_GROUP_offset = factory.getOffset();
+	public static final int CUSTOMER_DOB_GROUP_LEN = 8; 
+	public static final int CUSTOMER_DOB_GROUP_OFFSET = factory.getOffset();
 
 	/** <pre>
 	        05 CUSTOMER-DATE-OF-BIRTH              PIC 9(8). </pre> */
@@ -105,8 +105,8 @@ public class CUSTOMER {
 	        05 CUSTOMER-CREDIT-SCORE               PIC 999. </pre> */
 	static { factory.pushOffset(); } 
 	static { factory.setOffset(CUSTOMER_CS_REVIEW_DATE.getOffset()); } 
-	public static final int CUSTOMER_CS_GROUP_len = 8; 
-	public static final int CUSTOMER_CS_GROUP_offset = factory.getOffset();
+	public static final int CUSTOMER_CS_GROUP_LEN = 8; 
+	public static final int CUSTOMER_CS_GROUP_OFFSET = factory.getOffset();
 
 	/** <pre>
 	        05 CUSTOMER-CS-REVIEW-DATE             PIC 9(8).
@@ -123,7 +123,7 @@ public class CUSTOMER {
 	protected static final ExternalDecimalAsIntField CUSTOMER_CS_REVIEW_YEAR = factory.getExternalDecimalAsIntField(4, false, false, false, false);
 	static { factory.popOffset(); } 
 
-	protected byte[] _byteBuffer;
+	protected byte[] byteBuffer;
 	// Instance variables used to cache field values
 	protected String customerEyecatcher;
 	protected int customerSortcode;
@@ -137,21 +137,21 @@ public class CUSTOMER {
 
 
 	public CUSTOMER (byte[] buffer) {
-		this._byteBuffer = buffer;
+		this.byteBuffer = buffer;
 	}
 
 	public CUSTOMER () {
-		this._byteBuffer = new byte[OUTPUT_DATA_len];
+		this.byteBuffer = new byte[OUTPUT_DATA_LEN];
 	}
 
 	public byte[] getByteBuffer() {
-		return _byteBuffer;
+		return byteBuffer;
 	}
 
 
 	public String getCustomerEyecatcher() {
 		if (customerEyecatcher == null) {
-			customerEyecatcher = CUSTOMER_EYECATCHER.getString(_byteBuffer);
+			customerEyecatcher = CUSTOMER_EYECATCHER.getString(byteBuffer);
 		}
 		return customerEyecatcher;
 	}
@@ -160,7 +160,7 @@ public class CUSTOMER {
 		if (CUSTOMER_EYECATCHER.equals(this.customerEyecatcher, customerEyecatcher)) {
 			return;
 		}
-		CUSTOMER_EYECATCHER.putString(customerEyecatcher, _byteBuffer);
+		CUSTOMER_EYECATCHER.putString(customerEyecatcher, byteBuffer);
 		this.customerEyecatcher = customerEyecatcher;
 	}
 
@@ -170,7 +170,7 @@ public class CUSTOMER {
 
 	public int getCustomerSortcode() {
 		if (!customerSortcodeIsSet) {
-			customerSortcode = CUSTOMER_SORTCODE.getInt(_byteBuffer);
+			customerSortcode = CUSTOMER_SORTCODE.getInt(byteBuffer);
 			customerSortcodeIsSet = true;
 		}
 		return customerSortcode;
@@ -180,14 +180,14 @@ public class CUSTOMER {
 		if (customerSortcodeIsSet && CUSTOMER_SORTCODE.equals(this.customerSortcode, customerSortcode)) {
 			return;
 		}
-		CUSTOMER_SORTCODE.putInt(customerSortcode, _byteBuffer);
+		CUSTOMER_SORTCODE.putInt(customerSortcode, byteBuffer);
 		this.customerSortcode = customerSortcode;
 		customerSortcodeIsSet = true;
 	}
 
 	public long getCustomerNumber() {
 		if (!customerNumberIsSet) {
-			customerNumber = CUSTOMER_NUMBER.getLong(_byteBuffer);
+			customerNumber = CUSTOMER_NUMBER.getLong(byteBuffer);
 			customerNumberIsSet = true;
 		}
 		return customerNumber;
@@ -197,14 +197,14 @@ public class CUSTOMER {
 		if (customerNumberIsSet && CUSTOMER_NUMBER.equals(this.customerNumber, customerNumber)) {
 			return;
 		}
-		CUSTOMER_NUMBER.putLong(customerNumber, _byteBuffer);
+		CUSTOMER_NUMBER.putLong(customerNumber, byteBuffer);
 		this.customerNumber = customerNumber;
 		customerNumberIsSet = true;
 	}
 
 	public String getCustomerName() {
 		if (customerName == null) {
-			customerName = CUSTOMER_NAME.getString(_byteBuffer);
+			customerName = CUSTOMER_NAME.getString(byteBuffer);
 		}
 		return customerName;
 	}
@@ -213,13 +213,13 @@ public class CUSTOMER {
 		if (CUSTOMER_NAME.equals(this.customerName, customerName)) {
 			return;
 		}
-		CUSTOMER_NAME.putString(customerName, _byteBuffer);
+		CUSTOMER_NAME.putString(customerName, byteBuffer);
 		this.customerName = customerName;
 	}
 
 	public String getCustomerAddress() {
 		if (customerAddress == null) {
-			customerAddress = CUSTOMER_ADDRESS.getString(_byteBuffer);
+			customerAddress = CUSTOMER_ADDRESS.getString(byteBuffer);
 		}
 		return customerAddress;
 	}
@@ -228,45 +228,45 @@ public class CUSTOMER {
 		if (CUSTOMER_ADDRESS.equals(this.customerAddress, customerAddress)) {
 			return;
 		}
-		CUSTOMER_ADDRESS.putString(customerAddress, _byteBuffer);
+		CUSTOMER_ADDRESS.putString(customerAddress, byteBuffer);
 		this.customerAddress = customerAddress;
 	}
 
 	public int getCustomerDateOfBirth() {
-		return CUSTOMER_DATE_OF_BIRTH.getInt(_byteBuffer);
+		return CUSTOMER_DATE_OF_BIRTH.getInt(byteBuffer);
 	}
 
 	public void setCustomerDateOfBirth(int customerDateOfBirth) {
-		CUSTOMER_DATE_OF_BIRTH.putInt(customerDateOfBirth, _byteBuffer);
+		CUSTOMER_DATE_OF_BIRTH.putInt(customerDateOfBirth, byteBuffer);
 	}
 
 	public int getCustomerBirthDay() {
-		return CUSTOMER_BIRTH_DAY.getInt(_byteBuffer);
+		return CUSTOMER_BIRTH_DAY.getInt(byteBuffer);
 	}
 
 	public void setCustomerBirthDay(int customerBirthDay) {
-		CUSTOMER_BIRTH_DAY.putInt(customerBirthDay, _byteBuffer);
+		CUSTOMER_BIRTH_DAY.putInt(customerBirthDay, byteBuffer);
 	}
 
 	public int getCustomerBirthMonth() {
-		return CUSTOMER_BIRTH_MONTH.getInt(_byteBuffer);
+		return CUSTOMER_BIRTH_MONTH.getInt(byteBuffer);
 	}
 
 	public void setCustomerBirthMonth(int customerBirthMonth) {
-		CUSTOMER_BIRTH_MONTH.putInt(customerBirthMonth, _byteBuffer);
+		CUSTOMER_BIRTH_MONTH.putInt(customerBirthMonth, byteBuffer);
 	}
 
 	public int getCustomerBirthYear() {
-		return CUSTOMER_BIRTH_YEAR.getInt(_byteBuffer);
+		return CUSTOMER_BIRTH_YEAR.getInt(byteBuffer);
 	}
 
 	public void setCustomerBirthYear(int customerBirthYear) {
-		CUSTOMER_BIRTH_YEAR.putInt(customerBirthYear, _byteBuffer);
+		CUSTOMER_BIRTH_YEAR.putInt(customerBirthYear, byteBuffer);
 	}
 
 	public int getCustomerCreditScore() {
 		if (!customerCreditScoreIsSet) {
-			customerCreditScore = CUSTOMER_CREDIT_SCORE.getInt(_byteBuffer);
+			customerCreditScore = CUSTOMER_CREDIT_SCORE.getInt(byteBuffer);
 			customerCreditScoreIsSet = true;
 		}
 		return customerCreditScore;
@@ -276,41 +276,41 @@ public class CUSTOMER {
 		if (customerCreditScoreIsSet && CUSTOMER_CREDIT_SCORE.equals(this.customerCreditScore, customerCreditScore)) {
 			return;
 		}
-		CUSTOMER_CREDIT_SCORE.putInt(customerCreditScore, _byteBuffer);
+		CUSTOMER_CREDIT_SCORE.putInt(customerCreditScore, byteBuffer);
 		this.customerCreditScore = customerCreditScore;
 		customerCreditScoreIsSet = true;
 	}
 
 	public int getCustomerCsReviewDate() {
-		return CUSTOMER_CS_REVIEW_DATE.getInt(_byteBuffer);
+		return CUSTOMER_CS_REVIEW_DATE.getInt(byteBuffer);
 	}
 
 	public void setCustomerCsReviewDate(int customerCsReviewDate) {
-		CUSTOMER_CS_REVIEW_DATE.putInt(customerCsReviewDate, _byteBuffer);
+		CUSTOMER_CS_REVIEW_DATE.putInt(customerCsReviewDate, byteBuffer);
 	}
 
 	public int getCustomerCsReviewDay() {
-		return CUSTOMER_CS_REVIEW_DAY.getInt(_byteBuffer);
+		return CUSTOMER_CS_REVIEW_DAY.getInt(byteBuffer);
 	}
 
 	public void setCustomerCsReviewDay(int customerCsReviewDay) {
-		CUSTOMER_CS_REVIEW_DAY.putInt(customerCsReviewDay, _byteBuffer);
+		CUSTOMER_CS_REVIEW_DAY.putInt(customerCsReviewDay, byteBuffer);
 	}
 
 	public int getCustomerCsReviewMonth() {
-		return CUSTOMER_CS_REVIEW_MONTH.getInt(_byteBuffer);
+		return CUSTOMER_CS_REVIEW_MONTH.getInt(byteBuffer);
 	}
 
 	public void setCustomerCsReviewMonth(int customerCsReviewMonth) {
-		CUSTOMER_CS_REVIEW_MONTH.putInt(customerCsReviewMonth, _byteBuffer);
+		CUSTOMER_CS_REVIEW_MONTH.putInt(customerCsReviewMonth, byteBuffer);
 	}
 
 	public int getCustomerCsReviewYear() {
-		return CUSTOMER_CS_REVIEW_YEAR.getInt(_byteBuffer);
+		return CUSTOMER_CS_REVIEW_YEAR.getInt(byteBuffer);
 	}
 
 	public void setCustomerCsReviewYear(int customerCsReviewYear) {
-		CUSTOMER_CS_REVIEW_YEAR.putInt(customerCsReviewYear, _byteBuffer);
+		CUSTOMER_CS_REVIEW_YEAR.putInt(customerCsReviewYear, byteBuffer);
 	}
 
 }

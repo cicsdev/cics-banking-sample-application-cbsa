@@ -16,7 +16,7 @@ public class NewCustomerNumber {
 
 	/** <pre>
 	 01 COBOL-LANGUAGE-STRUCTURE. </pre> */
-	public static final int COBOL_LANGUAGE_STRUCTURE_len = 13; 
+	public static final int COBOL_LANGUAGE_STRUCTURE_LEN = 13; 
 
 	/** <pre>
 	     03 NEWCUSNO-FUNCTION  PIC X. </pre> */
@@ -46,7 +46,7 @@ public class NewCustomerNumber {
 	     03 NEWCUSNO-FAIL-CODE                  PIC X. </pre> */
 	protected static final StringField NEWCUSNO_FAIL_CODE = factory.getStringField(1);
 
-	protected byte[] _byteBuffer;
+	protected byte[] byteBuffer;
 	// Instance variables used to cache field values
 	protected String newcusnoFunction;
 	protected long customerNumber;
@@ -56,21 +56,21 @@ public class NewCustomerNumber {
 
 
 	public NewCustomerNumber (byte[] buffer) {
-		this._byteBuffer = buffer;
+		this.byteBuffer = buffer;
 	}
 
 	public NewCustomerNumber () {
-		this._byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_len];
+		this.byteBuffer = new byte[COBOL_LANGUAGE_STRUCTURE_LEN];
 	}
 
 	public byte[] getByteBuffer() {
-		return _byteBuffer;
+		return byteBuffer;
 	}
 
 
 	public String getNewcusnoFunction() {
 		if (newcusnoFunction == null) {
-			newcusnoFunction = NEWCUSNO_FUNCTION.getString(_byteBuffer);
+			newcusnoFunction = NEWCUSNO_FUNCTION.getString(byteBuffer);
 		}
 		return newcusnoFunction;
 	}
@@ -79,7 +79,7 @@ public class NewCustomerNumber {
 		if (NEWCUSNO_FUNCTION.equals(this.newcusnoFunction, newcusnoFunction)) {
 			return;
 		}
-		NEWCUSNO_FUNCTION.putString(newcusnoFunction, _byteBuffer);
+		NEWCUSNO_FUNCTION.putString(newcusnoFunction, byteBuffer);
 		this.newcusnoFunction = newcusnoFunction;
 	}
 
@@ -97,7 +97,7 @@ public class NewCustomerNumber {
 
 	public long getCustomerNumber() {
 		if (!customerNumberIsSet) {
-			customerNumber = CUSTOMER_NUMBER.getLong(_byteBuffer);
+			customerNumber = CUSTOMER_NUMBER.getLong(byteBuffer);
 			customerNumberIsSet = true;
 		}
 		return customerNumber;
@@ -107,14 +107,14 @@ public class NewCustomerNumber {
 		if (customerNumberIsSet && CUSTOMER_NUMBER.equals(this.customerNumber, customerNumber)) {
 			return;
 		}
-		CUSTOMER_NUMBER.putLong(customerNumber, _byteBuffer);
+		CUSTOMER_NUMBER.putLong(customerNumber, byteBuffer);
 		this.customerNumber = customerNumber;
 		customerNumberIsSet = true;
 	}
 
 	public String getNewcusnoSuccess() {
 		if (newcusnoSuccess == null) {
-			newcusnoSuccess = NEWCUSNO_SUCCESS.getString(_byteBuffer);
+			newcusnoSuccess = NEWCUSNO_SUCCESS.getString(byteBuffer);
 		}
 		return newcusnoSuccess;
 	}
@@ -123,13 +123,13 @@ public class NewCustomerNumber {
 		if (NEWCUSNO_SUCCESS.equals(this.newcusnoSuccess, newcusnoSuccess)) {
 			return;
 		}
-		NEWCUSNO_SUCCESS.putString(newcusnoSuccess, _byteBuffer);
+		NEWCUSNO_SUCCESS.putString(newcusnoSuccess, byteBuffer);
 		this.newcusnoSuccess = newcusnoSuccess;
 	}
 
 	public String getNewcusnoFailCode() {
 		if (newcusnoFailCode == null) {
-			newcusnoFailCode = NEWCUSNO_FAIL_CODE.getString(_byteBuffer);
+			newcusnoFailCode = NEWCUSNO_FAIL_CODE.getString(byteBuffer);
 		}
 		return newcusnoFailCode;
 	}
@@ -138,7 +138,7 @@ public class NewCustomerNumber {
 		if (NEWCUSNO_FAIL_CODE.equals(this.newcusnoFailCode, newcusnoFailCode)) {
 			return;
 		}
-		NEWCUSNO_FAIL_CODE.putString(newcusnoFailCode, _byteBuffer);
+		NEWCUSNO_FAIL_CODE.putString(newcusnoFailCode, byteBuffer);
 		this.newcusnoFailCode = newcusnoFailCode;
 	}
 

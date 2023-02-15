@@ -16,7 +16,7 @@ public class GetCompany {
 
 	/** <pre>
 	 LINKAGE SECTION. </pre> */
-	public static final int DFHCOMMAREA_len = 40; 
+	public static final int DFHCOMMAREA_LEN = 40; 
 
 	/** <pre>
 	 01 DFHCOMMAREA.
@@ -28,34 +28,34 @@ public class GetCompany {
     *
     *
 	     03 GETCompanyOperation. </pre> */
-	public static final int GETCOMPANYOPERATION_len = 40; 
-	public static final int GETCOMPANYOPERATION_offset = factory.getOffset();
+	public static final int GETCOMPANYOPERATION_LEN = 40; 
+	public static final int GETCOMPANYOPERATION_OFFSET = factory.getOffset();
 
 	/** <pre>
 	     03 GETCompanyOperation. </pre> */
 	protected static final StringField COMPANY_NAME = factory.getStringField(40);
 
-	protected byte[] _byteBuffer;
+	protected byte[] byteBuffer;
 	// Instance variables used to cache field values
 	protected String companyName;
 
 
 	public GetCompany (byte[] buffer) {
-		this._byteBuffer = buffer;
+		this.byteBuffer = buffer;
 	}
 
 	public GetCompany () {
-		this._byteBuffer = new byte[DFHCOMMAREA_len];
+		this.byteBuffer = new byte[DFHCOMMAREA_LEN];
 	}
 
 	public byte[] getByteBuffer() {
-		return _byteBuffer;
+		return byteBuffer;
 	}
 
 
 	public String getCompanyName() {
 		if (companyName == null) {
-			companyName = COMPANY_NAME.getString(_byteBuffer);
+			companyName = COMPANY_NAME.getString(byteBuffer);
 		}
 		return companyName;
 	}
@@ -64,7 +64,7 @@ public class GetCompany {
 		if (COMPANY_NAME.equals(this.companyName, companyName)) {
 			return;
 		}
-		COMPANY_NAME.putString(companyName, _byteBuffer);
+		COMPANY_NAME.putString(companyName, byteBuffer);
 		this.companyName = companyName;
 	}
 

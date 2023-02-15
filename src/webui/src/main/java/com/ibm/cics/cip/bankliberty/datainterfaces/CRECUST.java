@@ -16,7 +16,7 @@ public class CRECUST {
 
 	/** <pre>
 	 LINKAGE SECTION. </pre> */
-	public static final int DFHCOMMAREA_len = 261; 
+	public static final int DFHCOMMAREA_LEN = 261; 
 
 	/** <pre>
 	 01 DFHCOMMAREA.
@@ -33,8 +33,8 @@ public class CRECUST {
 	/** <pre>
 	******************************************************************
 	    03 COMM-EYECATCHER                 PIC X(4). </pre> */
-	public static final int COMM_KEY_len = 16; 
-	public static final int COMM_KEY_offset = factory.getOffset();
+	public static final int COMM_KEY_LEN = 16; 
+	public static final int COMM_KEY_OFFSET = factory.getOffset();
 
 	/** <pre>
 	    03 COMM-EYECATCHER                 PIC X(4). </pre> */
@@ -60,8 +60,8 @@ public class CRECUST {
 	    03 COMM-ADDRESS                    PIC X(160). </pre> */
 	static { factory.pushOffset(); } 
 	static { factory.setOffset(COMM_DATE_OF_BIRTH.getOffset()); } 
-	public static final int COMM_DOB_GROUP_len = 8; 
-	public static final int COMM_DOB_GROUP_offset = factory.getOffset();
+	public static final int COMM_DOB_GROUP_LEN = 8; 
+	public static final int COMM_DOB_GROUP_OFFSET = factory.getOffset();
 
 	/** <pre>
 	    03 COMM-DATE-OF-BIRTH              PIC 9(8). </pre> */
@@ -88,8 +88,8 @@ public class CRECUST {
 	    03 COMM-CREDIT-SCORE               PIC 999. </pre> */
 	static { factory.pushOffset(); } 
 	static { factory.setOffset(COMM_CS_REVIEW_DATE.getOffset()); } 
-	public static final int COMM_CS_REVIEW_DATE_GROUP_len = 8; 
-	public static final int COMM_CS_REVIEW_DATE_GROUP_offset = factory.getOffset();
+	public static final int COMM_CS_REVIEW_DATE_GROUP_LEN = 8; 
+	public static final int COMM_CS_REVIEW_DATE_GROUP_OFFSET = factory.getOffset();
 
 	/** <pre>
 	    03 COMM-CS-REVIEW-DATE             PIC 9(8). </pre> */
@@ -112,7 +112,7 @@ public class CRECUST {
 	       05 COMM-CS-REVIEW-YYYY          PIC 9999. </pre> */
 	protected static final StringField COMM_FAIL_CODE = factory.getStringField(1);
 
-	protected byte[] _byteBuffer;
+	protected byte[] byteBuffer;
 	// Instance variables used to cache field values
 	protected String commEyecatcher;
 	protected int commSortcode;
@@ -128,21 +128,21 @@ public class CRECUST {
 
 
 	public CRECUST (byte[] buffer) {
-		this._byteBuffer = buffer;
+		this.byteBuffer = buffer;
 	}
 
 	public CRECUST () {
-		this._byteBuffer = new byte[DFHCOMMAREA_len];
+		this.byteBuffer = new byte[DFHCOMMAREA_LEN];
 	}
 
 	public byte[] getByteBuffer() {
-		return _byteBuffer;
+		return byteBuffer;
 	}
 
 
 	public String getCommEyecatcher() {
 		if (commEyecatcher == null) {
-			commEyecatcher = COMM_EYECATCHER.getString(_byteBuffer);
+			commEyecatcher = COMM_EYECATCHER.getString(byteBuffer);
 		}
 		return commEyecatcher;
 	}
@@ -151,13 +151,13 @@ public class CRECUST {
 		if (COMM_EYECATCHER.equals(this.commEyecatcher, commEyecatcher)) {
 			return;
 		}
-		COMM_EYECATCHER.putString(commEyecatcher, _byteBuffer);
+		COMM_EYECATCHER.putString(commEyecatcher, byteBuffer);
 		this.commEyecatcher = commEyecatcher;
 	}
 
 	public int getCommSortcode() {
 		if (!commSortcodeIsSet) {
-			commSortcode = COMM_SORTCODE.getInt(_byteBuffer);
+			commSortcode = COMM_SORTCODE.getInt(byteBuffer);
 			commSortcodeIsSet = true;
 		}
 		return commSortcode;
@@ -167,14 +167,14 @@ public class CRECUST {
 		if (commSortcodeIsSet && COMM_SORTCODE.equals(this.commSortcode, commSortcode)) {
 			return;
 		}
-		COMM_SORTCODE.putInt(commSortcode, _byteBuffer);
+		COMM_SORTCODE.putInt(commSortcode, byteBuffer);
 		this.commSortcode = commSortcode;
 		commSortcodeIsSet = true;
 	}
 
 	public long getCommNumber() {
 		if (!commNumberIsSet) {
-			commNumber = COMM_NUMBER.getLong(_byteBuffer);
+			commNumber = COMM_NUMBER.getLong(byteBuffer);
 			commNumberIsSet = true;
 		}
 		return commNumber;
@@ -184,14 +184,14 @@ public class CRECUST {
 		if (commNumberIsSet && COMM_NUMBER.equals(this.commNumber, commNumber)) {
 			return;
 		}
-		COMM_NUMBER.putLong(commNumber, _byteBuffer);
+		COMM_NUMBER.putLong(commNumber, byteBuffer);
 		this.commNumber = commNumber;
 		commNumberIsSet = true;
 	}
 
 	public String getCommName() {
 		if (commName == null) {
-			commName = COMM_NAME.getString(_byteBuffer);
+			commName = COMM_NAME.getString(byteBuffer);
 		}
 		return commName;
 	}
@@ -200,13 +200,13 @@ public class CRECUST {
 		if (COMM_NAME.equals(this.commName, commName)) {
 			return;
 		}
-		COMM_NAME.putString(commName, _byteBuffer);
+		COMM_NAME.putString(commName, byteBuffer);
 		this.commName = commName;
 	}
 
 	public String getCommAddress() {
 		if (commAddress == null) {
-			commAddress = COMM_ADDRESS.getString(_byteBuffer);
+			commAddress = COMM_ADDRESS.getString(byteBuffer);
 		}
 		return commAddress;
 	}
@@ -215,45 +215,45 @@ public class CRECUST {
 		if (COMM_ADDRESS.equals(this.commAddress, commAddress)) {
 			return;
 		}
-		COMM_ADDRESS.putString(commAddress, _byteBuffer);
+		COMM_ADDRESS.putString(commAddress, byteBuffer);
 		this.commAddress = commAddress;
 	}
 
 	public int getCommDateOfBirth() {
-		return COMM_DATE_OF_BIRTH.getInt(_byteBuffer);
+		return COMM_DATE_OF_BIRTH.getInt(byteBuffer);
 	}
 
 	public void setCommDateOfBirth(int commDateOfBirth) {
-		COMM_DATE_OF_BIRTH.putInt(commDateOfBirth, _byteBuffer);
+		COMM_DATE_OF_BIRTH.putInt(commDateOfBirth, byteBuffer);
 	}
 
 	public int getCommBirthDay() {
-		return COMM_BIRTH_DAY.getInt(_byteBuffer);
+		return COMM_BIRTH_DAY.getInt(byteBuffer);
 	}
 
 	public void setCommBirthDay(int commBirthDay) {
-		COMM_BIRTH_DAY.putInt(commBirthDay, _byteBuffer);
+		COMM_BIRTH_DAY.putInt(commBirthDay, byteBuffer);
 	}
 
 	public int getCommBirthMonth() {
-		return COMM_BIRTH_MONTH.getInt(_byteBuffer);
+		return COMM_BIRTH_MONTH.getInt(byteBuffer);
 	}
 
 	public void setCommBirthMonth(int commBirthMonth) {
-		COMM_BIRTH_MONTH.putInt(commBirthMonth, _byteBuffer);
+		COMM_BIRTH_MONTH.putInt(commBirthMonth, byteBuffer);
 	}
 
 	public int getCommBirthYear() {
-		return COMM_BIRTH_YEAR.getInt(_byteBuffer);
+		return COMM_BIRTH_YEAR.getInt(byteBuffer);
 	}
 
 	public void setCommBirthYear(int commBirthYear) {
-		COMM_BIRTH_YEAR.putInt(commBirthYear, _byteBuffer);
+		COMM_BIRTH_YEAR.putInt(commBirthYear, byteBuffer);
 	}
 
 	public int getCommCreditScore() {
 		if (!commCreditScoreIsSet) {
-			commCreditScore = COMM_CREDIT_SCORE.getInt(_byteBuffer);
+			commCreditScore = COMM_CREDIT_SCORE.getInt(byteBuffer);
 			commCreditScoreIsSet = true;
 		}
 		return commCreditScore;
@@ -263,46 +263,46 @@ public class CRECUST {
 		if (commCreditScoreIsSet && COMM_CREDIT_SCORE.equals(this.commCreditScore, commCreditScore)) {
 			return;
 		}
-		COMM_CREDIT_SCORE.putInt(commCreditScore, _byteBuffer);
+		COMM_CREDIT_SCORE.putInt(commCreditScore, byteBuffer);
 		this.commCreditScore = commCreditScore;
 		commCreditScoreIsSet = true;
 	}
 
 	public int getCommCsReviewDate() {
-		return COMM_CS_REVIEW_DATE.getInt(_byteBuffer);
+		return COMM_CS_REVIEW_DATE.getInt(byteBuffer);
 	}
 
 	public void setCommCsReviewDate(int commCsReviewDate) {
-		COMM_CS_REVIEW_DATE.putInt(commCsReviewDate, _byteBuffer);
+		COMM_CS_REVIEW_DATE.putInt(commCsReviewDate, byteBuffer);
 	}
 
 	public int getCommCsReviewDd() {
-		return COMM_CS_REVIEW_DD.getInt(_byteBuffer);
+		return COMM_CS_REVIEW_DD.getInt(byteBuffer);
 	}
 
 	public void setCommCsReviewDd(int commCsReviewDd) {
-		COMM_CS_REVIEW_DD.putInt(commCsReviewDd, _byteBuffer);
+		COMM_CS_REVIEW_DD.putInt(commCsReviewDd, byteBuffer);
 	}
 
 	public int getCommCsReviewMm() {
-		return COMM_CS_REVIEW_MM.getInt(_byteBuffer);
+		return COMM_CS_REVIEW_MM.getInt(byteBuffer);
 	}
 
 	public void setCommCsReviewMm(int commCsReviewMm) {
-		COMM_CS_REVIEW_MM.putInt(commCsReviewMm, _byteBuffer);
+		COMM_CS_REVIEW_MM.putInt(commCsReviewMm, byteBuffer);
 	}
 
 	public int getCommCsReviewYyyy() {
-		return COMM_CS_REVIEW_YYYY.getInt(_byteBuffer);
+		return COMM_CS_REVIEW_YYYY.getInt(byteBuffer);
 	}
 
 	public void setCommCsReviewYyyy(int commCsReviewYyyy) {
-		COMM_CS_REVIEW_YYYY.putInt(commCsReviewYyyy, _byteBuffer);
+		COMM_CS_REVIEW_YYYY.putInt(commCsReviewYyyy, byteBuffer);
 	}
 
 	public String getCommSuccess() {
 		if (commSuccess == null) {
-			commSuccess = COMM_SUCCESS.getString(_byteBuffer);
+			commSuccess = COMM_SUCCESS.getString(byteBuffer);
 		}
 		return commSuccess;
 	}
@@ -311,13 +311,13 @@ public class CRECUST {
 		if (COMM_SUCCESS.equals(this.commSuccess, commSuccess)) {
 			return;
 		}
-		COMM_SUCCESS.putString(commSuccess, _byteBuffer);
+		COMM_SUCCESS.putString(commSuccess, byteBuffer);
 		this.commSuccess = commSuccess;
 	}
 
 	public String getCommFailCode() {
 		if (commFailCode == null) {
-			commFailCode = COMM_FAIL_CODE.getString(_byteBuffer);
+			commFailCode = COMM_FAIL_CODE.getString(byteBuffer);
 		}
 		return commFailCode;
 	}
@@ -326,7 +326,7 @@ public class CRECUST {
 		if (COMM_FAIL_CODE.equals(this.commFailCode, commFailCode)) {
 			return;
 		}
-		COMM_FAIL_CODE.putString(commFailCode, _byteBuffer);
+		COMM_FAIL_CODE.putString(commFailCode, byteBuffer);
 		this.commFailCode = commFailCode;
 	}
 
