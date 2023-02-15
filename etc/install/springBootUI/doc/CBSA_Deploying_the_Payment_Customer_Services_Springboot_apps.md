@@ -87,19 +87,13 @@ Change directory to the Z-OS-Connect-Customer-Services-Interface folder in cics-
 
 This creates a folder called target, and inside of target is a .war file.
 
-At this point we are missing two JARs, ibm record generator and jzos. 
+At this point we are missing a Java Archive file for the jZOS Toolkit. 
 
-You will need to go to the following URL to download record generator:
-
-> https://ibm.github.io/mainframe-downloads/IBM-Record-Generator-for-Java.html
-
-Issue the following command from the command line:
-
-mvn install:install-file -Dfile="*download location*/ibm-recgen/ibm-recgen.jar" -DgroupId=ibm.recgen -DartifactId=ibm-recgen -Dversion=1.0.0 -Dpackaging=jar
-
-Then you need to goto your installation of java, typically this can be found in:
+You need to goto your installation of java, typically this can be found in:
 
 > /usr/lpp/java/lib/ext
+
+Copy the "ibmjzos.jar" to a location on your workstation and make a note of it.
 
 Issue the following command from the command line:
 
@@ -147,10 +141,6 @@ the EA (Edit Ascii File) option to edit it.
 
 > /u/cicsuser/CICSTS56/CBSAWLP/wlp/usr/servers/defaultServer/server.xml
 
-In the \<featureManager\> section, add support for Spring Boot by adding
-this line
-
-> \<feature\>springBoot-2.0\</feature\>
 
 Add the two applications by adding these lines:
 

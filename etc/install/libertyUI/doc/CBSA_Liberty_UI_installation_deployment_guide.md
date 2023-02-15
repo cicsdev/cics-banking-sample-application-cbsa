@@ -29,7 +29,10 @@
 
 -   These instructions utilise CICS TS 5.5 and therefore all directory
     names used etc. are based around that, they will need to be
-    amended accordingly for different versions of CICS.
+    amended accordingly for different versions of CICS. In particular, verify the "BOM" for CICS is correct
+for your version of CICS.
+
+- Java SE 1.8 or later on the workstation
 
 -   The hostname, port number, userid and CICS TS version may be
     different when you install/deploy into your own environment. We
@@ -238,19 +241,13 @@ Start the command prompt.
 
 Change directory to the cics-banking-sample-application-cbsa/src/webui/ folder
 
-At this point we are missing the JARs for the IBM Record Generator for Java (IRG) and the IBM JZOS toolkit. 
+At this point we are missing the JARs for the IBM JZOS toolkit. 
 
-You will need to go to the following URL to download the IBM Record Generator for Java:
-
-> https://ibm.github.io/mainframe-downloads/IBM-Record-Generator-for-Java.html
-
-Issue the following command from the command line:
-
-mvn install:install-file -Dfile="*download location*/ibm-recgen/ibm-recgen.jar" -DgroupId=ibm.recgen -DartifactId=ibm-recgen -Dversion=1.0.0 -Dpackaging=jar
-
-Then you need to goto your installation of IBM Java for z/OS, typically this can be found in:
+You need to goto your installation of IBM Java for z/OS, typically this can be found in:
 
 > /usr/lpp/java/lib/ext
+
+Copy the ibmjzos.jar to your workstation and make a note of the location.
 
 Issue the following command from the command line to add the IBM JZOS toolkit JAR:
 
@@ -260,11 +257,13 @@ Issue the following Maven command:
 
 > mvn clean package
 
+This will create "webui-1.0.war" file in a new "target" directory.
+
 ## 
 
 ## Export to apps directory:
 
-Copy the war file from the target directory into the apps directory. 
+Copy the war file from the target directory into the apps directory of the JVM server. 
 
 ## 
 
