@@ -56,7 +56,7 @@ server inside CICS, but also communicate with z/OS Connect. It is
 important to make sure that the connection information to the zOS
 Connect server is correct. As a default, these are set to port 30701
 and host localhost, if you utilised a different port number or hostname
-during the zOS Connect EE setup (as part of the base/COBOL installation)
+during the zOS Connect setup (as part of the base/COBOL installation)
 then please substitute the default values with yours.
 
 Should you need to change these, they are configured in the following files, which can be found on the repo at:

@@ -16,7 +16,7 @@ installer already has:
 
 -   a Db2 subsystem (v12 or greater)
 
--   a zOS Connect EE server.
+-   a zOS Connect server.
 
 These instructions detail the steps required to:
 
@@ -34,7 +34,7 @@ These instructions detail the steps required to:
     populate the Db2 tables with data.
 
 6.  Make the necessary changes to your CICS region start up JCL and zOS
-    Connect EE server.xml file.
+    Connect server.xml file.
 
 
 At the end, your CICS region should be capable of successfully executing
@@ -60,30 +60,30 @@ There are some assumptions within this document, these are:
 > subsystem used, in this document, is called **DBCG**.
 >
 > c. If the restful API or the Payment and/or the Customer Services
-> interfaces are required, it is assumed that a zOS Connect EE Server is
+> interfaces are required, it is assumed that a zOS Connect Server is
 > already installed and available. For the sake of illustration, the one
 > we use is installed in USS at:
 >
 > >/var/zosconnect/v3r0/servers/defaultServer/resources/zosconnect
 >
-> (\* the zOS Connect EE *server.xml* file for your own installation may
+> (\* the zOS Connect *server.xml* file for your own installation may
 > be installed in a different location in USS and the instructions
 > should be applied accordingly).
 
 **NOTE 1** - The installation illustrated in this document replaces the
-'default' zOS Connect EE **server.xml** with one which utilises the port
+'default' zOS Connect **server.xml** with one which utilises the port
 numbers ***30701*** (HTTP) and ***30702*** (HTTPS) for the CBSA restful
 API. Should these port numbers not be appropriate in your host
 environment then they may be changed in the **server.xml** member after
 downloading it from the repo folder:
 
-> cicsdev/cics-banking-sample-application-cbsa/etc/install/base/zoseeserver
+> cicsdev/cics-banking-sample-application-cbsa/etc/install/base/zosconnectserver
 
 (see [Installation instructions](#installation-instructions) below for
 more information).
 
 **NOTE 2** - The last line in **server.xml** references the connection
-between the z/OS Connect EE server and the CICSTS56 CICS system and it
+between the z/OS Connect server and the CICSTS56 CICS system and it
 utilises port ***30709***:
 
 >\<zosconnect_cicsIpicConnection id=\"cicsConn\"
@@ -152,8 +152,8 @@ of the following GitHub folders into each respective host library.
 
 >| GitHub folder content                                                         | USS Location on the host                    |
 >| ---------------------                                                         | ------------------------                    |
->| /cicsdev/cics-banking-sample-application-cbsa/etc/install/base/aarfiles       | Copy all members/files into the location of the zOS Connect EE **apis** folder in USS, in our case it is /var/zosconnect/v3r0/servers/defaultServer/resources/zosconnect/**apis**/ (**Note** - if your zOS Connect EE server runs from a different location in USS, copy the content of the GitHub folder into the location of your own server's **apis** folder). |
->| /cicsdev/cics-banking-sample-application-cbsa/etc/install/base/sarfiles       | Copy all members/files into the location of the zOS Connect **servies** folder in USS, in our case it is /var/zosconnect/v3r0/servers/defaultServer/resources/zosconnect/**services**/ (**Note** - if  your zOS Connect EE server runs from a different location in USS, copy the content of GitHub folder into the location of your own server's **services** folder). |
+>| /cicsdev/cics-banking-sample-application-cbsa/etc/install/base/aarfiles       | Copy all members/files into the location of the zOS Connect **apis** folder in USS, in our case it is /var/zosconnect/v3r0/servers/defaultServer/resources/zosconnect/**apis**/ (**Note** - if your zOS Connect server runs from a different location in USS, copy the content of the GitHub folder into the location of your own server's **apis** folder). |
+>| /cicsdev/cics-banking-sample-application-cbsa/etc/install/base/sarfiles       | Copy all members/files into the location of the zOS Connect **services** folder in USS, in our case it is /var/zosconnect/v3r0/servers/defaultServer/resources/zosconnect/**services**/ (**Note** - if  your zOS Connect server runs from a different location in USS, copy the content of GitHub folder into the location of your own server's **services** folder). |
 
 
 
@@ -215,7 +215,7 @@ CBSA definitions and add the CSD GROUP(BANK) into a **LIST** called
 >> for CBSA are located in CBSA.JCL.INSTALL(BANK).
 >> You may also wish to edit the BANK member if you should need to use a
 >> different port number for the IPIC connection between the CICS region
->> and the zOS Connect EE server (ZOSEE) - we used port number 30709).
+>> and the zOS Connect server (ZOSEE) - we used port number 30709).
 
 2. Check job CBSA.JCL.INSTALL(**CICSTS56**), this is the startup procedure
 for the CICS region that we are using. You will have you own JCL or PROC
@@ -241,7 +241,7 @@ most pertinent things from the SIT are:
 
 ## Make RACF and USS security changes 
 
-***Some RACF changes for Db2 authorisation and the zOS Connect EE server
+***Some RACF changes for Db2 authorisation and the zOS Connect server
 will likely be required.***
 
 1. Please review the content of member CBSA.JCL.INSTALL(**RACF001**). This
@@ -251,9 +251,9 @@ subsystem **DBCG**. Similar RACF authorisations will need to be made to
 the user and Db2 subsystem in use in your environment.
 
 2. Please also review the content of member CBSA.JCL.INSTALL(**ZOSCSEC**).
-This makes changes to the security required for zOS Connect EE. A
+This makes changes to the security required for zOS Connect. A
 similar authorisation will need to be made to the location of the apis
-and services folder in use by your own zOS Connect EE server (the apis
+and services folder in use by your own zOS Connect server (the apis
 and services folder contains the aarfile and sarfiles respectively).
 
 ***Stop and Restart the CICS region.***
@@ -263,11 +263,11 @@ definitions for CBSA, it is necessary to stop and restart your CICS
 region at this point. The CICS region should be COLD started, to ensure
 that all of the changes are pulled in.
 
-***Stop and Restart the zOS Connect EE Server.***
+***Stop and Restart the zOS Connect Server.***
 
-1. In order to pick up the changes to the z/OS Connect EE Server (which
+1. In order to pick up the changes to the z/OS Connect Server (which
 may already be running), it is necessary to stop and restart your zOS
-Connect EE server at this point.
+Connect server at this point.
 
 ## 
 
@@ -327,9 +327,9 @@ correctly populated.
 
 ***\
 \
-Checking the zOS Connect EE API:***
+Checking the zOS Connect API:***
 
-4. Confirm that the zOS Connect EE server has been restarted and is
+4. Confirm that the zOS Connect server has been restarted and is
 executing.
 
 5. Go to a web browser and put in this URL:
@@ -343,7 +343,7 @@ executing.
 
 
 If data is not returned, then check the port number and status of the
-z/OS Connect EE server. If these are OK, check in the CICS region (using
+z/OS Connect server. If these are OK, check in the CICS region (using
 the **CEMT I TCPIPS(ZOSEE)** command) that there is a TCPIP Service
 called **ZOSEE** and that it has been installed and that the TCPIP
 Service is Open. You should see something like this:
@@ -351,9 +351,9 @@ Service is Open. You should see something like this:
 ![TCPIPS active system](../doc/images/Baseinstall/Baseinstall_TCPIPS_in_active_system.jpg)
 
 The above TCPIP Service uses port 30709 in our set up (yours may be
-different) - this is the connection between the zOS Connect EE server
+different) - this is the connection between the zOS Connect server
 and the CICS region.
 
-Finally, check the zOS Connect EE Server logs to ensure that the API
+Finally, check the zOS Connect Server logs to ensure that the API
 archive files (the aars), and the service archive files (the sars) were
 all installed successfully.

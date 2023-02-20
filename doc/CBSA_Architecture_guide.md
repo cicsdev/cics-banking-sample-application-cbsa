@@ -34,7 +34,7 @@ The base/COBOL installation assumes that the installer has:
 
 -   A Db2 subsystem (v12 or greater)
 
--   A zOS Connect EE server
+-   A zOS Connect server
 
 For the CBSA base offering the CICS region does not need to have a JVM
 server, although for additional/optional CBSA installation offerings
@@ -116,8 +116,7 @@ The Payment and Customer Services UI assumes:
 
 -   That there is a Liberty JVM (installed as part of the Liberty UI installation)
 
--   That there is a zOS Connect EE server (installed as part of the base
-    installation)
+-   That there is a zOS Connect server (installed as part of the base installation)
 
 -   Java 8 or later
 
