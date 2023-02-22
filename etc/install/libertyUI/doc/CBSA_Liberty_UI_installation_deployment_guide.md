@@ -146,7 +146,7 @@ If you have already installed the Liberty UI, you can skip this step.
 >> **Please note:** that if the execution host machine is not very
 >> powerful, that Java may take a significant time to start.
 
->4.  Add the following to the JVM profile to add support for DB2:
+>4.  Add the following to the JVM profile to add support for Db2:
 
 >> -Dcom.ibm.cics.jvmserver.wlp.jdbc.driver.location=/usr/lpp/db2c10/jdbc/
 >>
@@ -241,7 +241,7 @@ Start the command prompt.
 
 Change directory to the cics-banking-sample-application-cbsa/src/webui/ folder
 
-At this point we are missing the JARs for the IBM JZOS toolkit. 
+At this point we are missing the java archive (jar) for the IBM JZOS Toolkit API. 
 
 You need to goto your installation of IBM Java for z/OS, typically this can be found in:
 
@@ -249,7 +249,7 @@ You need to goto your installation of IBM Java for z/OS, typically this can be f
 
 Copy the ibmjzos.jar to your workstation and make a note of the location.
 
-Issue the following command from the command line to add the IBM JZOS toolkit JAR:
+Issue the following command from the command line to add the IBM JZOS Toolkit API jar:
 
 > mvn install:install-file -Dfile="*download location*/ibmjzos.jar" -DgroupId=jzos -DartifactId=ibmjzos -Dversion=1.0.0 -Dpackaging=jar
 
