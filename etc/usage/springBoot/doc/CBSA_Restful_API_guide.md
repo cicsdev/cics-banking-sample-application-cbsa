@@ -8,7 +8,7 @@ interfaces have different usage scenarios, aimed at different audiences.
 
 The RESTful APIs for both can be driven directly from a URL, or can be
 driven from the provided Payment and Customer Services Interfaces. In
-each case the URL goes via a zOS Connect EE server (represented below as
+each case the URL goes via a zOS Connect server (represented below as
 ***your-host-name*** and ***your-port-number***)
 
 Please refer to the GitHub repo:
@@ -28,8 +28,8 @@ cicsdev/cics-banking-sample-application-cbsa/etc/usage/sprintBoot/doc.
 
 ### The associated RESTful Payment details:
 
-The Payment interface utilises a z/OS Connect EE RESTful API, which
-requires the use of a zOS Connect EE server. The RESTful API can also be
+The Payment interface utilises a z/OS Connect RESTful API, which
+requires the use of a zOS Connect server. The RESTful API can also be
 driven independently of the Payment interface. It can, therefore, be
 integrated into other applications if desired.
 
@@ -88,7 +88,7 @@ integrated into other applications if desired.
 >
 > \"COMM_ORIGIN\": {
 >
-> \"COMM_APPLID\": \"NETFLIX \",
+> \"COMM_APPLID\": \"EXAMPLE \",
 >
 > \"COMM_USERID\": \"LTD \",
 >
@@ -110,7 +110,7 @@ integrated into other applications if desired.
 >
 > }
 >
-> This example JSON request body is used by the company NETFLIX LTD to
+> This example JSON request body is used by the company EXAMPLE LTD to
 > request a Payment of -10.99 (a payment is represented by a negative
 > COMM_AMT value) from account number 000000876 at the bank.
 >
@@ -130,7 +130,7 @@ integrated into other applications if desired.
 >
 > \"COMM_NETWRK_ID\": \"\",
 >
-> \"COMM_APPLID\": \"NETFLIX\",
+> \"COMM_APPLID\": \"EXAMPLE\",
 >
 > \"COMM_FACILITY_NAME\": \"\",
 >
@@ -162,7 +162,7 @@ integrated into other applications if desired.
 > utilise the full copybook on the JSON request and response,
 > illustrating the full range of data which may be flowed. Should some
 > attributes not be required, it is simple enough to change the mappings
-> in zOS Connect EE.
+> in zOS Connect.
 
 #### Examples of the JSON response body returned if the payment/credit cannot be made:
 
@@ -181,7 +181,7 @@ integrated into other applications if desired.
 >
 > \"COMM_NETWRK_ID\": \"\",
 >
-> \"COMM_APPLID\": \"NETFLIX\",
+> \"COMM_APPLID\": \"EXAMPLE\",
 >
 > \"COMM_FACILITY_NAME\": \"\",
 >
@@ -223,7 +223,7 @@ integrated into other applications if desired.
 >
 > \"COMM_NETWRK_ID\": \"\",
 >
-> \"COMM_APPLID\": \"NETFLIX\",
+> \"COMM_APPLID\": \"EXAMPLE\",
 >
 > \"COMM_FACILITY_NAME\": \"\",
 >
@@ -265,7 +265,7 @@ integrated into other applications if desired.
 >
 > \"COMM_NETWRK_ID\": \"\",
 >
-> \"COMM_APPLID\": \"NETFLIX\",
+> \"COMM_APPLID\": \"EXAMPLE\",
 >
 > \"COMM_FACILITY_NAME\": \"\",
 >
@@ -309,7 +309,7 @@ integrated into other applications if desired.
 >
 > \"COMM_NETWRK_ID\": \"\",
 >
-> \"COMM_APPLID\": \"NETFLIX\",
+> \"COMM_APPLID\": \"EXAMPLE\",
 >
 > \"COMM_FACILITY_NAME\": \"\",
 >
@@ -342,7 +342,7 @@ integrated into other applications if desired.
 
 #### Other information:
 
-> The same interface can also be used by NETFLIX LTD to issue a credit
+> The same interface can also be used by EXAMPLE LTD to issue a credit
 > back to a customer. To credit an amount simply drop the minus sign
 > from the COMM_AMT.
 
@@ -757,7 +757,7 @@ cicsdev/cics-banking-sample-application-cbsa/etc/usage/sprintBoot/doc.
 
 ### The associated RESTful Customer Service details:
 
-The Customer Service Interface utilises a range of new z/OS Connect EE
+The Customer Service Interface utilises a range of new z/OS Connect
 RESTful APIs. These RESTful APIs can also be driven independently of the
 Customer Service Interface and can, therefore, be integrated into other
 applications if desired.
@@ -852,7 +852,7 @@ applications if desired.
 > to utilise the full copybook on the JSON request and response,
 > illustrating the full range of data which may be flowed. Should some
 > attributes not be required, it is simple enough to change the mappings
-> in zOS Connect EE.
+> in zOS Connect.
 
 #### Examples of the JSON response body returned if the customer enquiry cannot be made:
 
@@ -1016,7 +1016,7 @@ applications if desired.
 > Backend program **INQCUST** is being driven by this API call utilising
 > copybook **INQCUSTZ**. Note the copybook INQCUSTZ and INQCUST are
 > identical except that in INQCUSTZ any POINTERs have been converted
-> into PIC X(4), this is to allowed zOS Connect EE to utilise the
+> into PIC X(4), this is to allowed zOS Connect to utilise the
 > copybook correctly.
 
 #### Swagger details:
@@ -1551,7 +1551,7 @@ applications if desired.
 > to utilise the full copybook on the JSON request and response,
 > illustrating the full range of data which may be flowed. Should some
 > attributes not be required, it is simple enough to change the mappings
-> in zOS Connect EE.
+> in zOS Connect.
 
 #### Examples of the JSON response body returned if the customer update cannot be made:
 
@@ -2203,7 +2203,7 @@ applications if desired.
 > leading zeros. We have intentionally chosen to utilise the full
 > copybook on the JSON request and response, illustrating the full range
 > of data which may be flowed. Should some attributes not be required,
-> it is simple enough to change the mappings in zOS Connect EE.
+> it is simple enough to change the mappings in zOS Connect.
 
 #### Examples of the JSON response body returned if the list accounts enquiry cannot be made:
 
@@ -2280,7 +2280,7 @@ applications if desired.
 > Backend program **INQACCCU** is being driven by this API, which
 > utilises copybook **INQACCCZ**. The copybook INQACCCZ and INQACCCU are
 > identical except that in INQACCCZ any POINTERs have been converted
-> into PIC X(4), this allows zOS Connect EE to utilise the copybook
+> into PIC X(4), this allows zOS Connect to utilise the copybook
 > correctly.
 
 #### Swagger details:
@@ -2874,7 +2874,7 @@ applications if desired.
 > intentionally chosen to utilise the full copybook on the JSON request
 > and response, illustrating the full range of data which may be flowed.
 > Should some attributes not be required, it is simple enough to change
-> the mappings in zOS Connect EE.
+> the mappings in zOS Connect.
 
 #### Examples of the JSON response body returned if the customer creation cannot be made:
 
@@ -3522,7 +3522,7 @@ applications if desired.
 > zeros. We have intentionally chosen to utilise the full copybook on
 > the JSON request and response, illustrating the full range of data
 > which may be flowed. Should some attributes not be required, it is
-> simple enough to change the mappings in zOS Connect EE.
+> simple enough to change the mappings in zOS Connect.
 
 #### Examples of the JSON response body returned if the delete request cannot be made:
 
@@ -3941,7 +3941,7 @@ applications if desired.
 > utilise the full copybook on the JSON request and response,
 > illustrating the full range of data which may be flowed. Should some
 > attributes not be required, it is simple enough to change the mappings
-> in zOS Connect EE.
+> in zOS Connect.
 
 #### Examples of the JSON response body returned if the account enquiry cannot be made:
 
@@ -3990,7 +3990,7 @@ applications if desired.
 > Backend program **INQACC** is being driven by this API call utilising
 > copybook **INQACCZ**. The copybook INQACCZ and INQACC are identical
 > except that in INQACCZ any POINTERs have been converted into PIC X(4),
-> this allows zOS Connect EE to utilise the copybook correctly.
+> this allows zOS Connect to utilise the copybook correctly.
 
 #### Swagger details:
 
@@ -4501,7 +4501,7 @@ applications if desired.
 > utilise the full copybook on the JSON request and response,
 > illustrating the full range of data which may be flowed. Should some
 > attributes not be required, it is simple enough to change the mappings
-> in zOS Connect EE.
+> in zOS Connect.
 
 #### Examples of the JSON response body returned if the account update cannot be made:
 
@@ -5114,7 +5114,7 @@ applications if desired.
 > intentionally chosen to utilise the full copybook on the JSON request
 > and response, illustrating the full range of data which may be flowed.
 > Should some attributes not be required, it is simple enough to change
-> the mappings in zOS Connect EE.
+> the mappings in zOS Connect.
 
 #### Examples of the JSON response body returned if the account creation cannot be made:
 
@@ -5812,7 +5812,7 @@ applications if desired.
 > zeros. We have intentionally chosen to utilise the full copybook on
 > the JSON request and response, illustrating the full range of data
 > which may be flowed. Should some attributes not be required, it is
-> simple enough to change the mappings in zOS Connect EE.
+> simple enough to change the mappings in zOS Connect.
 
 #### Examples of the JSON response body returned if the delete account request cannot be made:
 
@@ -5925,7 +5925,7 @@ applications if desired.
 > Backend program **DELACC** is being driven by this API, the call
 > utilises copybook **DELACCZ**. Note the copybook DELACCZ and DELACC
 > are identical except that in DELACCZ any POINTERs have been converted
-> into PIC X(4), allowing zOS Connect EE to utilise the copybook
+> into PIC X(4), allowing zOS Connect to utilise the copybook
 > correctly.
 
 #### Swagger details:

@@ -15,6 +15,8 @@
 
 -   the CBSA base/COBOL installed in the CICS region already
 
+-   Java SE 1.8 or later on the workstation
+
 > These instructions detail the steps required to:
 
 1.  Create and authorise a JVM profile.

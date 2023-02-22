@@ -16,7 +16,7 @@ for the CBSA RESTful API guide.
 ### The business justification/usage scenario for the Customer Services interface:
 
 The CBSA Customer Services interface will be used, in branch, to reduce
-people's queuing time. Staff will be deployed as "queue busters" at peak
+people's queueing time. Staff will be deployed as "queue busters" at peak
 times. They will be armed with a tablet, and they will walk the queue
 and perform some of the functions of the Teller. The bank doesn't want
 the queue busters to become a target for robbery, so the tasks that they

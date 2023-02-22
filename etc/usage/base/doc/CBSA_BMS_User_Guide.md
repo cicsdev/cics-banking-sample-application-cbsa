@@ -32,7 +32,7 @@
 
 -   The full CBSA application demonstrates how various technologies can
     be integrated together; CICS, COBOL, BMS, Db2, SQL, Java, Liberty,
-    Springboot etc.
+    Spring Boot etc.
 
 -   CBSA is an example of a traditionally written application, which has
     been extended over time. It is structured in a way that most

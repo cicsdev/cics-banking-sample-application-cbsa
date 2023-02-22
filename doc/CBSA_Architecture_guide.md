@@ -118,7 +118,7 @@ The Payment and Customer Services UI assumes:
 
 -   That there is a zOS Connect server (installed as part of the base installation)
 
--   Java 8 or later
+-   Java SE 1.8 or later 
 
 If you wish to utilise the RESTful API via the Springboot Payment or
 Customer services UI or from a web browser, you will need a zOS Connect

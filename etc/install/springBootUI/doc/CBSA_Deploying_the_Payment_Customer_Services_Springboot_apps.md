@@ -35,7 +35,7 @@ These instructions detail the steps required to:
 -   A Liberty JVM is running inside of the CICS region - this is set up
     as part of the Liberty UI installation process.
 
--   Java 8 or later
+-   Java SE 1.8 or later on the workstation
 
 -   Maven is utilised during the deployment of the apps -
     instructions are provided below.
