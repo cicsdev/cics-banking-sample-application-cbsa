@@ -2,7 +2,7 @@
 
 Thank you for contributing to this project.
 
-We welcome bug reports and discussions about new function in the issue tracker
+We welcome bug reports, discussions about new function, and suggested updates to the documentation in the issue tracker.
 
 You should read these guidelines to help you contribute.
 
@@ -14,4 +14,4 @@ When raising bugs, try to give a good indication of the exact circumstances that
 
 ## Requesting new features
 
-Please request new features via the issue tracker. When requesting features, try to show why you want the feature you're requesting.
+Please request new features or updates to the documentation in the issue tracker. When requesting features, try to show why you want the feature you're requesting.

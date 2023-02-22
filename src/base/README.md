@@ -12,8 +12,8 @@ You can use the CICS bank sample application to explore the following:
 
 ## Prerequisites
 
-* CICS Transaction Server V4.1 or later
-* IBM Db2
+* CICS Transaction Server V5.4 or later
+* IBM Db2 V12 or later
 
 ## Application architecture
 
