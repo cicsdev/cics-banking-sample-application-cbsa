@@ -224,7 +224,7 @@ If you have already installed the Liberty UI, you can skip this step.
 >
 > \<feature\>json-1.0\</feature\>
 >
-> \<feature\>jspn-2.3\</feature\>
+> \<feature\>jsp-2.3\</feature\>
 
 4. Add the following to allow the Liberty UI to be deployed in the next step.
 

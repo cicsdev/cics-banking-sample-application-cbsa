@@ -40,7 +40,6 @@ public class Customer
 
 	private static final String DASHES = "------------";
 
-	// String ACCOUNT_EYECATCHER CHAR(4),
 	private String customerNumber;
 
 	private String sortcode;
