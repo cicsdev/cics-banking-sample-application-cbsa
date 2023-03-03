@@ -99,14 +99,14 @@ for the Liberty UI installation documentation and:
 
 for the Liberty UI guide.
 
-## The Payment and Customer Services (Springboot) User Interface installation architecture diagram:
+## The Payment and Customer Services (Spring Boot) User Interface installation architecture diagram:
 
-The diagram below shows the addition of the Springboot Payment and
+The diagram below shows the addition of the Spring Boot Payment and
 Customer Services user interfaces. These utilise the RESTful APIs which
 interface with a zOS Connect EE server and from there talk to the CICS
 region.
 
-![Payment and CS architecture diagram](../doc/images/Architecture/Payment_and_Customer_Services_UI_CBSA_architecture_diagram2.jpg)
+![Payment and CS architecture diagram](../doc/images/Architecture/Payment_and_Customer_Services_UI_CBSA_architecture_diagram.jpg)
 
 ## Assumptions & Requirements for the Payment and Customer UIs: 
 
@@ -120,14 +120,14 @@ The Payment and Customer Services UI assumes:
 
 -   Java SE 1.8 or later 
 
-If you wish to utilise the RESTful API via the Springboot Payment or
+If you wish to utilise the RESTful API via the Spring Boot Payment or
 Customer services UI or from a web browser, you will need a zOS Connect
 EE server. The installation instructions for the zOS Connect EE Server
 are included in the base/COBOL CBSA documentation (please refer to
 <https://github.com/cicsdev/cics-banking-sample-application-cbsa/etc/install/base/doc>
 
 For more information about installing the Payment and Customer Services
-UI (Springboot) please refer to:
+UI (Spring Boot) please refer to:
 
 <https://github.com/cicsdev/cics-banking-sample-application-cbsa/etc/install/springBootUI/doc>
 
