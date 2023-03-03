@@ -4,7 +4,7 @@
 
 ### Introduction:
 
-The Customer Services interface is a SpringBoot application, which can
+The Customer Services interface is a Spring Boot application, which can
 drive back-end banking data, via a series of RESTful API calls, made to
 a zOS Connect server, which in turn, routes the requests to the CICS
 region. Please refer to the GitHub repo:
