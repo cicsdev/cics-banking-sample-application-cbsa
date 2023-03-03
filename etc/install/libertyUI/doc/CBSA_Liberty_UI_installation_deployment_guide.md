@@ -15,7 +15,7 @@
 
 -   the CBSA base/COBOL installed in the CICS region already
 
--   Java SE 1.8 or later on the workstation
+-   Java SE 1.8 or later. Java 11 is not supported.
 
 > These instructions detail the steps required to:
 
@@ -166,7 +166,7 @@ If you have already installed the Liberty UI, you can skip this step.
 
 >> /u/cicsuser/
 
->6. At CICS TS 5.5, CICS TS 5.6 and CICS TS 6.1, add the following to the JVM profile to prevent CICS adding "wab" support.
+>6. At CICS TS 5.5 and CICS TS 5.6, add the following to the JVM profile to prevent CICS adding "wab" support.
 
 >> -Dcom.ibm.cics.jvmserver.wlp.wab=false
 
@@ -226,9 +226,6 @@ If you have already installed the Liberty UI, you can skip this step.
 >
 > \<feature\>jsp-2.3\</feature\>
 
-4. Add the following to allow the Liberty UI to be deployed in the next step.
-
-> \<webApplication location="webui-1.0.war"/> 
 
 ## 
 
