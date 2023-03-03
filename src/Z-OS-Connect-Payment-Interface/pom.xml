@@ -9,6 +9,8 @@
 		<version>2.7.4</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
+
+
 	<groupId>com.ibm.cics.cip.bank.springboot</groupId>
 	<artifactId>paymentinterface</artifactId>
 	<version>1.1</version>
@@ -111,7 +113,7 @@
 		<dependency>
 			<groupId>org.yaml</groupId>
 			<artifactId>snakeyaml</artifactId>
-			<version>1.32</version>
+			<version>2.0</version>
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>
