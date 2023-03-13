@@ -1,10 +1,10 @@
+       PROCESS CICS,NODYNAM,NSYMBOL(NATIONAL),TRUNC(STD)
+       CBL CICS('SP,EDF')
       ******************************************************************
       *                                                                *
       *  Copyright IBM Corp. 2023                                      *
       *                                                                *
       ******************************************************************
-       PROCESS CICS,NODYNAM,NSYMBOL(NATIONAL),TRUNC(STD)
-       CBL CICS('SP,EDF')
 
 
       ******************************************************************
@@ -26,7 +26,7 @@
 
        DATA DIVISION.
        WORKING-STORAGE SECTION.
- 
+
        01 WS-CICS-WORK-AREA.
           03 WS-CICS-RESP              PIC S9(8) COMP VALUE 0.
           03 WS-CICS-RESP2             PIC S9(8) COMP VALUE 0.

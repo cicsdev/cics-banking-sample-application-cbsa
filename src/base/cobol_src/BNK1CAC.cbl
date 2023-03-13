@@ -1,10 +1,10 @@
+       PROCESS CICS,NODYNAM,NSYMBOL(NATIONAL),TRUNC(STD)
+       CBL CICS('SP,EDF')
       ******************************************************************
       *                                                                *
       *  Copyright IBM Corp. 2023                                      *
       *                                                                *
       ******************************************************************
-       PROCESS CICS,NODYNAM,NSYMBOL(NATIONAL),TRUNC(STD)
-       CBL CICS('SP,EDF')
 
       ******************************************************************
       * This is the Create Account program. It verifies the input

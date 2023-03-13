@@ -1,12 +1,11 @@
+       PROCESS CICS,NODYNAM,NSYMBOL(NATIONAL),TRUNC(STD)
+       CBL CICS('SP,EDF,DLI')
+       CBL SQL
       ******************************************************************
       *                                                                *
       *  Copyright IBM Corp. 2023                                      *
       *                                                                *
       ******************************************************************
-       PROCESS CICS,NODYNAM,NSYMBOL(NATIONAL),TRUNC(STD)
-       CBL CICS('SP,EDF,DLI')
-       CBL SQL
-
       ******************************************************************
       * This program gets called when someone updates the account
       * details (this excludes the balance which must be updated by

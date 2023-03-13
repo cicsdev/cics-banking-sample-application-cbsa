@@ -1,11 +1,10 @@
+       CBL CICS('SP,EDF,DLI')
+       CBL SQL
       ******************************************************************
       *                                                                *
       *  Copyright IBM Corp. 2023                                      *
       *                                                                *
       ******************************************************************
-       CBL CICS('SP,EDF,DLI')
-       CBL SQL
-
       ******************************************************************
       * This program takes an incoming customer number
       * and determines which accounts it is associated with

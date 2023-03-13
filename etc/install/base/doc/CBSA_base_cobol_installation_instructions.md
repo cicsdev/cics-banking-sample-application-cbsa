@@ -105,8 +105,8 @@ more information)
 
 ### Installation instructions:
 
-1. Create a PDSE on you host machine called **CBSA.JCL.INSTALL** (this
-should be capable of holding JCL members). Here is the dataset
+1. Create a PDSE on you host machine. In our example, we called it **CBSA.JCL.INSTALL** (this
+should be capable of holding JCL members). It must be Fixed Block and with a record length of 80. Here is the dataset
 information that we used:
 
 >![PDSE](../doc/images/Baseinstall/Baseinstall_PDSE.jpg)
@@ -182,7 +182,9 @@ data.](#create-the-vsam-files-and-populate-the-db2-tables-with-data)).
 
 ## 
 
-## Compile/assemble, linkedit and bind the source code modules and BMS maps:
+## Compile/assemble, linkedit and bind the source code modules and BMS maps. 
+
+CBSA.CICSBSA.BUILDJCL(DEFAULT) contains default values for the high-level qualifiers for CICS, DB2, COBOL, Language Environment and CBSA itself. Change these if necessary.
 
 1. Execute job CBSA.CICSBSA.BUILDJCL(**COMPALL**) to compile all of the
 source code.

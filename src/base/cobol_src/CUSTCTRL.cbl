@@ -1,11 +1,10 @@
+       CBL CICS('SP,EDF')
+       CBL SQL
       ******************************************************************
       *                                                                *
       *  Copyright IBM Corp. 2023                                      *
       *                                                                *
       ******************************************************************
-       CBL CICS('SP,EDF')
-       CBL SQL
-
 
        IDENTIFICATION DIVISION.
        PROGRAM-ID. CUSTCTRL.

@@ -1,8 +1,8 @@
-//*
-//* Copyright IBM Corp. 2023       
-//*
 //INSTDB2 JOB 'DB2',NOTIFY=&SYSUID,CLASS=A,MSGCLASS=H,
 //          MSGLEVEL=(1,1),REGION=4M
+//*
+//* Copyright IBM Corp. 2023
+//*
 //*
 //JCLLIB  JCLLIB ORDER=DSNC10.PROCLIB
 //JOBLIB  DD  DISP=SHR,DSN=DSNC10.SDSNLOAD

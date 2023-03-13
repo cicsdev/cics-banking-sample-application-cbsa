@@ -1,10 +1,10 @@
+       PROCESS CICS,NODYNAM,NSYMBOL(NATIONAL),TRUNC(STD)
+       CBL CICS('SP,EDF')
       ******************************************************************
       *                                                                *
       *  Copyright IBM Corp. 2023                                      *
       *                                                                *
       ******************************************************************
-       PROCESS CICS,NODYNAM,NSYMBOL(NATIONAL),TRUNC(STD)
-       CBL CICS('SP,EDF')
 
       ******************************************************************
       * This program lists accounts belonging to a specified customer

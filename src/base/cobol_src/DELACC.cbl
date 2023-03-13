@@ -1,10 +1,10 @@
+       CBL CICS('SP,EDF')
+       CBL SQL
       ******************************************************************
       *                                                                *
       *  Copyright IBM Corp. 2023                                      *
       *                                                                *
       ******************************************************************
-       CBL CICS('SP,EDF')
-       CBL SQL
       ******************************************************************
       * This program takes an incoming account number it then accesses
       * the account datastore and retrieves the associated account

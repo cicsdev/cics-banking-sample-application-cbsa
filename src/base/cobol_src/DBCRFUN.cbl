@@ -1,12 +1,11 @@
+       PROCESS CICS,NODYNAM,NSYMBOL(NATIONAL),TRUNC(STD)
+       CBL CICS('SP,EDF')
+       CBL SQL
       ******************************************************************
       *                                                                *
       *  Copyright IBM Corp. 2023                                      *
       *                                                                *
       ******************************************************************
-       PROCESS CICS,NODYNAM,NSYMBOL(NATIONAL),TRUNC(STD)
-       CBL CICS('SP,EDF')
-       CBL SQL
-
       ******************************************************************
       * This program will get called when someone pays some cash in to
       * the bank over the counter or takes out some cash out over the

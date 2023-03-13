@@ -1,13 +1,11 @@
+       PROCESS CICS,NODYNAM,NSYMBOL(NATIONAL),TRUNC(STD)
+       CBL CICS('SP,EDF')
+       CBL SQL
       ******************************************************************
       *                                                                *
       *  Copyright IBM Corp. 2023                                      *
       *                                                                *
       ******************************************************************
-       PROCESS CICS,NODYNAM,NSYMBOL(NATIONAL),TRUNC(STD)
-       CBL CICS('SP,EDF')
-       CBL SQL
-
-
 
       ******************************************************************
       * This program gets called when someone initiates a transfer
@@ -53,7 +51,7 @@
 
        DATA DIVISION.
        WORKING-STORAGE SECTION.
- 
+
 
        COPY SORTCODE.
 

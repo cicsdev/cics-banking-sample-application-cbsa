@@ -1,7 +1,7 @@
+//CRELIBS JOB ,,NOTIFY=&SYSUID.
 //*
-//* Copyright IBM Corp. 2023       
+//* Copyright IBM Corp. 2023
 //*
-//CRELIBS JOB ,,NOTIFY=&SYSUID.     
 //*
 // JCLLIB ORDER=CBSA.JCL.INSTALL                                        00020000
 //IEFBR14 EXEC PGM=IEFBR14                                              00030000

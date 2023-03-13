@@ -1,9 +1,9 @@
+       CBL CICS('SP,EDF')
       ******************************************************************
       *                                                                *
       *  Copyright IBM Corp. 2023                                      *
       *                                                                *
       ******************************************************************
-       CBL CICS('SP,EDF')
 
        IDENTIFICATION DIVISION.
        PROGRAM-ID. GETCOMPY.
@@ -24,7 +24,7 @@
 
 
        WORKING-STORAGE SECTION.
- 
+
 
        LINKAGE SECTION.
        01 DFHCOMMAREA.

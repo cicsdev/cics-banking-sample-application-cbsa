@@ -1,9 +1,9 @@
+       CBL CICS('SP,EDF')
       ******************************************************************
       *                                                                *
       *  Copyright IBM Corp. 2023                                      *
       *                                                                *
       ******************************************************************
-       CBL CICS('SP,EDF')
       ******************************************************************
       * This program is the dummy credit agency, used for credit
       * scoring. Data is passed to the program via a channel and

@@ -1,11 +1,10 @@
+       CBL CICS('SP,EDF')
+       CBL SQL
       ******************************************************************
       *                                                                *
       *  Copyright IBM Corp. 2023                                      *
       *                                                                *
       ******************************************************************
-       CBL CICS('SP,EDF')
-       CBL SQL
-
       ******************************************************************
       * This program takes customer information from the BMS
       * application (name, address and DOB) and should get the SORTCODE,

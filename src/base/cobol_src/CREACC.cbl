@@ -1,11 +1,10 @@
+       CBL CICS('SP,EDF')
+       CBL SQL
       ******************************************************************
       *                                                                *
       *  Copyright IBM Corp. 2023                                      *
       *                                                                *
       ******************************************************************
-       CBL CICS('SP,EDF')
-       CBL SQL
-
       ******************************************************************
       * This program takes account information from the BMS
       * application (cust no, name, address and DOB) and then enqueues
@@ -38,7 +37,7 @@
        FILE SECTION.
 
        WORKING-STORAGE SECTION.
- 
+
 
        COPY SORTCODE.
 

@@ -1,10 +1,9 @@
+       CBL CICS('SP,EDF')
       ******************************************************************
       *                                                                *
       *  Copyright IBM Corp. 2023                                      *
       *                                                                *
       ******************************************************************
-       CBL CICS('SP,EDF')
-
        IDENTIFICATION DIVISION.
        PROGRAM-ID. GETSCODE.
        AUTHOR. James O'Grady.
@@ -24,7 +23,7 @@
 
 
        WORKING-STORAGE SECTION.
- 
+
 
        COPY SORTCODE REPLACING ==SORTCODE== BY ==LITERAL-SORTCODE==.
 
