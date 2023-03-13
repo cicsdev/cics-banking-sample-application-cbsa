@@ -15,3 +15,6 @@ src/src_2023-02-21_17-13-54_logs.zip
 src/src_2023-02-21_17-13-54.irx
 src/src_2023-02-21_16-27-00_logs.zip
 src/src_2023-02-21_16-27-00.irx
+*.woff2
+*.woff
+*.map

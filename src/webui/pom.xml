@@ -53,30 +53,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-server</artifactId>
-			<version>7.7.24</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-client-compiled</artifactId>
-			<version>7.7.24</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-themes</artifactId>
-			<version>7.7.24</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.vaadin.external.slf4j</groupId>
-			<artifactId>vaadin-slf4j-jdk14</artifactId>
-			<version>1.6.1</version>
-		</dependency>
-
-		<dependency>
 			<groupId>com.ibm.cics</groupId>
 			<artifactId>com.ibm.cics.server</artifactId>
 		</dependency>
@@ -106,11 +82,7 @@
 			<artifactId>js</artifactId>
 			<version>1.7R2</version>
 		</dependency>
-		<dependency>
-			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-shared</artifactId>
-			<version>7.7.24</version>
-		</dependency>
+
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>

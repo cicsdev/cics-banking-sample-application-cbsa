@@ -14,10 +14,5 @@
     <param-name>syncId</param-name>
     <param-value>false</param-value>
 </context-param>
- <context-param>
-        <description>Vaadin production mode</description>
-        <param-name>productionMode</param-name>
-        <param-value>true</param-value>
-    </context-param>
     <display-name>webUI</display-name>
 </web-app>
