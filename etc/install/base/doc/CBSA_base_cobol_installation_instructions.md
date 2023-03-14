@@ -218,6 +218,7 @@ CBSA definitions and add the CSD GROUP(BANK) into a **LIST** called
 >> You may also wish to edit the BANK member if you should need to use a
 >> different port number for the IPIC connection between the CICS region
 >> and the zOS Connect server (ZOSEE) - we used port number 30709).
+>> Verify that the name of the DB2CONN matches your requirements, and that it connects to the correct Db2 subsystem.
 
 2. Check job CBSA.JCL.INSTALL(**CICSTS56**), this is the startup procedure
 for the CICS region that we are using. You will have you own JCL or PROC

@@ -1,8 +1,8 @@
-//*
-//* Copyright IBM Corp. 2023       
-//*
 //BANKDATA JOB 'DB2',NOTIFY=&SYSUID,CLASS=A,MSGCLASS=H,
 //          MSGLEVEL=(1,1),REGION=4M
+//*
+//* Copyright IBM Corp. 2023
+//*
 //*
 //*
 //*
@@ -37,9 +37,9 @@
 //SYSOUT DD SYSOUT=*
 //SYSPRINT DD SYSOUT=*
 //SYSIN DD *
-  DELETE CBSA.CICSBSA.ABNDFILE
+  DELETE @BANK_PREFIX@.ABNDFILE
   SET MAXCC=0
-  DEFINE CLUSTER (NAME(CBSA.CICSBSA.ABNDFILE)-
+  DEFINE CLUSTER (NAME(@BANK_PREFIX@.ABNDFILE)-
                      CYL(6 6) -
                      KEYS(12 0) -
                      RECORDSIZE(681 681) -
@@ -48,18 +48,18 @@
                      LOG(NONE) -
                      REUSE -
                      FREESPACE(3 3))-
-            DATA (NAME(CBSA.CICSBSA.ABNDFLE.DATA) -
+            DATA (NAME(@BANK_PREFIX@.ABNDFLE.DATA) -
                  ) -
-            INDEX (NAME(CBSA.CICSBSA.ABNDFILE.INDEX) -
+            INDEX (NAME(@BANK_PREFIX@.ABNDFILE.INDEX) -
                  )
 /*
 //BANKDAT1 EXEC PGM=IDCAMS
 //SYSOUT DD SYSOUT=*
 //SYSPRINT DD SYSOUT=*
 //SYSIN DD *
-  DELETE CBSA.CICSBSA.CUSTOMER
+  DELETE @BANK_PREFIX@.CUSTOMER
   SET MAXCC=0
-   DEFINE CLUSTER (NAME(CBSA.CICSBSA.CUSTOMER)-
+   DEFINE CLUSTER (NAME(@BANK_PREFIX@.CUSTOMER)-
                       CYL(50 50) -
                       KEYS(16 4) -
                       RECORDSIZE(259,259) -
@@ -70,9 +70,9 @@
                        -
                        -
                      ) -
-             DATA (NAME(CBSA.CICSBSA.CUSTOMER.DATA) -
+             DATA (NAME(@BANK_PREFIX@.CUSTOMER.DATA) -
                   ) -
-             INDEX (NAME(CBSA.CICSBSA.CUSTOMER.INDEX) -
+             INDEX (NAME(@BANK_PREFIX@.CUSTOMER.INDEX) -
                   )
 /*
 /*
@@ -92,10 +92,10 @@
 //******************************************************************
 //******************************************************************
 //BANKDAT5 EXEC PGM=IKJEFT01,REGION=0M
-//STEPLIB  DD DISP=SHR,DSN=CBSA.CICSBSA.DBRM
-//         DD DISP=SHR,DSN=CBSA.CICSBSA.LOADLIB
-//         DD DISP=SHR,DSN=DSNC10.SDSNLOAD
-//VSAM     DD DISP=SHR,DSN=CBSA.CICSBSA.CUSTOMER
+//STEPLIB  DD DISP=SHR,DSN=@BANK_DBRMLIB@
+//         DD DISP=SHR,DSN=@BANK_LOADLIB@
+//         DD DISP=SHR,DSN=@DB2_HLQ@ .SDSNLOAD
+//VSAM     DD DISP=SHR,DSN=@BANK_PREFIX@.CUSTOMER
 //*INPUT FILES
 //*OUTPUT FILES
 //SYSPRINT DD SYSOUT=*
@@ -105,10 +105,10 @@
 //SYSOUT   DD SYSOUT=*
 //SYSTSPRT DD SYSOUT=*
 //SYSTSIN  DD *
- DSN SYSTEM(DBCG)
+ DSN SYSTEM(@DB2_SUBSYSTEM@)
  RUN PROGRAM(BANKDATA)  -
- PLAN(CBSA) -
+ PLAN(@DB2_PLAN@) -
  PARM('1,10000,1,1000000000000000') -
- LIB('CBSA.CICSBSA.LOADLIB')
+ LIB('@BANK_LOADLIB@')
  END
 /*
