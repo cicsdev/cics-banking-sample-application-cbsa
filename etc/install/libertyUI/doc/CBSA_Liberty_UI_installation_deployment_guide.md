@@ -175,11 +175,11 @@ If you have already installed the Liberty UI, you can skip this step.
 
 ## CICS Resources:
 
-1.  CSD GROUP CBSAWLP contains a JVMSERVER called CBSAWLP
+1.  Create a JVM server definition in CSD GROUP CBSAWLP
 
 > CEDA DEFINE GROUP(CBSAWLP) JVMSERVER(CBSAWLP) JVMPROFILE(DFHWLP)
 >
-> This is JVMSERVER DFHWLP from DFHWLP copied and renamed.
+> This is a JVM server using the JVM profile we copied earlier.
 >
 > CEDA DEFINE GROUP(CBSAWLP) URIMAP(CBSAWLP) USAGE(JVMSERVER) HOST(\*)
 > PORT(**19080**) PATH(\*) USERID(CICSUSER)
@@ -192,6 +192,12 @@ If you have already installed the Liberty UI, you can skip this step.
 
 3.  Create and install this and it will create a JVM server. It may take
     a few minutes to become enabled.
+
+> CEDA INSTALL GROUP(CBSAWLP)
+
+You should also add the group to the list installed on a cold start.
+
+> CEDA ADD GROUP(CBSAWLP) LIST(CICSTS56) AFTER(BANK)
 
 > This will create a server.xml file in
 >
@@ -225,6 +231,8 @@ If you have already installed the Liberty UI, you can skip this step.
 > \<feature\>json-1.0\</feature\>
 >
 > \<feature\>jsp-2.3\</feature\>
+>
+> \<feature\>jdbc-4.0\</feature\>
 
 
 ## 

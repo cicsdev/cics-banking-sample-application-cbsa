@@ -126,7 +126,7 @@ public class AccountList
 			{
 
 				myAccountsResponse = myAccountsResource
-						.getAccountsExternal(true);
+						.getAccountsExternal(0,999999,true);
 				String myAccountsString = myAccountsResponse.getEntity()
 						.toString();
 
