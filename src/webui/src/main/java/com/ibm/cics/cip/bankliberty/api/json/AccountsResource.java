@@ -1616,6 +1616,8 @@ public class AccountsResource extends HBankDataAccess
 	private JSONObject validateNewAccount(AccountJSON newAccount)
 	{
 		JSONObject error = new JSONObject();
+		System.out.println(newAccount.toString());
+		
 		if (!newAccount.validateType(newAccount.getAccountType().trim()))
 		{
 			error.put(JSON_ERROR_MSG, ACC_TYPE_STRING

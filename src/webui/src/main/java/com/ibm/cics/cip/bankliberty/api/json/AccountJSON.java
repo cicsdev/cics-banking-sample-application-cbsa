@@ -209,4 +209,9 @@ public class AccountJSON
 		return accountType2.equalsIgnoreCase("CURRENT");
 	}
 
+	public String toString()
+	{
+		return "accountNumber="+this.getId()+",customerNumber="+this.getCustomerNumber()+",dateOpened="+this.getDateOpened()+",actualBalance="+this.getActualBalance()+",sortCode="+this.getSortCode()+",availableBalance="+this.getAvailableBalance()+",accountType="+this.getAccountType()+",overdraft="+this.getOverdraft()+",lastStatementDate="+this.getLastStatementDate()+",nextStatementDate="+this.getNextStatementDate();
+	}
+	
 }

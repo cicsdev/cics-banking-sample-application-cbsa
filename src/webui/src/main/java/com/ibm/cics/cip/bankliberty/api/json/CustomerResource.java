@@ -119,6 +119,9 @@ public class CustomerResource
 				CREATE_CUSTOMER_INTERNAL + customer.toString());
 		JSONObject response = new JSONObject();
 
+		
+			
+		
 		String[] name = customer.getCustomerName().split(" ");
 
 		if (!customer.validateTitle(name[0].trim()))

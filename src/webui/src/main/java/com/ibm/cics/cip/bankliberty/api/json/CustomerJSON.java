@@ -170,5 +170,9 @@ public class CustomerJSON
 		}
 		return (title.equalsIgnoreCase("Lady"));
 	}
+	public String toString()
+	{
+		return "customerAddress="+this.getCustomerAddress()+",customerName="+this.getCustomerName()+",dateOfBirth="+this.getDateOfBirth()+",creditScore="+this.getCreditScore()+",sortCode="+this.getSortCode()+",reviewDate="+this.getReviewDate();
+	}
 
 }

@@ -97,6 +97,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
+			<version>2.7.12</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
