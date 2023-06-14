@@ -177,7 +177,34 @@
 
            MOVE SORTCODE TO REQUIRED-SORT-CODE.
            MOVE INQCUST-CUSTNO TO REQUIRED-CUST-NUMBER.
-
+      *
+      *    Is the incoming CUSTOMER number set to 0's, 9's or
+      *    an actual value?
+      *
+      *    If the incoming CUSTOMER number is 0's (random
+      *    customer) or the incoming CUSTOMER number is 9's
+      *    (the last valid CUSTOMER in use) then access the
+      *    named counter server to get the last
+      *    CUSTOMER-NUMBER in use.
+      *
+           IF INQCUST-CUSTNO = 0000000000 OR INQCUST-CUSTNO = 9999999999
+              PERFORM READ-CUSTOMER-NCS
+      D       DISPLAY 'CUST NO RETURNED FROM NCS=' NCS-CUST-NO-VALUE
+              IF INQCUST-INQ-SUCCESS = 'Y'
+                MOVE NCS-CUST-NO-VALUE TO REQUIRED-CUST-NUMBER
+              ELSE
+                PERFORM GET-ME-OUT-OF-HERE
+              END-IF
+           END-IF.
+      *
+      * For a random customer generate a CUSTOMER number
+      * randomly which is less than the highest CUSTOMER
+      * number that is currently in use.
+      *
+           IF INQCUST-CUSTNO = 0000000000
+              PERFORM GENERATE-RANDOM-CUSTOMER
+              MOVE RANDOM-CUSTOMER TO REQUIRED-CUST-NUMBER
+           END-IF.
            MOVE 'N' TO EXIT-VSAM-READ.
            MOVE 'N' TO EXIT-DB2-READ.
            MOVE 'N' TO WS-D-RETRIED.
@@ -219,7 +246,7 @@
        READ-CUSTOMER-NCS SECTION.
        RCN010.
       *
-      *             Retrieve the last CUSTOMER number in use
+      *    Retrieve the last CUSTOMER number in use
       *
            PERFORM GET-LAST-CUSTOMER-VSAM
            IF INQCUST-INQ-SUCCESS = 'Y'
@@ -272,18 +299,47 @@
                      MOVE 'Y' TO INQCUST-INQ-SUCCESS
                      GO TO RCV999
                   END-IF
-
               END-PERFORM
-
            END-IF.
 
+      * If the customer record was NOT found and the incoming
+      * customer was 0000000000 (i.e. generate a random
+      * customer number) then have another go at generating a
+      * different random customer number and try reading that.
+      *
+           IF WS-CICS-RESP = DFHRESP(NOTFND) AND
+              INQCUST-CUSTNO = 0000000000
+            IF INQCUST-RETRY < 1000
+                PERFORM GENERATE-RANDOM-CUSTOMER-AGAIN
+                MOVE RANDOM-CUSTOMER TO REQUIRED-CUST-NUMBER
+                GO TO RCV999
+              ELSE
+                MOVE 'Y' TO EXIT-VSAM-READ
+                MOVE 'N' TO INQCUST-INQ-SUCCESS
+                MOVE '1' TO INQCUST-INQ-FAIL-CD
+                GO TO RCV999
+              END-IF
+           END-IF.
+           IF WS-CICS-RESP = DFHRESP(NOTFND) AND
+           INQCUST-CUSTNO = 9999999999 AND
+           WS-V-RETRIED = 'N'
+              PERFORM GET-LAST-CUSTOMER-VSAM
+      D       DISPLAY 'CUSTOMER NUMBER RETURNED FROM NCS IS='
+      D           NCS-CUST-NO-VALUE
+              MOVE NCS-CUST-NO-VALUE TO REQUIRED-CUST-NUMBER
+              MOVE 'Y' TO WS-V-RETRIED
+              GO TO RCV999
+           END-IF.
       *
       *    If the customer record was NOT found
       *    we must return the customer number with an initialised
       *    output record (this will indicate that the supplied
       *    customer number was a dud.
       *
-           IF WS-CICS-RESP = DFHRESP(NOTFND)
+           IF (WS-CICS-RESP = DFHRESP(NOTFND)
+                AND INQCUST-CUSTNO NOT = 9999999999)
+                AND (WS-CICS-RESP = DFHRESP(NOTFND)
+                AND INQCUST-CUSTNO NOT = 0000000000)
               MOVE REQUIRED-CUST-NUMBER TO CUSTOMER-NUMBER
                                            OF OUTPUT-DATA
               MOVE 'Y' TO EXIT-VSAM-READ
@@ -632,3 +688,24 @@
 
        PTD999.
            EXIT.
+
+      *
+      * Generate a random customer number
+      *
+       GENERATE-RANDOM-CUSTOMER SECTION.
+       GRC010.
+           MOVE ZERO TO INQCUST-RETRY.
+           COMPUTE RANDOM-CUSTOMER = ((NCS-CUST-NO-VALUE - 1)
+                                     * FUNCTION RANDOM(EIBTASKN)) + 1.
+       GRC999.
+           EXIT.
+      *
+      * Generate a random customer number
+      *
+       GENERATE-RANDOM-CUSTOMER-AGAIN SECTION.
+       GRCA10.
+           ADD 1 TO INQCUST-RETRY GIVING INQCUST-RETRY.
+           COMPUTE RANDOM-CUSTOMER = ((NCS-CUST-NO-VALUE - 1)
+                                                * FUNCTION RANDOM) + 1.
+        GRCA99.
+            EXIT.
