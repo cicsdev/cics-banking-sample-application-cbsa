@@ -125,7 +125,7 @@
        01 FETCH-DATA-CNT               PIC 9(4) COMP.
        01 WS-CUST-ALT-KEY-LEN          PIC S9(4) COMP VALUE +10.
 
-       01 CUSTOMER-KY.
+       01 ACCOUNT-KY.
           03 REQUIRED-SORT-CODE        PIC 9(6)  VALUE 0.
           03 REQUIRED-ACC-NUM          PIC 9(8)  VALUE 0.
 
@@ -211,11 +211,15 @@
               ABEND LABEL(ABEND-HANDLING)
            END-EXEC.
 
-           MOVE SORTCODE TO REQUIRED-SORT-CODE OF CUSTOMER-KY.
+           MOVE SORTCODE TO REQUIRED-SORT-CODE OF ACCOUNT-KY.
       *
       *          Get the ACCOUNT row from DB2
       *
-           PERFORM READ-ACCOUNT-DB2
+           IF INQACC-ACCNO = 99999999
+             PERFORM READ-ACCOUNT-LAST
+           ELSE
+             PERFORM READ-ACCOUNT-DB2
+           END-IF
 
 
       *
@@ -820,7 +824,7 @@
       *
       * Access the ACCOUNT Named Counter Server
       *
-       READ-ACCOUNT-NCS SECTION.
+       READ-ACCOUNT-LAST SECTION.
        RAN010.
 
             PERFORM GET-LAST-ACCOUNT-DB2.
@@ -835,7 +839,7 @@
            INITIALIZE OUTPUT-DATA.
            MOVE REQUIRED-ACC-NUMBER2 TO HV-ACCOUNT-ACC-NO.
            MOVE REQUIRED-SORT-CODE TO HV-ACCOUNT-SORTCODE.
-
+           MOVE SORTCODE TO HV-ACCOUNT-SORTCODE.
            EXEC SQL
               SELECT ACCOUNT_EYECATCHER,
                      ACCOUNT_CUSTOMER_NUMBER,
@@ -869,6 +873,7 @@
 
            IF SQLCODE IS NOT EQUAL TO ZERO
               MOVE SQLCODE TO SQLCODE-DISPLAY
+
       *
       *       Preserve the RESP and RESP2, then set up the
       *       standard ABEND info before getting the applid,
@@ -930,7 +935,49 @@
                        CANCEL
               END-EXEC
            ELSE
-              MOVE HV-ACCOUNT-ACC-NO TO REQUIRED-ACC-NUMBER2
+      *
+      *    If we found a matching account record
+      *
+             MOVE HV-ACCOUNT-EYECATCHER TO
+                ACCOUNT-EYE-CATCHER OF OUTPUT-DATA
+             MOVE HV-ACCOUNT-CUST-NO TO
+                ACCOUNT-CUST-NO OF OUTPUT-DATA
+             MOVE HV-ACCOUNT-SORTCODE TO
+                ACCOUNT-SORT-CODE OF OUTPUT-DATA
+             MOVE HV-ACCOUNT-ACC-NO TO
+                ACCOUNT-NUMBER OF OUTPUT-DATA
+             MOVE HV-ACCOUNT-ACC-TYPE TO
+                ACCOUNT-TYPE OF OUTPUT-DATA
+             MOVE HV-ACCOUNT-INT-RATE TO
+                ACCOUNT-INTEREST-RATE OF OUTPUT-DATA
+             MOVE HV-ACCOUNT-OPENED TO DB2-DATE-REFORMAT
+             MOVE DB2-DATE-REF-DAY TO
+                ACCOUNT-OPENED-DAY OF OUTPUT-DATA
+             MOVE DB2-DATE-REF-MNTH TO
+                ACCOUNT-OPENED-MONTH OF OUTPUT-DATA
+             MOVE DB2-DATE-REF-YR TO
+                ACCOUNT-OPENED-YEAR OF OUTPUT-DATA
+             MOVE HV-ACCOUNT-OVERDRAFT-LIM TO
+                ACCOUNT-OVERDRAFT-LIMIT OF OUTPUT-DATA
+             MOVE HV-ACCOUNT-LAST-STMT TO DB2-DATE-REFORMAT
+             MOVE DB2-DATE-REF-DAY TO
+                ACCOUNT-LAST-STMT-DAY OF OUTPUT-DATA
+             MOVE DB2-DATE-REF-MNTH TO
+                ACCOUNT-LAST-STMT-MONTH OF OUTPUT-DATA
+             MOVE DB2-DATE-REF-YR TO
+                ACCOUNT-LAST-STMT-YEAR OF OUTPUT-DATA
+             MOVE HV-ACCOUNT-NEXT-STMT TO DB2-DATE-REFORMAT
+             MOVE DB2-DATE-REF-DAY TO
+                ACCOUNT-NEXT-STMT-DAY OF OUTPUT-DATA
+             MOVE DB2-DATE-REF-MNTH TO
+                ACCOUNT-NEXT-STMT-MONTH OF OUTPUT-DATA
+             MOVE DB2-DATE-REF-YR TO
+                ACCOUNT-NEXT-STMT-YEAR OF OUTPUT-DATA
+             MOVE HV-ACCOUNT-AVAIL-BAL TO
+                ACCOUNT-AVAILABLE-BALANCE OF OUTPUT-DATA
+             MOVE HV-ACCOUNT-ACTUAL-BAL TO
+                ACCOUNT-ACTUAL-BALANCE OF OUTPUT-DATA
+
            END-IF.
 
        GLAD999.
@@ -953,4 +1000,5 @@
 
        PTD999.
            EXIT.
+
 
