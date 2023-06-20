@@ -61,6 +61,8 @@ public class CustomerResource
 	private static final String DELETE_CUSTOMER_INTERNAL_EXIT = "deleteCustomerInternal() exiting";
 
 	private static final String UPDATE_CUSTOMER_INTERNAL = "updateCustomerInternal for customerNumber ";
+	
+	private static final String UPDATE_CUSTOMER_INTERNAL_EXIT = "updateCustomerInternal() exiting ";
 
 	private static final String UPDATE_CUSTOMER_EXTERNAL = "updateCustomerExternal for customerNumber ";
 
@@ -120,7 +122,20 @@ public class CustomerResource
 		JSONObject response = new JSONObject();
 
 		
-			
+		if(customer.getCustomerName() == null)
+		{
+			JSONObject error = new JSONObject();
+			error.put(JSON_ERROR_MSG,
+					"Customer name is null");
+			Response myResponse = Response.status(400).entity(error.toString())
+					.build();
+			logger.log(Level.WARNING,
+					() -> "Customer name is null in CustomerResource.createCustomerInternal(), "
+							+ customer.toString());
+			logger.exiting(this.getClass().getName(),
+					CREATE_CUSTOMER_INTERNAL_EXIT, myResponse);
+			return myResponse;
+		}
 		
 		String[] name = customer.getCustomerName().split(" ");
 
@@ -139,6 +154,21 @@ public class CustomerResource
 			return myResponse;
 		}
 
+		if(customer.getSortCode() == null)
+		{
+			JSONObject error = new JSONObject();
+			error.put(JSON_ERROR_MSG,
+					"Sort Code is null");
+			Response myResponse = Response.status(400).entity(error.toString())
+					.build();
+			logger.log(Level.WARNING,
+					() -> "Sort Code is null in CustomerResource.createCustomerInternal(), "
+							+ customer.toString());
+			logger.exiting(this.getClass().getName(),
+					CREATE_CUSTOMER_INTERNAL_EXIT, myResponse);
+			return myResponse;
+		}
+		
 		Integer inputSortCode = Integer.parseInt(customer.getSortCode());
 
 		if (!inputSortCode.equals(this.getSortCode()))
@@ -151,6 +181,36 @@ public class CustomerResource
 			logger.log(Level.WARNING,
 					() -> "Invalid sortcode CustomerResource.createCustomerInternal(), "
 							+ inputSortCode.intValue());
+			logger.exiting(this.getClass().getName(),
+					CREATE_CUSTOMER_INTERNAL_EXIT, myResponse);
+			return myResponse;
+		}
+		
+		if(customer.getCustomerAddress() == null)
+		{
+			JSONObject error = new JSONObject();
+			error.put(JSON_ERROR_MSG,
+					"Customer address is null");
+			Response myResponse = Response.status(400).entity(error.toString())
+					.build();
+			logger.log(Level.WARNING,
+					() -> "Customer address is null in CustomerResource.createCustomerInternal(), "
+							+ customer.toString());
+			logger.exiting(this.getClass().getName(),
+					CREATE_CUSTOMER_INTERNAL_EXIT, myResponse);
+			return myResponse;
+		}
+		
+		if(customer.getDateOfBirth() == null)
+		{
+			JSONObject error = new JSONObject();
+			error.put(JSON_ERROR_MSG,
+					"Date of Birth is null");
+			Response myResponse = Response.status(400).entity(error.toString())
+					.build();
+			logger.log(Level.WARNING,
+					() -> "Date of Birth is null in CustomerResource.createCustomerInternal(), "
+							+ customer.toString());
 			logger.exiting(this.getClass().getName(),
 					CREATE_CUSTOMER_INTERNAL_EXIT, myResponse);
 			return myResponse;
@@ -248,6 +308,22 @@ public class CustomerResource
 	{
 		logger.entering(this.getClass().getName(),
 				UPDATE_CUSTOMER_INTERNAL + id);
+		
+		if(customer.getCustomerName() == null)
+		{
+			JSONObject error = new JSONObject();
+			error.put(JSON_ERROR_MSG,
+					"Customer name is null");
+			Response myResponse = Response.status(400).entity(error.toString())
+					.build();
+			logger.log(Level.WARNING,
+					() -> "Customer name is null in CustomerResource.updateCustomerInternal(), "
+							+ customer.toString());
+			logger.exiting(this.getClass().getName(),
+					UPDATE_CUSTOMER_INTERNAL_EXIT, myResponse);
+			return myResponse;
+		}
+		
 		String[] name = customer.getCustomerName().split(" ");
 
 		if (!customer.validateTitle(name[0].trim()))
@@ -262,10 +338,25 @@ public class CustomerResource
 					() -> "Invalid title in CustomerResource.updateCustomerInternal(), "
 							+ name[0].trim());
 			logger.exiting(this.getClass().getName(),
-					CREATE_CUSTOMER_INTERNAL_EXIT, myResponse);
+					UPDATE_CUSTOMER_INTERNAL_EXIT, myResponse);
 			return myResponse;
 		}
 
+		
+		if(customer.getSortCode() == null)
+		{
+			JSONObject error = new JSONObject();
+			error.put(JSON_ERROR_MSG,
+					"Sort Code is null");
+			Response myResponse = Response.status(400).entity(error.toString())
+					.build();
+			logger.log(Level.WARNING,
+					() -> "Sort Code is null in CustomerResource.updateCustomerInternal(), "
+							+ customer.toString());
+			logger.exiting(this.getClass().getName(),
+					UPDATE_CUSTOMER_INTERNAL_EXIT, myResponse);
+			return myResponse;
+		}
 		Integer inputSortCode = Integer.parseInt(customer.getSortCode());
 
 		if (!inputSortCode.equals(this.getSortCode()))
@@ -278,6 +369,21 @@ public class CustomerResource
 					() -> "Invalid sortcode in CustomerResource.updateCustomerInternal(), "
 							+ inputSortCode);
 			return Response.status(400).entity(error.toString()).build();
+		}
+		
+		if(customer.getCustomerAddress() == null)
+		{
+			JSONObject error = new JSONObject();
+			error.put(JSON_ERROR_MSG,
+					"Customer address is null");
+			Response myResponse = Response.status(400).entity(error.toString())
+					.build();
+			logger.log(Level.WARNING,
+					() -> "Customer address is null in CustomerResource.updateCustomerInternal(), "
+							+ customer.toString());
+			logger.exiting(this.getClass().getName(),
+					UPDATE_CUSTOMER_INTERNAL_EXIT, myResponse);
+			return myResponse;
 		}
 
 		JSONObject response = new JSONObject();
