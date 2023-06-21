@@ -474,18 +474,13 @@
       *
               IF VALID-DATA
                  PERFORM UNPROT-CUST-DATA
+                 MOVE SPACES TO MESSAGEO
+                 STRING 'Amend data then press <ENTER>.'
+                    DELIMITED BY SIZE,
+                    ' '
+                    DELIMITED BY SIZE
+                    INTO MESSAGEO
               END-IF
-
-      *
-      *       Ensure that we set the MSG properly
-      *
-              MOVE SPACES TO MESSAGEO
-              STRING 'Amend data then press <ENTER>.'
-                 DELIMITED BY SIZE,
-                 ' '
-                 DELIMITED BY SIZE
-                 INTO MESSAGEO
-
            END-IF.
 
            SET SEND-DATAONLY-ALARM TO TRUE.
@@ -812,8 +807,7 @@
                   ' not VALID.' DELIMITED BY SIZE
                   INTO MESSAGEO
            END-IF.
-
-           IF CUSTNOI = ZERO OR CUSTNOI = 9999999999
+           IF CUSTNOI = ZERO OR CUSTNOI = '9999999999'
               MOVE 'N' TO VALID-DATA-SW
               MOVE SPACES TO MESSAGEO
               STRING 'The customer number is'
@@ -950,12 +944,16 @@
               SCRDTYYO.
 
            MOVE SPACES TO MESSAGEO.
+           IF CUSTNOI = ZERO OR CUSTNOI = '9999999999'
+             MOVE   'Customer lookup successful.'
+                     TO MESSAGEO
+           ELSE
            STRING 'Customer lookup successful. <PF5> to Delete. <PF10'
                  DELIMITED BY SIZE,
                 '> to Update.                       '
                  DELIMITED BY SIZE
-                 INTO MESSAGEO.
-
+                 INTO MESSAGEO
+           END-IF.
        GCD999.
            EXIT.
 
@@ -2053,3 +2051,4 @@
 
        AH999.
            EXIT.
+

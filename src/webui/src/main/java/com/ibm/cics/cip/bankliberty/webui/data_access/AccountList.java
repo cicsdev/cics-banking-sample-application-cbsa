@@ -125,10 +125,8 @@ public class AccountList
 			if (filter.length() == 0)
 			{
 
-				myAccountsResponse = myAccountsResource
-						.getAccountsExternal(0,999999,true);
-				String myAccountsString = myAccountsResponse.getEntity()
-						.toString();
+				myAccountsResponse = myAccountsResource.getAccountsExternal(Integer.valueOf(0),Integer.valueOf(999999),true);
+				String myAccountsString = myAccountsResponse.getEntity().toString();
 
 				JSONObject myAccountsJSON = JSONObject.parse(myAccountsString);
 				if (myAccountsJSON.get(JSON_NUMBER_OF_ACCOUNTS) != null)
