@@ -777,12 +777,14 @@
                     MOVE 'N' TO VALID-DATA-SW
                     MOVE -1 TO CUSTTITL
                     GO TO ED999
-
               END-EVALUATE
-
            END-IF.
 
+           DISPLAY 'CHRISTNL IS ' CHRISTNL
+           DISPLAY 'CUSTSNL  IS ' CUSTSNL
+           DISPLAY 'CUSTAD1L IS ' CUSTAD1L
            IF CHRISTNL < 1 OR CHRISTNI = '____________________'
+              OR CHRISTNI = SPACES
               MOVE SPACES TO MESSAGEO
               MOVE 'Please supply a valid First Name  ' TO
                  MESSAGEO
@@ -793,6 +795,7 @@
            END-IF.
 
            IF CUSTSNL < 1 OR CUSTSNI = '____________________'
+              OR CUSTSNI = SPACES
               MOVE SPACES TO MESSAGEO
               MOVE 'Please supply a valid Surname ' TO
                  MESSAGEO
@@ -803,6 +806,7 @@
            END-IF.
 
            IF CUSTAD1I(1:1)= '_'  OR CUSTAD1L < 1
+              OR CUSTAD1I = SPACES
 
               MOVE SPACES TO MESSAGEO
               MOVE 'Please supply a valid Address Line 1 ' TO
@@ -1054,6 +1058,10 @@
               END-IF
               IF SUBPGM-FAIL-CODE = 'Y'
                 MOVE 'Sorry, customer D.O.B. is in the future.'
+                  to messageo
+              END-IF
+              IF SUBPGM-FAIL-CODE = 'Z'
+                MOVE 'Sorry, customer D.O.B. is invalid.'
                   to messageo
               END-IF
               MOVE 'N' TO VALID-DATA-SW
@@ -1650,4 +1658,5 @@
 
        HA999.
            EXIT.
+
 

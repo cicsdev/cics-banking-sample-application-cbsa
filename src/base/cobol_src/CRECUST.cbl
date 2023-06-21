@@ -1383,6 +1383,7 @@
 
            IF NOT CEE000 OF FC THEN
               MOVE 'Y' TO WS-DATE-OF-BIRTH-ERROR
+              MOVE 'Z' TO COMM-FAIL-CODE
               DISPLAY 'CEEDAYS failed, FORMAT LENGTH 10 with msg '
                  MSG-NO OF FC
                  ' for date YYYYMMDD' DATE-OF-BIRTH-FOR-CEEDAYS
@@ -1436,3 +1437,4 @@
 
        PTD2999.
            EXIT.
+
