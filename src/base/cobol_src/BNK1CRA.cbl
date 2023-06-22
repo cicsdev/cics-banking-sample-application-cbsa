@@ -462,7 +462,7 @@
            END-IF.
 
            IF SIGNI NOT = '+' AND SIGNI NOT = '-' AND SIGNL = 1
-              MOVE 'Please enter + or - preceeding the amount ' TO
+              MOVE 'Please enter + or - preceding the amount ' TO
                  MESSAGEO
               MOVE 'N' TO VALID-DATA-SW
               GO TO ED999
@@ -1164,4 +1164,5 @@
 
        PTD999.
            EXIT.
+
 
