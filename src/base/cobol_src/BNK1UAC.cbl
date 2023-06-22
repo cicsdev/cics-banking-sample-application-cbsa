@@ -890,6 +890,9 @@
            INITIALIZE DFHCOMMAREA.
 
            MOVE ACCNOI        TO COMM-ACCNO.
+           IF ACCNOI = 99999999
+             MOVE ACCNO2I        TO COMM-ACCNO
+           END-IF
            MOVE CUSTNOI       TO COMM-CUSTNO.
            MOVE SORTCI        TO COMM-SCODE.
            MOVE ACTYPEI       TO COMM-ACC-TYPE.
@@ -1400,4 +1403,5 @@
 
        PTD999.
            EXIT.
+
 

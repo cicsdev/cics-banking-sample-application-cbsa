@@ -79,6 +79,9 @@
           INCLUDE SQLCA
         END-EXEC.
 
+        01 SQLCODE-DISPLAY             PIC S9(8) DISPLAY
+            SIGN LEADING SEPARATE.
+
        01 WS-CICS-WORK-AREA.
           05 WS-CICS-RESP               PIC S9(8) COMP.
           05 WS-CICS-RESP2              PIC S9(8) COMP.
@@ -222,6 +225,9 @@
            IF SQLCODE NOT = 0
 
               MOVE 'N' TO COMM-SUCCESS
+              MOVE SQLCODE TO SQLCODE-DISPLAY
+              DISPLAY 'ERROR: UPDACC returned ' SQLCODE-DISPLAY
+              ' on SELECT'
               GO TO UAD999
 
            END-IF.
@@ -260,7 +266,7 @@
 
            IF (COMM-ACC-TYPE = SPACES OR COMM-ACC-TYPE(1:1) = ' ')
               MOVE 'N' TO COMM-SUCCESS
-
+              DISPLAY 'ERROR: UPDACC has invalid account-type'
               GO TO UAD999
 
            END-IF.
@@ -283,9 +289,10 @@
       *
            IF SQLCODE NOT = 0
               MOVE 'N' TO COMM-SUCCESS
-
+              MOVE SQLCODE TO SQLCODE-DISPLAY
+              DISPLAY 'ERROR: UPDACC returned ' SQLCODE-DISPLAY
+              ' on UPDATE'
               GO TO UAD999
-
            END-IF.
 
       *
@@ -397,4 +404,5 @@
 
        PTD999.
            EXIT.
+
 
