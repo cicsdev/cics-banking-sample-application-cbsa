@@ -97,6 +97,7 @@
        01 INTRT-PIC9                   PIC 9999.99.
        01 WS-NUM-COUNT-POINT           PIC S9(8) BINARY.
        01 WS-NUM-COUNT-TOTAL           PIC S9(8) BINARY.
+       01 WS-REVERSE                   PIC X(8).
 
        01 SUBPGM-PARMS.
           03 SUBPGM-EYECATCHER         PIC X(4).
@@ -678,6 +679,33 @@
               MOVE -1 TO INTRTL
               GO TO ED999
            END-IF
+      * Remove trailing spaces from OVERDRAFT
+           MOVE FUNCTION REVERSE(OVERDRI) TO WS-REVERSE
+           MOVE ZERO TO WS-NUM-COUNT-TOTAL
+           INSPECT WS-REVERSE TALLYING WS-NUM-COUNT-TOTAL
+           FOR LEADING SPACES
+           SUBTRACT WS-NUM-COUNT-TOTAL FROM OVERDRL
+             GIVING OVERDRL
+           MOVE ZERO TO WS-NUM-COUNT-TOTAL
+           INSPECT OVERDRI(1:OVERDRL) TALLYING
+              WS-NUM-COUNT-TOTAL FOR ALL '0'
+              WS-NUM-COUNT-TOTAL FOR ALL '1'
+              WS-NUM-COUNT-TOTAL FOR ALL '2'
+              WS-NUM-COUNT-TOTAL FOR ALL '3'
+              WS-NUM-COUNT-TOTAL FOR ALL '4'
+              WS-NUM-COUNT-TOTAL FOR ALL '5'
+              WS-NUM-COUNT-TOTAL FOR ALL '6'
+              WS-NUM-COUNT-TOTAL FOR ALL '7'
+              WS-NUM-COUNT-TOTAL FOR ALL '8'
+              WS-NUM-COUNT-TOTAL FOR ALL '9'.
+           IF WS-NUM-COUNT-TOTAL < OVERDRL
+              MOVE SPACES TO MESSAGEO
+              MOVE 'Overdraft Limit must be numeric positive int' TO
+                 MESSAGEO
+              MOVE 'N' TO VALID-DATA-SW
+              MOVE -1 TO OVERDRL
+              GO TO ED999
+           END-IF.
 
            EXEC CICS BIF DEEDIT FIELD(OVERDRI)
            END-EXEC.
@@ -686,7 +714,7 @@
       *    If the overdraft limit hasn't been supplied then make it
       *    zero
       *
-           IF OVERDRL < 1 OR OVERDRI = '________'
+           IF OVERDRL < 1 OR OVERDRI = '________' or overdri = spaces
               MOVE ZERO TO OVERDRI
            END-IF.
 
@@ -1268,3 +1296,4 @@
 
        PTD999.
            EXIT.
+
