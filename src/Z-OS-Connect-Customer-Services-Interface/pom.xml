@@ -50,7 +50,7 @@
 			<groupId>io.netty</groupId>
 			<artifactId>netty-codec-http</artifactId>
 			<scope>compile</scope>
-			<version>4.1.93.Final</version>
+			<version>4.1.94.Final</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>commons-logging</artifactId>
@@ -61,7 +61,7 @@
 		<dependency>
 			<groupId>io.netty</groupId>
 			<artifactId>netty-codec-http2</artifactId>
-			<version>4.1.89.Final</version>
+			<version>4.1.94.Final</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>commons-logging</artifactId>
