@@ -18,7 +18,7 @@
 	<name>paymentinterface</name>
 	<description>Springboot project utilising Z/OS Connect</description>
 	<properties>
-		<java.version>8</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 
@@ -66,7 +66,7 @@
 		<dependency>
 			<groupId>io.netty</groupId>
 			<artifactId>netty-codec-http</artifactId>
-			<version>4.1.89.Final</version>
+			<version>4.1.93.Final</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>commons-logging</artifactId>
