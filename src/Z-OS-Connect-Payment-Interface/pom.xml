@@ -18,7 +18,7 @@
 	<name>paymentinterface</name>
 	<description>Springboot project utilising Z/OS Connect</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>8</java.version>
 	</properties>
 	<dependencies>
 
