@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -243,6 +244,7 @@ public class ProcessedTransaction extends HBankDataAccess
 		openConnection();
 		String sql = "SELECT * from (SELECT p.*,row_number() over() as rn from PROCTRAN as p where PROCTRAN_SORTCODE like ? ORDER BY PROCTRAN_DATE ASC, PROCTRAN_TIME ASC) as col where rn between ? and ?";
 		logger.log(Level.FINE, () -> "About to issue query SQL <" + sql + ">");
+		
 
 		int i = 0;
 		try (PreparedStatement stmt = conn.prepareStatement(sql);)
@@ -270,9 +272,24 @@ public class ProcessedTransaction extends HBankDataAccess
 				temp[i].setAmount(rs.getDouble("PROCTRAN_AMOUNT"));
 				temp[i].setType(rs.getString("PROCTRAN_TYPE"));
 
-				temp[i] = processTransferRecord(temp[i]);
-				temp[i] = processCreateDeleteAccountRecord(temp[i]);
+				if(temp[i].getType().compareTo(PROCTRAN.PROC_TY_TRANSFER) == 0)
+				{
+					temp[i] = processTransferRecord(temp[i]);
+				}
+				if(temp[i].getType().compareTo(PROCTRAN.PROC_TY_BRANCH_DELETE_ACCOUNT) == 0 ||
+						temp[i].getType().compareTo(PROCTRAN.PROC_TY_WEB_DELETE_ACCOUNT) == 0 ||
+						temp[i].getType().compareTo(PROCTRAN.PROC_TY_BRANCH_CREATE_ACCOUNT) == 0 ||
+						temp[i].getType().compareTo(PROCTRAN.PROC_TY_WEB_CREATE_ACCOUNT) == 0)
+				{
+					temp[i] = processCreateDeleteAccountRecord(temp[i]);					
+				}
+				if(temp[i].getType().compareTo(PROCTRAN.PROC_TY_BRANCH_DELETE_CUSTOMER) == 0 ||
+						temp[i].getType().compareTo(PROCTRAN.PROC_TY_WEB_DELETE_CUSTOMER) == 0 ||
+						temp[i].getType().compareTo(PROCTRAN.PROC_TY_BRANCH_CREATE_CUSTOMER) == 0 ||
+						temp[i].getType().compareTo(PROCTRAN.PROC_TY_WEB_CREATE_CUSTOMER) == 0)
+				{
 				temp[i] = processCreateDeleteCustomerRecord(temp[i]);
+				}
 
 				if (transactionTime.length() == 6)
 				{
@@ -400,9 +417,9 @@ public class ProcessedTransaction extends HBankDataAccess
 		if (processedTransaction.getType().compareTo("TFR") == 0)
 		{
 			String targetSortcodeInRecord = processedTransaction
-					.getDescription().substring(25, 31);
+					.getDescription().substring(26, 32);
 			String targetAccountInRecord = processedTransaction.getDescription()
-					.substring(31, 40);
+					.substring(32, 40);
 
 			processedTransaction.setTargetAccountNumber(targetAccountInRecord);
 			processedTransaction.setTargetSortcode(targetSortcodeInRecord);
@@ -618,9 +635,19 @@ public class ProcessedTransaction extends HBankDataAccess
 		String customerDOBString = sortOutCustomerDOB(customerDOB);
 		String deleteCustomerDescription = "";
 
+		StringBuilder myStringBuilder = new StringBuilder();
+		for (int z = sortCode2.length(); z < 6; z++)
+		{
+			myStringBuilder = myStringBuilder.append("0");
+		}
+		myStringBuilder.append(sortCode2);
+
+		
+		deleteCustomerDescription = deleteCustomerDescription.concat(myStringBuilder.toString());
+		
 		deleteCustomerDescription = deleteCustomerDescription
 				.concat(padCustomerNumber(customerNumber));
-		StringBuilder myStringBuilder = new StringBuilder();
+		myStringBuilder = new StringBuilder();
 
 		for (int z = customerName.length(); z < 14; z++)
 		{
@@ -689,6 +716,7 @@ public class ProcessedTransaction extends HBankDataAccess
 
 		createCustomerDescription = createCustomerDescription
 				+ customerDOBStringForNewCustomer;
+		
 
 		openConnection();
 
@@ -907,30 +935,39 @@ public class ProcessedTransaction extends HBankDataAccess
 	{
 		Calendar myCalendar = Calendar.getInstance();
 		myCalendar.setTime(customerDOB);
+				myCalendar.setTimeInMillis(myCalendar.getTimeInMillis() - myCalendar.getTimeZone().getOffset(myCalendar.getTimeInMillis()));
 
-		StringBuilder myStringBuilder = new StringBuilder(
-				Integer.valueOf(myCalendar.get(Calendar.DATE)));
+
+		StringBuilder myStringBuilder = new StringBuilder();
+		myStringBuilder.append(Integer.valueOf(myCalendar.get(Calendar.DATE)));
 		for (int z = myStringBuilder.length(); z < 2; z++)
 		{
 			myStringBuilder = myStringBuilder.insert(0, "0");
 		}
 		String customerDOBString = myStringBuilder.toString();
 		customerDOBString = customerDOBString + "-";
-		myStringBuilder = new StringBuilder(
-				Integer.valueOf(myCalendar.get(Calendar.MONTH) + 1));
+		myStringBuilder = new StringBuilder();
+		myStringBuilder.append(Integer.valueOf(myCalendar.get(Calendar.MONTH) + 1));
+
 		for (int z = myStringBuilder.length(); z < 2; z++)
 		{
 			myStringBuilder = myStringBuilder.insert(0, "0");
 		}
+
 		customerDOBString = customerDOBString + myStringBuilder.toString();
+
 		customerDOBString = customerDOBString + "-";
-		myStringBuilder = new StringBuilder(
-				Integer.valueOf(myCalendar.get(Calendar.YEAR)));
+
+		myStringBuilder = new StringBuilder();
+		myStringBuilder.append(Integer.valueOf(myCalendar.get(Calendar.YEAR)));
+
 		for (int z = myStringBuilder.length(); z < 4; z++)
 		{
 			myStringBuilder = myStringBuilder.insert(0, "0");
 		}
+
 		customerDOBString = customerDOBString + myStringBuilder.toString();
+
 		return customerDOBString;
 	}
 

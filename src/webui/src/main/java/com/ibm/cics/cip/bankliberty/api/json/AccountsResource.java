@@ -1277,6 +1277,7 @@ public class AccountsResource extends HBankDataAccess
 			myDeletedAccount.setAccountNumber(db2Account.getAccountNumber());
 			myDeletedAccount.setType(db2Account.getType());
 			myDeletedAccount.setCustomerNumber(db2Account.getCustomerNumber());
+
 			myDeletedAccount.setSortCode(db2Account.getSortcode());
 			myDeletedAccount.setNextStatement(db2Account.getNextStatement());
 			myDeletedAccount.setLastStatement(db2Account.getLastStatement());
@@ -1310,7 +1311,7 @@ public class AccountsResource extends HBankDataAccess
 		{
 			try
 			{
-				logger.log(Level.WARNING,
+				logger.log(Level.INFO,
 						() -> ("Accounts: deleteAccount: Failed to find account "
 								+ accountNumber));
 				Task.getTask().rollback();

@@ -683,6 +683,8 @@ public class Account extends HBankDataAccess
 
 			stmt.setString(1, accountNumberString);
 			stmt.setString(2, sortCodeString);
+			
+			
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next())
 			{

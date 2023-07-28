@@ -7,7 +7,10 @@
 package com.ibm.cics.cip.bankliberty.api.json;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
@@ -241,13 +244,30 @@ public class CustomerResource
 		response.put(JSON_SORT_CODE, sortcode);
 		response.put(JSON_CUSTOMER_NAME, customer.getCustomerName());
 		response.put(JSON_CUSTOMER_ADDRESS, customer.getCustomerAddress());
-		response.put(JSON_DATE_OF_BIRTH, customer.getDateOfBirth().toString());
+		
+		Calendar myCalendar = Calendar.getInstance();
+		myCalendar.setTime(customer.getDateOfBirth());
+		myCalendar.setTimeInMillis(myCalendar.getTimeInMillis() - myCalendar.getTimeZone().getOffset(myCalendar.getTimeInMillis()));
+		
+		
+		
+		
+		DateFormat myDateFormat = DateFormat.getDateInstance();
+		Calendar newCalendar = Calendar.getInstance();
+		newCalendar.setTime(myCalendar.getTime());
+		response.put(JSON_DATE_OF_BIRTH, myDateFormat.format(newCalendar.getTime()));
 
 		ProcessedTransactionResource myProcessedTransactionResource = new ProcessedTransactionResource();
 
 		ProcessedTransactionCreateCustomerJSON myCreatedCustomer = new ProcessedTransactionCreateCustomerJSON();
 		myCreatedCustomer.setAccountNumber("0");
-		myCreatedCustomer.setCustomerDOB(vsamCustomer.getDob());
+		
+		java.sql.Date mySqlDate = new java.sql.Date(myCalendar.getTimeInMillis());
+		
+		
+		mySqlDate.setTime(mySqlDate.getTime() - myCalendar.getTimeZone().getOffset(myCalendar.getTimeInMillis()));
+	
+		myCreatedCustomer.setCustomerDOB(mySqlDate);
 		myCreatedCustomer.setCustomerName(vsamCustomer.getName());
 		myCreatedCustomer.setSortCode(vsamCustomer.getSortcode());
 		myCreatedCustomer.setCustomerNumber(vsamCustomer.getCustomerNumber());
@@ -508,7 +528,7 @@ public class CustomerResource
 			response.put(JSON_ERROR_MSG, CUSTOMER_PREFIX + id + NOT_FOUND_MSG);
 			Response myResponse = Response.status(404)
 					.entity(response.toString()).build();
-			logger.log(Level.WARNING,
+			logger.log(Level.INFO,
 					() -> "Customer not found in in com.ibm.cics.cip.bankliberty.web.vsam.Customer");
 			logger.exiting(this.getClass().getName(),
 					GET_CUSTOMER_INTERNAL_EXIT, myResponse);
@@ -669,8 +689,11 @@ public class CustomerResource
 		myDeletedCustomer.setAccountNumber("0");
 		myDeletedCustomer.setCustomerDOB(vsamCustomer.getDob());
 		myDeletedCustomer.setCustomerName(vsamCustomer.getName());
+		
+		
 		myDeletedCustomer.setSortCode(vsamCustomer.getSortcode());
 		myDeletedCustomer.setCustomerNumber(vsamCustomer.getCustomerNumber());
+		
 
 		Response writeDeleteCustomerResponse = myProcessedTransactionResource
 				.writeDeleteCustomerInternal(myDeletedCustomer);

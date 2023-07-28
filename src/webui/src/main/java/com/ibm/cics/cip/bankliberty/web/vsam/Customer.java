@@ -10,6 +10,7 @@ import java.io.UnsupportedEncodingException;
 
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
@@ -307,12 +308,12 @@ public class Customer
 
 		Calendar myCalendar = Calendar.getInstance();
 		myCalendar.set(Calendar.YEAR, myCustomer.getCustomerBirthYear());
-		myCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth());
+		myCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth()-1);
 		myCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerBirthDay());
 		Date myCustomerBirthDate = new Date(
 				myCalendar.toInstant().toEpochMilli());
 		myCalendar.set(Calendar.YEAR, myCustomer.getCustomerCsReviewYear());
-		myCalendar.set(Calendar.MONTH, myCustomer.getCustomerCsReviewMonth());
+		myCalendar.set(Calendar.MONTH, myCustomer.getCustomerCsReviewMonth()-1);
 		myCalendar.set(Calendar.DAY_OF_MONTH,
 				myCustomer.getCustomerCsReviewDay());
 		Date myCustomerReviewDate = new Date(
@@ -618,6 +619,7 @@ public class Customer
 		try
 		{
 			customerFile.readForUpdate(key, holder);
+			myCustomer = new CUSTOMER(holder.getValue());
 			customerFile.delete();
 		}
 		catch (InvalidSystemIdException | LogicException
@@ -645,7 +647,7 @@ public class Customer
 
 		Calendar myCalendar = Calendar.getInstance();
 		myCalendar.set(Calendar.YEAR, myCustomer.getCustomerBirthYear());
-		myCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth());
+		myCalendar.set(Calendar.MONTH, myCustomer.getCustomerBirthMonth() - 1);
 		myCalendar.set(Calendar.DAY_OF_MONTH, myCustomer.getCustomerBirthDay());
 		Date myCustomerBirthDate = new Date(
 				myCalendar.toInstant().toEpochMilli());
@@ -748,10 +750,12 @@ public class Customer
 		myCustomer.setCustomerAddress(customer.getCustomerAddress().trim());
 		// What about title validation?
 		myCustomer.setCustomerName(customer.getCustomerName().trim());
-
-		Calendar myCalendar = Calendar.getInstance();
+		
+		Calendar myCalendar = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
 		myCalendar.setTime(customer.getDateOfBirth());
-
+		
+		myCalendar.setTimeInMillis(myCalendar.getTimeInMillis() - myCalendar.getTimeZone().getOffset(myCalendar.getTimeInMillis()));
+		
 		myCustomer.setCustomerBirthDay(myCalendar.get(Calendar.DAY_OF_MONTH));
 		myCustomer.setCustomerBirthMonth(myCalendar.get(Calendar.MONTH) + 1);
 		myCustomer.setCustomerBirthYear(myCalendar.get(Calendar.YEAR));
