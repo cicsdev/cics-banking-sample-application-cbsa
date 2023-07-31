@@ -24,7 +24,7 @@ functionality from this interface. The React UI contains similar
 functionality to the BMS offering, however it should be noted that there
 is not a 1-1 mapping. 
 
-(****EYECATCHER**** - Is the following true) The React UI contains some functionality which
+The React UI contains some functionality which
 the BMS offering does not. To utilise a specific function click on the
 associated button.
 
@@ -73,7 +73,7 @@ From the Control Panel:
 
 ![ReactUI menu](./images/ReactUIUserGuide/101-Carbon-React-Control-Panel.png)
 
-click "Create a New Account":
+Click "Create a New Account":
 
 ![Create Account](./images/ReactUIUserGuide/301-Carbon-React-Create-Account.png)
 
@@ -147,4 +147,4 @@ Searching for the customer using the customer number and clicking "Submit" will 
 
 Clicking "Delete" again will permanently remove the customer.
 
-**Note**: You cannot delete an existing customer if they have any open accounts,
+**Note**: You cannot delete an existing customer if they have any open accounts.
