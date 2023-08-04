@@ -124,6 +124,7 @@
 			<groupId>org.yaml</groupId>
 			<artifactId>snakeyaml</artifactId>
 			<scope>compile</scope>
+			<version>2.0</version>
 		</dependency>
 
 		<dependency>
