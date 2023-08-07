@@ -1,3 +1,9 @@
+/*
+ *
+ *    Copyright IBM Corp. 2023
+ *
+ */
+
 import React from 'react';
 import { useState } from 'react';
 import CustomerDetailsTable from './CustomerDetailsTable';

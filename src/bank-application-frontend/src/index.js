@@ -1,3 +1,9 @@
+/*
+ *
+ *    Copyright IBM Corp. 2023
+ *
+ */
+
 // import 'core-js/modules/es.array.includes';
 // import 'core-js/modules/es.array.fill';
 // import 'core-js/modules/es.string.includes';

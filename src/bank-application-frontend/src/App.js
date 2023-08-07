@@ -1,3 +1,9 @@
+/*
+ *
+ *    Copyright IBM Corp. 2023
+ *
+ */
+
 import React, { Component } from 'react';
 import './app.scss';
 import { Content, Theme } from '@carbon/react';
@@ -45,7 +51,10 @@ class App extends Component {
             <Route path="/Admin/account_details" component={AdminHeader} />
           </Switch>
           <Switch>
-            <Route path="/Admin/deletion" component={AdminHeader} />
+            <Route path="/Admin/customer_deletion" component={AdminHeader} />
+          </Switch>
+          <Switch>
+            <Route path="/Admin/account_deletion" component={AdminHeader} />
           </Switch>
         </Theme>
         <Content>

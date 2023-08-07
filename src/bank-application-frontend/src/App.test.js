@@ -1,3 +1,9 @@
+/*
+ *
+ *    Copyright IBM Corp. 2023
+ *
+ */
+
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import RepoPage from './content/RepoPage';

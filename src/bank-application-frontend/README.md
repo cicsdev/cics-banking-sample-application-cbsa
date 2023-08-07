@@ -1,16 +1,6 @@
-# Carbon-React
+# bank-application-frontend
 
 Repo for using Carbon React Front-End Framework for CBSA and the code changes associated with it.
-
-## BEFORE:
-
-<img width="1208" src="https://media.github.ibm.com/user/372932/files/887b3522-bd30-4b35-a0bb-2cfc6370b148">
-
-## AFTER:
-
-<img width="628" src="https://media.github.ibm.com/user/372932/files/84543b80-394c-479b-9c78-017aa2f863eb">
-<img width="658" src="https://media.github.ibm.com/user/372932/files/d80d1c0b-0406-4b72-a374-5e881d328786">
-<img width="650" src="https://media.github.ibm.com/user/372932/files/4d475d40-f804-46ec-91f3-6ffbd34c0c23">
 
 ## Requirements
 
@@ -26,7 +16,7 @@ Run ng serve for a dev server. Navigate to http://localhost:4200/. The applic
 
 ## Important to note
 
-The back-end implementation of Customer Name search is designed to drive java workload, so is MUCH slower to return results than customer name search.
+The back-end implementation of Customer Name search is designed to drive java workload, so is MUCH slower to return results than customer number search.
 
 ## Known issues/Areas for improvement
 

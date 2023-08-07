@@ -1,3 +1,9 @@
+/*
+ *
+ *    Copyright IBM Corp. 2023
+ *
+ */
+
 import React from 'react';
 import {
   Header,
@@ -48,8 +54,11 @@ const AdminHeader = () => {
                 </SideNavMenuItem>
               </SideNavMenu>
               <SideNavMenu title="Delete">
-                <SideNavMenuItem href="./#/Admin/deletion">
-                  Delete Customer or Account
+                <SideNavMenuItem href="./#/Admin/customer_deletion">
+                  Delete Customer
+                </SideNavMenuItem>
+                <SideNavMenuItem href="./#/Admin/account_deletion">
+                  Delete Account
                 </SideNavMenuItem>
               </SideNavMenu>
               <SideNavMenu title="View Details">
