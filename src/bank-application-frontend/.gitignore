@@ -1,0 +1,9 @@
+.yarn/
+node_modules
+settings.json
+.scannerwork
+.env
+/build
+.logscanIt.bat
+build/
+scanIt.bat

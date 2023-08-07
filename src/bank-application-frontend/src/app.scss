@@ -1,0 +1,8 @@
+@use './components/Homepage-Header/homepage-header';
+@use './components/Admin-Header/admin-header';
+@use './content/HomePage/home-page';
+@use './content/AdminPage/admin-page';
+@use './content/CustomerDetailsPage/customer-details';
+@use './content/AccountDetailsPage/account-details';
+@use './content/AccountCreationPage/account-creation';
+@use './content/CustomerCreationPage/customer-creation';

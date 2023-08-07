@@ -1,0 +1,199 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/type' as *;
+@use '@carbon/react/scss/breakpoint' as *;
+@use '@carbon/react/scss/theme' as *;
+@use './mixins.scss' as *;
+@use './overrides.scss';
+
+.repo-page__r1 {
+  padding-top: $spacing-05;
+  padding-left: $spacing-05;
+  padding-right: $spacing-05;
+  padding-bottom: $spacing-05;
+}
+
+.landing-page__illo {
+  max-width: 100%;
+}
+
+.landing-page__banner {
+  padding-top: $spacing-05;
+  padding-bottom: $spacing-07 * 4;
+  padding-left: $spacing-06;
+  @include landing-page-background;
+}
+
+.landing-page__heading {
+  @include type-style('productive-heading-05');
+}
+
+.landing-page__r2 {
+  margin-top: rem(-40px);
+}
+
+.tabs-group-content {
+  padding: $spacing-10 $spacing-06;
+}
+
+.landing-page__subheading {
+  @include type-style('productive-heading-03');
+
+  font-weight: 600;
+}
+
+.landing-page__p {
+  @include type-style('productive-heading-03');
+  margin-top: $spacing-06;
+  margin-bottom: $spacing-08;
+
+  @include breakpoint-between((320px + 1), md) {
+    max-width: 75%;
+  }
+}
+
+.landing-page__r3 {
+  padding-top: $spacing-09;
+  padding-bottom: $spacing-09;
+  padding-left: $spacing-06;
+  @include landing-page-background;
+}
+
+.landing-page__label {
+  @include type-style('heading-01');
+}
+
+.tabs-group {
+  background-color: $layer-01;
+}
+
+.half-width {
+  height: 1.5px;
+  background-color: #f4f4f4;
+  border: none;
+  margin: 0cm;
+}
+
+.landing-page__banner,
+.landing-page__r2,
+.landing-page__r3 {
+  margin-left: -20px;
+  margin-right: -20px;
+
+  @include breakpoint-down(md) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.control-panel-parent {
+  display: flex;
+  justify-content: space-between;
+  width: 105rem;
+}
+
+.control-panel-left-child {
+  width: 50%;
+}
+
+.control-panel-right-child {
+  width: 55%;
+  margin-right: 75px;
+}
+
+a.cds--header__name.white-background {
+  color: #0f62fe;
+  padding: 0 0 0 0;
+}
+
+.lower-content {
+  width: 100%;
+  height: 100%;
+}
+
+div.gap {
+  margin-top: 150px;
+  width: 98%;
+}
+
+.customer-list-view {
+  margin-top: 30px;
+  width: 250px;
+}
+
+.upper {
+  width: 100%; 
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-part {
+  width: 15%;
+}
+
+.right-part {
+  width: 84%;
+  height: 250px;
+  margin-right: 35px;
+}
+.header-filler {
+  width: 40px;
+}
+
+.right-corner {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-btn-div {
+  width: 33%;
+  height: 48px;
+}
+
+.mid-btn-div {
+  width: 34%;
+  height: 48px;
+}
+
+.right-btn-div {
+  width: 33%;
+  height: 48px;
+}
+
+.left-btn {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid #e0e0e0;
+  border-left: 1px solid #e0e0e0;
+  border-right: 1px solid #e0e0e0;
+}
+
+.mid-btn {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.mid-btn:hover {
+  width: 100%;
+  height: 100%;
+  // background: url('../../../public/green-plus-icon.png') no-repeat;
+  background-color: green;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.right-btn {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: transparent;
+}
+
+a.cds--header__name.white-background {
+  color: #0f62fe;
+  padding: 0 0 0 0;
+}
