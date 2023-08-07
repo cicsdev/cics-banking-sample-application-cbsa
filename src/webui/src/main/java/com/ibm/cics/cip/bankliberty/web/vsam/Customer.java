@@ -620,6 +620,12 @@ public class Customer
 		{
 			customerFile.readForUpdate(key, holder);
 			myCustomer = new CUSTOMER(holder.getValue());
+			if(holder==null)
+			{
+				logger.severe("Read for Update " + customerNumber + " in CUSTOMER file failed, holder is null");
+				logger.exiting(this.getClass().getName(), DELETE_CUSTOMER, null);
+				return null;
+			}
 			customerFile.delete();
 		}
 		catch (InvalidSystemIdException | LogicException

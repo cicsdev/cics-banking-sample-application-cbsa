@@ -192,7 +192,6 @@ public class WebController implements WebMvcConfigurer
 			catch (Exception e)
 			{
 				log.info(e.toString());
-				e.printStackTrace();
 				model.addAttribute(LARGE_TEXT, REQUEST_ERROR);
 				model.addAttribute(SMALL_TEXT, ERROR_MSG);
 			}
@@ -245,11 +244,9 @@ public class WebController implements WebMvcConfigurer
 				ResponseSpec response = client.get().retrieve();
 
 				String responseBody = response.bodyToMono(String.class).block();
-				log.info("Response body is " + responseBody);
 				
 				CustomerEnquiryJson responseObj = new ObjectMapper()
 						.readValue(responseBody, CustomerEnquiryJson.class);
-				log.info("responseObj is {}", responseObj);
 				checkIfResponseValidEnqCust(responseObj);
 				model.addAttribute(LARGE_TEXT, "Customer Details");
 				model.addAttribute(SMALL_TEXT, responseObj.toPrettyString());
