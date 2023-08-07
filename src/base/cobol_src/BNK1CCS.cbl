@@ -780,9 +780,6 @@
               END-EVALUATE
            END-IF.
 
-           DISPLAY 'CHRISTNL IS ' CHRISTNL
-           DISPLAY 'CUSTSNL  IS ' CUSTSNL
-           DISPLAY 'CUSTAD1L IS ' CUSTAD1L
            IF CHRISTNL < 1 OR CHRISTNI = '____________________'
               OR CHRISTNI = SPACES
               MOVE SPACES TO MESSAGEO
