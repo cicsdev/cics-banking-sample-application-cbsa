@@ -22,3 +22,5 @@ src/Z-OS-Connect-Customer-Services-Interface/maven.txt
 src/Z-OS-Connect-Customer-Services-Interface/pomSafe.xml
 src/Z-OS-Connect-Payment-Interface/pomSafe.xml
 src/bank-application-frontend/.whitesource
+CSAR-CBSA.xml
+CSAR-CBSA.xml.out
