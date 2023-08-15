@@ -28,7 +28,7 @@ APACHE 2 CODE NOTICES AND INFORMATION
 
 The following third party components are provided for use with the Program:
 
-dbb-zAppBuild, harmony-reflect
+harmony-reflect
 
                                  Apache License
                            Version 2.0, January 2004
@@ -239,7 +239,7 @@ BSD-3 CODE NOTICES AND INFORMATION
 
 The following third party component(s) are provided for use with the Program:
 
-yuicompressor
+yuicompressor, node-forge
 
 Copyright  YEAR  COPYRIGHT HOLDER
 
@@ -596,7 +596,7 @@ MIT CODE NOTICES AND INFORMATION
 
 The following third party components are provided for use with the Program:
 
-atob, jsoup, JSONStream, fraction, peers
+atob, jsoup, JSONStream, fraction.js, peers
 
 Copyright © 2009 - 2021 Jonathan Hedley (https://jsoup.org/)
 
