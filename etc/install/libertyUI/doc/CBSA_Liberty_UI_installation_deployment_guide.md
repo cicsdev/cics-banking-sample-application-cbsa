@@ -15,7 +15,7 @@
 
 -   the CBSA base/COBOL installed in the CICS region already
 
--   Java SE 1.8 or later. Java 11 is not supported.
+-   Java SE 11.0.17 or later. Java 11.0.16 requires a workaround.
 
 > These instructions detail the steps required to:
 
@@ -29,12 +29,12 @@
 
 ### Assumptions: 
 
--   These instructions utilise CICS TS 5.5 and therefore all directory
+-   These instructions utilise CICS TS 6.1 and therefore all directory
     names used etc. are based around that, they will need to be
     amended accordingly for different versions of CICS. In particular, verify the "BOM" for CICS is correct
 for your version of CICS.
 
-- Java SE 1.8 or later on the workstation
+- Java SE 11 on the workstation
 
 -   The hostname, port number, userid and CICS TS version may be
     different when you install/deploy into your own environment. We
@@ -122,7 +122,7 @@ If you have already installed the Liberty UI, you can skip this step.
 2.  Copy the CICS supplied JVM profile called DFHWLP in to this new
     directory. In this case, copy from the following into the new **JVM Profiles** directory:
 
-> /usr/lpp/cicsts/cicsts55/JVMProfiles/DFHWLP.jvmprofile
+> /usr/lpp/cicsts/cicsts61/JVMProfiles/DFHWLP.jvmprofile
 
 3.  To utilise a JVMSERVER within CICS, you will we need a JVMPROFILEDIR
     SIT parameter in the CICS. Specify the following in the CICS
@@ -133,9 +133,9 @@ If you have already installed the Liberty UI, you can skip this step.
 4.  The copied DFHWLP.jvmprofile will need to be edited:
 
 > 1.  Ensure that JAVA_HOME is set to the appropriate level of java (in
-      our case J8.0_64):
+      our case Java 11):
 > 
->> JAVA_HOME=/usr/lpp/java/J8.0_64/
+>> JAVA_HOME=/usr/lpp/java/current_64/
 >
 >2.  Ensure that autoconfigure is set to true:
 
@@ -150,25 +150,43 @@ If you have already installed the Liberty UI, you can skip this step.
 
 >4.  Add the following to the JVM profile to add support for Db2:
 
+
 >> -Dcom.ibm.cics.jvmserver.wlp.jdbc.driver.location=/usr/lpp/db2c10/jdbc/
->>
->> -Dcom.ibm.cics.jvmserver.wlp.server.http.**port=19080**
->>
+>> -Ddb2.jcc.currentSchema=IBMUSER
 >> **Please note**: You should verify the location of the JDBC driver and
 >> amend the location (above) according to your own site installation
->> location.
+>> location. Ensure that the currentSchema is the "DB2OWNER" from the Db2 setup.
+>>
+
+>5. Add the following to choose the correct HTTP port.
+>> -Dcom.ibm.cics.jvmserver.wlp.server.http.**port=19080**
+>>
+
 >> Port **19080** is used in these instructions, you may wish to utilise a
 >> different port number and should specify your chosen port number
 >> (above) instead.
 
->5.  WORK_DIR must be set to a directory that the CICS region userid
+>6.  WORK_DIR must be set to a directory that the CICS region userid
     "CICSUSER" has access to. For example:
 
 >> /u/cicsuser/
 
->6. At CICS TS 5.5 and CICS TS 5.6, add the following to the JVM profile to prevent CICS adding "wab" support.
+>7. At CICS TS 5.5 and CICS TS 5.6, add the following to the JVM profile to prevent CICS adding "wab" support.
 
 >> -Dcom.ibm.cics.jvmserver.wlp.wab=false
+
+>8. Ensure that the Time Zone is set correctly, otherwise Java and COBOL will not be using the same clock. This is done by specifying TZ and then the correct value. The correct value can be obtained by entering UNIX Systems Services and issuing the command:
+
+>> echo $TZ
+
+> This would return CST6CDT, which you would set in the JVM profile as below:
+
+>> TZ=CST6CDT
+
+>9. At versions of Java BEFORE Java 11.0.17, you need to add Db2 libraries to your LIBPATH. An example is shown below:
+
+>># Specify any directories that contain DLLs required at run time.
+>>LIBPATH_SUFFIX=/usr/lpp/db2d10/jdbc/lib
 
 
 ## 
@@ -188,7 +206,7 @@ If you have already installed the Liberty UI, you can skip this step.
 > number and Userid.
 
 2.  Add the group CBSAWLP to a list installed on a cold start, for
-    example CICSTS55.
+    example CICSTS61.
 
 3.  Create and install this and it will create a JVM server. It may take
     a few minutes to become enabled.
@@ -201,7 +219,7 @@ You should also add the group to the list installed on a cold start.
 
 > This will create a server.xml file in
 >
-> /u/cicsuser/CICSTS55/CICSTS55/CBSAWLP/wlp/usr/servers/defaultServer/
+> /u/cicsuser/CICSTS61/CICSTS61/CBSAWLP/wlp/usr/servers/defaultServer/
 
 
 ##
@@ -266,7 +284,7 @@ Issue the following Maven command:
 
 This will create "webui-1.0.war" file in a new "target" directory.
 
-## 
+## Create an apps directory in your JVM server directory
 
 ## Export to apps directory:
 
