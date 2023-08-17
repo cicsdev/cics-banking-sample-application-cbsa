@@ -30,16 +30,18 @@ associated button.
 
 ![ReactUI Login](./images/ReactUIUserGuide/002-Carbon-React-User-Userid-And-Password.png)
 
-CBSA as a login mechanism, which is yet to be implemented with any actual security. Any combination of userid and password will take your through to the control pannel.
+CBSA has a login mechanism, which is yet to be implemented with any actual security. Any combination of userid and password will take you through to the control panel.
 
 
 #### Control Panel
 
 ![Control Panel](./images/ReactUIUserGuide/101-Carbon-React-Control-Panel.png)
 
-Upon login, the user should be faced with the user functions list, containing both "User Services" and "Accounts Service". This functions are also available from the burger menu in the top left of the screen.
+Upon login, the user should be faced with the user functions list, containing both "User Services" and "Accounts Service". These functions are also available from the hamburger menu in the top left of the screen. 
 
-#### Create Account
+![Hamburger Menu](./images/ReactUIUserGuide/Carbon-React-Hamburger-Icon.png)
+
+#### Create a New Customer
 
 ![Create Customer](./images/ReactUIUserGuide/201-Carbon-React-Create-Customer.png)
 
@@ -53,17 +55,17 @@ The customer ID is generated upon creation.
 
 **Note**: Customers cannot be younger than 18 or older than 120.
 
-#### View / Update Account
+#### View / Update Customer Details
 
 ![View Customer](./images/ReactUIUserGuide/203-Carbon-React-View-Customer.png)
 
-A customer can be viewed using the CustomerId number or using the account name. Once the submit button is pushed the customer table should appear assuming the customer exists.
+A customer can be viewed using the CustomerId number or using the customer name. Once the submit button is pushed the customer table should appear assuming the customer exists.
 
-Using the update button should produce the update popup:
+Click the update button to produce the update popup:
 
 ![Update Customer](./images/ReactUIUserGuide/204-Carbon-React-Update-Customer-Popup.png)
 
-Using the submit button will save any edits to a customers details.
+Using the submit button will save any edits to a customer's details.
 
 #### Adding an account:
 
@@ -113,7 +115,7 @@ The account can then be updated using the "Update" button on the account
 
 ![Update Account Popup](./images/ReactUIUserGuide/304-Carbon-React-Update-Accounts-Popup.png)
 
-#### Deleting a Account
+#### Delete an Account
 
 From the Control Panel:
 
@@ -124,7 +126,7 @@ Click "Deleting existing account":
 
 ![Delete Account](./images/ReactUIUserGuide/401-Carbon-React-Delete-Account.png)
 
-Searching for the account using the account number and clicking "Submit" will show any existing account in a table. Clicking the "Delete" button will produce a warning popup.
+Searching for the account using the account number and clicking "Submit" will show the existing account in a table. Clicking the "Delete" button will produce a warning popup.
 
 ![Delete Account Popup](./images/ReactUIUserGuide/402-Carbon-React-Delete-Account-Warning-Popup.png)
 
