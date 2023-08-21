@@ -171,22 +171,24 @@ const CustomerDetailsTable = ({ customerDetailsRows, accountDetailsRows }) => {
     if (useName.length === 0) {
       useName = currentCustomerName
     }
+
+let newDateOfBirth = currentDateOfBirth.substring(6,10) + "-" + currentDateOfBirth.substring(3,5) + "-" + currentDateOfBirth.substring(0,2)
     try {
       await axios
         .put(process.env.REACT_APP_CUSTOMER_URL + "/" + `${customerNumber}`, {
           customerAddress: useAddress,
           creditScore: currentCreditScore,
-          dateOfBirth: currentDateOfBirth,
+          dateOfBirth: newDateOfBirth,
           sortCode: currentSortCode,
           customerName: useName
         }).then((response) => {
           responseData = response.data
         });
-      console.log(responseData)
     } catch (e) {
       console.log("Error updating customer: " + e)
     }
     setUpdateCustomerModalOpened(wasUpdateCustomerOpened => !wasUpdateCustomerOpened)
+    window.location.reload(true)
   }
 
   //Set default values for the account to be updated
@@ -322,6 +324,7 @@ const CustomerDetailsTable = ({ customerDetailsRows, accountDetailsRows }) => {
      * Toggle account update modal visibility
      */
     setUpdateAccountModalOpened(wasUpdateAccountOpened => !wasUpdateAccountOpened)
+    window.location.reload(true);
   }
 
   /**
@@ -332,6 +335,8 @@ const CustomerDetailsTable = ({ customerDetailsRows, accountDetailsRows }) => {
       wasUpdateAccountOpened => !wasUpdateAccountOpened
     );
   };
+
+ 
 
   /**
    * Called when the table requires the expanded rows
@@ -417,7 +422,7 @@ const CustomerDetailsTable = ({ customerDetailsRows, accountDetailsRows }) => {
                       modalHeading="Update Customer"
                       passiveModal
                       open={isUpdateCustomerModalOpened}
-                      onRequestClose={displayUpdateCustomerModal}
+                      onRequestClose={() => {displayUpdateCustomerModal(); window.location.reload(true)}}
                     >
                       <TextInput
                         data-modal-primary-focus
@@ -461,7 +466,7 @@ const CustomerDetailsTable = ({ customerDetailsRows, accountDetailsRows }) => {
 
                       <ModalFooter>
                         <Button
-                          onClick={() => updateCustomer()}>
+				onClick={() => {updateCustomer()}}>
                           Submit
                         </Button>
                       </ModalFooter>
@@ -532,7 +537,7 @@ const CustomerDetailsTable = ({ customerDetailsRows, accountDetailsRows }) => {
                   </div>
                   <ModalFooter>
                     <Button
-                      onClick={updateAccount}>
+			onClick={() => {updateAccount()}}>
                       Submit
                     </Button>
                   </ModalFooter>

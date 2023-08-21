@@ -450,7 +450,7 @@ public class AccountsResource extends HBankDataAccess
 			{
 				response.put(JSON_ERROR_MSG, ACCOUNT_LITERAL + accountNumber
 						+ " not found in com.ibm.cics.cip.bankliberty.web.db2.Account");
-				logger.log(Level.WARNING, () -> ACCOUNT_LITERAL + accountNumber
+				logger.log(Level.INFO, () -> ACCOUNT_LITERAL + accountNumber
 						+ " not found in com.ibm.cics.cip.bankliberty.web.db2.Account");
 				myResponse = Response.status(404).entity(response.toString())
 						.build();

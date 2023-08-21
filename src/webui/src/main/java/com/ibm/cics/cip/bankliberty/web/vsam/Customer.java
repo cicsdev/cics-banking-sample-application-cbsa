@@ -290,13 +290,20 @@ public class Customer
 			{
 				customerFile.read(key, holder);
 			}
+			catch(RecordNotFoundException e)
+			{
+				logger.info("Record not found reading customer file for "
+						+ customerNumber + " " + e.getLocalizedMessage());
+				logger.exiting(this.getClass().getName(), GET_CUSTOMER, null);
+				return null;
+			}
 			catch (InvalidSystemIdException | LogicException
 					| InvalidRequestException | IOErrorException
 					| ChangedException | LockedException | LoadingException
 					| RecordBusyException | FileDisabledException
 					| DuplicateKeyException | FileNotFoundException
 					| ISCInvalidRequestException | NotAuthorisedException
-					| RecordNotFoundException | NotOpenException e)
+					| NotOpenException e)
 			{
 				logger.severe("Error reading customer file for "
 						+ customerNumber + " " + e.getLocalizedMessage());

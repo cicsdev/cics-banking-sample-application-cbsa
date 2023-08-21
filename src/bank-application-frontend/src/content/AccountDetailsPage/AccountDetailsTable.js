@@ -180,12 +180,16 @@ const AccountDetailsTable = ({accountMainRow}) => {
 
     //Update the account with the details given
     try {
+
+let newLastStatementDate = lastStatementDate.substring(6,10) + "-" + lastStatementDate.substring(3,5) + "-" + lastStatementDate.substring(0,2)
+let newNextStatementDate = nextStatementDate.substring(6,10) + "-" + nextStatementDate.substring(3,5) + "-" + nextStatementDate.substring(0,2)
+let newDateOpened        = dateOpened.substring(6,10) + "-" + dateOpened.substring(3,5) + "-" + dateOpened.substring(0,2) 
       await axios
         .put(process.env.REACT_APP_ACCOUNT_URL + `/${useAccountNumber}`, {
           interestRate: useInterestRate,
-          lastStatementDate: lastStatementDate,
-          nextStatementDate: nextStatementDate,
-          dateOpened: dateOpened,
+          lastStatementDate: newLastStatementDate,
+          nextStatementDate: newNextStatementDate,
+          dateOpened: newDateOpened,
           actualBalance: currentActualBalance,
           overdraft: useOverdraft,
           accountType: useAccountType,
@@ -204,6 +208,7 @@ const AccountDetailsTable = ({accountMainRow}) => {
       console.log("Error updating account: " + e)
     }
     setUpdateAccountModalOpened(wasUpdateAccountOpened => !wasUpdateAccountOpened)
+    window.location.reload(true)
   }
 
   const [isUpdateAccountModalOpened, setUpdateAccountModalOpened] = useState(
@@ -255,7 +260,7 @@ const AccountDetailsTable = ({accountMainRow}) => {
                       modalHeading="Update Account"
                       passiveModal
                       open={isUpdateAccountModalOpened}
-                      onRequestClose={displayUpdateAccountModal}>
+                      onRequestClose={() => {displayUpdateAccountModal()}}>
 
                       <div style={{ width: 200 }}>
                         <TextInput
@@ -304,7 +309,7 @@ const AccountDetailsTable = ({accountMainRow}) => {
                       </div>
 
                       <ModalFooter>
-                        <Button onClick={updateAccount}>
+                        <Button onClick={() => {updateAccount()}}>
                           Submit
                         </Button>
                       </ModalFooter>

@@ -243,7 +243,7 @@ const CustomerDeleteTables = ({customerRow, accountRow}) => {
                     <Modal
                       modalHeading="Customer deleted successfully"
                       open={isSuccessfulCustomerDeleteModalOpened}
-                      onRequestClose={() => {displaySuccessfulCustomerDeleteModal(); window.location.reload()}}
+                      onRequestClose={() => {displaySuccessfulCustomerDeleteModal(); window.location.reload(true)}}
                       passiveModal>
                     </Modal>
                   </TableExpandRow>
