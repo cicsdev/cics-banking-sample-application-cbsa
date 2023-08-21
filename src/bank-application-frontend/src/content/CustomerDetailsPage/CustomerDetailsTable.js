@@ -466,7 +466,7 @@ let newDateOfBirth = currentDateOfBirth.substring(6,10) + "-" + currentDateOfBir
 
                       <ModalFooter>
                         <Button
-				onClick={() => {updateCustomer()}}>
+				                  onClick={() => {updateCustomer()}}>
                           Submit
                         </Button>
                       </ModalFooter>
@@ -486,7 +486,7 @@ let newDateOfBirth = currentDateOfBirth.substring(6,10) + "-" + currentDateOfBir
                   modalHeading="Update Customer Account"
                   passiveModal
                   open={isUpdateAccountModalOpened}
-                  onRequestClose={displayUpdateAccountModal}
+                  onRequestClose={() => {displayUpdateAccountModal(); window.location.reload(true)}}
                 >
 
                   <div style={{ width: 200 }}>
@@ -537,7 +537,7 @@ let newDateOfBirth = currentDateOfBirth.substring(6,10) + "-" + currentDateOfBir
                   </div>
                   <ModalFooter>
                     <Button
-			onClick={() => {updateAccount()}}>
+			                onClick={() => {updateAccount()}}>
                       Submit
                     </Button>
                   </ModalFooter>
