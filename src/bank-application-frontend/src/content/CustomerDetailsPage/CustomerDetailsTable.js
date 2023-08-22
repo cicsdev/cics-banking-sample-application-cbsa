@@ -12,7 +12,6 @@ import {
   NumberInput,
   Button,
   Modal,
-  Dropdown,
   ModalFooter,
   TextInput,
   TableContainer,
@@ -86,18 +85,12 @@ const CustomerDetailsTable = ({ customerDetailsRows, accountDetailsRows }) => {
   );
 
   /**
-   * Is the updateAccount popup being used
-   */
-  const [isUpdateAccountModalOpened, setUpdateAccountModalOpened] = useState(
-    false
-  );
-
-  /**
    * Is the noCustomer popup being used
    */
   const [isNoCustomersModalOpen, setNoCustomersModalOpened] = useState(
     false
   );
+
 
   function displayNoCustomerModal() {
     setNoCustomersModalOpened(
@@ -160,7 +153,6 @@ const CustomerDetailsTable = ({ customerDetailsRows, accountDetailsRows }) => {
    * The function ensures that both of the changeable fields are not left blank by using the value before an update attempt was made as a fallback
    */
   async function updateCustomer() {
-    let responseData;
     let useAddress = enteredAddressChange
     let useName = enteredNameChange
     let customerNumber = currentCustomerNumber
@@ -175,14 +167,13 @@ const CustomerDetailsTable = ({ customerDetailsRows, accountDetailsRows }) => {
 let newDateOfBirth = currentDateOfBirth.substring(6,10) + "-" + currentDateOfBirth.substring(3,5) + "-" + currentDateOfBirth.substring(0,2)
     try {
       await axios
-        .put(process.env.REACT_APP_CUSTOMER_URL + "/" + `${customerNumber}`, {
+        .put(process.env.REACT_APP_CUSTOMER_URL + `/${customerNumber}`, {
           customerAddress: useAddress,
           creditScore: currentCreditScore,
           dateOfBirth: newDateOfBirth,
           sortCode: currentSortCode,
           customerName: useName
         }).then((response) => {
-          responseData = response.data
         });
     } catch (e) {
       console.log("Error updating customer: " + e)
@@ -191,152 +182,6 @@ let newDateOfBirth = currentDateOfBirth.substring(6,10) + "-" + currentDateOfBir
     window.location.reload(true)
   }
 
-  //Set default values for the account to be updated
-  const [accountNumber, setAccountNumber] = useState("")
-  const [currentAccountType, setCurrentAccountType] = useState("")
-  const [currentOverdraft, setCurrentOverdraft] = useState("")
-  const [currentInterestRate, setCurrentInterestRate] = useState("")
-  const [accountSortCode, setAccountSortCode] = useState("")
-  const [currentActualBalance, setCurrentActualBalance] = useState("")
-  const [lastStatementDate, setLastStatementDate] = useState("")
-  const [nextStatementDate, setNextStatementDate] = useState("")
-  const [dateOpened, setDateOpened] = useState("")
-  const [currentAvailableBalance, setCurrentAvailableBalance] = useState("")
-  const [currentAccountCustomerNumber, setAccountCustomerNumber] = useState("")
-
-  /**
-   * When the update button on an account is pressed
-   * Calls clearExistingData to ensure all states are set back to empty
-   * Calls setPrefilledAccountData to set the current values from the row
-   * Calls displayUpdateAccountModal to then show the update account popup
-   */
-  function onUpdateAccountClick(row) {
-    clearExistingData()
-    setPrefilledAccountData(row)
-    displayUpdateAccountModal()
-  }
-
-  /**
-   * Sets all states to ""
-   */
-  function clearExistingData() {
-    setAccountNumber("")
-    setCurrentAccountType("")
-    setCurrentOverdraft("")
-    setCurrentInterestRate("")
-    setAccountSortCode("")
-    setCurrentActualBalance("")
-    setLastStatementDate("")
-    setNextStatementDate("")
-    setDateOpened("")
-    setAccountType("")
-    setCurrentAvailableBalance("")
-    setAccountCustomerNumber("")
-  }
-
-  /**
-   * Sets data to the values within the row
-   * This allows us to specify which account we want to update if there is more than 1 available
-   */
-  function setPrefilledAccountData(row) {
-    setAccountNumber(row.accountNumber)
-    setAccountType(row.accountType)
-    setCurrentAccountType(row.accountType)
-    setCurrentOverdraft(row.overdraft)
-    setCurrentInterestRate(row.interestRate)
-    setAccountSortCode(row.sortCode)
-    setCurrentActualBalance(row.actualBalance)
-    setLastStatementDate(row.lastStatementDate)
-    setNextStatementDate(row.nextStatementDate)
-    setDateOpened(row.dateOpened)
-    setCurrentAvailableBalance(row.availableBalance)
-    setAccountCustomerNumber(row.customerNumber)
-  }
-
-
-  /**
-   * States for the user entered fields
-   */
-  const [enteredOverdraftLimit, setOverdraftLimit] = useState("");
-  const [enteredAccountType, setAccountType] = useState("");
-  const [enteredInterestRate, setInterestRate] = useState("");
-
-  const enteredInterestRateChangeHandler = event => {
-    setInterestRate(event.target.value);
-  };
-
-  const enteredOverdraftLimitChangeHandler = event => {
-    setOverdraftLimit(event.target.value);
-  };
-
-  const enteredAccountTypeChangeHandler = event => {
-    setAccountType(event.target.value);
-  };
-
-  /**
-   * Update a selected account
-   * Checks that entered data from the customer isn't blank - if it is it falls back on whatever the value was before the customer opened the edit modal
-   */
-  async function updateAccount() {
-    let responseData;
-    let useInterestRate = enteredInterestRate;
-    let useOverdraft = enteredOverdraftLimit;
-    let useAccountType = enteredAccountType;
-    let useAccountNumber = accountNumber;
-
-    //Checks for empty fields
-    if (useInterestRate.length === 0) {
-      useInterestRate = currentInterestRate
-    }
-    if (useOverdraft.length === 0) {
-      useOverdraft = currentOverdraft
-    }
-    if (useAccountType.length === 0) {
-      useAccountType = currentAccountType
-    }
-
-    try {
-      await axios
-        .put(process.env.REACT_APP_ACCOUNT_URL + `${useAccountNumber}`, {
-          interestRate: useInterestRate,
-          lastStatementDate: lastStatementDate,
-          nextStatementDate: nextStatementDate,
-          dateOpened: dateOpened,
-          actualBalance: currentActualBalance,
-          overdraft: useOverdraft,
-          accountType: useAccountType,
-          id: accountNumber,
-          customerNumber: currentAccountCustomerNumber,
-          sortCode: accountSortCode,
-          availableBalance: currentAvailableBalance
-        }).then((response) => {
-          responseData = response.data
-        }).catch(function(error){
-          if (error.response){
-            console.log(error)
-          }
-        })
-    } catch (e) {
-      console.log("Error updating account: " + e)
-    }
-
-    /**
-     * Toggle account update modal visibility
-     */
-    setUpdateAccountModalOpened(wasUpdateAccountOpened => !wasUpdateAccountOpened)
-    window.location.reload(true);
-  }
-
-  /**
-   * Set account update modal visibility
-   */
-  function displayUpdateAccountModal() {
-    setUpdateAccountModalOpened(
-      wasUpdateAccountOpened => !wasUpdateAccountOpened
-    );
-  };
-
- 
 
   /**
    * Called when the table requires the expanded rows
@@ -366,13 +211,7 @@ let newDateOfBirth = currentDateOfBirth.substring(6,10) + "-" + currentDateOfBir
                       <TableCell key={key}>{row[key]}</TableCell>
                     );
                   })}
-                <Button
-                  className="displayModal"
-                  onClick={() => onUpdateAccountClick(row)}
-                >
-                  Update
-                </Button>
-
+               
               </TableRow>
             ))}
           </TableBody>
@@ -466,7 +305,7 @@ let newDateOfBirth = currentDateOfBirth.substring(6,10) + "-" + currentDateOfBir
 
                       <ModalFooter>
                         <Button
-				                  onClick={() => {updateCustomer()}}>
+				onClick={() => {updateCustomer()}}>
                           Submit
                         </Button>
                       </ModalFooter>
@@ -481,68 +320,6 @@ let newDateOfBirth = currentDateOfBirth.substring(6,10) + "-" + currentDateOfBir
                   {getExpandedRows(row)}
                 </React.Fragment>
               ))}
-              <div>
-                <Modal
-                  modalHeading="Update Customer Account"
-                  passiveModal
-                  open={isUpdateAccountModalOpened}
-                  onRequestClose={() => {displayUpdateAccountModal(); window.location.reload(true)}}
-                >
-
-                  <div style={{ width: 200 }}>
-                    <TextInput
-                      id="accountNumber"
-                      value={accountNumber}
-                      label="Account number (this cannot be changed)"
-                      readOnly
-                      hideSteppers
-                      allowEmpty
-                      style={{ marginBottom: "1rem" }}
-                    />
-                  </div>
-
-                  <div style={{ width: 200 }}>
-                    <TextInput
-                      id="interestRate"
-                      placeHolder={currentInterestRate}
-                      labelText="Interest rate:"
-                      onChange={enteredInterestRateChangeHandler}
-                      style={{ marginBottom: "1rem" }}
-                    />
-                  </div>
-
-                  <div style={{ width: 200 }}>
-                    <Dropdown
-                      items2={["MORTGAGE", "ISA", "LOAN", "SAVING", "CURRENT"]}
-                      id="default"
-                      titleText="Account Type"
-                      label="Account Type"
-                      items={["MORTGAGE", "ISA", "LOAN", "SAVING", "CURRENT"]}
-                      onChange={({ selectedItem }) =>
-                        setAccountType(selectedItem)
-                      }
-                      selectedItem={enteredAccountType}
-                      style={{ marginBottom: "1rem" }}
-                    />
-                  </div>
-
-                  <div style={{ width: 200 }}>
-                    <TextInput
-                      id="carbon-number"
-                      labelText="Overdraft Limit:"
-                      helperText="Please set the overdraft limit"
-                      placeHolder={currentOverdraft}
-                      onChange={enteredOverdraftLimitChangeHandler}
-                    />
-                  </div>
-                  <ModalFooter>
-                    <Button
-			                onClick={() => {updateAccount()}}>
-                      Submit
-                    </Button>
-                  </ModalFooter>
-                </Modal>
-              </div>
             </TableBody>
           </Table>
         </TableContainer>

@@ -159,7 +159,6 @@ const CustomerDeleteTables = ({customerRow, accountRow}) => {
         .delete(process.env.REACT_APP_ACCOUNT_URL + `/${accountNumber}`)
         .then(response => {
           responseData = response.data
-          console.log(responseData)
         })
       displayAccountModal()
       displaySuccessfulAccountDeleteModal()
