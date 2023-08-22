@@ -211,7 +211,8 @@ const CustomerDetailsPage = () => {
               <div class="cds--col">
                 <div className="upper">
                   <div className="left-part">
-                    <p> Please ensure one field is empty when you press submit, otherwise the search may not work</p>
+                    <p> Please ensure one field is empty when you press Submit, otherwise the search may not work. After searching, the twistee can be expanded to see accounts belonging to this customer.
+</p>
                     <NumberInput
                       className="customer-list-view"
                       id="customerNum"

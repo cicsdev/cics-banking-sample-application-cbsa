@@ -97,7 +97,7 @@ const AdminPage = () => {
                           className="white-background"
                           element={Link}
                           to="/Admin/customer_details"
-                          prefix="View/Update customer details"
+                          prefix="View/Update customer details (and see their accounts)"
                         />
                       </Button>
                       <hr class="half-width" />
