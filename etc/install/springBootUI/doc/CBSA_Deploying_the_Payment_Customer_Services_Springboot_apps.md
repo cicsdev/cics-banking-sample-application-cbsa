@@ -35,7 +35,7 @@ These instructions detail the steps required to:
 -   A Liberty JVM is running inside of the CICS region - this is set up
     as part of the Liberty UI installation process.
 
--   Java SE 1.8 or later, Java 11 is not supported.
+-   Java 11
 -   Maven is utilised during the deployment of the apps -
     instructions are provided below.
 
@@ -51,8 +51,10 @@ For architecture information please refer to the GitHub repo:
 ## Changing the port to match z/OS Connect:
 
 The Spring Boot applications run inside a WebSphere Liberty Profile JVM
-server inside CICS, but also communicate with z/OS Connect. It is
-important to make sure that the connection information to the zOS
+server inside CICS, but also communicate with z/OS Connect. Installing the z/OS Connect components is done as part of the "base" install.
+
+
+It isimportant to make sure that the connection information to the zOS
 Connect server is correct. As a default, these are set to port 30701
 and host localhost, if you utilised a different port number or hostname
 during the zOS Connect setup (as part of the base/COBOL installation)
@@ -138,7 +140,7 @@ Liberty Application Server. In this example, it is here, and this is an
 ASCII file. You need to use 3.17 (the Unix Directory List Facility) and
 the EA (Edit Ascii File) option to edit it.
 
-> /u/cicsuser/CICSTS56/CBSAWLP/wlp/usr/servers/defaultServer/server.xml
+> /u/cicsuser/CICSTS61/CBSAWLP/wlp/usr/servers/defaultServer/server.xml
 
 
 Add the two applications by adding these lines:
@@ -152,7 +154,7 @@ The WAR files have installed and now we must wait for the Spring Boot
 applications to start. Check the *messages.log* file, in this example
 these are found in:
 
-> /u/cicsuser/CICSTS56/CBSAWLP/wlp/usr/servers/defaultServer/logs
+> /u/cicsuser/CICSTS61/CBSAWLP/wlp/usr/servers/defaultServer/logs
 >
 > ![Spring](../doc/images/springBootUI/SpringBoot_Spring.jpg)
 
@@ -178,7 +180,7 @@ own hostname and port number:
 > <http://your-chosen-host-name:19080/customerservices-1.0/>
 
 **NOTE** - Port number 19080 is the JVM Server port number which was
-allocated as part of the Liberty UI installation process. If you elected
+allocated as part of the Carbon React UI installation process. If you elected
 to use a different port number, you should substitute it with your own
 one.
 
@@ -196,7 +198,7 @@ and port number:
 > <http://your-chosen-host-name:19080/paymentinterface-1.1/>
 
 **NOTE** - Port number 19080 is the JVM Server port number which was
-allocated as part of the Liberty UI installation process. If you elected
+allocated as part of the Carbon React UI installation process. If you elected
 to use a different port number, you should substitute it with your own
 one.
 
