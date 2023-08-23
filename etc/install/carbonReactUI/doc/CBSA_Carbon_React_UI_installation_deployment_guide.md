@@ -341,13 +341,13 @@ After making changes, you need to use a tool called "yarn" to build and package.
 
 You then issue the yarn build package command from this directory
 
-[Bank Application Front End](../src/bank-application-frontend/)
+[Bank Application Front End](../../../../src/bank-application-frontend/)
 
 This will compress the Javascript into a new "build" directory.
 
 Copy the contents of the build directory and paste them in to this directory:
 
-[WebContent](../src/webui/WebContent)
+[WebContent](../../../../../src/webui/WebContent)
 
 After making changes, you need to use Maven to rebuild.
 
