@@ -2,12 +2,11 @@
 
 ## Introduction:
 
-> There are multiple parts to the CICS Bank Sample Application (CBSA).
-> The base/COBOL installation needs to be installed first, to define all
-> of the necessary files, data etc.
->
-> This document is for the Liberty UI deployment/installation. It
-> assumes that the installer already has:
+There are multiple parts to the CICS Bank Sample Application (CBSA).
+The base/COBOL installation needs to be installed first, to define all
+of the necessary files, data etc.
+This document is for the Liberty UI deployment/installation. It
+assumes that the installer already has:
 
 -   a CICS region (running CICS TS 5.4 or greater)
 
@@ -17,7 +16,7 @@
 
 -   Java SE 11.0.17 or later. It is possible to use with Java 11.0.16 but this requires a workaround which is detailed below.
 
-> These instructions detail the steps required to:
+These instructions detail the steps required to:
 
 1.  Create and edit a JVM profile.
 
@@ -106,7 +105,7 @@ And then change the owner:
 ## 
 
 ## Create a JVM server:
-If you have already installed the Spring Boot UI, you can skip this step. Carry on from "Edit server.xml"
+If you have already installed the Spring Boot UI, you can skip this step. Carry on from [Edit server.xml](#Edit server.xml)
 
 We need a JVMSERVER resource.
 
@@ -218,7 +217,7 @@ You should also add the group to the list installed on a cold start.
 
 ##
 
-## Edit server.xml:
+## Edit server.xml
 
 1.  Edit server.xml so that the application "webUI" is defined.
 
