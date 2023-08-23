@@ -17,15 +17,19 @@ assumes that the installer already has:
 -   Java SE 11.0.17 or later. It is possible to use with Java 11.0.16 but this requires a workaround which is detailed below.
 
 These instructions detail the steps required to:
- -  Updating the CICS region userid [OMVS Segment](#OMVS Segment)
+- Updating the CICS region userid [OMVS Segment](#OMVS Segment)
 
- -   Create and edit a JVM profile.
+- Create and edit a JVM profile.
 
- -  Define the JVM CICS resources. [JVM server](#Create a JVM server)
+- Define the JVM CICS resources. [JVM server](#Create a JVM server)
 
- -  Edit the server.xml with the appropriate properties. [server.xml]{#Edit server.xml)
+- Edit the server.xml with the appropriate properties. [server.xml]{#Edit server.xml)
 
- -   Deploy the Carbon React UI application.
+- [Deploy](#deploy)
+
+- [Checking](#checking)
+
+- [Further development](#further development)
 
 ### Assumptions: 
 
@@ -92,7 +96,7 @@ This returns:
 
 > ALTUSER CICSUSER OMVS(HOME(/u/cicsuser))
 
-    This fixes it, but that directory doesn't exist yet.
+This fixes it, but that directory doesn't exist yet.
 
 3.  Create a new folder for /u/cicsuser in Remote Systems Explorer.
 
@@ -179,7 +183,6 @@ different port number and should specify your chosen port number
 
 9. If you are using Java 11.0.16, you need to add Db2 libraries to your LIBPATH. An example is shown below:
 
->># Specify any directories that contain DLLs required at run time.
 >>LIBPATH_SUFFIX=/usr/lpp/db2d10/jdbc/lib
 
 
@@ -249,7 +252,7 @@ You should also add the group to the list installed on a cold start.
 
 ## 
 
-## Deploying the application:
+## Deploy
 
 You need Maven installed on your laptop. Maven is a dependency
 management tool which is provided by Apache.
