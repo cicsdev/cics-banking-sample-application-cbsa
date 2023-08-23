@@ -17,19 +17,19 @@ assumes that the installer already has:
 -   Java SE 11.0.17 or later. It is possible to use with Java 11.0.16 but this requires a workaround which is detailed below.
 
 These instructions detail the steps required to:
-- Updating the CICS region userid [OMVS Segment](#OMVS Segment)
+- [OMVS Segment](#OMVS Segment)
 
-- Create and edit a JVM profile.
+- [JVMprofile](#JVMprofile)
 
-- Define the JVM CICS resources. [JVM server](#Create a JVM server)
+- [JVMserver](#JVMserver)
 
-- Edit the server.xml with the appropriate properties. [server.xml]{#Edit server.xml)
+- [server.xml]{#Edit server.xml)
 
 - [Deploy](#deploy)
 
 - [Checking](#checking)
 
-- [Further development](#further development)
+- [Development](#development)
 
 ### Assumptions: 
 
@@ -109,7 +109,7 @@ And then change the owner:
 
 ## 
 
-## Create a JVM server
+## JVMprofile
 If you have already installed the Spring Boot UI, you can skip this step. Carry on from [Edit server.xml](#Edit server.xml)
 
 We need a JVMSERVER resource.
@@ -188,7 +188,7 @@ different port number and should specify your chosen port number
 
 ## 
 
-## CICS Resources:
+## JVMserver
 
 1.  Create a JVM server definition in CSD GROUP CBSAWLP
 
@@ -221,7 +221,7 @@ You should also add the group to the list installed on a cold start.
 
 ##
 
-## Edit server.xml
+## server.xml
 
 1.  Edit server.xml so that the application "webUI" is defined.
 
@@ -312,7 +312,7 @@ Copy the war file from the target directory into the apps directory of the JVM s
 
 > cicsdev/cics-banking-sample-application-cbsa/etc/usage/carbonReactUI/doc
 
-## Further development
+## Development
 
 The Carbon React UI is an application that consists of back-end Java code and front-end JavaScript. 
 You can make changes to the back-end Java code in the application which is in 
