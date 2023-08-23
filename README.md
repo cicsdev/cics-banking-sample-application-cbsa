@@ -26,7 +26,7 @@ The first interface is the **base COBOL (BMS) interface**:
 </br>
 
 The second interface is the **Carbon React UI interface**:
-> ![Liberty Main Menu](./doc/images/Architecture/CarbonReactUI_MAINMENU.jpg)
+> ![Carbon React UI Main Menu](./doc/images/Architecture/CarbonReactUI_MAINMENU.jpg)
 </br>
 
 The third interface is the **Customer Services interface**:
@@ -54,9 +54,9 @@ The interfaces are designed to exploit the underlying banking functionality, whi
 ## Requirements
 - An existing CICS TS region running at V5.4 or later
 - A Db2 subsystem (V12 or later)
-- A Liberty JVM server in CICS (set up and configured during the installation process) for the Liberty UI and Spring Boot interfaces
+- A WebSphere Liberty Profile JVM server in CICS (set up and configured during the installation process) for the Carbon React UI and Spring Boot interfaces
 - Java SE 1.11 on the workstation.
-- Apache Maven on the workstation (to build the Liberty UI, Customer Services and Payment interfaces)
+- Apache Maven on the workstation (to build the Carbon React UI, Customer Services and Payment interfaces)
 - Various VSAM files (set up and configured during the installation process)
 - A z/OS Connect server (if the RESTful API or the Customer Services or Payment interfaces are required)
 
@@ -76,14 +76,14 @@ Installation instructions:
 
 Installation of CBSA is split into 3 parts :
   1. The base COBOL(BMS) installation, this is mandatory and should be installed first. See the [base COBOL installation documentation.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/tree/main/etc/install/base/doc/CBSA_base_cobol_installation_instructions.md) 
-  2. The Carbon React UI installation, this is optional, requires a JVM server to be running in the CICS region (this gets set up as part of installation process). See [the Liberty UI installation documentation.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/tree/main/etc/install/libertyUI/doc/CBSA_Carbon_React_UI_installation_deployment_guide.md)
+  2. The Carbon React UI installation, this is optional, requires a JVM server to be running in the CICS region (which you set up as part of the installation process). See [the Carbon React UI installation documentation.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/tree/main/etc/install/carbonReactUI/doc/CBSA_Carbon_React_UI_installation_deployment_guide.md)
   3. The Customer Service and Payment interface installation (also optional). See [deploying the Payment and Customer Services documentation.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/tree/main/etc/install/springBootUI/doc/CBSA_Deploying_the_Payment_Customer_Services_Springboot_apps.md)
 
 ## Usage
 Various user guides are provided:
 
   1. For the base/COBOL(BMS) interface please refer to the [CBSA BMS User Guide.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/tree/main/etc/usage/base/doc/CBSA_BMS_User_Guide.md)
-  2. For the Carbon React UI please refer to the [CBSA Liberty UI User Guide.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/tree/main/etc/usage/carbonReactUI/doc/CBSA_Carbon_React_UI_User_Guide.md)
+  2. For the Carbon React UI please refer to the [CBSA Carbon React UI User Guide.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/tree/main/etc/usage/carbonReactUI/doc/CBSA_Carbon_React_UI_User_Guide.md)
   3. For the Customer Services interface please refer to the [CBSA Customer Service User Interface User Guide.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/tree/main/etc/usage/springBoot/doc/CBSA_Customer_Services_Interface_User_Guide.md)
   4. For the Payment interface please refer to the [CBSA Payment Interface User Guide.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/tree/main/etc/usage/springBoot/doc/CBSA_Payment_Interface_User_Guide.md)
   5. For the RESTful API guide please refer to the [CBSA RESTful Api Guide.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/tree/main/etc/usage/springBoot/doc/CBSA_Restful_API_guide.md)
