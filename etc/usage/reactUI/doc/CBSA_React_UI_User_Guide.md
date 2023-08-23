@@ -59,13 +59,13 @@ The customer ID is generated upon creation.
 
 ![View Customer](./images/ReactUIUserGuide/203-Carbon-React-View-Customer.png)
 
-A customer can be viewed using the CustomerId number or using the customer name. Once the submit button is pushed the customer table should appear assuming the customer exists.
+A customer can be viewed using the CustomerId number or using the customer name. Once the submit button is pushed the customer table will appear if the customer exists. The twistie can be expanded to view the customer's accounts.
 
 Click the update button to produce the update popup:
 
 ![Update Customer](./images/ReactUIUserGuide/204-Carbon-React-Update-Customer-Popup.png)
 
-Using the submit button will save any edits to a customer's details.
+Using the submit button will save any edits to a customer's details. The page will then reload and you will need to enter the customer's number again to view the amended record.
 
 #### Adding an account:
 
@@ -114,6 +114,8 @@ Entering the account number and clicking "Submit" will produce a table containin
 The account can then be updated using the "Update" button on the account
 
 ![Update Account Popup](./images/ReactUIUserGuide/304-Carbon-React-Update-Accounts-Popup.png)
+
+After clicking submit, the page will then reload and you will need to enter the account number again to view the amended record.
 
 #### Delete an Account
 
