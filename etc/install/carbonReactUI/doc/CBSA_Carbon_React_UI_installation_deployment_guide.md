@@ -304,7 +304,7 @@ Copy the war file from the target directory into the apps directory of the JVM s
 
  CICS Bank Sample Application Main Menu:
 
- ![Liberty Main Menu](../doc/images/CarbonReactUIinstall/CarbonReactUI_MAINMENU.jpg)
+ ![Carbon React Main Menu](../doc/images/CarbonReactUIinstall/CarbonReactUI_MainMenu.png)
 
 
  For a detailed description of the functionality provided by this
