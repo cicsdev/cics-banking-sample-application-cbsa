@@ -18,11 +18,13 @@ assumes that the installer already has:
 
 These instructions detail the steps required to:
 
+1.  Updating the CICS region userid [OMVS Segment](#OMVS Segment)
+
 1.  Create and edit a JVM profile.
 
-2.  Define the JVM CICS resources.
+2.  Define the JVM CICS resources. [JVM server](#Create a JVM server)
 
-3.  Edit the server.xml with the appropriate properties.
+3.  Edit the server.xml with the appropriate properties. [server.xml]{#Edit server.xml)
 
 4.  Deploy the Carbon React UI application.
 
@@ -45,7 +47,7 @@ These instructions detail the steps required to:
     different User ID and should amend references to CICSUSER
     accordingly.
 
-## Update the CICSUSER Userid:
+## OMVS Segment
 
 If you have already installed the Spring Boot UI, you can skip this step.
 
@@ -104,7 +106,7 @@ And then change the owner:
 
 ## 
 
-## Create a JVM server:
+## Create a JVM server
 If you have already installed the Spring Boot UI, you can skip this step. Carry on from [Edit server.xml](#Edit server.xml)
 
 We need a JVMSERVER resource.
