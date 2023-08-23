@@ -47,7 +47,7 @@ The interfaces are designed to exploit the underlying banking functionality, whi
 > - Open new accounts etc. etc.
 
 ## Architecture
-![Payment and CS architecture diagram2](./doc/images/Architecture/Payment_and_Customer_Services_UI_CBSA_architecture_diagram2.jpg)
+![Payment and CS architecture diagram](./doc/images/Architecture/Payment_and_Customer_Services_UI_CBSA_architecture_diagram.jpg)
 
 > Please refer to the [Architecture documentation](https://github.com/cicsdev/cics-banking-sample-application-cbsa/tree/main/doc/CBSA_Architecture_guide.md) for more detailed information.
 
