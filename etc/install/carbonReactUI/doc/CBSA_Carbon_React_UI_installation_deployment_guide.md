@@ -329,7 +329,7 @@ Issue the following Maven command:
 
 This will create "webui-1.0.war" file into the "target" directory. Copy this war file to the "apps" folder as before.
 
-You can make changes to the front end (browser interface) which is written using the Carbon Design Framework on top of React. This is more involved.
+You can make changes to the front end (browser interface) which is written using the Carbon Design Framework on top of React. This is more involved. You do NOT need to do this to use the Carbon React UI, only if you wish to change the web pages.
 
 The source for this is found here:
 
@@ -339,13 +339,17 @@ After making changes, you need to use a tool called "yarn" to build and package.
 
 > npm install yarn
 
-You then issue the yarn build package command from the directory
+You then issue the 
+
+>yarn build package
+
+ command from the directory
 
 > /src/bank-application-frontend/
 
-This will compress the Javascript into a new "build" directory.
+This will compress the Javascript into a new "build" directory. 
 
-Copy the contents of the build directory and paste them in to this directory:
+Copy the contents of the build directory and paste them in to the following directory. It is a good idea to delete the "static" folder from WebContent before doing so. This is because "yarn build package" produces JavaScript files with randomly generated names that are quite large, and these will make your "war" file larger. You only need the latest ones produced by the build.
 
 > /src/webui/WebContent
 
