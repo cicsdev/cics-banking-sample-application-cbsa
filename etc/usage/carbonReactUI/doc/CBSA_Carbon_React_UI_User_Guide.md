@@ -17,7 +17,7 @@ will look something like this:
 
 #### CICS Bank Sample Application Main Menu:
 
-![ReactUI menu](./images/ReactUIUserGuide/001-Carbon-React-Welcome-Screen.png)
+![ReactUI menu](./images/CarbonReactUIUserGuide/001-Carbon-React-Welcome-Screen.png)
 
 The React UI main menu is the start point for utilising all
 functionality from this interface. The React UI contains similar
@@ -28,28 +28,28 @@ The React UI contains some functionality which
 the BMS offering does not. To utilise a specific function click on the
 associated button.
 
-![ReactUI Login](./images/ReactUIUserGuide/002-Carbon-React-User-Userid-And-Password.png)
+![ReactUI Login](./images/CarbonReactUIUserGuide/002-Carbon-React-User-Userid-And-Password.png)
 
 CBSA has a login mechanism, which is yet to be implemented with any actual security. Any combination of userid and password will take you through to the control panel.
 
 
 #### Control Panel
 
-![Control Panel](./images/ReactUIUserGuide/101-Carbon-React-Control-Panel.png)
+![Control Panel](./images/CarbonReactUIUserGuide/101-Carbon-React-Control-Panel.png)
 
 Upon login, the user will see the user functions list, containing both "User Services" and "Accounts Service". These functions are also available from the hamburger menu in the top left of the screen. 
 
-![Hamburger Menu](./images/ReactUIUserGuide/Carbon-React-Hamburger-Icon.png)
+![Hamburger Menu](./images/CarbonReactUIUserGuide/Carbon-React-Hamburger-Icon.png)
 
 #### Create a New Customer
 
-![Create Customer](./images/ReactUIUserGuide/201-Carbon-React-Create-Customer.png)
+![Create Customer](./images/CarbonReactUIUserGuide/201-Carbon-React-Create-Customer.png)
 
 A new customer can be created using this view. Note, the expected field format should be present in the boxes before completion. E.g Date of birth should be `dd-mm-yyyy`. If any field is completed incorrectly the account will not be created.
 
 Clicking submit once the form is completed will generate the popup:
 
-![Create Customer Popup](./images/ReactUIUserGuide/202-Carbon-React-Create-Customer-Popup.png)
+![Create Customer Popup](./images/CarbonReactUIUserGuide/202-Carbon-React-Create-Customer-Popup.png)
 
 The customer ID is generated upon creation. 
 
@@ -57,13 +57,13 @@ The customer ID is generated upon creation.
 
 #### View / Update Customer Details
 
-![View Customer](./images/ReactUIUserGuide/203-Carbon-React-View-Customer.png)
+![View Customer](./images/CarbonReactUIUserGuide/203-Carbon-React-View-Customer.png)
 
 A customer can be viewed using the CustomerId number or using the customer name. Once the submit button is pushed the customer table will appear if the customer exists. The twistie can be expanded to view the customer's accounts.
 
 Click the update button to produce the update popup:
 
-![Update Customer](./images/ReactUIUserGuide/204-Carbon-React-Update-Customer-Popup.png)
+![Update Customer](./images/CarbonReactUIUserGuide/204-Carbon-React-Update-Customer-Popup.png)
 
 Using the submit button will save any edits to a customer's details. The page will then reload and you will need to enter the customer's number again to view the amended record.
 
@@ -73,11 +73,11 @@ Customers are limited to a maximum of TEN accounts.
 
 From the Control Panel:
 
-![ReactUI menu](./images/ReactUIUserGuide/101-Carbon-React-Control-Panel.png)
+![ReactUI menu](./images/CarbonReactUIUserGuide/101-Carbon-React-Control-Panel.png)
 
 Click "Create a New Account":
 
-![Create Account](./images/ReactUIUserGuide/301-Carbon-React-Create-Account.png)
+![Create Account](./images/CarbonReactUIUserGuide/301-Carbon-React-Create-Account.png)
 
 You MUST specify the customer number of the customer to whom the account
 belongs. You can:
@@ -89,7 +89,7 @@ belongs. You can:
 
 Click "Submit" to create the account:
 
-![Create Account Popup](./images/ReactUIUserGuide/302-Carbon-React-Create-Account-Popup.png)
+![Create Account Popup](./images/CarbonReactUIUserGuide/302-Carbon-React-Create-Account-Popup.png)
 
 If the account creation was successful, the text within the button gets
 amended with the account number which was allocated, in this case
@@ -102,18 +102,18 @@ account 00002996.
 
 From the Control Panel:
 
-![ReactUI menu](./images/ReactUIUserGuide/101-Carbon-React-Control-Panel.png)
+![ReactUI menu](./images/CarbonReactUIUserGuide/101-Carbon-React-Control-Panel.png)
 
 
 Click "View/Update Account details":
 
-![View Account](./images/ReactUIUserGuide/303-Carbon-React-View-Accounts.png)
+![View Account](./images/CarbonReactUIUserGuide/303-Carbon-React-View-Accounts.png)
 
 Entering the account number and clicking "Submit" will produce a table containing the account.
 
 The account can then be updated using the "Update" button on the account
 
-![Update Account Popup](./images/ReactUIUserGuide/304-Carbon-React-Update-Accounts-Popup.png)
+![Update Account Popup](./images/CarbonReactUIUserGuide/304-Carbon-React-Update-Accounts-Popup.png)
 
 After clicking submit, the page will then reload and you will need to enter the account number again to view the amended record.
 
@@ -121,16 +121,16 @@ After clicking submit, the page will then reload and you will need to enter the 
 
 From the Control Panel:
 
-![ReactUI menu](./images/ReactUIUserGuide/101-Carbon-React-Control-Panel.png)
+![ReactUI menu](./images/CarbonReactUIUserGuide/101-Carbon-React-Control-Panel.png)
 
 
 Click "Deleting existing account":
 
-![Delete Account](./images/ReactUIUserGuide/401-Carbon-React-Delete-Account.png)
+![Delete Account](./images/CarbonReactUIUserGuide/401-Carbon-React-Delete-Account.png)
 
 Searching for the account using the account number and clicking "Submit" will show the existing account in a table. Clicking the "Delete" button will produce a warning popup.
 
-![Delete Account Popup](./images/ReactUIUserGuide/402-Carbon-React-Delete-Account-Warning-Popup.png)
+![Delete Account Popup](./images/CarbonReactUIUserGuide/402-Carbon-React-Delete-Account-Warning-Popup.png)
 
 Clicking "Delete" again will permanently remove the account.
 
@@ -138,16 +138,16 @@ Clicking "Delete" again will permanently remove the account.
 
 From the Control Panel:
 
-![ReactUI menu](./images/ReactUIUserGuide/101-Carbon-React-Control-Panel.png)
+![ReactUI menu](./images/CarbonReactUIUserGuide/101-Carbon-React-Control-Panel.png)
 
 
 Click "Deleting existing customer":
 
-![Delete Customer](./images/ReactUIUserGuide/501-Carbon-React-Delete-Customer.png)
+![Delete Customer](./images/CarbonReactUIUserGuide/501-Carbon-React-Delete-Customer.png)
 
 Searching for the customer using the customer number and clicking "Submit" will show any existing customer in a table. Clicking the "Delete" button will produce a warning popup.
 
-![Delete Account Popup](./images/ReactUIUserGuide/502-Carbon-React-Delete-Customer-Warning-Popup.png)
+![Delete Account Popup](./images/CarbonReactUIUserGuide/502-Carbon-React-Delete-Customer-Warning-Popup.png)
 
 Clicking "Delete" again will permanently remove the customer.
 

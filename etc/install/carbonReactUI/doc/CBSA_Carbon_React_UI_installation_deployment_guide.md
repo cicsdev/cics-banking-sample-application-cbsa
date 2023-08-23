@@ -1,4 +1,4 @@
-# Liberty UI installation/deployment guide
+# Carbon React UI installation/deployment guide
 
 ## Introduction:
 
@@ -25,7 +25,7 @@
 
 3.  Edit the server.xml with the appropriate properties.
 
-4.  Deploy the Liberty UI application.
+4.  Deploy the Carbon React UI application.
 
 ### Assumptions: 
 
@@ -290,9 +290,9 @@ Copy the war file from the target directory into the apps directory of the JVM s
 
 ## 
 
-## Checking the Liberty UI:
+## Checking the Carbon React UI:
 
-> Access the Liberty UI using the following URL, you should utilise the
+> Access the Carbon React UI using the following URL, you should utilise the
 > hostname and port number that you have assigned:
 >
 > [http://*your-chosen-host-name*:*your-chosen-port-number*/webui-1.0/](http://your-chosen-host-name:your-chosen-port-number/webui-1.0/)
@@ -301,21 +301,22 @@ Copy the war file from the target directory into the apps directory of the JVM s
 > to 5 minutes for the JVM server to restart.
 >
 > Once the JVM server has restarted you should be presented with the
-> CBSA Liberty UI main menu.
+> Carbon React UI main menu.
 >
 > CICS Bank Sample Application Main Menu:
 >
-> ![Liberty Main Menu](../doc/images/LibertyUIinstall/LibertyUI_LIBERTY_MAINMENU.jpg)
+> ![Liberty Main Menu](../doc/images/CarbonReactUIinstall/CarbonReactUI_MAINMENU.jpg)
 >
 >
 > For a detailed description of the functionality provided by this
 > interface please refer to the GitHub repo:
 >
-> cicsdev/cics-banking-sample-application-cbsa/etc/usage/libertyUI/doc
+> cicsdev/cics-banking-sample-application-cbsa/etc/usage/carbonReactUI/doc
 
 ## Further development
 
-> You can make changes to the Java code in the application which is in 
+> The Carbon React UI is an application that consists of back-end Java code and front-end JavaScript. 
+> You can make changes to the back-end Java code in the application which is in 
 >
 > cicsdev/cics-banking-sample-application-cbsa/src/webui/src/main/java
 >
