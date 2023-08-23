@@ -17,11 +17,11 @@ assumes that the installer already has:
 -   Java SE 11.0.17 or later. It is possible to use with Java 11.0.16 but this requires a workaround which is detailed below.
 
 These instructions detail the steps required to:
-- [OMVS Segment](#OMVS Segment)
+- [OMVS Segment](#OMVS-Segment)
 
-- [JVMprofile](#JVMprofile)
+- [JVM profile](#JVM-profile)
 
-- [JVMserver](#JVMserver)
+- [JVM server](#JVM-server)
 
 - [server.xml]{#Edit server.xml)
 
@@ -109,7 +109,7 @@ And then change the owner:
 
 ## 
 
-## JVMprofile
+## JVM profile
 If you have already installed the Spring Boot UI, you can skip this step. Carry on from [Edit server.xml](#Edit server.xml)
 
 We need a JVMSERVER resource.
@@ -188,7 +188,7 @@ different port number and should specify your chosen port number
 
 ## 
 
-## JVMserver
+## JVM server
 
 1.  Create a JVM server definition in CSD GROUP CBSAWLP
 
@@ -283,13 +283,13 @@ This will create "webui-1.0.war" file in a new "target" directory.
 
 ## Create an apps directory in your JVM server directory
 
-## Export to apps directory:
+## Export to apps directory
 
 Copy the war file from the target directory into the apps directory of the JVM server. 
 
 ## 
 
-## Checking the Carbon React UI:
+## Checking
 
  Access the Carbon React UI using the following URL, you should utilise the
  hostname and port number that you have assigned:
