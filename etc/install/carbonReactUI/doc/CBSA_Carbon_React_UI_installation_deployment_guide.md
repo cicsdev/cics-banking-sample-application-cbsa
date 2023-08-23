@@ -25,7 +25,7 @@ These instructions detail the steps required to:
 
 - [server.xml](#server.xml)
 
-- [Deploy the Carbob React UI](#deploy)
+- [Deploy the Carbon React UI](#deploy)
 
 - [Checking the Carbon React UI](#checking)
 
