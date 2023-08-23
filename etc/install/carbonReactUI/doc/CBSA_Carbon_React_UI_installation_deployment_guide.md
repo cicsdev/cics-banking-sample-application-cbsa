@@ -129,34 +129,36 @@ We need a JVMSERVER resource.
 
 > JVMPROFILEDIR=/var/cics/JVMProfiles/
 
-4.  The copied DFHWLP.jvmprofile will need to be edited:
+4.  The copied DFHWLP.jvmprofile will need to be edited.
 
-  1.  Ensure that JAVA_HOME is set to the appropriate level of java (in
+  a.  Ensure that JAVA_HOME is set to the appropriate level of java (in
       our case Java 11):
  
 >> JAVA_HOME=/usr/lpp/java/current_64/
 
-2.  Ensure that autoconfigure is set to true:
+b.  Ensure that autoconfigure is set to true:
 
 >> -Dcom.ibm.cics.jvmserver.wlp.autoconfigure=true
 
-3.  The timeout value should be set to a large value.:
+c.  The timeout value should be set to a large value.:
 
 >> -Dcom.ibm.cics.jvmserver.controller.timeout=900000
 
  **Please note:** that if the execution host machine is not very powerful, that Java may take a significant time to start.
 
-4.  Add the following to the JVM profile to add support for Db2:
+d.  Add the following to the JVM profile to add support for Db2:
 
 
 >> -Dcom.ibm.cics.jvmserver.wlp.jdbc.driver.location=/usr/lpp/db2c10/jdbc/
+
 >> -Ddb2.jcc.currentSchema=IBMUSER
+
  **Please note**: You should verify the location of the JDBC driver and
  amend the location (above) according to your own site installation
  location. Ensure that the currentSchema is the "DB2OWNER" from the Db2 setup.
 
 
-5. Add the following to choose the correct HTTP port.
+e. Add the following to choose the correct HTTP port.
 >> -Dcom.ibm.cics.jvmserver.wlp.server.http.port=**19080**
 
 
@@ -164,16 +166,16 @@ Port **19080** is used in these instructions, you may wish to utilise a
 different port number and should specify your chosen port number
 (above) instead.
 
-6.  WORK_DIR must be set to a directory that the CICS region userid
+f.  WORK_DIR must be set to a directory that the CICS region userid
     "CICSUSER" has access to. For example:
 
 >> /u/cicsuser/
 
-7. At CICS TS 5.5 and CICS TS 5.6, add the following to the JVM profile to prevent CICS adding "wab" support.
+g. At CICS TS 5.5 and CICS TS 5.6, add the following to the JVM profile to prevent CICS adding "wab" support.
 
 >> -Dcom.ibm.cics.jvmserver.wlp.wab=false
 
-8. Ensure that the Time Zone is set correctly, otherwise Java and COBOL will not be using the same clock. This is done by specifying TZ and then the correct value. The correct value can be obtained by entering UNIX Systems Services and issuing the command:
+h. Ensure that the Time Zone is set correctly, otherwise Java and COBOL will not be using the same clock. This is done by specifying TZ and then the correct value. The correct value can be obtained by entering UNIX Systems Services and issuing the command:
 
 >> echo $TZ
 
@@ -181,7 +183,7 @@ different port number and should specify your chosen port number
 
 >> TZ=CST6CDT
 
-9. If you are using Java 11.0.16, you need to add Db2 libraries to your LIBPATH. An example is shown below:
+i. If you are using Java 11.0.16, you need to add Db2 libraries to your LIBPATH. An example is shown below:
 
 >>LIBPATH_SUFFIX=/usr/lpp/db2d10/jdbc/lib
 
