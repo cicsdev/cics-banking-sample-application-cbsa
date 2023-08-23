@@ -17,16 +17,15 @@ assumes that the installer already has:
 -   Java SE 11.0.17 or later. It is possible to use with Java 11.0.16 but this requires a workaround which is detailed below.
 
 These instructions detail the steps required to:
+ -  Updating the CICS region userid [OMVS Segment](#OMVS Segment)
 
-1.  Updating the CICS region userid [OMVS Segment](#OMVS Segment)
+ -   Create and edit a JVM profile.
 
-1.  Create and edit a JVM profile.
+ -  Define the JVM CICS resources. [JVM server](#Create a JVM server)
 
-2.  Define the JVM CICS resources. [JVM server](#Create a JVM server)
+ -  Edit the server.xml with the appropriate properties. [server.xml]{#Edit server.xml)
 
-3.  Edit the server.xml with the appropriate properties. [server.xml]{#Edit server.xml)
-
-4.  Deploy the Carbon React UI application.
+ -   Deploy the Carbon React UI application.
 
 ### Assumptions: 
 
