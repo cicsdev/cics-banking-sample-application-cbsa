@@ -333,7 +333,7 @@ You can make changes to the front end (browser interface) which is written using
 
 The source for this is found here:
 
- cicsdev/cics-banking-sample-application-cbsa/src/bank-application-frontend/src
+[Bank Application Front End](../src/bank-application-frontend/)
 
 After making changes, you need to use a tool called "yarn" to build and package. "Yarn" is installed via the npm command
 
@@ -341,13 +341,13 @@ After making changes, you need to use a tool called "yarn" to build and package.
 
 You then issue the yarn build package command from this directory
 
-> cicsdev/cics-banking-sample-application-cbsa/src/bank-application-frontend
+[Bank Application Front End](../src/bank-application-frontend/)
 
 This will compress the Javascript into a new "build" directory.
 
 Copy the contents of the build directory and paste them in to this directory:
 
-> cicsdev/cics-banking-sample-application-cbsa/src/webui/WebContent
+[WebContent](../src/webui/WebContent)
 
 After making changes, you need to use Maven to rebuild.
 
