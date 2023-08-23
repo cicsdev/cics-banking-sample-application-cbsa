@@ -25,11 +25,11 @@ These instructions detail the steps required to:
 
 - [server.xml](#server.xml)
 
-- [Deploy](#deploy)
+- [Deploy the Carbob React UI](#deploy)
 
-- [Checking](#checking)
+- [Checking the Carbon React UI](#checking)
 
-- [Development](#development)
+- [Further Development](#development)
 
 ### Assumptions: 
 
