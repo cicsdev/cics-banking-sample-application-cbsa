@@ -37,7 +37,7 @@ CBSA has a login mechanism, which is yet to be implemented with any actual secur
 
 ![Control Panel](./images/ReactUIUserGuide/101-Carbon-React-Control-Panel.png)
 
-Upon login, the user should be faced with the user functions list, containing both "User Services" and "Accounts Service". These functions are also available from the hamburger menu in the top left of the screen. 
+Upon login, the user will see the user functions list, containing both "User Services" and "Accounts Service". These functions are also available from the hamburger menu in the top left of the screen. 
 
 ![Hamburger Menu](./images/ReactUIUserGuide/Carbon-React-Hamburger-Icon.png)
 
@@ -47,7 +47,7 @@ Upon login, the user should be faced with the user functions list, containing bo
 
 A new customer can be created using this view. Note, the expected field format should be present in the boxes before completion. E.g Date of birth should be `dd-mm-yyyy`. If any field is completed incorrectly the account will not be created.
 
-Clicking submit once the form is completed should generate the popup:
+Clicking submit once the form is completed will generate the popup:
 
 ![Create Customer Popup](./images/ReactUIUserGuide/202-Carbon-React-Create-Customer-Popup.png)
 
