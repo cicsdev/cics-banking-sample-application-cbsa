@@ -15,7 +15,7 @@
 
 -   the CBSA base/COBOL installed in the CICS region already
 
--   Java SE 11.0.17 or later. Java 11.0.16 requires a workaround.
+-   Java SE 11.0.17 or later. It is possible to use with Java 11.0.16 but this requires a workaround which is detailed below.
 
 > These instructions detail the steps required to:
 
@@ -32,7 +32,7 @@
 -   These instructions utilise CICS TS 6.1 and therefore all directory
     names used etc. are based around that, they will need to be
     amended accordingly for different versions of CICS. In particular, verify the "BOM" for CICS is correct
-for your version of CICS.
+    for your version of CICS.
 
 - Java SE 11 on the workstation
 
@@ -46,8 +46,6 @@ for your version of CICS.
     different User ID and should amend references to CICSUSER
     accordingly.
 
-## 
- 
 ## Update the CICSUSER Userid:
 
 If you have already installed the Liberty UI, you can skip this step.
@@ -183,7 +181,7 @@ If you have already installed the Liberty UI, you can skip this step.
 
 >> TZ=CST6CDT
 
->9. At versions of Java BEFORE Java 11.0.17, you need to add Db2 libraries to your LIBPATH. An example is shown below:
+>9. If you are using Java 11.0.16, you need to add Db2 libraries to your LIBPATH. An example is shown below:
 
 >># Specify any directories that contain DLLs required at run time.
 >>LIBPATH_SUFFIX=/usr/lpp/db2d10/jdbc/lib
@@ -203,7 +201,7 @@ If you have already installed the Liberty UI, you can skip this step.
 > PORT(**19080**) PATH(\*) USERID(CICSUSER)
 >
 > Amend the above command accordingly, to represent your chosen port
-> number and Userid.
+> number and userid.
 
 2.  Add the group CBSAWLP to a list installed on a cold start, for
     example CICSTS61.
@@ -215,7 +213,7 @@ If you have already installed the Liberty UI, you can skip this step.
 
 You should also add the group to the list installed on a cold start.
 
-> CEDA ADD GROUP(CBSAWLP) LIST(CICSTS56) AFTER(BANK)
+> CEDA ADD GROUP(CBSAWLP) LIST(CICSTS61) AFTER(BANK)
 
 > This will create a server.xml file in
 >
@@ -314,3 +312,45 @@ Copy the war file from the target directory into the apps directory of the JVM s
 > interface please refer to the GitHub repo:
 >
 > cicsdev/cics-banking-sample-application-cbsa/etc/usage/libertyUI/doc
+
+## Further development
+
+> You can make changes to the Java code in the application which is in 
+>
+> cicsdev/cics-banking-sample-application-cbsa/src/webui/src/main/java
+>
+> After making changes, you need to use Maven to rebuild.
+
+Issue the following Maven command:
+
+> mvn clean package
+
+This will create "webui-1.0.war" file into the "target" directory. Copy this war file to the "apps" folder as before.
+
+You can make changes to the front end (browser interface) which is written using the Carbon Design Framework on top of React. This is more involved.
+
+The source for this is found here:
+
+> cicsdev/cics-banking-sample-application-cbsa/src/bank-application-frontend/src
+
+After making changes, you need to use a tool called "yarn" to build and package. "Yarn" is installed via the npm command
+
+npm install yarn
+
+You then issue the yarn build package command from this directory
+
+> cicsdev/cics-banking-sample-application-cbsa/src/bank-application-frontend
+
+This will compress the Javascript into a new "build" directory.
+
+Copy the contents of the build directory and paste them in to this directory:
+
+> cicsdev/cics-banking-sample-application-cbsa/src/webui/WebContent
+
+> After making changes, you need to use Maven to rebuild.
+
+Issue the following Maven command:
+
+> mvn clean package
+
+This will create "webui-1.0.war" file into the "target" directory. Copy this war file to the "apps" folder as before.
