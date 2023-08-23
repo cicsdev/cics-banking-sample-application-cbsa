@@ -26,7 +26,7 @@ The first interface is the **base COBOL (BMS) interface**:
 </br>
 
 The second interface is the **Carbon React UI interface**:
-> ![Liberty Main Menu](./doc/images/Architecture/CarbonReactUI_LIBERTY_MAINMENU.jpg)
+> ![Liberty Main Menu](./doc/images/Architecture/CarbonReactUI_MAINMENU.jpg)
 </br>
 
 The third interface is the **Customer Services interface**:
