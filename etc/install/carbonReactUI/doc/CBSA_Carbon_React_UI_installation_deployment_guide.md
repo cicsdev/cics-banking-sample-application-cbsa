@@ -319,7 +319,7 @@ Copy the war file from the target directory into the apps directory of the JVM s
 The Carbon React UI is an application that consists of back-end Java code and front-end JavaScript. 
 You can make changes to the back-end Java code in the application which is in 
 
-> cicsdev/cics-banking-sample-application-cbsa/src/webui/src/main/java
+> /src/webui/src/main/java
 
  After making changes, you need to use Maven to rebuild.
 
@@ -333,21 +333,21 @@ You can make changes to the front end (browser interface) which is written using
 
 The source for this is found here:
 
-[Bank Application Front End](../src/bank-application-frontend/)
+> /src/bank-application-frontend/
 
 After making changes, you need to use a tool called "yarn" to build and package. "Yarn" is installed via the npm command
 
 > npm install yarn
 
-You then issue the yarn build package command from this directory
+You then issue the yarn build package command from the directory
 
-[Bank Application Front End](../../../../src/bank-application-frontend/)
+> /src/bank-application-frontend/
 
 This will compress the Javascript into a new "build" directory.
 
 Copy the contents of the build directory and paste them in to this directory:
 
-[WebContent](../../../../../src/webui/WebContent)
+/src/webui/WebContent)
 
 After making changes, you need to use Maven to rebuild.
 
