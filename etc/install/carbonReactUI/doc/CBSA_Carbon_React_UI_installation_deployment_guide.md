@@ -23,7 +23,7 @@ These instructions detail the steps required to:
 
 - [JVM server](#JVM-server)
 
-- [server.xml]{#server.xml)
+- [server.xml](#server.xml)
 
 - [Deploy](#deploy)
 
