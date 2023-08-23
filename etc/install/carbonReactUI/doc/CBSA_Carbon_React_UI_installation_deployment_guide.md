@@ -347,7 +347,7 @@ This will compress the Javascript into a new "build" directory.
 
 Copy the contents of the build directory and paste them in to this directory:
 
-/src/webui/WebContent)
+> /src/webui/WebContent
 
 After making changes, you need to use Maven to rebuild.
 
