@@ -504,6 +504,7 @@ EPL 2.0 CODE NOTICES AND INFORMATION
 The following third party component(s) are provided for use with the Program:
 
 jakarta.annotation-api
+javax.ws.rs-api
 
 
 Eclipse Public License - v 2.0
