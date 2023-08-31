@@ -2,10 +2,10 @@
 
 This contains configuration.
 
-## install
+[install] (install/README.md)
 
 contains information on how to install CBSA.
 
-## usage 
+[usage] (usage/README.md)
 
 contains information on how to use it.
