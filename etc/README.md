@@ -2,10 +2,10 @@
 
 This contains configuration.
 
-[install] (/etc/install/README.md)
+[install](/install/README.md)
 
 contains information on how to install CBSA.
 
-[usage] (/etc/usage/README.md)
+[usage](/usage/README.md)
 
 contains information on how to use it.
