@@ -2,10 +2,10 @@
 
 This contains configuration.
 
-## install
+## ./install
 
 contains information on how to install CBSA.
 
-## usage 
+## ./usage 
 
 contains information on how to use it.
