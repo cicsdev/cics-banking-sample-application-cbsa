@@ -35,7 +35,7 @@
        PROCEDURE DIVISION USING DFHCOMMAREA.
        PREMIERE SECTION.
        A010.
-           move 'CICS Bank Sample Application' to COMPANY-NAME.
+           move 'CICS Banking Sample Application' to COMPANY-NAME.
 
            EXEC CICS RETURN
            END-EXEC.
