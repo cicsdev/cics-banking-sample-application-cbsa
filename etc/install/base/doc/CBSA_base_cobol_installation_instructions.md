@@ -4,7 +4,7 @@
 
 ## Introduction:
 
-There are multiple parts to the CICS Bank Sample Application (CBSA).
+There are multiple parts to the CICS Banking Sample Application (CBSA).
 There is the base/COBOL installation - which needs to be installed as a
 minimum. Then there are additional, optional, installation instructions
 for the Liberty UI and the Payment and Customer Services interfaces.
