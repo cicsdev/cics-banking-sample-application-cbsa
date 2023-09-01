@@ -155,8 +155,8 @@ starting.
 Message CWWKZ0001I is issued several minutes later at which point you
 can use the applications.
 
-`Root WebApplicationContext: initialization completed in 180700 ms
-`Root WebApplicationContext: initialization completed in 180395 ms
+`Root WebApplicationContext: initialization completed in 180700 ms`
+`Root WebApplicationContext: initialization completed in 180395 ms`
 
 
 ## Access to the application/interfaces:
