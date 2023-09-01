@@ -1507,20 +1507,26 @@ copybook correctly.
 
 ### B. The Customer Service Customer Update (CScustupd) details are:            
 
-`"ServiceName": "CScustupd",
+```
+
+"ServiceName": "CScustupd",
 
 "ServiceDescription": "Customer Service customer update",
 
 "ServiceProvider": "CICS-1.0",
 
-"ServiceURL": "http://your-host-name:your-host-number/zosConnect/services/CScustupd"`
+"ServiceURL": "http://your-host-name:your-host-number/zosConnect/services/CScustupd"
+
+```
 
 #### The Customer Service Customer Update API:
 
 There is one API available for the Customer Update, and that is the
 ***updcust*** API. The details are as follows:
 
-`"name": "updcust",
+```
+
+"name": "updcust",
 
 "version": "1.0.0",
 
@@ -1567,11 +1573,15 @@ returned.
 
 }
 
-}`
+}
+
+```
 
 #### The JSON response body returned:
 
-`{"UPDCUST": {
+```
+
+{"UPDCUST": {
 
 "COMM_ADDR": "602A Maple Avenue, Fife",
 
@@ -1593,7 +1603,9 @@ returned.
 
 "COMM_DOB": 22021941
 
-}}`
+}}
+
+```
 
 In this instance the request was successful, denoted by the
 COMM_UPD_SUCCESS attribute containing 'Y'. On the response body,
@@ -1611,7 +1623,9 @@ Occasions when a customer update might not be successful include:
     1234567890 does not exist, here is the JSON response body returned
     under this circumstance:
 
-`{"UPDCUST": {
+```
+
+{"UPDCUST": {
 
 "COMM_ADDR": "70 Thames Avenue, Swindon, Wiltshire",
 
@@ -1633,7 +1647,9 @@ Occasions when a customer update might not be successful include:
 
 "COMM_DOB": 0
 
-}}`
+}}
+
+```
 
 The failure is denoted by the COMM_UPD_SUCCESS being set to 'N' and
 the COMM_UPD_FAIL_CD attribute being set to '1' ('1' = Customer not
@@ -1641,7 +1657,9 @@ found).
 
 2.  ***An issue processing the VSAM data related to the update*:**
 
-`{"UPDCUST": {
+```
+
+{"UPDCUST": {
 
 "COMM_ADDR": "702 Burt Street, Swindon, Wilts",
 
@@ -1663,7 +1681,9 @@ found).
 
 "COMM_DOB": 0
 
-}}`
+}}
+
+```
 
 The failure is denoted by the COMM_UPD_SUCCESS being set to 'N' and
 the COMM_UPD_FAIL_CD attribute being set to '2' ('2' = An issue was
@@ -1672,7 +1692,9 @@ request cannot be fulfilled).
 
 3.  ***A problem with the Title***:
 
-`{"UPDCUST": {
+```
+
+{"UPDCUST": {
 
 "COMM_ADDR": "70 Thames Avenue, Swindon, Wiltshire",
 
@@ -1694,7 +1716,9 @@ request cannot be fulfilled).
 
 "COMM_DOB": 0
 
-}}`
+}}
+
+```
 
 The failure is denoted by the COMM_UPD_SUCCESS being set to 'N' and
 the COMM_UPD_FAIL_CD attribute being set to 'T' ('T' = An issue was
@@ -1703,6 +1727,8 @@ be; Mr, Mrs, Miss, Ms, Dr, Professor, Drs, Lord, Sir, Lady) and the
 request cannot be fulfilled).
 
 4.  ***A VSAM update issue***:
+
+```
 
 {"UPDCUST": {
 
@@ -1728,12 +1754,16 @@ request cannot be fulfilled).
 
 }}
 
+```
+
 The failure is denoted by the COMM_UPD_SUCCESS being set to 'N' and
 the COMM_UPD_FAIL_CD attribute being set to '3' ('3' = VSAM failure;
 unable to update the details in the backend program, request cannot be
 fulfilled).
 
 5.  ***Customer Name and Address are both spaces***:
+
+```
 
 {"UPDCUST": {
 
@@ -1759,6 +1789,8 @@ fulfilled).
 
 }}
 
+```
+
 The failure is denoted by the COMM_UPD_SUCCESS being set to 'N' and
 the COMM_UPD_FAIL_CD attribute being set to '4' ('4' = The Name and
 Address are both spaces or both start with a space, the request cannot
@@ -1777,6 +1809,8 @@ Backend program **UPDCUST** is being driven by this API, the call
 utilises copybook **UPDCUST**.
 
 #### Swagger details:
+
+```
 
 {
 
@@ -2047,25 +2081,31 @@ Service",
 
 }
 
+```
+
 **\
 **
 
 ### C. The Customer Service List All Customer's Accounts (CScustacc) details are:    
 
-      "ServiceName": "CScustacc",
+```
+
+"ServiceName": "CScustacc",
 
 "ServiceDescription": "Customer Servoce customer\'s accounts",
 
 "ServiceProvider": "CICS-1.0",
 
-"ServiceURL": "http://your-host-name:your-port-number
+"ServiceURL": "http://your-host-name:your-port-number/zosConnect/services/CScustacc"
 
-/zosConnect/services/CScustacc"
+```
 
 #### The Customer Service List All Customer's Accounts API:
 
 There is one API available for listing all of the customer's accounts,
 and that is the ***inqacccz*** API. The details are as follows:
+
+```
 
 "name": "inqaccz",
 
@@ -2073,12 +2113,13 @@ and that is the ***inqacccz*** API. The details are as follows:
 
 "description": "enquire about an account on the CSaccenq service",
 
-"adminUrl":
-[http://your-host-name:your-port-number/zosConnect/apis/inqaccz](http://your-host-name:your-port-number/zosConnect/apis/inqaccz)
+"adminUrl": http://your-host-name:your-port-number/zosConnect/apis/inqaccz
+
+```
 
 #### The URL to drive RESTful List All Customer's Accounts Enquiry:
 
-http://your-host-name:your-port-number/inqacccz/list/1
+`http://your-host-name:your-port-number/inqacccz/list/1`
 
 This URL performs a list all customer's accounts and issues an HTTP
 PUT. No JSON request body is needed for this enquiry.
@@ -2086,6 +2127,8 @@ PUT. No JSON request body is needed for this enquiry.
 #### The JSON response body returned:
 
 Here is the response when the URL above is used:
+
+```
 
 {"INQACCCZ": {
 
@@ -2245,6 +2288,8 @@ Here is the response when the URL above is used:
 
 }}
 
+```
+
 In this instance the request was successful, denoted by the
 COMM_SUCCESS attribute containing 'Y'. Customer 1 had five accounts;
 an ISA account (account number 1), a SAVING account (acc no 2), a
@@ -2264,6 +2309,8 @@ include:
     1234567890 does not exist, here is the JSON response body returned
     under this circumstance:
 
+```
+
 {"INQACCCZ": {
 
 "COMM_FAIL_CODE": "1",
@@ -2278,12 +2325,16 @@ include:
 
 }}
 
+```
+
 The failure is denoted by the COMM_SUCCESS being set to 'N' and the
 COMM_FAIL_CODE set to '1'.
 
 2.  ***Customer is found but has no accounts to list:*** In this example
     customer number 10006 exists but does not have any related accounts.
     Here is the JSON response body returned under this circumstance:
+
+```
 
 {"INQACCCZ": {
 
@@ -2299,12 +2350,16 @@ COMM_FAIL_CODE set to '1'.
 
 }}
 
+```
+
 Note that this isn't a failure. The look up was successful, denoted by
 the COMM_SUCCESS set to 'Y', the CUSTOMER_FOUND set to 'Y' and the
 COMM_FAIL_CODE set to '0', as there were no associated accounts, none
 are returned.
 
 3.  ***An issue processing the Db2 account data***:
+
+```
 
 {"INQACCCZ": {
 
@@ -2320,6 +2375,8 @@ are returned.
 
 }}
 
+```
+
 The failure is denoted by the COMM_SUCCESS being set to 'N' and the
 COMM_FAIL_CODE set to either '2', '3' or '4' ('2' = Cursor cannot be
 opened. '3' = An issue was encountered fetching the account data. '4'
@@ -2334,6 +2391,8 @@ into PIC X(4), this allows zOS Connect to utilise the copybook
 correctly.
 
 #### Swagger details:
+
+```
 
 {
 
@@ -2810,25 +2869,31 @@ on the CScustacc service",
 
 }
 
+```
+
 **\
 **
 
 ### D. The Customer Service Customer Create (CScustcre) details are:    
 
-      "ServiceName": "CScustcre",
+```
+
+"ServiceName": "CScustcre",
 
 "ServiceDescription": "Customer Service create customer",
 
 "ServiceProvider": "CICS-1.0",
 
-"ServiceURL": "http://your-host-name:your-port-number
+"ServiceURL": "http://your-host-name:your-port-number/zosConnect/services/CScustcre"
 
-/zosConnect/services/CScustcre"
+```
 
 #### The Customer Service Customer Creation API:
 
 There is one API available for the Customer Create, and that is the
 ***crecust*** API. The details are as follows:
+
+```
 
 "name": "crecust",
 
@@ -2836,12 +2901,10 @@ There is one API available for the Customer Create, and that is the
 
 "description": "Creates a customer on the CScustcre Service",
 
-"adminUrl":
-[http://your-host-name:your-port-number/zosConnect/apis/crecust](http://your-host-name:your-port-number/zosConnect/apis/crecust)
+"adminUrl": http://your-host-name:your-port-number/zosConnect/apis/crecust
 
-            
-
-                 
+```
+                
 
 #### The URL to drive RESTful Customer Creation:
 
@@ -2852,6 +2915,8 @@ requires a JSON request body to be provided (containing the Name,
 Address and Date of Birth) and a JSON response body is returned.
 
 #### An example JSON request body:
+
+```
 
 {
 
@@ -2885,9 +2950,13 @@ Address and Date of Birth) and a JSON response body is returned.
 
 }
 
+```
+
 #### The JSON response body returned:
 
 Here is the response from the above request:
+
+```
 
 {"CRECUST": {
 
@@ -2917,6 +2986,8 @@ Here is the response from the above request:
 
 }}
 
+```
+
 In this instance the request was successful and customer number 10007
 was created, denoted by the COMM_SUCCESS attribute containing 'Y'.
 Integer fields do not have leading zeros in the returned data. On the
@@ -2931,6 +3002,8 @@ the mappings in zOS Connect.
 Occasions when a customer creation might not be successful, include:
 
 1.  ***Customer credit check failure***:
+
+```
 
 {"CRECUST": {
 
@@ -2960,11 +3033,15 @@ Occasions when a customer creation might not be successful, include:
 
 }}
 
+```
+
 The failure is denoted by the COMM_SUCCESS being set to 'N' and the
 COMM_FAIL_CODE attribute being set to 'G' ('G' = issue obtaining a
 credit score).
 
 2.  ***An issue generating the new customer number***:
+
+```
 
 {"CRECUST": {
 
@@ -2994,6 +3071,8 @@ credit score).
 
 }}
 
+```
+
 The failure is denoted by the COMM_SUCCESS being set to 'N' and the
 COMM_FAIL_CODE attribute being set to either '3', '4', or '5' ('3' =
 An issue with the enqueue. '4' = An issue updating the next customer
@@ -3001,6 +3080,8 @@ number. '5' = An issue with the dequeue). In any of these cases the
 request cannot be fulfilled.
 
 3.  ***A problem with writing to a container*:**
+
+```
 
 {"CRECUST": {
 
@@ -3030,12 +3111,16 @@ request cannot be fulfilled.
 
 }}
 
+```
+
 The failure is denoted by the COMM_SUCCESS being set to 'N' and the
 COMM_FAIL_CODE attribute being set to 'A' ('A' = An issue writing
 information to a container and the request cannot be fulfilled).
 
 4.  ***A problem running an Asynchronous transaction (to generate a
     credit score)***:
+
+```
 
 {"CRECUST": {
 
@@ -3065,12 +3150,16 @@ information to a container and the request cannot be fulfilled).
 
 }}
 
+```
+
 The failure is denoted by the COMM_SUCCESS being set to 'N' and the
 COMM_FAIL_CODE attribute being set to 'B' ('B' = Unable to
 successfully run an asynchronous transaction to calculate the credit
 score, request cannot be fulfilled).
 
 5.  ***Underlying infrastructure failure***:
+
+```
 
 {"CRECUST": {
 
@@ -3100,6 +3189,8 @@ score, request cannot be fulfilled).
 
 }}
 
+```
+
 The failure is denoted by the COMM_SUCCESS being set to 'N' and the
 COMM_FAIL_CODE attribute being set to 'C', 'D', 'E', 'F', 'G', 'H'
 ('C' = None of the credit scoring agencies returned a credit score for
@@ -3109,6 +3200,8 @@ encountered. 'H' = Some other unspecified error occurred). In these
 cases, the request cannot be fulfilled.
 
 6.  ***Unable to record the new CUSTOMER on the CUSTOMER datastore***:
+
+```
 
 {"CRECUST": {
 
@@ -3138,12 +3231,16 @@ cases, the request cannot be fulfilled.
 
 }}
 
+```
+
 The failure is denoted by the COMM_SUCCESS being set to 'N' and the
 COMM_FAIL_CODE attribute being set to '1' ('1' = Unable to record the
 new customer onto the CUSTOMER datastore). In this case, the request
 cannot be fulfilled.
 
 7.  ***The supplied DOB is invalid***:
+
+```
 
 {"CRECUST": {
 
@@ -3173,6 +3270,8 @@ cannot be fulfilled.
 
 }}
 
+```
+
 The failure is denoted by the COMM_SUCCESS being set to 'N' and the
 COMM_FAIL_CODE attribute being set to 'O' ('O' =The supplied Date Of
 Birth is invalid). In this case, the request cannot be fulfilled.
@@ -3199,6 +3298,8 @@ Scenarios outside of this, may need to perform additional validation
 checks to avoid data corruption.
 
 #### Swagger details:
+
+```
 
 {
 
@@ -3496,10 +3597,14 @@ checks to avoid data corruption.
 
 }
 
+```
+
 **\
 **
 
 ### E. The Customer Service Delete a Customer (CScustdel) details are:    
+
+```
 
 "ServiceName": "CScustdel",
 
@@ -3511,25 +3616,25 @@ checks to avoid data corruption.
 
 /zosConnect/services/CScustdel"
 
+```
+
 #### The Customer Service Delete Customer API:
 
 There is one API available for deleting customers, and that is the
 ***delcus*** API. The details are as follows:
 
-      "name": "delcus",
+```
+
+"name": "delcus",
 
 "version": "1.0.0",
 
-"description": "Deletes a customer and their accounts on the
-CScustdel
+"description": "Deletes a customer and their accounts on the CScustdel Service",
 
-Service",
+"adminUrl": "http://your-host-name:your-port-number/zosConnect/apis/delcus"      
 
-"adminUrl": "http://your-host-name:your-port-number
-
-/zosConnect/apis/delcus"      
-
-          
+```
+       
 
 ### The URL to drive RESTful Delete Customer:
 
@@ -3541,6 +3646,8 @@ request body is needed for this instruction.
 #### The JSON response body returned:
 
 Here is the response from the above request:
+
+```
 
 {"DELCUS": {
 
@@ -3566,6 +3673,8 @@ Here is the response from the above request:
 
 }}
 
+```
+
 In this instance the delete customer request was successful, denoted
 by the COMM_DEL_SUCCESS attribute containing 'Y'. Customer 0000001471
 was deleted. On the response body, integer fields do not have leading
@@ -3581,6 +3690,8 @@ Occasions when deleting a customer might not be successful, include:
 1.  ***Customer cannot be found***: In this example customer number
     1234567890 does not exist, here is the JSON response body returned
     under this circumstance:
+
+```
 
 {"DELCUS": {
 
@@ -3606,6 +3717,8 @@ Occasions when deleting a customer might not be successful, include:
 
 }}
 
+```
+
 The failure is denoted by the COMM_DEL_SUCCESS being set to 'N' and
 the COMM_DEL_FAIL_CD set to '1'.
 
@@ -3615,6 +3728,8 @@ Backend program **DELCUS** is being driven by this API, the call
 utilises copybook **DELCUS**
 
 #### Swagger details:
+
+```
 
 {
 
@@ -3910,10 +4025,14 @@ Service",
 
 }
 
+```
+
 **\
 **
 
 ### F. The Customer Service Account Enquiry (CSaccenq) details are:    
+
+```
 
 "ServiceName": "CSaccenq",
 
@@ -3921,14 +4040,16 @@ Service",
 
 "ServiceProvider": "CICS-1.0",
 
-"ServiceURL": "http://your-host-name:your-port-number
+"ServiceURL": "http://your-host-name:your-port-number/zosConnect/services/CSaccenq"
 
-/zosConnect/services/CSaccenq"
+```
 
 #### The Customer Service Account Enquiry API:
 
 There is one API available for the Account Enquiry, and that is the
 ***inqaccz*** API. The details are as follows:
+
+```
 
 "name": "inqaccz",
 
@@ -3936,9 +4057,9 @@ There is one API available for the Account Enquiry, and that is the
 
 "description": "enquire about an account on the CSaccenq service",
 
-"adminUrl": "http://your-host-name:your-port-number
+"adminUrl": "http://your-host-name:your-port-number/zosConnect/apis/inqaccz"
 
-/zosConnect/apis/inqaccz"
+```
 
                                      
 
@@ -3952,6 +4073,8 @@ This URL enquires on account 51 and issues an HTTP GET. No JSON
 request body is needed for this enquiry.
 
 #### The JSON response body returned:
+
+```
 
 {"INQACC_COMMAREA": {
 
@@ -3985,6 +4108,8 @@ request body is needed for this enquiry.
 
 }}
 
+```
+
 In this instance the request was successful, denoted by the
 INQACC_SUCCESS attribute containing 'Y'. On the response body, integer
 fields do not have leading zeros. We have intentionally chosen to
@@ -4000,6 +4125,8 @@ Occasions when an account enquiry might not be successful, include:
 1.  ***Account cannot be found***: In this example, account number
     12345678 does not exist, here is the JSON response body returned
     under this circumstance:
+
+```
 
 {"INQACC_COMMAREA": {
 
@@ -4033,6 +4160,8 @@ Occasions when an account enquiry might not be successful, include:
 
 }}
 
+```
+
 The failure is denoted by the INQACC_SUCCESS being set to 'N'.
 
 #### What is being driven at the backend by this API?:
@@ -4043,6 +4172,8 @@ except that in INQACCZ any POINTERs have been converted into PIC X(4),
 this allows zOS Connect to utilise the copybook correctly.
 
 #### Swagger details:
+
+```
 
 {
 
@@ -4434,36 +4565,41 @@ this allows zOS Connect to utilise the copybook correctly.
 
 }
 
+```
+
 **\
 **
 
 ### G. The Customer Service Account Update (CSaccupd) details are:    
 
-      "ServiceName": "CSaccupd",
+```
+
+"ServiceName": "CSaccupd",
 
 "ServiceDescription": "Customer Service account update",
 
 "ServiceProvider": "CICS-1.0",
 
-"ServiceURL": "http://your-host-name:your-port-number
+"ServiceURL": "http://your-host-name:your-port-number/zosConnect/services/CSaccupd"
 
-/zosConnect/services/CSaccupd"
+```
 
 #### The Customer Service Account Update API:
 
 There is one API available for the Account Update, and that is the
 *updacc* API. The details are as follows:
 
+```
+
 "name": "updacc",
 
 "version": "1.0.0",
 
-"description": "Updates account information on the CSaccupd
-Service",
+"description": "Updates account information on the CSaccupd Service",
 
-"adminUrl": "http://your-host-name:your-port-number
+"adminUrl": "http://your-host-name:your-port-number/zosConnect/apis/updacc"    
 
-/zosConnect/apis/updacc"    
+```
 
 #### The URL to drive RESTful Account Update:
 
@@ -4476,44 +4612,50 @@ response body is returned.
 
 #### An example JSON request body:
 
-**{**
+```
 
-**"UPDACC": {**
+{
 
-**"COMM_EYE": " ",**
+"UPDACC": {
 
-**"COMM_CUSTNO": "0000000000",**
+"COMM_EYE": " ",
 
-**"COMM_SCODE": "000000",**
+"COMM_CUSTNO": "0000000000",
 
-**"COMM_ACCNO": 43,**
+"COMM_SCODE": "000000",
 
-**"COMM_ACC_TYPE": "LOAN ",**
+"COMM_ACCNO": 43,
 
-**"COMM_INT_RATE": 66.91,**
+"COMM_ACC_TYPE": "LOAN ",
 
-**"COMM_OPENED": 0,**
+"COMM_INT_RATE": 66.91,
 
-**"COMM_OVERDRAFT": 1000,**
+"COMM_OPENED": 0,
 
-**"COMM_LAST_STMT_DT": 0,**
+"COMM_OVERDRAFT": 1000,
 
-**"COMM_NEXT_STMT_DT": 0,**
+"COMM_LAST_STMT_DT": 0,
 
-**"COMM_AVAIL_BAL": 0,**
+"COMM_NEXT_STMT_DT": 0,
 
-**"COMM_ACTUAL_BAL": 0,**
+"COMM_AVAIL_BAL": 0,
 
-**"COMM_SUCCESS": " "**
+"COMM_ACTUAL_BAL": 0,
 
-**}**
+"COMM_SUCCESS": " "
 
-**}**
+}
+
+}
+
+```
 
 This request turns account 43 into a LOAN account, with an interest
 rate of 66.91%, and a 1000 overdraft limit.
 
 #### The JSON response body returned:
+
+```
 
 {"UPDACC": {
 
@@ -4545,6 +4687,8 @@ rate of 66.91%, and a 1000 overdraft limit.
 
 }}
 
+```
+
 In this instance the request was successful, denoted by the
 COMM_SUCCESS attribute containing 'Y'. On the response body, integer
 fields do not have leading zeros. We have intentionally chosen to
@@ -4560,6 +4704,8 @@ Occasions when an account update might not be successful:
 1.  ***Account cannot be found***: In this example account number
     12345678 does not exist, here is the JSON response body returned
     under this circumstance:
+
+```
 
 {"UPDACC": {
 
@@ -4591,10 +4737,14 @@ Occasions when an account update might not be successful:
 
 }}
 
+```
+
 The failure is denoted by the COMM_SUCCESS being set to 'N'.
 
 2.  ***The account type is spaces or begins with a space***: Here is the
     JSON response body returned under this circumstance:
+
+```
 
 {"UPDACC": {
 
@@ -4626,10 +4776,14 @@ The failure is denoted by the COMM_SUCCESS being set to 'N'.
 
 }}
 
+```
+
 The failure is denoted by the COMM_SUCCESS being set to 'N'.
 
 3.  ***Any other issues with the processing***: Here is the JSON
     response body returned under this circumstance:
+
+```
 
 {"UPDACC": {
 
@@ -4661,6 +4815,8 @@ The failure is denoted by the COMM_SUCCESS being set to 'N'.
 
 }}
 
+```
+
 If the update is unsuccessful for any other reason, you will also get
 the same response body (with COMM_SUCCESS set to 'N').
 
@@ -4689,6 +4845,8 @@ Scenarios outside of this, may need to perform additional validation
 checks to avoid data corruption.
 
 #### Swagger details:
+
+```
 
 {
 
@@ -5039,10 +5197,14 @@ Service",
 
 }
 
+```
+
 **\
 **
 
 ### H. The Customer Service Account Create (CSacccre) details are:  
+
+```
 
 "ServiceName": "CSacccre",
 
@@ -5050,14 +5212,16 @@ Service",
 
 "ServiceProvider": "CICS-1.0",
 
-"ServiceURL": "http://your-host-name:your-port-number
+"ServiceURL": "http://your-host-name:your-port-number/zosConnect/services/CSacccre"
 
-/zosConnect/services/CSacccre"
+```
 
 #### The Customer Service Account Creation API:
 
 There is one API available for the Account Create, and that is the
 ***creacc*** API. The details are as follows:
+
+```
 
 "name": "creacc",
 
@@ -5065,9 +5229,9 @@ There is one API available for the Account Create, and that is the
 
 "description": "Creates an account on the CSacccre Service",
 
-"adminUrl": "http://your-host-name:your-port-number
+"adminUrl": "http://your-host-name:your-port-number/zosConnect/apis/creacc"
 
-/zosConnect/apis/creacc"
+```
 
 #### The URL to drive RESTful Account Creation:
 
@@ -5079,6 +5243,8 @@ number, the account type, the interest rate, and the overdraft limit)
 and a JSON response body is returned.
 
 #### An example JSON request body: 
+
+```
 
 {
 
@@ -5120,7 +5286,11 @@ and a JSON response body is returned.
 
 }
 
+```
+
 #### The JSON response body returned:
+
+```
 
 {"CREACC": {
 
@@ -5158,6 +5328,8 @@ and a JSON response body is returned.
 
 }}
 
+```
+
 In this instance, the request was successful and account number 29932
 was created, denoted by the COMM_SUCCESS attribute containing 'Y'. On
 the response body, integer fields do not have leading zeros. We have
@@ -5171,6 +5343,8 @@ the mappings in zOS Connect.
 Occasions when an account creation might not be successful, include:
 
 1.  ***Customer not found failure***:
+
+```
 
 {"CREACC": {
 
@@ -5208,11 +5382,15 @@ Occasions when an account creation might not be successful, include:
 
 }}
 
+```
+
 In this example, customer 1234567890 does not exist. The failure is
 denoted by the COMM_SUCCESS being set to 'N' and the COMM_FAIL_CODE
 attribute being set to '1' ('1' = Customer not found).
 
 2.  ***Bad account type supplied***:
+
+```
 
 {"CREACC": {
 
@@ -5250,12 +5428,16 @@ attribute being set to '1' ('1' = Customer not found).
 
 }}
 
+```
+
 The failure is denoted by the COMM_SUCCESS being set to 'N' and the
 COMM_FAIL_CODE attribute being set to 'A' ('A' = An invalid account
 type has been used. Allowable account types are 'ISA ', 'MORTGAGE',
 'SAVING ', 'CURRENT ' or 'LOAN '). The request cannot be fulfilled.
 
 3.  ***An issue with the account information being retrieved***:
+
+```
 
 {"CREACC": {
 
@@ -5293,6 +5475,8 @@ type has been used. Allowable account types are 'ISA ', 'MORTGAGE',
 
 }}
 
+```
+
 The failure is denoted by the COMM_SUCCESS being set to 'N' and the
 COMM_FAIL_CODE attribute being set to either '8', or '9'('8' = An
 error occurred with the volume of account information retrieved. '9' =
@@ -5300,6 +5484,8 @@ An error occurred counting the accounts). In any of these cases the
 request cannot be fulfilled.
 
 4.  ***An internal problem generating the new account***:
+
+```
 
 {"CREACC": {
 
@@ -5337,6 +5523,8 @@ request cannot be fulfilled.
 
 }}
 
+```
+
 The failure is denoted by the COMM_SUCCESS being set to 'N' and the
 COMM_FAIL_CODE attribute being set to '3', '5', '7' ('3' = An enqueue
 issue. '5' A dequeue issue. '7' = An issue with the INSERT). In any of
@@ -5364,6 +5552,8 @@ Scenarios outside of this, may need to perform additional validation
 checks to avoid data corruption.
 
 #### Swagger details:
+
+```
 
 {
 
@@ -5773,10 +5963,14 @@ checks to avoid data corruption.
 
 }
 
+```
+
 **\
 **
 
 ### I. The Customer Service Delete an Account (CSaccdel) details are:    
+
+```
 
 "ServiceName": "CSaccdel",
 
@@ -5784,14 +5978,16 @@ checks to avoid data corruption.
 
 "ServiceProvider": "CICS-1.0",
 
-"ServiceURL": "http://your-host-name:your-port-number
+"ServiceURL": "http://your-host-name:your-port-number/zosConnect/services/CSaccdel"
 
-/zosConnect/services/CSaccdel"
+```
 
 #### The Customer Service Delete Account API:
 
 There is one API available for deleting accounts, and that is the
 ***delacc*** API. The details are as follows:
+
+```
 
 "name": "delacc",
 
@@ -5799,9 +5995,9 @@ There is one API available for deleting accounts, and that is the
 
 "description": "Deletes an account on the CSaccdel Service",
 
-"adminUrl": "http://your-host-name:your-port-number
+"adminUrl": "http://your-host-name:your-port-number/zosConnect/apis/delacc"
 
-/zosConnect/apis/delacc"
+```
 
 #### The URL to drive RESTful Account deletion:
 
@@ -5811,6 +6007,8 @@ This URL performs an account delete and issues an HTTP DELETE. No JSON
 request body is needed for this.
 
 #### The JSON response body returned:
+
+```
 
 {"DELACC_COMMAREA": {
 
@@ -5856,6 +6054,8 @@ request body is needed for this.
 
 }}
 
+```
+
 In this example the delete account request was successful, denoted by
 the DELACC_DEL_SUCCESS attribute containing 'Y'. Account 559 was
 deleted. On the response body, integer fields do not have leading
@@ -5871,6 +6071,8 @@ Occasions when an account deletion might not be successful, include:
 1.  ***Account cannot be found***: In this example, account number
     12345678 does not exist, here is the JSON response body returned
     under this circumstance:
+
+```
 
 {"DELACC_COMMAREA": {
 
@@ -5916,12 +6118,16 @@ Occasions when an account deletion might not be successful, include:
 
 }}
 
+```
+
 The failure is denoted by the DELACC_DEL_SUCCESS = 'N' and the
 DELACC_DEL_FAIL_CD = '1' (where '1' = Account not found).
 
 2.  ***Account cannot be deleted from the datastore***: In this example,
     there is a technical problem and the account cannot be deleted
     from the datastore:
+
+```
 
 {"DELACC_COMMAREA": {
 
@@ -5967,6 +6173,8 @@ DELACC_DEL_FAIL_CD = '1' (where '1' = Account not found).
 
 }}
 
+```
+
 The failure is denoted by the DELACC_DEL_SUCCESS = 'N' and the
 DELACC_DEL_FAIL_CD = '3' ('3' = Unable to delete).
 
@@ -5979,6 +6187,8 @@ into PIC X(4), allowing zOS Connect to utilise the copybook
 correctly.
 
 #### Swagger details:
+
+```
 
 {
 
@@ -6457,3 +6667,4 @@ correctly.
 }
 
 }
+```
