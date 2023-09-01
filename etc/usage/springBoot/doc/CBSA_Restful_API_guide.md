@@ -128,7 +128,9 @@ COMM_AMT value) from account number 000000876 at the bank.
 
 #### The JSON response body returned:
 
-`{"PAYDBCR": {
+```
+
+{"PAYDBCR": {
 
 "COMM_ORIGIN": {
 
@@ -162,7 +164,9 @@ COMM_AMT value) from account number 000000876 at the bank.
 
  }
 
-}`
+}
+
+```
 
  In this instance the request was successful, denoted by the
  COMM_SUCCESS attribute containing 'Y'. On the response body, integer
@@ -181,7 +185,9 @@ example:
     does not exist. Here is the JSON response body returned under this
     circumstance:
 
-`{"PAYDBCR": {
+```
+
+{"PAYDBCR": {
 
 "COMM_ORIGIN": {
 
@@ -215,7 +221,9 @@ example:
 
  }
 
-}`
+}
+
+```
 
 The failure is denoted by the COMM_SUCCESS being set to 'N' and a
 COMM_FAIL-CODE of '1' indicates that the account number could not be
@@ -225,7 +233,9 @@ found.
 
 The JSON response body returned:
 
-`{"PAYDBCR": {
+```
+
+{"PAYDBCR": {
 
 "COMM_ORIGIN": {
 
@@ -259,7 +269,9 @@ The JSON response body returned:
 
  }
 
-}`
+}
+
+```
 
 The failure is denoted by the COMM_SUCCESS being set to 'N' and a
 COMM_FAIL-CODE of '2' indicates that there was a problem in Db2 and
@@ -269,7 +281,9 @@ that the request could not be successfully completed.
 
 The JSON response body returned:
 
-`{"PAYDBCR": {
+```
+
+{"PAYDBCR": {
 
 "COMM_ORIGIN": {
 
@@ -303,7 +317,9 @@ The JSON response body returned:
 
  }
 
-}`
+}
+
+```
 
 The failure is denoted by the COMM_SUCCESS being set to 'N' and a
 COMM_FAIL-CODE of '4' indicates that the user is trying to make a
@@ -315,7 +331,9 @@ does not make sense and is therefore prohibited.
 
 The JSON response body returned:
 
-`{"PAYDBCR": {
+```
+
+{"PAYDBCR": {
 
 "COMM_ORIGIN": {
 
@@ -349,7 +367,9 @@ The JSON response body returned:
 
  }
 
-}`
+}
+
+```
 
 The failure is denoted by the COMM_SUCCESS being set to 'N' and a
 COMM_FAIL-CODE of '3' indicates that there are insufficient funds
@@ -379,7 +399,9 @@ COMM_FAIL-CODE of '3' indicates that there are insufficient funds
 
 #### Swagger details:
 
-` {
+```
+
+ {
 
 "swagger": "2.0",
 
@@ -751,7 +773,9 @@ COMM_FAIL-CODE of '3' indicates that there are insufficient funds
 
 }
 
-}`
+}
+
+```
 
 ## The CUSTOMER SERVICE Interface: 
 
