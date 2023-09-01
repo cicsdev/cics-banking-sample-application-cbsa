@@ -36,8 +36,11 @@ integrated into other applications if desired.
 #### The Payment Service (Pay) details are:
 
 `"ServiceName": "Pay",
+
 "ServiceDescription": "CBSA Pay Service",
+
 "ServiceProvider": "CICS-1.0",
+
 "ServiceURL": "http://your-host-name:your-port-number/zosConnect/services/Pay"`
 
 #### The Payment Service API:
@@ -46,8 +49,11 @@ There is one API available for the Payment Service, called
  ***makepayment***. The details are as follows:
 
 `"name": "makepayment",
+
 "version": "1.0.0",
+
 "description": "Make a payment on the Pay Service",
+
  "adminUrl":[http://your-host-name:your-port-number/zosConnect/apis/makepayment](http://your-host-name:your-port-number/zosConnect/apis/makepayment)`
 
 
@@ -64,23 +70,41 @@ amount).
 #### A valid JSON request body example:
 
 `{
+
  "PAYDBCR": {
+
 "COMM_ACCNO": "00000876",
+
 "COMM_AMT": -10.99,
+
 "COMM_SORTC": 000000,
+
 "COMM_AV_BAL": 0,
+
 "COMM_ACT_BAL": 0,
+
 "COMM_ORIGIN": {
+
 "COMM_APPLID": "EXAMPLE ",
+
 "COMM_USERID": "LTD ",
+
 "COMM_FACILITY_NAME": " ",
+
 "COMM_NETWRK_ID": " ",
+
 "COMM_FACILTYPE": 496,
+
 "FILL_0": " "
+
  },
+
 "COMM_SUCCESS": " ",
+
 "COMM_FAIL_CODE": " "
+
  }
+
 }`
 
 This example JSON request body is used by the company EXAMPLE LTD to
@@ -96,22 +120,39 @@ COMM_AMT value) from account number 000000876 at the bank.
 #### The JSON response body returned:
 
 `{"PAYDBCR": {
+
 "COMM_ORIGIN": {
+
 "COMM_FACILTYPE": 496,
+
 "COMM_NETWRK_ID": "",
+
 "COMM_APPLID": "EXAMPLE",
+
 "COMM_FACILITY_NAME": "",
+
 "COMM_USERID": "LTD",
+
 "FILL_0": ""
+
 },
+
 "COMM_AV_BAL": 700382.9,
+
 "COMM_FAIL_CODE": "0",
+
 "COMM_SORTC": 987654,
+
 "COMM_AMT": -10.99,
+
 "COMM_ACCNO": "00000876",
+
 "COMM_ACT_BAL": 700382.9,
+
 "COMM_SUCCESS": "Y"
+
  }
+
 }`
 
  In this instance the request was successful, denoted by the
@@ -132,22 +173,39 @@ example:
     circumstance:
 
 `{"PAYDBCR": {
+
 "COMM_ORIGIN": {
+
 "COMM_FACILTYPE": 496,
+
 "COMM_NETWRK_ID": "",
+
 "COMM_APPLID": "EXAMPLE",
+
 "COMM_FACILITY_NAME": "",
+
 "COMM_USERID": "LTD",
+
 "FILL_0": ""
+
 },
+
 "COMM_AV_BAL": 0,
+
 "COMM_FAIL_CODE": "1",
+
 "COMM_SORTC": 987654,
+
 "COMM_AMT": -10.99,
+
 "COMM_ACCNO": "99999876",
+
 "COMM_ACT_BAL": 0,
+
 "COMM_SUCCESS": "N"
+
  }
+
 }`
 
 The failure is denoted by the COMM_SUCCESS being set to 'N' and a
@@ -159,22 +217,39 @@ found.
 The JSON response body returned:
 
 `{"PAYDBCR": {
+
 "COMM_ORIGIN": {
+
 "COMM_FACILTYPE": 496,
+
 "COMM_NETWRK_ID": "",
+
 "COMM_APPLID": "EXAMPLE",
+
 "COMM_FACILITY_NAME": "",
+
 "COMM_USERID": "LTD",
+
 "FILL_0": ""
+
  },
+
 "COMM_AV_BAL": 0,
+
 "COMM_FAIL_CODE": "2",
+
 "COMM_SORTC": 987654,
+
 "COMM_AMT": -10.99,
+
 "COMM_ACCNO": "00000777",
+
 "COMM_ACT_BAL": 0,
+
 "COMM_SUCCESS": "N"
+
  }
+
 }`
 
 The failure is denoted by the COMM_SUCCESS being set to 'N' and a
@@ -186,22 +261,39 @@ that the request could not be successfully completed.
 The JSON response body returned:
 
 `{"PAYDBCR": {
+
 "COMM_ORIGIN": {
+
 "COMM_FACILTYPE": 496,
+
 "COMM_NETWRK_ID": "",
+
 "COMM_APPLID": "EXAMPLE",
+
 "COMM_FACILITY_NAME": "",
+
 "COMM_USERID": "LTD",
+
 "FILL_0": ""
+
 },
+
 "COMM_AV_BAL": 0,
+
 "COMM_FAIL_CODE": "4",
+
 "COMM_SORTC": 987654,
+
 "COMM_AMT": -10.99,
+
 "COMM_ACCNO": "00000005",
+
 "COMM_ACT_BAL": 0,
+
 "COMM_SUCCESS": "N"
+
  }
+
 }`
 
 The failure is denoted by the COMM_SUCCESS being set to 'N' and a
@@ -215,22 +307,39 @@ does not make sense and is therefore prohibited.
 The JSON response body returned:
 
 `{"PAYDBCR": {
+
 "COMM_ORIGIN": {
+
 "COMM_FACILTYPE": 496,
+
 "COMM_NETWRK_ID": "",
+
 "COMM_APPLID": "EXAMPLE",
+
 "COMM_FACILITY_NAME": "",
+
 "COMM_USERID": "LTD",
+
 "FILL_0": ""
+
 },
+
 "COMM_AV_BAL": 0,
+
 "COMM_FAIL_CODE": "3",
+
 "COMM_SORTC": 987654,
+
 "COMM_AMT": -10.99,
+
 "COMM_ACCNO": "00001490",
+
 "COMM_ACT_BAL": 0,
+
 "COMM_SUCCESS": "N"
+
  }
+
 }`
 
 The failure is denoted by the COMM_SUCCESS being set to 'N' and a
@@ -264,190 +373,375 @@ COMM_FAIL-CODE of '3' indicates that there are insufficient funds
 ` {
 
 "swagger": "2.0",
+
 "info": {
+
 "description": "Make a payment on the Pay Service",
+
 "version": "1.0.0",
+
 "title": "makepayment"
+
  },
+
  "basePath": "/makepayment",
+
  "schemes": [
+
  "https",
+
  "http"
+
  ],
+
 "consumes": ["application/json"],
+
 "produces": ["application/json"],
+
 "paths": {"/dbcr": {"put": {
+
 "tags": ["makepayment"],
+
 "operationId": "putPay",
+
 "parameters": [
+
 {
+
 "name": "Authorization",
+
 "in": "header",
+
 "required": false,
+
 "type": "string"
+
  },
+
  {
+
 "in": "body",
+
 "name": "putPay_request",
+
 "description": "request body",
+
 "required": true,
+
 "schema": {"$ref": "#/definitions/putPay_request"}
+
 }
+
 ],
+
 "responses": {"200": {
+
 "description": "OK",
+
 "schema": {"$ref": "#/definitions/putPay_response_200"}
+
   }
+
 }
+
 }}},
+
 "definitions": {
+
  "putPay_request": {
+
  "type": "object",
+
 "properties": {"PAYDBCR": {
+
 "type": "object",
+
 "properties": {
+
 "COMM_ACCNO": {
+
 "type": "string",
+
 "maxLength": 8
+
  },
+
 "COMM_AMT": {
+
 "type": "number",
+
 "format": "decimal",
+
 "minimum": -9.99999999999E9,
+
 "maximum": 9.99999999999E9
+
 },
+
 "COMM_SORTC": {
+
 "type": "integer",
+
 "minimum": 0,
+
 "maximum": 999999
+
 },
+
 "COMM_AV_BAL": {
+
 "type": "number",
+
 "format": "decimal",
+
 "minimum": -9.99999999999E9,
+
 "maximum": 9.99999999999E9
+
 },
+
 "COMM_ACT_BAL": {
+
 "type": "number",
+
 "format": "decimal",
+
 "minimum": -9.99999999999E9,
+
 "maximum": 9.99999999999E9
+
 },
+
 "COMM_ORIGIN": {
+
 "type": "object",
+
 "properties": {
+
 "COMM_APPLID": {
+
 "type": "string",
+
 "maxLength": 8
+
 },
+
 "COMM_USERID": {
+
 "type": "string",
+
 "maxLength": 8
+
 },
+
 "COMM_FACILITY_NAME": {
+
 "type": "string",
+
 "maxLength": 8
+
 },
+
 "COMM_NETWRK_ID": {
+
 "type": "string",
+
 "maxLength": 8
+
 },
+
 "COMM_FACILTYPE": {
+
 "type": "integer",
+
 "minimum": -99999999,
+
 "maximum": 99999999
+
 },
+
 "FILL_0": {
+
 "type": "string",
+
 "maxLength": 4
+
 }
+
 }
+
 },
+
 "COMM_SUCCESS": {
+
 "type": "string",
+
 "maxLength": 1
+
 },
+
 "COMM_FAIL_CODE": {
+
 "type": "string",
+
 "maxLength": 1
+
 }
+
 }
+
 }}
+
 },
+
 "putPay_response_200": {
+
 "type": "object",
+
 "properties": {"PAYDBCR": {
+
 "type": "object",
+
 "properties": {
+
 "COMM_ACCNO": {
+
 "type": "string",
+
 "maxLength": 8
+
 },
+
 "COMM_AMT": {
+
 "type": "number",
+
 "format": "decimal",
+
 "minimum": -9.99999999999E9,
+
 "maximum": 9.99999999999E9
+
 },
+
 "COMM_SORTC": {
+
 "type": "integer",
+
 "minimum": 0,
+
 "maximum": 999999
+
 },
+
 "COMM_AV_BAL": {
+
 "type": "number",
+
 "format": "decimal",
+
 "minimum": -9.99999999999E9,
+
 "maximum": 9.99999999999E9
+
 },
+
 "COMM_ACT_BAL": {
+
 "type": "number",
+
 "format": "decimal",
+
 "minimum": -9.99999999999E9,
+
 "maximum": 9.99999999999E9
+
 },
+
 "COMM_ORIGIN": {
+
 "type": "object",
+
 "properties": {
+
 "COMM_APPLID": {
+
 "type": "string",
+
 "maxLength": 8
+
 },
+
 "COMM_USERID": {
+
 "type": "string",
+
 "maxLength": 8
+
 },
+
 "COMM_FACILITY_NAME": {
+
 "type": "string",
+
 "maxLength": 8
+
 },
+
 "COMM_NETWRK_ID": {
+
 "type": "string",
+
 "maxLength": 8
+
 },
+
 "COMM_FACILTYPE": {
+
 "type": "integer",
+
 "minimum": -99999999,
+
 "maximum": 99999999
+
 },
+
 "FILL_0": {
+
 "type": "string",
+
 "maxLength": 4
+
 }
+
 }
+
 },
+
 "COMM_SUCCESS": {
+
 "type": "string",
+
 "maxLength": 1
+
 },
+
 "COMM_FAIL_CODE": {
+
 "type": "string",
+
 "maxLength": 1
+
 }
+
 }
+
 }}
+
 }
+
 }
+
 }`
 
 ## The CUSTOMER SERVICE Interface: 
@@ -475,8 +769,11 @@ applications if desired.
 ### A. The Customer Service Customer Enquiry (CScustenq) details are:    
 
 `"ServiceName": "CScustenq",
+
 "ServiceDescription": "Customer Service customer enquiry",
+
 "ServiceProvider": "CICS-1.0",
+
 "ServiceURL": "http://your-host-name:your-port-number/zosConnect/services/CScustenq"`
                  
 
@@ -486,8 +783,11 @@ There is one API available for the Customer Enquiry, and that is the
 ***inqcustz*** API. The details are as follows:
 
 `"name": "inqcustz",
+
 "version": "1.0.0",
+
 "description": "enquiry about a customer on the CScustenq service",
+
 "adminUrl": http://your-host-name:your-port-number/zosConnect/apis/inqcustz`
                  
 
@@ -503,25 +803,46 @@ request body is needed for this enquiry.
 Here is the response from the above request:
 
 `{"INQCUSTZ": {
+
 "INQCUST_NAME": "Dr William Q Price",
+
 "INQCUST_CREDIT_SCORE": 263,
+
 "INQCUST_INQ_SUCCESS": "Y",
+
 "INQCUST_ADDR": "19 Nutmeg Grove, Durham",
+
 "INQCUST_SCODE": "987654",
+
 "INQCUST_INQ_FAIL_CD": "0",
+
 "INQCUST_DOB": {
+
 "INQCUST_DOB_YYYY": 1936,
+
 "INQCUST_DOB_DD": 24,
+
+
 "INQCUST_DOB_MM": 9
+
 },
+
 "INQCUST_EYE": "CUST",
+
 "INQCUST_PCB_POINTER": "",
+
 "INQCUST_CUSTNO": 10,
+
 "INQCUST_CS_REVIEW_DT": {
+
 "INQCUST_CS_REVIEW_YYYY": 2022,
+
 "INQCUST_CS_REVIEW_DD": 9,
+
 "INQCUST_CS_REVIEW_MM": 2
+
 }
+
 }}`
 
 In this instance the request was successful, denoted by the
@@ -542,25 +863,45 @@ for example:
     under this circumstance:
 
 `{"INQCUSTZ": {
+
 "INQCUST_NAME": "",
+
 "INQCUST_CREDIT_SCORE": 0,
+
 "INQCUST_INQ_SUCCESS": "N",
+
 "INQCUST_ADDR": "",
+
 "INQCUST_SCODE": "",
+
 "INQCUST_INQ_FAIL_CD": "1",
+
 "INQCUST_DOB": {
+
 "INQCUST_DOB_YYYY": 0,
+
 "INQCUST_DOB_DD": 0,
+
 "INQCUST_DOB_MM": 0
+
 },
+
 "INQCUST_EYE": "",
+
 "INQCUST_PCB_POINTER": "",
+
 "INQCUST_CUSTNO": 1234567890,
+
 "INQCUST_CS_REVIEW_DT": {
+
 "INQCUST_CS_REVIEW_YYYY": 0,
+
 "INQCUST_CS_REVIEW_DD": 0,
+
 "INQCUST_CS_REVIEW_MM": 0
+
 }
+
 }}`
 
 The failure is denoted by the INQCUST_INQ_SUCCESS being set to 'N' and
@@ -572,25 +913,45 @@ found).
 The JSON response body returned:
 
 `{"INQCUSTZ": {
+
 "INQCUST_NAME": "",
+
 "INQCUST_CREDIT_SCORE": 0,
+
 "INQCUST_INQ_SUCCESS": "N",
+
 "INQCUST_ADDR": "",
+
 "INQCUST_SCODE": "",
+
 "INQCUST_INQ_FAIL_CD": "2",
+
 "INQCUST_DOB": {
+
 "INQCUST_DOB_YYYY": 0,
+
 "INQCUST_DOB_DD": 0,
+
 "INQCUST_DOB_MM": 0
+
 },
+
 "INQCUST_EYE": "",
+
 "INQCUST_PCB_POINTER": "",
+
 "INQCUST_CUSTNO": 123,
+
 "INQCUST_CS_REVIEW_DT": {
+
 "INQCUST_CS_REVIEW_YYYY": 0,
+
 "INQCUST_CS_REVIEW_DD": 0,
+
 "INQCUST_CS_REVIEW_MM": 0
+
 }
+
 }}`
 
 The failure is denoted by the INQCUST_INQ_SUCCESS being set to 'N' and
@@ -603,25 +964,45 @@ specifically relating to the abend handling).
 The JSON response body returned:
 
 `{"INQCUSTZ": {
+
 "INQCUST_NAME": "",
+
 "INQCUST_CREDIT_SCORE": 0,
+
 "INQCUST_INQ_SUCCESS": "N",
+
 "INQCUST_ADDR": "",
+
 "INQCUST_SCODE": "",
+
 "INQCUST_INQ_FAIL_CD": "9",
+
 "INQCUST_DOB": {
+
 "INQCUST_DOB_YYYY": 0,
+
 "INQCUST_DOB_DD": 0,
+
 "INQCUST_DOB_MM": 0
+
 },
+
 "INQCUST_EYE": "",
+
 "INQCUST_PCB_POINTER": "",
+
 "INQCUST_CUSTNO": 124,
+
 "INQCUST_CS_REVIEW_DT": {
+
 "INQCUST_CS_REVIEW_YYYY": 0,
+
 "INQCUST_CS_REVIEW_DD": 0,
+
 "INQCUST_CS_REVIEW_MM": 0
+
 }
+
 }}`
 
 The failure is denoted by the INQCUST_INQ_SUCCESS being set to 'N' and
@@ -640,223 +1021,437 @@ copybook correctly.
 #### Swagger details:
 
 `{
+
 "swagger": "2.0",
+
 "info": {
+
 "description": "enquiry about a customer on the CScustenq service",
+
 "version": "1.0.0",
+
 "title": "inqcustz"
+
 },
+
 "basePath": "/inqcustz",
+
 "schemes": [
+
 "https",
+
 "http"
+
 ],
+
 "consumes": ["application/json"],
+
 "produces": ["application/json"],
+
 "paths": {"/enquiry/{custno}": {"get": {
+
 "tags": ["inqcustz"],
+
 "operationId": "getCScustenq",
+
 "parameters": [
+
 {
+
 "name": "Authorization",
+
 "in": "header",
+
 "required": false,
+
 "type": "string"
+
 },
+
 {
+
 "name": "custno",
+
 "in": "path",
+
 "required": true,
+
 "type": "string"
+
 },
+
 {
+
 "in": "body",
+
 "name": "getCScustenq_request",
+
 "description": "request body",
+
 "required": true,
+
 "schema": {"$ref": "#/definitions/getCScustenq_request"}
+
 }
+
 ],
+
 "responses": {"200": {
+
 "description": "OK",
+
 "schema": {"$ref": "#/definitions/getCScustenq_response_200"}
+
 }}
+
 }}},
+
 "definitions": {
+
 "getCScustenq_request": {
+
 "type": "object",
+
 "properties": {"INQCUSTZ": {
+
 "type": "object",
+
 "properties": {
+
 "INQCUST_EYE": {
+
 "type": "string",
+
 "maxLength": 4
+
 },
+
 "INQCUST_SCODE": {
+
 "type": "string",
+
 "maxLength": 6
+
 },
+
 "INQCUST_NAME": {
+
 "type": "string",
+
 "maxLength": 60
+
 },
+
 "INQCUST_ADDR": {
+
 "type": "string",
+
 "maxLength": 160
+
 },
+
 "INQCUST_DOB": {
+
 "type": "object",
+
 "properties": {
+
 "INQCUST_DOB_DD": {
+
 "type": "integer",
+
 "minimum": 0,
+
 "maximum": 99
+
 },
+
 "INQCUST_DOB_MM": {
+
 "type": "integer",
+
 "minimum": 0,
+
 "maximum": 99
 },
+
 "INQCUST_DOB_YYYY": {
+
 "type": "integer",
+
 "minimum": 0,
+
 "maximum": 9999
+
 }
+
 }
+
 },
+
 "INQCUST_CREDIT_SCORE": {
+
 "type": "integer",
+
 "minimum": 0,
+
 "maximum": 999
+
 },
+
 "INQCUST_CS_REVIEW_DT": {
+
 "type": "object",
+
 "properties": {
+
 "INQCUST_CS_REVIEW_DD": {
+
 "type": "integer",
+
 "minimum": 0,
+
 "maximum": 99
+
 },
+
 "INQCUST_CS_REVIEW_MM": {
+
 "type": "integer",
+
 "minimum": 0,
+
 "maximum": 99
+
 },
+
 "INQCUST_CS_REVIEW_YYYY": {
+
 "type": "integer",
+
 "minimum": 0,
+
 "maximum": 9999
+
 }
+
 }
+
 },
+
 "INQCUST_INQ_SUCCESS": {
+
 "type": "string",
+
 "maxLength": 1
+
 },
+
 "INQCUST_INQ_FAIL_CD": {
+
 "type": "string",
+
 "maxLength": 1
+
 },
+
 "INQCUST_PCB_POINTER": {
+
 "type": "string",
+
 "maxLength": 4
+
 }
+
 }
+
 }}
+
 },
+
 "getCScustenq_response_200": {
+
 "type": "object",
+
 "properties": {"INQCUSTZ": {
+
 "type": "object",
+
 "properties": {
+
 "INQCUST_EYE": {
+
 "type": "string",
+
 "maxLength": 4
+
 },
+
 "INQCUST_SCODE": {
+
 "type": "string",
+
 "maxLength": 6
+
 },
+
 "INQCUST_CUSTNO": {
+
 "type": "integer",
+
 "minimum": 0,
+
 "maximum": 9999999999
+
 },
+
 "INQCUST_NAME": {
+
 "type": "string",
+
 "maxLength": 60
+
 },
+
 "INQCUST_ADDR": {
+
 "type": "string",
+
 "maxLength": 160
+
 },
+
 "INQCUST_DOB": {
+
 "type": "object",
+
 "properties": {
+
 "INQCUST_DOB_DD": {
+
 "type": "integer",
+
 "minimum": 0,
+
 "maximum": 99
+
 },
+
 "INQCUST_DOB_MM": {
+
 "type": "integer",
+
 "minimum": 0,
+
 "maximum": 99
+
 },
+
 "INQCUST_DOB_YYYY": {
+
 "type": "integer",
+
 "minimum": 0,
+
 "maximum": 9999
+
 }
+
 }
+
 },
+
 "INQCUST_CREDIT_SCORE": {
+
 "type": "integer",
+
 "minimum": 0,
+
 "maximum": 999
+
 },
+
 "INQCUST_CS_REVIEW_DT": {
+
 "type": "object",
+
 "properties": {
+
 "INQCUST_CS_REVIEW_DD": {
+
 "type": "integer",
+
 "minimum": 0,
+
 "maximum": 99
+
 },
+
 "INQCUST_CS_REVIEW_MM": {
+
 "type": "integer",
+
 "minimum": 0,
+
 "maximum": 99
+
 },
+
 "INQCUST_CS_REVIEW_YYYY": {
+
 "type": "integer",
+
 "minimum": 0,
+
 "maximum": 9999
+
 }
+
 }
+
 },
+
 "INQCUST_INQ_SUCCESS": {
+
 "type": "string",
+
 "maxLength": 1
+
 },
+
 "INQCUST_INQ_FAIL_CD": {
+
 "type": "string",
+
 "maxLength": 1
+
 },
+
 "INQCUST_PCB_POINTER": {
+
 "type": "string",
+
 "maxLength": 4
+
 }
+
 }}
+
 }
+
 }
+
 }`
+
 
 ### B. The Customer Service Customer Update (CScustupd) details are:            
 
 `"ServiceName": "CScustupd",
+
 "ServiceDescription": "Customer Service customer update",
+
 "ServiceProvider": "CICS-1.0",
+
 "ServiceURL": "http://your-host-name:your-host-number/zosConnect/services/CScustupd"`
 
 #### The Customer Service Customer Update API:
@@ -865,9 +1460,13 @@ There is one API available for the Customer Update, and that is the
 ***updcust*** API. The details are as follows:
 
 `"name": "updcust",
+
 "version": "1.0.0",
+
 "description": "Update a customer\'s details on the CScustupd Service",
+
 "adminUrl": "http://your-host-name:your-host-number/zosConnect/apis/updcust"`
+
                 
 
 #### The URL to drive RESTful Customer Update:
@@ -882,33 +1481,57 @@ returned.
 #### An example JSON request body:
 
 `{
+
 "UPDCUST": {
+
 "COMM_EYE": " ",
+
 "COMM_SCODE": "987654",
+
 "COMM_CUSTNO": "0000000001",
+
 "COMM_NAME": "Mrs Buford G Morris-Symyth-Ping-Fred-Splat ",
+
 "COMM_ADDR": "602A Maple Avenue, Fife ",
+
 "COMM_DOB": 0,
+
 "COMM_CREDIT_SCORE": 0,
+
 "COMM_CS_REVIEW_DATE": 0,
+
 "COMM_UPD_SUCCESS": " ",
+
 "COMM_UPD_FAIL_CD": " "
+
 }
+
 }`
 
 #### The JSON response body returned:
 
 `{"UPDCUST": {
+
 "COMM_ADDR": "602A Maple Avenue, Fife",
+
 "COMM_SCODE": "987654",
+
 "COMM_NAME": "Mrs Buford G Morris-Symyth-Ping-Fred-Splat",
+
 "COMM_UPD_SUCCESS": "Y",
+
 "COMM_EYE": "CUST",
+
 "COMM_CS_REVIEW_DATE": 21012022,
+
 "COMM_CUSTNO": "0000000001",
+
 "COMM_CREDIT_SCORE": 516,
+
 "COMM_UPD_FAIL_CD": "",
+
 "COMM_DOB": 22021941
+
 }}`
 
 In this instance the request was successful, denoted by the
@@ -928,16 +1551,27 @@ Occasions when a customer update might not be successful include:
     under this circumstance:
 
 `{"UPDCUST": {
+
 "COMM_ADDR": "70 Thames Avenue, Swindon, Wiltshire",
+
 "COMM_SCODE": "987654",
+
 "COMM_NAME": "Mrs Judith A Smith",
+
 "COMM_UPD_SUCCESS": "N",
+
 "COMM_EYE": "",
+
 "COMM_CS_REVIEW_DATE": 0,
+
 "COMM_CUSTNO": "1234567890",
+
 "COMM_CREDIT_SCORE": 0,
+
 "COMM_UPD_FAIL_CD": "1",
+
 "COMM_DOB": 0
+
 }}`
 
 The failure is denoted by the COMM_UPD_SUCCESS being set to 'N' and
@@ -947,16 +1581,27 @@ found).
 2.  ***An issue processing the VSAM data related to the update*:**
 
 `{"UPDCUST": {
+
 "COMM_ADDR": "702 Burt Street, Swindon, Wilts",
+
 "COMM_SCODE": "987654",
+
 "COMM_NAME": "Mrs Maude Grimms",
+
 "COMM_UPD_SUCCESS": "N",
+
 "COMM_EYE": "",
+
 "COMM_CS_REVIEW_DATE": 0,
+
 "COMM_CUSTNO": "0000000214",
+
 "COMM_CREDIT_SCORE": 0,
+
 "COMM_UPD_FAIL_CD": "2",
+
 "COMM_DOB": 0
+
 }}`
 
 The failure is denoted by the COMM_UPD_SUCCESS being set to 'N' and
@@ -966,7 +1611,7 @@ request cannot be fulfilled).
 
 3.  ***A problem with the Title***:
 
-{"UPDCUST": {
+`{"UPDCUST": {
 
 "COMM_ADDR": "70 Thames Avenue, Swindon, Wiltshire",
 
@@ -988,7 +1633,7 @@ request cannot be fulfilled).
 
 "COMM_DOB": 0
 
-}}
+}}`
 
 The failure is denoted by the COMM_UPD_SUCCESS being set to 'N' and
 the COMM_UPD_FAIL_CD attribute being set to 'T' ('T' = An issue was
