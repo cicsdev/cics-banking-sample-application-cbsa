@@ -6,11 +6,8 @@ The Payment interface is a Spring Boot application, which can drive
 back-end banking data, via a series of RESTful API calls, made to a zOS
 Connect server, which in turn, routes the requests to a CICS region.
 
-Please refer to the GitHub repo:
+Please refer to [CBSA RESTful API guide](CBSA_Restful_API_guide.md).
 
-> cicsdev/cics-banking-sample-application-cbsa/etc/usage/springBoot/doc
-
-for the CBSA RESTful API guide.
 
 ### The business justification/usage scenario for the Payment interface:
 
@@ -29,7 +26,7 @@ applications. The Payment interface, and the Spring Boot source code, has
 been provided to allow the RESTful API to be used straight from the box.
 
 The functionality in the Payment interface, mimics functions provided in
-the BMS and Liberty UI interfaces (as used by the Bank Teller).
+the BMS and Carbon React UI interfaces (as used by the Bank Teller).
 
 ### Accessing the Payment Interface:
 
