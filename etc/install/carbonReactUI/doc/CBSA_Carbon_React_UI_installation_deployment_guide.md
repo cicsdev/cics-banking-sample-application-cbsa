@@ -66,7 +66,9 @@ directory.
 
 This returns:
 
-`USER=CICSUSER
+```
+
+USER=CICSUSER
 
 OMVS INFORMATION
 
@@ -86,7 +88,9 @@ PROCUSERMAX= NONE
 
 THREADSMAX= NONE
 
-MMAPAREAMAX= NONE`
+MMAPAREAMAX= NONE
+
+```
 
 2.  The "HOME" directory is set to /u and the USERID running the CICS
     region (CICSUSER) may not have access to that. You fix that by
