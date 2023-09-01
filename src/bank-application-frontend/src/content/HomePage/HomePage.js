@@ -67,7 +67,7 @@ This will take you to the main part of the application.
                   <img
                     className="landing-page__illo"
                     src={`${process.env.PUBLIC_URL}/Use_cases_reduce_complexity.png`}
-                    alt="CICS Bank Sample Application"
+                    alt="CICS Banking Sample Application"
                   />
                 </Column>
               </Grid>
