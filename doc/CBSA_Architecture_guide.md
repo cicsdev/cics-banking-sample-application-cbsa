@@ -87,7 +87,7 @@ The Liberty User interface assumes:
 
 -   That there is a Liberty JVM server executing in the CICS region
 
--   Java 8 or later
+-   Java 11
 
 For more information please refer to:
 
@@ -118,7 +118,7 @@ The Payment and Customer Services UI assumes:
 
 -   That there is a zOS Connect server (installed as part of the base installation)
 
--   Java SE 1.8 or later 
+-   Java 11
 
 If you wish to utilise the RESTful API via the Spring Boot Payment or
 Customer services UI or from a web browser, you will need a zOS Connect

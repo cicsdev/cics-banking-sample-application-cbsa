@@ -2,7 +2,7 @@
 
 ## Introduction:
 
-There are multiple parts to the CICS Bank Sample Application (CBSA).
+There are multiple parts to the CICS Banking Sample Application (CBSA).
 The base/COBOL installation needs to be installed first, to define all
 of the necessary files, data etc.
 This document is for the Liberty UI deployment/installation. It
@@ -295,7 +295,7 @@ Copy the war file from the target directory into the apps directory of the JVM s
  Once the JVM server has restarted you should be presented with the
  Carbon React UI main menu.
 
- CICS Bank Sample Application Main Menu:
+ CICS Banking Sample Application Main Menu:
 
  ![Carbon React Main Menu](../doc/images/CarbonReactUIinstall/CarbonReactUI_MainMenu.png)
 
