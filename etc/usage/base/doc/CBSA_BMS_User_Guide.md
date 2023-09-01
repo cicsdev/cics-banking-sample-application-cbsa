@@ -4,25 +4,23 @@
 
 ## What is the CICS Banking Sample Application?
 
-> The CICS Banking Sample Application (CBSA) is a CICS/COBOL based
-> application utilising banking functionality that will be used, in
-> branch, by a Bank Teller/Clerk. This includes the ability to create a
-> new customer, open accounts, pay money in, withdraw money, transfer
-> funds between accounts etc. etc.
->
-> The application has a set of BMS screens and comes fully populated
-> with data i.e. existing accounts and customers.
+ The CICS Banking Sample Application (CBSA) is a CICS/COBOL based
+ application utilising banking functionality that will be used, in
+ branch, by a Bank Teller/Clerk. This includes the ability to create a
+ new customer, open accounts, pay money in, withdraw money, transfer
+ funds between accounts etc. etc.
+
+ The application has a set of BMS screens and comes fully populated
+ with data i.e. existing accounts and customers.
 
 ## CICS Banking Sample Application Architecture:
 
-> Please refer to the GitHub repo:
-> cicsdev/cics-banking-sample-application-cbsa/doc for architecture
-> information.
+ Please refer to [the GitHub repo](/)
 
 ## Scenarios:
 
-> The CBSA application has a number of practical usage scenarios, here
-> are just a few examples:
+The CBSA application has a number of practical usage scenarios, here
+are just a few examples:
 
 -   As an easy to use, out of the box, application. Which comes pre
     populated with data.
@@ -300,11 +298,10 @@ successfully processed transactions).
 All source code, BMS maps and copy libraries can be found in the GitHub
 repo:
 
-> BMS - \> cics-banking-sample-application-cbsa/src/base/bms_src/
->
-> COBOL -\> cics-banking-sample-application-cbsa/src/base/cobol_src/
->
-> Copy libs -\>
-> cics-banking-sample-application-cbsa/src/base/cobol_copy/
->
-> Assembler -\> cics-banking-sample-application-cbsa/src/base/asm_src/
+[BMS](/src/base/bms_src/)
+
+[COBOL](/src/base/cobol_src/)
+
+[Copybooks](/src/base/cobol_copy/)
+
+
