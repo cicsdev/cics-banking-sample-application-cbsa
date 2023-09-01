@@ -85,8 +85,8 @@ more information).
 between the z/OS Connect server and the CICSTS56 CICS system and it
 utilises port ***30709***:
 
-`\<zosconnect_cicsIpicConnection id=\"cicsConn\"
-host=\"[localhost]{.underline}\" port=\"30709\" /\>`
+`<zosconnect_cicsIpicConnection id="cicsConn"
+host="`[localhost]{.underline}`" port="30709" />`
 
 If the 30709 port number needs to be changed, edit the **server.xml**
 file and then edit the CSD definition for TCPIP Service definition
