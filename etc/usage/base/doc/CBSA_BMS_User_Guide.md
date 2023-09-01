@@ -15,7 +15,7 @@
 
 ## CICS Banking Sample Application Architecture:
 
- Please refer to [the GitHub repo](/)
+ Please refer to [the architecture documentation](/doc/CBSA_Architecture_guide.md)
 
 ## Scenarios:
 
