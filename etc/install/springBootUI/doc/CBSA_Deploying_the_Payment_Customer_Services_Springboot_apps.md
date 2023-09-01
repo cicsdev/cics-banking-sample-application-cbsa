@@ -67,9 +67,13 @@ Should you need to change these, they are configured in the following files, whi
 
 Both need to be changed and both currently contain the following lines.
 
-`private static int port = 30701;
+```
 
-private static String address = "localhost";`
+private static int port = 30701;
+
+private static String address = "localhost";
+
+```
 
  
 ## Maven:
