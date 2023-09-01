@@ -46,29 +46,28 @@ CBSA transactions.
 
 The CBSA GitHub repo can be found at:
 
-> <https://github.com/cicsdev/cics-banking-sample-application-cbsa>
+[Github](https://github.com/cicsdev/cics-banking-sample-application-cbsa)
 
 **Assumptions:**
 
 There are some assumptions within this document, these are:
 
-> a. That a CICS region and the underlying libraries for that region
-> are already installed in the host environment. Within this document,
-> the CICS region is called **CICSTS56.**
->
-> b. That a Db2 subsystem is available in the host environment. The Db2
-> subsystem used, in this document, is called **DBCG**.
->
-> c. If the restful API or the Payment and/or the Customer Services
-> interfaces are required, it is assumed that a zOS Connect Server is
-> already installed and available. For the sake of illustration, the one
-> we use is installed in USS at:
->
-> >/var/zosconnect/v3r0/servers/defaultServer/resources/zosconnect
->
-> (\* the zOS Connect *server.xml* file for your own installation may
-> be installed in a different location in USS and the instructions
-> should be applied accordingly).
+1. That a CICS region and the underlying libraries for that region
+   are already installed in the host environment. Within this document,
+   the CICS region is called **CICSTS56.**
+
+2. That a Db2 subsystem is available in the host environment. The Db2
+   subsystem used, in this document, is called **DBCG**.
+
+3. If the restful API or the Payment and/or the Customer Services
+   interfaces are required, it is assumed that a zOS Connect Server is
+   already installed and available. For the sake of illustration, the one
+   we use is installed in USS at:
+
+`/var/zosconnect/v3r0/servers/defaultServer/resources/zosconnect`
+
+ (\* the zOS Connect *server.xml* file for your own installation may
+ be installed in a different location).
 
 **NOTE 1** - The installation illustrated in this document replaces the
 'default' zOS Connect **server.xml** with one which utilises the port
@@ -77,7 +76,7 @@ API. Should these port numbers not be appropriate in your host
 environment then they may be changed in the **server.xml** member after
 downloading it from the repo folder:
 
-> cicsdev/cics-banking-sample-application-cbsa/etc/install/base/zosconnectserver
+[z/OS Connect Server](../zosconnectserver)
 
 (see [Installation instructions](#installation-instructions) below for
 more information).
@@ -86,41 +85,38 @@ more information).
 between the z/OS Connect server and the CICSTS56 CICS system and it
 utilises port ***30709***:
 
->\<zosconnect_cicsIpicConnection id=\"cicsConn\"
-host=\"[localhost]{.underline}\" port=\"30709\" /\>
+'\<zosconnect_cicsIpicConnection id=\"cicsConn\"
+host=\"[localhost]{.underline}\" port=\"30709\" /\>'
 
 If the 30709 port number needs to be changed, edit the **server.xml**
 file and then edit the CSD definition for TCPIP Service definition
 (ZOSEE), as shown below, which is provided in member BANK, after
 downloading it from the repo folder:
 
-> cicsdev/cics-banking-sample-application-cbsa/etc/install/base/installjcl
+[installjcl](../installjcl)
 
 >![TCPIP def](../doc/images/Baseinstall/Baseinstall_TCPIPS_DEF.jpg)
 
 >(see [Installation instructions](#installation-instructions) below for
 more information)
 
-## 
-
 ### Installation instructions:
 
-1. Create a PDSE on you host machine. In our example, we called it **CBSA.JCL.INSTALL** (this
-should be capable of holding JCL members). It must be Fixed Block and with a record length of 80. Here is the dataset
-information that we used:
+1. Create a PDSE on your host machine. In our example, we called it **CBSA.JCL.INSTALL** (this
+should be capable of holding JCL members). It must be Fixed Block and with a record length of 80. Here is the dataset information that we used:
 
 >![PDSE](../doc/images/Baseinstall/Baseinstall_PDSE.jpg)
 
->Then copy all members from the /cicsdev/cics-banking-sample-application-cbsa/etc/install/base/installjcl folder in
+Then copy all .jcl files from the [installjcl[(../installjcl) directory folder in
 the repo, into the PDSE **CBSA.JCL.INSTALL**
 
->This PDSE contains a set of jobs, which are used to create the necessary
+This PDSE contains a set of jobs, which are used to create the necessary
 libraries and perform necessary set up.
 
 2. On the host machine, execute job CBSA.JCL.INSTALL(**CRELIBS**).
 
->This job creates the following additional empty PDSE/LIBRARYs on the
->host machine (which are all required later on):
+This job creates the following additional empty PDSE/LIBRARYs on the
+host machine (which are all required later on):
 >
 >| PDSE/Library              | Description                                |
 >| ------------              | -----------                                |
@@ -141,28 +137,25 @@ of the following GitHub folders into each respective host library.
 
 >| GitHub folder content                                                         | Host LIBRARY                                |
 >| ---------------------                                                         | ------------                                |
->| /cicsdev/cics-banking-sample-application-cbsa/etc/install/base/db2jcl         | **CBSA.DB2.JCL.INSTALL**                    |
->| /cicsdev/cics-banking-sample-application-cbsa/etc/install/base/buildjcl       | **CBSA.CICSBSA.BUILDJCL**                   |
->| /cicsdev/cics-banking-sample-application-cbsa/etc/install/base/linkeditjcl    | **CBSA.CICSBSA.LKED**                       |    
->| /cicsdev/cics-banking-sample-application-cbsa/src/base/bms_src                | **CBSA.CICSBSA.BMS**                        |  
->| /cicsdev/cics-banking-sample-application-cbsa/src/base/asm_src                | **CBSA.CICSBSA.ASM**                        |
->| /cicsdev/cics-banking-sample-application-cbsa/src/base/cobol_src              | **CBSA.CICSBSA.COBOL**                      |
->| /cicsdev/cics-banking-sample-application-cbsa/src/base/cobol_copy             | **CBSA.CICSBSA.DSECT**                      |
+>| [/etc/install/base/db2jcl](./etc/install/base/db2jcl)                         | **CBSA.DB2.JCL.INSTALL**                    | 
+>| [/etc/install/base/buildjcl](./etc/install/base/buildjcl)                     | **CBSA.CICSBSA.BUILDJCL**                   |
+>| [/etc/install/base/linkeditjcl](./etc/install/base/linkeditjcl)               | **CBSA.CICSBSA.LKED**                       |    
+>| [/src/base/bms_src](/src/base/bms_src)                                        | **CBSA.CICSBSA.BMS**                        |  
+>| [/src/base/asm_src](/src/base/asm_src)                                        | **CBSA.CICSBSA.ASM**                        |
+>| [/src/base/cobol_src](/src/base/cobol_src)                                    | **CBSA.CICSBSA.COBOL**                      |
+>| [/src/base/cobol_copy](/src/base/cobol_copy)                                  | **CBSA.CICSBSA.DSECT**                      |
 
 
 >| GitHub folder content                                                         | USS Location on the host                    |
 >| ---------------------                                                         | ------------------------                    |
->| /cicsdev/cics-banking-sample-application-cbsa/etc/install/base/aarfiles       | Copy all members/files into the location of the zOS Connect **apis** folder in USS, in our case it is /var/zosconnect/v3r0/servers/defaultServer/resources/zosconnect/**apis**/ (**Note** - if your zOS Connect server runs from a different location in USS, copy the content of the GitHub folder into the location of your own server's **apis** folder). |
->| /cicsdev/cics-banking-sample-application-cbsa/etc/install/base/sarfiles       | Copy all members/files into the location of the zOS Connect **services** folder in USS, in our case it is /var/zosconnect/v3r0/servers/defaultServer/resources/zosconnect/**services**/ (**Note** - if  your zOS Connect server runs from a different location in USS, copy the content of GitHub folder into the location of your own server's **services** folder). |
+>| [/etc/install/base/aarfiles](/etc/install/base/aarfiles)                      | Copy all .aar files into the location of the zOS Connect **apis** folder in USS, in our case it is /var/zosconnect/v3r0/servers/defaultServer/resources/zosconnect/**apis**/ (**Note** - if your zOS Connect server runs from a different location in USS, copy the content of the GitHub folder into the location of your own server's **apis** folder). |
+>| [/etc/install/base/sarfiles](/etc/install/base/sarfiles)                      | Copy all .sar files into the location of the zOS Connect **services** folder in USS, in our case it is /var/zosconnect/v3r0/servers/defaultServer/resources/zosconnect/**services**/ (**Note** - if  your zOS Connect server runs from a different location in USS, copy the content of GitHub folder into the location of your own server's **services** folder). |
 
 
-
-## 
-
-## Setting up the Db2 artefacts (STORGROUPS, TABLESPACES, TABLES, INDEXES):
+## Setting up the Db2 components (STORGROUPS, TABLESPACES, TABLES, INDEXES):
 
 The following job creates the ACCOUNT, PROCTRAN and CONTROL table Db2
-artefacts used by CBSA. The Db2 ACCOUNT table holds the data for every
+components used by CBSA. The Db2 ACCOUNT table holds the data for every
 account at the bank. The PROCTRAN table holds information about
 successfully processed banking transactions and the CONTROL table is
 utilised to store the last account number in use.
@@ -180,7 +173,6 @@ data on them yet - data population is performed in [Create the VSAM
 files and populate the Db2 tables with
 data.](#create-the-vsam-files-and-populate-the-db2-tables-with-data)).
 
-## 
 
 ## Compile/assemble, linkedit and bind the source code modules and BMS maps. 
 
