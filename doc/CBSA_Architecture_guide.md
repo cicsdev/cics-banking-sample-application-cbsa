@@ -1,8 +1,8 @@
-# CICS Bank Sample Application (CBSA) Architecture
+# CICS Banking Sample Application (CBSA) Architecture
 
 ## Introduction:
 
-There are multiple parts to the CICS Bank Sample Application (CBSA).
+There are multiple parts to the CICS Banking Sample Application (CBSA).
 There is:
 
 -   The base/COBOL installation - which needs to be installed first.
