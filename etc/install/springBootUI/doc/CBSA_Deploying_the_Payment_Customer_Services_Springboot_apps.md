@@ -24,7 +24,7 @@ These instructions detail the steps required to:
 
 ### Assumptions: 
 
--   A CICS region (running CIC TS 5.4 or later) is available, and the
+-   A CICS region (running CICS TS 5.4 or later) is available, and the
     CBSA base/COBOL installation has been performed.
 
 -   A Db2 subsystem (v12 or greater) is available.
@@ -60,7 +60,7 @@ then please substitute the default values with yours.
 
 Should you need to change these, they are configured in the following files, which can be found on the repo at:
 
-[ConnectionInfo.java[(/src/Z-OS-Connect-Customer-Services-Interface/src/main/java/com/ibm/cics/cip/bank/springboot/customerservices/ConnectionInfo.java)
+[ConnectionInfo.java](/src/Z-OS-Connect-Customer-Services-Interface/src/main/java/com/ibm/cics/cip/bank/springboot/customerservices/ConnectionInfo.java)
 
 [ConnectionInfo.java](/src/Z-OS-Connect-Payment-Interface/src/main/java/com/ibm/cics/cip/bank/springboot/paymentinterface/ConnectionInfo.java)
 
