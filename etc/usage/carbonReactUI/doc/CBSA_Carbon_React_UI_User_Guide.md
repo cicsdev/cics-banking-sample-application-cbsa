@@ -1,7 +1,7 @@
-# CICS Bank Sample Application (CBSA) React UI User Guide 
+# CICS Banking Sample Application (CBSA) React UI User Guide 
 
 
-## CICS Bank Sample Application React UI Architecture:
+## CICS Banking Sample Application React UI Architecture:
 
 For architecture information please refer to the GitHub repo: 
 
@@ -15,7 +15,7 @@ will look something like this:
 
 [http://*your-allocated-host-name*:*your-port-number*/webui-1.0/](http://your-allocated-host-name:your-port-number/webui-1.0/)
 
-#### CICS Bank Sample Application Main Menu:
+#### CICS Banking Sample Application Main Menu:
 
 ![ReactUI menu](./images/CarbonReactUIUserGuide/001-Carbon-React-Welcome-Screen.png)
 
