@@ -40,7 +40,7 @@ These instructions detail the steps required to:
     instructions are provided below.
 
 
-### CICS Bank Sample Application Architecture:
+### CICS Banking Sample Application Architecture:
 
 For architecture information please refer to the GitHub repo:
 
