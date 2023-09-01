@@ -801,13 +801,17 @@ applications if desired.
 
 ### A. The Customer Service Customer Enquiry (CScustenq) details are:    
 
-`"ServiceName": "CScustenq",
+```
+
+"ServiceName": "CScustenq",
 
 "ServiceDescription": "Customer Service customer enquiry",
 
 "ServiceProvider": "CICS-1.0",
 
-"ServiceURL": "http://your-host-name:your-port-number/zosConnect/services/CScustenq"`
+"ServiceURL": "http://your-host-name:your-port-number/zosConnect/services/CScustenq"
+
+```
                  
 
 #### The Customer Service Customer Enquiry API:
@@ -815,13 +819,17 @@ applications if desired.
 There is one API available for the Customer Enquiry, and that is the
 ***inqcustz*** API. The details are as follows:
 
-`"name": "inqcustz",
+```
+
+"name": "inqcustz",
 
 "version": "1.0.0",
 
 "description": "enquiry about a customer on the CScustenq service",
 
-"adminUrl": http://your-host-name:your-port-number/zosConnect/apis/inqcustz`
+"adminUrl": http://your-host-name:your-port-number/zosConnect/apis/inqcustz
+
+```
                  
 
 #### The URL to drive RESTful Customer Enquiry:
@@ -835,7 +843,9 @@ request body is needed for this enquiry.
 
 Here is the response from the above request:
 
-`{"INQCUSTZ": {
+```
+
+{"INQCUSTZ": {
 
 "INQCUST_NAME": "Dr William Q Price",
 
@@ -876,7 +886,9 @@ Here is the response from the above request:
 
 }
 
-}}`
+}}
+
+```
 
 In this instance the request was successful, denoted by the
 INQCUST_INQ_SUCCESS attribute containing 'Y'. On the response body,
@@ -895,7 +907,9 @@ for example:
     1234567890 does not exist. Here is the JSON response body returned
     under this circumstance:
 
-`{"INQCUSTZ": {
+```
+
+{"INQCUSTZ": {
 
 "INQCUST_NAME": "",
 
@@ -935,7 +949,9 @@ for example:
 
 }
 
-}}`
+}}
+
+```
 
 The failure is denoted by the INQCUST_INQ_SUCCESS being set to 'N' and
 the INQCUST_INQ_FAIL_CD attribute being set to '1' ('1' = customer not
@@ -945,7 +961,9 @@ found).
 
 The JSON response body returned:
 
-`{"INQCUSTZ": {
+```
+
+{"INQCUSTZ": {
 
 "INQCUST_NAME": "",
 
@@ -985,7 +1003,9 @@ The JSON response body returned:
 
 }
 
-}}`
+}}
+
+```
 
 The failure is denoted by the INQCUST_INQ_SUCCESS being set to 'N' and
 the INQCUST_INQ_FAIL_CD attribute being set to '2' ('2' = an issue was
@@ -996,7 +1016,9 @@ specifically relating to the abend handling).
 
 The JSON response body returned:
 
-`{"INQCUSTZ": {
+```
+
+{"INQCUSTZ": {
 
 "INQCUST_NAME": "",
 
@@ -1036,7 +1058,9 @@ The JSON response body returned:
 
 }
 
-}}`
+}}
+
+```
 
 The failure is denoted by the INQCUST_INQ_SUCCESS being set to 'N' and
 the INQCUST_INQ_FAIL_CD attribute being set to '9' ('9' = an issue was
@@ -1053,7 +1077,9 @@ copybook correctly.
 
 #### Swagger details:
 
-`{
+```
+
+{
 
 "swagger": "2.0",
 
@@ -1474,7 +1500,9 @@ copybook correctly.
 
 }
 
-}`
+}
+
+```
 
 
 ### B. The Customer Service Customer Update (CScustupd) details are:            
