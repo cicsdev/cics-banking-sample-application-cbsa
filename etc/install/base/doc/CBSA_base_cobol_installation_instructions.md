@@ -86,7 +86,7 @@ between the z/OS Connect server and the CICSTS56 CICS system and it
 utilises port ***30709***:
 
 `<zosconnect_cicsIpicConnection id="cicsConn"
-host="`[localhost]{.underline}`" port="30709" />`
+host="localhost" port="30709" />`
 
 If the 30709 port number needs to be changed, edit the **server.xml**
 file and then edit the CSD definition for TCPIP Service definition
@@ -139,7 +139,7 @@ of the following GitHub folders into each respective host library.
 >| ---------------------                                                         | ------------                                |
 >| [/etc/install/base/db2jcl](../db2jcl)                                         | **CBSA.DB2.JCL.INSTALL**                    | 
 >| [/etc/install/base/buildjcl](../buildjcl)                                     | **CBSA.CICSBSA.BUILDJCL**                   |
->| [/etc/install/base/linkeditjcl](../etc/install/base/linkeditjcl)              | **CBSA.CICSBSA.LKED**                       |    
+>| [/etc/install/base/linkeditjcl](../linkeditjcl)                               | **CBSA.CICSBSA.LKED**                       |    
 >| [/src/base/bms_src](/src/base/bms_src)                                        | **CBSA.CICSBSA.BMS**                        |  
 >| [/src/base/asm_src](/src/base/asm_src)                                        | **CBSA.CICSBSA.ASM**                        |
 >| [/src/base/cobol_src](/src/base/cobol_src)                                    | **CBSA.CICSBSA.COBOL**                      |
