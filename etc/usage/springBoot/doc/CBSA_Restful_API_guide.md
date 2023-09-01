@@ -11,8 +11,7 @@ driven from the provided Payment and Customer Services Interfaces. In
 each case the URL goes via a zOS Connect server (represented below as
 ***your-host-name*** and ***your-port-number***)
 
-Please refer to the GitHub repo:
-cicsdev/cics-banking-sample-application-cbsa/doc for architecture
+Please refer to [the architecture documentation](/doc/CBSA_Architecture_guide.md)for architecture
 information.
 
 ## The PAYMENT interface: 
@@ -22,9 +21,7 @@ card machine that you'd find in a business. Instead of swiping a card,
 the business has access to take payments or make refunds, via the
 interface, for goods and services, directly from their customer's bank
 account. For further details about the Payment interface please refer to
-the GitHub repo:
-
-cicsdev/cics-banking-sample-application-cbsa/etc/usage/sprintBoot/doc.
+[the user guide](/etc/usage/sprintBoot/doc/CBSA_Payment_Interface_User_Guide.md)
 
 ### The associated RESTful Payment details:
 
