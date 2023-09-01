@@ -14,9 +14,9 @@ All the scripts (Job Control Language jobs) to compile and bind the COBOL progra
 
 The scripts (Job Control Language and SQL) to build the Db2 infrastructure.
 
-[doc](/.doc/README.md)
+[doc](/.doc/CBSA_base_cobol_installation_instructions.md)
 
-Documentation.
+Full base application installation instructions.
 
 [installjcl](./installjcl/README.md)
 
