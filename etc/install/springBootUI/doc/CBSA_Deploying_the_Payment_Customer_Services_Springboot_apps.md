@@ -44,65 +44,60 @@ These instructions detail the steps required to:
 
 For architecture information please refer to the GitHub repo:
 
-> cicsdev/cics-banking-sample-application-cbsa/doc
+[architecture](/doc/CBSA_Architecture_guide.md)
 
-##
  
 ## Changing the port to match z/OS Connect:
 
 The Spring Boot applications run inside a WebSphere Liberty Profile JVM
 server inside CICS, but also communicate with z/OS Connect. Installing the z/OS Connect components is done as part of the "base" install.
 
-
-It isimportant to make sure that the connection information to the zOS
+It is important to make sure that the connection information to the zOS
 Connect server is correct. As a default, these are set to port 30701
 and host localhost, if you utilised a different port number or hostname
-during the zOS Connect setup (as part of the base/COBOL installation)
+during the z/OS Connect setup (as part of the base/COBOL installation)
 then please substitute the default values with yours.
 
 Should you need to change these, they are configured in the following files, which can be found on the repo at:
 
-> cicsdev/cics-banking-sample-application-cbsa/src/Z-OS-Connect-Customer-Services-Interface/src/main/java/com/ibm/cics/cip/bank/springboot/customerservices/**ConnectionInfo.java**
+[ConnectionInfo.java[(/src/Z-OS-Connect-Customer-Services-Interface/src/main/java/com/ibm/cics/cip/bank/springboot/customerservices/ConnectionInfo.java)
 
-> cicsdev/cics-banking-sample-application-cbsa/src/Z-OS-Connect-Payment-Interface/src/main/java/com/ibm/cics/cip/bank/springboot/paymentinterface/**ConnectionInfo.java**
+[ConnectionInfo.java](/src/Z-OS-Connect-Payment-Interface/src/main/java/com/ibm/cics/cip/bank/springboot/paymentinterface/ConnectionInfo.java)
 
 
 Both need to be changed and both currently contain the following lines.
 
-private static int port = 30701;
+`private static int port = 30701;
 
-private static String address = \"localhost\";
+private static String address = "localhost";`
 
-##
  
 ## Maven:
 
 You need Maven installed on your laptop. Maven is a dependency
 management tool which is provided by Apache.
 
-> <https://maven.apache.org/install.html>
+[Maven](https://maven.apache.org/install.html)
 
 Start the command prompt.
 
 Change directory to the Z-OS-Connect-Customer-Services-Interface folder in cics-banking-sample-application-cbsa/src/
 
-This creates a folder called target, and inside of target is a .war file.
-
 At this point we are missing a Java Archive file for the jZOS Toolkit. 
 
 You need to goto your installation of java, typically this can be found in:
 
-> /usr/lpp/java/lib/ext
+`/usr/lpp/java/lib/ext`
 
 Copy the "ibmjzos.jar" to a location on your workstation and make a note of it.
 
 Issue the following command from the command line:
 
-> mvn install:install-file -Dfile="*download location*/ibmjzos.jar" -DgroupId=jzos -DartifactId=ibmjzos -Dversion=1.0.0 -Dpackaging=jar
+`mvn install:install-file -Dfile="*download location*/ibmjzos.jar" -DgroupId=jzos -DartifactId=ibmjzos -Dversion=1.0.0 -Dpackaging=jar`
 
 Issue the following Maven command:
 
-> mvn clean package
+`mvn clean package`
 
 This creates a folder called target, and inside of target is a .war file.
 
@@ -110,15 +105,11 @@ Change directory to the Z-OS-Connect-Payment-Interface folder in cics-banking-sa
 
 Issue the following Maven command:
 
-> mvn clean package
-
-## 
+`mvn clean package`
 
 ## Export to apps directory:
 
 Copy the war file from the two target directories into the apps directory. 
-
-##
 
 ## Updating the JVM server:
 
@@ -127,26 +118,26 @@ provide more time for the application to start. The JVM profile lives in
 the JVMPROFILEDIR specified on CICS start-up, in this example it is this
 one:
 
-> /S0W1/var/cics/JVMProfiles/DFHWLP.jvmprofile
+`/S0W1/var/cics/JVMProfiles/DFHWLP.jvmprofile`
 
 At the bottom, add the following timeout overrides.
 
-> -Dcom.ibm.cics.jvmserver.controller.timeout=900000
+`-Dcom.ibm.cics.jvmserver.controller.timeout=900000`
 
-> -Dcom.ibm.cics.jvmserver.wlp.bundlepart.timeout=900000
+`-Dcom.ibm.cics.jvmserver.wlp.bundlepart.timeout=900000`
 
 Then update the server.xml which controls the operation of the WebSphere
 Liberty Application Server. In this example, it is here, and this is an
 ASCII file. You need to use 3.17 (the Unix Directory List Facility) and
 the EA (Edit Ascii File) option to edit it.
 
-> /u/cicsuser/CICSTS61/CBSAWLP/wlp/usr/servers/defaultServer/server.xml
+`/u/cicsuser/CICSTS61/CBSAWLP/wlp/usr/servers/defaultServer/server.xml`
 
 
 Add the two applications by adding these lines:
 
->    \<webApplication location=\"customerservices-1.0.war\"/\>
->    \<webApplication location=\"paymentinterface-1.1.war\"/\>
+`<webApplication location="customerservices-1.0.war"/>`
+`<webApplication location="paymentinterface-1.1.war"/>`
 
 Restart the JVM server to allow these new changes to come into effect.
 
@@ -154,9 +145,9 @@ The WAR files have installed and now we must wait for the Spring Boot
 applications to start. Check the *messages.log* file, in this example
 these are found in:
 
-> /u/cicsuser/CICSTS61/CBSAWLP/wlp/usr/servers/defaultServer/logs
->
-> ![Spring](../doc/images/springBootUI/SpringBoot_Spring.jpg)
+`/u/cicsuser/CICSTS61/CBSAWLP/wlp/usr/servers/defaultServer/logs`
+
+![Spring](../doc/images/springBootUI/SpringBoot_Spring.jpg)
 
 This is a sign that things are working, and the applications are
 starting.
@@ -164,11 +155,9 @@ starting.
 Message CWWKZ0001I is issued several minutes later at which point you
 can use the applications.
 
-> Root WebApplicationContext: initialization completed in 180700 ms
->
-> Root WebApplicationContext: initialization completed in 180395 ms
+`Root WebApplicationContext: initialization completed in 180700 ms
+`Root WebApplicationContext: initialization completed in 180395 ms
 
-## 
 
 ## Access to the application/interfaces:
 
@@ -177,7 +166,7 @@ To access the Customer Services interface utilise the following URL,
 note that you will need to amend the URL in this example to reflect your
 own hostname and port number:
 
-> <http://your-chosen-host-name:19080/customerservices-1.0/>
+`http://your-chosen-host-name:19080/customerservices-1.0`
 
 **NOTE** - Port number 19080 is the JVM Server port number which was
 allocated as part of the Carbon React UI installation process. If you elected
@@ -187,7 +176,7 @@ one.
 A user guide for the Customer Services interface can be found in the
 repo:
 
-> cicsdev/cics-banking-sample-application-cbsa/etc/usage/springBoot/doc
+[Customer Services](/etc/usage/springBoot/doc/CBSA_Customer_Services_Interface_User_Guide.md)
 
 
 ### The Payment interface
@@ -195,7 +184,7 @@ Access to the Payment interface is via the following URL, note that you
 will need to amend the URL in this example to reflect your own hostname
 and port number:
 
-> <http://your-chosen-host-name:19080/paymentinterface-1.1/>
+`http://your-chosen-host-name:19080/paymentinterface-1.1`
 
 **NOTE** - Port number 19080 is the JVM Server port number which was
 allocated as part of the Carbon React UI installation process. If you elected
@@ -205,4 +194,4 @@ one.
 A user guide for the Payment interface can be found in the
 repo:
 
-> cicsdev/cics-banking-sample-application-cbsa/etc/usage/springBoot/doc.
+[Payment Interface](/etc/usage/springBoot/doc/CBSA_Payment_Interface_User_Guide.md)
