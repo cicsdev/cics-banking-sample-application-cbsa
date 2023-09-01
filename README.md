@@ -64,7 +64,6 @@ The interfaces are designed to exploit the underlying banking functionality, whi
 
 ## Downloading
 - Clone the repository using your IDEs support, such as the Eclipse Git plugin
-- **or**, download the sample as a [ZIP] from the release page and then follow the installation instructions (see Installing).
 
 >*Tip: Eclipse Git provides an 'Import existing Projects' check-box when cloning a repository.*
 
