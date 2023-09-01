@@ -55,7 +55,7 @@ The interfaces are designed to exploit the underlying banking functionality, whi
 - An existing CICS TS region running at V5.4 or later
 - A Db2 subsystem (V12 or later)
 - A WebSphere Liberty Profile JVM server in CICS (set up and configured during the installation process) for the Carbon React UI and Spring Boot interfaces
-- Java SE 1.11 on the workstation.
+- Java 11 on the workstation.
 - Apache Maven on the workstation (to build the Carbon React UI, Customer Services and Payment interfaces)
 - Various VSAM files (set up and configured during the installation process)
 - A z/OS Connect server (if the RESTful API or the Customer Services or Payment interfaces are required)
