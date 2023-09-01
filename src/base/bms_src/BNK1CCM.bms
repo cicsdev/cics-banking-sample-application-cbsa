@@ -8,7 +8,7 @@
 ***************************************************************
 *
 * BNK1CCM
-* Create Customer for CICS Bank Sample Application
+* Create Customer for CICS Banking Sample Application
 *
 * Created: 12-Nov-2015
 *
@@ -28,8 +28,8 @@ BNK1CC   DFHMDI SIZE=(24,80),                                          *
          DFHMDF POS=(1,1),LENGTH=7,INITIAL='BNK1CC ',                  *
                ATTRB=(PROT,NORM),COLOR=BLUE
 COMPANY  DFHMDF POS=(1,16),LENGTH=52,ATTRB=(NORM,PROT),COLOR=RED,      *
-               INITIAL='CICS Bank Sample Application - Create Customer.*
-               '
+               INITIAL='CICS Banking Sample Application - Create Custom*
+               er.'
 ***********************************************************************
          DFHMDF POS=(3,1),LENGTH=46,ATTRB=(NORM,PROT),COLOR=TURQUOISE, *
                INITIAL='Provide a Name, Address and D.O.B. then Enter '
