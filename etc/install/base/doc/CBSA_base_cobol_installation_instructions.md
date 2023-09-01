@@ -66,12 +66,12 @@ There are some assumptions within this document, these are:
 
 `/var/zosconnect/v3r0/servers/defaultServer/resources/zosconnect`
 
- (\* the zOS Connect *server.xml* file for your own installation may
+ (The z/OS Connect *server.xml* file for your own installation may
  be installed in a different location).
 
 **NOTE 1** - The installation illustrated in this document replaces the
 'default' zOS Connect **server.xml** with one which utilises the port
-numbers ***30701*** (HTTP) and ***30702*** (HTTPS) for the CBSA restful
+numbers ***30701*** (HTTP) and ***30702*** (HTTPS) for the CBSA RESTful
 API. Should these port numbers not be appropriate in your host
 environment then they may be changed in the **server.xml** member after
 downloading it from the repo folder:
@@ -85,8 +85,8 @@ more information).
 between the z/OS Connect server and the CICSTS56 CICS system and it
 utilises port ***30709***:
 
-'\<zosconnect_cicsIpicConnection id=\"cicsConn\"
-host=\"[localhost]{.underline}\" port=\"30709\" /\>'
+`\<zosconnect_cicsIpicConnection id=\"cicsConn\"
+host=\"[localhost]{.underline}\" port=\"30709\" /\>`
 
 If the 30709 port number needs to be changed, edit the **server.xml**
 file and then edit the CSD definition for TCPIP Service definition
@@ -137,9 +137,9 @@ of the following GitHub folders into each respective host library.
 
 >| GitHub folder content                                                         | Host LIBRARY                                |
 >| ---------------------                                                         | ------------                                |
->| [/etc/install/base/db2jcl](./etc/install/base/db2jcl)                         | **CBSA.DB2.JCL.INSTALL**                    | 
->| [/etc/install/base/buildjcl](./etc/install/base/buildjcl)                     | **CBSA.CICSBSA.BUILDJCL**                   |
->| [/etc/install/base/linkeditjcl](./etc/install/base/linkeditjcl)               | **CBSA.CICSBSA.LKED**                       |    
+>| [/etc/install/base/db2jcl](../db2jcl)                                         | **CBSA.DB2.JCL.INSTALL**                    | 
+>| [/etc/install/base/buildjcl](../buildjcl)                                     | **CBSA.CICSBSA.BUILDJCL**                   |
+>| [/etc/install/base/linkeditjcl](../etc/install/base/linkeditjcl)              | **CBSA.CICSBSA.LKED**                       |    
 >| [/src/base/bms_src](/src/base/bms_src)                                        | **CBSA.CICSBSA.BMS**                        |  
 >| [/src/base/asm_src](/src/base/asm_src)                                        | **CBSA.CICSBSA.ASM**                        |
 >| [/src/base/cobol_src](/src/base/cobol_src)                                    | **CBSA.CICSBSA.COBOL**                      |
