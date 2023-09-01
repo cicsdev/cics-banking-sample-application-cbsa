@@ -71,7 +71,6 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Installing
 Installation instructions:
-</br>
 
 Installation of CBSA is split into 3 parts :
   1. The base COBOL(BMS) installation, this is mandatory and should be installed first. See the [base COBOL installation documentation.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/tree/main/etc/install/base/doc/CBSA_base_cobol_installation_instructions.md) 
