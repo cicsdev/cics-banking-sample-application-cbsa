@@ -11,7 +11,7 @@ driven from the provided Payment and Customer Services Interfaces. In
 each case the URL goes via a zOS Connect server (represented below as
 ***your-host-name*** and ***your-port-number***)
 
-Please refer to [the architecture documentation](/doc/CBSA_Architecture_guide.md)for architecture
+Please refer to [the architecture documentation](/doc/CBSA_Architecture_guide.md) for architecture
 information.
 
 ## The PAYMENT interface: 
@@ -32,26 +32,34 @@ integrated into other applications if desired.
 
 #### The Payment Service (Pay) details are:
 
-`"ServiceName": "Pay",
+```
+
+"ServiceName": "Pay",
 
 "ServiceDescription": "CBSA Pay Service",
 
 "ServiceProvider": "CICS-1.0",
 
-"ServiceURL": "http://your-host-name:your-port-number/zosConnect/services/Pay"`
+"ServiceURL": "http://your-host-name:your-port-number/zosConnect/services/Pay"
+
+```
 
 #### The Payment Service API:
 
 There is one API available for the Payment Service, called
  ***makepayment***. The details are as follows:
 
-`"name": "makepayment",
+```
+
+"name": "makepayment",
 
 "version": "1.0.0",
 
 "description": "Make a payment on the Pay Service",
 
- "adminUrl":[http://your-host-name:your-port-number/zosConnect/apis/makepayment](http://your-host-name:your-port-number/zosConnect/apis/makepayment)`
+ "adminUrl":http://your-host-name:your-port-number/zosConnect/apis/makepayment
+
+```
 
 
 
@@ -66,7 +74,9 @@ amount).
 
 #### A valid JSON request body example:
 
-`{
+```
+
+{
 
  "PAYDBCR": {
 
@@ -102,7 +112,9 @@ amount).
 
  }
 
-}`
+}
+
+```
 
 This example JSON request body is used by the company EXAMPLE LTD to
 request a Payment of -10.99 (a payment is represented by a negative
