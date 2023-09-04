@@ -87,7 +87,7 @@ The Carbon React User interface assumes:
 
 -   That there is a Liberty JVM server executing in the CICS region
 
--   Java 11 or later
+-   Java 11
 
 For more information please refer to:
 
