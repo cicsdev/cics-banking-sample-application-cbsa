@@ -11,8 +11,8 @@ driven from the provided Payment and Customer Services Interfaces. In
 each case the URL goes via a zOS Connect server (represented below as
 ***your-host-name*** and ***your-port-number***)
 
-Please refer to [the architecture documentation](/doc/CBSA_Architecture_guide.md) for architecture
-information.
+
+Please refer to [the architecture documentation](/doc/CBSA_Architecture_guide.md) for architecture information.
 
 ## The PAYMENT interface: 
 
@@ -21,7 +21,8 @@ card machine that you'd find in a business. Instead of swiping a card,
 the business has access to take payments or make refunds, via the
 interface, for goods and services, directly from their customer's bank
 account. For further details about the Payment interface please refer to
-[the user guide](/etc/usage/sprintBoot/doc/CBSA_Payment_Interface_User_Guide.md)
+
+[Payment Interface Documentation](/etc/usage/springBoot/doc/CBSA_Payment_Interface_User_Guide.md).
 
 ### The associated RESTful Payment details:
 
@@ -223,11 +224,13 @@ example:
 
 }
 
+
 ```
 
 The failure is denoted by the COMM_SUCCESS being set to 'N' and a
 COMM_FAIL-CODE of '1' indicates that the account number could not be
 found.
+
 
 2.  ***A problem with Db2*:**
 

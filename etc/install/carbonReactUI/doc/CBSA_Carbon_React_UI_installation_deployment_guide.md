@@ -5,7 +5,7 @@
 There are multiple parts to the CICS Banking Sample Application (CBSA).
 The base/COBOL installation needs to be installed first, to define all
 of the necessary files, data etc.
-This document is for the Liberty UI deployment/installation. It
+This document is for the Carbon React UI deployment/installation. It
 assumes that the installer already has:
 
 -   a CICS region (running CICS TS 5.4 or greater)
@@ -314,7 +314,7 @@ Copy the war file from the target directory into the apps directory of the JVM s
 The Carbon React UI is an application that consists of back-end Java code and front-end JavaScript. 
 You can make changes to the back-end Java code in the application which is in 
 
-`/src/webui/src/main/java`
+> [src/webui/src/main/java](/src/webui/src/main/java)
 
  After making changes, you need to use Maven to rebuild.
 
@@ -328,7 +328,7 @@ You can make changes to the front end (browser interface) which is written using
 
 The source for this is found here:
 
-`/src/bank-application-frontend/`
+> [/src/bank-application-frontend/](/src/bank-application-frontend/)
 
 After making changes, you need to use a tool called "yarn" to build and package. "Yarn" is installed via the npm command
 
