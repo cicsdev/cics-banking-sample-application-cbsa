@@ -298,10 +298,11 @@ successfully processed transactions).
 All source code, BMS maps and copy libraries can be found in the GitHub
 repo:
 
-[BMS](/src/base/bms_src/)
-
-[COBOL](/src/base/cobol_src/)
-
-[Copybooks](/src/base/cobol_copy/)
-
+> BMS - \> [/src/base/bms_src/](/src/base/bms_src/)
+>
+> COBOL -\> [/src/base/cobol_src/](/src/base/cobol_src/)
+>
+> Copy libs -\> [/src/base/cobol_copy/](/src/base/cobol_copy/)
+>
+> Assembler -\> [/src/base/asm_src/](/src/base/asm_src/)
 

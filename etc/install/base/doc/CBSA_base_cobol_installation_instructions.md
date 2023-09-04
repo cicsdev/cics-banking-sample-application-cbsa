@@ -7,7 +7,7 @@
 There are multiple parts to the CICS Banking Sample Application (CBSA).
 There is the base/COBOL installation - which needs to be installed as a
 minimum. Then there are additional, optional, installation instructions
-for the Liberty UI and the Payment and Customer Services interfaces.
+for the Carbon React UI and the Payment and Customer Services interfaces.
 
 This document is the base/COBOL installation. It assumes that the
 installer already has:
@@ -76,7 +76,7 @@ API. Should these port numbers not be appropriate in your host
 environment then they may be changed in the **server.xml** member after
 downloading it from the repo folder:
 
-[z/OS Connect Server](../zosconnectserver)
+> [/etc/install/base/zosconnectserver](/etc/install/base/zosconnectserver)
 
 (see [Installation instructions](#installation-instructions) below for
 more information).
@@ -93,7 +93,7 @@ file and then edit the CSD definition for TCPIP Service definition
 (ZOSEE), as shown below, which is provided in member BANK, after
 downloading it from the repo folder:
 
-[installjcl](../installjcl)
+> [/etc/install/base/installjcl](/etc/install/base/installjcl)
 
 >![TCPIP def](../doc/images/Baseinstall/Baseinstall_TCPIPS_DEF.jpg)
 

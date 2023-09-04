@@ -33,9 +33,10 @@ These instructions detail the steps required to:
     base/COBOL install.
 
 -   A Liberty JVM is running inside of the CICS region - this is set up
-    as part of the Liberty UI installation process.
+    as part of the Carbon React UI installation process.
 
 -   Java 11
+
 -   Maven is utilised during the deployment of the apps -
     instructions are provided below.
 
@@ -44,26 +45,19 @@ These instructions detail the steps required to:
 
 For architecture information please refer to the GitHub repo:
 
-[architecture](/doc/CBSA_Architecture_guide.md)
-
+> [Archeticture Documentation](/doc/CBSA_Architecture_guide.md)
  
 ## Changing the port to match z/OS Connect:
 
-The Spring Boot applications run inside a WebSphere Liberty Profile JVM
-server inside CICS, but also communicate with z/OS Connect. Installing the z/OS Connect components is done as part of the "base" install.
+The Spring Boot applications run inside a WebSphere Liberty Profile JVM server inside CICS, but also communicate with z/OS Connect. Installing the z/OS Connect components is done as part of the "base" install.
 
-It is important to make sure that the connection information to the zOS
-Connect server is correct. As a default, these are set to port 30701
-and host localhost, if you utilised a different port number or hostname
-during the z/OS Connect setup (as part of the base/COBOL installation)
-then please substitute the default values with yours.
+It is important to make sure that the connection information to the zOS Connect server is correct. As a default, these are set to port 30701 and host localhost, if you utilised a different port number or hostname during the zOS Connect setup (as part of the base/COBOL installation) then please substitute the default values with yours.
 
 Should you need to change these, they are configured in the following files, which can be found on the repo at:
 
-[ConnectionInfo.java](/src/Z-OS-Connect-Customer-Services-Interface/src/main/java/com/ibm/cics/cip/bank/springboot/customerservices/ConnectionInfo.java)
+> [**Customer Services**](/src/Z-OS-Connect-Customer-Services-Interface/src/main/java/com/ibm/cics/cip/bank/springboot/customerservices/ConnectionInfo.java)
 
-[ConnectionInfo.java](/src/Z-OS-Connect-Payment-Interface/src/main/java/com/ibm/cics/cip/bank/springboot/paymentinterface/ConnectionInfo.java)
-
+> [**Payment Interface**](/src/Z-OS-Connect-Payment-Interface/src/main/java/com/ibm/cics/cip/bank/springboot/paymentinterface/ConnectionInfo.java)
 
 Both need to be changed and both currently contain the following lines.
 
@@ -180,7 +174,7 @@ one.
 A user guide for the Customer Services interface can be found in the
 repo:
 
-[Customer Services](/etc/usage/springBoot/doc/CBSA_Customer_Services_Interface_User_Guide.md)
+> [Customer Services Interface Documentation](/etc/usage/springBoot/doc/CBSA_Customer_Services_Interface_User_Guide.md)
 
 
 ### The Payment interface
@@ -198,4 +192,4 @@ one.
 A user guide for the Payment interface can be found in the
 repo:
 
-[Payment Interface](/etc/usage/springBoot/doc/CBSA_Payment_Interface_User_Guide.md)
+> [Payment Interface Documentation](/etc/usage/springBoot/doc/CBSA_Payment_Interface_User_Guide.md).
