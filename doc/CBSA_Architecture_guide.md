@@ -1,8 +1,8 @@
-# CICS Banking Sample Application (CBSA) Architecture
+# CICS Bank Sample Application (CBSA) Architecture
 
 ## Introduction:
 
-There are multiple parts to the CICS Banking Sample Application (CBSA).
+There are multiple parts to the CICS Bank Sample Application (CBSA).
 There is:
 
 -   The base/COBOL installation - which needs to be installed first.
@@ -67,37 +67,31 @@ by the Payment and Customer Services interfaces.
 
 For more information please refer to:
 
-> https://github.com/cicsdev/cics-banking-sample-application-cbsa/etc/install/base/doc
+> [COBOL Installation Documentation](/etc/install/base/doc/CBSA_base_cobol_installation_instructions.md)
 
 for the base/COBOL installation documentation.
 
-## The Liberty UI installation architecture diagram:
+## The Carbon React UI installation architecture diagram:
 
-The diagram below shows the addition of the Liberty UI. This utilises a
+The diagram below shows the addition of the Carbon React UI. This utilises a
 JVM server running in the CICS region.
 
-![libertyUI architecture diagram](../doc/images/Architecture/LibertyUI_CBSA_architecture_diagram.jpg)
+![Carbon React UI Architecture diagram](/doc/images/Architecture/CarbonReactUI_CBSA_architecture_diagram.jpg)
 
-### Assumptions & Requirements for the Liberty UI: 
+### Assumptions & Requirements for the Carbon React UI: 
 
-The Liberty User interface assumes:
+The Carbon React User interface assumes:
 
 -   That the base/COBOL installation has already been successfully
     installed.
 
 -   That there is a Liberty JVM server executing in the CICS region
 
--   Java 11
+-   Java 11 or later
 
 For more information please refer to:
 
-> <https://github.com/cicsdev/cics-banking-sample-application-cbsa/etc/install/libertyUI/doc>
-
-for the Liberty UI installation documentation and:
-
-> <https://github.com/cicsdev/cics-banking-sample-application-cbsa/etc/usage/libertyUI/doc>
-
-for the Liberty UI guide.
+> [Carbon React Documentation and Installation Guide](/etc/install/carbonReactUI/doc/CBSA_Carbon_React_UI_installation_deployment_guide.md)
 
 ## The Payment and Customer Services (Spring Boot) User Interface installation architecture diagram:
 
@@ -118,22 +112,22 @@ The Payment and Customer Services UI assumes:
 
 -   That there is a zOS Connect server (installed as part of the base installation)
 
--   Java 11
+-   Java SE 1.8 or later 
 
 If you wish to utilise the RESTful API via the Spring Boot Payment or
 Customer services UI or from a web browser, you will need a zOS Connect
 EE server. The installation instructions for the zOS Connect EE Server
-are included in the base/COBOL CBSA documentation (please refer to
-<https://github.com/cicsdev/cics-banking-sample-application-cbsa/etc/install/base/doc>
+are included in the base/COBOL CBSA documentation please refer to:
+
+> [Base COBOL Documentation](/etc/install/base/doc/CBSA_base_cobol_installation_instructions.md)
 
 For more information about installing the Payment and Customer Services
 UI (Spring Boot) please refer to:
 
-<https://github.com/cicsdev/cics-banking-sample-application-cbsa/etc/install/springBootUI/doc>
+> [Springboot Installation Instructions](/etc/install/springBootUI/doc/CBSA_Deploying_the_Payment_Customer_Services_Springboot_apps.md)
 
-for installation instructions and:
+For the Customer Services and Payment user guides, and the RESTful API guide:
 
-> <https://github.com/cicsdev/cics-banking-sample-application-cbsa/etc/usage/sprintBoot/doc>
+> [Springboot Documentation](/etc/usage/sprintBoot/doc)
 
-for the Customer Services and Payment user guides, and the RESTful API
-guide.
+
