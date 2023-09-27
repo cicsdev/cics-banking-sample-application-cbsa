@@ -107,7 +107,7 @@ should be capable of holding JCL members). It must be Fixed Block and with a rec
 
 >![PDSE](../doc/images/Baseinstall/Baseinstall_PDSE.jpg)
 
-Then copy all .jcl files from the [installjcl](../installjcl) directory folder in
+Then copy all .jcl files and the .csd file from the [installjcl](../installjcl) directory folder in
 the repo, into the PDSE **CBSA.JCL.INSTALL**
 
 This PDSE contains a set of jobs, which are used to create the necessary
