@@ -207,6 +207,8 @@ CBSA definitions and add the CSD GROUP(BANK) into a **LIST** called
 >> adds the CBSA resource definitions to it. You may need to amend job
 >> HBANKCSD with the name of your CSD. All of the CSD definitions needed
 >> for CBSA are located in CBSA.JCL.INSTALL(BANK).
+>> If you wish to alter the name of the CSD group or the list then you will need to make
+>> changes to BANK.csd before running.
 >> You may also wish to edit the BANK member if you should need to use a
 >> different port number for the IPIC connection between the CICS region
 >> and the zOS Connect server (ZOSEE) - we used port number 30709).
