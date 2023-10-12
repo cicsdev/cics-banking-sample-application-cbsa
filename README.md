@@ -21,24 +21,19 @@ here are a few examples:
 ## About
 There are multiple different interfaces exploiting a range of different underlying technologies.
 
-The first interface is the **base COBOL (BMS) interface**:
->![Main Menu](/doc/images/Architecture/Baseinstall_CBSA_MAIN_MENU.jpg)
-</br>
+### The first interface is the **base COBOL (BMS) interface**:
+![Main Menu](/doc/images/Architecture/Baseinstall_CBSA_MAIN_MENU.jpg)
 
-The second interface is the **Carbon React UI interface**:
-> ![Carbon React UI Main Menu](/doc/images/Architecture/CarbonReactUI_MainMenu.png)
-</br>
+### The second interface is the **Carbon React UI interface**:
+![Carbon React UI Main Menu](/doc/images/Architecture/CarbonReactUI_MainMenu.png)
 
-The third interface is the **Customer Services interface**:
-> ![CS Landing Page](/doc/images/Architecture/Landing_Page_Small.jpg)
-</br>
+### The third interface is the **Customer Services interface**:
+![CS Landing Page](/doc/images/Architecture/Landing_Page_Small.jpg)
 
-The fourth interface is the **Payment interface**:
-> ![Payment Landing Page](/doc/images/Architecture/Payment_Landing_page_small.jpg)
-</br>
+### The fourth interface is the **Payment interface**:
+![Payment Landing Page](/doc/images/Architecture/Payment_Landing_page_small.jpg)
 
 There is also a **RESTful API** please refer to the [CBSA RESTful API Guide](etc/usage/springBoot/doc/CBSA_Restful_API_guide.md) for more detailed information.
-</br>
 
 The interfaces are designed to exploit the underlying banking functionality, which includes functions to:
 > - Pay money in
