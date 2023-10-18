@@ -49,7 +49,7 @@ The interfaces are designed to exploit the underlying banking functionality, whi
 ## Architecture
 ![Payment and CS architecture diagram](/doc/images/Architecture/Payment_and_Customer_Services_UI_CBSA_architecture_diagram.jpg)
 
-> Please refer to the [Architecture documentation](/doc/CBSA_Architecture_guide.md) for more detailed information.
+> Please refer to the [Architecture documentation](doc/CBSA_Architecture_guide.md) for more detailed information.
 
 ## Requirements
 - An existing CICS TS region running at V5.4 or later
