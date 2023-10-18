@@ -67,7 +67,7 @@ by the Payment and Customer Services interfaces.
 
 For more information please refer to:
 
-> [COBOL Installation Documentation](/etc/install/base/doc/CBSA_base_cobol_installation_instructions.md)
+> [COBOL Installation Documentation](../etc/install/base/doc/CBSA_base_cobol_installation_instructions.md)
 
 for the base/COBOL installation documentation.
 
@@ -91,7 +91,7 @@ The Carbon React User interface assumes:
 
 For more information please refer to:
 
-> [Carbon React Documentation and Installation Guide](/etc/install/carbonReactUI/doc/CBSA_Carbon_React_UI_installation_deployment_guide.md)
+> [Carbon React Documentation and Installation Guide](../etc/install/carbonReactUI/doc/CBSA_Carbon_React_UI_installation_deployment_guide.md)
 
 ## The Payment and Customer Services (Spring Boot) User Interface installation architecture diagram:
 
@@ -119,15 +119,15 @@ Customer services UI or from a web browser, you will need a zOS Connect
 EE server. The installation instructions for the zOS Connect EE Server
 are included in the base/COBOL CBSA documentation please refer to:
 
-> [Base COBOL Documentation](/etc/install/base/doc/CBSA_base_cobol_installation_instructions.md)
+> [Base COBOL Documentation](../etc/install/base/doc/CBSA_base_cobol_installation_instructions.md)
 
 For more information about installing the Payment and Customer Services
 UI (Spring Boot) please refer to:
 
-> [Springboot Installation Instructions](/etc/install/springBootUI/doc/CBSA_Deploying_the_Payment_Customer_Services_Springboot_apps.md)
+> [Springboot Installation Instructions](../etc/install/springBootUI/doc/CBSA_Deploying_the_Payment_Customer_Services_Springboot_apps.md)
 
 For the Customer Services and Payment user guides, and the RESTful API guide:
 
-> [Springboot Documentation](/etc/usage/sprintBoot/doc)
+> [Springboot Documentation](../etc/usage/springBoot/doc)
 
 
