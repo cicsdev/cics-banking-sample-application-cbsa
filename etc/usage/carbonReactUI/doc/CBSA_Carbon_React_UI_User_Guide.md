@@ -5,7 +5,7 @@
 
 For architecture information please refer to the GitHub repo: 
 
-> ([CBSA Architecture Documentation](/doc/CBSA_Architecture_guide.md))
+([CBSA Architecture Documentation](/doc/CBSA_Architecture_guide.md))
 
 ## Accessing the React UI:
 
