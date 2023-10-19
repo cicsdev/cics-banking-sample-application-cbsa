@@ -23,7 +23,7 @@ These instructions detail the steps required to:
 
 - [Set up the JVM server](#JVM-server)
 
-- [Configure server.xml](#server.xml)
+- [Configure the server.xml](#server.xml)
 
 - [Deploy the Carbon React UI](#deploy)
 
