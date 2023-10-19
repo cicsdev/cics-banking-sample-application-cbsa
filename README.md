@@ -22,19 +22,19 @@ here are a few examples:
 There are multiple different interfaces exploiting a range of different underlying technologies.
 
 The first interface is the **base COBOL (BMS) interface**:
->![](../doc/images/Architecture/Baseinstall_CBSA_MAIN_MENU.jpg)
+![Main Menu](/doc/images/Architecture/Baseinstall_CBSA_MAIN_MENU.jpg)
 </br>
 
 The second interface is the **Carbon React UI interface**:
-> ![Carbon React UI Main Menu](../doc/images/Architecture/CarbonReactUI_MainMenu.png)
+![Carbon React UI Main Menu](../doc/images/Architecture/CarbonReactUI_MainMenu.png)
 </br>
 
 The third interface is the **Customer Services interface**:
-> ![CS Landing Page](../doc/images/Architecture/Landing_Page_Small.jpg)
+![CS Landing Page](../doc/images/Architecture/Landing_Page_Small.jpg)
 </br>
 
 The fourth interface is the **Payment interface**:
-> ![Payment Landing Page](../doc/images/Architecture/Payment_Landing_page_small.jpg)
+![Payment Landing Page](../doc/images/Architecture/Payment_Landing_page_small.jpg)
 </br>
 
 There is also a **RESTful API** please refer to the [CBSA RESTful API Guide](https://github.com/cicsdev/cics-banking-sample-application-cbsa/blob/main/etc/usage/springBoot/doc/CBSA_Restful_API_guide.md) for more detailed information.
@@ -49,7 +49,7 @@ The interfaces are designed to exploit the underlying banking functionality, whi
 ## Architecture
 ![Payment and CS architecture diagram](/doc/images/Architecture/Payment_and_Customer_Services_UI_CBSA_architecture_diagram.jpg)
 
-> Please refer to the [Architecture documentation](https://github.com/cicsdev/cics-banking-sample-application-cbsa/blob/main/doc/CBSA_Architecture_guide.md) for more detailed information.
+Please refer to the [Architecture documentation](/doc/CBSA_Architecture_guide.md) for more detailed information.
 
 ## Requirements
 - An existing CICS TS region running at V5.4 or later
