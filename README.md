@@ -22,7 +22,7 @@ here are a few examples:
 There are multiple different interfaces exploiting a range of different underlying technologies.
 
 The first interface is the **base COBOL (BMS) interface**:
->![Main Menu](../doc/images/Architecture/Baseinstall_CBSA_MAIN_MENU.jpg)
+>![](../doc/images/Architecture/Baseinstall_CBSA_MAIN_MENU.jpg)
 </br>
 
 The second interface is the **Carbon React UI interface**:
