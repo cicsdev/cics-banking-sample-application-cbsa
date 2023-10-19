@@ -12,7 +12,7 @@ Run npm install , or npm i , is used to install dependencies: It will install al
 
 ## Getting Started
 
-Run ng serve for a dev server. Navigate to http://localhost:4200/. The application will automatically reload if you change any of the source files.
+Running server for a dev server. Navigate to http://localhost:4200/. The application will automatically reload if you change any of the source files.
 
 ## Important to note
 
