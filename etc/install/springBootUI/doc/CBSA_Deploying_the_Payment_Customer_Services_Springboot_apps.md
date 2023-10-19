@@ -45,7 +45,7 @@ These instructions detail the steps required to:
 
 For architecture information please refer to the GitHub repo:
 
-> [Archeticture Documentation](/doc/CBSA_Architecture_guide.md)
+[Archeticture Documentation](/doc/CBSA_Architecture_guide.md)
  
 ## Changing the port to match z/OS Connect:
 
@@ -55,9 +55,9 @@ It is important to make sure that the connection information to the zOS Connect 
 
 Should you need to change these, they are configured in the following files, which can be found on the repo at:
 
-> [**Customer Services**](/src/Z-OS-Connect-Customer-Services-Interface/src/main/java/com/ibm/cics/cip/bank/springboot/customerservices/ConnectionInfo.java)
+[**Customer Services**](/src/Z-OS-Connect-Customer-Services-Interface/src/main/java/com/ibm/cics/cip/bank/springboot/customerservices/ConnectionInfo.java)
 
-> [**Payment Interface**](/src/Z-OS-Connect-Payment-Interface/src/main/java/com/ibm/cics/cip/bank/springboot/paymentinterface/ConnectionInfo.java)
+[**Payment Interface**](/src/Z-OS-Connect-Payment-Interface/src/main/java/com/ibm/cics/cip/bank/springboot/paymentinterface/ConnectionInfo.java)
 
 Both need to be changed and both currently contain the following lines.
 
@@ -174,7 +174,7 @@ one.
 A user guide for the Customer Services interface can be found in the
 repo:
 
-> [Customer Services Interface Documentation](/etc/usage/springBoot/doc/CBSA_Customer_Services_Interface_User_Guide.md)
+[Customer Services Interface Documentation](/etc/usage/springBoot/doc/CBSA_Customer_Services_Interface_User_Guide.md)
 
 
 ### The Payment interface
@@ -192,4 +192,4 @@ one.
 A user guide for the Payment interface can be found in the
 repo:
 
-> [Payment Interface Documentation](/etc/usage/springBoot/doc/CBSA_Payment_Interface_User_Guide.md).
+[Payment Interface Documentation](/etc/usage/springBoot/doc/CBSA_Payment_Interface_User_Guide.md).
