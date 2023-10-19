@@ -76,7 +76,7 @@ API. Should these port numbers not be appropriate in your host
 environment then they may be changed in the **server.xml** member after
 downloading it from the repo folder:
 
-> [/etc/install/base/zosconnectserver](/etc/install/base/zosconnectserver)
+![/etc/install/base/zosconnectserver](/etc/install/base/zosconnectserver)
 
 (see [Installation instructions](#installation-instructions) below for
 more information).
@@ -93,11 +93,11 @@ file and then edit the CSD definition for TCPIP Service definition
 (ZOSEE), as shown below, which is provided in member BANK, after
 downloading it from the repo folder:
 
-> [/etc/install/base/installjcl](/etc/install/base/installjcl)
+![/etc/install/base/installjcl](/etc/install/base/installjcl)
 
->![TCPIP def](../doc/images/Baseinstall/Baseinstall_TCPIPS_DEF.jpg)
+![TCPIP def](../doc/images/Baseinstall/Baseinstall_TCPIPS_DEF.jpg)
 
->(see [Installation instructions](#installation-instructions) below for
+(see [Installation instructions](#installation-instructions) below for
 more information)
 
 ### Installation instructions:
@@ -105,7 +105,7 @@ more information)
 1. Create a PDSE on your host machine. In our example, we called it **CBSA.JCL.INSTALL** (this
 should be capable of holding JCL members). It must be Fixed Block and with a record length of 80. Here is the dataset information that we used:
 
->![PDSE](../doc/images/Baseinstall/Baseinstall_PDSE.jpg)
+![PDSE](../doc/images/Baseinstall/Baseinstall_PDSE.jpg)
 
 Then copy all .jcl files and the .csd file from the [installjcl](../installjcl) directory folder in
 the repo, into the PDSE **CBSA.JCL.INSTALL**
@@ -137,19 +137,19 @@ of the following GitHub folders into each respective host library.
 
 >| GitHub folder content                                                         | Host LIBRARY                                |
 >| ---------------------                                                         | ------------                                |
->| [/etc/install/base/db2jcl](../db2jcl)                                         | **CBSA.DB2.JCL.INSTALL**                    | 
->| [/etc/install/base/buildjcl](../buildjcl)                                     | **CBSA.CICSBSA.BUILDJCL**                   |
->| [/etc/install/base/linkeditjcl](../linkeditjcl)                               | **CBSA.CICSBSA.LKED**                       |    
->| [/src/base/bms_src](/src/base/bms_src)                                        | **CBSA.CICSBSA.BMS**                        |  
->| [/src/base/asm_src](/src/base/asm_src)                                        | **CBSA.CICSBSA.ASM**                        |
->| [/src/base/cobol_src](/src/base/cobol_src)                                    | **CBSA.CICSBSA.COBOL**                      |
->| [/src/base/cobol_copy](/src/base/cobol_copy)                                  | **CBSA.CICSBSA.DSECT**                      |
+| [/etc/install/base/db2jcl](../db2jcl)                                         | **CBSA.DB2.JCL.INSTALL**                    | 
+| [/etc/install/base/buildjcl](../buildjcl)                                     | **CBSA.CICSBSA.BUILDJCL**                   |
+| [/etc/install/base/linkeditjcl](../linkeditjcl)                               | **CBSA.CICSBSA.LKED**                       |    
+| [/src/base/bms_src](/src/base/bms_src)                                        | **CBSA.CICSBSA.BMS**                        |  
+| [/src/base/asm_src](/src/base/asm_src)                                        | **CBSA.CICSBSA.ASM**                        |
+| [/src/base/cobol_src](/src/base/cobol_src)                                    | **CBSA.CICSBSA.COBOL**                      |
+| [/src/base/cobol_copy](/src/base/cobol_copy)                                  | **CBSA.CICSBSA.DSECT**                      |
 
 
 >| GitHub folder content                                                         | USS Location on the host                    |
 >| ---------------------                                                         | ------------------------                    |
->| [/etc/install/base/aarfiles](/etc/install/base/aarfiles)                      | Copy all .aar files into the location of the zOS Connect **apis** folder in USS, in our case it is /var/zosconnect/v3r0/servers/defaultServer/resources/zosconnect/**apis**/ (**Note** - if your zOS Connect server runs from a different location in USS, copy the content of the GitHub folder into the location of your own server's **apis** folder). |
->| [/etc/install/base/sarfiles](/etc/install/base/sarfiles)                      | Copy all .sar files into the location of the zOS Connect **services** folder in USS, in our case it is /var/zosconnect/v3r0/servers/defaultServer/resources/zosconnect/**services**/ (**Note** - if  your zOS Connect server runs from a different location in USS, copy the content of GitHub folder into the location of your own server's **services** folder). |
+| [/etc/install/base/aarfiles](/etc/install/base/aarfiles)                      | Copy all .aar files into the location of the zOS Connect **apis** folder in USS, in our case it is /var/zosconnect/v3r0/servers/defaultServer/resources/zosconnect/**apis**/ (**Note** - if your zOS Connect server runs from a different location in USS, copy the content of the GitHub folder into the location of your own server's **apis** folder). |
+| [/etc/install/base/sarfiles](/etc/install/base/sarfiles)                      | Copy all .sar files into the location of the zOS Connect **services** folder in USS, in our case it is /var/zosconnect/v3r0/servers/defaultServer/resources/zosconnect/**services**/ (**Note** - if  your zOS Connect server runs from a different location in USS, copy the content of GitHub folder into the location of your own server's **services** folder). |
 
 
 ## Setting up the Db2 components (STORGROUPS, TABLESPACES, TABLES, INDEXES):
@@ -331,7 +331,7 @@ executing.
 
 5. Go to a web browser and put in this URL:
 
-> [http://*your-host-name*:*your-port-number*/inqaccz/enquiry/42](http://your-host-name:your%20port-number/inqaccz/enquiry/42)
+![http://*your-host-name*:*your-port-number*/inqaccz/enquiry/42](http://your-host-name:your%20port-number/inqaccz/enquiry/42)
 
 6. This should return something similar to this (enquiry on account
 42):
