@@ -50,7 +50,7 @@ These instructions detail the steps required to:
     different User ID and should amend references to CICSUSER
     accordingly.
 
-## OMVS Segment
+## OMVS-Segment
 
 If you have already installed the Spring Boot UI, you can skip this step.
 
@@ -314,7 +314,7 @@ Copy the war file from the target directory into the apps directory of the JVM s
 The Carbon React UI is an application that consists of back-end Java code and front-end JavaScript. 
 You can make changes to the back-end Java code in the application which is in 
 
-> [src/webui/src/main/java](/src/webui/src/main/java)
+[src/webui/src/main/java](/src/webui/src/main/java)
 
  After making changes, you need to use Maven to rebuild.
 
@@ -328,7 +328,7 @@ You can make changes to the front end (browser interface) which is written using
 
 The source for this is found here:
 
-> [/src/bank-application-frontend/](/src/bank-application-frontend/)
+[/src/bank-application-frontend/](/src/bank-application-frontend/)
 
 After making changes, you need to use a tool called "yarn" to build and package. "Yarn" is installed via the npm command
 
