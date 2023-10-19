@@ -73,18 +73,18 @@ These instructions will get you a copy of the project up and running on your loc
 Installation instructions:
 
 Installation of CBSA is split into 3 parts :
-  1. The base COBOL(BMS) installation, this is mandatory and should be installed first. See the [base COBOL installation documentation.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/blob/main//etc/install/base/doc/CBSA_base_cobol_installation_instructions.md) 
-  2. The Carbon React UI installation, this is optional, requires a JVM server to be running in the CICS region (which you set up as part of the installation process). See [the Carbon React UI installation documentation.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/blob/main//etc/install/carbonReactUI/doc/CBSA_Carbon_React_UI_installation_deployment_guide.md)
-  3. The Customer Service and Payment interface installation (also optional). See [deploying the Payment and Customer Services documentation.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/blob/main//etc/install/springBootUI/doc/CBSA_Deploying_the_Payment_Customer_Services_Springboot_apps.md)
+  1. The base COBOL(BMS) installation, this is mandatory and should be installed first. See the [base COBOL installation documentation.](/etc/install/base/doc/CBSA_base_cobol_installation_instructions.md) 
+  2. The Carbon React UI installation, this is optional, requires a JVM server to be running in the CICS region (which you set up as part of the installation process). See [the Carbon React UI installation documentation.](/etc/install/carbonReactUI/doc/CBSA_Carbon_React_UI_installation_deployment_guide.md)
+  3. The Customer Service and Payment interface installation (also optional). See [deploying the Payment and Customer Services documentation.](/etc/install/springBootUI/doc/CBSA_Deploying_the_Payment_Customer_Services_Springboot_apps.md)
 
 ## Usage
 Various user guides are provided:
 
-  1. For the base/COBOL(BMS) interface please refer to the [CBSA BMS User Guide.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/blob/main//etc/usage/base/doc/CBSA_BMS_User_Guide.md)
-  2. For the Carbon React UI please refer to the [CBSA Carbon React UI User Guide.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/blob/main//etc/usage/carbonReactUI/doc/CBSA_Carbon_React_UI_User_Guide.md)
-  3. For the Customer Services interface please refer to the [CBSA Customer Service User Interface User Guide.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/blob/main//etc/usage/springBoot/doc/CBSA_Customer_Services_Interface_User_Guide.md)
-  4. For the Payment interface please refer to the [CBSA Payment Interface User Guide.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/blob/main//etc/usage/springBoot/doc/CBSA_Payment_Interface_User_Guide.md)
-  5. For the RESTful API guide please refer to the [CBSA RESTful Api Guide.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/blob/main//etc/usage/springBoot/doc/CBSA_Restful_API_guide.md)
+  1. For the base/COBOL(BMS) interface please refer to the [CBSA BMS User Guide.](/etc/usage/base/doc/CBSA_BMS_User_Guide.md)
+  2. For the Carbon React UI please refer to the [CBSA Carbon React UI User Guide.](/etc/usage/carbonReactUI/doc/CBSA_Carbon_React_UI_User_Guide.md)
+  3. For the Customer Services interface please refer to the [CBSA Customer Service User Interface User Guide.](etc/usage/springBoot/doc/CBSA_Customer_Services_Interface_User_Guide.md)
+  4. For the Payment interface please refer to the [CBSA Payment Interface User Guide.](/etc/usage/springBoot/doc/CBSA_Payment_Interface_User_Guide.md)
+  5. For the RESTful API guide please refer to the [CBSA RESTful Api Guide.](/etc/usage/springBoot/doc/CBSA_Restful_API_guide.md)
 
 
 ## Contributors
