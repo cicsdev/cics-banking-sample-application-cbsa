@@ -1,0 +1,78 @@
+################################################################
+# LICENSED MATERIALS - PROPERTY OF IBM
+# "RESTRICTED MATERIALS OF IBM"
+# (C) COPYRIGHT IBM CORPORATION 2020, 2023. ALL RIGHTS RESERVED
+# US GOVERNMENT USERS RESTRICTED RIGHTS - USE, DUPLICATION,
+# OR DISCLOSURE RESTRICTED BY GSA ADP SCHEDULE
+# CONTRACT WITH IBM CORPORATION
+################################################################
+
+name: sam
+description: For IBM Z Open Editor 3.2.0 or newer. Wazi's code samples with COBOL, PL/I, and HLASM applications
+version: 3.2.0
+author:
+  name: IBM CORPORATION
+
+propertyGroups:
+  - name: cobol-copybooks
+    language: cobol
+    libraries:
+      - name: syslib
+        type: local
+        locations:
+          - "**/cobol_copy"
+      - name: syslib
+        type: mvs
+        locations:
+          - "${HLQ}.SAMPLE.COBCOPY"
+      - name: MYLIB
+        type: mvs
+        locations:
+          - ${HLQ}.SAMPLE.COPYLIB
+      - name: MYLIB
+        type: local
+        locations:
+          - "**/COPYLIB-MVS"
+      - name: MYFILE
+        type: local
+        locations:
+          - "**/COPYLIB"
+
+
+# Mappings example using US defaults. Adjust to your code pages.
+profiles:
+  - name: RSE-Mappings
+    type: rseapi
+    settings:
+      mappings:
+        - resource: "**.SAMPLE.COB**"
+          extension: cbl
+          transfer: text
+          encoding: IBM-037
+          memberMappings:
+            - extension: dat
+              transfer: binary
+              resource: "*DAT"
+        - resource: "**PLI*"
+          extension: pl1
+          transfer: text
+          encoding: IBM-037
+      default.encoding: IBM-037
+  - name: dbb-userbuild
+    type: dbb
+    settings:
+      application: CBSA
+      command: "$DBB_HOME/bin/groovyz -DBB_DAEMON_HOST 127.0.0.1 - DBB_DAEMON_PORT 7380 "
+      buildScriptPath: "/var/work/dbb-zappbuild/build.groovy" 
+      buildScriptArgs:
+        - "--userBuild"
+        - "--workspace ${zopeneditor.userbuild.userSettings.dbbWorkspace}" 
+        - "--application ${application}"
+        - "--hlq ${zopeneditor.userbuild.userSettings.dbbHlq}"
+        - "--outDir ${zopeneditor.userbuild.userSettings.dbbLogDir}"
+        - "--verbose"
+      additionalDependencies:
+        - ${application}"/application-conf - "zapp*"
+      logFilePatterns:
+        - "${buildFile.basename}.log" 
+        - "BuildReport.*"
