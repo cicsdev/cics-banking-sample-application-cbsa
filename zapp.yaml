@@ -62,7 +62,7 @@ profiles:
     type: dbb
     settings:
       application: CBSA
-      command: "$DBB_HOME/bin/groovyz -DBB_DAEMON_HOST 127.0.0.1 - DBB_DAEMON_PORT 7380 "
+      command: "$DBB_HOME/bin/groovyz -DBB_DAEMON_HOST 127.0.0.1 -DBB_DAEMON_PORT 7380 "
       buildScriptPath: "/var/work/dbb-zappbuild/build.groovy" 
       buildScriptArgs:
         - "--userBuild"
