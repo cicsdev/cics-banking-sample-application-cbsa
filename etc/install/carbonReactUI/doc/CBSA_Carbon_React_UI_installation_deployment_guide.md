@@ -245,7 +245,7 @@ You should also add the group to the list installed on a cold start.
 `<feature>jaxrs-2.1</feature>`
 `<feature>json-1.0</feature>`
 `<feature>jsp-2.3</feature>`
-`<feature\>jdbc-4.0</feature>`
+`<feature>jdbc-4.0</feature>`
 
 
 ## Deploy
