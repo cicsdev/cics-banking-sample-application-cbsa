@@ -1,9 +1,9 @@
-//*
-//* Copyright IBM Corp. 2023       
-//*
 //REPLSIP JOB ,,CLASS=A,MSGCLASS=H,
 //  NOTIFY=&SYSUID,
 //  MSGLEVEL=(1,1),REGION=0M
+//*
+//* Copyright IBM Corp. 2023       
+//*
 //*
 //JOBSTEP  EXEC  PGM=IEBCOPY
 //SYSPRINT DD  SYSOUT=H

@@ -490,6 +490,10 @@ public class CustomerResource
 	{
 		logger.entering(this.getClass().getName(),
 				"getCustomerInternal for customerNumber " + id);
+		
+		System.out.println(this.getClass().getName() +
+				"getCustomerInternal for customerNumber " + id);
+		
 		Integer sortCode = this.getSortCode();
 
 		JSONObject response = new JSONObject();
@@ -509,8 +513,14 @@ public class CustomerResource
 
 		com.ibm.cics.cip.bankliberty.web.vsam.Customer vsamCustomer = new com.ibm.cics.cip.bankliberty.web.vsam.Customer();
 		vsamCustomer = vsamCustomer.getCustomer(id, sortCode.intValue());
+		
+		System.out.println("vsamCustomer is " + vsamCustomer);
+		
 		if (vsamCustomer != null)
 		{
+			
+			System.out.println("vsamCustomer name is " + vsamCustomer.getName());
+			
 			response.put(JSON_SORT_CODE, vsamCustomer.getSortcode().trim());
 			response.put(JSON_ID, vsamCustomer.getCustomerNumber().trim());
 			response.put(JSON_CUSTOMER_NAME, vsamCustomer.getName().trim());

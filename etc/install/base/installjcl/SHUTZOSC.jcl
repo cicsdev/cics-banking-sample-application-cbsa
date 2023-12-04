@@ -1,9 +1,9 @@
-//*
-//* Copyright IBM Corp. 2023       
-//*
 //SHUTZOSC JOB ,,CLASS=A,MSGCLASS=H,
 //  NOTIFY=&SYSUID,
 //  MSGLEVEL=(1,1),REGION=0M
+//*
+//* Copyright IBM Corp. 2023       
+//*
 //*
 //STEP0001 EXEC PGM=IKJEFT01,TIME=1440,REGION=0M
 //SYSTSPRT DD DUMMY
