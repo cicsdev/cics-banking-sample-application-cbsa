@@ -198,9 +198,15 @@ A JSON array is returned:
 ],"numberOfProcessedTransactionRecords":2,"success":"Y"}
 
 Each processed transaction has a reference number (the task that caused it to be written), a type, and then various information depending on the type.
+
 IDC and ODC are delete customer records.
+
 IDA and ODA are delete account records.
+
 ICC and OCC are create customer records.
+
 ICA and OCA are create account records.
+
 CRE and DEB are credit and debit records.
+
 TFR is a transfer record.
