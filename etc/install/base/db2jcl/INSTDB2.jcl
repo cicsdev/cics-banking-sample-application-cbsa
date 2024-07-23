@@ -47,7 +47,7 @@
 //* job if you do. 
 //* The plan must match that in the INSTALL(BANK) member
 //SYSIN    DD  *
-SET CURRENT SQLID = ' @BANK_USER@';
+SET CURRENT SQLID = '@BANK_USER@';
 
 CREATE DATABASE CBSA
        BUFFERPOOL BP1
