@@ -55,8 +55,9 @@ The interfaces are designed to exploit the underlying banking functionality, whi
 - An existing CICS TS region running at V5.4 or later
 - A Db2 subsystem (V12 or later)
 - A Liberty JVM server in CICS (set up and configured during the installation process) for the Liberty UI and Spring Boot interfaces
-- Java SE 1.8 or later on the workstation.  Java 11 is not supported.
+- Java 17
 - Apache Maven on the workstation (to build the Liberty UI, Customer Services and Payment interfaces)
+- Yarn to build the web front-end
 - Various VSAM files (set up and configured during the installation process)
 - A z/OS Connect server (if the RESTful API or the Customer Services or Payment interfaces are required)
 
