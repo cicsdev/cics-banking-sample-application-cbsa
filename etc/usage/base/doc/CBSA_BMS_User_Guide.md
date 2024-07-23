@@ -1,26 +1,28 @@
-# The CICS Banking Sample Application(CBSA) base/COBOL BMS User Guide
+# The CICS Bank Sample Application(CBSA) base/COBOL BMS User Guide
 
 ## 
 
-## What is the CICS Banking Sample Application?
+## What is the CICS Bank Sample Application?
 
- The CICS Banking Sample Application (CBSA) is a CICS/COBOL based
- application utilising banking functionality that will be used, in
- branch, by a Bank Teller/Clerk. This includes the ability to create a
- new customer, open accounts, pay money in, withdraw money, transfer
- funds between accounts etc. etc.
+> The CICS Bank Sample Application (CBSA) is a CICS/COBOL based
+> application utilising banking functionality that will be used, in
+> branch, by a Bank Teller/Clerk. This includes the ability to create a
+> new customer, open accounts, pay money in, withdraw money, transfer
+> funds between accounts etc. etc.
+>
+> The application has a set of BMS screens and comes fully populated
+> with data i.e. existing accounts and customers.
 
- The application has a set of BMS screens and comes fully populated
- with data i.e. existing accounts and customers.
+## CICS Bank Sample Application Architecture:
 
-## CICS Banking Sample Application Architecture:
-
- Please refer to [the architecture documentation](/doc/CBSA_Architecture_guide.md)
+> Please refer to the GitHub repo:
+> cicsdev/cics-banking-sample-application-cbsa/doc for architecture
+> information.
 
 ## Scenarios:
 
-The CBSA application has a number of practical usage scenarios, here
-are just a few examples:
+> The CBSA application has a number of practical usage scenarios, here
+> are just a few examples:
 
 -   As an easy to use, out of the box, application. Which comes pre
     populated with data.
@@ -51,21 +53,21 @@ are just a few examples:
 > the BMS application may be invoked from within the CICS TS region, by
 > utilising the OMEN transaction:
 >
-![BMSUser OMEN](../doc/images/BMSUserGuide/BMSUser_OMEN.jpg)
+> ![BMSUser OMEN](../doc/images/BMSUserGuide/BMSUser_OMEN.jpg)
 >
 >
 >
 > This should display the CBSA main menu:
 >
-![BMSUser Main menu](../doc/images/BMSUserGuide/BMSUser_Main_Menu.jpg)
+> ![BMSUser Main menu](../doc/images/BMSUserGuide/BMSUser_Main_Menu.jpg)
 >
 
 ## Navigating CBSA:
 
-> CICS Banking Sample Application is driven from the main menu. Simply
+> CICS Bank Sample Application is driven from the main menu. Simply
 > select the number or letter for the function that you require.
 >
-![BMSUser OMEN](../doc/images/BMSUserGuide/BMSUser_Main_Menu.jpg)
+> ![BMSUser OMEN](../doc/images/BMSUserGuide/BMSUser_Main_Menu.jpg)
 >
 
 #### Displaying Customer information (option 1 from the main menu):
@@ -76,21 +78,21 @@ are just a few examples:
 > installation. To display the information for a customer, select option
 > 1:
 >
-![BMSUser option 1 start](../doc/images/BMSUserGuide/BMSUser_Opt_1_START.jpg)
+> ![BMSUser option 1 start](../doc/images/BMSUserGuide/BMSUser_Opt_1_START.jpg)
 >
 >
 > This gives:
 >
-![BMSUser option 1 empty](../doc/images/BMSUserGuide/BMSUser_Opt_1_EMPTY.jpg)
+> ![BMSUser option 1 empty](../doc/images/BMSUserGuide/BMSUser_Opt_1_EMPTY.jpg)
 >
 > and then enter a customer number e.g. 1234:
 >
-![BMSUser option 1 entry](../doc/images/BMSUserGuide/BMSUser_Opt_1_ENTRY.jpg)
+> ![BMSUser option 1 entry](../doc/images/BMSUserGuide/BMSUser_Opt_1_ENTRY.jpg)
 >
 >
 > And the details for that customer will be returned:
 >
-![BMSUser option 1 success](../doc/images/BMSUserGuide/BMSUser_Opt_1_SUCCESS.jpg)
+> ![BMSUser option 1 success](../doc/images/BMSUserGuide/BMSUser_Opt_1_SUCCESS.jpg)
 >
 >
 > Notice further options are displayed at the bottom of the screen. In
@@ -105,21 +107,21 @@ are just a few examples:
 > display details of a single account, select option 2 (from the main
 > menu):
 >
-![BMSUser option 2 start](../doc/images/BMSUserGuide/BMSUser_Opt_2_START.jpg)
+> ![BMSUser option 2 start](../doc/images/BMSUserGuide/BMSUser_Opt_2_START.jpg)
 >
 >
 > This gives:
 >
-![BMSUser option 2 empty](../doc/images/BMSUserGuide/BMSUser_Opt_2_EMPTY.jpg)
+> ![BMSUser option 2 empty](../doc/images/BMSUserGuide/BMSUser_Opt_2_EMPTY.jpg)
 >
 > and then enter an account number:
 >
-![BMSUser option 2 entry](../doc/images/BMSUserGuide/BMSUser_Opt_2_ENTRY.jpg)
+> ![BMSUser option 2 entry](../doc/images/BMSUserGuide/BMSUser_Opt_2_ENTRY.jpg)
 >
 >
 > This returns:
 >
-![BMSUser option 2 success](../doc/images/BMSUserGuide/BMSUser_Opt_2_SUCCESS.jpg)
+> ![BMSUser option 2 success](../doc/images/BMSUserGuide/BMSUser_Opt_2_SUCCESS.jpg)
 >
 >
 > As before, further options are displayed at the bottom of the screen.
@@ -131,14 +133,14 @@ are just a few examples:
 > To see what accounts a particular Customer has select option A from
 > the main menu:
 >
-![BMSUser option A start](../doc/images/BMSUserGuide/BMSUser_Opt_A_START.jpg)
+> ![BMSUser option A start](../doc/images/BMSUserGuide/BMSUser_Opt_A_START.jpg)
 >
 > and provide the Customer number:
 >
-![BMSUser option A entry](../doc/images/BMSUserGuide/BMSUser_Opt_A_ENTRY.jpg)
+> ![BMSUser option A entry](../doc/images/BMSUserGuide/BMSUser_Opt_A_ENTRY.jpg)
 >
 >
-![BMSUser option A success](../doc/images/BMSUserGuide/BMSUser_Opt_A_SUCCESS.jpg)
+> ![BMSUser option A success](../doc/images/BMSUserGuide/BMSUser_Opt_A_SUCCESS.jpg)
 >
 >
 > In this example Customer 3 has 3 accounts (ISA, SAVING, CURRENT) which
@@ -152,17 +154,17 @@ are just a few examples:
 
 > To create a new Customer, select option 3 from the main menu:
 >
-![BMSUser option 3 start](../doc/images/BMSUserGuide/BMSUser_Opt_3_START.jpg)
+> ![BMSUser option 3 start](../doc/images/BMSUserGuide/BMSUser_Opt_3_START.jpg)
 >
 >
 >
 > This gives:
 >
-![BMSUser option 3 empty](../doc/images/BMSUserGuide/BMSUser_Opt_3_EMPTY.jpg)
+> ![BMSUser option 3 empty](../doc/images/BMSUserGuide/BMSUser_Opt_3_EMPTY.jpg)
 >
 > Then supply the required information:
 >
-![BMSUser option 3 entry](../doc/images/BMSUserGuide/BMSUser_Opt_3_ENTRY.jpg)
+> ![BMSUser option 3 entry](../doc/images/BMSUserGuide/BMSUser_Opt_3_ENTRY.jpg)
 >
 >
 > Validation will guide you through what content is acceptable or not,
@@ -171,7 +173,7 @@ are just a few examples:
 > Once the information provided has passed the validation check a new
 > Customer Number, Sort Code and Credit Score will be returned.
 >
-![BMSUser option 3 success](../doc/images/BMSUserGuide/BMSUser_Opt_3_SUCCESS.jpg)
+> ![BMSUser option 3 success](../doc/images/BMSUserGuide/BMSUser_Opt_3_SUCCESS.jpg)
 >
 
 #### Creating a New Account (option 4 from the main menu):
@@ -180,10 +182,10 @@ are just a few examples:
 
 > To create a new Account, select option 4 from the main menu:
 >
-![BMSUser option 4 start](../doc/images/BMSUserGuide/BMSUser_Opt_4_START.jpg)
+> ![BMSUser option 4 start](../doc/images/BMSUserGuide/BMSUser_Opt_4_START.jpg)
 >
 >
-![BMSUser option 4 empty](../doc/images/BMSUserGuide/BMSUser_Opt_4_EMPTY.jpg)
+> ![BMSUser option 4 empty](../doc/images/BMSUserGuide/BMSUser_Opt_4_EMPTY.jpg)
 >
 >
 > Assign a Customer Number that the new Account relates to, an Account
@@ -195,13 +197,13 @@ are just a few examples:
 > needs to be modified. In the example below, the Account Type has not
 > been supplied, resulting in an appropriate error message:
 >
-![BMSUser option 4 error](../doc/images/BMSUserGuide/BMSUser_Opt_4_ERROR.jpg)
+> ![BMSUser option 4 error](../doc/images/BMSUserGuide/BMSUser_Opt_4_ERROR.jpg)
 >
 >
 > Once the details pass validation, information about the new account is
 > returned (e.g. the allocated Account number, etc.):
 >
-![BMSUser option 4 success](../doc/images/BMSUserGuide/BMSUser_Opt_4_SUCCESS.jpg)
+> ![BMSUser option 4 success](../doc/images/BMSUserGuide/BMSUser_Opt_4_SUCCESS.jpg)
 >
 #### Update Account Information (option 5 from the main menu):
 
@@ -210,7 +212,7 @@ are just a few examples:
 > To update the details of an existing Account, select option 5 from the
 > main menu:
 >
-![BMSUser option 5 start](../doc/images/BMSUserGuide/BMSUser_Opt_5_START.jpg)
+> ![BMSUser option 5 start](../doc/images/BMSUserGuide/BMSUser_Opt_5_START.jpg)
 >
 
 > ![BMSUser option 5 empty](../doc/images/BMSUserGuide/BMSUser_Opt_5_EMPTY.jpg)
@@ -218,24 +220,24 @@ are just a few examples:
 >
 > and provide the account number:
 >
-![BMSUser option 5 entry](../doc/images/BMSUserGuide/BMSUser_Opt_5_ENTRY.jpg)
+> ![BMSUser option 5 entry](../doc/images/BMSUserGuide/BMSUser_Opt_5_ENTRY.jpg)
 >
 >
 > This displays the account details:
 >
-![BMSUser option 5 success](../doc/images/BMSUserGuide/BMSUser_Opt_5_SUCCESS.jpg)
+> ![BMSUser option 5 success](../doc/images/BMSUserGuide/BMSUser_Opt_5_SUCCESS.jpg)
 >
 >
 > In this case the Account Type, the Interest Rate and the Overdraft
 > Limit are the 3 fields which may be amended:
 >
-![BMSUser option 5 amend](../doc/images/BMSUserGuide/BMSUser_Opt_5_AMEND.jpg)
+> ![BMSUser option 5 amend](../doc/images/BMSUserGuide/BMSUser_Opt_5_AMEND.jpg)
 >
 >
 > This example amends the Account Type and Interest Rate, then simply
 > press pf5 to apply the changes:
 >
-![BMSUser option 5 amend2](../doc/images/BMSUserGuide/BMSUser_Opt_5_AMEND2.jpg)
+> ![BMSUser option 5 amend2](../doc/images/BMSUserGuide/BMSUser_Opt_5_AMEND2.jpg)
 >
 
 #### Credit and Debit funds to an Account (option 6 from the main menu):
@@ -245,21 +247,21 @@ are just a few examples:
 > To credit (pay in) or debit (withdraw) funds from an Account, use
 > option 6 from the main menu:
 >
-![BMSUser option 6 start](../doc/images/BMSUserGuide/BMSUser_Opt_6_START.jpg)
+> ![BMSUser option 6 start](../doc/images/BMSUserGuide/BMSUser_Opt_6_START.jpg)
 >
 >
-![BMSUser option 6 empty](../doc/images/BMSUserGuide/BMSUser_Opt_6_EMPTY.jpg)
+> ![BMSUser option 6 empty](../doc/images/BMSUserGuide/BMSUser_Opt_6_EMPTY.jpg)
 >
 >
 > and provide the account number and either + (for credit) or - (for
 > debit) followed by the amount:
 >
-![BMSUser option 6 entry](../doc/images/BMSUserGuide/BMSUser_Opt_6_ENTRY.jpg)
+> ![BMSUser option 6 entry](../doc/images/BMSUserGuide/BMSUser_Opt_6_ENTRY.jpg)
 >
 >
 > Then press enter:
 >
-![BMSUser option 6 success](../doc/images/BMSUserGuide/BMSUser_Opt_6_SUCCESS.jpg)
+> ![BMSUser option 6 success](../doc/images/BMSUserGuide/BMSUser_Opt_6_SUCCESS.jpg)
 >
 
 #### Transfer funds between Accounts (option 7 from the main menu):
@@ -268,21 +270,21 @@ are just a few examples:
 
 > To transfer funds between accounts, use option 7 from the main menu:
 >
-![BMSUser option 7 start](../doc/images/BMSUserGuide/BMSUser_Opt_7_START.jpg)
+> ![BMSUser option 7 start](../doc/images/BMSUserGuide/BMSUser_Opt_7_START.jpg)
 >
-![BMSUser option 7 empty](../doc/images/BMSUserGuide/BMSUser_Opt_7_EMPTY.jpg)
+> ![BMSUser option 7 empty](../doc/images/BMSUserGuide/BMSUser_Opt_7_EMPTY.jpg)
 >
 >
 > The transfer can be for accounts held by the same or different
 > customers. Simply enter the FROM account number, the TO account number
 > and the amount you wish to transfer:
 >
-![BMSUser option 7 empty](../doc/images/BMSUserGuide/BMSUser_Opt_7_ENTRY.jpg)
+> ![BMSUser option 7 empty](../doc/images/BMSUserGuide/BMSUser_Opt_7_ENTRY.jpg)
 >
 >
 > Then press enter:
 >
-![BMSUser option 7 success](../doc/images/BMSUserGuide/BMSUser_Opt_7_SUCCESS.jpg)
+> ![BMSUser option 7 success](../doc/images/BMSUserGuide/BMSUser_Opt_7_SUCCESS.jpg)
 >
 >
 > Upon a successful transfer the balances of the FROM and TO accounts
@@ -298,11 +300,11 @@ successfully processed transactions).
 All source code, BMS maps and copy libraries can be found in the GitHub
 repo:
 
-BMS - \> [/src/base/bms_src/](/src/base/bms_src/)
+> BMS - \> cics-banking-sample-application-cbsa/src/base/bms_src/
 >
-COBOL -\> [/src/base/cobol_src/](/src/base/cobol_src/)
+> COBOL -\> cics-banking-sample-application-cbsa/src/base/cobol_src/
 >
-Copy libs -\> [/src/base/cobol_copy/](/src/base/cobol_copy/)
+> Copy libs -\>
+> cics-banking-sample-application-cbsa/src/base/cobol_copy/
 >
-Assembler -\> [/src/base/asm_src/](/src/base/asm_src/)
-
+> Assembler -\> cics-banking-sample-application-cbsa/src/base/asm_src/
