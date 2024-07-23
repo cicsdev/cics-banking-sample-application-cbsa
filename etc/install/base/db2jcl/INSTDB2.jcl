@@ -27,7 +27,6 @@
 //*
 //* Please change DSNV12DP to the appropriate value for your installation
 //*
-//JCLLIB  JCLLIB ORDER=@DB2_HLQ@.PROCLIB
 //* This is your Db2 load library
 //JOBLIB  DD  DISP=SHR,DSN=@DB2_HLQ@.SDSNLOAD
 //GRANT   EXEC PGM=IKJEFT01,DYNAMNBR=20
@@ -40,7 +39,7 @@
 //SYSTSIN  DD  *
   DSN SYSTEM(@DB2_SUBSYSTEM@)
   RUN PROGRAM(DSNTEP2)  PLAN(@DB2_DSNTEP_PLAN@) -
-       LIB@DB2_DSNTEP_LOADLIB@') PARMS('/ALIGN(MID)')
+       LIB('@DB2_DSNTEP_LOADLIB@') PARMS('/ALIGN(MID)')
   END
 //* The following works on a standalone system
 //* The table names cannot be changed, but other
