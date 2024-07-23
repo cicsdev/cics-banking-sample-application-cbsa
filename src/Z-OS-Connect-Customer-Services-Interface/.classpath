@@ -81,6 +81,7 @@
 	<classpathentry kind="var" path="M2_REPO/org/objenesis/objenesis/3.2/objenesis-3.2.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/mockito/mockito-junit-jupiter/3.9.0/mockito-junit-jupiter-3.9.0.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/skyscreamer/jsonassert/1.5.0/jsonassert-1.5.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-test/5.3.9/spring-test-5.3.9.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/xmlunit/xmlunit-core/2.8.2/xmlunit-core-2.8.2.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/springframework/boot/spring-boot-starter-webflux/2.5.4/spring-boot-starter-webflux-2.5.4.jar"/>

@@ -25,6 +25,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.ibm.cics.cip.bank.springboot.customerservices.ConnectionInfo;
 import com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.accountenquiry.AccountEnquiryForm;
 import com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.accountenquiry.AccountEnquiryJson;
@@ -101,12 +104,15 @@ public class WebController implements WebMvcConfigurer
 
 	// Customer and account services screen
 	@GetMapping(value =
-	{ "/services", "/" })
+	{ "","/services", "/" })
 	public String showCustServices(Model model)
 	{
+
 		model.addAttribute("contextPath", "");
 		return "customerServices";
 	}
+
+
 
 	// These are numbered based on their actions; Only the first one is
 	// commented, as the rest follow the same format.
@@ -146,8 +152,7 @@ public class WebController implements WebMvcConfigurer
 
 			// Instantiating a WebClient at either the specified address or the
 			// default one
-			WebClient client = WebClient.create(
-					ConnectionInfo.getAddressAndPort() + "/inqaccz/enquiry/"
+			WebClient client = WebClient.create(ConnectionInfo.getAddressAndPort() + "/inqaccz/enquiry/"
 							+ accountEnquiryForm.getAcctNumber());
 
 			try
@@ -162,8 +167,13 @@ public class WebController implements WebMvcConfigurer
 				// Deserialise the response so it can be interacted with as a
 				// plain
 				// Java class
-				AccountEnquiryJson responseObj = new ObjectMapper()
-						.readValue(responseBody, AccountEnquiryJson.class);
+				ObjectMapper myObjectMapper = new ObjectMapper();
+				
+				myObjectMapper.enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS);
+				
+
+
+				AccountEnquiryJson responseObj = myObjectMapper.readValue(responseBody, AccountEnquiryJson.class);
 				log.info("{}", responseObj);
 
 				// Run through the checks on error codes in the method shown
@@ -235,8 +245,8 @@ public class WebController implements WebMvcConfigurer
 	{
 		if (!bindingResult.hasErrors())
 		{
-			WebClient client = WebClient.create(
-					ConnectionInfo.getAddressAndPort() + "/inqcustz/enquiry/"
+ 
+			WebClient client = WebClient.create(ConnectionInfo.getAddressAndPort() + "/inqcustz/enquiry/"
 							+ customerEnquiryForm.getCustNumber());
 
 			try
@@ -245,6 +255,7 @@ public class WebController implements WebMvcConfigurer
 
 				String responseBody = response.bodyToMono(String.class).block();
 				
+
 				CustomerEnquiryJson responseObj = new ObjectMapper()
 						.readValue(responseBody, CustomerEnquiryJson.class);
 				checkIfResponseValidEnqCust(responseObj);
@@ -784,8 +795,7 @@ public class WebController implements WebMvcConfigurer
 	{
 		if (!bindingResult.hasErrors())
 		{
-			WebClient client = WebClient.create(
-					ConnectionInfo.getAddressAndPort() + "/delacc/remove/"
+			WebClient client = WebClient.create(ConnectionInfo.getAddressAndPort() + "/delacc/remove/"
 							+ accountEnquiryForm.getAcctNumber());
 
 			try

@@ -14,45 +14,45 @@ public class UpdaccJson
 
 
 
-	@JsonProperty("CommEye")
+	@JsonProperty("COMM_EYE")
 	private String commEye;
 
-	@JsonProperty("CommCustno")
+	@JsonProperty("COMM_CUSTNO")
 	private String commCustno;
 
-	@JsonProperty("CommScode")
+	@JsonProperty("COMM_SCODE")
 	private String commSortcode;
 
-	@JsonProperty("CommAccno")
+	@JsonProperty("COMM_ACCNO")
 	private int commAccno;
 
-	@JsonProperty("CommIntRate")
+	@JsonProperty("COMM_INT_RATE")
 	private float commInterestRate;
 
-	@JsonProperty("CommOpened")
+	@JsonProperty("COMM_OPENED")
 	private String commOpened;
 
-	@JsonProperty("CommOverdraft")
+	@JsonProperty("COMM_OVERDRAFT")
 	private int commOverdraft;
 
-	@JsonProperty("CommLastStmtDt")
+	@JsonProperty("COMM_LAST_STMT_DT")
 	private String commLastStatementDate;
 
-	@JsonProperty("CommNextStmtDt")
+	@JsonProperty("COMM_NEXT_STMT_DT")
 	private String commNextStatementDate;
 
-	@JsonProperty("CommAvailBal")
+	@JsonProperty("COMM_AVAIL_BAL")
 	private float commAvailableBalance;
 
-	@JsonProperty("CommActualBal")
+	@JsonProperty("COMM_ACTUAL_BAL")
 	private float commActualBalance;
 
-	@JsonProperty("CommSuccess")
+	@JsonProperty("COMM_SUCCESS")
 	private String commSuccess;
 
 	private static final String SPACES = "        ";
 
-	@JsonProperty("CommAccType")
+	@JsonProperty("COMM_ACC_TYPE")
 	private String commAccountType = SPACES;
 
 

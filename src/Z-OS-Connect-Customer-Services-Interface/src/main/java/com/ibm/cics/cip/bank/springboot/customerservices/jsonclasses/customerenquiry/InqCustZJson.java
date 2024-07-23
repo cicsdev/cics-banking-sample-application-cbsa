@@ -13,37 +13,37 @@ public class InqCustZJson
 
 
 
-	@JsonProperty("InqCustName")
+	@JsonProperty("INQCUST_NAME")
 	private String inqcustName;
 
-	@JsonProperty("InqCustCreditScore")
+	@JsonProperty("INQCUST_CREDIT_SCORE")
 	private int inqcustCreditScore;
 
-	@JsonProperty("InqCustInqSuccess")
+	@JsonProperty("INQCUST_INQ_SUCCESS")
 	private String inqcustInqSuccess;
 
-	@JsonProperty("InqCustAddr")
+	@JsonProperty("INQCUST_ADDR")
 	private String inqcustAddress;
 
-	@JsonProperty("InqCustScode")
+	@JsonProperty("INQCUST_SCODE")
 	private int inqcustSortcode;
 
-	@JsonProperty("InqCustInqFailCd")
+	@JsonProperty("INQCUST_INQ_FAIL_CD")
 	private int inqcustInqFailCode;
 
-	@JsonProperty("InqCustDob")
+	@JsonProperty("INQCUST_DOB")
 	private InqCustDob inqCustDob;
 
-	@JsonProperty("InqCustEye")
+	@JsonProperty("INQCUST_EYE")
 	private String inqcustEye;
 
-	@JsonProperty("InqCustPcbPointer")
+	@JsonProperty("INQCUST_PCB_POINTER")
 	private String inqcustPcbPointer;
 
-	@JsonProperty("InqCustCustno")
+	@JsonProperty("INQCUST_CUSTNO")
 	private int inqcustCustno;
 
-	@JsonProperty("InqCustCsReviewDt")
+	@JsonProperty("INQCUST_CS_REVIEW_DT")
 	private InqCustReviewDate inqcustCsReviewDate;
 
 
@@ -188,7 +188,7 @@ public class InqCustZJson
 	@Override
 	public String toString()
 	{
-		return "InqCustZJson [InqCustAddr=" + inqcustAddress
+		return "INQCUST_ZJson [InqCustAddr=" + inqcustAddress
 				+ ", InqCustCreditScore=" + inqcustCreditScore
 				+ ", InqCustCsReviewDt=" + inqcustCsReviewDate
 				+ ", InqCustCustno=" + inqcustCustno + ", InqCustDob="

@@ -16,7 +16,7 @@ public class UpdateAccountJson
 
 	private static final String FLOAT_FORMAT = "%.02f";
 
-	@JsonProperty("UpdAcc")
+	@JsonProperty("UPDACC")
 	UpdaccJson updacc;
 
 

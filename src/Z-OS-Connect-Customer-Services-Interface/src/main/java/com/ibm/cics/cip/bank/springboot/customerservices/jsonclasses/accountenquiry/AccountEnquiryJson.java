@@ -16,7 +16,7 @@ public class AccountEnquiryJson
 
 	private static final String FLOAT_FORMAT = "%.02f";
 
-	@JsonProperty("InqAcc")
+	@JsonProperty("INQACC_COMMAREA")
 	private InqaccJson inqaccCommarea;
 
 

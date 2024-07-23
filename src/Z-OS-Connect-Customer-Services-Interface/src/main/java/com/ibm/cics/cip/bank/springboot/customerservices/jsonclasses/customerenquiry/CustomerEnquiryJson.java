@@ -4,15 +4,17 @@
 package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.customerenquiry;
 
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ibm.cics.cip.bank.springboot.customerservices.JsonPropertyNamingStrategy;
 import com.ibm.cics.cip.bank.springboot.customerservices.OutputFormatUtils;
 
 @JsonNaming(JsonPropertyNamingStrategy.class)
+
 public class CustomerEnquiryJson
 {
 
-
-	private InqCustZJson inqCustZ;
+	@JsonProperty("INQCUSTZ")
+	private InqCustZJson INQCUSTZ;
 
 
 	public CustomerEnquiryJson()
@@ -23,26 +25,27 @@ public class CustomerEnquiryJson
 
 	public InqCustZJson getInqCustZ()
 	{
-		return inqCustZ;
+		return INQCUSTZ;
 	}
+
 
 
 	public void setInqCustZ(InqCustZJson inqCustZIn)
 	{
-		inqCustZ = inqCustZIn;
+		INQCUSTZ = inqCustZIn;
 	}
 
 
 	@Override
 	public String toString()
 	{
-		return "CustomerEnquiryJson [InqCustZ=" + inqCustZ + "]";
+		return "CustomerEnquiryJson [INQCUSTZ=" + INQCUSTZ + "]";
 	}
 
 
 	public String toPrettyString()
 	{
-		InqCustZJson custInfo = inqCustZ;
+		InqCustZJson custInfo = INQCUSTZ;
 		String output = "";
 		output += "Customer Number:    "
 				+ OutputFormatUtils.leadingZeroes(10,

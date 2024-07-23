@@ -6,7 +6,7 @@
 ***************************************************************
 *
 * BNK1UAM
-* Update Account for CICS Banking Sample Application
+* Update Account for CICS Bank Sample Application
 *
 * Created: 12-Nov-2014
 *
@@ -26,8 +26,7 @@ BNK1UA   DFHMDI SIZE=(24,80),                                          *
          DFHMDF POS=(1,1),LENGTH=7,INITIAL='BNK1UA ',                  *
                ATTRB=(NORM,PROT),COLOR=BLUE
 COMPANY  DFHMDF POS=(1,17),LENGTH=52,ATTRB=(NORM,PROT),COLOR=RED,      *
-               INITIAL='CICS Banking Sample Application - Update Accoun*
-               t.'
+               INITIAL='CICS Bank Sample Application - Update Account.'
 ***********************************************************************
          DFHMDF POS=(3,1),LENGTH=34,ATTRB=(NORM,PROT),COLOR=TURQUOISE, *
                INITIAL='Please provide an ACCOUNT number.'

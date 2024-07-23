@@ -254,10 +254,6 @@ public class Customer
 	public Customer getCustomer(long customerNumber, int sortCode)
 	{
 		logger.entering(this.getClass().getName(), GET_CUSTOMER);
-		
-		System.out.println(this.getClass().getName() + GET_CUSTOMER + " " + customerNumber);
-		
-		
 		Customer temp = null;
 
 		customerFile.setName(FILENAME);
@@ -266,13 +262,7 @@ public class Customer
 
 		if (customerNumber == 9999999999L)
 		{
-			
-			System.out.println("Getting the last customer");
-			
 			holder = getLastCustomer();
-			
-			System.out.println("holder was " + holder);
-			
 			byte[] lastCustomerBytes;
 			if (holder != null)
 			{
@@ -283,7 +273,7 @@ public class Customer
 
 			if (lastCustomerBytes != null)
 			{
-				myCustomer = new CUSTOMER(lastCustomerBytes);
+				myCustomer = new CUSTOMER();
 			}
 			else
 			{
@@ -294,8 +284,6 @@ public class Customer
 
 		if (customerNumber > 0 && customerNumber < 9999999999L)
 		{
-			
-			System.out.println("getting not the last, not a random customer");
 			holder = new RecordHolder();
 			byte[] key = buildKey(sortCode, customerNumber);
 			try

@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/webui-1.0/static/css/main.8a1faada.css",
-    "main.js": "/webui-1.0/static/js/main.3ed43bc5.js",
+    "main.css": "/webui-1.0/static/css/main.27ea650d.css",
+    "main.js": "/webui-1.0/static/js/main.43ee80df.js",
     "static/media/IBMPlexSerif-SemiBoldItalic-Cyrillic.woff": "/webui-1.0/static/media/IBMPlexSerif-SemiBoldItalic-Cyrillic.d96e5a614e96c351c453.woff",
     "static/media/IBMPlexSerif-SemiBoldItalic-Latin1.woff": "/webui-1.0/static/media/IBMPlexSerif-SemiBoldItalic-Latin1.b691d8c0c5110ea3659e.woff",
     "static/media/IBMPlexSerif-Italic-Cyrillic.woff": "/webui-1.0/static/media/IBMPlexSerif-Italic-Cyrillic.452cc78a1baf50168631.woff",
@@ -183,11 +183,11 @@
     "static/media/IBMPlexMono-Light-Latin3.woff2": "/webui-1.0/static/media/IBMPlexMono-Light-Latin3.8a014da16bb5df1e9830.woff2",
     "static/media/IBMPlexMono-Regular-Latin3.woff2": "/webui-1.0/static/media/IBMPlexMono-Regular-Latin3.cacfd1d7dbd14067b970.woff2",
     "index.html": "/webui-1.0/index.html",
-    "main.8a1faada.css.map": "/webui-1.0/static/css/main.8a1faada.css.map",
-    "main.3ed43bc5.js.map": "/webui-1.0/static/js/main.3ed43bc5.js.map"
+    "main.27ea650d.css.map": "/webui-1.0/static/css/main.27ea650d.css.map",
+    "main.43ee80df.js.map": "/webui-1.0/static/js/main.43ee80df.js.map"
   },
   "entrypoints": [
-    "static/css/main.8a1faada.css",
-    "static/js/main.3ed43bc5.js"
+    "static/css/main.27ea650d.css",
+    "static/js/main.43ee80df.js"
   ]
 }

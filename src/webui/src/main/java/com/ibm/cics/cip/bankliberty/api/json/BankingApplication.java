@@ -1,15 +1,15 @@
 
 package com.ibm.cics.cip.bankliberty.api.json;
 
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
+import jakarta.ws.rs.core.Application;
+import jakarta.ws.rs.ApplicationPath;
 
 /**
  * Copyright IBM Corp. 2023
  *
  */
 
-@ApplicationPath("/banking")
+@ApplicationPath("banking")
 public class BankingApplication extends Application
 {
 

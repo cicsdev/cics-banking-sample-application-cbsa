@@ -11,8 +11,12 @@ public class ConnectionInfo
 
 
 	@Parameter(names =
+	{ "--scheme", "-s" }, description = "Scheme/protocol to connect with")
+	private static String scheme = "http";
+
+	@Parameter(names =
 	{ "--port", "-p" }, description = "Port to connect with")
-	private static int port = 30701;
+	private static int port = 38417;
 
 	@Parameter(names =
 	{ "--address", "--url", "-a", "-u" }, description = "Address to use")
@@ -27,7 +31,7 @@ public class ConnectionInfo
 
 	public static String getAddressAndPort()
 	{
-		return address + ":" + port;
+		return scheme + "://" + address + ":" + port;
 	}
 
 
@@ -58,6 +62,17 @@ public class ConnectionInfo
 	public static void setAddress(String address)
 	{
 		ConnectionInfo.address = address;
+	}
+
+	public static String getScheme()
+	{
+		return scheme;
+	}
+
+
+	public static void setScheme(String scheme)
+	{
+		ConnectionInfo.scheme = scheme;
 	}
 
 }

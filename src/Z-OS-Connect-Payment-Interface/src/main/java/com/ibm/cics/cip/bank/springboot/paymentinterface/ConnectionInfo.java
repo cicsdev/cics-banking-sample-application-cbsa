@@ -8,7 +8,17 @@ import com.beust.jcommander.Parameter;
 public class ConnectionInfo
 {
 
+@Parameter(names =
+	{ "--scheme", "-s" }, description = "Scheme/protocol to connect with")
+	private static String scheme = "http";
 
+	@Parameter(names =
+	{ "--port", "-p" }, description = "Port to connect with")
+	private static int port = 38417;
+
+	@Parameter(names =
+	{ "--address", "--url", "-a", "-u" }, description = "Address to use")
+	private static String address = "127.0.0.1";
 
 
 	private ConnectionInfo()
@@ -16,18 +26,10 @@ public class ConnectionInfo
 		throw new IllegalStateException("Static only");
 	}
 
-	@Parameter(names =
-	{ "--port", "-p" }, description = "Port to connect with")
-	private static int port = 30701;
-
-	@Parameter(names =
-	{ "--address", "--url", "-a", "-u" }, description = "Address to use")
-	private static String address = "localhost";
-
 
 	public static String getAddressAndPort()
 	{
-		return address + ":" + port;
+		return scheme + "://" + address + ":" + port;
 	}
 
 
@@ -58,6 +60,17 @@ public class ConnectionInfo
 	public static void setAddress(String address)
 	{
 		ConnectionInfo.address = address;
+	}
+
+	public static String getScheme()
+	{
+		return scheme;
+	}
+
+
+	public static void setScheme(String scheme)
+	{
+		ConnectionInfo.scheme = scheme;
 	}
 
 }
