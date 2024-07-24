@@ -24,7 +24,7 @@ These instructions detail the steps required to:
 
 ### Assumptions: 
 
--   A CICS region (running CIC TS 6.15 or later) is available, and the
+-   A CICS region (running CIC TS 6.1 or later) is available, and the
     CBSA base/COBOL installation has been performed.
 
 -   A Db2 subsystem (v12 or greater) is available.
@@ -143,7 +143,7 @@ Liberty Application Server. In this example, it is here, and this is an
 ASCII file. You need to use 3.17 (the Unix Directory List Facility) and
 the EA (Edit Ascii File) option to edit it.
 
-> /u/cicsuser/CICSTS56/CBSAWLP/wlp/usr/servers/defaultServer/server.xml
+> /u/cicsuser/CICSTS61/CBSAWLP/wlp/usr/servers/defaultServer/server.xml
 
 
 Add the two applications by adding these lines:
@@ -158,15 +158,15 @@ The WAR files have installed and now we must wait for the Spring Boot
 applications to start. Check the *messages.log* file, in this example
 these are found in:
 
-> /u/cicsuser/CICSTS56/CBSAWLP/wlp/usr/servers/defaultServer/logs
+> /u/cicsuser/CICSTS61/CBSAWLP/wlp/usr/servers/defaultServer/logs
 >
 > ![Spring](../doc/images/springBootUI/SpringBoot_Spring.jpg)
 
 This is a sign that things are working, and the applications are
 starting.
 
-Message CWWKZ0001I is issued several minutes later at which point you
-can use the applications.
+Message CWWKZ0001I is issued once the applications have started at which point you
+can use them.
 
 > Root WebApplicationContext: initialization completed in 180700 ms
 >

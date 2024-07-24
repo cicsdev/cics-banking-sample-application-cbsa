@@ -223,21 +223,20 @@ data in it to start with).
 
 1. Execute job CBSA.JCL.INSTALL(**HBANKCSD**) to update the DFHCSD with the
 CBSA definitions and add the CSD GROUP(BANK) into a **LIST** called
-**CICSTS56** (which is used in the SIT parms for the CICS region).
+**CICSTS61** (which is used in the SIT parms for the CICS region).
 
->> **NOTE:** This job updates an existing CSD called DFH560.CICS.DFHCSD and
->> adds the CBSA resource definitions to it. You may need to amend job
+>> **NOTE:** This job updates an existing CSD called @CSD_PREFIX@.DFHCSD and
+>> adds the CBSA resource definitions to it. You need to amend job
 >> HBANKCSD with the name of your CSD. All of the CSD definitions needed
 >> for CBSA are located in CBSA.JCL.INSTALL(BANK).
 >> You may also wish to edit the BANK member if you should need to use a
 >> different port number for the IPIC connection between the CICS region
 >> and the zOS Connect server (ZOSEE) - we used port number 30709).
 >> Verify that the name of the DB2CONN matches your requirements, and that it connects to the correct Db2 subsystem.
+>> Verify that the plan name of the DB2CONN and DB2ENTRY definitions match your requirements.
 
-2. Check job CBSA.JCL.INSTALL(**CICSTS56**), this is an example CICS region.  You will have you own JCL or PROC
-to start up your own CICS region. You may need to extrapolate
-information from this member to include into your own CICS region
-startup JCL. The most pertinent things are:
+
+2. Check your CICS region JCL and edit as appropriate. The most pertinent things are:
 
 >> -   Inclusion of the CBSA.CICSBSA.LOADLIB in the DFHRPL
 >> 
@@ -250,7 +249,7 @@ most pertinent things from the SIT are:
 
 >> DB2CONN=YES
 >> 
->> GRPLIST=(XYZLIST,**CICSTS56**) - ensure that you include the CICSTS56
+>> GRPLIST=(XYZLIST,**CICSTS61**) - ensure that you include the CICSTS61
 >> LIST, created above, into your GRPLIST.
 
 ## 
