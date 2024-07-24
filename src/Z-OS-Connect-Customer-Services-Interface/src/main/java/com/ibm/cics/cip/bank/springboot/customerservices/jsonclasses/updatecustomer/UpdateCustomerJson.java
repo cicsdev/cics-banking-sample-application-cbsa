@@ -14,7 +14,7 @@ public class UpdateCustomerJson
 
 
 
-	@JsonProperty("UpdCust")
+	@JsonProperty("UPDCUST")
 	UpdcustJson updcust;
 
 

@@ -12,13 +12,13 @@ public class InqCustDob
 {
 
 
-	@JsonProperty("InqCustDobYyyy")
+	@JsonProperty("INQCUST_DOB_YYYY")
 	private int inqcustDobYyyy;
 
-	@JsonProperty("InqCustDobDd")
+	@JsonProperty("INQCUST_DOB_DD")
 	private int inqcustDobDd;
 
-	@JsonProperty("InqCustDobMm")
+	@JsonProperty("INQCUST_DOB_MM")
 	private int inqcustDobMm;
 
 

@@ -13,13 +13,13 @@ public class InqCustReviewDate
 
 
 
-	@JsonProperty("InqCustCsReviewYyyy")
+	@JsonProperty("INQCUST_CS_REVIEW_YYYY")
 	private int inqcustCsReviewYyyy;
 
-	@JsonProperty("InqCustCsReviewMm")
+	@JsonProperty("INQCUST_CS_REVIEW_MM")
 	private int inqcustCsReviewMm;
 
-	@JsonProperty("InqCustCsReviewDd")
+	@JsonProperty("INQCUST_CS_REVIEW_DD")
 	private int inqcustCsReviewDd;
 
 

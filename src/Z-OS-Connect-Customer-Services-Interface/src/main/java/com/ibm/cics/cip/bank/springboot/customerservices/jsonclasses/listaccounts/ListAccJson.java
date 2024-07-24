@@ -12,7 +12,7 @@ public class ListAccJson
 {
 
 
-	@JsonProperty("InqAccZ")
+	@JsonProperty("INQACCCZ")
 	private InqAccczJson inqAcccz;
 
 

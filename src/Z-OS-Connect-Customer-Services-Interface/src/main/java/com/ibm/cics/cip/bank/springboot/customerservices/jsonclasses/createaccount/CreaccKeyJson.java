@@ -12,10 +12,10 @@ public class CreaccKeyJson
 {
 
 
-	@JsonProperty("CommSortcode")
+	@JsonProperty("COMM_SORTCODE")
 	private int commSortcode = 0;
 
-	@JsonProperty("CommNumber")
+	@JsonProperty("COMM_NUMBER")
 	private int commNumber = 0;
 
 

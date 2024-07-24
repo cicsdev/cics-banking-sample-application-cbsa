@@ -5,31 +5,32 @@
 //*
 //*
 //*
-//* Please change @DB2_HLQ@  to DSNC10
+//* Please change @DB2_HLQ@  
 //*  (to the high level qualifiers of your
 //* system's DB2 datasets (SDSNLOAD et cetera)
 //*
-//* Please change @BANK_DBRMLIB@ to @BANK_DBRMLIB@
+//* Please change @BANK_DBRMLIB@ 
 //* (to the name you chose
 //* for the DBRMLIB provided by Hursley Bank)
 //*
-//* Please change @DB2_SUBSYSTEM@ to DBCG
+//* Please change @DB2_SUBSYSTEM@ 
 //* (to the name of your chosen DB2
 //* subsystem (which must be running on the same MVS image as this
-//* batch job)
+//* batch job) for example DBCG
 //*
-//* Please change @BANK_PACKAGE@ to PCBSA
+//* Please change @BANK_PACKAGE@ 
 //* to the name you have chosen for the
 //* package name in DB2, for example PHBANK.
 //*
-//* Please change @DB2_OWNER@ to IBMUSER
+//* Please change @DB2_OWNER@ 
 //* to the userid that will own the DB2
 //* resources
 //*
-//* Please change @BANK_PLAN@ to CBSA
+//* Please change @BANK_PLAN@ to 
 //*  to the desired DB2 plan name
+//* This must match the CSD and the Db2 Install job
 //*
-//* Please change @DB2_DSNTEP_PLAN@ to DSNTEP12
+//* Please change @DB2_DSNTEP_PLAN@
 //* to the name of the plan that was
 //* used for the DSNTEP2 utility program
 //*
@@ -130,7 +131,7 @@ RUN PROGRAM(DSNTEP2) PLAN(@DB2_DSNTEP_PLAN@) -
 LIB('@DB2_DSNTEP_LOADLIB@')
 //SYSIN DD *
  SET CURRENT SQLID = '@DB2_OWNER@';
- GRANT EXECUTE ON PLAN CBSA TO @BANK_USER@;
+ GRANT EXECUTE ON PLAN @BANK_PLAN@ TO @BANK_USER@;
  GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE
      @DB2_OWNER@.ACCOUNT TO @BANK_USER@;
  GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE

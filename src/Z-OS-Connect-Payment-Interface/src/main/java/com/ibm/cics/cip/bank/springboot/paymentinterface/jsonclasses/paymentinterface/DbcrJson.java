@@ -4,6 +4,7 @@
 package com.ibm.cics.cip.bank.springboot.paymentinterface.jsonclasses.paymentinterface;
 
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ibm.cics.cip.bank.springboot.paymentinterface.JsonPropertyNamingStrategy;
 
 @JsonNaming(JsonPropertyNamingStrategy.class)
@@ -11,21 +12,28 @@ public class DbcrJson
 {
 
 
-
+	@JsonProperty("COMM_ACCNO")
 	private String commAccno;
 
+	@JsonProperty("COMM_AMT")
 	private float commAmt;
 
+	@JsonProperty("COMM_SORTC")
 	private int commSortC = 0;
 
+	@JsonProperty("COMM_AV_BAL")
 	private int commAvBal = 0;
 
+	@JsonProperty("COMM_ACT_BAL")
 	private int commActBal = 0;
 
+	@JsonProperty("COMM_ORIGIN")
 	private OriginJson commOrigin;
 
+	@JsonProperty("COMM_SUCCESS")
 	private String commSuccess = " ";
 
+	@JsonProperty("COMM_FAIL_CODE")
 	private String commFailCode = " ";
 
 

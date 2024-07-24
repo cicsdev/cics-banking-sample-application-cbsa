@@ -6,8 +6,8 @@
 ***************************************************************
 *
 * BNKB2M
-* Transfer an amount from one account to another account for
-* CICS Banking Sample Application
+* Transfer an amount from one account to another account for   
+* CICS Bank Sample Application
 *
 * Created: 12-Nov-2019
 *
@@ -28,8 +28,7 @@ BNK1B2   DFHMDI SIZE=(24,80),                                          *
          DFHMDF POS=(1,1),LENGTH=7,INITIAL='BNK1B2',                   *
                ATTRB=(ASKIP,NORM),COLOR=BLUE
 COMPANY  DFHMDF POS=(1,15),LENGTH=58,COLOR=RED,                        *
-               INITIAL='CICS Banking Sample Application - Transfer Fund*
-               s',                                                     *
+               INITIAL='CICS Bank Sample Application - Transfer Funds',*
                ATTRB=(PROT,NORM)
          DFHMDF POS=(3,1),LENGTH=15,INITIAL='Transfer funds',          *
                ATTRB=(ASKIP,NORM),HILIGHT=OFF,COLOR=NEUTRAL

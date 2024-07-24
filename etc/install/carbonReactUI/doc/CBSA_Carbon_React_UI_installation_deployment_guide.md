@@ -8,13 +8,13 @@ of the necessary files, data etc.
 This document is for the Carbon React UI deployment/installation. It
 assumes that the installer already has:
 
--   a CICS region (running CICS TS 5.4 or greater)
+-   a CICS region (running CICS TS 6.1 or greater)
 
 -   a Db2 subsystem (v12 or greater)
 
 -   the CBSA base/COBOL installed in the CICS region already
 
--   Java SE 11.0.17 or later. It is possible to use with Java 11.0.16 but this requires a workaround which is detailed below.
+-   Java 17
 
 These instructions detail the steps required to:
 - [Set up the OMVS Segment](#OMVS-Segment)
@@ -38,7 +38,7 @@ These instructions detail the steps required to:
     amended accordingly for different versions of CICS. In particular, verify the "BOM" for CICS is correct
     for your version of CICS.
 
-- Java SE 11 on the workstation
+- Java 17 on the workstation
 
 -   The hostname, port number, userid and CICS TS version may be
     different when you install/deploy into your own environment. We
@@ -133,7 +133,7 @@ We need a JVMSERVER resource.
 4.  The copied DFHWLP.jvmprofile will need to be edited.
 
   a.  Ensure that JAVA_HOME is set to the appropriate level of java (in
-      our case Java 11):
+      our case Java 17):
  
 `JAVA_HOME=/usr/lpp/java/current_64/`
 
@@ -150,7 +150,7 @@ c.  The timeout value should be set to a large value.:
 d.  Add the following to the JVM profile to add support for Db2:
 
 
-`-Dcom.ibm.cics.jvmserver.wlp.jdbc.driver.location=/usr/lpp/db2c10/jdbc/`
+`-Dcom.ibm.cics.jvmserver.wlp.jdbc.driver.location=/usr/lpp/db2c12/jdbc/`
 
 `-Ddb2.jcc.currentSchema=IBMUSER`
 
@@ -172,11 +172,7 @@ f.  WORK_DIR must be set to a directory that the CICS region userid
 
 `/u/cicsuser/`
 
-g. At CICS TS 5.5 and CICS TS 5.6, add the following to the JVM profile to prevent CICS adding "wab" support.
-
-`-Dcom.ibm.cics.jvmserver.wlp.wab=false`
-
-h. Ensure that the Time Zone is set correctly, otherwise Java and COBOL will not be using the same clock. This is done by specifying TZ and then the correct value. The correct value can be obtained by entering UNIX Systems Services and issuing the command:
+g. Ensure that the Time Zone is set correctly, otherwise Java and COBOL will not be using the same clock. This is done by specifying TZ and then the correct value. The correct value can be obtained by entering UNIX Systems Services and issuing the command:
 
 `echo $TZ`
 
@@ -184,9 +180,6 @@ h. Ensure that the Time Zone is set correctly, otherwise Java and COBOL will not
 
 `TZ=CST6CDT`
 
-i. If you are using Java 11.0.16, you need to add Db2 libraries to your LIBPATH. An example is shown below:
-
-`LIBPATH_SUFFIX=/usr/lpp/db2d10/jdbc/lib`
 
 
 

@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Date;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 
 import com.ibm.cics.cip.bankliberty.api.json.AccountsResource;
 import com.ibm.cics.cip.bankliberty.api.json.SortCodeResource;

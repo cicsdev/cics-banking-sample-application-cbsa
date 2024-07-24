@@ -7,8 +7,11 @@
 The Customer Services interface is a Spring Boot application, which can
 drive back-end banking data, via a series of RESTful API calls, made to
 a zOS Connect server, which in turn, routes the requests to the CICS
-region. Please refer to [CBSA RESTful API guide](CBSA_Restful_API_guide.md).
+region. Please refer to the GitHub repo:
 
+cicsdev/cics-banking-sample-application-cbsa/etc/usage/sprintBoot/doc
+
+for the CBSA RESTful API guide.
 
 ### The business justification/usage scenario for the Customer Services interface:
 
@@ -20,11 +23,17 @@ the queue busters to become a target for robbery, so the tasks that they
 can perform (via the Customer Services interface) are more
 administrative in nature. For handling money (paying it in, taking it
 out, transferring it or dealing with cheques) the customer will still
-need to see a CBSA Bank Teller who will utilise the BMS or Carbon React UI
+need to see a CBSA Bank Teller who will utilise the BMS or Liberty
 interface to perform those functions.
 
 Further information about the Teller's interfaces can be found in the
-[BMS User Guide](/etc/usage/base/doc/CBSA_BMS_User_Guide.md) and the [Carbon React UI User Guide](/etc/usage/carbonReactUI/doc/CBSA_Carbon_React_UI_User_Guide.md)
+BMS User Guide in the GitHub repo:
+
+> cicsdev/cics-banking-sample-application-cbsa/etc/usage/base/doc
+
+and the Liberty UI User Guide:
+
+> cicsdev/cics-banking-sample-application-cbsa/etc/usage/libertyUI/doc
 
 Queue busters can attend to things like:
 
@@ -50,7 +59,7 @@ with the source code etc. to allow the RESTful API to be used straight
 from the box.
 
 The functionality in this interface, mimics most functions provided in
-the BMS and Carbon React UI interfaces (as used by the Teller).
+the BMS and Liberty UI interfaces (as used by the Teller).
 
 ### Accessing the Customer Services Interface:
 

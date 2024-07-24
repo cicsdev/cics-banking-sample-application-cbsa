@@ -6,7 +6,7 @@
 ***************************************************************
 *
 * BNK1CAM
-* Create Account for CICS Banking Sample Application
+* Create Account for CICS Bank Sample Application
 *
 * Created: 12-Nov-2015
 *
@@ -26,8 +26,7 @@ BNK1CA   DFHMDI SIZE=(24,80),                                          *
          DFHMDF POS=(1,1),LENGTH=7,INITIAL='BNK1CA ',                  *
                ATTRB=(PROT,NORM),COLOR=BLUE
 COMPANY  DFHMDF POS=(1,18),LENGTH=58,ATTRB=(NORM,PROT),COLOR=RED,      *
-               INITIAL='CICS Banking Sample Application- Create Account*
-               .'
+               INITIAL='CICS Bank Sample Application- Create Account. '
 ***********************************************************************
          DFHMDF POS=(3,1),LENGTH=57,ATTRB=(NORM,PROT),COLOR=TURQUOISE, *
                INITIAL='Please provide the requested information and pr*
@@ -44,7 +43,7 @@ ACCTYP   DFHMDF POS=(7,23),LENGTH=8,ATTRB=(NORM,UNPROT,FSET),          *
          DFHMDF POS=(7,32),LENGTH=1,ATTRB=(PROT,ASKIP)
          DFHMDF POS=(8,1),LENGTH=18,ATTRB=(NORM,PROT),COLOR=TURQUOISE, *
                INITIAL='Interest Rate    :'
-INTRT    DFHMDF POS=(8,23),LENGTH=7,ATTRB=(NORM,FSET,UNPROT),          *
+INTRT    DFHMDF POS=(8,23),LENGTH=7,ATTRB=(NORM,NUM,FSET,UNPROT),      *
                COLOR=GREEN,INITIAL='0000.00',                          *
                HILIGHT=UNDERLINE
          DFHMDF POS=(8,31),LENGTH=1,ATTRB=(PROT,ASKIP)

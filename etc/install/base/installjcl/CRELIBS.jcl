@@ -3,7 +3,8 @@
 //* Copyright IBM Corp. 2023
 //*
 //*
-// JCLLIB ORDER=CBSA.JCL.INSTALL                                        00020000
+// JCLLIB ORDER=CBSA.JCL.INSTALL
+// SET HLQ=CBSA
 //IEFBR14 EXEC PGM=IEFBR14                                              00030000
 // INCLUDE MEMBER=CREDB2L                                               00040003
 // INCLUDE MEMBER=CREL001                                               00041003

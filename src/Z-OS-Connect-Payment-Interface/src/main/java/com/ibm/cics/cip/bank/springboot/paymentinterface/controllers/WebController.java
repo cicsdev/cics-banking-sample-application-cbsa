@@ -48,7 +48,7 @@ public class WebController implements WebMvcConfigurer
 
 
 	// Payment Interface
-	@GetMapping("/")
+	@GetMapping(value={"/",""})
 	public String showForm(TransferForm personForm)
 	{
 		return FORM_NAME;

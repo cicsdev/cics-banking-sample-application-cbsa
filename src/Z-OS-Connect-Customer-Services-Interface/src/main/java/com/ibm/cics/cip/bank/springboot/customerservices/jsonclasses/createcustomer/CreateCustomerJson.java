@@ -13,7 +13,7 @@ public class CreateCustomerJson
 {
 
 
-	@JsonProperty("CreCust")
+	@JsonProperty("CRECUST")
 	private CrecustJson creCust;
 
 

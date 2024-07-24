@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+        Copyright IBM Corp. 2023
+
+-->
+<server description="new server">
+
+    <!-- Enable features -->
+    <featureManager>
+        <feature>zosconnect:zosConnect-2.0</feature>
+        <feature>zosconnect:cicsService-1.0</feature>          
+        <feature>zosconnect:zosConnectCommands-1.0</feature>
+    </featureManager>
+
+    <keyStore id="defaultKeyStore" password="Liberty"/>
+
+    <webAppSecurity allowFailOverToBasicAuth="true" />
+
+    <basicRegistry id="basic1" realm="zosConnect">
+     <user name="ibmuser" password="SYS1" />
+    </basicRegistry>
+
+    <authorization-roles id="zos.connect.access.roles">
+     <security-role name="zosConnectAccess">
+      <user name="ibmuser"/>
+     </security-role>
+    </authorization-roles>
+
+    <!-- To access this server from a remote client add a host attribute to the following element, e.g. host="*" -->
+    <httpEndpoint id="defaultHttpEndpoint"
+                  host="*"
+                  httpPort="30701"
+                  httpsPort="30702" />
+
+    <!-- add cors to allow cross origin access, e.g. when using swagger UI to fetch swagger doc from zOS Connect Enterprise Edition  -->
+    <cors id="defaultCORSConfig"
+          domain="/"
+          allowedOrigins="*"
+          allowedMethods="GET, POST, PUT, DELETE, OPTIONS"
+          allowedHeaders="Origin, Content-Type, Authorization"
+          allowCredentials="true"
+          maxAge="3600"/>
+
+	<!-- NOTE: Disabling automatic polling for changes to configuration files,
+	     deployed services and APIs is a prudent option for z/OS Connect EE.
+		 Polling might be convenient for iterative development and test
+		 systems, but not for production.
+
+	     Configuration elements that can drive significant polling activity by
+		 default are specified below to explicitly disable automatic polling.
+		 Further element types to consider for polling interval include
+		 zosconnect_zosConnectDataXform (default 2 seconds) and
+		 keyStore (default 500 milliseconds).
+		
+		 Consider setting the updateTrigger attribute to "polled" if changes
+		 to associated resources need to be picked up automatically, and tune
+		 the polling interval accordingly. The attribute that controls polling
+		 frequency for each of these elements is included, together with its
+		 associated default value.
+    -->
+
+	<!-- config requires updateTrigger="mbean" for REFRESH command support -->
+	<config updateTrigger="mbean" monitorInterval="500"/>
+
+    <!-- zosConnect APIs -->
+    <zosconnect_zosConnectAPIs updateTrigger="disabled" pollingRate="5s"/>	
+	
+    <!-- zosConnect Services -->
+	<zosconnect_services updateTrigger="disabled" pollingRate="5s"/>
+
+	<!-- applicationMonitor is not applicable for zCEE servers -->
+	<applicationMonitor updateTrigger="disabled" dropinsEnabled="false"/>
+	
+	<zosconnect_zosConnectManager requireAuth="false" requireSecure="false" setUTF8ResponseEncoding="true"/>
+ 
+    <zosconnect_cicsIpicConnection id="cicsConn" host="localhost" port="30709" />
+	
+
+</server>

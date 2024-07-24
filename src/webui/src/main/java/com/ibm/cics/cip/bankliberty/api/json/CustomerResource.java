@@ -15,17 +15,19 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.Consumes;
+
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.QueryParam;
+
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 import com.ibm.cics.cip.bankliberty.web.vsam.Customer;
 import com.ibm.cics.server.InvalidRequestException;
@@ -33,7 +35,7 @@ import com.ibm.cics.server.Task;
 import com.ibm.json.java.JSONArray;
 import com.ibm.json.java.JSONObject;
 
-@Path("/customer")
+@Path("customer")
 public class CustomerResource
 {
 
@@ -490,10 +492,6 @@ public class CustomerResource
 	{
 		logger.entering(this.getClass().getName(),
 				"getCustomerInternal for customerNumber " + id);
-		
-		System.out.println(this.getClass().getName() +
-				"getCustomerInternal for customerNumber " + id);
-		
 		Integer sortCode = this.getSortCode();
 
 		JSONObject response = new JSONObject();
@@ -513,14 +511,8 @@ public class CustomerResource
 
 		com.ibm.cics.cip.bankliberty.web.vsam.Customer vsamCustomer = new com.ibm.cics.cip.bankliberty.web.vsam.Customer();
 		vsamCustomer = vsamCustomer.getCustomer(id, sortCode.intValue());
-		
-		System.out.println("vsamCustomer is " + vsamCustomer);
-		
 		if (vsamCustomer != null)
 		{
-			
-			System.out.println("vsamCustomer name is " + vsamCustomer.getName());
-			
 			response.put(JSON_SORT_CODE, vsamCustomer.getSortcode().trim());
 			response.put(JSON_ID, vsamCustomer.getCustomerNumber().trim());
 			response.put(JSON_CUSTOMER_NAME, vsamCustomer.getName().trim());

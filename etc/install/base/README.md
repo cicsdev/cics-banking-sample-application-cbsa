@@ -2,27 +2,27 @@
 
 Everything needed to deploy and build the COBOL and z/OS Connect portions of the application.
 
-[aarfiles](./aarfiles/README.md) and [sarfiles](./sarfiles/README.md)
+# aarfiles and sarfiles
 
 The API and Service archives respectively, to be deployed to z/OS Connect.
 
-[buildjcl](./buildjcl/README.md)
+# buildjcl
 
 All the scripts (Job Control Language jobs) to compile and bind the COBOL programs.
 
-[db2jcl](./db2jcl/README.md)
+# db2jcl
 
 The scripts (Job Control Language and SQL) to build the Db2 infrastructure.
 
-[doc](./doc/CBSA_base_cobol_installation_instructions.md)
+# doc
 
-Full base application installation instructions.
+Documentation.
 
-[installjcl](./installjcl/README.md)
+# installjcl
 
 The scripts (Job Control Language jobs) to build the data and resources for the application.
 
-[linkeditjcl](./linkeditjcl/README.md)
+# linkeditjcl
 
 The inputs for the binder. You should not need to edit these.
 

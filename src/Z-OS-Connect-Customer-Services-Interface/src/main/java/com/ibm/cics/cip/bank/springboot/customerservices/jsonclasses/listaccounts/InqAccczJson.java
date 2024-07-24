@@ -15,22 +15,22 @@ public class InqAccczJson
 
 
 
-	@JsonProperty("CommFailCode")
+	@JsonProperty("COMM_FAIL_CODE")
 	private int commFailCode;
 
-	@JsonProperty("CustomerNumber")
+	@JsonProperty("CUSTOMER_NUMBER")
 	private int customerNumber;
 
-	@JsonProperty("AccountDetails")
+	@JsonProperty("ACCOUNT_DETAILS")
 	private List<AccountDetails> accountDetails;
 
-	@JsonProperty("CommPcbPointer")
+	@JsonProperty("COMM_PCB_POINTER")
 	private String commPcbPointer;
 
-	@JsonProperty("CustomerFound")
+	@JsonProperty("CUSTOMER_FOUND")
 	private String customerFound;
 
-	@JsonProperty("CommSuccess")
+	@JsonProperty("COMM_SUCCESS")
 	private String commSuccess;
 
 	

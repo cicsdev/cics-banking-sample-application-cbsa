@@ -16,40 +16,40 @@ public class AccountDetails
 
 	private static final String FLOAT_FORMAT = "%.02f";
 
-	@JsonProperty("CommActualBal")
+	@JsonProperty("COMM_ACTUAL_BAL")
 	private float commActualBalance;
 
-	@JsonProperty("CommAvailBal")
+	@JsonProperty("COMM_AVAIL_BAL")
 	private float commAvailableBalance;
 
-	@JsonProperty("CommScode")
+	@JsonProperty("COMM_SCODE")
 	private int commSortcode;
 
-	@JsonProperty("CommIntRate")
+	@JsonProperty("COMM_INT_RATE")
 	private float commInterestRate;
 
-	@JsonProperty("CommEye")
+	@JsonProperty("COMM_EYE")
 	private String commEye;
 
-	@JsonProperty("CommOpened")
+	@JsonProperty("COMM_OPENED")
 	private int commOpened;
 
-	@JsonProperty("CommCustno")
+	@JsonProperty("COMM_CUSTNO")
 	private int commCustno;
 
-	@JsonProperty("CommNextStmtDt")
+	@JsonProperty("COMM_NEXT_STMT_DT")
 	private int commNextStatementDate;
 
-	@JsonProperty("CommAccType")
+	@JsonProperty("COMM_ACC_TYPE")
 	private String commAccType;
 
-	@JsonProperty("CommOverdraft")
+	@JsonProperty("COMM_OVERDRAFT")
 	private int commOverdraft;
 
-	@JsonProperty("CommAccno")
+	@JsonProperty("COMM_ACCNO")
 	private int commAccno;
 
-	@JsonProperty("CommLastStmtDt")
+	@JsonProperty("COMM_LAST_STMT_DT")
 	private int commLastStatementDate;
 
 
