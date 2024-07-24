@@ -71,16 +71,16 @@ For more information please refer to:
 
 for the base/COBOL installation documentation.
 
-## The Liberty UI installation architecture diagram:
+## The Carbon React UI installation architecture diagram:
 
-The diagram below shows the addition of the Liberty UI. This utilises a
+The diagram below shows the addition of the Carbon React UI. This utilises a
 JVM server running in the CICS region.
 
-![libertyUI architecture diagram](../doc/images/Architecture/LibertyUI_CBSA_architecture_diagram.jpg)
+![carbonReactUI architecture diagram](../doc/images/Architecture/CarbonReactUI_CBSA_architecture_diagram.jpg)
 
-### Assumptions & Requirements for the Liberty UI: 
+### Assumptions & Requirements for the Carbon React UI: 
 
-The Liberty User interface assumes:
+The Carbon React User interface assumes:
 
 -   That the base/COBOL installation has already been successfully
     installed.
@@ -91,13 +91,13 @@ The Liberty User interface assumes:
 
 For more information please refer to:
 
-> <https://github.com/cicsdev/cics-banking-sample-application-cbsa/etc/install/libertyUI/doc>
+> <https://github.com/cicsdev/cics-banking-sample-application-cbsa/blob/main/etc/install/carbonReactUI/doc/CBSA_Carbon_React_UI_installation_deployment_guide.md>
 
-for the Liberty UI installation documentation and:
+for the Carbon React UI installation documentation and:
 
-> <https://github.com/cicsdev/cics-banking-sample-application-cbsa/etc/usage/libertyUI/doc>
+> <https://github.com/cicsdev/cics-banking-sample-application-cbsa/blob/main/etc/usage/carbonReactUI/doc/CBSA_Carbon_React_UI_User_Guide.md>
 
-for the Liberty UI guide.
+for the Carbon React UI guide.
 
 ## The Payment and Customer Services (Spring Boot) User Interface installation architecture diagram:
 
