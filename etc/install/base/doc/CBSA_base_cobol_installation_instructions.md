@@ -12,7 +12,7 @@ for the Liberty UI and the Payment and Customer Services interfaces.
 This document is the base/COBOL installation. It assumes that the
 installer already has:
 
--   a CICS region (running CICS TS 5.5 or greater)
+-   a CICS region (running CICS TS 6.1 or greater)
 
 -   a Db2 subsystem (v12 or greater)
 
@@ -53,8 +53,7 @@ The CBSA GitHub repo can be found at:
 There are some assumptions within this document, these are:
 
 > a. That a CICS region and the underlying libraries for that region
-> are already installed in the host environment. Within this document,
-> the CICS region is called **CICSTS56.**
+> are already installed in the host environment.
 >
 > b. That a Db2 subsystem is available in the host environment. The Db2
 > subsystem used, in this document, is called **DBCG**.
@@ -83,7 +82,7 @@ downloading it from the repo folder:
 more information).
 
 **NOTE 2** - The last line in **server.xml** references the connection
-between the z/OS Connect server and the CICSTS56 CICS system and it
+between the z/OS Connect server and the CICS system and it
 utilises port ***30709***:
 
 >\<zosconnect_cicsIpicConnection id=\"cicsConn\"

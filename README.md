@@ -52,7 +52,7 @@ The interfaces are designed to exploit the underlying banking functionality, whi
 > Please refer to the [Architecture documentation](https://github.com/cicsdev/cics-banking-sample-application-cbsa/tree/main/doc/CBSA_Architecture_guide.md) for more detailed information.
 
 ## Requirements
-- An existing CICS TS region running at V5.4 or later
+- An existing CICS TS region running at V6.1 or later
 - A Db2 subsystem (V12 or later)
 - A Liberty JVM server in CICS (set up and configured during the installation process) for the Liberty UI and Spring Boot interfaces
 - Java 17
