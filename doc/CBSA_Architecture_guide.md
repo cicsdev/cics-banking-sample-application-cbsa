@@ -30,7 +30,7 @@ The architecture diagram for base/COBOL looks as follows:
 
 The base/COBOL installation assumes that the installer has:
 
--   A CICS region (running CICS TS 5.5 or greater)
+-   A CICS region (running CICS TS 6.1 or greater)
 
 -   A Db2 subsystem (v12 or greater)
 
@@ -87,7 +87,7 @@ The Liberty User interface assumes:
 
 -   That there is a Liberty JVM server executing in the CICS region
 
--   Java 17 or later
+-   Java 17
 
 For more information please refer to:
 

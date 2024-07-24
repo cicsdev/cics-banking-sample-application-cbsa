@@ -8,13 +8,13 @@ of the necessary files, data etc.
 This document is for the Carbon React UI deployment/installation. It
 assumes that the installer already has:
 
--   a CICS region (running CICS TS 5.4 or greater)
+-   a CICS region (running CICS TS 6.1 or greater)
 
 -   a Db2 subsystem (v12 or greater)
 
 -   the CBSA base/COBOL installed in the CICS region already
 
--   Java SE 11.0.17 or later. It is possible to use with Java 11.0.16 but this requires a workaround which is detailed below.
+-   Java 17
 
 These instructions detail the steps required to:
 - [Set up the OMVS Segment](#OMVS-Segment)
