@@ -20,7 +20,7 @@ SECTION_START
 
 The following third party components might be provided for use with the Program:
 
-tslib, tslib, tslib
+tslib
 
 Copyright (C) YEAR by AUTHOR EMAIL
 
@@ -1848,7 +1848,5 @@ END OF NOTICES AND INFORMATION
 --------------------------------------------------------------------------------
 
 
-L/N: L-xxxx-nnnnnn
-D/N: L-xxxx-nnnnnn
-P/N: L-xxxx-nnnnnn
+
 
