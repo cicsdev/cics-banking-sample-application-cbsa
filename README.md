@@ -12,6 +12,7 @@ here are a few examples:
 
 - [About](#about)
 - [Architecture](#architecture)
+- [Comparison][#comparison]
 - [Requirements](#requirements)
 - [Downloading](#downloading)
 - [Installing](#installing)
@@ -45,6 +46,42 @@ The interfaces are designed to exploit the underlying banking functionality, whi
 > - Take money out
 > - Transfer funds
 > - Open new accounts etc. etc.
+
+## Comparison
+
+| CICS Sample Application Comparisons |      |        |
+|-------------------------------------|------|--------|
+|                                     |      |        |  
+| FEATURES                            | CBSA | GENAPP |
+||||
+| **Programming Languages**           |      |        |  
+| Assembler                           | ✅   | ❌ |  
+| COBOL                               | ✅   | ❌ | 
+| Java                                | ✅   | ❌ |  
+| JavaScript                          | ✅   | ❌ | 
+||||
+| **Interfaces**                      |      |        |  
+| BMS/3270                            | ✅   | ✅ | 
+| Liberty                             | ✅   | ❌ |   
+| Spring Boot                         | ✅   | ❌ |  
+| z/OS Connect                        | ✅   | ❌ |
+||||
+| **Data**                            |      |        | 
+| Db2                                 | ✅   | ✅ | 
+| JDBC                                | ✅   | ❌ |
+| VSAM                                | ✅   | ✅ |
+||||
+| **Build**                           |      |        |
+| JCL - COBOL Components              | ✅   | ✅ |
+| Maven - Java Components             | ✅   | ❌ |
+||||
+| **Other**                           |      |        |   
+| EXEC CICS API calls                 | 30   | 27 |   
+| Support via GitHub Issues           | ✅   | ❌ |  
+| Open Source                         | ✅   | ✅ |   
+| Event Binding                       | ❌   | ✅ |
+| Workload Simulator Scripts          | ❌   | ✅ |
+
 
 ## Architecture
 ![Payment and CS architecture diagram2](./doc/images/Architecture/Payment_and_Customer_Services_UI_CBSA_architecture_diagram2.jpg)
