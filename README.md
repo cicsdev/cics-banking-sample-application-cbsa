@@ -12,7 +12,7 @@ here are a few examples:
 
 - [About](#about)
 - [Architecture](#architecture)
-- [Comparison][#comparison]
+- [Comparison](#comparison)
 - [Requirements](#requirements)
 - [Downloading](#downloading)
 - [Installing](#installing)
