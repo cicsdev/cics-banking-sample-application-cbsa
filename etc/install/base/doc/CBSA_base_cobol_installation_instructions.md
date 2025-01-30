@@ -178,19 +178,35 @@ existing Db2 subsystem called **DBCG,** and all of the tables are
 prefixed **IBMUSER** to differentiate them from others that you may have
 with similar names.
 
-1. Execute job CBSA.DB2.JCL.INSTALL(**INSTDB2**). 
+1. Edit CBSA.DB2.JCL.INSTALL(**DEFAULT**). This contains nine variables that need completing, which are used by the two jobs INSTDB2 and DB2BIND.
+
+@DB2_HLQ@ is the high level qualifier of the Db2 datasets SDSNLOAD and SDSNEXIT. Depending on your installation, SDSNEXIT may have an additional qualifier which you will need to insert into the JCL yourself.
+
+@DB2_SUBSYSTEM@ is the 1-4 character name of the Db2 subsystem you are using, which must be on the same MVS image as the JCL is submitted (and the CICS region).
+
+@DB2_OWNER@ is the userid or group that is going to create the Db2 resources, and also the prefix for the resources. For example, IBMUSER.
+
+@BANK_DBRMLIB@ is the dataset that is populated by COMPALL with Db2 information. For example, CBSA.CICSBSA.DBRM.
+
+@BANK_PLAN@ is the Db2 plan you intend to use. This will need to match the Db2 definitions in the CICS region and CSD.  For example, CBSA.
+
+@BANK_PACKAGE@ is the Db2 package you intend to bind the plan into. This is required as we also need to use Java. For example, PCBSA.
+
+@DB2_DSNTEP_PLAN@ is the name of the plan that the Db2 utility program is bound with. This is installation dependent. You may need to ask your Db2 administrator, or use Db2 to inquire on possible plan names.
+
+@DB2_DSNTEP_LOADLIB@ is the name of the dataset containing the Db2 utility program DSNTEP2. Typically this has "RUNLIB" as part of the name, but this is installation dependent.
+
+@BANK_USER@ is the name of the user who is going to use Db2 in CICS, which is distinct from the user who is creating the resources. For example, CICSUSER.
+
+2. Edit job CBSA.DB2.JCL.INSTALL(**INSTDB2**). 
 
 This creates the Db2 artefacts e.g. STORGROUPS, TABLESPACES, TABLES and INDEXES.
 
-You need to change the JCLLIB and JOBLIB to reference the correct PROCLIB and SDSNLOAD for your installation of Db2.
-
-You need to change the SYSTSIN to refer to the correct PLAN and LIB for the DSNTEP2 program. Consult
-your Db2 Administrator for these details which are site dependent.
+You need to change the JCLLIB to refer to the dataset you are currently using.
 
 The VCAT value for the storage groups must be changed to match your installation's requirements.
  
-(note at this time the ACCOUNT, PROCTRAN and CONTROL tables, required by CBSA, have no
-data on them yet - data population is performed in [Create the VSAM
+(note at this time the ACCOUNT, PROCTRAN and CONTROL tables, required by CBSA, have no data on them yet - data population is performed in [Create the VSAM
 files and populate the Db2 tables with
 data.](#create-the-vsam-files-and-populate-the-db2-tables-with-data)).
 
@@ -205,6 +221,9 @@ source code.
 
 2. Execute job CBSA.DB2.JCL.INSTALL(**DB2BIND**) to BIND the programs to
 Db2.
+
+You need to change the JCLLIB to refer to the dataset you are currently using.
+
 
 >> All load modules are created in CBSA.CICSBSA.LOADLIB.
 
@@ -221,22 +240,23 @@ data in it to start with).
 
 ## Set up the CICS region, SIT parameters and the DFHCSD used to contain all of the CBSA definitions:
 
-1. Execute job CBSA.JCL.INSTALL(**HBANKCSD**) to update the DFHCSD with the
+1. Execute job CBSA.JCL.INSTALL(**CBSACSD**) to update the DFHCSD with the
 CBSA definitions and add the CSD GROUP(BANK) into a **LIST** called
 **CICSTS61** (which is used in the SIT parms for the CICS region).
 
->> **NOTE:** This job updates an existing CSD called @CSD_PREFIX@.DFHCSD and
->> adds the CBSA resource definitions to it. You need to amend job
->> HBANKCSD with the name of your CSD. All of the CSD definitions needed
+>> **NOTE:** This job updates an existing CSD called DFH560.CICS.DFHCSD and
+>> adds the CBSA resource definitions to it. You may need to amend job
+>> CBSACSD with the name of your CSD. All of the CSD definitions needed
 >> for CBSA are located in CBSA.JCL.INSTALL(BANK).
 >> You may also wish to edit the BANK member if you should need to use a
 >> different port number for the IPIC connection between the CICS region
 >> and the zOS Connect server (ZOSEE) - we used port number 30709).
 >> Verify that the name of the DB2CONN matches your requirements, and that it connects to the correct Db2 subsystem.
->> Verify that the plan name of the DB2CONN and DB2ENTRY definitions match your requirements.
 
-
-2. Check your CICS region JCL and edit as appropriate. The most pertinent things are:
+2. Check job CBSA.JCL.INSTALL(**CICSTS56**), this is an example CICS region.  You will have you own JCL or PROC
+to start up your own CICS region. You may need to extrapolate
+information from this member to include into your own CICS region
+startup JCL. The most pertinent things are:
 
 >> -   Inclusion of the CBSA.CICSBSA.LOADLIB in the DFHRPL
 >> 
@@ -249,7 +269,7 @@ most pertinent things from the SIT are:
 
 >> DB2CONN=YES
 >> 
->> GRPLIST=(XYZLIST,**CICSTS61**) - ensure that you include the CICSTS61
+>> GRPLIST=(XYZLIST,**CICSTS56**) - ensure that you include the CICSTS56
 >> LIST, created above, into your GRPLIST.
 
 ## 

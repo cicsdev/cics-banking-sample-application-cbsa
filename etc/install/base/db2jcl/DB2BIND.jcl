@@ -1,141 +1,109 @@
-//DB2BIND JOB 'DB2',NOTIFY=&SYSUID,CLASS=A,MSGCLASS=H,
-//          MSGLEVEL=(1,1),REGION=4M
-//*
-//* Copyright IBM Corp. 2023
-//*
-//*
-//*
-//* Please change @DB2_HLQ@  
-//*  (to the high level qualifiers of your
-//* system's DB2 datasets (SDSNLOAD et cetera)
-//*
-//* Please change @BANK_DBRMLIB@ 
-//* (to the name you chose
-//* for the DBRMLIB provided by Hursley Bank)
-//*
-//* Please change @DB2_SUBSYSTEM@ 
-//* (to the name of your chosen DB2
-//* subsystem (which must be running on the same MVS image as this
-//* batch job) for example DBCG
-//*
-//* Please change @BANK_PACKAGE@ 
-//* to the name you have chosen for the
-//* package name in DB2, for example PHBANK.
-//*
-//* Please change @DB2_OWNER@ 
-//* to the userid that will own the DB2
-//* resources
-//*
-//* Please change @BANK_PLAN@ to 
-//*  to the desired DB2 plan name
-//* This must match the CSD and the Db2 Install job
-//*
-//* Please change @DB2_DSNTEP_PLAN@
-//* to the name of the plan that was
-//* used for the DSNTEP2 utility program
-//*
-//* Please change @DB2_DSNTEP_LOADLIB@ to
-//* to the name of the load library
-//* that contains the DSNTEP2 utility program
-//*
-//* Please change @BANK_USER@ to IBMUSER
-//* to the userid that will be accessing the
-//* plan
-//BIND    EXEC PGM=IKJEFT01
-//STEPLIB  DD  DISP=SHR,DSN=@DB2_HLQ@.@DB2_SUBSYSTEM@.SDSNEXIT
-//         DD  DISP=SHR,DSN=@DB2_HLQ@.SDSNLOAD
-//DBRMLIB  DD DISP=SHR,DSN=@BANK_DBRMLIB@(CREACC)
-//     DD DISP=SHR,DSN=@BANK_DBRMLIB@(CRECUST)
-//     DD DISP=SHR,DSN=@BANK_DBRMLIB@(DBCRFUN)
-//     DD DISP=SHR,DSN=@BANK_DBRMLIB@(DELACC)
-//     DD DISP=SHR,DSN=@BANK_DBRMLIB@(DELCUS)
-//     DD DISP=SHR,DSN=@BANK_DBRMLIB@(INQACC)
-//     DD DISP=SHR,DSN=@BANK_DBRMLIB@(INQACCCU)
-//     DD DISP=SHR,DSN=@BANK_DBRMLIB@(BANKDATA)
-//     DD DISP=SHR,DSN=@BANK_DBRMLIB@(UPDACC)
-//     DD DISP=SHR,DSN=@BANK_DBRMLIB@(XFRFUN)
-//SYSPRINT DD  SYSOUT=*
-//SYSTSPRT DD  SYSOUT=*
-//SYSUDUMP DD  SYSOUT=*
-//SYSTSIN DD *
- DSN S(@DB2_SUBSYSTEM@)
-
- BIND PACKAGE(@BANK_PACKAGE@) OWNER(@DB2_OWNER@) -
- QUALIFIER(@DB2_OWNER@) -
- MEMBER(CREACC) -
- ACTION(REPLACE)
-
- BIND PACKAGE(@BANK_PACKAGE@) OWNER(@DB2_OWNER@) -
- QUALIFIER(@DB2_OWNER@) -
- MEMBER(CRECUST) -
- ACTION(REPLACE)
-
- BIND PACKAGE(@BANK_PACKAGE@) OWNER(@DB2_OWNER@) -
- QUALIFIER(@DB2_OWNER@) -
- MEMBER(DBCRFUN) -
- ACTION(REPLACE)
-
- BIND PACKAGE(@BANK_PACKAGE@) OWNER(@DB2_OWNER@) -
- QUALIFIER(@DB2_OWNER@) -
- MEMBER(DELACC) -
- ACTION(REPLACE)
-
- BIND PACKAGE(@BANK_PACKAGE@) OWNER(@DB2_OWNER@) -
- QUALIFIER(@DB2_OWNER@) -
- MEMBER(DELCUS) -
- ACTION(REPLACE)
-
- BIND PACKAGE(@BANK_PACKAGE@) OWNER(@DB2_OWNER@) -
- QUALIFIER(@DB2_OWNER@) -
- MEMBER(INQACC) -
- ACTION(REPLACE)
-
- BIND PACKAGE(@BANK_PACKAGE@) OWNER(@DB2_OWNER@) -
- QUALIFIER(@DB2_OWNER@) -
- MEMBER(INQACCCU) -
- ACTION(REPLACE)
-
- BIND PACKAGE(@BANK_PACKAGE@) OWNER(@DB2_OWNER@) -
- QUALIFIER(@DB2_OWNER@) -
- MEMBER(BANKDATA) -
- ACTION(REPLACE)
-
- BIND PACKAGE(@BANK_PACKAGE@) OWNER(@DB2_OWNER@) -
- QUALIFIER(@DB2_OWNER@) -
- MEMBER(UPDACC) -
- ACTION(REPLACE)
-
- BIND PACKAGE(@BANK_PACKAGE@) OWNER(@DB2_OWNER@) -
- QUALIFIER(@DB2_OWNER@) -
- MEMBER(XFRFUN) -
- ACTION(REPLACE)
-
-  BIND PLAN(@BANK_PLAN@) -
-   OWNER(@DB2_OWNER@) -
-   ISOLATION(UR) -
-   PKLIST( -
-   NULLID.*,@BANK_PACKAGE@.* )
- END
-//********************************************************************
-//***    GRANT EXECUTE AUTHORITY ON PLAN CBSA
-//********************************************************************
-//GRANT EXEC PGM=IKJEFT01,REGION=0M
-//STEPLIB  DD  DISP=SHR,DSN=@DB2_HLQ@.@DB2_SUBSYSTEM@.SDSNEXIT
-//         DD  DISP=SHR,DSN=@DB2_HLQ@.SDSNLOAD
-//SYSUDUMP DD SYSOUT=*
-//SYSPRINT DD SYSOUT=*
-//SYSTSPRT DD SYSOUT=*
-//SYSTSIN DD *
-DSN SYSTEM(@DB2_SUBSYSTEM@)
-RUN PROGRAM(DSNTEP2) PLAN(@DB2_DSNTEP_PLAN@) -
-LIB('@DB2_DSNTEP_LOADLIB@')
-//SYSIN DD *
- SET CURRENT SQLID = '@DB2_OWNER@';
- GRANT EXECUTE ON PLAN @BANK_PLAN@ TO @BANK_USER@;
- GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE
-     @DB2_OWNER@.ACCOUNT TO @BANK_USER@;
- GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE
-     @DB2_OWNER@.PROCTRAN TO @BANK_USER@;
- GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE
-     @DB2_OWNER@.CONTROL TO @BANK_USER@;
-/*
+//DB2BIND JOB 'DB2',NOTIFY=&SYSUID,CLASS=A,MSGCLASS=H,       
+//          MSGLEVEL=(1,1),REGION=4M                         
+//*                                                          
+//* Copyright IBM Corp. 2023                                 
+//*                                                          
+// EXPORT SYMLIST=*                                          
+// JCLLIB ORDER=CBSA.DB2.JCL.INSTALL                         
+// INCLUDE MEMBER=DEFAULT                                    
+//*                                                          
+//*                                                          
+//*                                                          
+//BIND    EXEC PGM=IKJEFT01                                  
+//STEPLIB  DD  DISP=SHR,DSN=&DB2HLQ..SDSNEXIT                
+//         DD  DISP=SHR,DSN=&DB2HLQ..SDSNLOAD                
+//DBRMLIB  DD DISP=SHR,DSN=&BANKDBRM(CREACC)                 
+//     DD DISP=SHR,DSN=&BANKDBRM(CRECUST)                    
+//     DD DISP=SHR,DSN=&BANKDBRM(DBCRFUN)                    
+//     DD DISP=SHR,DSN=&BANKDBRM(DELACC)     
+//     DD DISP=SHR,DSN=&BANKDBRM(DELCUS)     
+//     DD DISP=SHR,DSN=&BANKDBRM(INQACC)     
+//     DD DISP=SHR,DSN=&BANKDBRM(INQACCCU)   
+//     DD DISP=SHR,DSN=&BANKDBRM(BANKDATA)   
+//     DD DISP=SHR,DSN=&BANKDBRM(UPDACC)     
+//     DD DISP=SHR,DSN=&BANKDBRM(XFRFUN)     
+//SYSPRINT DD  SYSOUT=*                      
+//SYSTSPRT DD  SYSOUT=*                      
+//SYSUDUMP DD  SYSOUT=*                      
+//SYSTSIN DD *,SYMBOLS=(EXECSYS)             
+ DSN S(&DB2SYS.)                             
+                                             
+ BIND PACKAGE(&BANKPKGE) OWNER(&DB2OWNER) -  
+ QUALIFIER(&DB2OWNER) -                      
+ MEMBER(CREACC) -                            
+ ACTION(REPLACE)                             
+                                             
+ BIND PACKAGE(&BANKPKGE) OWNER(&DB2OWNER) -  
+ QUALIFIER(&DB2OWNER) -                      
+ MEMBER(CRECUST) -                           
+ ACTION(REPLACE)                            
+                                            
+ BIND PACKAGE(&BANKPKGE) OWNER(&DB2OWNER) - 
+ QUALIFIER(&DB2OWNER) -                     
+ MEMBER(DBCRFUN) -                          
+ ACTION(REPLACE)                            
+                                            
+ BIND PACKAGE(&BANKPKGE) OWNER(&DB2OWNER) - 
+ QUALIFIER(&DB2OWNER) -                     
+ MEMBER(DELACC) -                           
+ ACTION(REPLACE)                            
+                                            
+ BIND PACKAGE(&BANKPKGE) OWNER(&DB2OWNER) - 
+ QUALIFIER(&DB2OWNER) -                     
+ MEMBER(DELCUS) -                           
+ ACTION(REPLACE)                            
+                                            
+ BIND PACKAGE(&BANKPKGE) OWNER(&DB2OWNER) - 
+ QUALIFIER(&DB2OWNER) -                     
+ MEMBER(INQACC) -                           
+ ACTION(REPLACE)                            
+                                              
+ BIND PACKAGE(&BANKPKGE) OWNER(&DB2OWNER) -   
+ QUALIFIER(&DB2OWNER) -                       
+ MEMBER(INQACCCU) -                           
+ ACTION(REPLACE)                              
+                                              
+ BIND PACKAGE(&BANKPKGE) OWNER(&DB2OWNER) -   
+ QUALIFIER(&DB2OWNER) -                       
+ MEMBER(BANKDATA) -                           
+ ACTION(REPLACE)                              
+                                              
+ BIND PACKAGE(&BANKPKGE) OWNER(&DB2OWNER) -   
+ QUALIFIER(&DB2OWNER) -                       
+ MEMBER(UPDACC) -                             
+ ACTION(REPLACE)                              
+                                              
+ BIND PACKAGE(&BANKPKGE) OWNER(&DB2OWNER) -   
+ QUALIFIER(&DB2OWNER) -                       
+ MEMBER(XFRFUN) -                             
+ ACTION(REPLACE)                              
+                                              
+  BIND PLAN(&BANKPLAN) -                                               
+   OWNER(&DB2OWNER) -                                                  
+   ISOLATION(UR) -                                                     
+   PKLIST( -                                                           
+   NULLID.*,&BANKPKGE..* )                                             
+ END                                                                   
+//******************************************************************** 
+//***    GRANT EXECUTE AUTHORITY ON PLAN CBSA                          
+//******************************************************************** 
+//GRANT EXEC PGM=IKJEFT01,REGION=0M                                    
+//STEPLIB  DD  DISP=SHR,DSN=&DB2HLQ..SDSNEXIT                          
+//         DD  DISP=SHR,DSN=&DB2HLQ..SDSNLOAD                          
+//SYSUDUMP DD SYSOUT=*                                                 
+//SYSPRINT DD SYSOUT=*                                                 
+//SYSTSPRT DD SYSOUT=*                                                 
+//SYSTSIN DD *,SYMBOLS=(EXECSYS)                                       
+DSN SYSTEM(&DB2SYS)                                                    
+RUN PROGRAM(DSNTEP2) PLAN(&DSNTEPP) -                                  
+LIB('&DSNTEPL')                                                        
+//SYSIN DD *,SYMBOLS=EXECSYS                                           
+ SET CURRENT SQLID = '&DB2OWNER';                                      
+ GRANT EXECUTE ON PLAN &BANKPLAN TO &BANKUSER;                         
+ GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE   
+     &DB2OWNER..ACCOUNT TO &BANKUSER;            
+ GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE   
+     &DB2OWNER..PROCTRAN TO &BANKUSER;           
+ GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE   
+     &DB2OWNER..CONTROL TO &BANKUSER;            
+/*                                               

@@ -10,27 +10,29 @@ and running.
 
 These instructions detail the steps required to:
 
-1.  Set up the port for the zOS Connect server.
+1.  Set up the port for the z/OS Connect server.
 
 2.  Install Maven.
 
-3.  Package up the application with Maven.
+3.  Update "ConnectionInfo" with the correct port and hostname for the z/OS Connect server.
 
-4.  Copy the WAR file to the apps directory.
+4.  Package up the application with Maven.
 
-5.  Update the JVM Server.
+5.  Copy the WAR file to the apps directory.
 
-6.  Access the applications.
+6.  Update the JVM Server.
+
+7.  Access the applications.
 
 ### Assumptions: 
 
--   A CICS region (running CIC TS 6.1 or later) is available, and the
+-   A CICS region (running CICS TS 6.1 or later) is available, and the
     CBSA base/COBOL installation has been performed.
 
 -   A Db2 subsystem (v12 or greater) is available.
 
--   A zOS Connect server is available - set up as part of the
-    base/COBOL install.
+-   A z/OS Connect server is available and set up as part of the
+    base/COBOL install, especially the .aar and .sar files.
 
 -   A Liberty JVM is running inside of the CICS region - this is set up
     as part of the Liberty UI installation process.
@@ -53,10 +55,10 @@ For architecture information please refer to the GitHub repo:
 
 The Spring Boot applications run inside a WebSphere Liberty Profile JVM
 server inside CICS, but also communicate with z/OS Connect. It is
-important to make sure that the connection information to the zOS
+important to make sure that the connection information to the z/OS
 Connect server is correct. As a default, these are set to port 30701
 and host localhost, if you utilised a different port number or hostname
-during the zOS Connect setup (as part of the base/COBOL installation)
+during the z/OS Connect setup (as part of the base/COBOL installation)
 then please substitute the default values with yours.
 
 Should you need to change these, they are configured in the following files, which can be found on the repo at:
@@ -87,18 +89,6 @@ Change directory to the Z-OS-Connect-Customer-Services-Interface folder in cics-
 
 This creates a folder called target, and inside of target is a .war file.
 
-At this point we are missing a Java Archive file for the jZOS Toolkit. 
-
-You need to goto your installation of java, typically this can be found in:
-
-> /usr/lpp/java/lib/ext
-
-Copy the "ibmjzos.jar" to a location on your workstation and make a note of it.
-
-Issue the following command from the command line:
-
-> mvn install:install-file -Dfile="*download location*/ibmjzos.jar" -DgroupId=jzos -DartifactId=ibmjzos -Dversion=1.0.0 -Dpackaging=jar
-
 Issue the following Maven command:
 
 > mvn clean package
@@ -115,7 +105,7 @@ Issue the following Maven command:
 
 ## Export to apps directory:
 
-Copy the war file from the two target directories into the apps directory. 
+Copy the war file from the two target directories into the apps directory as binary files.
 
 ##
 
@@ -152,6 +142,10 @@ Add the two applications by adding these lines:
 
 >    \<webApplication location=\"paymentinterface-1.1.war\"/\>
 
+In the \<featureManager\> section, add the following line to enable SpringBoot support.
+
+>    \<feature\>springBoot-3.0\</feature\>
+
 Restart the JVM server to allow these new changes to come into effect.
 
 The WAR files have installed and now we must wait for the Spring Boot
@@ -165,8 +159,8 @@ these are found in:
 This is a sign that things are working, and the applications are
 starting.
 
-Message CWWKZ0001I is issued once the applications have started at which point you
-can use them.
+Message CWWKZ0001I is issued several minutes later at which point you
+can use the applications.
 
 > Root WebApplicationContext: initialization completed in 180700 ms
 >
