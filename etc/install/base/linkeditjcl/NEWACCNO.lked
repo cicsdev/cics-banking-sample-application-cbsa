@@ -1,7 +1,0 @@
-*
-* Copyright IBM Corp. 2023       
-*
-    INCLUDE CBSAMOD(NEWACCNO)
-    ENTRY NEWACCNO
-    NAME NEWACCNO(R)
-

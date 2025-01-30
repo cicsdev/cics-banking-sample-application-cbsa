@@ -1,7 +1,0 @@
-*
-* Copyright IBM Corp. 2023       
-*
-    INCLUDE CBSAMOD(PROOFFL)
-    INCLUDE SYSLIB(DSNELI)
-    ENTRY PROOFFL
-    NAME PROOFFL(R)
