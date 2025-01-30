@@ -23,11 +23,13 @@ import com.ibm.cics.server.CCSIDErrorException;
 import com.ibm.cics.server.Channel;
 import com.ibm.cics.server.ChannelErrorException;
 import com.ibm.cics.server.ChildResponse;
+import com.ibm.cics.server.CicsConditionException;
 import com.ibm.cics.server.CodePageErrorException;
 import com.ibm.cics.server.Container;
 import com.ibm.cics.server.ContainerErrorException;
 import com.ibm.cics.server.InvalidRequestException;
 import com.ibm.cics.server.InvalidTransactionIdException;
+import com.ibm.cics.server.LengthErrorException;
 import com.ibm.cics.server.NotAuthorisedException;
 import com.ibm.cics.server.NotFoundException;
 import com.ibm.cics.server.ResourceDisabledException;
@@ -160,9 +162,7 @@ public class CreditScoreCICS540
 					creditAgencyCount--;
 				}
 			}
-			catch (InvalidRequestException | NotFoundException
-					| ChannelErrorException | CCSIDErrorException
-					| CodePageErrorException | ContainerErrorException e)
+			catch (CicsConditionException e)
 			{
 				logger.severe(e.toString());
 				Task.getTask().abend("CRDT");
