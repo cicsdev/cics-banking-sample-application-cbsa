@@ -7,7 +7,7 @@
 ***************************************************************
 *
 * BNK1CDM
-* Display Customer for CICS Bank Sample Application
+* Display Customer for CICS Banking Sample Application
 *
 * Created: 12-Nov-2015
 *
@@ -26,9 +26,9 @@ BNK1CD   DFHMDI SIZE=(24,80),                                          *
                COLUMN=1,LINE=1
          DFHMDF POS=(1,1),LENGTH=7,INITIAL='BNK1CD ',                  *
                ATTRB=(PROT,NORM),COLOR=BLUE
-COMPANY  DFHMDF POS=(1,15),LENGTH=58,ATTRB=(NORM,PROT),COLOR=RED,      *
-               INITIAL='CICS Bank Sample Application - Credit/Debit Fun*
-               ds.'             
+COMPANY  DFHMDF POS=(1,15),LENGTH=61,ATTRB=(NORM,PROT),COLOR=RED,      *
+               INITIAL='CICS Banking Sample Application - Credit/Debit *
+               Funds.'             
 **********************************************************************
          DFHMDF POS=(3,1),LENGTH=61,ATTRB=(NORM,PROT),COLOR=TURQUOISE, *
                INITIAL='Provide an ACCOUNT number and an AMOUNT and the*
