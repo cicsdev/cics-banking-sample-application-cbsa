@@ -1,5 +1,5 @@
 //*
-//* Copyright IBM Corp. 2023       
+//* Copyright IBM Corp. 2023
 //*
 //*
 //CICSTS56 PROC START='INITIAL',

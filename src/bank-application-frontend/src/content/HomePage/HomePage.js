@@ -85,7 +85,7 @@ This will take you to the main part of the application.
                   <p className="landing-page__p">
                     Click on the User icon <UserAvatar size="24" /> on the top
                     right corner to enter your Username and Password and click
-                    'Submit' to log in. This is an example of what could be 
+                    'Submit' to log in. This is an example of what could be
 		    implemented. CBSA as shipped does not use these credentials
 		    and you can just press "Submit" leaving those fields blank.
                     <br />

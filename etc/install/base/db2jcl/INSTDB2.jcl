@@ -1,13 +1,13 @@
 //INSTDB2 JOB 'DB2',NOTIFY=&SYSUID,CLASS=A,MSGCLASS=H,
 //          MSGLEVEL=(1,1),REGION=4M
 //*
-//* Copyright IBM Corp. 2023
+//* Copyright IBM Corp. 2023, 2025
 //*
 //*
-// EXPORT SYMLIST=* 
+// EXPORT SYMLIST=*
 // JCLLIB ORDER=CBSA.DB2.JCL.INSTALL
 // INCLUDE MEMBER=DEFAULT
-//* 
+//*
 //* Please change DSNV12DP to the appropriate value for your installation
 //* This is the integrated catalog facility catalog for the storage group
 //*
@@ -20,7 +20,7 @@
 //* What is the name of your Db2 subsystem?
 //* Program DSNTEP2 is a Db2 utility
 //* The plan and library are installation dependent
-//SYSTSIN  DD  *,SYMBOLS=(EXECSYS)   
+//SYSTSIN  DD  *,SYMBOLS=(EXECSYS)
   DSN SYSTEM(&DB2SYS.)
   RUN PROGRAM(DSNTEP2)  PLAN(&DSNTEPP) -
        LIB('&DSNTEPL') PARMS('/ALIGN(MID)')
@@ -28,14 +28,14 @@
 //* The following works on a standalone system
 //* The table names cannot be changed, but other
 //* parameters can be. Please change them in the bind
-//* job if you do. 
+//* job if you do.
 //* The plan must match that in the INSTALL(BANK) member
 //SYSIN    DD  *,SYMBOLS=(EXECSYS)
-SET CURRENT SQLID = '&BANKUSER';
+SET CURRENT SQLID = '&DB2OWNER';
 
 CREATE DATABASE CBSA
        BUFFERPOOL BP1
-       INDEXBP BP2;
+       INDEXBP BP0;
 
 CREATE STOGROUP ACCOUNT VOLUMES('*','*','*','*','*') VCAT DSNV12DP;
 

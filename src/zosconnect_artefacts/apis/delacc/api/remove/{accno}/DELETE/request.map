@@ -1,200 +1,200 @@
 <?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="zosconnect" jsonWrapped="false" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/DELETE" version="8.0.5.0" xmlns:map="http://www.ibm.com/zosConnect/2.0/mapping/DELETE">
 <!--  Copyright IBM Corp. 2023   -->
-    <inlinedXMLSchema targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/DELETE"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/DELETE" xmlns:tns="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/DELETE">   
-  <xsd:element name="DelAcc" type="tns:DelAcc"/>   
-  <xsd:complexType name="DelAcc">   
-    <xsd:sequence>   
-      <xsd:element minOccurs="0" name="DelAccEye">   
-        <xsd:simpleType>   
-          <xsd:restriction base="xsd:string">   
-            <xsd:maxLength value="4"/>   
-          </xsd:restriction>   
-        </xsd:simpleType>   
-      </xsd:element>   
-      <xsd:element minOccurs="0" name="DelAccCustno">   
-        <xsd:simpleType>   
-          <xsd:restriction base="xsd:string">   
-            <xsd:maxLength value="10"/>   
-          </xsd:restriction>   
-        </xsd:simpleType>   
-      </xsd:element>   
-      <xsd:element minOccurs="0" name="DelAccScode">   
-        <xsd:simpleType>   
-          <xsd:restriction base="xsd:string">   
-            <xsd:maxLength value="6"/>   
-          </xsd:restriction>   
-        </xsd:simpleType>   
-      </xsd:element>   
-      <xsd:element minOccurs="0" name="DelAccAccno">   
-        <xsd:simpleType>   
-          <xsd:restriction base="xsd:integer">   
-            <xsd:minInclusive value="0"/>   
-            <xsd:maxInclusive value="99999999"/>   
-          </xsd:restriction>   
-        </xsd:simpleType>   
-      </xsd:element>   
-      <xsd:element minOccurs="0" name="DelAccAccType">   
-        <xsd:simpleType>   
-          <xsd:restriction base="xsd:string">   
-            <xsd:maxLength value="8"/>   
-          </xsd:restriction>   
-        </xsd:simpleType>   
-      </xsd:element>   
-      <xsd:element minOccurs="0" name="DelAccIntRate">   
-        <xsd:simpleType>   
-          <xsd:restriction base="xsd:decimal">   
-            <xsd:minInclusive value="0"/>   
-            <xsd:maxInclusive value="9999.99"/>   
-            <xsd:fractionDigits value="2"/>   
-          </xsd:restriction>   
-        </xsd:simpleType>   
-      </xsd:element>   
-      <xsd:element minOccurs="0" name="DelAccOpened">   
-        <xsd:simpleType>   
-          <xsd:restriction base="xsd:integer">   
-            <xsd:minInclusive value="0"/>   
-            <xsd:maxInclusive value="99999999"/>   
-          </xsd:restriction>   
-        </xsd:simpleType>   
-      </xsd:element>   
-      <xsd:element minOccurs="0" name="DelAccOverdraft">   
-        <xsd:simpleType>   
-          <xsd:restriction base="xsd:integer">   
-            <xsd:minInclusive value="0"/>   
-            <xsd:maxInclusive value="99999999"/>   
-          </xsd:restriction>   
-        </xsd:simpleType>   
-      </xsd:element>   
-      <xsd:element minOccurs="0" name="DelAccLastStmtDt">   
-        <xsd:simpleType>   
-          <xsd:restriction base="xsd:integer">   
-            <xsd:minInclusive value="0"/>   
-            <xsd:maxInclusive value="99999999"/>   
-          </xsd:restriction>   
-        </xsd:simpleType>   
-      </xsd:element>   
-      <xsd:element minOccurs="0" name="DelAccNextStmtDt">   
-        <xsd:simpleType>   
-          <xsd:restriction base="xsd:integer">   
-            <xsd:minInclusive value="0"/>   
-            <xsd:maxInclusive value="99999999"/>   
-          </xsd:restriction>   
-        </xsd:simpleType>   
-      </xsd:element>   
-      <xsd:element minOccurs="0" name="DelAccAvailBal">   
-        <xsd:simpleType>   
-          <xsd:restriction base="xsd:decimal">   
-            <xsd:minInclusive value="-9999999999.99"/>   
-            <xsd:maxInclusive value="9999999999.99"/>   
-            <xsd:fractionDigits value="2"/>   
-          </xsd:restriction>   
-        </xsd:simpleType>   
-      </xsd:element>   
-      <xsd:element minOccurs="0" name="DelAccActualBal">   
-        <xsd:simpleType>   
-          <xsd:restriction base="xsd:decimal">   
-            <xsd:minInclusive value="-9999999999.99"/>   
-            <xsd:maxInclusive value="9999999999.99"/>   
-            <xsd:fractionDigits value="2"/>   
-          </xsd:restriction>   
-        </xsd:simpleType>   
-      </xsd:element>   
-      <xsd:element minOccurs="0" name="DelAccSuccess">   
-        <xsd:simpleType>   
-          <xsd:restriction base="xsd:string">   
-            <xsd:maxLength value="1"/>   
-          </xsd:restriction>   
-        </xsd:simpleType>   
-      </xsd:element>   
-      <xsd:element minOccurs="0" name="DelAccFailCd">   
-        <xsd:simpleType>   
-          <xsd:restriction base="xsd:string">   
-            <xsd:maxLength value="1"/>   
-          </xsd:restriction>   
-        </xsd:simpleType>   
-      </xsd:element>   
-      <xsd:element minOccurs="0" name="DelAccDelSuccess">   
-        <xsd:simpleType>   
-          <xsd:restriction base="xsd:string">   
-            <xsd:maxLength value="1"/>   
-          </xsd:restriction>   
-        </xsd:simpleType>   
-      </xsd:element>   
-      <xsd:element minOccurs="0" name="DelAccDelFailCd">   
-        <xsd:simpleType>   
-          <xsd:restriction base="xsd:string">   
-            <xsd:maxLength value="1"/>   
-          </xsd:restriction>   
-        </xsd:simpleType>   
-      </xsd:element>   
-      <xsd:element minOccurs="0" name="DelAccDelApplid">   
-        <xsd:simpleType>   
-          <xsd:restriction base="xsd:string">   
-            <xsd:maxLength value="8"/>   
-          </xsd:restriction>   
-        </xsd:simpleType>   
-      </xsd:element>   
-      <xsd:element minOccurs="0" name="DelAccDelPcb1">   
-        <xsd:simpleType>   
-          <xsd:restriction base="xsd:string">   
-            <xsd:maxLength value="4"/>   
-          </xsd:restriction>   
-        </xsd:simpleType>   
-      </xsd:element>   
-      <xsd:element minOccurs="0" name="DelAccDelPcb2">   
-        <xsd:simpleType>   
-          <xsd:restriction base="xsd:string">   
-            <xsd:maxLength value="4"/>   
-          </xsd:restriction>   
-        </xsd:simpleType>   
-      </xsd:element>   
-      <xsd:element minOccurs="0" name="DelAccDelPcb3">   
-        <xsd:simpleType>   
-          <xsd:restriction base="xsd:string">   
-            <xsd:maxLength value="4"/>   
-          </xsd:restriction>   
-        </xsd:simpleType>   
-      </xsd:element>   
-    </xsd:sequence>   
-  </xsd:complexType>   
+    <inlinedXMLSchema targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/DELETE"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/DELETE" xmlns:tns="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/DELETE">
+  <xsd:element name="DelAcc" type="tns:DelAcc"/>
+  <xsd:complexType name="DelAcc">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="DelAccEye">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="DelAccCustno">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="DelAccScode">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="6"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="DelAccAccno">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:integer">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="99999999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="DelAccAccType">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="8"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="DelAccIntRate">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:decimal">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="9999.99"/>
+            <xsd:fractionDigits value="2"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="DelAccOpened">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:integer">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="99999999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="DelAccOverdraft">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:integer">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="99999999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="DelAccLastStmtDt">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:integer">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="99999999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="DelAccNextStmtDt">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:integer">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="99999999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="DelAccAvailBal">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:decimal">
+            <xsd:minInclusive value="-9999999999.99"/>
+            <xsd:maxInclusive value="9999999999.99"/>
+            <xsd:fractionDigits value="2"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="DelAccActualBal">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:decimal">
+            <xsd:minInclusive value="-9999999999.99"/>
+            <xsd:maxInclusive value="9999999999.99"/>
+            <xsd:fractionDigits value="2"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="DelAccSuccess">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="DelAccFailCd">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="DelAccDelSuccess">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="DelAccDelFailCd">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="DelAccDelApplid">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="8"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="DelAccDelPcb1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="DelAccDelPcb2">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="DelAccDelPcb3">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
 </xsd:schema>]]></inlinedXMLSchema>
-    <inlinedXMLSchema targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/HTTP/input/DELETE"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/HTTP/input/DELETE" xmlns:body="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/DELETE" xmlns:tns="http://www.ibm.com/zosConnect/2.0/mapping/HTTP/input/DELETE">    
-    
-      <xsd:import namespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/DELETE" schemaLocation="../schema_0.xsd"/>    
-    
-      <xsd:element name="HTTPRequest" type="tns:HTTPRequestType"/>    
-    
-      <xsd:complexType name="HTTPRequestType">    
-        <xsd:sequence>    
-          <xsd:element name="Headers" type="tns:HeadersType"/>    
-          <xsd:element name="PathParameters" type="tns:PathParametersType"/>    
-          <xsd:element name="QueryParameters" type="tns:QueryParametersType"/>    
-          <xsd:element name="Body" type="tns:BodyType"/>    
-        </xsd:sequence>    
-      </xsd:complexType>    
-    
-      <xsd:complexType name="HeadersType">    
-        <xsd:sequence>    
-        	<xsd:element maxOccurs="1" minOccurs="0" name="Authorization" type="xsd:string"/>    
-        </xsd:sequence>    
-      </xsd:complexType>    
-    
-      <xsd:complexType name="PathParametersType">    
-        <xsd:sequence>    
-            <xsd:element maxOccurs="1" minOccurs="1" name="accno" type="xsd:string"/>    
-        </xsd:sequence>    
-      </xsd:complexType>    
-    
-      <xsd:complexType name="QueryParametersType">    
-        <xsd:sequence>    
-        </xsd:sequence>    
-      </xsd:complexType>    
-    
-      <xsd:complexType name="BodyType">    
-        <xsd:sequence>    
-          <xsd:element ref="body:DelAcc"/>    
-        </xsd:sequence>    
-      </xsd:complexType>    
+    <inlinedXMLSchema targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/HTTP/input/DELETE"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/HTTP/input/DELETE" xmlns:body="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/DELETE" xmlns:tns="http://www.ibm.com/zosConnect/2.0/mapping/HTTP/input/DELETE">
+
+      <xsd:import namespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/DELETE" schemaLocation="../schema_0.xsd"/>
+
+      <xsd:element name="HTTPRequest" type="tns:HTTPRequestType"/>
+
+      <xsd:complexType name="HTTPRequestType">
+        <xsd:sequence>
+          <xsd:element name="Headers" type="tns:HeadersType"/>
+          <xsd:element name="PathParameters" type="tns:PathParametersType"/>
+          <xsd:element name="QueryParameters" type="tns:QueryParametersType"/>
+          <xsd:element name="Body" type="tns:BodyType"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="HeadersType">
+        <xsd:sequence>
+        	<xsd:element maxOccurs="1" minOccurs="0" name="Authorization" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="PathParametersType">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="accno" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="QueryParametersType">
+        <xsd:sequence>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="BodyType">
+        <xsd:sequence>
+          <xsd:element ref="body:DelAcc"/>
+        </xsd:sequence>
+      </xsd:complexType>
     </xsd:schema>]]></inlinedXMLSchema>
     <input inlinedXMLSchema="true" path="../schema_1.xsd" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/HTTP/input/DELETE" var="rootInput"/>
     <output inlinedXMLSchema="true" path="../schema_0.xsd" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/DELETE" var="rootOutput"/>

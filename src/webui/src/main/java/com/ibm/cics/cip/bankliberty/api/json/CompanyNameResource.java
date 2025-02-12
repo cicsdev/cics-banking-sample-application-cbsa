@@ -33,7 +33,7 @@ import com.ibm.json.java.JSONObject;
 
 /**
  * This class is used to get the Company Name
- * 
+ *
  */
 
 @Path("/companyName")

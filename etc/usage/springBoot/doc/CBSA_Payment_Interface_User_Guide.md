@@ -37,7 +37,7 @@ It can be accessed via a URL structured as follows:
 
 [http://your-host-name:your-host-port-number/paymentinterface-1.1/](http://your-host-name:your-host-port-number/paymentinterface-1.1/)
 
-### 
+###
 
 (\* as part of the installation process, you will have previously assigned your own hostname and port number for the Payment interface to utilise).
 
@@ -93,4 +93,3 @@ selecting the "Credit" radio button:
 Then clicking "Submit":
 
 ![Payment refund success](../doc/images/PaymentUserGuide/Payment_REFUND_SUCCESS.jpg)
-

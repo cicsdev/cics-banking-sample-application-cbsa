@@ -12,11 +12,11 @@ import com.ibm.jzos.fields.*;
 
 public class CRECUST {
 	protected static CobolDatatypeFactory factory = new CobolDatatypeFactory();
-	static { factory.setStringTrimDefault(false); } 
+	static { factory.setStringTrimDefault(false); }
 
 	/** <pre>
 	 LINKAGE SECTION. </pre> */
-	public static final int DFHCOMMAREA_LEN = 261; 
+	public static final int DFHCOMMAREA_LEN = 261;
 
 	/** <pre>
 	 01 DFHCOMMAREA.
@@ -33,7 +33,7 @@ public class CRECUST {
 	/** <pre>
 	******************************************************************
 	    03 COMM-EYECATCHER                 PIC X(4). </pre> */
-	public static final int COMM_KEY_LEN = 16; 
+	public static final int COMM_KEY_LEN = 16;
 	public static final int COMM_KEY_OFFSET = factory.getOffset();
 
 	/** <pre>
@@ -58,9 +58,9 @@ public class CRECUST {
 
 	/** <pre>
 	    03 COMM-ADDRESS                    PIC X(160). </pre> */
-	static { factory.pushOffset(); } 
-	static { factory.setOffset(COMM_DATE_OF_BIRTH.getOffset()); } 
-	public static final int COMM_DOB_GROUP_LEN = 8; 
+	static { factory.pushOffset(); }
+	static { factory.setOffset(COMM_DATE_OF_BIRTH.getOffset()); }
+	public static final int COMM_DOB_GROUP_LEN = 8;
 	public static final int COMM_DOB_GROUP_OFFSET = factory.getOffset();
 
 	/** <pre>
@@ -74,7 +74,7 @@ public class CRECUST {
 	/** <pre>
 	       05 COMM-BIRTH-DAY               PIC 99. </pre> */
 	protected static final ExternalDecimalAsIntField COMM_BIRTH_YEAR = factory.getExternalDecimalAsIntField(4, false, false, false, false);
-	static { factory.popOffset(); } 
+	static { factory.popOffset(); }
 
 	/** <pre>
 	       05 COMM-BIRTH-MONTH             PIC 99. </pre> */
@@ -86,9 +86,9 @@ public class CRECUST {
 
 	/** <pre>
 	    03 COMM-CREDIT-SCORE               PIC 999. </pre> */
-	static { factory.pushOffset(); } 
-	static { factory.setOffset(COMM_CS_REVIEW_DATE.getOffset()); } 
-	public static final int COMM_CS_REVIEW_DATE_GROUP_LEN = 8; 
+	static { factory.pushOffset(); }
+	static { factory.setOffset(COMM_CS_REVIEW_DATE.getOffset()); }
+	public static final int COMM_CS_REVIEW_DATE_GROUP_LEN = 8;
 	public static final int COMM_CS_REVIEW_DATE_GROUP_OFFSET = factory.getOffset();
 
 	/** <pre>
@@ -102,7 +102,7 @@ public class CRECUST {
 	/** <pre>
 	       05 COMM-CS-REVIEW-DD            PIC 99. </pre> */
 	protected static final ExternalDecimalAsIntField COMM_CS_REVIEW_YYYY = factory.getExternalDecimalAsIntField(4, false, false, false, false);
-	static { factory.popOffset(); } 
+	static { factory.popOffset(); }
 
 	/** <pre>
 	       05 COMM-CS-REVIEW-MM            PIC 99. </pre> */

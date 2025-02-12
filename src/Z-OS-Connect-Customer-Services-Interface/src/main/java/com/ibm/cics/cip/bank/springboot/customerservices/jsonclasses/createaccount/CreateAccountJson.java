@@ -15,7 +15,7 @@ public class CreateAccountJson
 
 	private static final String FLOAT_FORMAT = "%.02f";
 
-	@JsonProperty("CREACC")	
+	@JsonProperty("CREACC")
 	private CreaccJson creAcc;
 
 

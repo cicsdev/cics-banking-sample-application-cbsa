@@ -32,7 +32,7 @@ import com.ibm.json.java.JSONObject;
 
 /**
  * This class describes the methods of the AccountsResource
- * 
+ *
  */
 
 @Path("/account")
@@ -45,13 +45,13 @@ public class AccountsResource extends HBankDataAccess
 	private static final String NOT_SUPPORTED = " is not supported.";
 
 	private static final String ACC_TYPE_STRING = "Account type ";
-	
+
 	private static final String INTEREST_RATE = "Interest rate ";
-	
+
 	private static final String OVERDRAFT_LIMIT = "Overdraft limit ";
-	
+
 	private static final String CUSTOMER_NUMBER = "Customer Number ";
-	
+
 	private static final String IS_NULL = "is null";
 
 	private static final String CREATE_ACCOUNT_INTERNAL = "createAccountInternal(AccountJSON account)";
@@ -141,9 +141,9 @@ public class AccountsResource extends HBankDataAccess
 	private static final String JSON_ACCOUNTS = "accounts";
 
 	private static final String JSON_ERROR_MSG = "errorMessage";
-	
+
 	private static final int MAXIMUM_ACCOUNTS_PER_CUSTOMER = 10;
-	
+
 	private static final int CUSTOMER_NUMBER_LENGTH = 10;
 
 
@@ -1625,21 +1625,21 @@ public class AccountsResource extends HBankDataAccess
 	private JSONObject validateNewAccount(AccountJSON newAccount)
 	{
 		JSONObject error = new JSONObject();
-		
+
 		if(newAccount == null)
 		{
 			error.put(JSON_ERROR_MSG, "Account "+ IS_NULL);
 			logger.log(Level.WARNING, () -> "Account " + IS_NULL);
-			return error;	
+			return error;
 		}
-		
+
 		if(newAccount.getAccountType() == null)
 		{
 			error.put(JSON_ERROR_MSG, ACC_TYPE_STRING + IS_NULL);
 			logger.log(Level.WARNING, () -> ACC_TYPE_STRING + IS_NULL);
-			return error;	
+			return error;
 		}
-		
+
 		if (!newAccount.validateType(newAccount.getAccountType().trim()))
 		{
 			error.put(JSON_ERROR_MSG, ACC_TYPE_STRING
@@ -1648,12 +1648,12 @@ public class AccountsResource extends HBankDataAccess
 					+ newAccount.getAccountType() + NOT_SUPPORTED);
 			return error;
 		}
-		
+
 		if(newAccount.getInterestRate() == null)
 		{
 			error.put(JSON_ERROR_MSG, INTEREST_RATE + IS_NULL);
 			logger.log(Level.WARNING, () -> INTEREST_RATE + IS_NULL);
-			return error;	
+			return error;
 		}
 		// Interest rate cannot be < 0
 		if (newAccount.getInterestRate().doubleValue() < 0.00)
@@ -1688,9 +1688,9 @@ public class AccountsResource extends HBankDataAccess
 		{
 			error.put(JSON_ERROR_MSG, OVERDRAFT_LIMIT + IS_NULL);
 			logger.log(Level.WARNING, () -> OVERDRAFT_LIMIT + IS_NULL);
-			return error;	
+			return error;
 		}
-		
+
 		// Overdraft limit cannot be < 0
 		if (newAccount.getOverdraft().intValue() < 0)
 		{
@@ -1705,7 +1705,7 @@ public class AccountsResource extends HBankDataAccess
 		{
 			error.put(JSON_ERROR_MSG, CUSTOMER_NUMBER + IS_NULL);
 			logger.log(Level.WARNING, () -> CUSTOMER_NUMBER + IS_NULL);
-			return error;	
+			return error;
 		}
 
 

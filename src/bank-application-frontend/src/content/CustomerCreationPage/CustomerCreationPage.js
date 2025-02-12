@@ -192,7 +192,7 @@ const CustomerCreationPage = () => {
                     <div> {customerFullName} </div>
                     <p>has been created, their Customer ID is: </p>
                     <div> {parseInt(successText)}</div>
-                  
+
                     <ModalFooter>
                       <HeaderName
                         className="white-background"

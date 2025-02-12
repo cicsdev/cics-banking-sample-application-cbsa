@@ -13,11 +13,11 @@ import java.math.*;
 
 public class PROCTRAN {
 	protected static CobolDatatypeFactory factory = new CobolDatatypeFactory();
-	static { factory.setStringTrimDefault(false); } 
+	static { factory.setStringTrimDefault(false); }
 
 	/** <pre>
 	 01 COBOL-LANGUAGE-STRUCTURE. </pre> */
-	public static final int COBOL_LANGUAGE_STRUCTURE_LEN = 99; 
+	public static final int COBOL_LANGUAGE_STRUCTURE_LEN = 99;
 
 	/** <pre>
 	     COPY PROCTRAN.
@@ -26,9 +26,9 @@ public class PROCTRAN {
     *    Copyright IBM Corp. 2023
     *
     *
-    *	     
+    *
 	     03 PROC-TRAN-DATA. </pre> */
-	public static final int PROC_TRAN_DATA_LEN = 99; 
+	public static final int PROC_TRAN_DATA_LEN = 99;
 	public static final int PROC_TRAN_DATA_OFFSET = factory.getOffset();
 
 	/** <pre>
@@ -42,9 +42,9 @@ public class PROCTRAN {
 	/** <pre>
 	        05 PROC-TRAN-LOGICAL-DELETE-AREA REDEFINES
 	           PROC-TRAN-EYE-CATCHER. </pre> */
-	static { factory.pushOffset(); } 
-	static { factory.setOffset(PROC_TRAN_EYE_CATCHER.getOffset()); } 
-	public static final int PROC_TRAN_LOGICAL_DELETE_AREA_LEN = 4; 
+	static { factory.pushOffset(); }
+	static { factory.setOffset(PROC_TRAN_EYE_CATCHER.getOffset()); }
+	public static final int PROC_TRAN_LOGICAL_DELETE_AREA_LEN = 4;
 	public static final int PROC_TRAN_LOGICAL_DELETE_AREA_OFFSET = factory.getOffset();
 
 	/** <pre>
@@ -58,11 +58,11 @@ public class PROCTRAN {
 	/** <pre>
 	           07 FILLER PIC X(3). </pre> */
 	protected static final StringField FILLER_1 = factory.getStringField(3);
-	static { factory.popOffset(); } 
+	static { factory.popOffset(); }
 
 	/** <pre>
 	        05 PROC-TRAN-ID. </pre> */
-	public static final int PROC_TRAN_ID_LEN = 14; 
+	public static final int PROC_TRAN_ID_LEN = 14;
 	public static final int PROC_TRAN_ID_OFFSET = factory.getOffset();
 
 	/** <pre>
@@ -79,9 +79,9 @@ public class PROCTRAN {
 
 	/** <pre>
 	        05 PROC-TRAN-DATE-GRP REDEFINES PROC-TRAN-DATE. </pre> */
-	static { factory.pushOffset(); } 
-	static { factory.setOffset(PROC_TRAN_DATE.getOffset()); } 
-	public static final int PROC_TRAN_DATE_GRP_LEN = 8; 
+	static { factory.pushOffset(); }
+	static { factory.setOffset(PROC_TRAN_DATE.getOffset()); }
+	public static final int PROC_TRAN_DATE_GRP_LEN = 8;
 	public static final int PROC_TRAN_DATE_GRP_OFFSET = factory.getOffset();
 
 	/** <pre>
@@ -95,7 +95,7 @@ public class PROCTRAN {
 	/** <pre>
 	           07 PROC-TRAN-DATE-GRP-DD     PIC 99. </pre> */
 	protected static final ExternalDecimalAsIntField PROC_TRAN_DATE_GRP_DD = factory.getExternalDecimalAsIntField(2, false, false, false, false);
-	static { factory.popOffset(); } 
+	static { factory.popOffset(); }
 
 	/** <pre>
 	        05 PROC-TRAN-TIME               PIC 9(6). </pre> */
@@ -103,9 +103,9 @@ public class PROCTRAN {
 
 	/** <pre>
 	        05 PROC-TRAN-TIME-GRP REDEFINES PROC-TRAN-TIME. </pre> */
-	static { factory.pushOffset(); } 
-	static { factory.setOffset(PROC_TRAN_TIME.getOffset()); } 
-	public static final int PROC_TRAN_TIME_GRP_LEN = 6; 
+	static { factory.pushOffset(); }
+	static { factory.setOffset(PROC_TRAN_TIME.getOffset()); }
+	public static final int PROC_TRAN_TIME_GRP_LEN = 6;
 	public static final int PROC_TRAN_TIME_GRP_OFFSET = factory.getOffset();
 
 	/** <pre>
@@ -119,7 +119,7 @@ public class PROCTRAN {
 	/** <pre>
 	           07 PROC-TRAN-TIME-GRP-SS     PIC 99. </pre> */
 	protected static final ExternalDecimalAsIntField PROC_TRAN_TIME_GRP_SS = factory.getExternalDecimalAsIntField(2, false, false, false, false);
-	static { factory.popOffset(); } 
+	static { factory.popOffset(); }
 
 	/** <pre>
 	        05 PROC-TRAN-REF                PIC 9(12). </pre> */
@@ -207,9 +207,9 @@ public class PROCTRAN {
 
 	/** <pre>
 	        05 PROC-TRAN-DESC-XFR REDEFINES PROC-TRAN-DESC. </pre> */
-	static { factory.pushOffset(); } 
-	static { factory.setOffset(PROC_TRAN_DESC.getOffset()); } 
-	public static final int PROC_TRAN_DESC_XFR_LEN = 40; 
+	static { factory.pushOffset(); }
+	static { factory.setOffset(PROC_TRAN_DESC.getOffset()); }
+	public static final int PROC_TRAN_DESC_XFR_LEN = 40;
 	public static final int PROC_TRAN_DESC_XFR_OFFSET = factory.getOffset();
 
 	/** <pre>
@@ -230,13 +230,13 @@ public class PROCTRAN {
 	          07 PROC-TRAN-DESC-XFR-ACCOUNT
 	             PIC 9(8). </pre> */
 	protected static final ExternalDecimalAsIntField PROC_TRAN_DESC_XFR_ACCOUNT = factory.getExternalDecimalAsIntField(8, false, false, false, false);
-	static { factory.popOffset(); } 
+	static { factory.popOffset(); }
 
 	/** <pre>
 	        05 PROC-TRAN-DESC-DELACC REDEFINES PROC-TRAN-DESC. </pre> */
-	static { factory.pushOffset(); } 
-	static { factory.setOffset(PROC_TRAN_DESC.getOffset()); } 
-	public static final int PROC_TRAN_DESC_DELACC_LEN = 40; 
+	static { factory.pushOffset(); }
+	static { factory.setOffset(PROC_TRAN_DESC.getOffset()); }
+	public static final int PROC_TRAN_DESC_DELACC_LEN = 40;
 	public static final int PROC_TRAN_DESC_DELACC_OFFSET = factory.getOffset();
 
 	/** <pre>
@@ -279,13 +279,13 @@ public class PROCTRAN {
 	          88 PROC-DESC-DELACC-FLAG
 	             VALUE 'DELETE'. </pre> */
 	public static final String PROC_DESC_DELACC_FLAG = "DELETE";
-	static { factory.popOffset(); } 
+	static { factory.popOffset(); }
 
 	/** <pre>
 	        05 PROC-TRAN-DESC-CREACC REDEFINES PROC-TRAN-DESC. </pre> */
-	static { factory.pushOffset(); } 
-	static { factory.setOffset(PROC_TRAN_DESC.getOffset()); } 
-	public static final int PROC_TRAN_DESC_CREACC_LEN = 40; 
+	static { factory.pushOffset(); }
+	static { factory.setOffset(PROC_TRAN_DESC.getOffset()); }
+	public static final int PROC_TRAN_DESC_CREACC_LEN = 40;
 	public static final int PROC_TRAN_DESC_CREACC_OFFSET = factory.getOffset();
 
 	/** <pre>
@@ -328,13 +328,13 @@ public class PROCTRAN {
 	          88 PROC-DESC-CREACC-FLAG
 	             VALUE 'CREATE'. </pre> */
 	public static final String PROC_DESC_CREACC_FLAG = "CREATE";
-	static { factory.popOffset(); } 
+	static { factory.popOffset(); }
 
 	/** <pre>
 	        05 PROC-TRAN-DESC-DELCUS REDEFINES PROC-TRAN-DESC. </pre> */
-	static { factory.pushOffset(); } 
-	static { factory.setOffset(PROC_TRAN_DESC.getOffset()); } 
-	public static final int PROC_TRAN_DESC_DELCUS_LEN = 40; 
+	static { factory.pushOffset(); }
+	static { factory.setOffset(PROC_TRAN_DESC.getOffset()); }
+	public static final int PROC_TRAN_DESC_DELCUS_LEN = 40;
 	public static final int PROC_TRAN_DESC_DELCUS_OFFSET = factory.getOffset();
 
 	/** <pre>
@@ -376,13 +376,13 @@ public class PROCTRAN {
 	/** <pre>
 	          07 PROC-DESC-DELCUS-DOB-DD    PIC 99. </pre> */
 	protected static final ExternalDecimalAsIntField PROC_DESC_DELCUS_DOB_DD = factory.getExternalDecimalAsIntField(2, false, false, false, false);
-	static { factory.popOffset(); } 
+	static { factory.popOffset(); }
 
 	/** <pre>
 	        05 PROC-TRAN-DESC-CRECUS REDEFINES PROC-TRAN-DESC. </pre> */
-	static { factory.pushOffset(); } 
-	static { factory.setOffset(PROC_TRAN_DESC.getOffset()); } 
-	public static final int PROC_TRAN_DESC_CRECUS_LEN = 40; 
+	static { factory.pushOffset(); }
+	static { factory.setOffset(PROC_TRAN_DESC.getOffset()); }
+	public static final int PROC_TRAN_DESC_CRECUS_LEN = 40;
 	public static final int PROC_TRAN_DESC_CRECUS_OFFSET = factory.getOffset();
 
 	/** <pre>
@@ -424,7 +424,7 @@ public class PROCTRAN {
 	/** <pre>
 	          07 PROC-DESC-CRECUS-DOB-DD    PIC 99. </pre> */
 	protected static final ExternalDecimalAsIntField PROC_DESC_CRECUS_DOB_DD = factory.getExternalDecimalAsIntField(2, false, false, false, false);
-	static { factory.popOffset(); } 
+	static { factory.popOffset(); }
 
 	/** <pre>
 	        05 PROC-TRAN-AMOUNT             PIC S9(10)V99. </pre> */

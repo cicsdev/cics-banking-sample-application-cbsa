@@ -2,8 +2,8 @@ TERMS AND CONDITIONS FOR SEPARATELY LICENSED CODE
 
 IBM CICS Sample Bank Application
 
-This file provides details concerning terms and conditions applicable to 
-code identified as Separately Licensed Code below and included in the 
+This file provides details concerning terms and conditions applicable to
+code identified as Separately Licensed Code below and included in the
 products listed above ("the Program").
 
 The Separately Licensed Code is provided to Licensee under terms
@@ -12,8 +12,8 @@ Licensee's use of such components or portions thereof is subject to the
 terms of the associated license agreement provided or referenced in this
 section and not the terms of the principal license agreement.
 
-Please note: This file may identify Separately Licensed Code and its related 
-agreements that are not used by, or that were not shipped with, the Program as 
+Please note: This file may identify Separately Licensed Code and its related
+agreements that are not used by, or that were not shipped with, the Program as
 Licensee installed it.
 
 
@@ -434,21 +434,21 @@ jsmin
 
 Copyright (c) 2002 JSON.org
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
-and associated documentation files (the "Software"), to deal in the Software without restriction, 
-including without limitation the rights to use, copy, modify, merge, publish, distribute, 
-sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is 
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+and associated documentation files (the "Software"), to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge, publish, distribute,
+sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial 
+The above copyright notice and this permission notice shall be included in all copies or substantial
 portions of the Software.
 
 The Software shall be used for Good, not Evil.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT 
-NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
-WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 END OF JSON CODE NOTICES AND INFORMATION
@@ -514,4 +514,3 @@ END OF NOTICES AND INFORMATION FOR SEPARATELY LICENSED CODE
 L/N: L-xxxx-nnnnnn
 D/N: L-xxxx-nnnnnn
 P/N: L-xxxx-nnnnnn
-

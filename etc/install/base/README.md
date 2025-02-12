@@ -16,7 +16,7 @@ The scripts (Job Control Language and SQL) to build the Db2 infrastructure.
 
 # doc
 
-Documentation.
+Documentation. Read the information in here to install the base application.
 
 # installjcl
 
@@ -25,4 +25,3 @@ The scripts (Job Control Language jobs) to build the data and resources for the 
 # linkeditjcl
 
 The inputs for the binder. You should not need to edit these.
-

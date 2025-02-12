@@ -74,9 +74,9 @@ const account_headers = [
   "Account Opened",
   "Last Statement Due",
 ];
-  
+
 const CustomerDetailsTable = ({ customerDetailsRows, accountDetailsRows }) => {
-  
+
   /**
   * Is the updateCustomer popup being used
   */
@@ -149,7 +149,7 @@ const CustomerDetailsTable = ({ customerDetailsRows, accountDetailsRows }) => {
   }
 
   /**
-   * Updates a customer by making a put request 
+   * Updates a customer by making a put request
    * The function ensures that both of the changeable fields are not left blank by using the value before an update attempt was made as a fallback
    */
   async function updateCustomer() {
@@ -211,7 +211,7 @@ let newDateOfBirth = currentDateOfBirth.substring(6,10) + "-" + currentDateOfBir
                       <TableCell key={key}>{row[key]}</TableCell>
                     );
                   })}
-               
+
               </TableRow>
             ))}
           </TableBody>
@@ -328,4 +328,3 @@ let newDateOfBirth = currentDateOfBirth.substring(6,10) + "-" + currentDateOfBir
   );
 }
 export default CustomerDetailsTable;
-

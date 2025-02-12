@@ -1,122 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--  Copyright IBM Corp. 2023   -->
 <mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="zosconnect" jsonWrapped="false" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/PUT" version="8.0.5.0" xmlns:map="http://www.ibm.com/zosConnect/2.0/mapping/PUT">
-    <inlinedXMLSchema targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/PUT"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/PUT" xmlns:tns="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/PUT">  
-  <xsd:element name="UpdCust" type="tns:UpdCust"/>  
-  <xsd:complexType name="UpdCust">  
-    <xsd:sequence>  
-      <xsd:element minOccurs="0" name="CommEye">  
-        <xsd:simpleType>  
-          <xsd:restriction base="xsd:string">  
-            <xsd:maxLength value="4"/>  
-          </xsd:restriction>  
-        </xsd:simpleType>  
-      </xsd:element>  
-      <xsd:element minOccurs="0" name="CommScode">  
-        <xsd:simpleType>  
-          <xsd:restriction base="xsd:string">  
-            <xsd:maxLength value="6"/>  
-          </xsd:restriction>  
-        </xsd:simpleType>  
-      </xsd:element>  
-      <xsd:element minOccurs="0" name="CommCustno">  
-        <xsd:simpleType>  
-          <xsd:restriction base="xsd:string">  
-            <xsd:maxLength value="10"/>  
-          </xsd:restriction>  
-        </xsd:simpleType>  
-      </xsd:element>  
-      <xsd:element minOccurs="0" name="CommName">  
-        <xsd:simpleType>  
-          <xsd:restriction base="xsd:string">  
-            <xsd:maxLength value="60"/>  
-          </xsd:restriction>  
-        </xsd:simpleType>  
-      </xsd:element>  
-      <xsd:element minOccurs="0" name="CommAddress">  
-        <xsd:simpleType>  
-          <xsd:restriction base="xsd:string">  
-            <xsd:maxLength value="160"/>  
-          </xsd:restriction>  
-        </xsd:simpleType>  
-      </xsd:element>  
-      <xsd:element minOccurs="0" name="CommDob">  
-        <xsd:simpleType>  
-          <xsd:restriction base="xsd:integer">  
-            <xsd:minInclusive value="0"/>  
-            <xsd:maxInclusive value="99999999"/>  
-          </xsd:restriction>  
-        </xsd:simpleType>  
-      </xsd:element>  
-      <xsd:element minOccurs="0" name="CommCreditScore">  
-        <xsd:simpleType>  
-          <xsd:restriction base="xsd:integer">  
-            <xsd:minInclusive value="0"/>  
-            <xsd:maxInclusive value="999"/>  
-          </xsd:restriction>  
-        </xsd:simpleType>  
-      </xsd:element>  
-      <xsd:element minOccurs="0" name="CommCsReviewDate">  
-        <xsd:simpleType>  
-          <xsd:restriction base="xsd:integer">  
-            <xsd:minInclusive value="0"/>  
-            <xsd:maxInclusive value="99999999"/>  
-          </xsd:restriction>  
-        </xsd:simpleType>  
-      </xsd:element>  
-      <xsd:element minOccurs="0" name="CommUpdSuccess">  
-        <xsd:simpleType>  
-          <xsd:restriction base="xsd:string">  
-            <xsd:maxLength value="1"/>  
-          </xsd:restriction>  
-        </xsd:simpleType>  
-      </xsd:element>  
-      <xsd:element minOccurs="0" name="CommUpdFailCd">  
-        <xsd:simpleType>  
-          <xsd:restriction base="xsd:string">  
-            <xsd:maxLength value="1"/>  
-          </xsd:restriction>  
-        </xsd:simpleType>  
-      </xsd:element>  
-    </xsd:sequence>  
-  </xsd:complexType>  
+    <inlinedXMLSchema targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/PUT"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/PUT" xmlns:tns="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/PUT">
+  <xsd:element name="UpdCust" type="tns:UpdCust"/>
+  <xsd:complexType name="UpdCust">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="CommEye">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="CommScode">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="6"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="CommCustno">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="CommName">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="60"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="CommAddress">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="160"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="CommDob">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:integer">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="99999999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="CommCreditScore">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:integer">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="CommCsReviewDate">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:integer">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="99999999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="CommUpdSuccess">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="CommUpdFailCd">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
 </xsd:schema>]]></inlinedXMLSchema>
-    <inlinedXMLSchema targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/HTTP/input/PUT"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/HTTP/input/PUT" xmlns:body="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/PUT" xmlns:tns="http://www.ibm.com/zosConnect/2.0/mapping/HTTP/input/PUT">  
-  
-      <xsd:import namespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/PUT" schemaLocation="../schema_0.xsd"/>  
-  
-      <xsd:element name="HTTPRequest" type="tns:HTTPRequestType"/>  
-  
-      <xsd:complexType name="HTTPRequestType">  
-        <xsd:sequence>  
-          <xsd:element name="Headers" type="tns:HeadersType"/>  
-          <xsd:element name="PathParameters" type="tns:PathParametersType"/>  
-          <xsd:element name="QueryParameters" type="tns:QueryParametersType"/>  
-          <xsd:element name="Body" type="tns:BodyType"/>  
-        </xsd:sequence>  
-      </xsd:complexType>  
-  
-      <xsd:complexType name="HeadersType">  
-        <xsd:sequence>  
-        	<xsd:element maxOccurs="1" minOccurs="0" name="Authorization" type="xsd:string"/>  
-        </xsd:sequence>  
-      </xsd:complexType>  
-  
-      <xsd:complexType name="PathParametersType">  
-        <xsd:sequence>  
-        </xsd:sequence>  
-      </xsd:complexType>  
-  
-      <xsd:complexType name="QueryParametersType">  
-        <xsd:sequence>  
-        </xsd:sequence>  
-      </xsd:complexType>  
-  
-      <xsd:complexType name="BodyType">  
-        <xsd:sequence>  
-          <xsd:element ref="body:UpdCust"/>  
-        </xsd:sequence>  
-      </xsd:complexType>  
+    <inlinedXMLSchema targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/HTTP/input/PUT"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/HTTP/input/PUT" xmlns:body="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/PUT" xmlns:tns="http://www.ibm.com/zosConnect/2.0/mapping/HTTP/input/PUT">
+
+      <xsd:import namespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/PUT" schemaLocation="../schema_0.xsd"/>
+
+      <xsd:element name="HTTPRequest" type="tns:HTTPRequestType"/>
+
+      <xsd:complexType name="HTTPRequestType">
+        <xsd:sequence>
+          <xsd:element name="Headers" type="tns:HeadersType"/>
+          <xsd:element name="PathParameters" type="tns:PathParametersType"/>
+          <xsd:element name="QueryParameters" type="tns:QueryParametersType"/>
+          <xsd:element name="Body" type="tns:BodyType"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="HeadersType">
+        <xsd:sequence>
+        	<xsd:element maxOccurs="1" minOccurs="0" name="Authorization" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="PathParametersType">
+        <xsd:sequence>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="QueryParametersType">
+        <xsd:sequence>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="BodyType">
+        <xsd:sequence>
+          <xsd:element ref="body:UpdCust"/>
+        </xsd:sequence>
+      </xsd:complexType>
     </xsd:schema>]]></inlinedXMLSchema>
     <input inlinedXMLSchema="true" path="../schema_1.xsd" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/HTTP/input/PUT" var="rootInput"/>
     <output inlinedXMLSchema="true" path="../schema_0.xsd" targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/PUT" var="rootOutput"/>

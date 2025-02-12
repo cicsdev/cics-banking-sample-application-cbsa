@@ -28,7 +28,7 @@ BNK1CD   DFHMDI SIZE=(24,80),                                          *
                ATTRB=(PROT,NORM),COLOR=BLUE
 COMPANY  DFHMDF POS=(1,15),LENGTH=61,ATTRB=(NORM,PROT),COLOR=RED,      *
                INITIAL='CICS Banking Sample Application - Credit/Debit *
-               Funds.'             
+               Funds.'
 **********************************************************************
          DFHMDF POS=(3,1),LENGTH=61,ATTRB=(NORM,PROT),COLOR=TURQUOISE, *
                INITIAL='Provide an ACCOUNT number and an AMOUNT and the*

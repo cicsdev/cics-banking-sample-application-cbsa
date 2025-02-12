@@ -61,7 +61,7 @@ public class DelaccJson
 
 	@JsonProperty("DELACC_OVERDRAFT")
 	private int delaccOverdraft;
-	
+
 	@JsonProperty("DELACC_FAIL_CD")
 	private int delaccFailCode;
 

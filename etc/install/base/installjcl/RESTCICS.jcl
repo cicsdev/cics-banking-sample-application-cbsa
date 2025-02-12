@@ -1,8 +1,8 @@
 //*
-//* Copyright IBM Corp. 2023       
+//* Copyright IBM Corp. 2023
 //*
 //RESTCICS JOB ,,CLASS=A,MSGCLASS=H,
-//  NOTIFY=&SYSUID, 
+//  NOTIFY=&SYSUID,
 //  MSGLEVEL=(1,1),REGION=0M
 //*
 //STEP0001 EXEC PGM=IKJEFT01,TIME=1440,REGION=0M

@@ -1,5 +1,5 @@
 ---
-# Copyright IBM Corp. 2023  
+# Copyright IBM Corp. 2023
 Manifest-Version: 1.0
 name: "CScustcre"
 provider: "CICS-1.0"

@@ -1,7 +1,6 @@
 *
-* Copyright IBM Corp. 2023       
+* Copyright IBM Corp. 2023
 *
     INCLUDE CBSAMOD(BNKMENU)
     ENTRY BNKMENU
     NAME BNKMENU(R)
-

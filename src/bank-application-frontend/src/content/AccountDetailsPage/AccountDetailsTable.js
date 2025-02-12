@@ -159,7 +159,7 @@ const AccountDetailsTable = ({accountMainRow}) => {
 
   /**
    * Checks that all edited fields have been filled, if one is empty it uses the fallback value that was set before the user began edits
-   * 
+   *
    */
   async function updateAccount() {
     let responseData;
@@ -183,7 +183,7 @@ const AccountDetailsTable = ({accountMainRow}) => {
 
 let newLastStatementDate = lastStatementDate.substring(6,10) + "-" + lastStatementDate.substring(3,5) + "-" + lastStatementDate.substring(0,2)
 let newNextStatementDate = nextStatementDate.substring(6,10) + "-" + nextStatementDate.substring(3,5) + "-" + nextStatementDate.substring(0,2)
-let newDateOpened        = dateOpened.substring(6,10) + "-" + dateOpened.substring(3,5) + "-" + dateOpened.substring(0,2) 
+let newDateOpened        = dateOpened.substring(6,10) + "-" + dateOpened.substring(3,5) + "-" + dateOpened.substring(0,2)
       await axios
         .put(process.env.REACT_APP_ACCOUNT_URL + `/${useAccountNumber}`, {
           interestRate: useInterestRate,

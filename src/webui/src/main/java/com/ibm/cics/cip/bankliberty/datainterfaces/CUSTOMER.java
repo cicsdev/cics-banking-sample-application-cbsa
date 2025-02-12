@@ -12,11 +12,11 @@ import com.ibm.jzos.fields.*;
 
 public class CUSTOMER {
 	protected static CobolDatatypeFactory factory = new CobolDatatypeFactory();
-	static { factory.setStringTrimDefault(false); } 
+	static { factory.setStringTrimDefault(false); }
 
 	/** <pre>
 	 01 WS-EXIT-RETRY-LOOP            PIC X         VALUE ' '. </pre> */
-	public static final int OUTPUT_DATA_LEN = 259; 
+	public static final int OUTPUT_DATA_LEN = 259;
 
 	/** <pre>
 	 01 OUTPUT-DATA.
@@ -28,7 +28,7 @@ public class CUSTOMER {
     *
     *
 	     03 CUSTOMER-RECORD. </pre> */
-	public static final int CUSTOMER_RECORD_LEN = 259; 
+	public static final int CUSTOMER_RECORD_LEN = 259;
 	public static final int CUSTOMER_RECORD_OFFSET = factory.getOffset();
 
 	/** <pre>
@@ -42,7 +42,7 @@ public class CUSTOMER {
 
 	/** <pre>
 	        05 CUSTOMER-EYECATCHER                 PIC X(4). </pre> */
-	public static final int CUSTOMER_KEY_LEN = 16; 
+	public static final int CUSTOMER_KEY_LEN = 16;
 	public static final int CUSTOMER_KEY_OFFSET = factory.getOffset();
 
 	/** <pre>
@@ -75,9 +75,9 @@ public class CUSTOMER {
 
 	/** <pre>
 	*          07 CUSTOMER-POSTCODE-OR-ZIP         PIC X(10). </pre> */
-	static { factory.pushOffset(); } 
-	static { factory.setOffset(CUSTOMER_DATE_OF_BIRTH.getOffset()); } 
-	public static final int CUSTOMER_DOB_GROUP_LEN = 8; 
+	static { factory.pushOffset(); }
+	static { factory.setOffset(CUSTOMER_DATE_OF_BIRTH.getOffset()); }
+	public static final int CUSTOMER_DOB_GROUP_LEN = 8;
 	public static final int CUSTOMER_DOB_GROUP_OFFSET = factory.getOffset();
 
 	/** <pre>
@@ -91,7 +91,7 @@ public class CUSTOMER {
 	/** <pre>
 	           07 CUSTOMER-BIRTH-DAY               PIC 99. </pre> */
 	protected static final ExternalDecimalAsIntField CUSTOMER_BIRTH_YEAR = factory.getExternalDecimalAsIntField(4, false, false, false, false);
-	static { factory.popOffset(); } 
+	static { factory.popOffset(); }
 
 	/** <pre>
 	           07 CUSTOMER-BIRTH-MONTH             PIC 99. </pre> */
@@ -103,9 +103,9 @@ public class CUSTOMER {
 
 	/** <pre>
 	        05 CUSTOMER-CREDIT-SCORE               PIC 999. </pre> */
-	static { factory.pushOffset(); } 
-	static { factory.setOffset(CUSTOMER_CS_REVIEW_DATE.getOffset()); } 
-	public static final int CUSTOMER_CS_GROUP_LEN = 8; 
+	static { factory.pushOffset(); }
+	static { factory.setOffset(CUSTOMER_CS_REVIEW_DATE.getOffset()); }
+	public static final int CUSTOMER_CS_GROUP_LEN = 8;
 	public static final int CUSTOMER_CS_GROUP_OFFSET = factory.getOffset();
 
 	/** <pre>
@@ -121,7 +121,7 @@ public class CUSTOMER {
 	/** <pre>
 	           07 CUSTOMER-CS-REVIEW-DAY           PIC 99. </pre> */
 	protected static final ExternalDecimalAsIntField CUSTOMER_CS_REVIEW_YEAR = factory.getExternalDecimalAsIntField(4, false, false, false, false);
-	static { factory.popOffset(); } 
+	static { factory.popOffset(); }
 
 	protected byte[] byteBuffer;
 	// Instance variables used to cache field values

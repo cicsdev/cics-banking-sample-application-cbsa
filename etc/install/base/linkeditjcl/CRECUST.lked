@@ -1,6 +1,6 @@
 *
-* Copyright IBM Corp. 2023       
+* Copyright IBM Corp. 2023
 *
     INCLUDE CBSAMOD(CRECUST)
     ENTRY CRECUST
-    NAME CRECUST(R)         
+    NAME CRECUST(R)

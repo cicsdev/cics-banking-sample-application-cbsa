@@ -84,7 +84,7 @@ class App extends Component {
             <Route
               path="/Admin/account_deletion"
               component={AccountDeletePage}
-            /> 
+            />
             <Route path="./profile/Admin" component={AdminPage} />
             <Route path="./#/profile/Admin" component={AdminPage} />
             <Route path="/profile/Admin" component={AdminPage} />

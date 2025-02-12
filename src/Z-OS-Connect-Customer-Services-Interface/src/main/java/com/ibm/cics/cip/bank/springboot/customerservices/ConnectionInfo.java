@@ -16,11 +16,11 @@ public class ConnectionInfo
 
 	@Parameter(names =
 	{ "--port", "-p" }, description = "Port to connect with")
-	private static int port = 38417;
+	private static int port = 38016;
 
 	@Parameter(names =
 	{ "--address", "--url", "-a", "-u" }, description = "Address to use")
-	private static String address = "localhost";
+	private static String address = "winmvsb0.hursley.ibm.com";
 
 
 	private ConnectionInfo()

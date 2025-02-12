@@ -42,7 +42,7 @@ const AdminPage = () => {
     setSuccessModalOpened(wasOpened => !wasOpened);
   }
 
-  
+
 
   return (
     <Grid className="landing-page" fullWidth>

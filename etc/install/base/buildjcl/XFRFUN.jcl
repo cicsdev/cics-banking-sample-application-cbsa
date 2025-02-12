@@ -1,5 +1,5 @@
 //*
-//* Copyright IBM Corp. 2023       
+//* Copyright IBM Corp. 2023
 //*
 //* JCL to compile COBOL program XFRFUN
 // JCLLIB ORDER=CBSA.CICSBSA.BUILDJCL

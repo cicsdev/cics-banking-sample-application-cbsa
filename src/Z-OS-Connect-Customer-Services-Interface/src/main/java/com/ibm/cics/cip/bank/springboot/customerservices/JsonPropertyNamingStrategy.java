@@ -12,7 +12,7 @@ public class JsonPropertyNamingStrategy extends PropertyNamingStrategy
 {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -5634229355538397996L;
 

@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 /**
  * This class describes the methods of the CreditScore, used to generate a
  * credit score for new customers
- * 
+ *
  */
 
 public class CreditScore

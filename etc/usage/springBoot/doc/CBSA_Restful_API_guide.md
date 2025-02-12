@@ -1,4 +1,4 @@
-# CBSA RESTful API Guide. 
+# CBSA RESTful API Guide.
 
 ## Introduction:
 
@@ -15,7 +15,7 @@ Please refer to the GitHub repo:
 cicsdev/cics-banking-sample-application-cbsa/doc for architecture
 information.
 
-## The PAYMENT interface: 
+## The PAYMENT interface:
 
 Think of the Payment interface as being similar to a debit or credit
 card machine that you'd find in a business. Instead of swiping a card,
@@ -61,7 +61,7 @@ integrated into other applications if desired.
 >
 >        
 
-#### The URL to drive RESTful Payments: 
+#### The URL to drive RESTful Payments:
 
 > http://your-host-name:your-port-number/makepayment/dbcr
 >
@@ -735,7 +735,7 @@ integrated into other applications if desired.
 >
 > }
 
-## The CUSTOMER SERVICE Interface: 
+## The CUSTOMER SERVICE Interface:
 
 The Customer Service interface will be used in bank branches, by staff,
 who can traverse the line of queuing customers, to deal with most
@@ -3892,7 +3892,7 @@ applications if desired.
 
                                      
 
-#### 
+####
 
 #### The URL to drive Account Enquiry:
 
@@ -4614,7 +4614,7 @@ applications if desired.
 > If the update is unsuccessful for any other reason, you will also get
 > the same response body (with COMM_SUCCESS set to 'N').
 
-#### 
+####
 
 #### Other information:
 
@@ -5028,7 +5028,7 @@ applications if desired.
 > number, the account type, the interest rate, and the overdraft limit)
 > and a JSON response body is returned.
 
-#### An example JSON request body: 
+#### An example JSON request body:
 
 > {
 >

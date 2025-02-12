@@ -9,7 +9,7 @@
     <!-- Enable features -->
     <featureManager>
         <feature>zosconnect:zosConnect-2.0</feature>
-        <feature>zosconnect:cicsService-1.0</feature>          
+        <feature>zosconnect:cicsService-1.0</feature>
         <feature>zosconnect:zosConnectCommands-1.0</feature>
     </featureManager>
 
@@ -52,7 +52,7 @@
 		 Further element types to consider for polling interval include
 		 zosconnect_zosConnectDataXform (default 2 seconds) and
 		 keyStore (default 500 milliseconds).
-		
+
 		 Consider setting the updateTrigger attribute to "polled" if changes
 		 to associated resources need to be picked up automatically, and tune
 		 the polling interval accordingly. The attribute that controls polling
@@ -64,17 +64,17 @@
 	<config updateTrigger="mbean" monitorInterval="500"/>
 
     <!-- zosConnect APIs -->
-    <zosconnect_zosConnectAPIs updateTrigger="disabled" pollingRate="5s"/>	
-	
+    <zosconnect_zosConnectAPIs updateTrigger="disabled" pollingRate="5s"/>
+
     <!-- zosConnect Services -->
 	<zosconnect_services updateTrigger="disabled" pollingRate="5s"/>
 
 	<!-- applicationMonitor is not applicable for zCEE servers -->
 	<applicationMonitor updateTrigger="disabled" dropinsEnabled="false"/>
-	
+
 	<zosconnect_zosConnectManager requireAuth="false" requireSecure="false" setUTF8ResponseEncoding="true"/>
- 
+
     <zosconnect_cicsIpicConnection id="cicsConn" host="localhost" port="30709" />
-	
+
 
 </server>

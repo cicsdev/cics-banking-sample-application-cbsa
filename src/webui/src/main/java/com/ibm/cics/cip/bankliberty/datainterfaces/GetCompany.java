@@ -12,11 +12,11 @@ import com.ibm.jzos.fields.*;
 
 public class GetCompany {
 	protected static CobolDatatypeFactory factory = new CobolDatatypeFactory();
-	static { factory.setStringTrimDefault(false); } 
+	static { factory.setStringTrimDefault(false); }
 
 	/** <pre>
 	 LINKAGE SECTION. </pre> */
-	public static final int DFHCOMMAREA_LEN = 40; 
+	public static final int DFHCOMMAREA_LEN = 40;
 
 	/** <pre>
 	 01 DFHCOMMAREA.
@@ -28,7 +28,7 @@ public class GetCompany {
     *
     *
 	     03 GETCompanyOperation. </pre> */
-	public static final int GETCOMPANYOPERATION_LEN = 40; 
+	public static final int GETCOMPANYOPERATION_LEN = 40;
 	public static final int GETCOMPANYOPERATION_OFFSET = factory.getOffset();
 
 	/** <pre>

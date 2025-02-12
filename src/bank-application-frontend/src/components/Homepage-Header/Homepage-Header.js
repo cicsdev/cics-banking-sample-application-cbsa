@@ -31,20 +31,20 @@ const HomepageHeader = () => {
           </HeaderName>
           <HeaderGlobalBar>
             <span
-              className="cds--popover-container 
-                              cds--popover--caret 
-                              cds--popover--high-contrast 
-                              cds--popover--bottom 
-                              cds--tooltip 
+              className="cds--popover-container
+                              cds--popover--caret
+                              cds--popover--high-contrast
+                              cds--popover--bottom
+                              cds--tooltip
                               cds--icon-tooltip">
               <button
                 aria-label="ExpandableSearch"
                 tabIndex="0"
                 className="cds--header__action
-                                cds--header__action__search 
-                                 cds--btn cds--btn--primary 
-                                 cds--btn--icon-only 
-                                 cds--btn 
+                                cds--header__action__search
+                                 cds--btn cds--btn--primary
+                                 cds--btn--icon-only
+                                 cds--btn
                                  cds--btn--primary"
                 type="button"
                 aria-labelledby="tooltip-3">
@@ -78,8 +78,8 @@ const HomepageHeader = () => {
                 />
                 <button
                   aria-label="Submit"
-                  class="cds--btn 
-                                   cds--btn--primary 
+                  class="cds--btn
+                                   cds--btn--primary
                                    cds--btn--primary--submit">
                   <HeaderName
                     element={Link}

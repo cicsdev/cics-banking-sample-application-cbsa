@@ -12,11 +12,11 @@ import com.ibm.jzos.fields.*;
 
 public class GetSortCode {
 	protected static CobolDatatypeFactory factory = new CobolDatatypeFactory();
-	static { factory.setStringTrimDefault(false); } 
+	static { factory.setStringTrimDefault(false); }
 
 	/** <pre>
 	 LINKAGE SECTION. </pre> */
-	public static final int DFHCOMMAREA_LEN = 6; 
+	public static final int DFHCOMMAREA_LEN = 6;
 
 	/** <pre>
 	 01 DFHCOMMAREA.
@@ -28,7 +28,7 @@ public class GetSortCode {
     *
     *
 	     03 GETSORTCODEOperation. </pre> */
-	public static final int GETSORTCODEOPERATION_LEN = 6; 
+	public static final int GETSORTCODEOPERATION_LEN = 6;
 	public static final int GETSORTCODEOPERATION_OFFSET = factory.getOffset();
 
 	/** <pre>

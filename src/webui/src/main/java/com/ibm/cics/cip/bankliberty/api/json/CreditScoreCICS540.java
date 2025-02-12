@@ -39,7 +39,7 @@ import com.ibm.cics.server.ChildResponse.CompletionStatus;
 /**
  * This class is used with the jCICS ASYNC API to generate multiple credit
  * scores
- * 
+ *
  */
 
 public class CreditScoreCICS540

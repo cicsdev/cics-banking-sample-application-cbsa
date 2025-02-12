@@ -12,21 +12,19 @@ These instructions detail the steps required to:
 
 1.  Set up the port for the z/OS Connect server.
 
-2.  Install Maven.
+2.  Update "ConnectionInfo" with the correct port and hostname for the z/OS Connect server.
 
-3.  Update "ConnectionInfo" with the correct port and hostname for the z/OS Connect server.
+3.  Build the Java components using with Maven.
 
-4.  Package up the application with Maven.
+4.  Copy the WAR file to the apps directory.
 
-5.  Copy the WAR file to the apps directory.
+5.  Update the JVM Server.
 
-6.  Update the JVM Server.
+6.  Access the applications.
 
-7.  Access the applications.
+### Assumptions:
 
-### Assumptions: 
-
--   A CICS region (running CICS TS 6.1 or later) is available, and the
+-   A CICS region (running CICS TS 6.1 with APAR PH60795 applied or later) is available, and the
     CBSA base/COBOL installation has been performed.
 
 -   A Db2 subsystem (v12 or greater) is available.
@@ -35,12 +33,10 @@ These instructions detail the steps required to:
     base/COBOL install, especially the .aar and .sar files.
 
 -   A Liberty JVM is running inside of the CICS region - this is set up
-    as part of the Liberty UI installation process.
+    as part of the Carbon React UI installation process.
 
 -   Java 17.
 
--   Maven is utilised during the deployment of the apps -
-    instructions are provided below.
 
 
 ### CICS Bank Sample Application Architecture:
@@ -50,7 +46,7 @@ For architecture information please refer to the GitHub repo:
 > cicsdev/cics-banking-sample-application-cbsa/doc
 
 ##
- 
+
 ## Changing the port to match z/OS Connect:
 
 The Spring Boot applications run inside a WebSphere Liberty Profile JVM
@@ -75,33 +71,22 @@ private static int port = 30701;
 private static String address = \"localhost\";
 
 ##
- 
+
 ## Maven:
 
-You need Maven installed on your laptop. Maven is a dependency
-management tool which is provided by Apache.
-
-> <https://maven.apache.org/install.html>
+Maven is a dependency management tool which is provided by Apache. A wrapper for Maven is provided for your convenience.
 
 Start the command prompt.
 
-Change directory to the Z-OS-Connect-Customer-Services-Interface folder in cics-banking-sample-application-cbsa/src/
-
-This creates a folder called target, and inside of target is a .war file.
+Change directory to the base directory.
 
 Issue the following Maven command:
 
-> mvn clean package
+> mvnw clean package
 
-This creates a folder called target, and inside of target is a .war file.
+This creates 3 folders called target, one inside each of the Java application directories within src. Inside of each target is a .war file.
 
-Change directory to the Z-OS-Connect-Payment-Interface folder in cics-banking-sample-application-cbsa/src/
-
-Issue the following Maven command:
-
-> mvn clean package
-
-## 
+##
 
 ## Export to apps directory:
 
@@ -166,7 +151,7 @@ can use the applications.
 >
 > Root WebApplicationContext: initialization completed in 180395 ms
 
-## 
+##
 
 ## Access to the application/interfaces:
 
@@ -178,7 +163,7 @@ own hostname and port number:
 > <http://your-chosen-host-name:19080/customerservices-1.0/>
 
 **NOTE** - Port number 19080 is the JVM Server port number which was
-allocated as part of the Liberty UI installation process. If you elected
+allocated as part of the Carbon React UI installation process. If you elected
 to use a different port number, you should substitute it with your own
 one.
 

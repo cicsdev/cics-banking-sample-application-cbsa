@@ -408,7 +408,7 @@ public class Account
 			Long myLong = (Long) myAccount.get(JSON_OVERDRAFT);
 
 			this.overdraftLimit = myLong.intValue();
-			
+
 			this.sortcode = (String) myAccount.get(JSON_SORT_CODE);
 			this.type = (String) myAccount.get(JSON_ACCOUNT_TYPE);
 			return true;
@@ -543,7 +543,7 @@ public class Account
 
 			Long myLong = (Long) myAccount.get(JSON_OVERDRAFT);
 			this.overdraftLimit = myLong.intValue();
-			
+
 			this.sortcode = (String) myAccount.get(JSON_SORT_CODE);
 			this.type = (String) myAccount.get(JSON_ACCOUNT_TYPE);
 			myAccountsResponse.close();

@@ -6,7 +6,7 @@
 	version="8.0.5.0"
 	xmlns:map="http://www.ibm.com/zosConnect/2.0/mapping/POST"
 	jsonWrapped="false"
-	 
+
 	>
 <!--  Copyright IBM Corp. 2023   -->
 	<inlinedXMLSchema targetNamespace="http://www.ibm.com/zosConnect/2.0/mapping/JSON/output/POST"><![CDATA[

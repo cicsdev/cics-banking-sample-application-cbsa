@@ -88,4 +88,3 @@ DUMMY    DFHMDF POS=(24,79),LENGTH=1,ATTRB=(DRK,PROT,FSET),INITIAL=' '
 ***********************************************************************
          DFHMSD TYPE=FINAL
          END
-

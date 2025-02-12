@@ -1,5 +1,5 @@
 //*
-//* Copyright IBM Corp. 2023       
+//* Copyright IBM Corp. 2023
 //*
 //BATCH  PROC MEMBER=
 //COBOL  EXEC PGM=IGYCRCTL,REGION=0M,

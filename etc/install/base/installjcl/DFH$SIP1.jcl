@@ -1,5 +1,5 @@
 *
-* Copyright IBM Corp. 2023       
+* Copyright IBM Corp. 2023
 *
 *
 TRTABSZ=12288,                                                          00010000
@@ -12,8 +12,8 @@ CPSMCONN=NO                                                             00061003
 DB2CONN=YES                                                             00062011
 EDSALIM=100M                              FOR PR JVM                    00070000
 DSALIM=7M                                                               00080000
-FEPI=YES                                  START FEPI INTERFACE     
-START=INITIAL     
+FEPI=YES                                  START FEPI INTERFACE
+START=INITIAL
 INITPARM=(EQA0CPLT='NLE,STK,NWP')                                       00091007
 JVMPROFILEDIR=/var/cics/JVMProfiles/                                    00092008
 USSHOME=/usr/lpp/cicsts/cicsts56                                        00100002

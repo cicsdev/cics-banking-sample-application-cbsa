@@ -2,11 +2,11 @@
 
 Instructions on how to install CICS Banking Sample application.
 
-## base 
+## base
 
 Information, documentation and scripts for installing the COBOL parts of the application, and the archive files for deployment to the z/OS Connect server.
 
-## libertyUI 
+## carbonReactUI
 
 Instructions on how to deploy the WebSphere Liberty Profile application that runs in the JVM server inside CICS.
 
