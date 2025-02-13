@@ -127,9 +127,6 @@ Add the two applications by adding these lines:
 
 >    \<webApplication location=\"paymentinterface-1.1.war\"/\>
 
-In the \<featureManager\> section, add the following line to enable SpringBoot support.
-
->    \<feature\>springBoot-3.0\</feature\>
 
 Restart the JVM server to allow these new changes to come into effect.
 
