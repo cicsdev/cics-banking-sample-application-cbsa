@@ -1,7 +1,0 @@
-*
-* Copyright IBM Corp. 2023       
-*
-    INCLUDE CBSAMOD(ACCOFFL)
-    INCLUDE SYSLIB(DSNELI)
-    ENTRY ACCOFFL
-    NAME ACCOFFL(R)

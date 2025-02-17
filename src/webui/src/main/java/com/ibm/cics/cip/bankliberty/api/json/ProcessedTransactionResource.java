@@ -32,7 +32,7 @@ import com.ibm.json.java.JSONObject;
 
 /**
  * This class describes the methods of the ProcessedTransaction Resource
- * 
+ *
  */
 
 @Path("/processedTransaction")
@@ -124,7 +124,7 @@ public class ProcessedTransactionResource
 
 		com.ibm.cics.cip.bankliberty.web.db2.ProcessedTransaction myProcessedTransaction = new com.ibm.cics.cip.bankliberty.web.db2.ProcessedTransaction();
 		com.ibm.cics.cip.bankliberty.web.db2.ProcessedTransaction[] processedTransactions = null;
-		
+
 		processedTransactions = myProcessedTransaction
 				.getProcessedTransactions(sortCode.intValue(), limit, offset);
 		if (processedTransactions == null)
@@ -136,7 +136,7 @@ public class ProcessedTransactionResource
 		}
 
 		processedTransactionsJSON = new JSONArray(processedTransactions.length);
-		
+
 
 		for (int i = 0; i < processedTransactions.length; i++)
 		{
@@ -390,7 +390,7 @@ public class ProcessedTransactionResource
 			ProcessedTransactionCreateCustomerJSON myCreatedCustomer)
 	{
 		com.ibm.cics.cip.bankliberty.web.db2.ProcessedTransaction myProcessedTransactionDB2 = new com.ibm.cics.cip.bankliberty.web.db2.ProcessedTransaction();
-		
+
 
 		if (myProcessedTransactionDB2.writeCreateCustomer(
 				myCreatedCustomer.getSortCode(),

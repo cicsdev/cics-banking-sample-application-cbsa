@@ -12,11 +12,11 @@ import com.ibm.jzos.fields.*;
 
 public class NewCustomerNumber {
 	protected static CobolDatatypeFactory factory = new CobolDatatypeFactory();
-	static { factory.setStringTrimDefault(false); } 
+	static { factory.setStringTrimDefault(false); }
 
 	/** <pre>
 	 01 COBOL-LANGUAGE-STRUCTURE. </pre> */
-	public static final int COBOL_LANGUAGE_STRUCTURE_LEN = 13; 
+	public static final int COBOL_LANGUAGE_STRUCTURE_LEN = 13;
 
 	/** <pre>
 	     03 NEWCUSNO-FUNCTION  PIC X. </pre> */

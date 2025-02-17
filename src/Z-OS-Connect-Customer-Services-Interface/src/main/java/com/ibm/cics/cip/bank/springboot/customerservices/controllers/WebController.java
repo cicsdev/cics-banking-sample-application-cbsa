@@ -168,9 +168,9 @@ public class WebController implements WebMvcConfigurer
 				// plain
 				// Java class
 				ObjectMapper myObjectMapper = new ObjectMapper();
-				
+
 				myObjectMapper.enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS);
-				
+
 
 
 				AccountEnquiryJson responseObj = myObjectMapper.readValue(responseBody, AccountEnquiryJson.class);
@@ -245,7 +245,7 @@ public class WebController implements WebMvcConfigurer
 	{
 		if (!bindingResult.hasErrors())
 		{
- 
+
 			WebClient client = WebClient.create(ConnectionInfo.getAddressAndPort() + "/inqcustz/enquiry/"
 							+ customerEnquiryForm.getCustNumber());
 
@@ -254,7 +254,7 @@ public class WebController implements WebMvcConfigurer
 				ResponseSpec response = client.get().retrieve();
 
 				String responseBody = response.bodyToMono(String.class).block();
-				
+
 
 				CustomerEnquiryJson responseObj = new ObjectMapper()
 						.readValue(responseBody, CustomerEnquiryJson.class);
@@ -732,7 +732,7 @@ public class WebController implements WebMvcConfigurer
 			model.addAttribute(LARGE_TEXT, "Customer updated");
 			model.addAttribute(SMALL_TEXT, responseObj.toPrettyString());
 
-			// Otherwise... 
+			// Otherwise...
 		}
 		catch (ItemNotFoundException | IllegalArgumentException e)
 		{
@@ -921,7 +921,7 @@ class InsufficientFundsException extends Exception
 {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 2916294528612553278L;
 
@@ -939,7 +939,7 @@ class InvalidAccountTypeException extends Exception
 {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -3342099995389507130L;
 
@@ -957,7 +957,7 @@ class TooManyAccountsException extends Exception
 {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -3421012321723845378L;
 
@@ -976,7 +976,7 @@ class ItemNotFoundException extends Exception
 {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -3570840021629249034L;
 

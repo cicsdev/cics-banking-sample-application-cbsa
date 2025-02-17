@@ -1,6 +1,6 @@
 //COMPALL JOB ,CLASS=A,MSGCLASS=X,NOTIFY=&SYSUID
 //*
-//* Copyright IBM Corp. 2023       
+//* Copyright IBM Corp. 2023
 //*
 //*
 // JCLLIB ORDER=CBSA.CICSBSA.BUILDJCL

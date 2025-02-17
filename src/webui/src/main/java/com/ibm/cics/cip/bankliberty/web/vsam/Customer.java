@@ -235,7 +235,7 @@ public class Customer
 
 	/**
 	 * printCustomerDetails Test method by Tom
-	 * 
+	 *
 	 */
 	public void printCustomerDetails()
 	{
@@ -763,12 +763,12 @@ public class Customer
 		myCustomer.setCustomerAddress(customer.getCustomerAddress().trim());
 		// What about title validation?
 		myCustomer.setCustomerName(customer.getCustomerName().trim());
-		
+
 		Calendar myCalendar = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
 		myCalendar.setTime(customer.getDateOfBirth());
-		
+
 		myCalendar.setTimeInMillis(myCalendar.getTimeInMillis() - myCalendar.getTimeZone().getOffset(myCalendar.getTimeInMillis()));
-		
+
 		myCustomer.setCustomerBirthDay(myCalendar.get(Calendar.DAY_OF_MONTH));
 		myCustomer.setCustomerBirthMonth(myCalendar.get(Calendar.MONTH) + 1);
 		myCustomer.setCustomerBirthYear(myCalendar.get(Calendar.YEAR));

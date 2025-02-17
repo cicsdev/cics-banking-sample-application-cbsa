@@ -36,4 +36,3 @@
               07 COMM-NEXT-STMT-YEAR PIC 9999.
             05 COMM-AVAIL-BAL            PIC S9(10)V99.
             05 COMM-ACTUAL-BAL           PIC S9(10)V99.
-

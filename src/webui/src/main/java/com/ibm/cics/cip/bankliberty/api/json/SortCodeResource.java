@@ -5,7 +5,7 @@
  */
 /**
  * This class describes the methods of the SortCode Resource
- * 
+ *
  */
 
 package com.ibm.cics.cip.bankliberty.api.json;

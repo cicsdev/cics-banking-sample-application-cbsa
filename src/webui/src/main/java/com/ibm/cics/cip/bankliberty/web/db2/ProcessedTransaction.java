@@ -244,7 +244,7 @@ public class ProcessedTransaction extends HBankDataAccess
 		openConnection();
 		String sql = "SELECT * from (SELECT p.*,row_number() over() as rn from PROCTRAN as p where PROCTRAN_SORTCODE like ? ORDER BY PROCTRAN_DATE ASC, PROCTRAN_TIME ASC) as col where rn between ? and ?";
 		logger.log(Level.FINE, () -> "About to issue query SQL <" + sql + ">");
-		
+
 
 		int i = 0;
 		try (PreparedStatement stmt = conn.prepareStatement(sql);)
@@ -281,7 +281,7 @@ public class ProcessedTransaction extends HBankDataAccess
 						temp[i].getType().compareTo(PROCTRAN.PROC_TY_BRANCH_CREATE_ACCOUNT) == 0 ||
 						temp[i].getType().compareTo(PROCTRAN.PROC_TY_WEB_CREATE_ACCOUNT) == 0)
 				{
-					temp[i] = processCreateDeleteAccountRecord(temp[i]);					
+					temp[i] = processCreateDeleteAccountRecord(temp[i]);
 				}
 				if(temp[i].getType().compareTo(PROCTRAN.PROC_TY_BRANCH_DELETE_CUSTOMER) == 0 ||
 						temp[i].getType().compareTo(PROCTRAN.PROC_TY_WEB_DELETE_CUSTOMER) == 0 ||
@@ -642,9 +642,9 @@ public class ProcessedTransaction extends HBankDataAccess
 		}
 		myStringBuilder.append(sortCode2);
 
-		
+
 		deleteCustomerDescription = deleteCustomerDescription.concat(myStringBuilder.toString());
-		
+
 		deleteCustomerDescription = deleteCustomerDescription
 				.concat(padCustomerNumber(customerNumber));
 		myStringBuilder = new StringBuilder();
@@ -716,7 +716,7 @@ public class ProcessedTransaction extends HBankDataAccess
 
 		createCustomerDescription = createCustomerDescription
 				+ customerDOBStringForNewCustomer;
-		
+
 
 		openConnection();
 

@@ -59,7 +59,7 @@ const CustomerDeletePage = () => {
   function getDay(date){
     return date.substring(8,10)
   }
- 
+
    /**
     * Finds the customer using the customerNumber entered by the user and creates an array from the server response
     * customerDetailsRows' state is set to this array
@@ -101,7 +101,7 @@ const CustomerDeletePage = () => {
          }
        })
    }
- 
+
    /**
     * Finds the accounts for the given customer ID and creates an array from the server response.
     * accountDetailsRows' state is set to this array
@@ -137,7 +137,7 @@ const CustomerDeletePage = () => {
          if (error.response) {
            console.log(error)
          }
-       }) 
+       })
    }
 
   return (
@@ -187,7 +187,7 @@ const CustomerDeletePage = () => {
                 </div>
                 {isOpened && (
                   <Column lg={16}>
-                    <CustomerDeleteTables 
+                    <CustomerDeleteTables
                     customerRow={customerDetailsRows} accountRow={accountDetailsRows}/>
                   </Column>
                 )}

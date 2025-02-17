@@ -316,9 +316,9 @@ public class Customer
 
 	/**
 	 * inDB
-	 * 
+	 *
 	 * Checks if the customer is in the database
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean inDB()
@@ -363,9 +363,9 @@ public class Customer
 
 	/**
 	 * sortOutDate
-	 * 
+	 *
 	 * Returns a correctly formatted java date from the one input
-	 * 
+	 *
 	 * @param dateString
 	 * @return
 	 */
@@ -388,10 +388,10 @@ public class Customer
 
 	/**
 	 * showInfo
-	 * 
+	 *
 	 * Displays all the info stored about the customer Will show a credit score
 	 * if the customer is being edited
-	 * 
+	 *
 	 */
 	public void showInfo()
 	{

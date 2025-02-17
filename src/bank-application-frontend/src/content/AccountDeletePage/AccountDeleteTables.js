@@ -139,7 +139,7 @@ const AccountDeleteTables = ({accountQuery}) => {
     });
     try {
       let row;
-      accountData.accounts.forEach(account => { 
+      accountData.accounts.forEach(account => {
       row = {
         accountNumber : account.id,
         sortCode : account.sortCode,
@@ -177,7 +177,7 @@ const AccountDeleteTables = ({accountQuery}) => {
        console.log(responseData)
      }).catch(function (error){
       if (error.response){
-        console.log(error) 
+        console.log(error)
         displayModal()
         displayUnableDeleteModal()
       }
@@ -189,7 +189,7 @@ const AccountDeleteTables = ({accountQuery}) => {
      console.log(e)
      displayModal()
      displayUnableDeleteModal()
-   } 
+   }
    }
 
 const [isModalOpened, setModalOpened] = useState(false);

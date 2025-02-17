@@ -8,7 +8,7 @@ of the necessary files, data etc.
 This document is for the Carbon React UI deployment/installation. It
 assumes that the installer already has:
 
--   a CICS region (running CICS TS 6.1 or greater)
+-   a CICS region (running CICS TS 6.1 with APAR PH60795 applied, or later)
 
 -   a Db2 subsystem (v12 or greater)
 
@@ -23,7 +23,7 @@ These instructions detail the steps required to:
 
 - [Set up the JVM server](#JVM-server)
 
-- [Configure the server.xml](#serverxml)
+- [Edit the server.xml](#edit-serverxml)
 
 - [Deploy the Carbon React UI](#deploy)
 
@@ -31,7 +31,7 @@ These instructions detail the steps required to:
 
 - [Further Development](#development)
 
-### Assumptions: 
+### Assumptions:
 
 -   These instructions utilise CICS TS 6.1 and therefore all directory
     names used etc. are based around that, they will need to be
@@ -111,7 +111,7 @@ And then change the owner:
 
 
 ## JVM profile
-If you have already installed the Spring Boot UI, you can skip this step. Carry on from [Edit server.xml](#Edit server.xml)
+If you have already installed the Spring Boot UI, you can skip this step. Carry on from ![Edit server.xml](#Edit server.xml)
 
 We need a JVMSERVER resource.
 
@@ -134,7 +134,7 @@ We need a JVMSERVER resource.
 
   a.  Ensure that JAVA_HOME is set to the appropriate level of java (in
       our case Java 17):
- 
+
 `JAVA_HOME=/usr/lpp/java/current_64/`
 
 b.  Ensure that autoconfigure is set to true:
@@ -191,12 +191,6 @@ g. Ensure that the Time Zone is set correctly, otherwise Java and COBOL will not
 
  This is a JVM server using the JVM profile we copied earlier.
 
-`CEDA DEFINE GROUP(CBSAWLP) URIMAP(CBSAWLP) USAGE(JVMSERVER) HOST(\*)
- PORT(**19080**) PATH(\*) USERID(CICSUSER)`
-
- Amend the above command accordingly, to represent your chosen port
- number and userid.
-
 2.  Add the group CBSAWLP to a list installed on a cold start, for
     example CICSTS61.
 
@@ -215,7 +209,7 @@ You should also add the group to the list installed on a cold start.
 
 
 
-## server.xml
+## Edit server.xml
 
 1.  Edit server.xml so that the application "webUI" is defined.
 
@@ -235,40 +229,26 @@ You should also add the group to the list installed on a cold start.
 
 3.  Within the `<featureManager>` tag, add the following lines:
 
-`<feature>jaxrs-2.1</feature>`
+`<feature>jakartaee-10.0</feature>`
 `<feature>json-1.0</feature>`
-`<feature>jsp-2.3</feature>`
-`<feature>jdbc-4.0</feature>`
 
 
 ## Deploy
 
-You need Maven installed on your laptop. Maven is a dependency
-management tool which is provided by Apache.
-
-[Maven](https://maven.apache.org/install.html)
+Maven is a dependency management tool which is provided by Apache. A wrapper for Maven is provided.
 
 Start the command prompt.
 
-Change directory to the cics-banking-sample-application-cbsa/src/webui/ folder
+The following process will build both the Carbon React UI and the two SpringBoot applications.
 
-At this point we are missing the java archive (jar) for the IBM JZOS Toolkit API. 
-
-You need to goto your installation of IBM Java for z/OS, typically this can be found in:
-
-`/usr/lpp/java/lib/ext`
-
-Copy the ibmjzos.jar to your workstation and make a note of the location.
-
-Issue the following command from the command line to add the IBM JZOS Toolkit API jar:
-
-`mvn install:install-file -Dfile="*download location*/ibmjzos.jar" -DgroupId=jzos -DartifactId=ibmjzos -Dversion=1.0.0 -Dpackaging=jar`
+Change directory to the cics-banking-sample-application-cbsa folder.
 
 Issue the following Maven command:
 
-`mvn clean package`
+`mvnw clean package`
 
-This will create "webui-1.0.war" file in a new "target" directory.
+This will create "webui-1.0.war" file in a new "target" directory,
+`/src/webui/target`
 
 ## Create an apps directory in your JVM server directory
 
@@ -276,7 +256,7 @@ This directory will be where our applications will be stored.
 
 ## Export to apps directory
 
-Copy the war file from the target directory into the apps directory of the JVM server. 
+Copy the war file from the target directory into the apps directory of the JVM server. You may need to alter permissions on the war file to let the CICS region userid read it.
 
 
 ## Checking
@@ -304,16 +284,16 @@ Copy the war file from the target directory into the apps directory of the JVM s
 
 ## Development
 
-The Carbon React UI is an application that consists of back-end Java code and front-end JavaScript. 
-You can make changes to the back-end Java code in the application which is in 
+The Carbon React UI is an application that consists of back-end Java code and front-end JavaScript.
+You can make changes to the back-end Java code in the application which is in
 
 [src/webui/src/main/java](/src/webui/src/main/java)
 
  After making changes, you need to use Maven to rebuild.
 
-Issue the following Maven command:
+Issue the following Maven command from the base directory:
 
-`mvn clean package`
+`mvnw clean package`
 
 This will create "webui-1.0.war" file into the "target" directory. Copy this war file to the "apps" folder as before.
 
@@ -327,7 +307,7 @@ After making changes, you need to use a tool called "yarn" to build and package.
 
 `npm install yarn`
 
-You then issue the 
+You then issue the
 
 `yarn build package`
 
@@ -335,7 +315,7 @@ You then issue the
 
 `/src/bank-application-frontend/`
 
-This will compress the Javascript into a new "build" directory. 
+This will compress the JavaScript into a new "build" directory.
 
 Copy the contents of the build directory and paste them in to the following directory. It is a good idea to delete the "static" folder from WebContent before doing so. This is because "yarn build package" produces JavaScript files with randomly generated names that are quite large, and these will make your "war" file larger. You only need the latest ones produced by the build.
 
@@ -343,8 +323,8 @@ Copy the contents of the build directory and paste them in to the following dire
 
 After making changes, you need to use Maven to rebuild.
 
-Issue the following Maven command:
+Issue the following Maven command from the base directory:
 
-`mvn clean package`
+`mvnw clean package`
 
-This will create "webui-1.0.war" file into the "target" directory. Copy this war file to the "apps" folder as before.
+This will create "webui-1.0.war" file into the "src/webui/target" directory. Copy this war file to the "apps" folder as before.

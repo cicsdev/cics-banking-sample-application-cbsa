@@ -1,5 +1,5 @@
 //*
-//* Copyright IBM Corp. 2023       
+//* Copyright IBM Corp. 2023
 //*
 //* Proc to assemble BMS maps
 //MAPGEN PROC  MEMBER=,                      NAME OF MAPSET - REQUIRED

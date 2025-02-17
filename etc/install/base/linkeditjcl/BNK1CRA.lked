@@ -1,7 +1,6 @@
 *
-* Copyright IBM Corp. 2023       
+* Copyright IBM Corp. 2023
 *
     INCLUDE CBSAMOD(BNK1CRA)
     ENTRY BNK1CRA
     NAME BNK1CRA(R)
-

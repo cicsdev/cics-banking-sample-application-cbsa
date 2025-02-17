@@ -95,7 +95,7 @@ const AccountDetailsPage = () => {
         overdraft: account.overdraft,
         availableBalance: account.availableBalance,
         actualBalance: account.actualBalance,
-        formattedDateOpened: formattedDateOpened, 
+        formattedDateOpened: formattedDateOpened,
         dateOpened: account.dateOpened,
         formattedLastStatementDue: formattedLastStatementDue,
         formattedNextStatementDue: formattedNextStatementDue,

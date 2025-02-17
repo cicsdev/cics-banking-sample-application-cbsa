@@ -1,5 +1,5 @@
 //*
-//* Copyright IBM Corp. 2023       
+//* Copyright IBM Corp. 2023
 //*
 //REPLSIP JOB ,,CLASS=A,MSGCLASS=H,
 //  NOTIFY=&SYSUID,

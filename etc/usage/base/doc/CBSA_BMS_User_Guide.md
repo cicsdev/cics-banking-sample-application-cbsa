@@ -1,6 +1,6 @@
 # The CICS Bank Sample Application(CBSA) base/COBOL BMS User Guide
 
-## 
+##
 
 ## What is the CICS Bank Sample Application?
 
@@ -47,7 +47,7 @@
     verification/validation/interaction of IBM and vendor tool
     offerings.
 
-## Accessing the CBSA application: 
+## Accessing the CBSA application:
 
 > After completion of the installation instructions for CBSA base/COBOL,
 > the BMS application may be invoked from within the CICS TS region, by
@@ -72,7 +72,7 @@
 
 #### Displaying Customer information (option 1 from the main menu):
 
-####  
+####
 
 > The Bank has a number of prepopulated Customers set up during
 > installation. To display the information for a customer, select option
@@ -101,7 +101,7 @@
 
 #### Displaying Account information (option 2 from the main menu):
 
-####  
+####
 
 > There are lots of prepopulated accounts belonging to customers. To
 > display details of a single account, select option 2 (from the main
@@ -128,7 +128,7 @@
 
 #### Displaying All of the Accounts for a given Customer (option A from the main menu):
 
-####  
+####
 
 > To see what accounts a particular Customer has select option A from
 > the main menu:
@@ -146,11 +146,11 @@
 > In this example Customer 3 has 3 accounts (ISA, SAVING, CURRENT) which
 > all hold different balances.
 
-## 
+##
 
 #### Creating a New Customer (option 3 from the main menu):
 
-####  
+####
 
 > To create a new Customer, select option 3 from the main menu:
 >
@@ -178,7 +178,7 @@
 
 #### Creating a New Account (option 4 from the main menu):
 
-####  
+####
 
 > To create a new Account, select option 4 from the main menu:
 >
@@ -207,7 +207,7 @@
 >
 #### Update Account Information (option 5 from the main menu):
 
-####  
+####
 
 > To update the details of an existing Account, select option 5 from the
 > main menu:
@@ -242,7 +242,7 @@
 
 #### Credit and Debit funds to an Account (option 6 from the main menu):
 
-####  
+####
 
 > To credit (pay in) or debit (withdraw) funds from an Account, use
 > option 6 from the main menu:
@@ -266,7 +266,7 @@
 
 #### Transfer funds between Accounts (option 7 from the main menu):
 
-####  
+####
 
 > To transfer funds between accounts, use option 7 from the main menu:
 >

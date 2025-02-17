@@ -1,5 +1,5 @@
 //*
-//* Copyright IBM Corp. 2023       
+//* Copyright IBM Corp. 2023
 //*
 // SET CICSHLQ=DFH560.CICS
 // SET CBSAHLQ=CBSA.CICSBSA

@@ -1,9 +1,9 @@
-# CICS Banking Sample Application (CBSA) React UI User Guide 
+# CICS Banking Sample Application (CBSA) React UI User Guide
 
 
 ## CICS Banking Sample Application React UI Architecture:
 
-For architecture information please refer to the GitHub repo: 
+For architecture information please refer to the GitHub repo:
 
 [CBSA Architecture Documentation](/doc/CBSA_Architecture_guide.md)
 
@@ -22,7 +22,7 @@ will look something like this:
 The React UI main menu is the start point for utilising all
 functionality from this interface. The React UI contains similar
 functionality to the BMS offering, however it should be noted that there
-is not a 1-1 mapping. 
+is not a 1-1 mapping.
 
 The React UI contains some functionality which
 the BMS offering does not. To utilise a specific function click on the
@@ -37,7 +37,7 @@ CBSA has a login mechanism, which is yet to be implemented with any actual secur
 
 ![Control Panel](./images/CarbonReactUIUserGuide/101-Carbon-React-Control-Panel.png)
 
-Upon login, the user will see the user functions list, containing both "User Services" and "Accounts Service". These functions are also available from the hamburger menu in the top left of the screen. 
+Upon login, the user will see the user functions list, containing both "User Services" and "Accounts Service". These functions are also available from the hamburger menu in the top left of the screen.
 
 ![Hamburger Menu](./images/CarbonReactUIUserGuide/Carbon-React-Hamburger-Icon.png)
 
@@ -51,7 +51,7 @@ Clicking submit once the form is completed will generate the popup:
 
 ![Create Customer Popup](./images/CarbonReactUIUserGuide/202-Carbon-React-Create-Customer-Popup.png)
 
-The customer ID is generated upon creation. 
+The customer ID is generated upon creation.
 
 **Note**: Customers cannot be younger than 18 or older than 120.
 

@@ -10,11 +10,11 @@ and running.
 
 These instructions detail the steps required to:
 
-1.  Set up the port for the zOS Connect server.
+1.  Set up the port for the z/OS Connect server.
 
-2.  Install Maven.
+2.  Update "ConnectionInfo" with the correct port and hostname for the z/OS Connect server.
 
-3.  Package up the application with Maven.
+3.  Build the Java components using with Maven.
 
 4.  Copy the WAR file to the apps directory.
 
@@ -22,23 +22,21 @@ These instructions detail the steps required to:
 
 6.  Access the applications.
 
-### Assumptions: 
+### Assumptions:
 
--   A CICS region (running CIC TS 6.1 or later) is available, and the
+-   A CICS region (running CICS TS 6.1 with APAR PH60795 applied or later) is available, and the
     CBSA base/COBOL installation has been performed.
 
 -   A Db2 subsystem (v12 or greater) is available.
 
--   A zOS Connect server is available - set up as part of the
-    base/COBOL install.
+-   A z/OS Connect server is available and set up as part of the
+    base/COBOL install, especially the .aar and .sar files.
 
 -   A Liberty JVM is running inside of the CICS region - this is set up
-    as part of the Liberty UI installation process.
+    as part of the Carbon React UI installation process.
 
 -   Java 17.
 
--   Maven is utilised during the deployment of the apps -
-    instructions are provided below.
 
 
 ### CICS Bank Sample Application Architecture:
@@ -48,15 +46,15 @@ For architecture information please refer to the GitHub repo:
 > cicsdev/cics-banking-sample-application-cbsa/doc
 
 ##
- 
+
 ## Changing the port to match z/OS Connect:
 
 The Spring Boot applications run inside a WebSphere Liberty Profile JVM
 server inside CICS, but also communicate with z/OS Connect. It is
-important to make sure that the connection information to the zOS
+important to make sure that the connection information to the z/OS
 Connect server is correct. As a default, these are set to port 30701
 and host localhost, if you utilised a different port number or hostname
-during the zOS Connect setup (as part of the base/COBOL installation)
+during the z/OS Connect setup (as part of the base/COBOL installation)
 then please substitute the default values with yours.
 
 Should you need to change these, they are configured in the following files, which can be found on the repo at:
@@ -73,49 +71,26 @@ private static int port = 30701;
 private static String address = \"localhost\";
 
 ##
- 
+
 ## Maven:
 
-You need Maven installed on your laptop. Maven is a dependency
-management tool which is provided by Apache.
-
-> <https://maven.apache.org/install.html>
+Maven is a dependency management tool which is provided by Apache. A wrapper for Maven is provided for your convenience.
 
 Start the command prompt.
 
-Change directory to the Z-OS-Connect-Customer-Services-Interface folder in cics-banking-sample-application-cbsa/src/
-
-This creates a folder called target, and inside of target is a .war file.
-
-At this point we are missing a Java Archive file for the jZOS Toolkit. 
-
-You need to goto your installation of java, typically this can be found in:
-
-> /usr/lpp/java/lib/ext
-
-Copy the "ibmjzos.jar" to a location on your workstation and make a note of it.
-
-Issue the following command from the command line:
-
-> mvn install:install-file -Dfile="*download location*/ibmjzos.jar" -DgroupId=jzos -DartifactId=ibmjzos -Dversion=1.0.0 -Dpackaging=jar
+Change directory to the base directory.
 
 Issue the following Maven command:
 
-> mvn clean package
+> mvnw clean package
 
-This creates a folder called target, and inside of target is a .war file.
+This creates 3 folders called target, one inside each of the Java application directories within src. Inside of each target is a .war file.
 
-Change directory to the Z-OS-Connect-Payment-Interface folder in cics-banking-sample-application-cbsa/src/
-
-Issue the following Maven command:
-
-> mvn clean package
-
-## 
+##
 
 ## Export to apps directory:
 
-Copy the war file from the two target directories into the apps directory. 
+Copy the war file from the two target directories into the apps directory as binary files.
 
 ##
 
@@ -152,6 +127,7 @@ Add the two applications by adding these lines:
 
 >    \<webApplication location=\"paymentinterface-1.1.war\"/\>
 
+
 Restart the JVM server to allow these new changes to come into effect.
 
 The WAR files have installed and now we must wait for the Spring Boot
@@ -165,14 +141,14 @@ these are found in:
 This is a sign that things are working, and the applications are
 starting.
 
-Message CWWKZ0001I is issued once the applications have started at which point you
-can use them.
+Message CWWKZ0001I is issued several minutes later at which point you
+can use the applications.
 
 > Root WebApplicationContext: initialization completed in 180700 ms
 >
 > Root WebApplicationContext: initialization completed in 180395 ms
 
-## 
+##
 
 ## Access to the application/interfaces:
 
@@ -184,7 +160,7 @@ own hostname and port number:
 > <http://your-chosen-host-name:19080/customerservices-1.0/>
 
 **NOTE** - Port number 19080 is the JVM Server port number which was
-allocated as part of the Liberty UI installation process. If you elected
+allocated as part of the Carbon React UI installation process. If you elected
 to use a different port number, you should substitute it with your own
 one.
 

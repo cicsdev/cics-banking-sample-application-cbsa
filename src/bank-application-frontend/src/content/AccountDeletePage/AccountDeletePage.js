@@ -74,7 +74,7 @@ const AccountDeletePage = () => {
                 </div>
                 {isOpened && (
                   <Column lg={16}>
-                    <AccountDeleteTables 
+                    <AccountDeleteTables
                     accountQuery={searchAccountValue} />
                   </Column>
                 )}

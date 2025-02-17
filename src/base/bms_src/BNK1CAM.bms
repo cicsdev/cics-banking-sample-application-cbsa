@@ -6,7 +6,7 @@
 ***************************************************************
 *
 * BNK1CAM
-* Create Account for CICS Bank Sample Application
+* Create Account for CICS Banking Sample Application
 *
 * Created: 12-Nov-2015
 *
@@ -25,8 +25,9 @@ BNK1CA   DFHMDI SIZE=(24,80),                                          *
                COLUMN=1,LINE=1
          DFHMDF POS=(1,1),LENGTH=7,INITIAL='BNK1CA ',                  *
                ATTRB=(PROT,NORM),COLOR=BLUE
-COMPANY  DFHMDF POS=(1,18),LENGTH=58,ATTRB=(NORM,PROT),COLOR=RED,      *
-               INITIAL='CICS Bank Sample Application- Create Account. '
+COMPANY  DFHMDF POS=(1,18),LENGTH=61,ATTRB=(NORM,PROT),COLOR=RED,      *
+               INITIAL='CICS Banking Sample Application- Create Account*
+               .'
 ***********************************************************************
          DFHMDF POS=(3,1),LENGTH=57,ATTRB=(NORM,PROT),COLOR=TURQUOISE, *
                INITIAL='Please provide the requested information and pr*

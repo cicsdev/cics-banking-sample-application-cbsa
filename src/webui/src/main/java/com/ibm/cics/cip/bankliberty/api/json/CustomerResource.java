@@ -42,7 +42,7 @@ public class CustomerResource
 
 	/**
 	 * This class describes the methods of the Customer Resource
-	 * 
+	 *
 	 */
 
 	static String sortcode = null;
@@ -66,7 +66,7 @@ public class CustomerResource
 	private static final String DELETE_CUSTOMER_INTERNAL_EXIT = "deleteCustomerInternal() exiting";
 
 	private static final String UPDATE_CUSTOMER_INTERNAL = "updateCustomerInternal for customerNumber ";
-	
+
 	private static final String UPDATE_CUSTOMER_INTERNAL_EXIT = "updateCustomerInternal() exiting ";
 
 	private static final String UPDATE_CUSTOMER_EXTERNAL = "updateCustomerExternal for customerNumber ";
@@ -126,7 +126,7 @@ public class CustomerResource
 				CREATE_CUSTOMER_INTERNAL + customer.toString());
 		JSONObject response = new JSONObject();
 
-		
+
 		if(customer.getCustomerName() == null)
 		{
 			JSONObject error = new JSONObject();
@@ -141,7 +141,7 @@ public class CustomerResource
 					CREATE_CUSTOMER_INTERNAL_EXIT, myResponse);
 			return myResponse;
 		}
-		
+
 		String[] name = customer.getCustomerName().split(" ");
 
 		if (!customer.validateTitle(name[0].trim()))
@@ -173,7 +173,7 @@ public class CustomerResource
 					CREATE_CUSTOMER_INTERNAL_EXIT, myResponse);
 			return myResponse;
 		}
-		
+
 		Integer inputSortCode = Integer.parseInt(customer.getSortCode());
 
 		if (!inputSortCode.equals(this.getSortCode()))
@@ -190,7 +190,7 @@ public class CustomerResource
 					CREATE_CUSTOMER_INTERNAL_EXIT, myResponse);
 			return myResponse;
 		}
-		
+
 		if(customer.getCustomerAddress() == null)
 		{
 			JSONObject error = new JSONObject();
@@ -205,7 +205,7 @@ public class CustomerResource
 					CREATE_CUSTOMER_INTERNAL_EXIT, myResponse);
 			return myResponse;
 		}
-		
+
 		if(customer.getDateOfBirth() == null)
 		{
 			JSONObject error = new JSONObject();
@@ -246,14 +246,14 @@ public class CustomerResource
 		response.put(JSON_SORT_CODE, sortcode);
 		response.put(JSON_CUSTOMER_NAME, customer.getCustomerName());
 		response.put(JSON_CUSTOMER_ADDRESS, customer.getCustomerAddress());
-		
+
 		Calendar myCalendar = Calendar.getInstance();
 		myCalendar.setTime(customer.getDateOfBirth());
 		myCalendar.setTimeInMillis(myCalendar.getTimeInMillis() - myCalendar.getTimeZone().getOffset(myCalendar.getTimeInMillis()));
-		
-		
-		
-		
+
+
+
+
 		DateFormat myDateFormat = DateFormat.getDateInstance();
 		Calendar newCalendar = Calendar.getInstance();
 		newCalendar.setTime(myCalendar.getTime());
@@ -263,12 +263,12 @@ public class CustomerResource
 
 		ProcessedTransactionCreateCustomerJSON myCreatedCustomer = new ProcessedTransactionCreateCustomerJSON();
 		myCreatedCustomer.setAccountNumber("0");
-		
+
 		java.sql.Date mySqlDate = new java.sql.Date(myCalendar.getTimeInMillis());
-		
-		
+
+
 		mySqlDate.setTime(mySqlDate.getTime() - myCalendar.getTimeZone().getOffset(myCalendar.getTimeInMillis()));
-	
+
 		myCreatedCustomer.setCustomerDOB(mySqlDate);
 		myCreatedCustomer.setCustomerName(vsamCustomer.getName());
 		myCreatedCustomer.setSortCode(vsamCustomer.getSortcode());
@@ -330,7 +330,7 @@ public class CustomerResource
 	{
 		logger.entering(this.getClass().getName(),
 				UPDATE_CUSTOMER_INTERNAL + id);
-		
+
 		if(customer.getCustomerName() == null)
 		{
 			JSONObject error = new JSONObject();
@@ -345,7 +345,7 @@ public class CustomerResource
 					UPDATE_CUSTOMER_INTERNAL_EXIT, myResponse);
 			return myResponse;
 		}
-		
+
 		String[] name = customer.getCustomerName().split(" ");
 
 		if (!customer.validateTitle(name[0].trim()))
@@ -364,7 +364,7 @@ public class CustomerResource
 			return myResponse;
 		}
 
-		
+
 		if(customer.getSortCode() == null)
 		{
 			JSONObject error = new JSONObject();
@@ -392,7 +392,7 @@ public class CustomerResource
 							+ inputSortCode);
 			return Response.status(400).entity(error.toString()).build();
 		}
-		
+
 		if(customer.getCustomerAddress() == null)
 		{
 			JSONObject error = new JSONObject();
@@ -691,11 +691,11 @@ public class CustomerResource
 		myDeletedCustomer.setAccountNumber("0");
 		myDeletedCustomer.setCustomerDOB(vsamCustomer.getDob());
 		myDeletedCustomer.setCustomerName(vsamCustomer.getName());
-		
-		
+
+
 		myDeletedCustomer.setSortCode(vsamCustomer.getSortcode());
 		myDeletedCustomer.setCustomerNumber(vsamCustomer.getCustomerNumber());
-		
+
 
 		Response writeDeleteCustomerResponse = myProcessedTransactionResource
 				.writeDeleteCustomerInternal(myDeletedCustomer);

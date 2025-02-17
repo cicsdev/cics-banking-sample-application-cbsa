@@ -39,7 +39,7 @@ public class CounterResource extends HBankDataAccess
 	/**
 	 * This class describes the methods of the CounterResource. NamedCounters
 	 * are not supported in jCICS, so we jCICS LINK to COBOL programs
-	 * 
+	 *
 	 */
 
 	private static final String NEWACCNO = "NEWACCNO";

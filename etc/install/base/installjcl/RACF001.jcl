@@ -2,7 +2,7 @@
 //  NOTIFY=&SYSUID,
 //  MSGLEVEL=(1,1)
 //*
-//* Copyright IBM Corp. 2023       
+//* Copyright IBM Corp. 2023
 //*
 //*
 //TSO     EXEC PGM=IKJEFT01,DYNAMNBR=20,REGION=0M

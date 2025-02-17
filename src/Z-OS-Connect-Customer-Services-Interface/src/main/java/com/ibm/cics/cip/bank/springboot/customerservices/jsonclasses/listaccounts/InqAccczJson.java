@@ -33,7 +33,7 @@ public class InqAccczJson
 	@JsonProperty("COMM_SUCCESS")
 	private String commSuccess;
 
-	
+
 	public int getCommFailCode()
 	{
 		return commFailCode;

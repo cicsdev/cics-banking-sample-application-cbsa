@@ -25,7 +25,7 @@ import com.ibm.cics.server.Task;
 
 /**
  * This class is used to hold a HashTable which in turn holds Db2 Connections
- * 
+ *
  */
 
 public class HBankDataAccess

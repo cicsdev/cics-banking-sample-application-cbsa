@@ -1,7 +1,0 @@
-*
-* Copyright IBM Corp. 2023       
-*
-    INCLUDE CBSAMOD(PROLOAD)
-    INCLUDE SYSLIB(DSNELI)
-    ENTRY PROLOAD
-    NAME PROLOAD(R)

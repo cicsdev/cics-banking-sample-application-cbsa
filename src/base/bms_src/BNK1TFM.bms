@@ -8,7 +8,7 @@
 *
 * BNK1TFM
 * Transfer funds from one account to another account for
-* CICS Bank Sample Application
+* CICS Banking Sample Application
 *
 * Created: 12-Nov-2019
 *
@@ -27,8 +27,9 @@ BNK1TF   DFHMDI SIZE=(24,80),                                          *
                COLUMN=1,LINE=1
          DFHMDF POS=(1,1),LENGTH=7,INITIAL='BNK1TF ',                  *
                ATTRB=(NORM,PROT),COLOR=BLUE
-COMPANY  DFHMDF POS=(1,17),LENGTH=58,ATTRB=(NORM,PROT),COLOR=RED,      *
-               INITIAL='CICS Bank Sample Application - Transfer funds.'
+COMPANY  DFHMDF POS=(1,17),LENGTH=61,ATTRB=(NORM,PROT),COLOR=RED,      *
+               INITIAL='CICS Banking Sample Application - Transfer fund*
+               s.'
 **********************************************************************
          DFHMDF POS=(3,1),LENGTH=70,ATTRB=(NORM,PROT),COLOR=TURQUOISE, *
                INITIAL='Provide a FROM account, a TO account and an Amo*
@@ -87,4 +88,3 @@ DUMMY    DFHMDF POS=(24,79),LENGTH=1,ATTRB=(DRK,PROT,FSET),INITIAL=' '
 ***********************************************************************
          DFHMSD TYPE=FINAL
          END
-
