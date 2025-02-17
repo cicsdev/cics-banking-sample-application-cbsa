@@ -56,10 +56,10 @@ The interfaces are designed to exploit the underlying banking functionality, whi
 - A Db2 subsystem (V12 or later)
 - A Liberty JVM server in CICS (set up and configured during the installation process) for the Carbon React UI and Spring Boot interfaces
 - Java 17
-- Apache Maven on the workstation (to build the Carbon React UI, Customer Services and Payment interfaces)
 - Yarn to build the web front-end
 - Various VSAM files (set up and configured during the installation process)
 - A z/OS Connect server (if the RESTful API or the Customer Services or Payment interfaces are required)
+- A Maven wrapper is used to build the Java components. This is included for your convenience.
 
 
 
@@ -77,7 +77,7 @@ Installation instructions:
 
 Installation of CBSA is split into 3 parts :
   1. The base COBOL(BMS) installation, this is mandatory and should be installed first. See the [base COBOL installation documentation.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/tree/main/etc/install/base/doc/README.md)
-  2. The Carbon React UI installation, this is optional, requires a JVM server to be running in the CICS region (this gets set up as part of installation process). See [the Carbon React UI installation documentation.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/tree/main/etc/install/libertyUI/doc/CBSA_Liberty_UI_installation_deployment_guide.md)
+  2. The Carbon React UI installation, this is optional, requires a JVM server to be running in the CICS region (this gets set up as part of installation process). See [the Carbon React UI installation documentation.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/tree/main/etc/install/carbonReactUI/doc/CBSA_Carbon_React_UI_installation_deployment_guide.md)
   3. The Customer Service and Payment interface installation (also optional). See [deploying the Payment and Customer Services documentation.](https://github.com/cicsdev/cics-banking-sample-application-cbsa/tree/main/etc/install/springBootUI/doc/CBSA_Deploying_the_Payment_Customer_Services_Springboot_apps.md)
 
 ## Usage
