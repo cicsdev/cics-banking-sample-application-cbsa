@@ -8,9 +8,9 @@ This document outlines the scope and approach for migrating the CICS Banking Sam
 
 ## Migration Approach
 
-- **Strategy**: Complete "big-bang" cutover of all 29 COBOL programs to Java
-- **Timeline**: Full feature parity on day one with no phased rollout
-- **Risk Mitigation**: Comprehensive rollback plan and thorough end-to-end testing before switchover
+- **Strategy**: Incremental migration of COBOL programs to Java, starting with simpler components
+- **Timeline**: Progressive delivery with prioritization of simpler components first
+- **Risk Mitigation**: Comprehensive testing of each component before moving to the next
 
 ## Technical Scope
 
