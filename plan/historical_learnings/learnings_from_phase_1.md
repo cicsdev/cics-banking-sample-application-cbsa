@@ -1,5 +1,7 @@
 # Phase 1 Implementation Learnings
 
+Historical Learnings - Not Current Information
+
 Date: May 24, 2025
 
 ## Key Insights from Phase 1
