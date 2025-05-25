@@ -2,3 +2,7 @@ com/cbsa/migration/repository/TransactionRepositoryIntegrationTest.class
 com/cbsa/migration/repository/RepositoryTestConfig.class
 com/cbsa/migration/repository/CustomerRepositoryIntegrationTest.class
 com/cbsa/migration/repository/AccountRepositoryIntegrationTest.class
+com/cbsa/migration/util/CobolConverterTest.class
+com/cbsa/migration/controller/UtilityControllerTest.class
+com/cbsa/migration/service/CompanyInfoServiceTest.class
+com/cbsa/migration/service/SortCodeServiceTest.class

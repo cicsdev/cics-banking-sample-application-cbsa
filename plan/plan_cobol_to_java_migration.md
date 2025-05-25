@@ -121,83 +121,134 @@ We'll adopt an **incremental migration** approach with the following characteris
    2. Document API using Swagger/OpenAPI annotations (following Phase 1 pattern)
    3. Write integration tests for endpoints following repository test patterns
 
+4. **Document Migration Patterns for Workflow Development**
+
+   1. Capture detailed learnings from Phase 2 migrations (GETSCODE.cbl, GETCOMPY.cbl)
+   2. Document patterns for COBOL to Java mapping that worked well
+   3. Identify pain points and challenges to address in workflow development
+   4. Prepare initial insights for `plan_workflow_rules_development.md` creation in Phase 3
+
 ### Phase 3: Basic Account Functions (Weeks 5-8)
 
-1. **Account Inquiry**
+1. **Workflow and Rules Development**
 
-   1. Migrate INQACC.cbl (account inquiry)
+   1. Create initial version of the Unified COBOL Business Function Migration Workflow
+   2. Establish initial Migration Rules for naming, data types, and code structure
+   3. Document workflows in `.windsurf/workflows/` and rules in `.windsurf/rules/`
+   4. See `plan_workflow_rules_development.md` for detailed workflow and rules structure
+
+2. **Account Inquiry**
+
+   1. Migrate INQACC.cbl (account inquiry) following the workflow
    2. Implement account lookup functionality
    3. Create read-only endpoints first
+   4. Document workflow effectiveness and challenges
 
-2. **Account Creation**
+3. **Account Creation**
 
-   1. Migrate CREACC.cbl (account creation)
-   2. Implement account creation service
-   3. Include business validation rules
+   1. Refine the workflow based on INQACC.cbl migration experience
+   2. Migrate CREACC.cbl (account creation) following the updated workflow
+   3. Implement account creation service
+   4. Include business validation rules
+   5. Update workflows and rules based on new learnings
 
-3. **Account Update and Deletion**
+4. **Account Update and Deletion**
 
-   1. Migrate UPDACC.cbl (account update)
-   2. Migrate DELACC.cbl (account deletion)
+   1. Migrate UPDACC.cbl (account update) following the workflow
+   2. Migrate DELACC.cbl (account deletion) following the workflow
    3. Ensure proper validation and error handling
    4. Create integration tests for repository and controller layers
    5. Document APIs with Swagger/OpenAPI annotations
+   6. Finalize Phase 3 updates to workflows and rules
 
 ### Phase 4: Customer Management (Weeks 9-12)
 
-1. **Customer Inquiry**
+1. **Workflow and Rules Refinement**
 
-   1. Migrate INQCUST.cbl (customer inquiry)
+   1. Review and update workflows based on Phase 3 experience
+   2. Refine rules for consistency across all migrated components
+   3. Document common patterns and challenges identified in Phase 3
+
+2. **Customer Inquiry**
+
+   1. Migrate INQCUST.cbl (customer inquiry) following the refined workflow
    2. Implement customer lookup functionality
    3. Create read-only endpoints first
+   4. Document any new workflow insights
 
-2. **Customer Creation and Management**
+3. **Customer Creation and Management**
 
-   1. Migrate CRECUST.cbl (customer creation)
-   2. Migrate UPDCUST.cbl (customer update)
-   3. Migrate DELCUS.cbl (customer deletion)
+   1. Migrate CRECUST.cbl (customer creation) following the workflow
+   2. Migrate UPDCUST.cbl (customer update) following the workflow
+   3. Migrate DELCUS.cbl (customer deletion) following the workflow
    4. Add integration tests for all customer operations
    5. Document APIs with Swagger/OpenAPI annotations
+   6. Update workflows and rules with any new patterns discovered
 
 ### Phase 5: Financial Operations (Weeks 13-16)
 
-1. **Transaction Processing**
+1. **Workflow and Rules Assessment**
 
-   1. Migrate DBCRFUN.cbl (debit/credit functionality)
+   1. Perform comprehensive assessment of workflow effectiveness
+   2. Identify any areas for improvement in complex financial operations
+   3. Update workflows and rules for transaction-heavy operations
+
+2. **Transaction Processing**
+
+   1. Migrate DBCRFUN.cbl (debit/credit functionality) following the workflow
    2. Implement transaction posting logic
+   3. Document specific workflow adaptations for financial transactions
 
-2. **Transfer Functions**
+3. **Transfer Functions**
 
-   1. Migrate XFRFUN.cbl (transfer functionality)
+   1. Migrate XFRFUN.cbl (transfer functionality) following the workflow
    2. Implement transfer between accounts
    3. Ensure proper transaction handling
+   4. Refine workflows based on complex financial operation experience
 
 ### Phase 6: Menu and Integration (Weeks 17-20)
 
-1. **Main Menu Functionality**
+1. **Workflow Finalization for UI Components**
 
-   1. Migrate BNKMENU.cbl to Java controller
+   1. Extend workflows to cover UI component migration
+   2. Update rules for UI-specific considerations
+   3. Document UI migration patterns
+
+2. **Main Menu Functionality**
+
+   1. Migrate BNKMENU.cbl to Java controller following the workflow
    2. Connect UI components to backend services
+   3. Document specific UI migration challenges and solutions
 
-2. **Integration Testing**
+3. **Integration Testing**
 
    1. Develop end-to-end test scenarios
    2. Validate complete business processes
    3. Test boundary conditions and error handling
+   4. Update workflows with integration testing insights
 
-3. **Performance Testing**
+4. **Performance Testing**
 
    1. Benchmark Java implementation
    2. Identify and resolve bottlenecks
+   3. Document performance optimization patterns in workflows
 
 ### Phase 7: Data Migration and Final Deployment (Weeks 21-24)
 
-1. **Data Migration Tools**
+1. **Data Migration Workflow Implementation**
 
-   1. Create scripts to migrate data from COBOL structures to SQLite
-   2. Verify data integrity after migration
+   1. Implement the Data Migration Workflow documented in `plan_workflow_rules_development.md`
+   2. Create scripts to migrate data from COBOL structures to SQLite
+   3. Verify data integrity after migration
+   4. Document effectiveness of the Data Migration Workflow
 
-2. **Deployment Process**
+2. **Workflow and Rules Documentation Finalization**
+
+   1. Compile all workflow and rules insights from Phases 1-7
+   2. Create comprehensive final documentation of successful patterns
+   3. Document lessons learned and recommendations for future projects
+
+3. **Deployment Process**
 
    1. Finalize deployment approach
    2. Create deployment documentation
