@@ -7,12 +7,12 @@ description: When creating or editing markdown files.
 
 ## List Style Preference
 
-### Rule: Use numbered/lettered lists instead of bullet points
+### Rule: Use numbered lists consistently at all levels
 
 **Prefer:**
-1. Numbered lists (1., 2., 3.)
-2. Lettered lists (a., b., c.)
-3. Roman numeral lists (i., ii., iii.)
+1. Numbered lists (1., 2., 3.) at all levels of nesting
+2. Consistent use of numbers rather than mixing with letters or roman numerals
+3. Proper indentation to show hierarchy
 
 **Avoid:**
 - Bullet points using dashes
@@ -26,10 +26,10 @@ description: When creating or editing markdown files.
 # Good Example
 1. First item
 2. Second item
-   a. Sub-item one
-   b. Sub-item two
-      i. Nested item one
-      ii. Nested item two
+   1. Sub-item one
+   2. Sub-item two
+      1. Nested item one
+      2. Nested item two
 3. Third item
 
 # Avoid
@@ -40,6 +40,15 @@ description: When creating or editing markdown files.
     - Nested item one
     - Nested item two
 - Third item
+
+# Also Avoid
+1. First item
+2. Second item
+   a. Sub-item one
+   b. Sub-item two
+      i. Nested item one
+      ii. Nested item two
+3. Third item
 ```
 
 **Scope:** All markdown documentation in this project
