@@ -1,0 +1,4 @@
+com/cbsa/migration/repository/TransactionRepositoryIntegrationTest.class
+com/cbsa/migration/repository/RepositoryTestConfig.class
+com/cbsa/migration/repository/CustomerRepositoryIntegrationTest.class
+com/cbsa/migration/repository/AccountRepositoryIntegrationTest.class

@@ -1,6 +1,13 @@
 package com.cbsa.migration.controller;
 
 import com.cbsa.migration.util.DataGenerator;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +20,7 @@ import java.util.Map;
  * Controller for generating and resetting test data.
  * For development and testing purposes only.
  */
+@Tag(name = "Test Data", description = "API endpoints for managing test data - for development use only")
 @RestController
 @RequestMapping("/api/data")
 public class DataController {
@@ -31,6 +39,11 @@ public class DataController {
      * 
      * @return Response indicating success
      */
+    @Operation(summary = "Reset database", description = "Delete all data from the database, resetting it to an empty state")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Database reset successfully", 
+                  content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Map.class))})
+    })
     @PostMapping("/reset")
     public ResponseEntity<Map<String, String>> resetDatabase() {
         logger.info("Resetting database via API call");
@@ -48,13 +61,18 @@ public class DataController {
      * @param maxTransactionsPerAccount Maximum transactions per account (default: 20)
      * @return Response indicating success
      */
+    @Operation(summary = "Generate sample data", description = "Generate sample customers, accounts, and transactions for testing")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Sample data generated successfully", 
+                  content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Map.class))})
+    })
     @PostMapping("/generate")
     public ResponseEntity<Map<String, String>> generateData(
-            @RequestParam(defaultValue = "10") int customerCount,
-            @RequestParam(defaultValue = "1") int minAccountsPerCustomer,
-            @RequestParam(defaultValue = "3") int maxAccountsPerCustomer,
-            @RequestParam(defaultValue = "5") int minTransactionsPerAccount,
-            @RequestParam(defaultValue = "20") int maxTransactionsPerAccount) {
+            @Parameter(description = "Number of customers to generate") @RequestParam(defaultValue = "10") int customerCount,
+            @Parameter(description = "Minimum accounts per customer") @RequestParam(defaultValue = "1") int minAccountsPerCustomer,
+            @Parameter(description = "Maximum accounts per customer") @RequestParam(defaultValue = "3") int maxAccountsPerCustomer,
+            @Parameter(description = "Minimum transactions per account") @RequestParam(defaultValue = "5") int minTransactionsPerAccount,
+            @Parameter(description = "Maximum transactions per account") @RequestParam(defaultValue = "20") int maxTransactionsPerAccount) {
         
         logger.info("Generating sample data via API call: {} customers, {}-{} accounts per customer, {}-{} transactions per account",
                 customerCount, minAccountsPerCustomer, maxAccountsPerCustomer, 
@@ -82,13 +100,18 @@ public class DataController {
      * @param maxTransactionsPerAccount Maximum transactions per account (default: 20)
      * @return Response indicating success
      */
+    @Operation(summary = "Reset database and generate sample data", description = "Combined operation to reset the database and generate new sample data in one call")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Database reset and sample data generated successfully", 
+                  content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Map.class))})
+    })
     @PostMapping("/reset-and-generate")
     public ResponseEntity<Map<String, String>> resetAndGenerate(
-            @RequestParam(defaultValue = "10") int customerCount,
-            @RequestParam(defaultValue = "1") int minAccountsPerCustomer,
-            @RequestParam(defaultValue = "3") int maxAccountsPerCustomer,
-            @RequestParam(defaultValue = "5") int minTransactionsPerAccount,
-            @RequestParam(defaultValue = "20") int maxTransactionsPerAccount) {
+            @Parameter(description = "Number of customers to generate") @RequestParam(defaultValue = "10") int customerCount,
+            @Parameter(description = "Minimum accounts per customer") @RequestParam(defaultValue = "1") int minAccountsPerCustomer,
+            @Parameter(description = "Maximum accounts per customer") @RequestParam(defaultValue = "3") int maxAccountsPerCustomer,
+            @Parameter(description = "Minimum transactions per account") @RequestParam(defaultValue = "5") int minTransactionsPerAccount,
+            @Parameter(description = "Maximum transactions per account") @RequestParam(defaultValue = "20") int maxTransactionsPerAccount) {
         
         logger.info("Resetting database and generating new sample data via API call");
         

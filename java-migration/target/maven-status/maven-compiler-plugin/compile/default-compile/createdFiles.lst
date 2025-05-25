@@ -20,4 +20,5 @@ com/cbsa/migration/repository/jdbc/JdbcCustomerRepository.class
 com/cbsa/migration/repository/jdbc/JdbcAccountRepository.class
 com/cbsa/migration/repository/CustomerRepository.class
 com/cbsa/migration/util/DataGenerator.class
+com/cbsa/migration/config/OpenApiConfig.class
 com/cbsa/migration/model/Control$ControlBuilder.class
