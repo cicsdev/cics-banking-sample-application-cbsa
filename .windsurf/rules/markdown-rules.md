@@ -1,3 +1,8 @@
+---
+trigger: model_decision
+description: When creating or editing markdown files.
+---
+
 # Markdown Formatting Rules
 
 ## List Style Preference

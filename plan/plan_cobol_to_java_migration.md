@@ -32,148 +32,173 @@ We'll adopt an **incremental migration** approach with the following characteris
 ### Phase 1: Environment Setup and Data Model (Weeks 1-2) - ✅ MAIN TASKS COMPLETED
 
 1. **Set up Java/Spring Boot Development Environment** ✅
-   a. Set up Maven project structure
-   b. Configure Spring Boot starter dependencies
+
+   1. Set up Maven project structure
+   2. Configure Spring Boot starter dependencies
 
 2. **Define Java Data Models** ✅
-   a. Create Java classes for core entities based on COBOL copybooks:
-      i. `Account` (from ACCOUNT.cpy)
-      ii. `Customer` (from CUSTOMER.cpy)
-      iii. `Transaction` (from PROCTRAN.cpy)
-      iv. `Control` (from CONTROLI.cpy)
-   b. Include proper validation annotations
+
+   1. Create Java classes for core entities based on COBOL copybooks:
+      1. `Account` (from ACCOUNT.cpy)
+      2. `Customer` (from CUSTOMER.cpy)
+      3. `Transaction` (from PROCTRAN.cpy)
+      4. `Control` (from CONTROLI.cpy)
+   2. Include proper validation annotations
 
 3. **Create SQLite Database Schema** ✅
-   a. Design relational schema based on COBOL data structures
-   b. Create SQL scripts for table creation
-   c. Implement basic JDBC repository classes
-   d. Created REST API endpoints for status and data management
+
+   1. Design relational schema based on COBOL data structures
+   2. Create SQL scripts for table creation
+   3. Implement basic JDBC repository classes
+   4. Created REST API endpoints for status and data management
 
 4. **Develop Test Data Generator** ✅
-   a. Create script to generate realistic test data
-   b. Include capabilities for database reset
-   c. Generate sample customer and account data
-   d. Successfully tested with command: `mvn spring-boot:run -Dspring-boot.run.arguments="--generate-test-data=true --customer-count=10 --accounts-per-customer=2 --transactions-per-account=5 --reset-database=true" -Dspring-boot.run.jvmArguments="-Dserver.port=8085"`
+
+   1. Create script to generate realistic test data
+   2. Include capabilities for database reset
+   3. Generate sample customer and account data
+   4. Successfully tested with command: `mvn spring-boot:run -Dspring-boot.run.arguments="--generate-test-data=true --customer-count=10 --accounts-per-customer=2 --transactions-per-account=5 --reset-database=true" -Dspring-boot.run.jvmArguments="-Dserver.port=8085"`
 
 5. **Phase 1 Completion Tasks** 🔄
-   a. Add basic integration tests for the repository layer
-   b. Review SQL schema for any needed optimizations
-   c. Document existing API endpoints with Swagger/OpenAPI
+
+   1. Add basic integration tests for the repository layer
+   2. Review SQL schema for any needed optimizations
+   3. Document existing API endpoints with Swagger/OpenAPI
 
 ### Phase 1 Technical Insights
 
 1. **SQLite Implementation Discoveries**
-   a. SQLite has reserved keywords (like "transaction") that required table name adjustments
-   b. Spring Data JDBC doesn't work well with SQLite; plain JDBC repositories are more reliable
-   c. SQLite data types differ from standard SQL, requiring careful mapping
+
+   1. SQLite has reserved keywords (like "transaction") that required table name adjustments
+   2. Spring Data JDBC doesn't work well with SQLite; plain JDBC repositories are more reliable
+   3. SQLite data types differ from standard SQL, requiring careful mapping
 
 2. **Java Implementation Successes**
-   a. REST API structure with separate controllers for status and data management works well
-   b. Application runs successfully as a backend service with API endpoints
-   c. Test data generation is critical for validating functionality
+
+   1. REST API structure with separate controllers for status and data management works well
+   2. Application runs successfully as a backend service with API endpoints
+   3. Test data generation is critical for validating functionality
 
 3. **Architecture Validation**
-   a. The Spring Boot architecture with separate controllers, services, and repositories provides a clean separation of concerns
-   b. Java model classes successfully map to COBOL data structures
-   c. REST API approach is suitable for replacing CICS transaction processing
+
+   1. The Spring Boot architecture with separate controllers, services, and repositories provides a clean separation of concerns
+   2. Java model classes successfully map to COBOL data structures
+   3. REST API approach is suitable for replacing CICS transaction processing
 
 ### Phase 2: Utility Functions Migration (Weeks 3-4) - 🔄 NEXT
 
 ### Phase 2 Focus
 
 1. **Set Migration Priorities**
-   a. Start with GETSCODE.cbl and GETCOMPY.cbl as first conversions
-   b. These provide simple, testable functionality with minimal CICS interactions
+
+   1. Start with GETSCODE.cbl and GETCOMPY.cbl as first conversions
+   2. These provide simple, testable functionality with minimal CICS interactions
 
 ### Phase 2 Implementation Tasks
 
 1. **Migrate Simple Utility Programs**
-   a. Start with smallest, self-contained programs like:
-      i. GETSCODE.cbl (retrieve sort codes)
-      ii. GETCOMPY.cbl (retrieve company information)
-   b. Create equivalent Java service methods
-   c. Write unit tests to verify behavior
+
+   1. Start with smallest, self-contained programs like:
+      1. GETSCODE.cbl (retrieve sort codes)
+      2. GETCOMPY.cbl (retrieve company information)
+   2. Create equivalent Java service methods
+   3. Write unit tests to verify behavior
 
 2. **Establish Common Helper Functions**
-   a. Date/time conversions between COBOL and Java formats
-   b. Field validations and formatting
-   c. Error handling utilities
+
+   1. Date/time conversions between COBOL and Java formats
+   2. Field validations and formatting
+   3. Error handling utilities
 
 3. **Define REST API Controllers**
-   a. Create initial REST endpoints for utility functions
-   b. Document API using Swagger/OpenAPI
-   c. Write integration tests for endpoints
+
+   1. Create initial REST endpoints for utility functions
+   2. Document API using Swagger/OpenAPI
+   3. Write integration tests for endpoints
 
 ### Phase 3: Basic Account Functions (Weeks 5-8)
 
 1. **Account Inquiry**
-   a. Migrate INQACC.cbl (account inquiry)
-   b. Implement account lookup functionality
-   c. Create read-only endpoints first
+
+   1. Migrate INQACC.cbl (account inquiry)
+   2. Implement account lookup functionality
+   3. Create read-only endpoints first
 
 2. **Account Creation**
-   a. Migrate CREACC.cbl (account creation)
-   b. Implement account creation service
-   c. Include business validation rules
+
+   1. Migrate CREACC.cbl (account creation)
+   2. Implement account creation service
+   3. Include business validation rules
 
 3. **Account Update and Deletion**
-   a. Migrate UPDACC.cbl (account update)
-   b. Migrate DELACC.cbl (account deletion)
-   c. Ensure proper validation and error handling
+
+   1. Migrate UPDACC.cbl (account update)
+   2. Migrate DELACC.cbl (account deletion)
+   3. Ensure proper validation and error handling
 
 ### Phase 4: Customer Management (Weeks 9-12)
 
 1. **Customer Inquiry**
-   a. Migrate INQCUST.cbl (customer inquiry)
-   b. Implement customer lookup functionality
-   c. Create read-only endpoints first
+
+   1. Migrate INQCUST.cbl (customer inquiry)
+   2. Implement customer lookup functionality
+   3. Create read-only endpoints first
 
 2. **Customer Creation and Management**
-   a. Migrate CRECUST.cbl (customer creation)
-   b. Migrate UPDCUST.cbl (customer update)
-   c. Migrate DELCUS.cbl (customer deletion)
+
+   1. Migrate CRECUST.cbl (customer creation)
+   2. Migrate UPDCUST.cbl (customer update)
+   3. Migrate DELCUS.cbl (customer deletion)
 
 ### Phase 5: Financial Operations (Weeks 13-16)
 
 1. **Transaction Processing**
-   a. Migrate DBCRFUN.cbl (debit/credit functionality)
-   b. Implement transaction posting logic
+
+   1. Migrate DBCRFUN.cbl (debit/credit functionality)
+   2. Implement transaction posting logic
 
 2. **Transfer Functions**
-   a. Migrate XFRFUN.cbl (transfer functionality)
-   b. Implement transfer between accounts
-   c. Ensure proper transaction handling
+
+   1. Migrate XFRFUN.cbl (transfer functionality)
+   2. Implement transfer between accounts
+   3. Ensure proper transaction handling
 
 ### Phase 6: Menu and Integration (Weeks 17-20)
 
 1. **Main Menu Functionality**
-   a. Migrate BNKMENU.cbl to Java controller
-   b. Connect UI components to backend services
+
+   1. Migrate BNKMENU.cbl to Java controller
+   2. Connect UI components to backend services
 
 2. **Integration Testing**
-   a. Develop end-to-end test scenarios
-   b. Validate complete business processes
-   c. Test boundary conditions and error handling
+
+   1. Develop end-to-end test scenarios
+   2. Validate complete business processes
+   3. Test boundary conditions and error handling
 
 3. **Performance Testing**
-   a. Benchmark Java implementation
-   b. Identify and resolve bottlenecks
+
+   1. Benchmark Java implementation
+   2. Identify and resolve bottlenecks
 
 ### Phase 7: Data Migration and Final Deployment (Weeks 21-24)
 
 1. **Data Migration Tools**
-   a. Create scripts to migrate data from COBOL structures to SQLite
-   b. Verify data integrity after migration
+
+   1. Create scripts to migrate data from COBOL structures to SQLite
+   2. Verify data integrity after migration
 
 2. **Deployment Process**
-   a. Finalize deployment approach
-   b. Create deployment documentation
-   c. Set up continuous integration pipeline
+
+   1. Finalize deployment approach
+   2. Create deployment documentation
+   3. Set up continuous integration pipeline
 
 3. **Transition Planning**
-   a. Define detailed component transition steps
-   b. Create verification procedures
-   c. Establish success criteria for each component
+
+   1. Define detailed component transition steps
+   2. Create verification procedures
+   3. Establish success criteria for each component
 
 ## 5. Common COBOL to Java Conversion Patterns
 
@@ -203,38 +228,41 @@ We'll adopt an **incremental migration** approach with the following characteris
 
 ### Unit Testing
 
-a. Each Java service method will have comprehensive unit tests
-b. Use JUnit 5 for test framework
-c. Use Mockito to mock dependencies
-d. Target high test coverage (>80%)
+1. Each Java service method will have comprehensive unit tests
+2. Use JUnit 5 for test framework
+3. Use Mockito to mock dependencies
+4. Target high test coverage (>80%)
 
 ### Integration Testing
 
-a. Test complete business processes
-b. Validate API endpoints with Spring MockMvc
-c. Use SQLite in-memory database for tests
+1. Test complete business processes
+2. Validate API endpoints with Spring MockMvc
+3. Use SQLite in-memory database for tests
 
 ### Test Data Management
 
-a. Develop data generation scripts for all entities
-b. Create known test scenarios with predictable outcomes
-c. Include boundary conditions and error cases
+1. Develop data generation scripts for all entities
+2. Create known test scenarios with predictable outcomes
+3. Include boundary conditions and error cases
 
 ## 7. Documentation Requirements
 
 1. **Code Documentation**
-   a. Javadoc comments for all classes and methods
-   b. Clear mapping between COBOL programs and Java components
-   c. Document business rules and validation logic
+
+   1. Javadoc comments for all classes and methods
+   2. Clear mapping between COBOL programs and Java components
+   3. Document business rules and validation logic
 
 2. **API Documentation**
-   a. OpenAPI/Swagger documentation for all endpoints
-   b. Include example requests and responses
+
+   1. OpenAPI/Swagger documentation for all endpoints
+   2. Include example requests and responses
 
 3. **Architecture Documentation**
-   a. Component diagrams
-   b. Data flow descriptions
-   c. Integration points
+
+   1. Component diagrams
+   2. Data flow descriptions
+   3. Integration points
 
 ## 8. Risks and Mitigation
 
@@ -249,27 +277,32 @@ c. Include boundary conditions and error cases
 ## 9. Key Success Metrics
 
 1. **Functional Completeness**
-   a. All COBOL program functionality successfully migrated
-   b. No regressions in business logic
+
+   1. All COBOL program functionality successfully migrated
+   2. No regressions in business logic
 
 2. **Code Quality**
-   a. Test coverage percentage
-   b. Static analysis results
-   c. Documentation completeness
+
+   1. Test coverage percentage
+   2. Static analysis results
+   3. Documentation completeness
 
 3. **Performance**
-   a. Response time comparable to or better than COBOL version
-   b. Resource utilization within acceptable limits
+
+   1. Response time comparable to or better than COBOL version
+   2. Resource utilization within acceptable limits
 
 ## 10. Next Steps
 
 1. **Immediate Actions**
-   a. Set up Java/Spring Boot development environment
-   b. Create initial project structure
-   c. Begin analyzing COBOL data structures for Java model design
-   d. Develop test data generation scripts
+
+   1. Set up Java/Spring Boot development environment
+   2. Create initial project structure
+   3. Begin analyzing COBOL data structures for Java model design
+   4. Develop test data generation scripts
 
 2. **First Milestone Target (2 weeks)**
-   a. Complete Phase 1: Environment Setup and Data Model
-   b. Demonstrate basic CRUD operations with SQLite database
-   c. Present initial Java data models mapped from COBOL structures
+
+   1. Complete Phase 1: Environment Setup and Data Model
+   2. Demonstrate basic CRUD operations with SQLite database
+   3. Present initial Java data models mapped from COBOL structures
