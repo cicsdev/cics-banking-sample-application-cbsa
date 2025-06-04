@@ -132,10 +132,11 @@ We'll adopt an **incremental migration** approach with the following characteris
 
 1. **Workflow and Rules Development**
 
-   1. Create initial version of the Unified COBOL Business Function Migration Workflow
-   2. Establish initial Migration Rules for naming, data types, and code structure
-   3. Document workflows in `.windsurf/workflows/` and rules in `.windsurf/rules/`
-   4. See `plan_workflow_rules_development.md` for detailed workflow and rules structure
+   1. Draft **crucial starter rules** (type mapping ✔ + minimal naming rule) in `.windsurf/rules/`
+   2. Author **starter Unified Workflow** referencing these two rules
+   3. Run workflow on INQACC.cbl, capture learnings
+   4. Iterate—refine rules & workflow, add REST/testing rules as needed
+   5. See `plan/plan_workflow_rules_development.md` for detailed iterative strategy
 
 2. **Account Inquiry**
 

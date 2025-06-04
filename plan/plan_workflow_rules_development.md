@@ -14,6 +14,15 @@ We'll develop two main workflows:
 
 This approach better reflects how we'll actually tackle each migration task in the plan, focusing on implementing business functionality rather than theoretical mappings of COBOL constructs.
 
+### 1.2. Iterative Rules & Workflow Strategy
+
+1. **Crucial Starter Rules (max 2)**  
+   1. **`cobol_java_type_mapping.md`** – **already drafted**; ensures type correctness across DTOs, repositories, and tests.  
+   2. **`naming_structure.md`** *(minimal scope)* – defines class/package naming and basic layer suffixes so the first workflow can generate correctly named files.
+2. **Starter Workflow** – Draft the *Unified COBOL Business Function Migration* workflow referencing the two starter rules.
+3. **Run & Test** – Apply the workflow to migrate **INQACC.cbl** end-to-end; capture issues.
+4. **Iterate** – Update existing rules/workflow based on findings and add new rules (REST API patterns, testing conventions, service-layer structure, etc.).
+
 ## 2. Unified Migration Workflow
 
 ### 2.1. Migration Planning and Analysis
@@ -136,51 +145,24 @@ This workflow is specifically for Phase 7 tasks focused on migrating data from C
 
 ## 4. Migration Rules
 
-### 4.1. Naming and Structure Rules
+*(Rule files live in `.windsurf/rules/`)*
 
-1. **Class Naming**
-   1. Use CamelCase for all Java classes
-   2. Add appropriate suffixes based on responsibility (Service, Repository, Controller)
-   3. Name should reflect business functionality rather than COBOL program name
+### 4.1. Starter Rules (Phase 3 kickoff)
 
-2. **Package Organization**
-   1. Group related services in the same package
-   2. Separate DTOs, services, and controllers into appropriate packages
-   3. Place utility classes in a common package
+1. **cobol_java_type_mapping.md** – Trigger `model_decision`, **draft complete** ✔.  
+2. **naming_structure.md** – _Minimal naming conventions_, **draft pending**.
 
-3. **Code Structure**
-   1. Follow Spring Boot best practices for layers (controller, service, repository)
-   2. Keep methods focused on single responsibilities
-   3. Extract complex logic into helper methods
+### 4.2. Rules to be Added After First Workflow Run
 
-### 4.2. Data Handling Rules
+1. **rest_api_patterns.md** – Endpoint naming, status handling, Swagger annotations.  
+2. **testing_conventions.md** – Unit/integration test templates, coverage goals.  
+3. **service_layer_structure.md** – Standard layering and error patterns.
 
-1. **Type Conversion**
-   1. Use the established COBOL-to-Java type mapping (documented in Phase 2)
-   2. Handle special cases (REDEFINES, OCCURS) consistently
-   3. Apply validation for data constraints
+### 4.3. Rule Governance & Iteration
 
-2. **Database Interactions**
-   1. Use consistent patterns for database operations
-   2. Apply proper transaction management
-   3. Handle database errors consistently
-
-3. **Error Handling**
-   1. Use appropriate exceptions for different error conditions
-   2. Provide meaningful error messages
-   3. Return appropriate HTTP status codes from controllers
-
-### 4.3. Testing Rules
-
-1. **Test Coverage**
-   1. Write tests for all business logic paths
-   2. Test boundary conditions and error scenarios
-   3. Include integration tests for database operations
-
-2. **Test Naming and Organization**
-   1. Name tests clearly to reflect the scenario being tested
-   2. Organize tests to match the structure of the code
-   3. Use appropriate test fixtures and mocks
+1. Rules and workflow evolve **together**; update whichever is impacted first and commit both.  
+2. Review rule effectiveness after each migration sprint and refine.  
+3. Keep each rule < 6000 chars and tag with clear descriptions for Cascade UI.
 
 ## 5. Open Questions
 
@@ -200,14 +182,9 @@ This workflow is specifically for Phase 7 tasks focused on migrating data from C
 
 ### 6.1. Phase 3 Application
 
-1. **Initial Workflow Creation**
-   1. Document the unified workflow in `.windsurf/workflows/`
-   2. Create initial rules in `.windsurf/rules/`
-
-2. **Apply to Phase 3 Migrations**
-   1. Follow the workflow for INQACC.cbl migration
-   2. Apply the workflow to CREACC.cbl migration
-   3. Document any workflow adjustments needed
+1. **Crucial Starter Rules** – cobol type-mapping (✔) + minimal naming rule.  
+2. **Author Starter Workflow** – `unified_cobol_business_function_migration.workflow.md` referencing the two rules.  
+3. **Run on INQACC.cbl**, capture results, then refine rules/workflow before next migration.
 
 ### 6.2. Continuous Improvement
 
