@@ -1,5 +1,8 @@
 # COBOL to Java Migration: Workflow and Rules Development Plan
 
+**IMPORTANT – PLEASE READ (updated June 14, 2025):** This plan is largely outdated following findings from our first bloated workflow run. Please refer to [`plan/plan_breakdown_workflows.md`](plan_breakdown_workflows.md) for the latest pivot and updated guidance.
+
+
 Date: May 25, 2025
 
 ## 1. Introduction

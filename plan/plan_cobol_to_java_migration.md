@@ -90,13 +90,13 @@ We'll adopt an **incremental migration** approach with the following characteris
    4. Integration testing validates database interactions
    5. Maven provides reliable build and test execution
 
-### Phase 2: Utility Functions Migration (Weeks 3-4) - 🔄 NEXT
+### Phase 2: Utility Functions Migration (Weeks 3-4) - ✅ COMPLETE
 
 ### Phase 2 Focus
 
 1. **Set Migration Priorities**
 
-   1. Start with GETSCODE.cbl and GETCOMPY.cbl as first conversions
+   1. ✔ Migrated GETSCODE.cbl and GETCOMPY.cbl to Java (`SortCodeService`, `CompanyInfoService`)
    2. These provide simple, testable functionality with minimal CICS interactions
 
 ### Phase 2 Implementation Tasks
@@ -132,15 +132,15 @@ We'll adopt an **incremental migration** approach with the following characteris
 
 1. **Workflow and Rules Development**
 
-   1. Draft **crucial starter rules** (type mapping ✔ + minimal naming rule) in `.windsurf/rules/`
-   2. Author **starter Unified Workflow** referencing these two rules
-   3. Run workflow on INQACC.cbl, capture learnings
-   4. Iterate—refine rules & workflow, add REST/testing rules as needed
-   5. See `plan/plan_workflow_rules_development.md` for detailed iterative strategy
+   1. ✔ Drafted **crucial starter rules** (type mapping + minimal naming) in `.windsurf/rules/`
+   2. Authored initial `cobol_function_migration` workflow (proved too large in practice)
+   3. ✔ Ran workflow on INQACC.cbl; captured learnings that led to pivot
+   4. Pivot → designing piece-wise workflows (see `plan/plan_breakdown_workflows.md`) and refining rules accordingly
+   5. TODO — create the piece-wise workflow markdown templates under `.windsurf/workflows/`
 
 2. **Account Inquiry**
 
-   1. Migrate INQACC.cbl (account inquiry) following the workflow
+   1. PENDING — migrate INQACC.cbl (account inquiry) with the new piece-wise workflow (`/java_function_piece_*` commands)
    2. Implement account lookup functionality
    3. Create read-only endpoints first
    4. Document workflow effectiveness and challenges

@@ -1,5 +1,5 @@
 ---
-description: Unified COBOL business-function migration workflow
+description: DO NOT USE -- TOO LONG Unified COBOL business-function migration workflow
 ---
 
 # Unified COBOL Business-Function Migration Workflow
