@@ -49,17 +49,50 @@ public class JdbcTransactionRepository implements TransactionRepository {
 
     @Override
     public Optional<Transaction> findById(String compositeId) {
-        // Parse the composite ID to extract components
-        String[] parts = compositeId.split("-");
-        if (parts.length < 5) {
+        // Parse the composite ID: format is {sortCode}{accountNumber}-{date}-{time}-{referenceNumber}
+        // Example: 98765412345678-2024-01-15-12:30:45-123456
+        
+        // Find the first hyphen (after sortCode+accountNumber)
+        int firstHyphen = compositeId.indexOf('-');
+        if (firstHyphen == -1) {
             return Optional.empty();
         }
         
-        String sortCode = parts[0].substring(0, 6);
-        String accountNumber = parts[0].substring(6);
-        String transactionDate = parts[1];
-        String transactionTime = parts[2];
-        String referenceNumber = parts[3];
+        String sortCodeAndAccount = compositeId.substring(0, firstHyphen);
+        String remaining = compositeId.substring(firstHyphen + 1);
+        
+        // Extract sortCode (first 6 chars) and accountNumber (rest)
+        if (sortCodeAndAccount.length() < 6) {
+            return Optional.empty();
+        }
+        String sortCode = sortCodeAndAccount.substring(0, 6);
+        String accountNumber = sortCodeAndAccount.substring(6);
+        
+        // Find the last hyphen (before reference number)
+        int lastHyphen = remaining.lastIndexOf('-');
+        if (lastHyphen == -1) {
+            return Optional.empty();
+        }
+        
+        String referenceNumber = remaining.substring(lastHyphen + 1);
+        String dateAndTime = remaining.substring(0, lastHyphen);
+        
+        // Split date and time: find the pattern where time starts (after last date hyphen)
+        // Date format: YYYY-MM-DD, Time format: HH:MM:SS
+        // Look for the pattern: -DD-HH:MM:SS
+        int timeStart = dateAndTime.lastIndexOf('-') + 1;
+        if (timeStart <= 0 || timeStart >= dateAndTime.length()) {
+            return Optional.empty();
+        }
+        
+        // Check if the character after the last hyphen looks like time (digit:digit)
+        String potentialTime = dateAndTime.substring(timeStart);
+        if (!potentialTime.matches("\\d{2}:\\d{2}:\\d{2}")) {
+            return Optional.empty();
+        }
+        
+        String transactionDate = dateAndTime.substring(0, timeStart - 1); // -1 to remove the hyphen
+        String transactionTime = potentialTime;
         
         try {
             Transaction transaction = jdbcTemplate.queryForObject(
@@ -176,17 +209,41 @@ public class JdbcTransactionRepository implements TransactionRepository {
 
     @Override
     public boolean deleteById(String compositeId) {
-        // Parse the composite ID to extract components
-        String[] parts = compositeId.split("-");
-        if (parts.length < 5) {
+        // Parse the composite ID using the same logic as findById
+        int firstHyphen = compositeId.indexOf('-');
+        if (firstHyphen == -1) {
             return false;
         }
         
-        String sortCode = parts[0].substring(0, 6);
-        String accountNumber = parts[0].substring(6);
-        String transactionDate = parts[1];
-        String transactionTime = parts[2];
-        String referenceNumber = parts[3];
+        String sortCodeAndAccount = compositeId.substring(0, firstHyphen);
+        String remaining = compositeId.substring(firstHyphen + 1);
+        
+        if (sortCodeAndAccount.length() < 6) {
+            return false;
+        }
+        String sortCode = sortCodeAndAccount.substring(0, 6);
+        String accountNumber = sortCodeAndAccount.substring(6);
+        
+        int lastHyphen = remaining.lastIndexOf('-');
+        if (lastHyphen == -1) {
+            return false;
+        }
+        
+        String referenceNumber = remaining.substring(lastHyphen + 1);
+        String dateAndTime = remaining.substring(0, lastHyphen);
+        
+        int timeStart = dateAndTime.lastIndexOf('-') + 1;
+        if (timeStart <= 0 || timeStart >= dateAndTime.length()) {
+            return false;
+        }
+        
+        String potentialTime = dateAndTime.substring(timeStart);
+        if (!potentialTime.matches("\\d{2}:\\d{2}:\\d{2}")) {
+            return false;
+        }
+        
+        String transactionDate = dateAndTime.substring(0, timeStart - 1);
+        String transactionTime = potentialTime;
         
         int rowsAffected = jdbcTemplate.update(
             "DELETE FROM bank_transaction WHERE sort_code = ? AND account_number = ? " +
@@ -203,17 +260,41 @@ public class JdbcTransactionRepository implements TransactionRepository {
 
     @Override
     public boolean markAsDeleted(String compositeId) {
-        // Parse the composite ID to extract components
-        String[] parts = compositeId.split("-");
-        if (parts.length < 5) {
+        // Parse the composite ID using the same logic as findById
+        int firstHyphen = compositeId.indexOf('-');
+        if (firstHyphen == -1) {
             return false;
         }
         
-        String sortCode = parts[0].substring(0, 6);
-        String accountNumber = parts[0].substring(6);
-        String transactionDate = parts[1];
-        String transactionTime = parts[2];
-        String referenceNumber = parts[3];
+        String sortCodeAndAccount = compositeId.substring(0, firstHyphen);
+        String remaining = compositeId.substring(firstHyphen + 1);
+        
+        if (sortCodeAndAccount.length() < 6) {
+            return false;
+        }
+        String sortCode = sortCodeAndAccount.substring(0, 6);
+        String accountNumber = sortCodeAndAccount.substring(6);
+        
+        int lastHyphen = remaining.lastIndexOf('-');
+        if (lastHyphen == -1) {
+            return false;
+        }
+        
+        String referenceNumber = remaining.substring(lastHyphen + 1);
+        String dateAndTime = remaining.substring(0, lastHyphen);
+        
+        int timeStart = dateAndTime.lastIndexOf('-') + 1;
+        if (timeStart <= 0 || timeStart >= dateAndTime.length()) {
+            return false;
+        }
+        
+        String potentialTime = dateAndTime.substring(timeStart);
+        if (!potentialTime.matches("\\d{2}:\\d{2}:\\d{2}")) {
+            return false;
+        }
+        
+        String transactionDate = dateAndTime.substring(0, timeStart - 1);
+        String transactionTime = potentialTime;
         
         int rowsAffected = jdbcTemplate.update(
             "UPDATE bank_transaction SET logically_deleted = 1 " +

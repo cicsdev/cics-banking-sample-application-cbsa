@@ -1,24 +1,33 @@
 package com.cbsa.migration.service;
 
 import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-/**
- * Unit tests for the SortCodeService class.
- */
-public class SortCodeServiceTest {
+class SortCodeServiceTest {
 
     @Test
-    public void testGetSortCode() {
-        // 1. Arrange
+    void shouldReturnCorrectSortCode() {
+        // Given
         SortCodeService service = new SortCodeService();
-        String expectedSortCode = "987654";
         
-        // 2. Act
-        String actualSortCode = service.getSortCode();
+        // When
+        String result = service.getSortCode();
         
-        // 3. Assert
-        assertEquals(expectedSortCode, actualSortCode, "Sort code should match the value from COBOL SORTCODE.cpy");
+        // Then
+        assertThat(result).isEqualTo("987654");
+    }
+    
+    @Test
+    void shouldReturnSameValueOnMultipleCalls() {
+        // Given
+        SortCodeService service = new SortCodeService();
+        
+        // When
+        String result1 = service.getSortCode();
+        String result2 = service.getSortCode();
+        
+        // Then
+        assertThat(result1).isEqualTo(result2);
+        assertThat(result1).isEqualTo("987654");
     }
 }

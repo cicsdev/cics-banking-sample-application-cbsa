@@ -1,0 +1,13 @@
+/Users/taylorcurran/Documents/demos/homemade/cics-banking-sample-application-cbsa/java-migration/src/test/java/com/cbsa/migration/dto/ErrorResponseDtoTest.java
+/Users/taylorcurran/Documents/demos/homemade/cics-banking-sample-application-cbsa/java-migration/src/test/java/com/cbsa/migration/service/ErrorLoggingServiceTest.java
+/Users/taylorcurran/Documents/demos/homemade/cics-banking-sample-application-cbsa/java-migration/src/test/java/com/cbsa/migration/service/SortCodeServiceTest.java
+/Users/taylorcurran/Documents/demos/homemade/cics-banking-sample-application-cbsa/java-migration/src/test/java/com/cbsa/migration/model/TransactionTest.java
+/Users/taylorcurran/Documents/demos/homemade/cics-banking-sample-application-cbsa/java-migration/src/test/java/com/cbsa/migration/model/ApplicationErrorTest.java
+/Users/taylorcurran/Documents/demos/homemade/cics-banking-sample-application-cbsa/java-migration/src/test/java/com/cbsa/migration/repository/jdbc/JdbcTransactionRepositoryTest.java
+/Users/taylorcurran/Documents/demos/homemade/cics-banking-sample-application-cbsa/java-migration/src/test/java/com/cbsa/migration/repository/jdbc/JdbcControlRepositoryTest.java
+/Users/taylorcurran/Documents/demos/homemade/cics-banking-sample-application-cbsa/java-migration/src/test/java/com/cbsa/migration/model/AccountTest.java
+/Users/taylorcurran/Documents/demos/homemade/cics-banking-sample-application-cbsa/java-migration/src/test/java/com/cbsa/migration/dto/ErrorRequestDtoTest.java
+/Users/taylorcurran/Documents/demos/homemade/cics-banking-sample-application-cbsa/java-migration/src/test/java/com/cbsa/migration/controller/ErrorControllerTest.java
+/Users/taylorcurran/Documents/demos/homemade/cics-banking-sample-application-cbsa/java-migration/src/test/java/com/cbsa/migration/model/CustomerTest.java
+/Users/taylorcurran/Documents/demos/homemade/cics-banking-sample-application-cbsa/java-migration/src/test/java/com/cbsa/migration/service/CompanyInfoServiceTest.java
+/Users/taylorcurran/Documents/demos/homemade/cics-banking-sample-application-cbsa/java-migration/src/test/java/com/cbsa/migration/repository/jdbc/JdbcApplicationErrorRepositoryTest.java

@@ -159,4 +159,27 @@ public class JdbcAccountRepository implements AccountRepository {
     public int count() {
         return jdbcTemplate.queryForObject("SELECT COUNT(*) FROM account", Integer.class);
     }
+
+    @Override
+    public List<Account> findBySortCode(String sortCode) {
+        return jdbcTemplate.query(
+                "SELECT * FROM account WHERE sort_code = ?",
+                rowMapper,
+                sortCode
+        );
+    }
+
+    @Override
+    public Optional<Account> findTopBySortCodeOrderByAccountNumberDesc(String sortCode) {
+        try {
+            Account account = jdbcTemplate.queryForObject(
+                    "SELECT * FROM account WHERE sort_code = ? ORDER BY account_number DESC LIMIT 1",
+                    rowMapper,
+                    sortCode
+            );
+            return Optional.ofNullable(account);
+        } catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
+    }
 }

@@ -32,6 +32,7 @@
         <module>src/Z-OS-Connect-Customer-Services-Interface</module>
         <module>src/Z-OS-Connect-Payment-Interface</module>
         <module>src/webui</module>
+        <module>java-migration</module>
     </modules>
 
 

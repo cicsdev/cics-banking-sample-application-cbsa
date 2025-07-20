@@ -25,21 +25,21 @@ public class DatabaseConfig {
     @Value("${spring.datasource.driver-class-name}")
     private String driverClassName;
     
-    private final DataSource dataSource;
-    
-    public DatabaseConfig() {
-        // Initialize datasource
-        DriverManagerDataSource ds = new DriverManagerDataSource();
-        ds.setDriverClassName("org.sqlite.JDBC");
-        ds.setUrl("jdbc:sqlite:banking.db");
-        this.dataSource = ds;
-    }
+    private DataSource dataSource;
 
     /**
      * Initialize the database with our schema
      */
     @PostConstruct
     public void initializeDatabase() {
+        // Create datasource first
+        if (dataSource == null) {
+            DriverManagerDataSource ds = new DriverManagerDataSource();
+            ds.setDriverClassName(driverClassName);
+            ds.setUrl(databaseUrl);
+            dataSource = ds;
+        }
+        
         try (Connection connection = dataSource.getConnection()) {
             ScriptUtils.executeSqlScript(connection, new ClassPathResource("db/schema.sql"));
         } catch (SQLException e) {
@@ -52,14 +52,20 @@ public class DatabaseConfig {
      */
     @Bean
     public JdbcTemplate jdbcTemplate() {
-        return new JdbcTemplate(dataSource);
+        return new JdbcTemplate(dataSource());
     }
     
     /**
-     * Make the datasource available to other components
+     * Configure DataSource using injected properties
      */
     @Bean
     public DataSource dataSource() {
+        if (dataSource == null) {
+            DriverManagerDataSource ds = new DriverManagerDataSource();
+            ds.setDriverClassName(driverClassName);
+            ds.setUrl(databaseUrl);
+            dataSource = ds;
+        }
         return dataSource;
     }
 }

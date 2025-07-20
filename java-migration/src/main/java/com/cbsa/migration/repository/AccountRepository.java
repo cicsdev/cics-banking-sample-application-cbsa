@@ -57,4 +57,21 @@ public interface AccountRepository {
      * @return the number of accounts
      */
     int count();
+
+    /**
+     * Find all accounts for the specified sort code.
+     *
+     * @param sortCode the branch sort code
+     * @return list of matching accounts (may be empty)
+     */
+    List<Account> findBySortCode(String sortCode);
+
+    /**
+     * Fetch the account with the highest account number for the sort code.
+     * Mirrors COBOL last-record logic.
+     *
+     * @param sortCode branch sort code
+     * @return highest-numbered account if present
+     */
+    Optional<Account> findTopBySortCodeOrderByAccountNumberDesc(String sortCode);
 }
