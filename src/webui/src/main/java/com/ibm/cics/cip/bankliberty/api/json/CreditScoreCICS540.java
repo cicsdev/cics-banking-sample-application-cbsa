@@ -29,9 +29,10 @@ import com.ibm.cics.server.Container;
 import com.ibm.cics.server.ContainerErrorException;
 import com.ibm.cics.server.InvalidRequestException;
 import com.ibm.cics.server.InvalidTransactionIdException;
-import com.ibm.cics.server.LengthErrorException;
+// Remove unused imports
+// import com.ibm.cics.server.LengthErrorException;
 import com.ibm.cics.server.NotAuthorisedException;
-import com.ibm.cics.server.NotFoundException;
+// import com.ibm.cics.server.NotFoundException;
 import com.ibm.cics.server.ResourceDisabledException;
 import com.ibm.cics.server.Task;
 import com.ibm.cics.server.ChildResponse.CompletionStatus;
@@ -55,6 +56,7 @@ public class CreditScoreCICS540
 			.getLogger("com.ibm.cics.cip.bankliberty.api.json");
 
 
+	@SuppressWarnings("unlikely-arg-type")
 	public static CustomerJSON populateCreditScoreAndReviewDate(
 			CustomerJSON customer)
 	{

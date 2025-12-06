@@ -7,10 +7,11 @@
 package com.ibm.cics.cip.bankliberty.api.json;
 
 import java.io.IOException;
-import java.sql.Date;
+// Remove unused imports
+// import java.sql.Date;
 import java.text.DateFormat;
 import java.util.Calendar;
-import java.util.TimeZone;
+// import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;

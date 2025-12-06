@@ -82,9 +82,10 @@ public class AccountsResource extends HBankDataAccess
 
 	private static final String INTEREST_RATE_TOO_HIGH = "Interest rate cannot be greater than 9999.99%.";
 
-	private static final String GET_ACCOUNTS_EXTERNAL = "getAccountsExternal(Boolean countOnly)";
+	// Commented out as not used variables
+	// private static final String GET_ACCOUNTS_EXTERNAL = "getAccountsExternal(Boolean countOnly)";
 
-	private static final String GET_ACCOUNTS_INTERNAL = "getAccountsInternal(Boolean countOnly)";
+	// private static final String GET_ACCOUNTS_INTERNAL = "getAccountsInternal(Boolean countOnly)";
 
 	private static final String NOT_VALID_FOR_THIS_BANK = "not valid for this bank (";
 
