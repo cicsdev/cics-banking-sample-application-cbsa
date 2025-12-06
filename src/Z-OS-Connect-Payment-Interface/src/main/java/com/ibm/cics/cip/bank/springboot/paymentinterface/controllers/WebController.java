@@ -55,6 +55,7 @@ public class WebController implements WebMvcConfigurer
 	}
 
 
+	@SuppressWarnings("null")
 	@PostMapping("/paydbcr")
 	public String checkPersonInfo(@Valid TransferForm transferForm,
 			BindingResult bindingResult, Model model)

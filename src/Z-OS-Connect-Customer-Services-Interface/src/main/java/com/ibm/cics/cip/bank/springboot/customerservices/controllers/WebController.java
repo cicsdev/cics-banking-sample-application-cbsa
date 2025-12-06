@@ -26,8 +26,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.MapperFeature;
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
+// Removed unused imports
+// import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+// import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.ibm.cics.cip.bank.springboot.customerservices.ConnectionInfo;
 import com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.accountenquiry.AccountEnquiryForm;
 import com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.accountenquiry.AccountEnquiryJson;
@@ -134,6 +135,7 @@ public class WebController implements WebMvcConfigurer
 	// made
 	// This function gets its arguments created using magic and the form
 	// submitted
+	@SuppressWarnings("deprecation")
 	@PostMapping("/enqacct")
 	public String returnAcct(@Valid AccountEnquiryForm accountEnquiryForm,
 			BindingResult bindingResult, Model model)
@@ -378,6 +380,7 @@ public class WebController implements WebMvcConfigurer
 	}
 
 
+	@SuppressWarnings("null")
 	@PostMapping("/createacc")
 	public String processCreateAcc(@Valid CreateAccountForm createAccForm,
 			BindingResult bindingResult, Model model)
@@ -487,6 +490,7 @@ public class WebController implements WebMvcConfigurer
 	}
 
 
+	@SuppressWarnings("null")
 	@PostMapping("/createcust")
 	public String processCreateCust(@Valid CreateCustomerForm createCustForm,
 			BindingResult bindingResult, Model model)
@@ -584,6 +588,7 @@ public class WebController implements WebMvcConfigurer
 	}
 
 
+	@SuppressWarnings("null")
 	@PostMapping("/updateacc")
 	public String processCreateAcc(@Valid UpdateAccountForm updateAccountForm,
 			BindingResult bindingResult, Model model)
@@ -685,6 +690,7 @@ public class WebController implements WebMvcConfigurer
 	}
 
 
+	@SuppressWarnings("null")
 	@PostMapping("/updatecust")
 	public String processUpdateCust(
 			@Valid UpdateCustomerForm updateCustomerForm,

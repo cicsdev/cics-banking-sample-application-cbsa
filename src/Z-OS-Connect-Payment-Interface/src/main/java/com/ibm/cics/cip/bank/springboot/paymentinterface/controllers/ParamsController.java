@@ -56,6 +56,7 @@ public class ParamsController
 
 		try
 		{
+			@SuppressWarnings("null")
 			ResponseSpec response = client.put()
 					.header("content-type", "application/json")
 					.accept(MediaType.APPLICATION_JSON)

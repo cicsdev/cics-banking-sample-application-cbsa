@@ -13,7 +13,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
-import java.util.TimeZone;
+// Remove unused import
+// import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
