@@ -110,6 +110,14 @@ And then change the owner:
 `chown CICSUSER .`
 
 
+## SDSNLOD2
+
+Please ensure that the CICS region has both SDSNLOAD and SDSNLOD2 Db2 libraries in the STEPLIB concatenation. If you don't then you'll get an error like
+
+`Failed to load library ("/usr/lpp/db2c10/jdbc/lib/libdb2jcct2zos4_64.so")`
+
+When you try to use Db2 from the Carbon React application.
+
 ## JVM profile
 If you have already installed the Spring Boot UI, you can skip this step. Carry on from ![Edit server.xml](#Edit server.xml)
 
@@ -120,7 +128,9 @@ We need a JVMSERVER resource.
 `/var/cics/JVMProfiles/`
 
 2.  Copy the CICS supplied JVM profile called DFHWLP in to this new
-    directory. In this case, copy from the following into the new **JVM Profiles** directory:
+    directory. This is supplied by IBM, typically in a directory underneath /usr/lpp/cicsts. Please use the version appropriate to your release of CICS.
+
+In this case, copy from the following into the new **JVM Profiles** directory:
 
 `/usr/lpp/cicsts/cicsts61/JVMProfiles/DFHWLP.jvmprofile`
 
@@ -168,9 +178,9 @@ different port number and should specify your chosen port number
 (above) instead.
 
 f.  WORK_DIR must be set to a directory that the CICS region userid
-    "CICSUSER" has access to. For example:
+    "IBMUSER" has access to. For example:
 
-`/u/cicsuser/`
+`/u/ibmuser/`
 
 g. Ensure that the Time Zone is set correctly, otherwise Java and COBOL will not be using the same clock. This is done by specifying TZ and then the correct value. The correct value can be obtained by entering UNIX Systems Services and issuing the command:
 
@@ -203,9 +213,9 @@ You should also add the group to the list installed on a cold start.
 
 `CEDA ADD GROUP(CBSAWLP) LIST(CICSTS61) AFTER(BANK)`
 
- This will create a server.xml file in
+For a CICS region called CICS01 running under IBMUSER, this will create a server.xml file in
 
-`/u/cicsuser/CICSTS61/CICSTS61/CBSAWLP/wlp/usr/servers/defaultServer/`
+`/u/ibmuser/CICS01/CBSAWLP/wlp/usr/servers/defaultServer/`
 
 
 
@@ -256,8 +266,12 @@ This directory will be where our applications will be stored.
 
 ## Export to apps directory
 
-Copy the war file from the target directory into the apps directory of the JVM server. You may need to alter permissions on the war file to let the CICS region userid read it.
+Copy the war file from the target directory into the apps directory of the JVM server. You may need to create this directory, in the same place as the server.xml file. You may need to alter permissions on the war file to let the CICS region userid read it.
 
+
+## Db2 Plan Access
+
+Java applications will run under transaction CJSA by default. This is *not* covered by Db2 transactions and entries installed in the CSD group bank. Either create a Db2 Transaction for CJSA or change the default plan on the Db2 Connection to match your chosen plan.
 
 ## Checking
 

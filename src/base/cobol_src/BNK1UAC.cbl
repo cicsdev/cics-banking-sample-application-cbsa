@@ -1076,6 +1076,7 @@
                  FROM(BNK1UAO)
                  ERASE
                  CURSOR
+                 FREEKB
                  RESP(WS-CICS-RESP)
                  RESP2(WS-CICS-RESP2)
               END-EXEC
@@ -1152,6 +1153,7 @@
                  FROM(BNK1UAO)
                  DATAONLY
                  CURSOR
+                 FREEKB
                  RESP(WS-CICS-RESP)
                  RESP2(WS-CICS-RESP2)
               END-EXEC
@@ -1228,6 +1230,7 @@
                  DATAONLY
                  ALARM
                  CURSOR
+                 FREEKB
                  RESP(WS-CICS-RESP)
                  RESP2(WS-CICS-RESP2)
               END-EXEC

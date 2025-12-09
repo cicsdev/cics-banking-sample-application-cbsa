@@ -1,0 +1,129 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.ibm.cics",
+    "module": "com.ibm.cics.cip.cbsa.galasa.tests.manager",
+    "version": "0.0.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.12.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "dev.galasa",
+          "module": "dev.galasa"
+        }
+      ],
+      "files": [
+        {
+          "name": "com.ibm.cics.cip.cbsa.galasa.tests.manager-0.0.1.jar",
+          "url": "com.ibm.cics.cip.cbsa.galasa.tests.manager-0.0.1.jar",
+          "size": 506481,
+          "sha512": "26b23ef7f1e7b8d68a44cb2c8b01516b603ed97685f015477e4c53ade17555235f503893bace70c5e7be26cf4343fc83fd9da6a8a626d8e741673f09b52de155",
+          "sha256": "2e372547a2f4c3279318a87c5ef7847bbaab2041d48299da6c5e8581ef96f784",
+          "sha1": "b3435ffd303a8ac2e571595ceb9cf4af4516ed65",
+          "md5": "7fe1596eee4afa88e7da2b3e09032ae9"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "dev.galasa",
+          "module": "galasa-bom",
+          "version": {
+            "requires": "0.39.0"
+          },
+          "attributes": {
+            "org.gradle.category": "platform"
+          },
+          "endorseStrictVersions": true
+        },
+        {
+          "group": "org.osgi",
+          "module": "org.osgi.service.component.annotations",
+          "version": {
+            "requires": "1.3.0"
+          }
+        },
+        {
+          "group": "commons-logging",
+          "module": "commons-logging"
+        },
+        {
+          "group": "dev.galasa",
+          "module": "dev.galasa.framework"
+        },
+        {
+          "group": "dev.galasa",
+          "module": "dev.galasa.zos3270.manager"
+        },
+        {
+          "group": "dev.galasa",
+          "module": "dev.galasa.zos.manager"
+        },
+        {
+          "group": "dev.galasa",
+          "module": "dev.galasa.docker.manager"
+        },
+        {
+          "group": "dev.galasa",
+          "module": "dev.galasa.http.manager"
+        },
+        {
+          "group": "dev.galasa",
+          "module": "dev.galasa.selenium.manager"
+        },
+        {
+          "group": "javax.validation",
+          "module": "validation-api",
+          "version": {
+            "requires": "2.0.1.Final"
+          }
+        },
+        {
+          "group": "dev.galasa",
+          "module": "dev.galasa.cicsts.manager"
+        },
+        {
+          "group": "dev.galasa",
+          "module": "dev.galasa"
+        }
+      ],
+      "files": [
+        {
+          "name": "com.ibm.cics.cip.cbsa.galasa.tests.manager-0.0.1.jar",
+          "url": "com.ibm.cics.cip.cbsa.galasa.tests.manager-0.0.1.jar",
+          "size": 506481,
+          "sha512": "26b23ef7f1e7b8d68a44cb2c8b01516b603ed97685f015477e4c53ade17555235f503893bace70c5e7be26cf4343fc83fd9da6a8a626d8e741673f09b52de155",
+          "sha256": "2e372547a2f4c3279318a87c5ef7847bbaab2041d48299da6c5e8581ef96f784",
+          "sha1": "b3435ffd303a8ac2e571595ceb9cf4af4516ed65",
+          "md5": "7fe1596eee4afa88e7da2b3e09032ae9"
+        }
+      ]
+    }
+  ]
+}

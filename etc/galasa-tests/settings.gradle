@@ -1,0 +1,19 @@
+
+// Tell gradle where it should look to find the plugins and dependencies it needs to build.
+pluginManagement {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        // To use the bleeding edge version of galasa's obr plugin, use the development obr
+        // maven {
+        //    url 'https://development.galasa.dev/main/maven-repo/obr'
+        // }
+
+        gradlePluginPortal()
+    }
+}
+
+// Tell gradle to build the sub-projects in child folders
+include 'com.ibm.cics.cip.cbsa.galasa.tests.install'
+include 'com.ibm.cics.cip.cbsa.galasa.tests.obr'
+include 'com.ibm.cics.cip.cbsa.galasa.tests.manager'

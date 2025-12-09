@@ -42,29 +42,47 @@ const CustomerCreationPage = () => {
   const [isLoadingModalOpened, setIsLoadingModalOpened] = useState(false)
 
 
-  function handleFullNameChange(e){
+  function handleFullNameChange(e) {
     setFullName(e.target.value);
   }
 
-  function displayLoadingModal(){
+  function displayLoadingModal() {
     setIsLoadingModalOpened(wasOpened => !wasOpened)
   }
 
-  function displayFailureNetworkModal(){
+  function displayFailureNetworkModal() {
     setFailureNetworkModalOpened(wasOpened => !wasOpened)
   }
 
-  function handleAddressLine1Change(e){
+  function handleAddressLine1Change(e) {
     setAddressLine1(e.target.value);
   }
 
-  function handleDOBChange(e){
-    let unformattedDOB = e.target.value
-    let formattedDOB = unformattedDOB.substring(6,10) + "-" + unformattedDOB.substring(3,5) + "-" + unformattedDOB.substring(0,2)
-    setDOB(formattedDOB);
+  function handleDOBChange(e) {
+    let unformattedDOB = e.target.value;
+    if (unformattedDOB.length === 10) {
+      let formattedDOB = unformattedDOB.substring(6, 10) + "-" + unformattedDOB.substring(3, 5) + "-" + unformattedDOB.substring(0, 2)
+      setDOB(formattedDOB);
+    }
+    else {
+      setDOB(unformattedDOB);
+    }
   }
 
-  function handleCityChange(e){
+  function checkDOB() {
+    /**
+     * The date of birth has been reformatted at this point!
+      We want two numerics
+      then a dash
+      then two numerics
+      then a dash
+      then four numerics
+    */
+    var regex = new RegExp("([0-9]{4})-([0-9]{2})-([0-9]{2})$")
+    return regex.test(dateOfBirth);
+  }
+
+  function handleCityChange(e) {
     setCity(e.target.value)
   }
 
@@ -73,45 +91,50 @@ const CustomerCreationPage = () => {
    * If the fields have all been filled customerAddress and customerName are formed by concatenating their constituent parts
    * The request is sent and then a success/fail modal is shown depending on the response type
    */
-  async function createCustomer(){
-    if ((line1) === "" || (city) === "" || (title) === "" || (customerFullName) === ""){
+  async function createCustomer() {
+    if ((line1) === "" || (city) === "" || (title) === "" || (customerFullName) === "" || !(checkDOB())) {
       displayFailureModal()
     }
     else {
-    let customerAddress = line1 + ", " + city
-    let customerName =  title + " " + customerFullName
-    let responseData;
+      let customerAddress = line1 + ", " + city
+      let customerName = title + " " + customerFullName
+      let responseData;
       await axios
-      .post(process.env.REACT_APP_CUSTOMER_URL, {
-        customerAddress : customerAddress,
-        dateOfBirth : dateOfBirth,
-        sortCode : "987654",
-        customerName : customerName
-      }).then((response) => {
-        console.log(response)
-        responseData = response.data
-        setSuccessText(parseInt(responseData.id))
-        displayLoadingModal()
-        displaySuccessModal();
-      }).catch(function (error){
-        if (error.response){
-          console.log(error)
+        .post(process.env.REACT_APP_CUSTOMER_URL, {
+          customerAddress: customerAddress,
+          dateOfBirth: dateOfBirth,
+          sortCode: "987654",
+          customerName: customerName
+        }).then((response) => {
+          console.log(response)
+          responseData = response.data
+          setSuccessText(parseInt(responseData.id))
           displayLoadingModal()
-          displayFailureModal()
-        }
-        else if (error.request) {
-          console.log(error)
-          displayLoadingModal()
-          displayFailureNetworkModal()
-        }
-      });
+          displaySuccessModal();
+        }).catch(function (error) {
+          if (error.response) {
+            console.log(error)
+            displayLoadingModal()
+            displayFailureModal()
+          }
+          else if (error.request) {
+            console.log(error)
+            displayLoadingModal()
+            displayFailureNetworkModal()
+          }
+        });
     }
   }
 
   //Calls createCustomer when the submit button is pressed
-  function buttonPress(){
-    displayLoadingModal()
-    createCustomer();
+  function buttonPress() {
+    if (checkDOB()) {
+      displayLoadingModal();
+      createCustomer();
+    }
+    else {
+      alert("Date of Birth is not 10 characters. dd-mm-yyyy please");
+    }
   }
 
   /**
@@ -124,7 +147,7 @@ const CustomerCreationPage = () => {
   /**
    * Show failure modal toggle
    */
-  function displayFailureModal(){
+  function displayFailureModal() {
     setFailureModalOpened(wasOpened => !wasOpened)
   }
 
@@ -154,27 +177,33 @@ const CustomerCreationPage = () => {
                   className="left-form">
                   <div style={{ marginBottom: '2rem' }}>
                     <Dropdown
-                    items2={['Mr', 'Mrs', 'Miss', 'Ms', 'Dr', 'Drs', 'Professor', 'Sir', 'Lady', 'Lord']}
-                    titleText="Title"
-                    id="titleEntry"
-                    labelText="Title"
-                    items={['Mr', 'Mrs', 'Miss', 'Ms', 'Dr', 'Drs', 'Professor', 'Sir', 'Lady', 'Lord']}
-                    onChange={({ selectedItem }) =>
-                      setTitle(selectedItem)
-                    }
-                    selectedItem={title}
+                      items2={['Mr', 'Mrs', 'Miss', 'Ms', 'Dr', 'Drs', 'Professor', 'Sir', 'Lady', 'Lord']}
+                      titleText="Title"
+                      id="titleEntry"
+                      labelText="Title"
+                      items={['Mr', 'Mrs', 'Miss', 'Ms', 'Dr', 'Drs', 'Professor', 'Sir', 'Lady', 'Lord']}
+                      onChange={({ selectedItem }) =>
+                        setTitle(selectedItem)
+                      }
+                      selectedItem={title}
                     />
                     <TextInput
                       id="nameEntry"
                       labelText="Full name"
                       onChange={handleFullNameChange}
                     />
-                     <DatePicker datePickerType="simple" dateFormat="Y-m-d">
+                    <DatePicker datePickerType="simple" dateFormat="d-m-Y" onChange={handleDOBChange} maxCount="10" enableCounter="true" invalidText="Fix this" invalid={!checkDOB()} onClose={handleDOBChange}>
                       <DatePickerInput
                         placeholder="dd-mm-yyyy"
                         labelText="Date of Birth"
-                        id="date-of-birth"
-                        onChange = {handleDOBChange}
+                        id="date_of_birth"
+                        maxCount="10"
+                        invalidText="This is incorrect"
+                        invalid={!checkDOB()}
+                        enableCounter="true"
+                        onChange={handleDOBChange}
+                        onClose={handleDOBChange}
+
                       />
                     </DatePicker>
                   </div>
@@ -189,7 +218,7 @@ const CustomerCreationPage = () => {
                     <br />
                     <br />
                     <p> A customer profile for </p>
-                    <div> {customerFullName} </div>
+                    <div> {title} {customerFullName} </div>
                     <p>has been created, their Customer ID is: </p>
                     <div> {parseInt(successText)}</div>
 
@@ -203,29 +232,29 @@ const CustomerCreationPage = () => {
                     </ModalFooter>
                   </Modal>
                   <Modal
-            passiveModal
-            size="sm"
-            open={isLoadingModalOpened}
-            preventCloseOnClickOutside
-            onRequestClose={displayLoadingModal}>
-            <h4> Creating customer...</h4>
-          </Modal>
-          <Modal
-            passiveModal
-            size="sm"
-            open={isFailureNetworkModalOpened}
-            preventCloseOnClickOutside
-            onRequestClose={displayFailureNetworkModal}>
-            <h4> Customer failed to create due to a network error</h4>
-          </Modal>
+                    passiveModal
+                    size="sm"
+                    open={isLoadingModalOpened}
+                    preventCloseOnClickOutside
+                    onRequestClose={displayLoadingModal}>
+                    <h4> Creating customer...</h4>
+                  </Modal>
                   <Modal
-                  passiveModal
-                  size="sm"
-                  open={isFailureModalOpened}
-                  onRequestClose={displayFailureModal}
-                  preventCloseOnClickOutside
-                  modalHeading="Customer creation unsuccessful">
-                  <p> Please check that all fields have been filled </p>
+                    passiveModal
+                    size="sm"
+                    open={isFailureNetworkModalOpened}
+                    preventCloseOnClickOutside
+                    onRequestClose={displayFailureNetworkModal}>
+                    <h4> Customer failed to create due to a network error</h4>
+                  </Modal>
+                  <Modal
+                    passiveModal
+                    size="sm"
+                    open={isFailureModalOpened}
+                    onRequestClose={displayFailureModal}
+                    preventCloseOnClickOutside
+                    modalHeading="Customer creation unsuccessful">
+                    <p> Please check that all fields have been filled </p>
                   </Modal>
                 </FormGroup>
               </Column>
@@ -247,8 +276,8 @@ const CustomerCreationPage = () => {
                       onChange={handleCityChange}
                     />
                   </div>
-                  <div style={{marginTop: '20 px'}}></div>
-                   <Button className="displayModal" onClick={buttonPress}>
+                  <div style={{ marginTop: '20 px' }}></div>
+                  <Button className="displayModal" onClick={buttonPress}>
                     Submit
                   </Button>
                 </FormGroup>

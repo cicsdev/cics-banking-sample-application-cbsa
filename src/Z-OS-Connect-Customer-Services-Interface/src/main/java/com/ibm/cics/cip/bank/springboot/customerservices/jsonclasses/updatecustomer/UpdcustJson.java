@@ -13,34 +13,34 @@ public class UpdcustJson
 
 
 
-	@JsonProperty("COMM_EYE")
+	@JsonProperty("CommEye")
 	private String commEye = "    ";
 
-	@JsonProperty("COMM_SCODE")
+	@JsonProperty("CommScode")
 	private String commSortcode = "";
 
-	@JsonProperty("COMM_CUSTNO")
+	@JsonProperty("CommCustno")
 	private String commCustno = " ";
 
-	@JsonProperty("COMM_NAME")
+	@JsonProperty("CommName")
 	private String commName = " ";
 
-	@JsonProperty("COMM_ADDR")
+	@JsonProperty("CommAddress")
 	private String commAddress = " ";
 
-	@JsonProperty("COMM_DOB")
+	@JsonProperty("CommDob")
 	private int commDateOfBirth = 0;
 
-	@JsonProperty("COMM_CREDIT_SCORE")
+	@JsonProperty("CommCreditScore")
 	private int commCreditScore = 0;
 
-	@JsonProperty("COMM_CS_REVIEW_DATE")
+	@JsonProperty("CommCsReviewDate")
 	private int commCreditScoreReviewDate = 0;
 
-	@JsonProperty("COMM_UPD_SUCCESS")
+	@JsonProperty("CommUpdSuccess")
 	private String commUpdateSuccess = " ";
 
-	@JsonProperty("COMM_UPD_FAIL_CD")
+	@JsonProperty("CommUpdFailCd")
 	private String commUpdateFailCode = " ";
 
 

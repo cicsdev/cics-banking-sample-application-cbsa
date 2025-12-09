@@ -1,0 +1,116 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.ibm.cics",
+    "module": "com.ibm.cics.cip.cbsa.galasa.tests.install",
+    "version": "0.0.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.12.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "com.ibm.cics.cip.cbsa.galasa.tests.install-0.0.1.jar",
+          "url": "com.ibm.cics.cip.cbsa.galasa.tests.install-0.0.1.jar",
+          "size": 13985,
+          "sha512": "fdb4b59c15ff3fe00916420d8acc8ec5eda0694e31e5a7016b15617c7ecae228516de8cf1951ccdf8b441d916d2cbbc4248b49239fb8952b8b45865ede0a887a",
+          "sha256": "97c0ee0e917cfc85394c0e20ac7bfdfb927f70b3c489006ecc003a335adf9409",
+          "sha1": "0e866194e37551c51cf6f089853d65c7a6e4b285",
+          "md5": "db8bb640b3950989ca1a907f8312adc5"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "dev.galasa",
+          "module": "galasa-bom",
+          "version": {
+            "requires": "0.39.0"
+          },
+          "attributes": {
+            "org.gradle.category": "platform"
+          },
+          "endorseStrictVersions": true
+        },
+        {
+          "group": "com.ibm.cics",
+          "module": "com.ibm.cics.cip.cbsa.galasa.tests.manager",
+          "version": {
+            "requires": "0.0.1"
+          }
+        },
+        {
+          "group": "dev.galasa",
+          "module": "dev.galasa"
+        },
+        {
+          "group": "dev.galasa",
+          "module": "dev.galasa.framework"
+        },
+        {
+          "group": "dev.galasa",
+          "module": "dev.galasa.core.manager"
+        },
+        {
+          "group": "dev.galasa",
+          "module": "dev.galasa.artifact.manager"
+        },
+        {
+          "group": "commons-logging",
+          "module": "commons-logging"
+        },
+        {
+          "group": "org.assertj",
+          "module": "assertj-core"
+        },
+        {
+          "group": "dev.galasa",
+          "module": "dev.galasa.zos3270.manager"
+        },
+        {
+          "group": "dev.galasa",
+          "module": "dev.galasa.zos.manager"
+        },
+        {
+          "group": "dev.galasa",
+          "module": "dev.galasa.selenium.manager"
+        }
+      ],
+      "files": [
+        {
+          "name": "com.ibm.cics.cip.cbsa.galasa.tests.install-0.0.1.jar",
+          "url": "com.ibm.cics.cip.cbsa.galasa.tests.install-0.0.1.jar",
+          "size": 13985,
+          "sha512": "fdb4b59c15ff3fe00916420d8acc8ec5eda0694e31e5a7016b15617c7ecae228516de8cf1951ccdf8b441d916d2cbbc4248b49239fb8952b8b45865ede0a887a",
+          "sha256": "97c0ee0e917cfc85394c0e20ac7bfdfb927f70b3c489006ecc003a335adf9409",
+          "sha1": "0e866194e37551c51cf6f089853d65c7a6e4b285",
+          "md5": "db8bb640b3950989ca1a907f8312adc5"
+        }
+      ]
+    }
+  ]
+}

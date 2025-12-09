@@ -1,0 +1,51 @@
+// This section tells gradle which gradle plugins to use to build this project.
+plugins {
+    id 'base'
+    id 'maven-publish'
+    id 'dev.galasa.obr' version '0.36.0'
+    id 'dev.galasa.testcatalog' version '0.36.0'
+}
+
+// Set the variables which will control what the built OSGi bundle will be called
+// and the name it will be published under in the maven repository.
+group = 'com.ibm.cics'
+version = '0.0.1'
+
+// What are the dependencies of the obr ?
+dependencies {
+    bundle project(':com.ibm.cics.cip.cbsa.galasa.tests.manager')
+    bundle project(':com.ibm.cics.cip.cbsa.galasa.tests.install')
+}
+
+def obrFile = file('build/galasa.obr')
+artifacts {
+    archives obrFile
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+def testcatalog = file('build/testcatalog.json')
+
+// artifacts {
+//     archives obrFile
+// }
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifact obrFile
+            artifact (testcatalog) {
+                classifier "testcatalog"
+                extension "json"
+            }
+        }
+    }
+}
+
+tasks.named('publishMavenPublicationToMavenLocal') {
+    dependsOn 'genobr'
+    dependsOn 'mergetestcat'
+}

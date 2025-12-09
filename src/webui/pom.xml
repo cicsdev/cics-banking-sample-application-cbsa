@@ -55,14 +55,14 @@
 		<dependency>
 			<groupId>com.ibm.websphere.appserver.api</groupId>
 			<artifactId>com.ibm.websphere.appserver.api.json</artifactId>
-			<version>1.0.73</version>
+			<version>1.0.108</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 		        <groupId>com.ibm.jzos</groupId>
 		        <artifactId>ibm.jzos</artifactId>
-		        <version>3.1.3.1</version>
+		        <version>3.2.0.0</version>
 		        <scope>provided</scope>
 	        </dependency>
 

@@ -1,0 +1,53 @@
+{
+  "metadata": {
+    "generated": "2025-06-05T11:24:07.198705671Z",
+    "name": "com.ibm.cics.cip.cbsa.galasa.tests.install"
+  },
+  "classes": {
+    "com.ibm.cics.cip.cbsa.galasa.tests.install/com.ibm.cics.cip.cbsa.galasa.tests.install.TestWebui": {
+      "name": "com.ibm.cics.cip.cbsa.galasa.tests.install.TestWebui",
+      "bundle": "com.ibm.cics.cip.cbsa.galasa.tests.install",
+      "shortName": "TestWebui",
+      "package": "com.ibm.cics.cip.cbsa.galasa.tests.install"
+    },
+    "com.ibm.cics.cip.cbsa.galasa.tests.install/com.ibm.cics.cip.cbsa.galasa.tests.install.TestCustomer": {
+      "name": "com.ibm.cics.cip.cbsa.galasa.tests.install.TestCustomer",
+      "bundle": "com.ibm.cics.cip.cbsa.galasa.tests.install",
+      "shortName": "TestCustomer",
+      "package": "com.ibm.cics.cip.cbsa.galasa.tests.install"
+    },
+    "com.ibm.cics.cip.cbsa.galasa.tests.install/com.ibm.cics.cip.cbsa.galasa.tests.install.TestCustomerCreateDelete": {
+      "name": "com.ibm.cics.cip.cbsa.galasa.tests.install.TestCustomerCreateDelete",
+      "bundle": "com.ibm.cics.cip.cbsa.galasa.tests.install",
+      "shortName": "TestCustomerCreateDelete",
+      "package": "com.ibm.cics.cip.cbsa.galasa.tests.install"
+    },
+    "com.ibm.cics.cip.cbsa.galasa.tests.install/com.ibm.cics.cip.cbsa.galasa.tests.install.TestAccount": {
+      "name": "com.ibm.cics.cip.cbsa.galasa.tests.install.TestAccount",
+      "bundle": "com.ibm.cics.cip.cbsa.galasa.tests.install",
+      "shortName": "TestAccount",
+      "package": "com.ibm.cics.cip.cbsa.galasa.tests.install"
+    }
+  },
+  "packages": {
+    "com.ibm.cics.cip.cbsa.galasa.tests.install": [
+      "com.ibm.cics.cip.cbsa.galasa.tests.install/com.ibm.cics.cip.cbsa.galasa.tests.install.TestWebui",
+      "com.ibm.cics.cip.cbsa.galasa.tests.install/com.ibm.cics.cip.cbsa.galasa.tests.install.TestCustomer",
+      "com.ibm.cics.cip.cbsa.galasa.tests.install/com.ibm.cics.cip.cbsa.galasa.tests.install.TestCustomerCreateDelete",
+      "com.ibm.cics.cip.cbsa.galasa.tests.install/com.ibm.cics.cip.cbsa.galasa.tests.install.TestAccount"
+    ]
+  },
+  "bundles": {
+    "com.ibm.cics.cip.cbsa.galasa.tests.install": {
+      "packages": {
+        "com.ibm.cics.cip.cbsa.galasa.tests.install": [
+          "com.ibm.cics.cip.cbsa.galasa.tests.install/com.ibm.cics.cip.cbsa.galasa.tests.install.TestWebui",
+          "com.ibm.cics.cip.cbsa.galasa.tests.install/com.ibm.cics.cip.cbsa.galasa.tests.install.TestCustomer",
+          "com.ibm.cics.cip.cbsa.galasa.tests.install/com.ibm.cics.cip.cbsa.galasa.tests.install.TestCustomerCreateDelete",
+          "com.ibm.cics.cip.cbsa.galasa.tests.install/com.ibm.cics.cip.cbsa.galasa.tests.install.TestAccount"
+        ]
+      }
+    }
+  },
+  "sharedEnvironments": {}
+}

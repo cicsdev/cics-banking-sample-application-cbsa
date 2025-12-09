@@ -1,0 +1,52 @@
+
+// This section tells gradle which gradle plugins to use to build this project.
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'biz.aQute.bnd.builder' version '6.4.0'
+    id 'dev.galasa.tests' version '0.15.0'
+}
+
+// This section tells gradle where it should look for any dependencies
+repositories {
+    mavenLocal()
+    mavenCentral()
+    // To use the bleeding edge version of galasa's obr plugin, use the development obr
+    // maven {
+    //    url 'https://development.galasa.dev/main/maven-repo/obr'
+    // }
+
+}
+
+// Set the variables which will control what the built OSGi bundle will be called
+// and the name it will be published under in the maven repository.
+group = 'com.ibm.cics'
+version = '0.0.1'
+
+// What are the dependencies of the test code ?
+// When more managers and dependencies are added, this list will need to grow.
+dependencies {
+    implementation platform('dev.galasa:galasa-bom:0.39.0')
+    implementation project(':com.ibm.cics.cip.cbsa.galasa.tests.manager')
+
+    implementation 'dev.galasa:dev.galasa'
+    implementation 'dev.galasa:dev.galasa.framework'
+    implementation 'dev.galasa:dev.galasa.core.manager'
+    implementation 'dev.galasa:dev.galasa.artifact.manager'
+    implementation 'commons-logging:commons-logging'
+    implementation 'org.assertj:assertj-core'
+    implementation 'dev.galasa:dev.galasa.zos3270.manager'
+    implementation 'dev.galasa:dev.galasa.zos.manager'
+    implementation 'dev.galasa:dev.galasa.selenium.manager'
+
+}
+
+// Tell gradle to publish the built OSGi bundles as maven artifacts on the
+// local maven repository.
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+}

@@ -1,0 +1,44 @@
+
+plugins {
+    id 'java-library'
+    id 'maven-publish'  //Might not belong here along with publish at bottom
+    id 'biz.aQute.bnd.builder' version '5.3.0'
+}
+
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
+group = 'com.ibm.cics'
+version = '0.0.1'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation platform('dev.galasa:galasa-bom:0.44.0')
+
+    implementation 'org.osgi:org.osgi.service.component.annotations:1.3.0'
+    implementation 'commons-logging:commons-logging'
+    api 'dev.galasa:dev.galasa'
+    implementation 'dev.galasa:dev.galasa.framework'
+    implementation 'dev.galasa:dev.galasa.zos3270.manager'
+    implementation 'dev.galasa:dev.galasa.zos.manager'
+    implementation 'dev.galasa:dev.galasa.docker.manager'
+    implementation 'dev.galasa:dev.galasa.http.manager'
+    implementation 'dev.galasa:dev.galasa.selenium.manager'
+
+    implementation 'javax.validation:validation-api:2.0.1.Final'
+
+    implementation 'dev.galasa:dev.galasa.cicsts.manager'
+
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+}

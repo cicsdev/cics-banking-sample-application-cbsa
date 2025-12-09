@@ -1,0 +1,1 @@
+This content is read from a bundle resource file.
