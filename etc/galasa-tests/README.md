@@ -223,7 +223,7 @@ Before contributing:
 - Make sure your changes pass all existing tests
 ---
 ## 📄 License
-// to do?
+This project is licensed under [Eclipse Public License - v 2.0](LICENSE).
 ---
 ## 📚 References
 - [Galasa Docs](https://galasa.dev/docs/)

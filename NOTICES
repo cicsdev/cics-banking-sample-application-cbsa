@@ -16,47 +16,13 @@ NOTE: Search on "SECTION_START" to step through the different sections of this N
 --------------------------------------------------------------------------------
 SECTION_START
 --------------------------------------------------------------------------------
-0BSD CODE NOTICES AND INFORMATION
-
-The following third party components might be provided for use with the Program:
-
-tslib
-
-Copyright (C) YEAR by AUTHOR EMAIL
-
-Permission to use, copy, modify, and/or distribute this software for any purpose with or
-without fee is hereby granted.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO
-THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT
-SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR
-ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF
-CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE
-OR PERFORMANCE OF THIS SOFTWARE.
-
-END OF 0BSD CODE NOTICES AND INFORMATION
 
 --------------------------------------------------------------------------------
 APACHE-2.0 CODE NOTICES AND INFORMATION
 
 The following third party components might be provided for use with the Program:
 
-@ampproject/remapping, @carbon/colors, @carbon/feature-flags, @carbon/grid, @carbon/icon-helpers,
-@carbon/icons-react, @carbon/layout, @carbon/motion, @carbon/react, @carbon/styles, @carbon/themes,
-@carbon/type, @humanwhocodes/config-array, @humanwhocodes/module-importer, @ibm/telemetry-js,
-@surma/rollup-plugin-off-main-thread, @webassemblyjs/leb128, @webassemblyjs/leb128, @xtuc/long,
-ansi-html-community, aria-query, axobject-query, bser, com.beust, com.fasterxml,
-com.fasterxml.jackson.core, com.fasterxml.jackson.datatype, com.fasterxml.jackson.module,
-de.codecentric, didyoumean, doctrine, doctrine, ejs, eslint-visitor-keys, eslint-visitor-keys, faye-
-websocket, fb-watchman, filelist, harmony-reflect, human-signals, io.micrometer, io.netty, io.netty,
-io.projectreactor, io.projectreactor.addons, io.projectreactor.netty, io.projectreactor.netty,
-jakarta.validation, jake, javax.validation, ognl, org.apache.httpcomponents.client5,
-org.apache.httpcomponents.core5, org.apache.logging.log4j, org.apache.tomcat,
-org.apache.tomcat.embed, org.apache.tomcat.embed, org.attoparser, org.hibernate.validator,
-org.javassist, org.jboss.logging, org.springframework, org.springframework.boot,
-org.springframework.boot, org.springframework.boot, org.thymeleaf, org.unbescape, org.yaml,
-prettier, sass, ts-interface-checker, walker, websocket-driver, websocket-extensions, xml-name-
-validator
+doctrine, doctrine, sass, harmony-reflect, org.javassist
 
                                 Apache License
 
@@ -272,14 +238,9 @@ BSD-2-CLAUSE CODE NOTICES AND INFORMATION
 
 The following third party components might be provided for use with the Program:
 
-@typescript-eslint/parser, @typescript-eslint/typescript-estree, browser-process-hrtime, cheerio-
-select, css-select, css-select, css-select, css-what, css-what, cssmin, damerau-levenshtein,
-default-gateway, domelementtype, domelementtype, domhandler, domhandler, domutils, domutils,
-domutils, dotenv, dotenv, dotenv, dotenv-expand, entities, entities, escodegen, escodegen, eslint-
-scope, eslint-scope, espree, esprima, esprima, esrecurse, estraverse, estraverse, esutils, glob-to-
-regexp, hoist-non-react-statics, nth-check, org.hdrhistogram, regjsparser, source-map, source-map,
-source-map, stringify-object, terser, uglify-js, uri-js, webidl-conversions, webidl-conversions,
-webidl-conversions
+org.hdrhistogram
+
+
 
 Copyright (c) <YEAR> <COPYRIGHT HOLDER>
 
@@ -311,11 +272,7 @@ BSD-3-CLAUSE CODE NOTICES AND INFORMATION
 
 The following third party components might be provided for use with the Program:
 
-@humanwhocodes/object-schema, @sinonjs/commons, @sinonjs/fake-timers, @xtuc/ieee754, abab, babel-
-plugin-istanbul, com.yahoo.platform.yui, eslint-plugin-flowtype, esquery, filesize, istanbul-lib-
-coverage, istanbul-lib-instrument, istanbul-lib-report, istanbul-lib-source-maps, istanbul-reports,
-json-schema, makeerror, moo, node-forge, qs, rst-selector-parser, serialize-javascript, serialize-
-javascript, source-map, source-map-js, sprintf-js, tmpl, tough-cookie
+json-schema, node-forge, com.yahoo.platform.yui
 
 Copyright (c) <YEAR> <COPYRIGHT HOLDER>
 
@@ -348,131 +305,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 END OF BSD-3-CLAUSE CODE NOTICES AND INFORMATION
-
---------------------------------------------------------------------------------
-CC0-1.0 CODE NOTICES AND INFORMATION
-
-The following third party components might be provided for use with the Program:
-
-@csstools/normalize.css, @csstools/postcss-cascade-layers, @csstools/postcss-color-function,
-@csstools/postcss-font-format-keywords, @csstools/postcss-hwb-function, @csstools/postcss-ic-unit,
-@csstools/postcss-is-pseudo-class, @csstools/postcss-nested-calc, @csstools/postcss-normalize-
-display-values, @csstools/postcss-oklab-function, @csstools/postcss-progressive-custom-properties,
-@csstools/postcss-stepped-value-functions, @csstools/postcss-text-decoration-shorthand,
-@csstools/postcss-trigonometric-functions, @csstools/postcss-unset-value, @csstools/selector-
-specificity, css-blank-pseudo, css-has-pseudo, css-prefers-color-scheme, cssdb, language-subtag-
-registry, mdn-data, mdn-data, mdn-data, mdn-data, org.latencyutils, postcss-browser-comments,
-postcss-color-functional-notation, postcss-color-rebeccapurple, postcss-dir-pseudo-class, postcss-
-double-position-gradients, postcss-env-function, postcss-focus-visible, postcss-focus-within,
-postcss-gap-properties, postcss-image-set-function, postcss-lab-function, postcss-logical, postcss-
-nesting, postcss-normalize, postcss-overflow-shorthand, postcss-place, postcss-preset-env, postcss-
-pseudo-class-any-link, railroad-diagrams, sanitize.css
-
-CC0 1.0 Universal
-
-CREATIVE COMMONS CORPORATION IS NOT A LAW FIRM AND DOES NOT PROVIDE LEGAL SERVICES.
-DISTRIBUTION OF THIS DOCUMENT DOES NOT CREATE AN ATTORNEY-CLIENT RELATIONSHIP. CREATIVE
-COMMONS PROVIDES THIS INFORMATION ON AN "AS-IS" BASIS. CREATIVE COMMONS MAKES NO
-WARRANTIES REGARDING THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS PROVIDED
-HEREUNDER, AND DISCLAIMS LIABILITY FOR DAMAGES RESULTING FROM THE USE OF THIS DOCUMENT
-OR THE INFORMATION OR WORKS PROVIDED HEREUNDER.
-
-Statement of Purpose
-The laws of most jurisdictions throughout the world automatically confer exclusive
-Copyright and Related Rights (defined below) upon the creator and subsequent owner(s)
-(each and all, an "owner") of an original work of authorship and/or a database (each,
-a "Work").
-
-Certain owners wish to permanently relinquish those rights to a Work for the purpose
-of contributing to a commons of creative, cultural and scientific works ("Commons")
-that the public can reliably and without fear of later claims of infringement build
-upon, modify, incorporate in other works, reuse and redistribute as freely as possible
-in any form whatsoever and for any purposes, including without limitation commercial
-purposes. These owners may contribute to the Commons to promote the ideal of a free
-culture and the further production of creative, cultural and scientific works, or
-to gain reputation or greater distribution for their Work in part through the use
-and efforts of others.
-
-For these and/or other purposes and motivations, and without any expectation of
-additional consideration or compensation, the person associating CC0 with a Work
-(the "Affirmer"), to the extent that he or she is an owner of Copyright and Related
-Rights in the Work, voluntarily elects to apply CC0 to the Work and publicly distribute
-the Work under its terms, with knowledge of his or her Copyright and Related Rights
-in the Work and the meaning and intended legal effect of CC0 on those rights.
-
-1. Copyright and Related Rights.
-A Work made available under CC0 may be protected by copyright and related or neighboring
-rights ("Copyright and Related Rights"). Copyright and Related Rights include, but
-are not limited to, the following:
-
-the right to reproduce, adapt, distribute, perform, display, communicate, and translate
-a Work;
-moral rights retained by the original author(s) and/or performer(s);
-publicity and privacy rights pertaining to a person's image or likeness depicted
-in a Work;
-rights protecting against unfair competition in regards to a Work, subject to the
-limitations in paragraph 4(a), below;
-rights protecting the extraction, dissemination, use and reuse of data in a Work;
-database rights (such as those arising under Directive 96/9/EC of the European Parliament
-and of the Council of 11 March 1996 on the legal protection of databases, and under
-any national implementation thereof, including any amended or successor version
-of such directive); and
-other similar, equivalent or corresponding rights throughout the world based on
-applicable law or treaty, and any national implementations thereof.
-2. Waiver.
-To the greatest extent permitted by, but not in contravention of, applicable law,
-Affirmer hereby overtly, fully, permanently, irrevocably and unconditionally waives,
-abandons, and surrenders all of Affirmer's Copyright and Related Rights and associated
-claims and causes of action, whether now known or unknown (including existing as
-well as future claims and causes of action), in the Work (i) in all territories
-worldwide, (ii) for the maximum duration provided by applicable law or treaty (including
-future time extensions), (iii) in any current or future medium and for any number
-of copies, and (iv) for any purpose whatsoever, including without limitation commercial,
-advertising or promotional purposes (the "Waiver"). Affirmer makes the Waiver for
-the benefit of each member of the public at large and to the detriment of Affirmer's
-heirs and successors, fully intending that such Waiver shall not be subject to revocation,
-rescission, cancellation, termination, or any other legal or equitable action to
-disrupt the quiet enjoyment of the Work by the public as contemplated by Affirmer's
-express Statement of Purpose.
-
-3. Public License Fallback.
-Should any part of the Waiver for any reason be judged legally invalid or ineffective
-under applicable law, then the Waiver shall be preserved to the maximum extent permitted
-taking into account Affirmer's express Statement of Purpose. In addition, to the
-extent the Waiver is so judged Affirmer hereby grants to each affected person a
-royalty-free, non transferable, non sublicensable, non exclusive, irrevocable and
-unconditional license to exercise Affirmer's Copyright and Related Rights in the
-Work (i) in all territories worldwide, (ii) for the maximum duration provided by
-applicable law or treaty (including future time extensions), (iii) in any current
-or future medium and for any number of copies, and (iv) for any purpose whatsoever,
-including without limitation commercial, advertising or promotional purposes (the
-"License"). The License shall be deemed effective as of the date CC0 was applied
-by Affirmer to the Work. Should any part of the License for any reason be judged
-legally invalid or ineffective under applicable law, such partial invalidity or
-ineffectiveness shall not invalidate the remainder of the License, and in such case
-Affirmer hereby affirms that he or she will not (i) exercise any of his or her remaining
-Copyright and Related Rights in the Work or (ii) assert any associated claims and
-causes of action with respect to the Work, in either case contrary to Affirmer's
-express Statement of Purpose.
-
-4. Limitations and Disclaimers.
-No trademark or patent rights held by Affirmer are waived, abandoned, surrendered,
-licensed or otherwise affected by this document.
-Affirmer offers the Work as-is and makes no representations or warranties of any
-kind concerning the Work, express, implied, statutory or otherwise, including without
-limitation warranties of title, merchantability, fitness for a particular purpose,
-non infringement, or the absence of latent or other defects, accuracy, or the present
-or absence of errors, whether or not discoverable, all to the greatest extent permissible
-under applicable law.
-Affirmer disclaims responsibility for clearing rights of other persons that may
-apply to the Work or any use thereof, including without limitation any person's
-Copyright and Related Rights in the Work. Further, Affirmer disclaims responsibility
-for obtaining any necessary consents, permissions or other rights required for any
-use of the Work.
-Affirmer understands and acknowledges that Creative Commons is not a party to this
-document and has no duty or obligation with respect to this CC0 or use of the Work.
-
-END OF CC0-1.0 CODE NOTICES AND INFORMATION
 
 --------------------------------------------------------------------------------
 EPL-1.0 CODE NOTICES AND INFORMATION
@@ -674,7 +506,7 @@ EPL-2.0 CODE NOTICES AND INFORMATION
 
 The following third party components might be provided for use with the Program:
 
-jakarta.annotation
+jakarta.annotation, jakarta.ws.rs, dev.galasa.selenium.manager
 
 Eclipse Public License - v 2.0
 
@@ -941,229 +773,7 @@ MIT CODE NOTICES AND INFORMATION
 
 The following third party components might be provided for use with the Program:
 
-@aashutoshrathi/word-wrap, @alloc/quick-lru, @apideck/better-ajv-errors, @babel/code-frame,
-@babel/compat-data, @babel/core, @babel/eslint-parser, @babel/generator, @babel/helper-annotate-as-
-pure, @babel/helper-builder-binary-assignment-operator-visitor, @babel/helper-compilation-targets,
-@babel/helper-create-class-features-plugin, @babel/helper-create-regexp-features-plugin,
-@babel/helper-define-polyfill-provider, @babel/helper-environment-visitor, @babel/helper-function-
-name, @babel/helper-hoist-variables, @babel/helper-member-expression-to-functions, @babel/helper-
-module-imports, @babel/helper-module-transforms, @babel/helper-optimise-call-expression,
-@babel/helper-plugin-utils, @babel/helper-remap-async-to-generator, @babel/helper-replace-supers,
-@babel/helper-simple-access, @babel/helper-skip-transparent-expression-wrappers, @babel/helper-
-split-export-declaration, @babel/helper-string-parser, @babel/helper-validator-identifier,
-@babel/helper-validator-option, @babel/helper-wrap-function, @babel/helpers, @babel/highlight,
-@babel/parser, @babel/plugin-bugfix-safari-id-destructuring-collision-in-function-expression,
-@babel/plugin-bugfix-v8-spread-parameters-in-optional-chaining, @babel/plugin-bugfix-v8-static-
-class-fields-redefine-readonly, @babel/plugin-proposal-class-properties, @babel/plugin-proposal-
-decorators, @babel/plugin-proposal-nullish-coalescing-operator, @babel/plugin-proposal-numeric-
-separator, @babel/plugin-proposal-optional-chaining, @babel/plugin-proposal-private-methods,
-@babel/plugin-proposal-private-property-in-object, @babel/plugin-syntax-async-generators,
-@babel/plugin-syntax-bigint, @babel/plugin-syntax-class-properties, @babel/plugin-syntax-class-
-static-block, @babel/plugin-syntax-decorators, @babel/plugin-syntax-dynamic-import, @babel/plugin-
-syntax-export-namespace-from, @babel/plugin-syntax-flow, @babel/plugin-syntax-import-assertions,
-@babel/plugin-syntax-import-attributes, @babel/plugin-syntax-import-meta, @babel/plugin-syntax-json-
-strings, @babel/plugin-syntax-jsx, @babel/plugin-syntax-logical-assignment-operators, @babel/plugin-
-syntax-nullish-coalescing-operator, @babel/plugin-syntax-numeric-separator, @babel/plugin-syntax-
-object-rest-spread, @babel/plugin-syntax-optional-catch-binding, @babel/plugin-syntax-optional-
-chaining, @babel/plugin-syntax-private-property-in-object, @babel/plugin-syntax-top-level-await,
-@babel/plugin-syntax-typescript, @babel/plugin-syntax-unicode-sets-regex, @babel/plugin-transform-
-arrow-functions, @babel/plugin-transform-async-generator-functions, @babel/plugin-transform-async-
-to-generator, @babel/plugin-transform-block-scoped-functions, @babel/plugin-transform-block-scoping,
-@babel/plugin-transform-class-properties, @babel/plugin-transform-class-static-block, @babel/plugin-
-transform-classes, @babel/plugin-transform-computed-properties, @babel/plugin-transform-
-destructuring, @babel/plugin-transform-dotall-regex, @babel/plugin-transform-duplicate-keys,
-@babel/plugin-transform-dynamic-import, @babel/plugin-transform-exponentiation-operator,
-@babel/plugin-transform-export-namespace-from, @babel/plugin-transform-flow-strip-types,
-@babel/plugin-transform-for-of, @babel/plugin-transform-function-name, @babel/plugin-transform-json-
-strings, @babel/plugin-transform-literals, @babel/plugin-transform-logical-assignment-operators,
-@babel/plugin-transform-member-expression-literals, @babel/plugin-transform-modules-amd,
-@babel/plugin-transform-modules-commonjs, @babel/plugin-transform-modules-systemjs, @babel/plugin-
-transform-modules-umd, @babel/plugin-transform-named-capturing-groups-regex, @babel/plugin-
-transform-new-target, @babel/plugin-transform-nullish-coalescing-operator, @babel/plugin-transform-
-numeric-separator, @babel/plugin-transform-object-rest-spread, @babel/plugin-transform-object-super,
-@babel/plugin-transform-optional-catch-binding, @babel/plugin-transform-optional-chaining,
-@babel/plugin-transform-parameters, @babel/plugin-transform-private-methods, @babel/plugin-
-transform-private-property-in-object, @babel/plugin-transform-property-literals, @babel/plugin-
-transform-react-constant-elements, @babel/plugin-transform-react-display-name, @babel/plugin-
-transform-react-jsx, @babel/plugin-transform-react-jsx-development, @babel/plugin-transform-react-
-pure-annotations, @babel/plugin-transform-regenerator, @babel/plugin-transform-reserved-words,
-@babel/plugin-transform-runtime, @babel/plugin-transform-shorthand-properties, @babel/plugin-
-transform-spread, @babel/plugin-transform-sticky-regex, @babel/plugin-transform-template-literals,
-@babel/plugin-transform-typeof-symbol, @babel/plugin-transform-typescript, @babel/plugin-transform-
-unicode-escapes, @babel/plugin-transform-unicode-property-regex, @babel/plugin-transform-unicode-
-regex, @babel/plugin-transform-unicode-sets-regex, @babel/preset-env, @babel/preset-modules,
-@babel/preset-react, @babel/preset-typescript, @babel/regjsgen, @babel/runtime, @babel/runtime,
-@babel/template, @babel/traverse, @babel/types, @bcoe/v8-coverage, @colors/colors,
-@dabh/diagnostics, @eslint-community/eslint-utils, @eslint-community/regexpp, @eslint/eslintrc,
-@eslint/js, @floating-ui/core, @floating-ui/dom, @floating-ui/react, @floating-ui/react-dom,
-@floating-ui/utils, @istanbuljs/schema, @jest/console, @jest/console, @jest/core, @jest/environment,
-@jest/fake-timers, @jest/globals, @jest/reporters, @jest/schemas, @jest/source-map, @jest/test-
-result, @jest/test-result, @jest/test-sequencer, @jest/transform, @jest/types, @jest/types,
-@jridgewell/gen-mapping, @jridgewell/resolve-uri, @jridgewell/set-array, @jridgewell/source-map,
-@jridgewell/sourcemap-codec, @jridgewell/trace-mapping, @leichtgewicht/ip-codec, @nicolo-
-ribaudo/eslint-scope-5-internals, @nodelib/fs.scandir, @nodelib/fs.stat, @nodelib/fs.walk,
-@pmmmwh/react-refresh-webpack-plugin, @rollup/plugin-babel, @rollup/plugin-node-resolve,
-@rollup/plugin-replace, @rollup/pluginutils, @rushstack/eslint-patch, @sinclair/typebox,
-@svgr/babel-plugin-add-jsx-attribute, @svgr/babel-plugin-remove-jsx-attribute, @svgr/babel-plugin-
-remove-jsx-empty-expression, @svgr/babel-plugin-replace-jsx-attribute-value, @svgr/babel-plugin-svg-
-dynamic-title, @svgr/babel-plugin-svg-em-dimensions, @svgr/babel-plugin-transform-react-native-svg,
-@svgr/babel-plugin-transform-svg-component, @svgr/babel-preset, @svgr/core, @svgr/hast-util-to-
-babel-ast, @svgr/plugin-jsx, @svgr/plugin-svgo, @svgr/plugin-svgo, @svgr/webpack, @tootallnate/once,
-@types/babel__core, @types/babel__generator, @types/babel__template, @types/babel__traverse,
-@types/body-parser, @types/bonjour, @types/connect, @types/connect-history-api-fallback,
-@types/eslint, @types/eslint-scope, @types/estree, @types/estree, @types/estree, @types/express,
-@types/express-serve-static-core, @types/graceful-fs, @types/html-minifier-terser, @types/http-
-errors, @types/http-proxy, @types/istanbul-lib-coverage, @types/istanbul-lib-report,
-@types/istanbul-reports, @types/json-schema, @types/json5, @types/mime, @types/mime, @types/node,
-@types/node-forge, @types/parse-json, @types/prettier, @types/q, @types/qs, @types/range-parser,
-@types/resolve, @types/retry, @types/semver, @types/send, @types/serve-index, @types/serve-static,
-@types/sockjs, @types/stack-utils, @types/triple-beam, @types/trusted-types, @types/ws,
-@types/yargs, @types/yargs, @types/yargs-parser, @typescript-eslint/eslint-plugin, @typescript-
-eslint/experimental-utils, @typescript-eslint/scope-manager, @typescript-eslint/type-utils,
-@typescript-eslint/types, @typescript-eslint/utils, @typescript-eslint/visitor-keys,
-@webassemblyjs/ast, @webassemblyjs/ast, @webassemblyjs/floating-point-hex-parser,
-@webassemblyjs/floating-point-hex-parser, @webassemblyjs/helper-api-error, @webassemblyjs/helper-
-api-error, @webassemblyjs/helper-buffer, @webassemblyjs/helper-buffer, @webassemblyjs/helper-
-numbers, @webassemblyjs/helper-numbers, @webassemblyjs/helper-wasm-bytecode, @webassemblyjs/helper-
-wasm-bytecode, @webassemblyjs/helper-wasm-section, @webassemblyjs/helper-wasm-section,
-@webassemblyjs/ieee754, @webassemblyjs/ieee754, @webassemblyjs/utf8, @webassemblyjs/utf8,
-@webassemblyjs/wasm-edit, @webassemblyjs/wasm-edit, @webassemblyjs/wasm-gen, @webassemblyjs/wasm-
-gen, @webassemblyjs/wasm-opt, @webassemblyjs/wasm-opt, @webassemblyjs/wasm-parser,
-@webassemblyjs/wasm-parser, @webassemblyjs/wast-printer, @webassemblyjs/wast-printer, accepts,
-acorn, acorn, acorn-globals, acorn-import-assertions, acorn-jsx, acorn-walk, address, adjust-
-sourcemap-loader, agent-base, airbnb-prop-types, ajv, ajv, ajv-formats, ajv-keywords, ajv-keywords,
-align-text, ansi-escapes, ansi-regex, ansi-regex, ansi-styles, ansi-styles, ansi-styles, any-
-promise, arg, argparse, array-buffer-byte-length, array-flatten, array-flatten, array-includes,
-array-union, array.prototype.filter, array.prototype.find, array.prototype.findlastindex,
-array.prototype.flat, array.prototype.flatmap, array.prototype.reduce, array.prototype.tosorted,
-arraybuffer.prototype.slice, asap, ast-types-flow, async, asynciterator.prototype, asynckit,
-autoprefixer, available-typed-arrays, axios, babel-jest, babel-loader, babel-plugin-jest-hoist,
-babel-plugin-macros, babel-plugin-named-asset-import, babel-plugin-polyfill-corejs2, babel-plugin-
-polyfill-corejs3, babel-plugin-polyfill-regenerator, babel-plugin-transform-react-remove-prop-types,
-babel-preset-current-node-syntax, babel-preset-jest, babel-preset-react-app, balanced-match, batch,
-bfj, big.js, binary-extensions, bluebird, body-parser, bonjour-service, brace-expansion, brace-
-expansion, braces, browserslist, buffer-from, build, builtin-modules, bytes, bytes, call-bind,
-callsites, camel-case, camelcase, camelcase, camelcase, camelcase-css, caniuse-api, case-sensitive-
-paths-webpack-plugin, center-align, chalk, chalk, char-regex, char-regex, check-types, cheerio,
-chokidar, chrome-trace-event, ci-info, cjs-module-lexer, classnames, clean-css, co, coa,
-collect-v8-coverage, color, color, color-convert, color-convert, color-name, color-name, color-
-string, colord, colorette, colorspace, combined-stream, commander, commander, commander, commander,
-common-tags, commondir, compressible, compression, compute-scroll-into-view, concat-map, confusing-
-browser-globals, connect-history-api-fallback, content-disposition, content-type, convert-source-
-map, convert-source-map, cookie, cookie-signature, copy-to-clipboard, core-js, core-js-compat, core-
-js-pure, core-util-is, cosmiconfig, cosmiconfig, cross-spawn, crypto-random-string, css-loader, css-
-minimizer-webpack-plugin, css-select-base-adapter, css-tree, css-tree, css-tree, css-tree, cssesc,
-cssnano, cssnano-preset-default, cssnano-utils, csso, csso, cssom, cssom, cssstyle, data-urls,
-debug, debug, debug, decamelize, decimal.js, dedent, deep-is, deepmerge, define-data-property,
-define-lazy-prop, define-properties, delayed-stream, depd, depd, dequal, destroy, detect-newline,
-detect-node, detect-port-alt, diff-sequences, dir-glob, discontinuous-range, dlv, dns-equal, dns-
-packet, dom-converter, dom-serializer, dom-serializer, dom-serializer, domexception, dot-case,
-downshift, duplexer, ee-first, emittery, emittery, emoji-regex, emoji-regex, emojis-list, enabled,
-encodeurl, enhanced-resolve, enzyme, enzyme-adapter-react-16, enzyme-adapter-utils, enzyme-shallow-
-equal, error-ex, error-stack-parser, es-abstract, es-array-method-boxes-properly, es-iterator-
-helpers, es-module-lexer, es-module-lexer, es-set-tostringtag, es-shim-unscopables, es-to-primitive,
-escalade, escape-html, escape-string-regexp, escape-string-regexp, escape-string-regexp, eslint,
-eslint-config-react-app, eslint-import-resolver-node, eslint-module-utils, eslint-plugin-import,
-eslint-plugin-jest, eslint-plugin-jsx-a11y, eslint-plugin-react, eslint-plugin-react-hooks, eslint-
-plugin-testing-library, eslint-webpack-plugin, estree-walker, etag, eventemitter3, events, execa,
-exit, expect, express, fast-deep-equal, fast-glob, fast-json-stable-stringify, fast-levenshtein,
-fecha, file-entry-cache, file-loader, fill-range, finalhandler, find-cache-dir, find-up, find-up,
-find-up, flat-cache, flatpickr, fn.name, follow-redirects, for-each, fork-ts-checker-webpack-plugin,
-form-data, form-data, forwarded, fraction.js, fresh, fs-extra, fs-extra, fsevents, function-bind,
-function.prototype.name, functions-have-names, gensync, get-intrinsic, get-package-type, get-stream,
-get-symbol-description, global-modules, global-prefix, globals, globals, globalthis, globby, gopd,
-graphemer, gzip-size, handle-thing, has, has-bigints, has-flag, has-flag, has-property-descriptors,
-has-proto, has-symbols, has-tostringtag, hasown, he, history, hoopy, hpack.js, html-element-map,
-html-encoding-sniffer, html-entities, html-escaper, html-minifier-terser, html-webpack-plugin,
-htmlparser2, htmlparser2, http-deceiver, http-errors, http-errors, http-parser-js, http-proxy, http-
-proxy-agent, http-proxy-middleware, https-proxy-agent, iconv-lite, iconv-lite, identity-obj-proxy,
-ignore, immer, immutable, import-fresh, import-local, imurmurhash, internal-slot, invariant,
-ipaddr.js, ipaddr.js, is-array-buffer, is-arrayish, is-arrayish, is-async-function, is-bigint, is-
-binary-path, is-boolean-object, is-buffer, is-callable, is-core-module, is-date-object, is-docker,
-is-extglob, is-finalizationregistry, is-fullwidth-code-point, is-generator-fn, is-generator-
-function, is-glob, is-map, is-module, is-negative-zero, is-number, is-number-object, is-obj, is-
-path-inside, is-plain-obj, is-potential-custom-element-name, is-regex, is-regexp, is-root, is-set,
-is-shared-array-buffer, is-stream, is-string, is-subset, is-symbol, is-typed-array, is-typedarray,
-is-weakmap, is-weakref, is-weakset, is-wsl, isarray, isarray, isarray, iterator.prototype, jest,
-jest-changed-files, jest-circus, jest-cli, jest-config, jest-diff, jest-docblock, jest-each, jest-
-environment-jsdom, jest-environment-node, jest-get-type, jest-haste-map, jest-jasmine2, jest-leak-
-detector, jest-matcher-utils, jest-message-util, jest-message-util, jest-mock, jest-pnp-resolver,
-jest-regex-util, jest-regex-util, jest-resolve, jest-resolve-dependencies, jest-runner, jest-
-runtime, jest-serializer, jest-snapshot, jest-util, jest-util, jest-validate, jest-watch-typeahead,
-jest-watcher, jest-watcher, jest-worker, jest-worker, jest-worker, jiti, js-tokens, js-yaml, jsdom,
-jsesc, jsesc, json-buffer, json-parse-even-better-errors, json-schema-traverse, json-schema-
-traverse, json-stable-stringify-without-jsonify, json5, json5, jsonfile, jsonpath, jsonpointer, jsx-
-ast-utils, jxLoader, keyv, kind-of, kind-of, kleur, klona, kuler, language-tags, launch-editor,
-lazy-cache, leven, levn, levn, lilconfig, lines-and-columns, loader-runner, loader-utils, loader-
-utils, locate-path, locate-path, locate-path, lodash, lodash.debounce, lodash.escape,
-lodash.findlast, lodash.flattendeep, lodash.isequal, lodash.memoize, lodash.merge, lodash.omit,
-lodash.sortby, lodash.throttle, lodash.uniq, logform, longest, loose-envify, lower-case, magic-
-string, make-dir, make-dir, media-typer, merge-descriptors, merge-stream, merge2, methods,
-micromatch, mime, mime-db, mime-types, mimic-fn, mini-create-react-context, mini-css-extract-plugin,
-minimist, mkdirp, moo-server, ms, ms, ms, multicast-dns, mz, nanoid, natural-compare, natural-
-compare-lite, nearley, negotiator, neo-async, no-case, node-int64, node-releases, normalize-path,
-normalize-range, normalize-url, npm-run-path, nwsapi, object-assign, object-hash, object-inspect,
-object-is, object-keys, object.assign, object.entries, object.fromentries,
-object.getownpropertydescriptors, object.groupby, object.hasown, object.values, obuf, on-finished,
-on-headers, one-time, onetime, open, optionator, optionator, org.reactivestreams, org.slf4j,
-org.slf4j, p-limit, p-limit, p-locate, p-locate, p-locate, p-retry, p-try, param-case, parent-
-module, parse-json, parse5, parse5, parse5-htmlparser2-tree-adapter, parseurl, pascal-case, path-
-exists, path-exists, path-is-absolute, path-key, path-parse, path-to-regexp, path-to-regexp, path-
-type, performance-now, picomatch, picomatch, pify, pirates, pkg-dir, pkg-up, postcss, postcss-
-attribute-case-insensitive, postcss-calc, postcss-clamp, postcss-color-hex-alpha, postcss-colormin,
-postcss-convert-values, postcss-custom-media, postcss-custom-properties, postcss-custom-selectors,
-postcss-discard-comments, postcss-discard-duplicates, postcss-discard-empty, postcss-discard-
-overridden, postcss-flexbugs-fixes, postcss-font-variant, postcss-import, postcss-initial, postcss-
-js, postcss-load-config, postcss-loader, postcss-media-minmax, postcss-merge-longhand, postcss-
-merge-rules, postcss-minify-font-values, postcss-minify-gradients, postcss-minify-params, postcss-
-minify-selectors, postcss-modules-local-by-default, postcss-nested, postcss-normalize-charset,
-postcss-normalize-display-values, postcss-normalize-positions, postcss-normalize-repeat-style,
-postcss-normalize-string, postcss-normalize-timing-functions, postcss-normalize-unicode, postcss-
-normalize-url, postcss-normalize-whitespace, postcss-opacity-percentage, postcss-ordered-values,
-postcss-page-break, postcss-reduce-initial, postcss-reduce-transforms, postcss-replace-overflow-
-wrap, postcss-selector-not, postcss-selector-parser, postcss-svgo, postcss-unique-selectors,
-postcss-value-parser, prelude-ls, prelude-ls, pretty-bytes, pretty-error, pretty-format, pretty-
-format, process-nextick-args, promise, prompts, prop-types, prop-types-exact, proxy-addr, proxy-
-from-env, psl, punycode, q, querystringify, queue-microtask, raf, randexp, randombytes, range-
-parser, raw-body, react, react-app-polyfill, react-dev-utils, react-dom, react-dotenv, react-error-
-overlay, react-is, react-is, react-is, react-is, react-native-dotenv, react-refresh, react-router,
-react-router-dom, react-scripts, react-test-renderer, read-cache, readable-stream, readable-stream,
-readdirp, recursive-readdir, reflect.getprototypeof, reflect.ownkeys, regenerate, regenerate-
-unicode-properties, regenerator-runtime, regenerator-runtime, regenerator-transform, regex-parser,
-regexp.prototype.flags, regexpu-core, relateurl, renderkid, repeat-string, require-directory,
-require-from-string, requires-port, resize-observer-polyfill, resolve, resolve, resolve-cwd,
-resolve-from, resolve-from, resolve-pathname, resolve-url-loader, resolve.exports, ret, retry,
-reusify, right-align, rollup, rollup-plugin-terser, run-parallel, safe-array-concat, safe-buffer,
-safe-buffer, safe-regex-test, safe-stable-stringify, safer-buffer, sass-loader, sax, scheduler,
-scheduler, schema-utils, schema-utils, schema-utils, schema-utils, select-hose, selfsigned, send,
-serve-index, serve-static, set-function-length, set-function-name, shebang-command, shebang-regex,
-shell-quote, side-channel, simple-swizzle, sisteransi, slash, slash, sockjs, source-list-map,
-source-map-loader, source-map-support, sourcemap-codec, spdy, spdy-transport, stable, stack-trace,
-stack-utils, stackframe, static-eval, statuses, statuses, string-length, string-length, string-
-natural-compare, string-width, string.prototype.matchall, string.prototype.trim,
-string.prototype.trimend, string.prototype.trimstart, string_decoder, string_decoder, strip-ansi,
-strip-ansi, strip-bom, strip-bom, strip-comments, strip-final-newline, strip-json-comments, style-
-loader, stylehacks, sucrase, supports-color, supports-color, supports-color, supports-hyperlinks,
-supports-preserve-symlinks-flag, svg-parser, svgo, svgo, svgo, symbol-tree, tabbable, tailwindcss,
-tapable, tapable, temp-dir, tempy, terminal-link, terser-webpack-plugin, text-hex, text-table,
-thenify, thenify-all, throat, thunky, timespan, tiny-invariant, tiny-warning, to-fast-properties,
-to-regex-range, toggle-selection, toidentifier, tr46, tr46, triple-beam, tryer, tsconfig-paths,
-tsutils, type-check, type-check, type-detect, type-fest, type-fest, type-fest, type-is, typed-array-
-buffer, typed-array-byte-length, typed-array-byte-offset, typed-array-length, typedarray-to-buffer,
-uglify-to-browserify, unbox-primitive, underscore, undici-types, unicode-canonical-property-names-
-ecmascript, unicode-match-property-ecmascript, unicode-match-property-value-ecmascript, unicode-
-property-aliases-ecmascript, unique-string, universalify, universalify, unpipe, unquote, upath,
-update-browserslist-db, url-parse, use-resize-observer, util-deprecate, util.promisify, utila,
-utils-merge, uuid, value-equal, vary, w3c-hr-time, w3c-xmlserializer, watchpack, wbuf, webpack,
-webpack, webpack-dev-middleware, webpack-dev-server, webpack-dev-server, webpack-manifest-plugin,
-webpack-sources, webpack-sources, webpack-sources, whatwg-encoding, whatwg-fetch, whatwg-mimetype,
-whatwg-url, whatwg-url, which-boxed-primitive, which-builtin-type, which-collection, which-typed-
-array, window-or-global, window-size, winston, winston-transport, word-wrap, wordwrap, workbox-
-background-sync, workbox-broadcast-update, workbox-build, workbox-cacheable-response, workbox-core,
-workbox-expiration, workbox-google-analytics, workbox-navigation-preload, workbox-precaching,
-workbox-range-requests, workbox-recipes, workbox-routing, workbox-strategies, workbox-streams,
-workbox-sw, workbox-webpack-plugin, workbox-window, wrap-ansi, wrench, ws, xmlchars, yargs, yargs,
-yocto-queue
+rollup, sax, abbrev
 
 Copyright <YEAR><COPYRIGHT HOLDER>
 
