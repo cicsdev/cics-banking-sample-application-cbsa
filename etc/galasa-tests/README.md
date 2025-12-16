@@ -156,6 +156,29 @@ framework.test.stream.main.obr=mvn:com.yourorg/your.obr.artifact/0.0.1/obr
 framework.test.stream.main.location=https://your-repo-host/path/toyour/testcatalog.json
 ```
 ---
+## Create the main test stream
+Create a GalasaStream YAML resource, like this:
+```apiVersion: galasa-dev/v1alpha1
+kind: GalasaStream
+metadata:
+    name: main
+    description: CBSA Galasa tests
+data:
+    isEnabled: true
+    repository:
+        url: https://your-maven-repo/path/to/cbsa/test/material
+    obrs:
+        - group-id: com.ibm.cics
+          artifact-id: com.ibm.cics.cip.cbsa.galasatests.obr
+          version: 0.0.1
+    testCatalog:
+        url: https://your-maven-repo/path/to/testcatalog.json
+```
+Then apply to the Galasa ecosystem by running:
+
+```
+galasactl resources apply -f <your-galasa-stream-file>.yaml --bootstrap [bootstrap] --log -
+```
 ## ▶️ Running the Tests
 ### Run Tests Locally
 ```bash
