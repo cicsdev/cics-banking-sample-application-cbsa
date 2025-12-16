@@ -205,7 +205,7 @@ galasactl runs submit \
 ### c3270 Test
 ```java
     @Test
-    public void updateCustomerWithInvalid() throws Exception {
+    public void updateCustomerWithInvalidTitle() throws Exception {
         String[] customerData = ICbsaCustomergenerateRandomCustomerData();
         String name = customerData[1];
         try {
