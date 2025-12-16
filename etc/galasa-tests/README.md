@@ -225,7 +225,7 @@ galasactl runs submit \
         newCustomerNumber = result.get("customerNumber");
         String messageText = result.get("messageText");
         assertThat(newCustomerNumber).isNotNull();
-        assertThat(messageText).contain(customerCreationSuccessMessage);
+        assertThat(messageText).contains(customerCreationSuccessMessage);
     }
 ```
 ---
