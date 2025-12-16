@@ -18,7 +18,7 @@ This repository contains automated tests for the **CICS Banking Sample Applicati
 This repository contains automated tests for the **CICS Banking Sample Application (CBSA)** — a hybrid enterprise application thatcombines:
 - A **modern React-based web user interface**
 - A **mainframe-based 3270 terminal interface**
-The tests are written using the [Galasa Framework](https://galasadev/), which allows seamless integration of both mainframe and web UI testing in a single, unified framework.
+The tests are written using the [Galasa Framework](https://galasa.dev/), which allows seamless integration of both mainframe and web UI testing in a single, unified framework.
 This suite uses:
 - **Selenium WebDriver** to test the React web UI of CBSA
 - **c3270 terminal emulation** to test the green-screen (3270) portion of CBSA
@@ -61,7 +61,7 @@ Only the core source and configuration files are included in this repository. Bu
 ### ℹ️ Note on `.galasa/`
 The `.galasa/` directory contains local Galasa configuration, including runtime settings and credentials. It is created when you initialize Galasa on your machine.
 For setup instructions, please refer to the official documentation:
-- [Installing the Galasa CLI Tool](https://galasa.dev/docscli-command-reference/installing-cli-tool/)
+- [Installing the Galasa CLI Tool](https://galasa.dev/docs/cli-command-reference/installing-cli-tool/)
 - [Initializing the Galasa Home Folder](https://galasa.dev/docscli-command-reference/initialising-home-folder#setting-the-galasa-home-folder-optional)
 This directory is user-specific and usually **excluded from version control**.
 ---
@@ -78,7 +78,7 @@ This directory is user-specific and usually **excluded from version control**.
 - Java 17 or higher
 - Gradle 8.3 (usually included with the project via the Gradle Wrapper)
 - [Galasa CLI Installation](https://galasa.dev/docscli-command-reference/installing-cli-tool/) and
-[Initializing Galasa Home Folder](https://galasa.dev/docscli-command-reference/initialising-home-folder#setting-the-galasa-home-folder-optional) (required for local test execution and setup)
+[Initializing Galasa Home Folder](https://galasa.dev/docs/cli-command-reference/initialising-home-folder/) (required for local test execution and setup)
 - Browser drivers for Selenium (e.g., ChromeDriver)
 - Access to mainframe systems (e.g., IP/hostname, user credentials)
 - A CICS region with CBSA installed is required for running **c3270** tests
@@ -88,7 +88,6 @@ This directory is user-specific and usually **excluded from version control**.
 - Maven Repository
 - Kubernetes cluster
 - Helm package manager
-- For detailed ecosystem installation instructions, see the [Galasa Ecosystem Kubernetes Setup](https://galasa.dev/docs/ecosystemecosystem-installing-k8s/) documentation
 ---
 ### 🔧 Required Galasa Properties
 To run the CBSA Galasa test suite, several system properties must be configured in your `.galasa/` environment (typically in `localproperties` or defined via your ecosystem configuration).
