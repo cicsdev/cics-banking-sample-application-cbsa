@@ -1,5 +1,5 @@
 # 🧪 CBSA End-to-End Test Suite with Galasa
-This repository contains automated tests for the **CICS Banking Sample Application (CBSA)**, using the [Galasa Framework](https:/galasa.dev/) to validate both its **mainframe** and **web UI** components.
+This repository contains automated tests for the **CICS Banking Sample Application (CBSA)**, using the [Galasa Framework](https:/galasa.dev/) to validate both its **mainframe** and **web UI** components. It uses version 0.44.0 of Galasa.
 ---
 ## 📋 Table of Contents
 - [Overview](#overview)
@@ -15,7 +15,7 @@ This repository contains automated tests for the **CICS Banking Sample Applicati
 - [License](#license)
 ---
 ## 📘 Overview
-This repository contains automated tests for the **CICS Banking Sample Application (CBSA)** — a hybrid enterprise application thatcombines:
+This repository contains automated tests for the **CICS Banking Sample Application (CBSA)** — a hybrid enterprise application that combines:
 - A **modern React-based web user interface**
 - A **mainframe-based 3270 terminal interface**
 The tests are written using the [Galasa Framework](https://galasa.dev/), which allows seamless integration of both mainframe and web UI testing in a single, unified framework.

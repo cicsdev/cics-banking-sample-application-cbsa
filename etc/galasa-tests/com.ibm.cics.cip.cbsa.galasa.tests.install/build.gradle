@@ -26,7 +26,7 @@ version = '0.0.1'
 // What are the dependencies of the test code ?
 // When more managers and dependencies are added, this list will need to grow.
 dependencies {
-    implementation platform('dev.galasa:galasa-bom:0.39.0')
+    implementation platform('dev.galasa:galasa-bom:0.44.0')
     implementation project(':com.ibm.cics.cip.cbsa.galasa.tests.manager')
 
     implementation 'dev.galasa:dev.galasa'
