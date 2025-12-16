@@ -30,7 +30,6 @@ Only the core source and configuration files are included in this repository. Bu
 .
 ├── .galasa/
 ├── build.sh
-├── run.sh
 ├── gradlew
 ├── gradlew.bat
 ├── settings.gradle
@@ -222,8 +221,7 @@ Before contributing:
 - Include comments and Javadoc where helpful
 - Make sure your changes pass all existing tests
 ---
-## 📄 License
-This project is licensed under [Eclipse Public License - v 2.0](LICENSE).
+
 ---
 ## 📚 References
 - [Galasa Docs](https://galasa.dev/docs/)
