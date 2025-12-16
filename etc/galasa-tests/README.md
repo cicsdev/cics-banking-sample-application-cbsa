@@ -166,8 +166,7 @@ galasactl runs submit local --class com.ibm.cics.cip.cbsa.galasatests.install/co
 ```bash
 galasactl runs prepare \
         --stream "main" \
-        --bundle "" \
-        --class "com.ibm.cics.cip.cbsa.galasa.tests.install/com.ibmcics.cip.cbsa.galasa.tests.install.TestWebui,com.ibm.cics.cipcbsa.galasa.tests.install/com.ibm.cics.cip.cbsa.galasa.testsinstall.TestAccount,com.ibm.cics.cip.cbsa.galasa.testsinstall/com.ibm.cics.cip.cbsa.galasa.tests.installTestCustomer,com.ibm.cics.cip.cbsa.galasa.tests.install/comibm.cics.cip.cbsa.galasa.tests.installTestCustomerCreateDelete" \
+	--bundle "com.ibm.cics.cip.cbsa.galasa.tests.install" \
         --portfolio "portfolio.yaml" \
         --bootstrap [bootstrap] \
         --log "-"
