@@ -152,7 +152,7 @@ selenium.default.driver=grid
 selenium.grid.endpoint=ENDPOINT_URL
 # Galasa OBR/Test Stream config (based on Maven Repo)
 framework.test.stream.main.repo=https://your-repo-host/
-framework.test.stream.main.obr=mvn:com.yourorg/your.obr.artifact/0.01/obr
+framework.test.stream.main.obr=mvn:com.yourorg/your.obr.artifact/0.0.1/obr
 framework.test.stream.main.location=https://your-repo-host/path/toyour/testcatalog.json
 ```
 ---
