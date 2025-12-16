@@ -2,4 +2,4 @@
 
 * James O'Grady [@JAMOGRAD](https://github.com/JAMOGRAD)
 
-*Last reviewed:* December 2025.
+*Last reviewed:* December 2025
