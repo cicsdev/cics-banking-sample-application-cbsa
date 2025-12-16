@@ -4,7 +4,7 @@ plugins {
     id 'java'
     id 'maven-publish'
     id 'biz.aQute.bnd.builder' version '6.4.0'
-    id 'dev.galasa.tests' version '0.15.0'
+    id 'dev.galasa.tests' version '0.44.0'
 }
 
 // This section tells gradle where it should look for any dependencies
