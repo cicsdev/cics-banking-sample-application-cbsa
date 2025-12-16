@@ -183,7 +183,7 @@ galasactl resources apply -f <your-galasa-stream-file>.yaml --bootstrap [bootstr
 ### Run Tests Locally
 ```bash
 ./gradlew clean build publishToMavenLocal
-galasactl runs submit local --class com.ibm.cics.cip.cbsa.galasatests.install/com.ibm.cics.cip.cbsa.galasa.tests.install[TestClassName] --obr mvn:com.ibm.cics/com.ibm.cics.cip.cbsa.galasatests.obr/0.0.1/obr --log -
+galasactl runs submit local --class com.ibm.cics.cip.cbsa.galasatests.install/com.ibm.cics.cip.cbsa.galasa.tests.install.[TestClassName] --obr mvn:com.ibm.cics/com.ibm.cics.cip.cbsa.galasatests.obr/0.0.1/obr --log -
 ```
 ### Run Tests within Ecosystem
 ```bash
