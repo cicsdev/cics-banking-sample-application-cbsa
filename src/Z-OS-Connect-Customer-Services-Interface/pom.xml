@@ -151,7 +151,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 			<scope>compile</scope>
-			<version>6.1.21</version>
+			<version>6.2.0</version>
 		</dependency>
 
 		<dependency>

@@ -299,6 +299,27 @@ Java applications will run under transaction CJSA by default. This is *not* cove
 ## Development
 
 The Carbon React UI is an application that consists of back-end Java code and front-end JavaScript.
+Before you can use it, you need to build the front-end. You need to use a tool called "yarn" to build and package the front-end.
+
+"Yarn" is installed via the npm command
+
+`npm install yarn`
+
+You then issue the
+
+`yarn build package`
+
+ command from the directory
+
+`/src/bank-application-frontend/`
+
+This will compress the JavaScript into a new "build" directory, and download the necessary fonts.
+
+Copy the contents of the `build` directory and paste them in to the following directory. It is a good idea to delete the "static" folder from WebContent before doing so. This is because "yarn build package" produces JavaScript files with randomly generated names that are quite large, and these will make your "war" file larger. You only need the latest ones produced by the build.
+
+`/src/webui/WebContent`
+
+
 You can make changes to the back-end Java code in the application which is in
 
 [src/webui/src/main/java](/src/webui/src/main/java)
