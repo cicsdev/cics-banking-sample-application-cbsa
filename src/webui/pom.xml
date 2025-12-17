@@ -63,11 +63,11 @@
 		</dependency>
 
 		<dependency>
-		        <groupId>com.ibm.jzos</groupId>
-		        <artifactId>ibm.jzos</artifactId>
-		        <version>3.2.0.0</version>
-		        <scope>provided</scope>
-	        </dependency>
+			<groupId>com.ibm.jzos</groupId>
+			<artifactId>ibm.jzos</artifactId>
+			<version>4.0.0.0</version>
+			<scope>provided</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>com.yahoo.platform.yui</groupId>
