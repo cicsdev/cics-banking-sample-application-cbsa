@@ -52,7 +52,6 @@
 		<dependency>
 			<groupId>com.ibm.cics</groupId>
 			<artifactId>com.ibm.cics.server</artifactId>
-			<version>2.0.0-6.1-PH63856</version>
 		</dependency>
 
 		<dependency>
