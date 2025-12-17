@@ -21,7 +21,7 @@
 			<dependency>
 				<groupId>com.ibm.cics</groupId>
 				<artifactId>com.ibm.cics.ts.bom</artifactId>
-				    <version>6.1-20240903141936-PH59389</version>
+				    <version>6.1-20250812133513-PH63856</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>

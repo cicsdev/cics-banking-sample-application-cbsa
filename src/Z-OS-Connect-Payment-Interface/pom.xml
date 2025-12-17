@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.7</version>
+		<version>3.4.0</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -27,7 +27,7 @@
 		<dependency>
 		        <groupId>com.ibm.jzos</groupId>
 		        <artifactId>ibm.jzos</artifactId>
-		        <version>3.2.0.0</version>
+		        <version>4.0.0.0</version>
 		        <scope>provided</scope>
 	        </dependency>
 
