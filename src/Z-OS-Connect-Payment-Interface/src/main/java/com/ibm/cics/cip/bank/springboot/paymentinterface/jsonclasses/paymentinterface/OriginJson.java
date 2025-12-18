@@ -12,22 +12,22 @@ public class OriginJson
 {
 
 
-	@JsonProperty("COMM_APPLID")
+	@JsonProperty("CommApplid")
 	private String commApplid;
 
-	@JsonProperty("COMM_USERID")
+	@JsonProperty("CommUserid")
 	private String commUserid;
 
-	@JsonProperty("COMM_FACILITY_NAME")
+	@JsonProperty("CommFacilityName")
 	private String commFacilityName = "        ";
 
-	@JsonProperty("COMM_NETWRK_ID")
+	@JsonProperty("CommNetwrkId")
 	private String commNetwrkId = "        ";
 
-	@JsonProperty("COMM_FACILTYPE")
+	@JsonProperty("CommFaciltype")
 	private String commFaciltype = "0496";
 
-	@JsonProperty("FILL_0")
+	@JsonProperty("Fill0")
 	private String fill0 = "    ";
 
 

@@ -76,6 +76,7 @@ public class WebController implements WebMvcConfigurer
 		String jsonString = new ObjectMapper().writeValueAsString(transferjson);
 		log.info(jsonString);
 
+
 		// The port is set elsewhere as it changes frequently
 		WebClient client = WebClient.create(
 				ConnectionInfo.getAddressAndPort() + "/makepayment/dbcr");

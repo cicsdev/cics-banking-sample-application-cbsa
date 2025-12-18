@@ -84,7 +84,9 @@ const account_headers = [
   'Next Statement Due'
 ];
 
-const AccountDeleteTables = ({accountQuery}) => {
+
+
+const AccountDeleteTables = ({ accountQuery }) => {
   const [mainAccountRow, setMainRows] = useState([]);
   const [otherAccountRows, setOtherAccountRows] = useState([]);
   getAccountByNum(accountQuery)
@@ -92,30 +94,80 @@ const AccountDeleteTables = ({accountQuery}) => {
   /**
    * get the account from the given account number, create an array of the results and set mainAccountRow to this
    * then call getOtherAccounts to find any other accounts belonging to the customer
+   * async
    */
   async function getAccountByNum(accountQuery) {
     let account;
+    if (mainAccountRow.length === 0) {
+      let rowBuild = [];
+      await
+        axios
+          .get(process.env.REACT_APP_ACCOUNT_URL + `/${accountQuery}`)
+          .then(
+            response => {
+              account = response.data;
+            })
+          .catch(function (error) {
+            if(error.response.status === 404)
+            {
+              alert("Could not find account " + accountQuery);
+            }
+            else
+            {
+              alert("Error retrieving account number" + accountQuery + ", " + error.response.status + " " + error.message);
+            }
+          }
+
+          );
+      try {
+        let row;
+        row = {
+          id: account.id,
+          customerNumber: account.customerNumber,
+          accountNumber: account.id,
+          sortCode: account.sortCode,
+          accountType: account.accountType,
+          interestRate: account.interestRate,
+          overdraft: account.overdraft,
+          availableBalance: account.availableBalance,
+          actualBalance: account.actualBalance,
+          accountOpened: account.dateOpened,
+          lastStatementDate: account.lastStatementDate,
+          nextStatementDate: account.nextStatementDate
+        };
+        rowBuild.push(account);
+        getOtherAccounts(row.customerNumber, accountQuery)
+        setMainRows(rowBuild)
+      } catch (e) {
+        console.log("Error: " + e);
+      }
+    }
+  }
+
+  async function updateRows(accountQuery) {
+    let account;
     let rowBuild = [];
-    await axios
-    .get(process.env.REACT_APP_ACCOUNT_URL + `/${accountQuery}`)
-      .then(response => {
-        account = response.data;
-      });
+    await
+      axios
+        .get(process.env.REACT_APP_ACCOUNT_URL + `/${accountQuery}`)
+        .then(response => {
+          account = response.data;
+        });
     try {
       let row;
       row = {
-        id : account.id,
-        customerNumber : account.customerNumber,
-        accountNumber : account.id,
-        sortCode : account.sortCode,
-        accountType : account.accountType,
-        interestRate : account.interestRate,
-        overdraft : account.overdraft,
-        availableBalance : account.availableBalance,
-        actualBalance : account.actualBalance,
-        accountOpened : account.dateOpened,
-        lastStatementDate : account.lastStatementDate,
-        nextStatementDate : account.nextStatementDate
+        id: account.id,
+        customerNumber: account.customerNumber,
+        accountNumber: account.id,
+        sortCode: account.sortCode,
+        accountType: account.accountType,
+        interestRate: account.interestRate,
+        overdraft: account.overdraft,
+        availableBalance: account.availableBalance,
+        actualBalance: account.actualBalance,
+        accountOpened: account.dateOpened,
+        lastStatementDate: account.lastStatementDate,
+        nextStatementDate: account.nextStatementDate
       };
       rowBuild.push(account);
       getOtherAccounts(row.customerNumber, accountQuery)
@@ -128,34 +180,36 @@ const AccountDeleteTables = ({accountQuery}) => {
   /**
    * get all other accounts belonging to the customerID passed in, create an array and set otherAccountRows to this array
    * Ignores the main account row already found by comparing the accountID in the responseData to the accountID entered by the user initially
+   * async
    */
-  async function getOtherAccounts(customerID, accountQuery){
+  async function getOtherAccounts(customerID, accountQuery) {
     let accountData;
     let rowBuild = [];
-    await axios
-    .get(process.env.REACT_APP_ACCOUNT_URL + `/retrieveByCustomerNumber/${customerID}`)
-    .then(response => {
-      accountData = response.data;
-    });
+    await
+      axios
+        .get(process.env.REACT_APP_ACCOUNT_URL + `/retrieveByCustomerNumber/${customerID}`)
+        .then(response => {
+          accountData = response.data;
+        });
     try {
       let row;
       accountData.accounts.forEach(account => {
-      row = {
-        accountNumber : account.id,
-        sortCode : account.sortCode,
-        accountType : account.accountType,
-        interestRate : account.interestRate,
-        overdraft : account.overdraft,
-        availableBalance : account.availableBalance,
-        actualBalance : account.actualBalance,
-        accountOpened : account.dateOpened,
-        lastStatementDate : account.lastStatementDate,
-        nextStatementDate : account.nextStatementDate
-      };
-      if (parseInt(row.accountNumber) !== parseInt(accountQuery)){
-      rowBuild.push(row)
-      }
-    });
+        row = {
+          accountNumber: account.id,
+          sortCode: account.sortCode,
+          accountType: account.accountType,
+          interestRate: account.interestRate,
+          overdraft: account.overdraft,
+          availableBalance: account.availableBalance,
+          actualBalance: account.actualBalance,
+          accountOpened: account.dateOpened,
+          lastStatementDate: account.lastStatementDate,
+          nextStatementDate: account.nextStatementDate
+        };
+        if (parseInt(row.accountNumber) !== parseInt(accountQuery)) {
+          rowBuild.push(row)
+        }
+      });
       setOtherAccountRows(rowBuild)
     } catch (e) {
       console.log("Error fetching accounts for customer: " + customerID + ": " + e);
@@ -165,50 +219,54 @@ const AccountDeleteTables = ({accountQuery}) => {
   /**
    * Deletes the account tied to accountNumberToDelete
    * Displays either a success or failure modal once a response is received
+   * async
    */
-  async function deleteAccount(){
+  async function deleteAccount() {
     let accountNumber = accountNumberToDelete
     let responseData;
-    try{
-     await axios
-     .delete(process.env.REACT_APP_ACCOUNT_URL + `/${accountNumber}`)
-     .then(response => {
-       responseData = response.data
-       console.log(responseData)
-     }).catch(function (error){
-      if (error.response){
-        console.log(error)
-        displayModal()
-        displayUnableDeleteModal()
-      }
-     })
-     displayModal()
-     displaySuccessfulDeleteModal()
+    try {
+      await
+        axios
+          .delete(process.env.REACT_APP_ACCOUNT_URL + `/${accountNumber}`)
+          .then(response => {
+            // The account has just been deleted, so why go to get it? We never display it but go straight to a different screen
+            //            updateRows(accountNumber)
+            responseData = response.data
+            console.log(responseData)
+          }).catch(function (error) {
+            if (error.response) {
+              console.log(error)
+              displayModal()
+              displayUnableDeleteModal()
+            }
+          })
+      displayModal()
+      displaySuccessfulDeleteModal()
 
-   } catch (e) {
-     console.log(e)
-     displayModal()
-     displayUnableDeleteModal()
-   }
-   }
+    } catch (e) {
+      console.log(e)
+      displayModal()
+      displayUnableDeleteModal()
+    }
+  }
 
-const [isModalOpened, setModalOpened] = useState(false);
+  const [isModalOpened, setModalOpened] = useState(false);
 
-const [wasUnableDeleteOpened, setUnableDeleteModalOpened] = useState(false);
+  const [wasUnableDeleteOpened, setUnableDeleteModalOpened] = useState(false);
 
-const [wasSuccessfulDeleteModalOpened, setSuccessfulDeleteModalOpened] = useState(false)
+  const [wasSuccessfulDeleteModalOpened, setSuccessfulDeleteModalOpened] = useState(false)
 
-const [accountNumberToDelete, setAccountNumberToDelete] = useState("")
+  const [accountNumberToDelete, setAccountNumberToDelete] = useState("")
 
-function displayModalMainAccount(row){
-  setAccountNumberToDelete(row.cells[1].value)
-  displayModal()
-}
+  function displayModalMainAccount(row) {
+    setAccountNumberToDelete(row.cells[1].value)
+    displayModal()
+  }
 
-function displayModalOtherAccount(row){
-  setAccountNumberToDelete(row.accountNumber)
-  displayModal()
-}
+  function displayModalOtherAccount(row) {
+    setAccountNumberToDelete(row.accountNumber)
+    displayModal()
+  }
   function displayModal() {
     setModalOpened(wasOpened => !wasOpened);
   }
@@ -217,24 +275,20 @@ function displayModalOtherAccount(row){
     setUnableDeleteModalOpened(wasUnableDeleteOpened => !wasUnableDeleteOpened);
   }
 
-  function displaySuccessfulDeleteModal(){
+  function displaySuccessfulDeleteModal() {
     setSuccessfulDeleteModalOpened(wasSuccessfulDeleteModalOpened => !wasSuccessfulDeleteModalOpened)
   }
 
-  function refreshPage(){
+  function refreshPage() {
     window.location.reload()
   }
 
   return (
-    <DataTable
+    <><DataTable
       rows={mainAccountRow}
       headers={headers}
       render={({
-        rows,
-        headers,
-        getHeaderProps,
-        getRowProps,
-        getTableProps,
+        rows, headers, getHeaderProps, getRowProps, getTableProps,
       }) => (
         <TableContainer title="" description="">
           <Table {...getTableProps()}>
@@ -268,7 +322,7 @@ function displayModalOtherAccount(row){
                       onRequestClose={displayModal}
                       onRequestSubmit={deleteAccount}
                       danger
-shouldCloseAfterSubmit
+                      shouldCloseAfterSubmit
                       primaryButtonText="Delete"
                       secondaryButtonText="Cancel">
                       <ModalBody hasForm>
@@ -307,30 +361,29 @@ shouldCloseAfterSubmit
                                 );
                               })}
                             {/* <ModalWrapper
-                                      triggerButtonKind="danger"
-                                      buttonTriggerClassName = "modal-button"
-                                      buttonTriggerText="Delete"
-                                      modalHeading="Are you sure want to delete this user?"
-                                      modalLabel="Delete Customer"
-                                      handleSubmit={e => handleDelete(index,e);return true}
-                                      shouldCloseAfterSubmit
-                                      onRequestClose={displayModal}
-                                      primaryButtonText="Yes, delete"
-                                      danger
-                                      secondaryButtonText="Cancel" >
-                                    </ModalWrapper> */}
+                                          triggerButtonKind="danger"
+                                          buttonTriggerClassName = "modal-button"
+                                          buttonTriggerText="Delete"
+                                          modalHeading="Are you sure want to delete this user?"
+                                          modalLabel="Delete Customer"
+                                          handleSubmit={e => handleDelete(index,e);return true}
+                                          shouldCloseAfterSubmit
+                                          onRequestClose={displayModal}
+                                          primaryButtonText="Yes, delete"
+                                          danger
+                                          secondaryButtonText="Cancel" >
+                                        </ModalWrapper> */}
                             <Button
                               kind="danger"
                               className="displayModal"
                               onClick={() => displayModalOtherAccount(row)}>
                               Delete
                             </Button>
-                            <Modal
-                            modalHeading="Account deleted successfully"
-                            open={wasSuccessfulDeleteModalOpened}
-                            onRequestClose={() => {displaySuccessfulDeleteModal(); refreshPage()}}
-                            passiveModal
-                            />
+                            {/* <Modal
+                              modalHeading="Account deleted successfully"
+                              open={wasSuccessfulDeleteModalOpened}
+                              onRequestClose={() => { displaySuccessfulDeleteModal(); refreshPage(); } }
+                              passiveModal /> */}
                           </TableRow>
                         ))}
                       </TableBody>
@@ -341,8 +394,13 @@ shouldCloseAfterSubmit
             </TableBody>
           </Table>
         </TableContainer>
-      )}
-    />
+      )} />
+      <Modal
+        modalHeading="Account deleted successfully"
+        open={wasSuccessfulDeleteModalOpened}
+        onRequestClose={() => { displaySuccessfulDeleteModal(); refreshPage(); } }
+        passiveModal />
+      </>
   );
 };
 

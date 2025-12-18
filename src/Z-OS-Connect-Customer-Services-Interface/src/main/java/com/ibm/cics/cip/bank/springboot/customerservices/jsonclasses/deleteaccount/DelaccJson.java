@@ -14,64 +14,64 @@ public class DelaccJson
 
 
 
-	@JsonProperty("DELACC_SUCCESS")
+	@JsonProperty("DelAccSuccess")
 	private String delaccSuccess;
 
-	@JsonProperty("DELACC_LAST_STMT_DT")
+	@JsonProperty("DelAccLastStmtDt")
 	private String delaccLastStatementDate;
 
-	@JsonProperty("DELACC_INT_RATE")
+	@JsonProperty("DelAccIntRate")
 	private float delaccInterestRate;
 
-	@JsonProperty("DELACC_DEL_FAIL_CD")
+	@JsonProperty("DelAccFailCd")
 	private int delaccDelFailCode;
 
-	@JsonProperty("DELACC_SCODE")
+	@JsonProperty("DelAccScode")
 	private String delaccSortcode;
 
-	@JsonProperty("DELACC_DEL_PCB1")
+	@JsonProperty("DelAccDelPcb1")
 	private String delaccDelPcb1;
 
-	@JsonProperty("DELACC_OPENED")
+	@JsonProperty("DelAccOpened")
 	private String delaccOpened;
 
-	@JsonProperty("DELACC_ACC_TYPE")
+	@JsonProperty("DelAccAccType")
 	private AccountType delaccAccType;
 
-	@JsonProperty("DELACC_NEXT_STMT_DT")
+	@JsonProperty("DelAccNextStmtDt")
 	private String delaccNextStatementDate;
 
-	@JsonProperty("DELACC_ACTUAL_BAL")
+	@JsonProperty("DelAccActualBal")
 	private float delaccActualBalance;
 
-	@JsonProperty("DELACC_AVAIL_BAL")
+	@JsonProperty("DelAccAvailBal")
 	private float delaccAvailableBalance;
 
-	@JsonProperty("DELACC_CUSTNO")
+	@JsonProperty("DelAccCustno")
 	private String delaccCustno;
 
-	@JsonProperty("DELACC_DEL_PCB3")
+	@JsonProperty("DelAccDelPcb3")
 	private String delaccDelPcb3;
 
-	@JsonProperty("DELACC_DEL_PCB2")
+	@JsonProperty("DelAccDelPcb2")
 	private String delaccDelPcb2;
 
-	@JsonProperty("DELACC_ACCNO")
+	@JsonProperty("DelAccAccno")
 	private int delaccAccno;
 
-	@JsonProperty("DELACC_OVERDRAFT")
+	@JsonProperty("DelAccOverdraft")
 	private int delaccOverdraft;
 
-	@JsonProperty("DELACC_FAIL_CD")
+	@JsonProperty("DelAccDelFailCd")
 	private int delaccFailCode;
 
-	@JsonProperty("DELACC_EYE")
+	@JsonProperty("DelAccEye")
 	private String delaccEye;
 
-	@JsonProperty("DELACC_DEL_APPLID")
+	@JsonProperty("DelAccDelApplid")
 	private String delaccDelApplid;
 
-	@JsonProperty("DELACC_DEL_SUCCESS")
+	@JsonProperty("DelAccDelSuccess")
 	private String delaccDelSuccess;
 
 
