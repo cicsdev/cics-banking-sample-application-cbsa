@@ -761,7 +761,6 @@ public class Customer
 		myCustomer = new CUSTOMER();
 		myCustomer.setCustomerEyecatcher(CUSTOMER.CUSTOMER_EYECATCHER_VALUE);
 		myCustomer.setCustomerAddress(customer.getCustomerAddress().trim());
-		// What about title validation?
 		myCustomer.setCustomerName(customer.getCustomerName().trim());
 
 		Calendar myCalendar = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
@@ -772,6 +771,31 @@ public class Customer
 		myCustomer.setCustomerBirthDay(myCalendar.get(Calendar.DAY_OF_MONTH));
 		myCustomer.setCustomerBirthMonth(myCalendar.get(Calendar.MONTH) + 1);
 		myCustomer.setCustomerBirthYear(myCalendar.get(Calendar.YEAR));
+
+		Calendar nowCalendar = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
+
+		if(myCalendar.getTimeInMillis() > nowCalendar.getTimeInMillis())
+		{
+			logger.severe(
+					"Error! Customer birth date is in the future");
+			logger.exiting(this.getClass().getName(), CREATE_CUSTOMER, null);
+			return null;
+		}
+
+		int nowYear = nowCalendar.get(Calendar.YEAR);
+		int birthYear = myCalendar.get(Calendar.YEAR);
+
+
+		if(nowYear - birthYear > 150)
+		{
+			logger.severe(
+					"Error! Customer is older than 150 years");
+			logger.exiting(this.getClass().getName(), CREATE_CUSTOMER, null);
+			return null;
+		}
+
+
+
 
 		myCustomer.setCustomerSortcode(sortCodeInteger);
 		myCustomer.setCustomerNumber(customerNumberAsPrimitive);
