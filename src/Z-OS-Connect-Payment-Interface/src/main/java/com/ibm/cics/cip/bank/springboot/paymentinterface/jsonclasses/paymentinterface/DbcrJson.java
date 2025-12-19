@@ -12,28 +12,28 @@ public class DbcrJson
 {
 
 
-	@JsonProperty("COMM_ACCNO")
+	@JsonProperty("CommAccno")
 	private String commAccno;
 
-	@JsonProperty("COMM_AMT")
+	@JsonProperty("CommAmt")
 	private float commAmt;
 
-	@JsonProperty("COMM_SORTC")
+	@JsonProperty("mSortC")
 	private int commSortC = 0;
 
-	@JsonProperty("COMM_AV_BAL")
+	@JsonProperty("CommAvBal")
 	private int commAvBal = 0;
 
-	@JsonProperty("COMM_ACT_BAL")
+	@JsonProperty("CommActBal")
 	private int commActBal = 0;
 
-	@JsonProperty("COMM_ORIGIN")
+	@JsonProperty("CommOrigin")
 	private OriginJson commOrigin;
 
-	@JsonProperty("COMM_SUCCESS")
+	@JsonProperty("CommSuccess")
 	private String commSuccess = " ";
 
-	@JsonProperty("COMM_FAIL_CODE")
+	@JsonProperty("CommFailCode")
 	private String commFailCode = " ";
 
 

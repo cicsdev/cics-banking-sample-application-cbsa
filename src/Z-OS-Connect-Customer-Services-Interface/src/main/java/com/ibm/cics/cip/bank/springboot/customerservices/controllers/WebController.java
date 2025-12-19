@@ -535,6 +535,12 @@ public class WebController implements WebMvcConfigurer
 
 			// Otherwise...
 		}
+		catch (IllegalArgumentException e)
+		{
+			log.info(e.toString());
+			model.addAttribute(LARGE_TEXT, "Create Error");
+			model.addAttribute(SMALL_TEXT, e.getMessage());
+		}
 		catch (WebClientRequestException e)
 		{
 			log.info(e.toString());
@@ -556,14 +562,14 @@ public class WebController implements WebMvcConfigurer
 
 	public static void checkIfResponseValidCreateCust(
 			CreateCustomerJson responseObj) throws InvalidCustomerException,
-			NumberFormatException, TooManyAccountsException
+			NumberFormatException, IllegalArgumentException
 	{
 		if (!responseObj.getCreCust().getCommFailCode().equals(""))
 		{
-			if (responseObj.getCreCust().getCommFailCode().equals("8"))
+			if (responseObj.getCreCust().getCommFailCode().equals("T"))
 			{
-				throw new TooManyAccountsException(Integer
-						.parseInt(responseObj.getCreCust().getCommFailCode()));
+				throw new IllegalArgumentException(
+						"Invalid title; Valid titles are: Professor, Mr, Mrs, Miss, Ms, Dr, Drs, Lord, Sir or Lady.");
 			}
 
 			throw new InvalidCustomerException("An unexpected error occured");

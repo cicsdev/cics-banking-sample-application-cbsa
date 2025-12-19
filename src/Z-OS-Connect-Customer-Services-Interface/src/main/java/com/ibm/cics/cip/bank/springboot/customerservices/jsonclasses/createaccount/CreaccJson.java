@@ -13,43 +13,43 @@ public class CreaccJson
 
 
 
-	@JsonProperty("COMM_ACC_TYPE")
+	@JsonProperty("CommAccType")
 	private String commAccType;
 
-	@JsonProperty("COMM_CUSTNO")
+	@JsonProperty("CommCustno")
 	private String commCustno;
 
-	@JsonProperty("COMM_EYECATCHER")
+	@JsonProperty("CommEyecatcher")
 	private String commEyecatcher;
 
-	@JsonProperty("COMM_KEY")
+	@JsonProperty("CommKey")
 	private CreaccKeyJson commKey;
 
-	@JsonProperty("COMM_INT_RT")
+	@JsonProperty("CommIntRt")
 	private float commInterestRate;
 
-	@JsonProperty("COMM_OPENED")
+	@JsonProperty("CommOpened")
 	private int commOpened;
 
-	@JsonProperty("COMM_OVERDR_LIM")
+	@JsonProperty("CommOverdrLim")
 	private float commOverdraftLimit;
 
-	@JsonProperty("COMM_LAST_STMT_DT")
+	@JsonProperty("CommLastStmtDt")
 	private int commLastStatementDate;
 
-	@JsonProperty("COMM_NEXT_STMT_DT")
+	@JsonProperty("CommNextStmtDt")
 	private int commNextStatementDate;
 
-	@JsonProperty("COMM_AVAIL_BAL")
+	@JsonProperty("CommAvailBal")
 	private float commAvailableBalance;
 
-	@JsonProperty("COMM_ACT_BAL")
+	@JsonProperty("CommActBal")
 	private float commActualBalance;
 
-	@JsonProperty("COMM_SUCCESS")
+	@JsonProperty("CommSuccess")
 	private String commSuccess;
 
-	@JsonProperty("COMM_FAIL_CODE")
+	@JsonProperty("CommFailCode")
 	private String commFailCode;
 
 
