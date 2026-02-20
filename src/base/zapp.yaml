@@ -1,0 +1,16 @@
+name: Generated ZAPP document
+description: >-
+  CRRZG5299I Note that this default file will search all your local folders in
+  all your open VS Code workspaces and can be highly inefficient. Modify the
+  "locations" entries to be as specific as possible. Add a new entry of type
+  "MVS" to specify remote locations. See the user documentation for more
+  details:
+  https://ibm.github.io/zopeneditor-about/Docs/setting_propertygroup.html
+author: IBM Z Open Editor
+propertyGroups:
+  - name: search-all
+    libraries:
+      - name: syslib
+        type: local
+        locations:
+          - '**'

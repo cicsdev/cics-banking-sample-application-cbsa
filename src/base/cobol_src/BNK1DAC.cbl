@@ -828,6 +828,7 @@
                  MAPSET('BNK1DAM')
                  FROM(BNK1DAO)
                  ERASE
+                 FREEKB
                  RESP(WS-CICS-RESP)
                  RESP2(WS-CICS-RESP2)
               END-EXEC
@@ -907,6 +908,7 @@
                  MAPSET('BNK1DAM')
                  FROM(BNK1DAO)
                  DATAONLY
+                 FREEKB
                  RESP(WS-CICS-RESP)
                  RESP2(WS-CICS-RESP2)
               END-EXEC
@@ -982,6 +984,7 @@
                  FROM(BNK1DAO)
                  DATAONLY
                  ALARM
+                 FREEKB
                  RESP(WS-CICS-RESP)
                  RESP2(WS-CICS-RESP2)
               END-EXEC

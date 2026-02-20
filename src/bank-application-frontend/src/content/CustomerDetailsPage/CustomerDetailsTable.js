@@ -166,6 +166,20 @@ const CustomerDetailsTable = ({ customerDetailsRows, accountDetailsRows }) => {
 
 let newDateOfBirth = currentDateOfBirth.substring(6,10) + "-" + currentDateOfBirth.substring(3,5) + "-" + currentDateOfBirth.substring(0,2)
     try {
+      axios.interceptors.response.use(function (response) {
+        // Any status code that lie within the range of 2xx cause this function to trigger
+        // Do something with response data
+        return response;
+      }, function (error) {
+        // Any status codes that falls outside the range of 2xx cause this function to trigger
+        // Do something with response error
+        if(error.response)
+        {
+
+        alert(error.response.data.errorMessage);
+        }
+        return Promise.reject(error);
+      });
       await axios
         .put(process.env.REACT_APP_CUSTOMER_URL + `/${customerNumber}`, {
           customerAddress: useAddress,
@@ -173,13 +187,15 @@ let newDateOfBirth = currentDateOfBirth.substring(6,10) + "-" + currentDateOfBir
           dateOfBirth: newDateOfBirth,
           sortCode: currentSortCode,
           customerName: useName
-        }).then((response) => {
+        })
+        .then((response) => {
         });
+        setUpdateCustomerModalOpened(wasUpdateCustomerOpened => !wasUpdateCustomerOpened)
+        window.location.reload(true)
     } catch (e) {
       console.log("Error updating customer: " + e)
     }
-    setUpdateCustomerModalOpened(wasUpdateCustomerOpened => !wasUpdateCustomerOpened)
-    window.location.reload(true)
+
   }
 
 

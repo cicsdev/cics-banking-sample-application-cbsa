@@ -13,34 +13,34 @@ public class DelcusJson
 
 
 
-	@JsonProperty("COMM_ADDR")
+	@JsonProperty("CommAddr")
 	private String commAddress;
 
-	@JsonProperty("COMM_SCODE")
+	@JsonProperty("CommScode")
 	private int commSortcode;
 
-	@JsonProperty("COMM_NAME")
+	@JsonProperty("CommName")
 	private String commName;
 
-	@JsonProperty("COMM_DEL_SUCCESS")
+	@JsonProperty("CommDelSuccess")
 	private String commDelSuccess;
 
-	@JsonProperty("COMM_EYE")
+	@JsonProperty("CommEye")
 	private String commEye;
 
-	@JsonProperty("COMM_CS_REVIEW_DATE")
+	@JsonProperty("CommCsReviewDate")
 	private String commCsReviewDate;
 
-	@JsonProperty("COMM_CUSTNO")
+	@JsonProperty("CommCustno")
 	private int commCustno;
 
-	@JsonProperty("COMM_DEL_FAIL_CD")
+	@JsonProperty("CommDelFailCd")
 	private int commDelFailCode;
 
-	@JsonProperty("COMM_CREDIT_SCORE")
+	@JsonProperty("CommCreditScore")
 	private int commCreditScore;
 
-	@JsonProperty("COMM_DOB")
+	@JsonProperty("CommDob")
 	private String commDateOfBirth;
 
 

@@ -12,46 +12,46 @@ public class InqaccJson
 {
 
 
-	@JsonProperty("INQACC_PCB1_POINTER")
+	@JsonProperty("InqAccPcb1Pointer")
 	private String inqaccPcb1Pointer;
 
-	@JsonProperty("INQACC_OVERDRAFT")
+	@JsonProperty("InqAccOverdraft")
 	private int inqaccOverdraft;
 
-	@JsonProperty("INQACC_LAST_STMT_DT")
+	@JsonProperty("InqAccLastStmtDt")
 	private int inqaccLastStatementDate;
 
-	@JsonProperty("INQACC_SCODE")
+	@JsonProperty("InqAccScode")
 	private int inqaccSortcode;
 
-	@JsonProperty("INQACC_ACTUAL_BAL")
+	@JsonProperty("InqAccActualBal")
 	private float inqaccActualBalance;
 
-	@JsonProperty("INQACC_ACCNO")
+	@JsonProperty("InqAccAccno")
 	private int inqaccAccno;
 
-	@JsonProperty("INQACC_OPENED")
+	@JsonProperty("InqAccOpened")
 	private int inqaccOpened;
 
-	@JsonProperty("INQACC_CUSTNO")
+	@JsonProperty("InqAccCustno")
 	private int inqaccCustno;
 
-	@JsonProperty("INQACC_ACC_TYPE")
+	@JsonProperty("InqAccAccType")
 	private String inqaccAccType;
 
-	@JsonProperty("INQACC_NEXT_STMT_DT")
+	@JsonProperty("InqAccNextStmtDt")
 	private int inqaccNextStatementDate;
 
-	@JsonProperty("INQACC_AVAIL_BAL")
+	@JsonProperty("InqAccAvailBal")
 	private float inqaccAvailableBalance;
 
-	@JsonProperty("INQACC_EYE")
+	@JsonProperty("InqAccEye")
 	private String inqaccEyecatcher;
 
-	@JsonProperty("INQACC_SUCCESS")
+	@JsonProperty("InqAccSuccess")
 	private String inqaccSuccess;
 
-	@JsonProperty("INQACC_INT_RATE")
+	@JsonProperty("InqAccIntRate")
 	private float inqaccInterestRate;
 
 

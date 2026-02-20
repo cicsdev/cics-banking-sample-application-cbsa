@@ -16,7 +16,7 @@ public class DeleteAccountJson
 
 	private static final String FLOAT_FORMAT = "%.02f";
 
-	@JsonProperty("DELACC_COMMAREA")
+	@JsonProperty("DelAcc")
 	private DelaccJson delaccCommarea;
 
 

@@ -14,7 +14,7 @@ public class DeleteCustomerJson
 
 
 
-	@JsonProperty("DELCUS")
+	@JsonProperty("DelCus")
 	private DelcusJson delcus;
 
 

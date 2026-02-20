@@ -13,37 +13,37 @@ public class InqCustZJson
 
 
 
-	@JsonProperty("INQCUST_NAME")
+	@JsonProperty("InqCustName")
 	private String inqcustName;
 
-	@JsonProperty("INQCUST_CREDIT_SCORE")
+	@JsonProperty("InqCustCreditScore")
 	private int inqcustCreditScore;
 
-	@JsonProperty("INQCUST_INQ_SUCCESS")
+	@JsonProperty("InqCustInqSuccess")
 	private String inqcustInqSuccess;
 
-	@JsonProperty("INQCUST_ADDR")
+	@JsonProperty("InqCustAddr")
 	private String inqcustAddress;
 
-	@JsonProperty("INQCUST_SCODE")
+	@JsonProperty("InqCustScode")
 	private int inqcustSortcode;
 
-	@JsonProperty("INQCUST_INQ_FAIL_CD")
+	@JsonProperty("InqCustInqFailCd")
 	private int inqcustInqFailCode;
 
-	@JsonProperty("INQCUST_DOB")
+	@JsonProperty("InqCustDob")
 	private InqCustDob inqCustDob;
 
-	@JsonProperty("INQCUST_EYE")
+	@JsonProperty("InqCustEye")
 	private String inqcustEye;
 
-	@JsonProperty("INQCUST_PCB_POINTER")
+	@JsonProperty("InqCustPcbPointer")
 	private String inqcustPcbPointer;
 
-	@JsonProperty("INQCUST_CUSTNO")
+	@JsonProperty("InqCustCustno")
 	private int inqcustCustno;
 
-	@JsonProperty("INQCUST_CS_REVIEW_DT")
+	@JsonProperty("InqCustCsReviewDt")
 	private InqCustReviewDate inqcustCsReviewDate;
 
 
@@ -195,8 +195,9 @@ public class InqCustZJson
 				+ inqCustDob + ", InqCustEye=" + inqcustEye
 				+ ", InqCustInqFailCd=" + inqcustInqFailCode
 				+ ", InqCustInqSuccess=" + inqcustInqSuccess
-				+ ", InqCustName=" + inqcustName + ", InqCustPcbPointer="
-				+ inqcustPcbPointer + ", InqCustScode=" + inqcustSortcode
+				+ ", InqCustName=" + inqcustName +
+				", InqCustPcbPointer=" 	+ inqcustPcbPointer +
+				", InqCustScode=" + inqcustSortcode
 				+ "]";
 	}
 

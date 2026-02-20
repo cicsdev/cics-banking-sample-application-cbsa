@@ -221,6 +221,41 @@ public class CustomerResource
 			return myResponse;
 		}
 
+		Date nowDate = new Date(Calendar.getInstance().getTimeInMillis());
+
+		if(nowDate.before(customer.getDateOfBirth()))
+		{
+			JSONObject error = new JSONObject();
+			error.put(JSON_ERROR_MSG,
+					"Date of Birth is in the future");
+			Response myResponse = Response.status(400).entity(error.toString())
+					.build();
+			logger.log(Level.WARNING,
+					() -> "Date of Birth is in the future in CustomerResource.createCustomerInternal(), "
+							+ customer.toString());
+			logger.exiting(this.getClass().getName(),
+					CREATE_CUSTOMER_INTERNAL_EXIT, myResponse);
+			return myResponse;
+		}
+
+// 150 years as milliseconds
+		nowDate.setTime(nowDate.getTime() - (4733640000000L));
+
+		if(nowDate.after(customer.getDateOfBirth()))
+		{
+			JSONObject error = new JSONObject();
+			error.put(JSON_ERROR_MSG,
+					"Customer is over 150 years old");
+			Response myResponse = Response.status(400).entity(error.toString())
+					.build();
+			logger.log(Level.WARNING,
+					() -> "Customer is over 150 years old in CustomerResource.createCustomerInternal(), "
+							+ customer.toString());
+			logger.exiting(this.getClass().getName(),
+					CREATE_CUSTOMER_INTERNAL_EXIT, myResponse);
+			return myResponse;
+		}
+
 		com.ibm.cics.cip.bankliberty.web.vsam.Customer vsamCustomer = new com.ibm.cics.cip.bankliberty.web.vsam.Customer();
 
 		customer.setSortCode(this.getSortCode().toString());

@@ -12,7 +12,7 @@ These instructions detail the steps required to:
 
 1.  Set up the port for the z/OS Connect server.
 
-2.  Update "ConnectionInfo" with the correct port and hostname for the z/OS Connect server.
+2.  Update the JVM Profile with the correct port and hostname for the z/OS Connect server.
 
 3.  Build the Java components using with Maven.
 
@@ -57,18 +57,11 @@ and host localhost, if you utilised a different port number or hostname
 during the z/OS Connect setup (as part of the base/COBOL installation)
 then please substitute the default values with yours.
 
-Should you need to change these, they are configured in the following files, which can be found on the repo at:
+Should you need to change these, they are configured by parameters that you will need to set in the JVM Profile as given in the examples below.
 
-> cicsdev/cics-banking-sample-application-cbsa/src/Z-OS-Connect-Customer-Services-Interface/src/main/java/com/ibm/cics/cip/bank/springboot/customerservices/**ConnectionInfo.java**
+> -DCBSA_ZOSCONN_PORT=30701
 
-> cicsdev/cics-banking-sample-application-cbsa/src/Z-OS-Connect-Payment-Interface/src/main/java/com/ibm/cics/cip/bank/springboot/paymentinterface/**ConnectionInfo.java**
-
-
-Both need to be changed and both currently contain the following lines.
-
-private static int port = 30701;
-
-private static String address = \"localhost\";
+> -DCBSA_ZOSCONN_HOST=localhost
 
 ##
 
@@ -110,6 +103,8 @@ At the bottom, add the following timeout overrides.
 > -Dcom.ibm.cics.jvmserver.controller.timeout=900000
 
 > -Dcom.ibm.cics.jvmserver.wlp.bundlepart.timeout=900000
+
+
 
 ### server.xml
 

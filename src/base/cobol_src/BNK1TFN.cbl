@@ -673,6 +673,7 @@
                  MAPSET('BNK1TFM')
                  FROM(BNK1TFO)
                  ERASE
+                 FREEKB
                  RESP(WS-CICS-RESP)
                  RESP2(WS-CICS-RESP2)
               END-EXEC
@@ -747,6 +748,7 @@
                  MAPSET('BNK1TFM')
                  FROM(BNK1TFO)
                  DATAONLY
+                 FREEKB
                  RESP(WS-CICS-RESP)
                  RESP2(WS-CICS-RESP2)
               END-EXEC
@@ -822,6 +824,7 @@
                  FROM(BNK1TFO)
                  DATAONLY
                  ALARM
+                 FREEKB
                  RESP(WS-CICS-RESP)
                  RESP2(WS-CICS-RESP2)
               END-EXEC

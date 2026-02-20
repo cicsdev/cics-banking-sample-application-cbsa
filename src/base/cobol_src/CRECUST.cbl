@@ -344,6 +344,9 @@
        01 CUSTOMER-CONTROL.
            COPY CUSTCTRL.
 
+       01 WS-UNSTR-TITLE               PIC X(9)  VALUE ' '.
+       01 WS-TITLE-VALID               PIC X.
+
 
        LINKAGE SECTION.
        01 DFHCOMMAREA.
@@ -353,6 +356,61 @@
        PROCEDURE DIVISION USING DFHCOMMAREA.
        PREMIERE SECTION.
        P010.
+
+      *
+      *    You can change the customer's name, but the title must
+      *    be a valid one. Check that here
+      *
+           MOVE SPACES TO WS-UNSTR-TITLE.
+           UNSTRING COMM-NAME DELIMITED BY SPACE
+              INTO WS-UNSTR-TITLE.
+
+           MOVE ' ' TO WS-TITLE-VALID.
+
+           EVALUATE WS-UNSTR-TITLE
+              WHEN 'Professor'
+                 MOVE 'Y' TO WS-TITLE-VALID
+
+              WHEN 'Mr       '
+                 MOVE 'Y' TO WS-TITLE-VALID
+
+              WHEN 'Mrs      '
+                 MOVE 'Y' TO WS-TITLE-VALID
+
+              WHEN 'Miss     '
+                 MOVE 'Y' TO WS-TITLE-VALID
+
+              WHEN 'Ms       '
+                 MOVE 'Y' TO WS-TITLE-VALID
+
+              WHEN 'Dr       '
+                 MOVE 'Y' TO WS-TITLE-VALID
+
+              WHEN 'Drs      '
+                 MOVE 'Y' TO WS-TITLE-VALID
+
+              WHEN 'Lord     '
+                 MOVE 'Y' TO WS-TITLE-VALID
+
+              WHEN 'Sir      '
+                 MOVE 'Y' TO WS-TITLE-VALID
+
+              WHEN 'Lady     '
+                 MOVE 'Y' TO WS-TITLE-VALID
+
+              WHEN '         '
+                 MOVE 'Y' TO WS-TITLE-VALID
+
+              WHEN OTHER
+                 MOVE 'N' TO WS-TITLE-VALID
+           END-EVALUATE.
+
+           IF WS-TITLE-VALID = 'N'
+             MOVE 'N' TO COMM-SUCCESS
+             MOVE 'T' TO COMM-FAIL-CODE
+             GOBACK
+           END-IF
+
 
            MOVE SORTCODE TO REQUIRED-SORT-CODE.
 

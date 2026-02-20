@@ -18,6 +18,10 @@ The scripts (Job Control Language and SQL) to build the Db2 infrastructure.
 
 Documentation. Read the information in here to install the base application.
 
+# docZosConnect
+
+Documentation. Read the information in here to install and configure the z/OS Connect parts of the base application. This is the same information as in doc, but gathered in to one place.
+
 # installjcl
 
 The scripts (Job Control Language jobs) to build the data and resources for the application.

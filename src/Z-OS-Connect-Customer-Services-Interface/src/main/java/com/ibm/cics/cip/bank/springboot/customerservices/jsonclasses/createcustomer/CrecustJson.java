@@ -14,31 +14,31 @@ public class CrecustJson
 
 
 
-	@JsonProperty("COMM_EYECATCHER")
+	@JsonProperty("CommEyecatcher")
 	private String commEyecatcher = "    ";
 
-	@JsonProperty("COMM_KEY")
+	@JsonProperty("CommKey")
 	private CreaccKeyJson commKey = new CreaccKeyJson();
 
-	@JsonProperty("COMM_NAME")
+	@JsonProperty("CommName")
 	private String commName;
 
-	@JsonProperty("COMM_ADDRESS")
+	@JsonProperty("CommAddress")
 	private String commAddress;
 
-	@JsonProperty("COMM_DATE_OF_BIRTH")
+	@JsonProperty("CommDateOfBirth")
 	private String commDateOfBirth;
 
-	@JsonProperty("COMM_CREDIT_SCORE")
+	@JsonProperty("CommCreditScore")
 	private int commCreditScore = 0;
 
-	@JsonProperty("COMM_CS_REVIEW_DATE")
+	@JsonProperty("CommCsReviewDate")
 	private String commCsReviewDate = "0";
 
-	@JsonProperty("COMM_SUCCESS")
+	@JsonProperty("CommSuccess")
 	private String commSuccess;
 
-	@JsonProperty("COMM_FAIL_CODE")
+	@JsonProperty("CommFailCode")
 	private String commFailCode;
 
 

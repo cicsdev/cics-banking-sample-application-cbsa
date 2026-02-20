@@ -20,8 +20,6 @@ import AccountDeletePage from './content/AccountDeletePage'
 import { HashRouter, Route, Switch} from 'react-router-dom';
 
 
-
-
 class App extends Component {
 
 

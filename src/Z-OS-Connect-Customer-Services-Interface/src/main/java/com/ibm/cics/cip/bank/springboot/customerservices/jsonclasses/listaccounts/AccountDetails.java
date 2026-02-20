@@ -16,40 +16,40 @@ public class AccountDetails
 
 	private static final String FLOAT_FORMAT = "%.02f";
 
-	@JsonProperty("COMM_ACTUAL_BAL")
+	@JsonProperty("CommActualBal")
 	private float commActualBalance;
 
-	@JsonProperty("COMM_AVAIL_BAL")
+	@JsonProperty("CommAvailBal")
 	private float commAvailableBalance;
 
-	@JsonProperty("COMM_SCODE")
-	private int commSortcode;
+	// @JsonProperty("COMM_SCODE")
+	// private int commSortcode;
 
-	@JsonProperty("COMM_INT_RATE")
+	@JsonProperty("CommIntRate")
 	private float commInterestRate;
 
-	@JsonProperty("COMM_EYE")
+	@JsonProperty("CommEye")
 	private String commEye;
 
-	@JsonProperty("COMM_OPENED")
+	@JsonProperty("CommOpened")
 	private int commOpened;
 
-	@JsonProperty("COMM_CUSTNO")
+	@JsonProperty("CommCustno")
 	private int commCustno;
 
-	@JsonProperty("COMM_NEXT_STMT_DT")
+	@JsonProperty("CommNextStmtDt")
 	private int commNextStatementDate;
 
-	@JsonProperty("COMM_ACC_TYPE")
+	@JsonProperty("CommAccType")
 	private String commAccType;
 
-	@JsonProperty("COMM_OVERDRAFT")
+	@JsonProperty("CommOverdraft")
 	private int commOverdraft;
 
-	@JsonProperty("COMM_ACCNO")
+	@JsonProperty("CommAccno")
 	private int commAccno;
 
-	@JsonProperty("COMM_LAST_STMT_DT")
+	@JsonProperty("CommLastStmtDt")
 	private int commLastStatementDate;
 
 
@@ -77,16 +77,16 @@ public class AccountDetails
 	}
 
 
-	public int getCommSortcode()
-	{
-		return commSortcode;
-	}
+	// public int getCommSortcode()
+	// {
+	// 	return commSortcode;
+	// }
 
 
-	public void setCommSortcode(int commSortcodeIn)
-	{
-		commSortcode = commSortcodeIn;
-	}
+	// public void setCommSortcode(int commSortcodeIn)
+	// {
+	// 	commSortcode = commSortcodeIn;
+	// }
 
 
 	public float getCommInterestRate()
@@ -206,8 +206,9 @@ public class AccountDetails
 				+ ", CommIntRate=" + commInterestRate + ", CommLastStmtDt="
 				+ commLastStatementDate + ", CommNextStmtDt="
 				+ commNextStatementDate + ", CommOpened=" + commOpened
-				+ ", CommOverdraft=" + commOverdraft + ", CommScode="
-				+ commSortcode + "]";
+				+ ", CommOverdraft=" + commOverdraft;
+				//  + ", CommScode="
+				// + commSortcode + "]";
 	}
 
 
@@ -216,7 +217,7 @@ public class AccountDetails
 		String output = "";
 		output += "Account Number:       "
 				+ OutputFormatUtils.leadingZeroes(8, commAccno) + "\n"
-				+ "Sort Code:            " + String.format("%06d", commSortcode)
+				// + "Sort Code:            " + String.format("%06d", commSortcode)
 				+ "\n" + "Customer Number:      "
 				+ OutputFormatUtils.leadingZeroes(10, commCustno) + "\n"
 				+ "Account Type:         " + commAccType + "\n"

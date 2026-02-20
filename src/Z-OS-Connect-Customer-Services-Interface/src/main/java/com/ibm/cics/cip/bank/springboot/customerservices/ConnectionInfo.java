@@ -1,5 +1,5 @@
 /*                                                                        */
-/* Copyright IBM Corp. 2023                                               */
+/* Copyright IBM Corp. 2023, 2025                                         */
 /*                                                                        */
 package com.ibm.cics.cip.bank.springboot.customerservices;
 
@@ -16,11 +16,11 @@ public class ConnectionInfo
 
 	@Parameter(names =
 	{ "--port", "-p" }, description = "Port to connect with")
-	private static int port = 38016;
+	private static int port = 38417;
 
 	@Parameter(names =
 	{ "--address", "--url", "-a", "-u" }, description = "Address to use")
-	private static String address = "winmvsb0.hursley.ibm.com";
+	private static String address = "localhost";
 
 
 	private ConnectionInfo()
@@ -29,40 +29,31 @@ public class ConnectionInfo
 	}
 
 
-	public static String getAddressAndPort()
-	{
-		return scheme + "://" + address + ":" + port;
-	}
+public static String getAddressAndPort() {
+        return scheme + "://" + getAddress() + ":" + getPort();
+    }
 
+    public static int getPort() {
+        port = Integer.parseInt(System.getProperty("CBSA_ZOSCONN_PORT"));
+        return port;
+    }
 
-	public static int getPort()
-	{
-		return port;
-	}
+    public static String getPortString() {
+        return Integer.toString(getPort());
+    }
 
+    public static void setPort(int port) {
+        ConnectionInfo.port = port;
+    }
 
-	public static String getPortString()
-	{
-		return Integer.toString(port);
-	}
+    public static String getAddress() {
+        address = System.getProperty("CBSA_ZOSCONN_HOST");
+        return address;
+    }
 
-
-	public static void setPort(int port)
-	{
-		ConnectionInfo.port = port;
-	}
-
-
-	public static String getAddress()
-	{
-		return address;
-	}
-
-
-	public static void setAddress(String address)
-	{
-		ConnectionInfo.address = address;
-	}
+    public static void setAddress(String address) {
+        ConnectionInfo.address = address;
+    }
 
 	public static String getScheme()
 	{
