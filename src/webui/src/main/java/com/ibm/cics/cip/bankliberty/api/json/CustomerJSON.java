@@ -14,13 +14,15 @@ import javax.ws.rs.FormParam;
  * This class describes the parts of the Customer record in JSON format
  */
 
-public class CustomerJSON
-{
-
+public class CustomerJSON {
 
 	@NotNull
 	@FormParam("customerAddress")
 	String customerAddress;
+
+	@NotNull
+	@FormParam("customerTitle")
+	String customerTitle;
 
 	@NotNull
 	@FormParam("customerName")
@@ -38,27 +40,19 @@ public class CustomerJSON
 	@FormParam("customerCreditScore")
 	String customerCreditScore;
 
-
-	public String getCreditScore()
-	{
+	public String getCreditScore() {
 		return customerCreditScore;
 	}
 
-
-	public void setCreditScore(String customerCreditScore)
-	{
+	public void setCreditScore(String customerCreditScore) {
 		this.customerCreditScore = customerCreditScore;
 	}
 
-
-	public Date getReviewDate()
-	{
+	public Date getReviewDate() {
 		return customerCreditScoreReviewDate;
 	}
 
-
-	public void setReviewDate(Date customerCreditScoreReviewDate)
-	{
+	public void setReviewDate(Date customerCreditScoreReviewDate) {
 		this.customerCreditScoreReviewDate = customerCreditScoreReviewDate;
 	}
 
@@ -68,111 +62,90 @@ public class CustomerJSON
 
 	String id;
 
-
-	public String getId()
-	{
+	public String getId() {
 		return id;
 	}
 
-
-	public void setId(String id)
-	{
+	public void setId(String id) {
 		this.id = id;
 	}
 
-
-	public String getSortCode()
-	{
+	public String getSortCode() {
 		return sortCode;
 	}
 
-
-	public void setSortCode(String sortCode)
-	{
+	public void setSortCode(String sortCode) {
 		this.sortCode = sortCode;
 	}
 
+	public String getCustomerTitle() {
+		return customerTitle;
+	}
 
-	public String getCustomerName()
-	{
+	public void setCustomerTitle(String customerTitle) {
+		this.customerTitle = customerTitle;
+	}
+
+	public String getCustomerName() {
 		return customerName;
 	}
 
-
-	public void setCustomerName(String customerName)
-	{
+	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
 
-
-	public String getCustomerAddress()
-	{
+	public String getCustomerAddress() {
 		return customerAddress;
 	}
 
-
-	public void setCustomerAddress(String customerAddress)
-	{
+	public void setCustomerAddress(String customerAddress) {
 		this.customerAddress = customerAddress;
 	}
 
-
-	public Date getDateOfBirth()
-	{
+	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-
-	public void setDateOfBirth(Date dateOfBirth)
-	{
+	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-
 	// Customer title must be one of the following
-	public boolean validateTitle(String title)
-	{
-		if (title.equalsIgnoreCase("Professor"))
-		{
+	public boolean validateTitle(String title) {
+		if (title.equalsIgnoreCase("Professor")) {
 			return true;
 		}
-		if (title.equalsIgnoreCase("Mr"))
-		{
+		if (title.equalsIgnoreCase("Mr")) {
 			return true;
 		}
-		if (title.equalsIgnoreCase("Mrs"))
-		{
+		if (title.equalsIgnoreCase("Mrs")) {
 			return true;
 		}
-		if (title.equalsIgnoreCase("Miss"))
-		{
+		if (title.equalsIgnoreCase("Miss")) {
 			return true;
 		}
-		if (title.equalsIgnoreCase("Ms"))
-		{
+		if (title.equalsIgnoreCase("Ms")) {
 			return true;
 		}
-		if (title.equalsIgnoreCase("Dr"))
-		{
+		if (title.equalsIgnoreCase("Dr")) {
 			return true;
 		}
-		if (title.equalsIgnoreCase("Drs"))
-		{
+		if (title.equalsIgnoreCase("Drs")) {
 			return true;
 		}
-		if (title.equalsIgnoreCase("Lord"))
-		{
+		if (title.equalsIgnoreCase("Lord")) {
 			return true;
 		}
-		if (title.equalsIgnoreCase("Sir"))
-		{
+		if (title.equalsIgnoreCase("Sir")) {
 			return true;
 		}
 		return (title.equalsIgnoreCase("Lady"));
 	}
-	public String toString()
-	{
-		return "customerAddress="+this.getCustomerAddress()+",customerName="+this.getCustomerName()+",dateOfBirth="+this.getDateOfBirth()+",creditScore="+this.getCreditScore()+",sortCode="+this.getSortCode()+",reviewDate="+this.getReviewDate();
+
+	public String toString() {
+		return "customerAddress=" + this.getCustomerAddress() + ",customerTitle=" + this.getCustomerTitle()
+				+ ",customerName=" + this.getCustomerName() + ",dateOfBirth=" + this.getDateOfBirth() + ",creditScore="
+				+ this.getCreditScore() + ",sortCode=" + this.getSortCode() + ",reviewDate=" + this.getReviewDate();
 	}
 
 }

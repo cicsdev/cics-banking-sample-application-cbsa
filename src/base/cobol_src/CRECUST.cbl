@@ -59,9 +59,9 @@
        01 SYSIDERR-RETRY                PIC 999.
 
       * PROCTRAN DB2 copybook
-          EXEC SQL
+           EXEC SQL
              INCLUDE PROCDB2
-          END-EXEC.
+           END-EXEC.
 
       * PROCTRAN host variables for DB2
        01 HOST-PROCTRAN-ROW.
@@ -76,9 +76,9 @@
           03 HV-PROCTRAN-AMOUNT         PIC S9(10)V99 COMP-3.
 
       * Pull in the SQL COMMAREA
-       EXEC SQL
+           EXEC SQL
           INCLUDE SQLCA
-       END-EXEC.
+           END-EXEC.
 
        01 PROCTRAN-AREA.
           COPY PROCTRAN.
@@ -344,8 +344,8 @@
        01 CUSTOMER-CONTROL.
            COPY CUSTCTRL.
 
-       01 WS-UNSTR-TITLE               PIC X(9)  VALUE ' '.
-       01 WS-TITLE-VALID               PIC X.
+       01 WS-UNSTR-TITLE                PIC X(9)      VALUE ' '.
+       01 WS-TITLE-VALID                PIC X.
 
 
        LINKAGE SECTION.
@@ -368,47 +368,47 @@
            MOVE ' ' TO WS-TITLE-VALID.
 
            EVALUATE WS-UNSTR-TITLE
-              WHEN 'Professor'
-                 MOVE 'Y' TO WS-TITLE-VALID
+           WHEN 'Professor'
+                MOVE 'Y' TO WS-TITLE-VALID
 
-              WHEN 'Mr       '
-                 MOVE 'Y' TO WS-TITLE-VALID
+           WHEN 'Mr       '
+                MOVE 'Y' TO WS-TITLE-VALID
 
-              WHEN 'Mrs      '
-                 MOVE 'Y' TO WS-TITLE-VALID
+           WHEN 'Mrs      '
+                MOVE 'Y' TO WS-TITLE-VALID
 
-              WHEN 'Miss     '
-                 MOVE 'Y' TO WS-TITLE-VALID
+           WHEN 'Miss     '
+                MOVE 'Y' TO WS-TITLE-VALID
 
-              WHEN 'Ms       '
-                 MOVE 'Y' TO WS-TITLE-VALID
+           WHEN 'Ms       '
+                MOVE 'Y' TO WS-TITLE-VALID
 
-              WHEN 'Dr       '
-                 MOVE 'Y' TO WS-TITLE-VALID
+           WHEN 'Dr       '
+                MOVE 'Y' TO WS-TITLE-VALID
 
-              WHEN 'Drs      '
-                 MOVE 'Y' TO WS-TITLE-VALID
+           WHEN 'Drs      '
+                MOVE 'Y' TO WS-TITLE-VALID
 
-              WHEN 'Lord     '
-                 MOVE 'Y' TO WS-TITLE-VALID
+           WHEN 'Lord     '
+                MOVE 'Y' TO WS-TITLE-VALID
 
-              WHEN 'Sir      '
-                 MOVE 'Y' TO WS-TITLE-VALID
+           WHEN 'Sir      '
+                MOVE 'Y' TO WS-TITLE-VALID
 
-              WHEN 'Lady     '
-                 MOVE 'Y' TO WS-TITLE-VALID
+           WHEN 'Lady     '
+                MOVE 'Y' TO WS-TITLE-VALID
 
-              WHEN '         '
-                 MOVE 'Y' TO WS-TITLE-VALID
+           WHEN '         '
+                MOVE 'Y' TO WS-TITLE-VALID
 
-              WHEN OTHER
-                 MOVE 'N' TO WS-TITLE-VALID
+           WHEN OTHER
+                MOVE 'N' TO WS-TITLE-VALID
            END-EVALUATE.
 
            IF WS-TITLE-VALID = 'N'
-             MOVE 'N' TO COMM-SUCCESS
-             MOVE 'T' TO COMM-FAIL-CODE
-             GOBACK
+              MOVE 'N' TO COMM-SUCCESS
+              MOVE 'T' TO COMM-FAIL-CODE
+              GOBACK
            END-IF
 
 
@@ -432,17 +432,19 @@
               STRING WS-ORIG-DATE-DD DELIMITED BY SIZE,
                      WS-ORIG-DATE-MM DELIMITED BY SIZE,
                      WS-ORIG-DATE-YYYY DELIMITED BY SIZE
-                     INTO COMM-CS-REVIEW-DATE
+                 INTO COMM-CS-REVIEW-DATE
               END-STRING
 
               MOVE 'N' TO COMM-SUCCESS
               MOVE 'G' TO COMM-FAIL-CODE
 
               DISPLAY 'WS-CREDIT-CHECK-ERROR = Y, '
-                       ' RESP='
-                       WS-CICS-RESP ' RESP2=' WS-CICS-RESP2
+                      ' RESP='
+                      WS-CICS-RESP
+                      ' RESP2='
+                      WS-CICS-RESP2
               DISPLAY '   Exiting CRECUST. COMMAREA='
-                       DFHCOMMAREA
+                      DFHCOMMAREA
               PERFORM GET-ME-OUT-OF-HERE
 
            END-IF.
@@ -482,15 +484,15 @@
        PTD010.
 
            EXEC CICS ASKTIME
-              ABSTIME(WS-U-TIME)
-           END-EXEC.
+                ABSTIME(WS-U-TIME)
+                END-EXEC.
 
            EXEC CICS FORMATTIME
-                     ABSTIME(WS-U-TIME)
-                     DDMMYYYY(WS-ORIG-DATE)
-                     TIME(PROC-TRAN-TIME OF PROCTRAN-AREA )
-                     DATESEP
-           END-EXEC.
+                ABSTIME(WS-U-TIME)
+                DDMMYYYY(WS-ORIG-DATE)
+                TIME(PROC-TRAN-TIME OF PROCTRAN-AREA)
+                DATESEP
+                END-EXEC.
 
        PTD999.
            EXIT.
@@ -502,16 +504,16 @@
               NCS-CUST-NO-TEST-SORT.
 
            EXEC CICS ENQ
-              RESOURCE(NCS-CUST-NO-NAME)
-              LENGTH(16)
-              RESP(WS-CICS-RESP)
-              RESP2(WS-CICS-RESP2)
-           END-EXEC.
+                RESOURCE(NCS-CUST-NO-NAME)
+                LENGTH(16)
+                RESP(WS-CICS-RESP)
+                RESP2(WS-CICS-RESP2)
+                END-EXEC.
 
            IF WS-CICS-RESP NOT = DFHRESP(NORMAL)
-             MOVE 'N' TO COMM-SUCCESS
-             MOVE '3' TO COMM-FAIL-CODE
-             PERFORM GET-ME-OUT-OF-HERE
+              MOVE 'N' TO COMM-SUCCESS
+              MOVE '3' TO COMM-FAIL-CODE
+              PERFORM GET-ME-OUT-OF-HERE
            END-IF.
 
        ENC999.
@@ -527,16 +529,16 @@
       D    EXEC CICS ASKTIME ABSTIME(START-DEQ) END-EXEC
 
            EXEC CICS DEQ
-              RESOURCE(NCS-CUST-NO-NAME)
-              LENGTH(16)
-              RESP(WS-CICS-RESP)
-              RESP2(WS-CICS-RESP2)
-           END-EXEC.
+                RESOURCE(NCS-CUST-NO-NAME)
+                LENGTH(16)
+                RESP(WS-CICS-RESP)
+                RESP2(WS-CICS-RESP2)
+                END-EXEC.
 
            IF WS-CICS-RESP NOT = DFHRESP(NORMAL)
-             MOVE 'N' TO COMM-SUCCESS
-             MOVE '5' TO COMM-FAIL-CODE
-             PERFORM GET-ME-OUT-OF-HERE
+              MOVE 'N' TO COMM-SUCCESS
+              MOVE '5' TO COMM-FAIL-CODE
+              PERFORM GET-ME-OUT-OF-HERE
            END-IF.
 
        DNC999.
@@ -577,96 +579,107 @@
            COMPUTE WS-PUT-CONT-LEN = LENGTH OF DFHCOMMAREA.
 
            PERFORM VARYING WS-CC-CNT FROM 1 BY 1
-           UNTIL WS-CC-CNT > 5
+              UNTIL WS-CC-CNT > 5
 
       *
       *       Use transactions OCR1 - OCR5
       *
-              STRING 'OCR' DELIMITED BY SIZE,
-                      WS-CC-CNT DELIMITED BY SIZE
-                 INTO WS-RUN-TRANSID
-              END-STRING
+                   STRING 'OCR' DELIMITED BY SIZE,
+                          WS-CC-CNT DELIMITED BY SIZE
+                      INTO WS-RUN-TRANSID
+                   END-STRING
 
-              EVALUATE WS-CC-CNT
-                 WHEN 1
-                    MOVE 'CIPA            ' TO WS-PUT-CONT-NAME
-                 WHEN 2
-                    MOVE 'CIPB            ' TO WS-PUT-CONT-NAME
-                 WHEN 3
-                    MOVE 'CIPC            ' TO WS-PUT-CONT-NAME
-                 WHEN 4
-                    MOVE 'CIPD            ' TO WS-PUT-CONT-NAME
-                 WHEN 5
-                    MOVE 'CIPE            ' TO WS-PUT-CONT-NAME
-                 WHEN 6
-                    MOVE 'CIPF            ' TO WS-PUT-CONT-NAME
-                 WHEN 7
-                    MOVE 'CIPG            ' TO WS-PUT-CONT-NAME
-                 WHEN 8
-                    MOVE 'CIPH            ' TO WS-PUT-CONT-NAME
-                 WHEN 9
-                    MOVE 'CIPI            ' TO WS-PUT-CONT-NAME
+                   EVALUATE WS-CC-CNT
+                   WHEN 1
+                        MOVE 'CIPA            ' TO WS-PUT-CONT-NAME
+                   WHEN 2
+                        MOVE 'CIPB            ' TO WS-PUT-CONT-NAME
+                   WHEN 3
+                        MOVE 'CIPC            ' TO WS-PUT-CONT-NAME
+                   WHEN 4
+                        MOVE 'CIPD            ' TO WS-PUT-CONT-NAME
+                   WHEN 5
+                        MOVE 'CIPE            ' TO WS-PUT-CONT-NAME
+                   WHEN 6
+                        MOVE 'CIPF            ' TO WS-PUT-CONT-NAME
+                   WHEN 7
+                        MOVE 'CIPG            ' TO WS-PUT-CONT-NAME
+                   WHEN 8
+                        MOVE 'CIPH            ' TO WS-PUT-CONT-NAME
+                   WHEN 9
+                        MOVE 'CIPI            ' TO WS-PUT-CONT-NAME
 
-              END-EVALUATE
+                   END-EVALUATE
 
       *
       *       Pass the details of the customer into a container
       *
-              EXEC CICS PUT CONTAINER(WS-PUT-CONT-NAME)
-                            FROM(DFHCOMMAREA)
-                            FLENGTH(WS-PUT-CONT-LEN)
-                            CHANNEL(WS-CHANNEL-NAME)
-                            RESP(WS-CICS-RESP)
-                            RESP2(WS-CICS-RESP2)
-              END-EXEC
+                   EXEC CICS PUT CONTAINER(WS-PUT-CONT-NAME)
+                        FROM (DFHCOMMAREA)
+                        FLENGTH(WS-PUT-CONT-LEN)
+                        CHANNEL(WS-CHANNEL-NAME)
+                        RESP(WS-CICS-RESP)
+                        RESP2(WS-CICS-RESP2)
+                        END-EXEC
 
-              IF WS-CICS-RESP NOT = DFHRESP(NORMAL)
-                 MOVE 'N' TO COMM-SUCCESS
-                 MOVE 'A' TO COMM-FAIL-CODE
+                   IF WS-CICS-RESP NOT = DFHRESP(NORMAL)
+                      MOVE 'N' TO COMM-SUCCESS
+                      MOVE 'A' TO COMM-FAIL-CODE
 
-                 DISPLAY 'Unsuccessful attempt to PUT CONTAINER. '
-                         'CONTAINER=' WS-PUT-CONT-NAME 'CHANNEL='
-                         WS-CHANNEL-NAME '. FLENGTH ='
-                         WS-PUT-CONT-LEN '.'
-                 DISPLAY '    RESP=' WS-CICS-RESP ' RESP2='
-                         WS-CICS-RESP2
+                      DISPLAY 'Unsuccessful attempt to PUT CONTAINER. '
+                              'CONTAINER='
+                              WS-PUT-CONT-NAME
+                              'CHANNEL='
+                              WS-CHANNEL-NAME
+                              '. FLENGTH ='
+                              WS-PUT-CONT-LEN
+                              '.'
+                      DISPLAY '    RESP='
+                              WS-CICS-RESP
+                              ' RESP2='
+                              WS-CICS-RESP2
 
-                 PERFORM GET-ME-OUT-OF-HERE
-              END-IF
+                      PERFORM GET-ME-OUT-OF-HERE
+                   END-IF
 
       *
       *       Issue the ASYNC transaction
       *
-              EXEC CICS RUN TRANSID(WS-RUN-TRANSID)
-                   CHANNEL(WS-CHANNEL-NAME)
-                   CHILD(WS-ANY-CHILD-TKN)
-                   RESP(WS-CICS-RESP)
-                   RESP2(WS-CICS-RESP2)
-              END-EXEC
+                   EXEC CICS RUN TRANSID(WS-RUN-TRANSID)
+                        CHANNEL(WS-CHANNEL-NAME)
+                        CHILD(WS-ANY-CHILD-TKN)
+                        RESP(WS-CICS-RESP)
+                        RESP2(WS-CICS-RESP2)
+                        END-EXEC
 
-              IF WS-CICS-RESP NOT = DFHRESP(NORMAL)
-                 MOVE 'N' TO COMM-SUCCESS
-                 MOVE 'B' TO COMM-FAIL-CODE
+                   IF WS-CICS-RESP NOT = DFHRESP(NORMAL)
+                      MOVE 'N' TO COMM-SUCCESS
+                      MOVE 'B' TO COMM-FAIL-CODE
 
-                 DISPLAY 'Unsuccessful attempt to RUN TRANSID. '
-                         'TRANSID=' WS-RUN-TRANSID 'CHANNEL='
-                         WS-CHANNEL-NAME '. TOKEN='
-                         WS-ANY-CHILD-TKN
-                 DISPLAY '    RESP=' WS-CICS-RESP ' RESP2='
-                         WS-CICS-RESP2
+                      DISPLAY 'Unsuccessful attempt to RUN TRANSID. '
+                              'TRANSID='
+                              WS-RUN-TRANSID
+                              'CHANNEL='
+                              WS-CHANNEL-NAME
+                              '. TOKEN='
+                              WS-ANY-CHILD-TKN
+                      DISPLAY '    RESP='
+                              WS-CICS-RESP
+                              ' RESP2='
+                              WS-CICS-RESP2
 
-                 PERFORM GET-ME-OUT-OF-HERE
-              END-IF
+                      PERFORM GET-ME-OUT-OF-HERE
+                   END-IF
 
       *
       *       Store away the CHANNEL and the TKN into an array
       *       for later use.
       *
-              ADD 1 TO WS-CHILD-ISSUED-CNT
-              MOVE WS-CHANNEL-NAME TO
-                 WS-CHILD-CHAN (WS-CHILD-ISSUED-CNT)
-              MOVE WS-ANY-CHILD-TKN TO
-                 WS-CHILD-TKN (WS-CHILD-ISSUED-CNT)
+                   ADD 1 TO WS-CHILD-ISSUED-CNT
+                   MOVE WS-CHANNEL-NAME TO
+                      WS-CHILD-CHAN(WS-CHILD-ISSUED-CNT)
+                   MOVE WS-ANY-CHILD-TKN TO
+                      WS-CHILD-TKN(WS-CHILD-ISSUED-CNT)
 
       D       DISPLAY 'WS-CHILD-ARRAY=' WS-CHILD-ARRAY
 
@@ -679,8 +692,8 @@
       *    and then FETCH any data
       *
            EXEC CICS DELAY
-              FOR SECONDS(3)
-           END-EXEC.
+                FOR SECONDS(3)
+                END-EXEC.
 
            MOVE 'N' TO WS-FINISHED-FETCHING.
            MOVE 0 TO WS-RETRIEVED-CNT.
@@ -688,22 +701,22 @@
 
            PERFORM UNTIL WS-FINISHED-FETCHING = 'Y'
 
-              MOVE SPACES TO WS-ANY-CHILD-FETCH-ABCODE
+                   MOVE SPACES TO WS-ANY-CHILD-FETCH-ABCODE
 
       *
       *       Fetch an available reply immediately (without
       *       waiting).
       *
-              EXEC CICS FETCH ANY(WS-ANY-CHILD-FETCH-TKN)
-                   CHANNEL(WS-ANY-CHILD-FETCH-CHAN)
-                   NOSUSPEND
-                   COMPSTATUS(WS-CHILD-FETCH-COMPST)
-                   ABCODE(WS-ANY-CHILD-FETCH-ABCODE)
-                   RESP(WS-CICS-RESP)
-                   RESP2(WS-CICS-RESP2)
-              END-EXEC
+                   EXEC CICS FETCH ANY(WS-ANY-CHILD-FETCH-TKN)
+                        CHANNEL(WS-ANY-CHILD-FETCH-CHAN)
+                        NOSUSPEND
+                        COMPSTATUS(WS-CHILD-FETCH-COMPST)
+                        ABCODE(WS-ANY-CHILD-FETCH-ABCODE)
+                        RESP(WS-CICS-RESP)
+                        RESP2(WS-CICS-RESP2)
+                        END-EXEC
 
-              IF WS-CICS-RESP NOT = DFHRESP(NORMAL)
+                   IF WS-CICS-RESP NOT = DFHRESP(NORMAL)
       *
       *          Check to see if the response was NOTFINISHED
       *          this means that not all credit agencies replied in
@@ -712,35 +725,38 @@
       *          to retrieve (the outstanding reply remains
       *          outstanding).
       *
-                 IF WS-CICS-RESP = DFHRESP(NOTFINISHED) AND
-                 WS-CICS-RESP2 = 52
+                      IF WS-CICS-RESP = DFHRESP(NOTFINISHED) AND
+                         WS-CICS-RESP2 = 52
 
       *
       *             If we retrieved nothing at all then it is an
       *             error
       *
-                    IF WS-RETRIEVED-CNT = 0
-                       MOVE 'Y' TO WS-FINISHED-FETCHING
-                       MOVE 0 TO COMM-CREDIT-SCORE
-                       MOVE 'Y' TO WS-CREDIT-CHECK-ERROR
+                         IF WS-RETRIEVED-CNT = 0
+                            MOVE 'Y' TO WS-FINISHED-FETCHING
+                            MOVE 0 TO COMM-CREDIT-SCORE
+                            MOVE 'Y' TO WS-CREDIT-CHECK-ERROR
 
-                       STRING WS-ORIG-DATE-DD DELIMITED BY SIZE,
-                              WS-ORIG-DATE-MM DELIMITED BY SIZE,
-                              WS-ORIG-DATE-YYYY DELIMITED BY SIZE
-                              INTO COMM-CS-REVIEW-DATE
-                       END-STRING
+                            STRING WS-ORIG-DATE-DD DELIMITED BY SIZE,
+                                   WS-ORIG-DATE-MM DELIMITED BY SIZE,
+                                   WS-ORIG-DATE-YYYY DELIMITED BY SIZE
+                               INTO COMM-CS-REVIEW-DATE
+                            END-STRING
 
-                       MOVE 'N' TO COMM-SUCCESS
-                       MOVE 'C' TO COMM-FAIL-CODE
+                            MOVE 'N' TO COMM-SUCCESS
+                            MOVE 'C' TO COMM-FAIL-CODE
 
-                       DISPLAY 'EXEC CICS FETCH ANY failed. RESP='
-                          WS-CICS-RESP ' RESP2=' WS-CICS-RESP2
-                       DISPLAY '   NOTFINISHED (no data) was returned'
-                       DISPLAY '   Exiting CRECUST. COMMAREA='
-                          DFHCOMMAREA
-                       PERFORM GET-ME-OUT-OF-HERE
+                            DISPLAY 'EXEC CICS FETCH ANY failed. RESP='
+                                    WS-CICS-RESP
+                                    ' RESP2='
+                                    WS-CICS-RESP2
+                            DISPLAY
+                               '   NOTFINISHED (no data) was returned'
+                            DISPLAY '   Exiting CRECUST. COMMAREA='
+                                    DFHCOMMAREA
+                            PERFORM GET-ME-OUT-OF-HERE
 
-                    ELSE
+                         ELSE
       *
       *                If we have previously retrieved some data from
       *                the credit checking agency/agencies then
@@ -748,316 +764,329 @@
       *                new random review date (sometime in the
       *                next 21 days)
       *
-                       MOVE 'Y' TO WS-FINISHED-FETCHING
-                       MOVE 'N' TO WS-CREDIT-CHECK-ERROR
+                            MOVE 'Y' TO WS-FINISHED-FETCHING
+                            MOVE 'N' TO WS-CREDIT-CHECK-ERROR
       *
       *                Compute the average credit score from those
       *                credit agencies that responded
       *
-                       COMPUTE WS-ACTUAL-CS-SCR = WS-TOTAL-CS-SCR /
-                          WS-RETRIEVED-CNT
-                       MOVE WS-ACTUAL-CS-SCR TO COMM-CREDIT-SCORE
+                            COMPUTE WS-ACTUAL-CS-SCR = WS-TOTAL-CS-SCR /
+                               WS-RETRIEVED-CNT
+                            MOVE WS-ACTUAL-CS-SCR TO COMM-CREDIT-SCORE
 
       *
       *                Get today's date
       *
-                       MOVE FUNCTION CURRENT-DATE
-                          TO WS-CURRENT-DATE-DATA
+                            MOVE FUNCTION CURRENT-DATE
+                               TO WS-CURRENT-DATE-DATA
 
-                       MOVE WS-CURRENT-DATE-DATA (1:8)
-                          TO WS-CURRENT-DATE-9
+                            MOVE WS-CURRENT-DATE-DATA(1:8)
+                               TO WS-CURRENT-DATE-9
 
-                      COMPUTE WS-TODAY-INT =
-                          FUNCTION INTEGER-OF-DATE (WS-CURRENT-DATE-9)
+                            COMPUTE WS-TODAY-INT =
+                               FUNCTION INTEGER-OF-DATE
+                               (WS-CURRENT-DATE-9)
 
       *
       *                Set up a random Credit Score review date
       *                within the next 21 days.
       *
-                       MOVE EIBTASKN           TO WS-SEED
+                            MOVE EIBTASKN TO WS-SEED
 
-                       COMPUTE WS-REVIEW-DATE-ADD = ((21 - 1)
-                                   * FUNCTION RANDOM(WS-SEED)) + 1
+                            COMPUTE WS-REVIEW-DATE-ADD =((21 - 1)
+                               * FUNCTION RANDOM(WS-SEED)) + 1
 
-                       COMPUTE WS-NEW-REVIEW-DATE-INT =
-                          WS-TODAY-INT + WS-REVIEW-DATE-ADD
+                            COMPUTE WS-NEW-REVIEW-DATE-INT =
+                               WS-TODAY-INT + WS-REVIEW-DATE-ADD
 
       *
       *                Convert the integer date back to YYYYMMDD
       *                format
       *
-                       COMPUTE WS-NEW-REVIEW-YYYYMMDD = FUNCTION
-                          DATE-OF-INTEGER (WS-NEW-REVIEW-DATE-INT)
+                            COMPUTE WS-NEW-REVIEW-YYYYMMDD = FUNCTION
+                               DATE-OF-INTEGER(WS-NEW-REVIEW-DATE-INT)
 
-                       MOVE WS-NEW-REVIEW-YYYYMMDD(1:4) TO
-                          COMM-CS-REVIEW-DATE(5:4)
-                       MOVE WS-NEW-REVIEW-YYYYMMDD(5:2) TO
-                          COMM-CS-REVIEW-DATE(3:2)
-                       MOVE WS-NEW-REVIEW-YYYYMMDD(7:2) TO
-                          COMM-CS-REVIEW-DATE(1:2)
+                            MOVE WS-NEW-REVIEW-YYYYMMDD(1:4) TO
+                               COMM-CS-REVIEW-DATE(5:4)
+                            MOVE WS-NEW-REVIEW-YYYYMMDD(5:2) TO
+                               COMM-CS-REVIEW-DATE(3:2)
+                            MOVE WS-NEW-REVIEW-YYYYMMDD(7:2) TO
+                               COMM-CS-REVIEW-DATE(1:2)
 
-                    END-IF
-                 END-IF
+                         END-IF
+                      END-IF
       *
       *          Check to see if the response was INVREQ
       *          this means that the parent never had any children
       *
-                 IF WS-CICS-RESP = DFHRESP(INVREQ) AND
-                 WS-CICS-RESP2 = 1
+                      IF WS-CICS-RESP = DFHRESP(INVREQ) AND
+                         WS-CICS-RESP2 = 1
 
-                    MOVE 0 TO COMM-CREDIT-SCORE
+                         MOVE 0 TO COMM-CREDIT-SCORE
 
-                    STRING WS-ORIG-DATE-DD DELIMITED BY SIZE,
-                           WS-ORIG-DATE-MM DELIMITED BY SIZE,
-                           WS-ORIG-DATE-YYYY DELIMITED BY SIZE
-                           INTO COMM-CS-REVIEW-DATE
-                    END-STRING
+                         STRING WS-ORIG-DATE-DD DELIMITED BY SIZE,
+                                WS-ORIG-DATE-MM DELIMITED BY SIZE,
+                                WS-ORIG-DATE-YYYY DELIMITED BY SIZE
+                            INTO COMM-CS-REVIEW-DATE
+                         END-STRING
 
-                    MOVE 'N' TO COMM-SUCCESS
-                    MOVE 'D' TO COMM-FAIL-CODE
+                         MOVE 'N' TO COMM-SUCCESS
+                         MOVE 'D' TO COMM-FAIL-CODE
 
-                    DISPLAY 'EXEC CICS FETCH ANY failed. RESP='
-                       WS-CICS-RESP ' RESP2=' WS-CICS-RESP2
-                    DISPLAY '   INVREQ (no data) was returned'
-                    DISPLAY '   Exiting CRECUST. COMMAREA='
-                       DFHCOMMAREA
-                    PERFORM GET-ME-OUT-OF-HERE
+                         DISPLAY 'EXEC CICS FETCH ANY failed. RESP='
+                                 WS-CICS-RESP
+                                 ' RESP2='
+                                 WS-CICS-RESP2
+                         DISPLAY '   INVREQ (no data) was returned'
+                         DISPLAY '   Exiting CRECUST. COMMAREA='
+                                 DFHCOMMAREA
+                         PERFORM GET-ME-OUT-OF-HERE
 
-                 END-IF
+                      END-IF
 
       *
       *          Check to see if we are finished yet.
       *
-                 IF WS-CICS-RESP = DFHRESP(NOTFND) AND
-                 WS-CICS-RESP2 = 1
+                      IF WS-CICS-RESP = DFHRESP(NOTFND) AND
+                         WS-CICS-RESP2 = 1
 
       *
       *             If we retrieved nothing at all then it is an
       *             error
       *
-                    IF WS-RETRIEVED-CNT = 0
-                       MOVE 'Y' TO WS-FINISHED-FETCHING
-                       MOVE 0 TO COMM-CREDIT-SCORE
+                         IF WS-RETRIEVED-CNT = 0
+                            MOVE 'Y' TO WS-FINISHED-FETCHING
+                            MOVE 0 TO COMM-CREDIT-SCORE
 
-                       STRING WS-ORIG-DATE-DD DELIMITED BY SIZE,
-                              WS-ORIG-DATE-MM DELIMITED BY SIZE,
-                              WS-ORIG-DATE-YYYY DELIMITED BY SIZE
-                              INTO COMM-CS-REVIEW-DATE
-                       END-STRING
-                       MOVE 'Y' TO WS-CREDIT-CHECK-ERROR
+                            STRING WS-ORIG-DATE-DD DELIMITED BY SIZE,
+                                   WS-ORIG-DATE-MM DELIMITED BY SIZE,
+                                   WS-ORIG-DATE-YYYY DELIMITED BY SIZE
+                               INTO COMM-CS-REVIEW-DATE
+                            END-STRING
+                            MOVE 'Y' TO WS-CREDIT-CHECK-ERROR
 
-                    ELSE
+                         ELSE
       *
       *                If we have previously retrieved data from the
       *                credit checking agency/agencies then calculate
       *                the average credit score and a new random
       *                review date (sometime in the next 21 days)
       *
-                       MOVE 'Y' TO WS-FINISHED-FETCHING
-                       MOVE 'N' TO WS-CREDIT-CHECK-ERROR
+                            MOVE 'Y' TO WS-FINISHED-FETCHING
+                            MOVE 'N' TO WS-CREDIT-CHECK-ERROR
       *
       *                Compute the average credit score from those
       *                credit agencies that responded
       *
-                       COMPUTE WS-ACTUAL-CS-SCR = WS-TOTAL-CS-SCR /
-                          WS-RETRIEVED-CNT
-                       MOVE WS-ACTUAL-CS-SCR TO COMM-CREDIT-SCORE
+                            COMPUTE WS-ACTUAL-CS-SCR = WS-TOTAL-CS-SCR /
+                               WS-RETRIEVED-CNT
+                            MOVE WS-ACTUAL-CS-SCR TO COMM-CREDIT-SCORE
 
       *
       *                Get today's date
       *
-                       MOVE FUNCTION CURRENT-DATE
-                          TO WS-CURRENT-DATE-DATA
+                            MOVE FUNCTION CURRENT-DATE
+                               TO WS-CURRENT-DATE-DATA
 
-                       MOVE WS-CURRENT-DATE-DATA (1:8)
-                          TO WS-CURRENT-DATE-9
+                            MOVE WS-CURRENT-DATE-DATA(1:8)
+                               TO WS-CURRENT-DATE-9
 
-                      COMPUTE WS-TODAY-INT =
-                          FUNCTION INTEGER-OF-DATE (WS-CURRENT-DATE-9)
+                            COMPUTE WS-TODAY-INT =
+                               FUNCTION INTEGER-OF-DATE
+                               (WS-CURRENT-DATE-9)
       *
       *                Set up a random Credit Score review date
       *                within the next 21 days.
       *
-                       MOVE EIBTASKN           TO WS-SEED
+                            MOVE EIBTASKN TO WS-SEED
 
-                       COMPUTE WS-REVIEW-DATE-ADD = ((21 - 1)
-                                   * FUNCTION RANDOM(WS-SEED)) + 1
+                            COMPUTE WS-REVIEW-DATE-ADD =((21 - 1)
+                               * FUNCTION RANDOM(WS-SEED)) + 1
 
-                       COMPUTE WS-NEW-REVIEW-DATE-INT =
-                          WS-TODAY-INT + WS-REVIEW-DATE-ADD
+                            COMPUTE WS-NEW-REVIEW-DATE-INT =
+                               WS-TODAY-INT + WS-REVIEW-DATE-ADD
 
       *
       *                Convert the integer date back to YYYYMMDD
       *                format
       *
-                       COMPUTE WS-NEW-REVIEW-YYYYMMDD = FUNCTION
-                          DATE-OF-INTEGER (WS-NEW-REVIEW-DATE-INT)
+                            COMPUTE WS-NEW-REVIEW-YYYYMMDD = FUNCTION
+                               DATE-OF-INTEGER(WS-NEW-REVIEW-DATE-INT)
 
-                       MOVE WS-NEW-REVIEW-YYYYMMDD(1:4) TO
-                          COMM-CS-REVIEW-DATE(5:4)
-                       MOVE WS-NEW-REVIEW-YYYYMMDD(5:2) TO
-                          COMM-CS-REVIEW-DATE(3:2)
-                       MOVE WS-NEW-REVIEW-YYYYMMDD(7:2) TO
-                          COMM-CS-REVIEW-DATE(1:2)
+                            MOVE WS-NEW-REVIEW-YYYYMMDD(1:4) TO
+                               COMM-CS-REVIEW-DATE(5:4)
+                            MOVE WS-NEW-REVIEW-YYYYMMDD(5:2) TO
+                               COMM-CS-REVIEW-DATE(3:2)
+                            MOVE WS-NEW-REVIEW-YYYYMMDD(7:2) TO
+                               COMM-CS-REVIEW-DATE(1:2)
 
-                    END-IF
-                 END-IF
-              ELSE
+                         END-IF
+                      END-IF
+                   ELSE
 
       *       If it is a NORMAL RESPONSE code we need to check
       *       the COMP-STATUS
       *
 
-                 EVALUATE WS-CHILD-FETCH-COMPST
+                      EVALUATE WS-CHILD-FETCH-COMPST
 
-                    WHEN DFHVALUE(NORMAL)
+                      WHEN DFHVALUE(NORMAL)
       *
       *                Set up the correct container name
       *
-                       EVALUATE WS-ANY-CHILD-FETCH-TKN
+                           EVALUATE WS-ANY-CHILD-FETCH-TKN
 
-                          WHEN WS-CHILD-TKN(1)
-                             MOVE 'CIPA            '
-                                TO WS-CONTAINER-NAME
-                          WHEN WS-CHILD-TKN(2)
-                             MOVE 'CIPB            '
-                                TO WS-CONTAINER-NAME
-                          WHEN WS-CHILD-TKN(3)
-                             MOVE 'CIPC            '
-                                TO WS-CONTAINER-NAME
-                          WHEN WS-CHILD-TKN(4)
-                             MOVE 'CIPD            '
-                                TO WS-CONTAINER-NAME
-                          WHEN WS-CHILD-TKN(5)
-                             MOVE 'CIPE            '
-                                TO WS-CONTAINER-NAME
-                          WHEN WS-CHILD-TKN(6)
-                             MOVE 'CIPF            '
-                                TO WS-CONTAINER-NAME
-                          WHEN WS-CHILD-TKN(7)
-                             MOVE 'CIPG            '
-                                TO WS-CONTAINER-NAME
-                          WHEN WS-CHILD-TKN(8)
-                             MOVE 'CIPH            '
-                                TO WS-CONTAINER-NAME
-                          WHEN WS-CHILD-TKN(9)
-                             MOVE 'CIPI            '
-                                TO WS-CONTAINER-NAME
-                       END-EVALUATE
+                           WHEN WS-CHILD-TKN(1)
+                                MOVE 'CIPA            '
+                                   TO WS-CONTAINER-NAME
+                           WHEN WS-CHILD-TKN(2)
+                                MOVE 'CIPB            '
+                                   TO WS-CONTAINER-NAME
+                           WHEN WS-CHILD-TKN(3)
+                                MOVE 'CIPC            '
+                                   TO WS-CONTAINER-NAME
+                           WHEN WS-CHILD-TKN(4)
+                                MOVE 'CIPD            '
+                                   TO WS-CONTAINER-NAME
+                           WHEN WS-CHILD-TKN(5)
+                                MOVE 'CIPE            '
+                                   TO WS-CONTAINER-NAME
+                           WHEN WS-CHILD-TKN(6)
+                                MOVE 'CIPF            '
+                                   TO WS-CONTAINER-NAME
+                           WHEN WS-CHILD-TKN(7)
+                                MOVE 'CIPG            '
+                                   TO WS-CONTAINER-NAME
+                           WHEN WS-CHILD-TKN(8)
+                                MOVE 'CIPH            '
+                                   TO WS-CONTAINER-NAME
+                           WHEN WS-CHILD-TKN(9)
+                                MOVE 'CIPI            '
+                                   TO WS-CONTAINER-NAME
+                           END-EVALUATE
 
-                       MOVE 261 TO WS-CHILD-CONTAINER-LEN
+                           MOVE 261 TO WS-CHILD-CONTAINER-LEN
 
-                       EXEC CICS GET CONTAINER(WS-CONTAINER-NAME)
-                            CHANNEL(WS-ANY-CHILD-FETCH-CHAN)
-                            INTO(WS-CHILD-DATA)
-                            FLENGTH(WS-CHILD-CONTAINER-LEN)
-                            RESP(WS-CICS-RESP)
-                            RESP2(WS-CICS-RESP2)
-                       END-EXEC
+                           EXEC CICS GET CONTAINER(WS-CONTAINER-NAME)
+                                CHANNEL(WS-ANY-CHILD-FETCH-CHAN)
+                                INTO (WS-CHILD-DATA)
+                                FLENGTH(WS-CHILD-CONTAINER-LEN)
+                                RESP(WS-CICS-RESP)
+                                RESP2(WS-CICS-RESP2)
+                                END-EXEC
 
-                       IF WS-CICS-RESP NOT = DFHRESP(NORMAL)
-                          MOVE 0 TO COMM-CREDIT-SCORE
+                           IF WS-CICS-RESP NOT = DFHRESP(NORMAL)
+                              MOVE 0 TO COMM-CREDIT-SCORE
 
-                          STRING WS-ORIG-DATE-DD DELIMITED BY SIZE,
-                                 WS-ORIG-DATE-MM DELIMITED BY SIZE,
-                                 WS-ORIG-DATE-YYYY DELIMITED BY SIZE
+                              STRING WS-ORIG-DATE-DD DELIMITED BY SIZE,
+                                     WS-ORIG-DATE-MM DELIMITED BY SIZE,
+                                     WS-ORIG-DATE-YYYY DELIMITED BY SIZE
                                  INTO COMM-CS-REVIEW-DATE
-                          END-STRING
+                              END-STRING
 
-                          MOVE 'N' TO COMM-SUCCESS
-                          MOVE 'E' TO COMM-FAIL-CODE
+                              MOVE 'N' TO COMM-SUCCESS
+                              MOVE 'E' TO COMM-FAIL-CODE
 
-                          DISPLAY 'EXEC CICS FETCH ANY worked, '
-                             'but GET CONTAINER failed.'
-                             ' CONTAINER='  WS-CONTAINER-NAME
-                             ' CHANNEL=' WS-ANY-CHILD-FETCH-CHAN
-                             ' RESP='
-                             WS-CICS-RESP ' RESP2=' WS-CICS-RESP2
+                              DISPLAY 'EXEC CICS FETCH ANY worked, '
+                                      'but GET CONTAINER failed.'
+                                      ' CONTAINER='
+                                      WS-CONTAINER-NAME
+                                      ' CHANNEL='
+                                      WS-ANY-CHILD-FETCH-CHAN
+                                      ' RESP='
+                                      WS-CICS-RESP
+                                      ' RESP2='
+                                      WS-CICS-RESP2
 
-                          DISPLAY '   Exiting CRECUST. COMMAREA='
-                             DFHCOMMAREA
-                          PERFORM GET-ME-OUT-OF-HERE
-                       END-IF
+                              DISPLAY '   Exiting CRECUST. COMMAREA='
+                                      DFHCOMMAREA
+                              PERFORM GET-ME-OUT-OF-HERE
+                           END-IF
 
       *
       *                If the GET CONTAINER was successful
       *
-                       COMPUTE WS-RETRIEVED-CNT =
-                          WS-RETRIEVED-CNT + 1
-                       COMPUTE WS-TOTAL-CS-SCR =
-                          WS-TOTAL-CS-SCR + WS-CHILD-DATA-CREDIT-SCORE
+                           COMPUTE WS-RETRIEVED-CNT =
+                              WS-RETRIEVED-CNT + 1
+                           COMPUTE WS-TOTAL-CS-SCR =
+                              WS-TOTAL-CS-SCR +
+                              WS-CHILD-DATA-CREDIT-SCORE
 
-                    WHEN DFHVALUE(ABEND)
+                      WHEN DFHVALUE(ABEND)
       *
       *                You are here because the completion status from
       *                the FETCH ANY is ABEND, so deal with that.
       *
-                       MOVE 0 TO COMM-CREDIT-SCORE
+                           MOVE 0 TO COMM-CREDIT-SCORE
 
-                       STRING WS-ORIG-DATE-DD DELIMITED BY SIZE,
-                              WS-ORIG-DATE-MM DELIMITED BY SIZE,
-                              WS-ORIG-DATE-YYYY DELIMITED BY SIZE
+                           STRING WS-ORIG-DATE-DD DELIMITED BY SIZE,
+                                  WS-ORIG-DATE-MM DELIMITED BY SIZE,
+                                  WS-ORIG-DATE-YYYY DELIMITED BY SIZE
                               INTO COMM-CS-REVIEW-DATE
-                       END-STRING
+                           END-STRING
 
-                       MOVE 'N' TO COMM-SUCCESS
-                       MOVE 'F' TO COMM-FAIL-CODE
+                           MOVE 'N' TO COMM-SUCCESS
+                           MOVE 'F' TO COMM-FAIL-CODE
 
-                       PERFORM GET-ME-OUT-OF-HERE
+                           PERFORM GET-ME-OUT-OF-HERE
 
 
-                    WHEN DFHVALUE(SECERROR)
+                      WHEN DFHVALUE(SECERROR)
       *
       *                The completion status from the FETCH ANY is
       *                SECERROR
       *
-                       MOVE 0 TO COMM-CREDIT-SCORE
+                           MOVE 0 TO COMM-CREDIT-SCORE
 
-                       STRING WS-ORIG-DATE-DD DELIMITED BY SIZE,
-                              WS-ORIG-DATE-MM DELIMITED BY SIZE,
-                              WS-ORIG-DATE-YYYY DELIMITED BY SIZE
+                           STRING WS-ORIG-DATE-DD DELIMITED BY SIZE,
+                                  WS-ORIG-DATE-MM DELIMITED BY SIZE,
+                                  WS-ORIG-DATE-YYYY DELIMITED BY SIZE
                               INTO COMM-CS-REVIEW-DATE
-                       END-STRING
+                           END-STRING
 
-                       MOVE 'N' TO COMM-SUCCESS
-                       MOVE 'G' TO COMM-FAIL-CODE
+                           MOVE 'N' TO COMM-SUCCESS
+                           MOVE 'G' TO COMM-FAIL-CODE
 
-                       DISPLAY 'EXEC CICS FETCH ANY worked, '
-                          'but COMP-STATUS = SECERROR.'
-                          ' RESP='
-                          WS-CICS-RESP ' RESP2=' WS-CICS-RESP2
-                       DISPLAY '   Exiting CRECUST. COMMAREA='
-                          DFHCOMMAREA
-                       PERFORM GET-ME-OUT-OF-HERE
+                           DISPLAY 'EXEC CICS FETCH ANY worked, '
+                                   'but COMP-STATUS = SECERROR.'
+                                   ' RESP='
+                                   WS-CICS-RESP
+                                   ' RESP2='
+                                   WS-CICS-RESP2
+                           DISPLAY '   Exiting CRECUST. COMMAREA='
+                                   DFHCOMMAREA
+                           PERFORM GET-ME-OUT-OF-HERE
 
 
-                    WHEN OTHER
+                      WHEN OTHER
       *
       *                This catches any other completion status values
       *                from the FETCH ANY.
       *
-                       MOVE 0 TO COMM-CREDIT-SCORE
+                           MOVE 0 TO COMM-CREDIT-SCORE
 
-                       STRING WS-ORIG-DATE-DD DELIMITED BY SIZE,
-                              WS-ORIG-DATE-MM DELIMITED BY SIZE,
-                              WS-ORIG-DATE-YYYY DELIMITED BY SIZE
+                           STRING WS-ORIG-DATE-DD DELIMITED BY SIZE,
+                                  WS-ORIG-DATE-MM DELIMITED BY SIZE,
+                                  WS-ORIG-DATE-YYYY DELIMITED BY SIZE
                               INTO COMM-CS-REVIEW-DATE
-                       END-STRING
+                           END-STRING
 
-                       MOVE 'N' TO COMM-SUCCESS
-                       MOVE 'H' TO COMM-FAIL-CODE
+                           MOVE 'N' TO COMM-SUCCESS
+                           MOVE 'H' TO COMM-FAIL-CODE
 
-                       DISPLAY 'EXEC CICS FETCH ANY worked, '
-                          'but COMP-STATUS IS UNKNOWN.'
-                          ' RESP='
-                          WS-CICS-RESP ' RESP2=' WS-CICS-RESP2
-                       DISPLAY '   Exiting CRECUST. COMMAREA='
-                          DFHCOMMAREA
-                       PERFORM GET-ME-OUT-OF-HERE
+                           DISPLAY 'EXEC CICS FETCH ANY worked, '
+                                   'but COMP-STATUS IS UNKNOWN.'
+                                   ' RESP='
+                                   WS-CICS-RESP
+                                   ' RESP2='
+                                   WS-CICS-RESP2
+                           DISPLAY '   Exiting CRECUST. COMMAREA='
+                                   DFHCOMMAREA
+                           PERFORM GET-ME-OUT-OF-HERE
 
-                 END-EVALUATE
+                      END-EVALUATE
 
-              END-IF
+                   END-IF
 
            END-PERFORM.
 
@@ -1073,45 +1102,46 @@
       *
            INITIALIZE OUTPUT-DATA.
 
-           MOVE 'CUST'              TO CUSTOMER-EYECATCHER.
-           MOVE SORTCODE            TO CUSTOMER-SORTCODE.
-           MOVE NCS-CUST-NO-VALUE   TO CUSTOMER-NUMBER.
-           MOVE COMM-NAME           TO CUSTOMER-NAME.
-           MOVE COMM-ADDRESS        TO CUSTOMER-ADDRESS.
-           MOVE COMM-DATE-OF-BIRTH  TO CUSTOMER-DATE-OF-BIRTH.
-           MOVE COMM-CREDIT-SCORE   TO CUSTOMER-CREDIT-SCORE.
+           MOVE 'CUST' TO CUSTOMER-EYECATCHER.
+           MOVE SORTCODE TO CUSTOMER-SORTCODE.
+           MOVE NCS-CUST-NO-VALUE TO CUSTOMER-NUMBER.
+           MOVE COMM-TITLE TO CUSTOMER-TITLE.
+           MOVE COMM-NAME TO CUSTOMER-NAME.
+           MOVE COMM-ADDRESS TO CUSTOMER-ADDRESS.
+           MOVE COMM-DATE-OF-BIRTH TO CUSTOMER-DATE-OF-BIRTH.
+           MOVE COMM-CREDIT-SCORE TO CUSTOMER-CREDIT-SCORE.
            MOVE COMM-CS-REVIEW-DATE TO CUSTOMER-CS-REVIEW-DATE.
 
            COMPUTE WS-CUST-REC-LEN = LENGTH OF OUTPUT-DATA.
 
            EXEC CICS WRITE
                 FILE('CUSTOMER')
-                FROM(OUTPUT-DATA)
+                FROM (OUTPUT-DATA)
                 RIDFLD(CUSTOMER-KEY)
                 LENGTH(WS-CUST-REC-LEN)
                 KEYLENGTH(16)
                 RESP(WS-CICS-RESP)
                 RESP2(WS-CICS-RESP2)
-           END-EXEC.
+                END-EXEC.
 
            IF WS-CICS-RESP = DFHRESP(SYSIDERR)
               PERFORM VARYING SYSIDERR-RETRY FROM 1 BY 1
-              UNTIL SYSIDERR-RETRY > 100
-              OR WS-CICS-RESP = DFHRESP(NORMAL)
-              OR WS-CICS-RESP IS NOT EQUAL TO DFHRESP(SYSIDERR)
+                 UNTIL SYSIDERR-RETRY > 100
+                 OR WS-CICS-RESP = DFHRESP(NORMAL)
+                 OR WS-CICS-RESP IS NOT EQUAL TO DFHRESP(SYSIDERR)
 
-                 EXEC CICS DELAY FOR SECONDS(3)
-                 END-EXEC
+                      EXEC CICS DELAY FOR SECONDS(3)
+                           END-EXEC
 
-                 EXEC CICS WRITE
-                    FILE('CUSTOMER')
-                    FROM(OUTPUT-DATA)
-                    RIDFLD(CUSTOMER-KEY)
-                    LENGTH(WS-CUST-REC-LEN)
-                    KEYLENGTH(16)
-                    RESP(WS-CICS-RESP)
-                    RESP2(WS-CICS-RESP2)
-                 END-EXEC
+                      EXEC CICS WRITE
+                           FILE('CUSTOMER')
+                           FROM (OUTPUT-DATA)
+                           RIDFLD(CUSTOMER-KEY)
+                           LENGTH(WS-CUST-REC-LEN)
+                           KEYLENGTH(16)
+                           RESP(WS-CICS-RESP)
+                           RESP2(WS-CICS-RESP2)
+                           END-EXEC
 
               END-PERFORM
            END-IF
@@ -1132,18 +1162,18 @@
 
            EXEC CICS READ FILE('CUSTOMER')
                 RIDFLD(CUSTOMER-CONTROL-KEY)
-                INTO(CUSTOMER-CONTROL)
+                INTO (CUSTOMER-CONTROL)
                 UPDATE
-           END-EXEC
+                END-EXEC
 
            ADD 1 TO NUMBER-OF-CUSTOMERS IN CUSTOMER-CONTROL-RECORD
-           GIVING NUMBER-OF-CUSTOMERS IN CUSTOMER-CONTROL-RECORD
+              GIVING NUMBER-OF-CUSTOMERS IN CUSTOMER-CONTROL-RECORD
            MOVE CUSTOMER-NUMBER OF CUSTOMER-RECORD TO
-           LAST-CUSTOMER-NUMBER IN CUSTOMER-CONTROL-RECORD
+              LAST-CUSTOMER-NUMBER IN CUSTOMER-CONTROL-RECORD
 
            EXEC CICS REWRITE FILE('CUSTOMER')
-                FROM(CUSTOMER-CONTROL)
-           END-EXEC
+                FROM (CUSTOMER-CONTROL)
+                END-EXEC
 
       *
       *    If the WRITE was successful then WRITE to PROCTRAN datastore
@@ -1178,7 +1208,7 @@
 
        WRITE-PROCTRAN SECTION.
        WP010.
-              PERFORM WRITE-PROCTRAN-DB2.
+           PERFORM WRITE-PROCTRAN-DB2.
 
        WP999.
            EXIT.
@@ -1202,26 +1232,26 @@
       *    Populate the time and date
       *
            EXEC CICS ASKTIME
-              ABSTIME(WS-U-TIME)
-           END-EXEC.
+                ABSTIME(WS-U-TIME)
+                END-EXEC.
 
            EXEC CICS FORMATTIME
-                     ABSTIME(WS-U-TIME)
-                     DDMMYYYY(WS-ORIG-DATE)
-                     TIME(HV-PROCTRAN-TIME)
-                     DATESEP('.')
-           END-EXEC.
+                ABSTIME(WS-U-TIME)
+                DDMMYYYY(WS-ORIG-DATE)
+                TIME(HV-PROCTRAN-TIME)
+                DATESEP('.')
+                END-EXEC.
 
            MOVE WS-ORIG-DATE TO WS-ORIG-DATE-GRP-X.
            MOVE WS-ORIG-DATE-GRP-X TO HV-PROCTRAN-DATE.
 
            MOVE STORED-SORTCODE TO HV-PROCTRAN-DESC(1:6).
            MOVE STORED-CUSTNO TO HV-PROCTRAN-DESC(7:10).
-           MOVE STORED-NAME   TO HV-PROCTRAN-DESC(17:14).
-           MOVE STORED-DOB    TO HV-PROCTRAN-DESC(31:10).
+           MOVE STORED-NAME TO HV-PROCTRAN-DESC(17:14).
+           MOVE STORED-DOB TO HV-PROCTRAN-DESC(31:10).
 
-           MOVE 'OCC'         TO HV-PROCTRAN-TYPE.
-           MOVE ZEROS         TO HV-PROCTRAN-AMOUNT.
+           MOVE 'OCC' TO HV-PROCTRAN-TYPE.
+           MOVE ZEROS TO HV-PROCTRAN-AMOUNT.
 
            EXEC SQL
               INSERT INTO PROCTRAN
@@ -1262,64 +1292,66 @@
       *       program.
       *
               INITIALIZE ABNDINFO-REC
-              MOVE EIBRESP    TO ABND-RESPCODE
-              MOVE EIBRESP2   TO ABND-RESP2CODE
+              MOVE EIBRESP TO ABND-RESPCODE
+              MOVE EIBRESP2 TO ABND-RESP2CODE
       *
       *       Get supplemental information
       *
               EXEC CICS ASSIGN APPLID(ABND-APPLID)
-              END-EXEC
+                   END-EXEC
 
-              MOVE EIBTASKN   TO ABND-TASKNO-KEY
-              MOVE EIBTRNID   TO ABND-TRANID
+              MOVE EIBTASKN TO ABND-TASKNO-KEY
+              MOVE EIBTRNID TO ABND-TRANID
 
               PERFORM POPULATE-TIME-DATE2
 
               MOVE WS-ORIG-DATE TO ABND-DATE
               STRING WS-TIME-NOW-GRP-HH DELIMITED BY SIZE,
-                    ':' DELIMITED BY SIZE,
+                     ':' DELIMITED BY SIZE,
                      WS-TIME-NOW-GRP-MM DELIMITED BY SIZE,
                      ':' DELIMITED BY SIZE,
                      WS-TIME-NOW-GRP-MM DELIMITED BY SIZE
-                     INTO ABND-TIME
+                 INTO ABND-TIME
               END-STRING
 
-              MOVE WS-U-TIME   TO ABND-UTIME-KEY
-              MOVE 'HWPT'      TO ABND-CODE
+              MOVE WS-U-TIME TO ABND-UTIME-KEY
+              MOVE 'HWPT' TO ABND-CODE
 
               EXEC CICS ASSIGN PROGRAM(ABND-PROGRAM)
-              END-EXEC
+                   END-EXEC
 
-              MOVE SQLCODE-DISPLAY    TO ABND-SQLCODE
+              MOVE SQLCODE-DISPLAY TO ABND-SQLCODE
 
               STRING 'WPD010  - Unable to write to PROCTRAN DB2 '
-                    DELIMITED BY SIZE,
-                    'datastore with the following data:'
-                    DELIMITED BY SIZE,
-                    HOST-PROCTRAN-ROW
-                    DELIMITED BY SIZE,
-                    ' EIBRESP=' DELIMITED BY SIZE,
-                    ABND-RESPCODE DELIMITED BY SIZE,
-                    ' RESP2=' DELIMITED BY SIZE,
-                    ABND-RESP2CODE DELIMITED BY SIZE
-                    INTO ABND-FREEFORM
+                 DELIMITED BY SIZE,
+                     'datastore with the following data:'
+                 DELIMITED BY SIZE,
+                     HOST-PROCTRAN-ROW
+                 DELIMITED BY SIZE,
+                     ' EIBRESP=' DELIMITED BY SIZE,
+                     ABND-RESPCODE DELIMITED BY SIZE,
+                     ' RESP2=' DELIMITED BY SIZE,
+                     ABND-RESP2CODE DELIMITED BY SIZE
+                 INTO ABND-FREEFORM
               END-STRING
 
               EXEC CICS LINK PROGRAM(WS-ABEND-PGM)
-                        COMMAREA(ABNDINFO-REC)
-              END-EXEC
+                   COMMAREA(ABNDINFO-REC)
+                   END-EXEC
 
               DISPLAY 'In CRECUST(WPD010) '
-              'UNABLE TO WRITE TO PROCTRAN DB2 DATASTORE'
-              ' SQLCODE=' SQLCODE-DISPLAY
-              'WITH THE FOLLOWING DATA:' HOST-PROCTRAN-ROW
+                      'UNABLE TO WRITE TO PROCTRAN DB2 DATASTORE'
+                      ' SQLCODE='
+                      SQLCODE-DISPLAY
+                      'WITH THE FOLLOWING DATA:'
+                      HOST-PROCTRAN-ROW
 
 
               PERFORM DEQ-NAMED-COUNTER
 
               EXEC CICS ABEND
-                    ABCODE ('HWPT')
-              END-EXEC
+                   ABCODE('HWPT')
+                   END-EXEC
            END-IF.
 
        WPD999.
@@ -1332,7 +1364,7 @@
       *    Finish
       *
            EXEC CICS RETURN
-           END-EXEC.
+                END-EXEC.
 
        GMOFH999.
            EXIT.
@@ -1346,60 +1378,60 @@
            MOVE ALL '9' TO CUSTOMER-CONTROL-NUMBER
 
            EXEC CICS READ FILE('CUSTOMER')
-                     RIDFLD(CUSTOMER-CONTROL-KEY)
-                     UPDATE
-                     INTO(CUSTOMER-CONTROL)
-                     RESP(WS-CICS-RESP)
-                     RESP2(WS-CICS-RESP2)
-           END-EXEC
-
-           IF WS-CICS-RESP = DFHRESP(SYSIDERR)
-             PERFORM VARYING SYSIDERR-RETRY FROM 1 BY 1
-             UNTIL SYSIDERR-RETRY > 100
-             OR WS-CICS-RESP = DFHRESP(NORMAL)
-             OR WS-CICS-RESP IS NOT EQUAL TO DFHRESP(SYSIDERR)
-               EXEC CICS DELAY FOR SECONDS(3)
-               END-EXEC
-
-               EXEC CICS READ FILE('CUSTOMER')
-                         RIDFLD(CUSTOMER-CONTROL-KEY)
-                         UPDATE
-                         INTO(CUSTOMER-CONTROL)
-                         RESP(WS-CICS-RESP)
-                         RESP2(WS-CICS-RESP2)
-               END-EXEC
-
-             END-PERFORM
-           ELSE
-             IF WS-CICS-RESP IS NOT = DFHRESP(NORMAL)
-               MOVE 'N' TO COMM-SUCCESS
-               MOVE '4' TO COMM-FAIL-CODE
-               PERFORM DEQ-NAMED-COUNTER
-               PERFORM GET-ME-OUT-OF-HERE
-             END-IF
-           END-IF.
-           ADD 1 TO LAST-CUSTOMER-NUMBER IN CUSTOMER-CONTROL
-           GIVING LAST-CUSTOMER-NUMBER IN CUSTOMER-CONTROL
-
-           EXEC CICS REWRITE FILE('CUSTOMER')
-                FROM(CUSTOMER-CONTROL)
+                RIDFLD(CUSTOMER-CONTROL-KEY)
+                UPDATE
+                INTO (CUSTOMER-CONTROL)
                 RESP(WS-CICS-RESP)
                 RESP2(WS-CICS-RESP2)
-           END-EXEC
+                END-EXEC
 
            IF WS-CICS-RESP = DFHRESP(SYSIDERR)
               PERFORM VARYING SYSIDERR-RETRY FROM 1 BY 1
-              UNTIL SYSIDERR-RETRY > 100
-              OR WS-CICS-RESP = DFHRESP(NORMAL)
-              OR WS-CICS-RESP IS NOT EQUAL TO DFHRESP(SYSIDERR)
-                 EXEC CICS DELAY FOR SECONDS(3)
-                 END-EXEC
+                 UNTIL SYSIDERR-RETRY > 100
+                 OR WS-CICS-RESP = DFHRESP(NORMAL)
+                 OR WS-CICS-RESP IS NOT EQUAL TO DFHRESP(SYSIDERR)
+                      EXEC CICS DELAY FOR SECONDS(3)
+                           END-EXEC
 
-                 EXEC CICS REWRITE FILE('CUSTOMER')
-                    FROM(CUSTOMER-CONTROL)
-                    RESP(WS-CICS-RESP)
-                    RESP2(WS-CICS-RESP2)
-                 END-EXEC
+                      EXEC CICS READ FILE('CUSTOMER')
+                           RIDFLD(CUSTOMER-CONTROL-KEY)
+                           UPDATE
+                           INTO (CUSTOMER-CONTROL)
+                           RESP(WS-CICS-RESP)
+                           RESP2(WS-CICS-RESP2)
+                           END-EXEC
+
+              END-PERFORM
+           ELSE
+              IF WS-CICS-RESP IS NOT = DFHRESP(NORMAL)
+                 MOVE 'N' TO COMM-SUCCESS
+                 MOVE '4' TO COMM-FAIL-CODE
+                 PERFORM DEQ-NAMED-COUNTER
+                 PERFORM GET-ME-OUT-OF-HERE
+              END-IF
+           END-IF.
+           ADD 1 TO LAST-CUSTOMER-NUMBER IN CUSTOMER-CONTROL
+              GIVING LAST-CUSTOMER-NUMBER IN CUSTOMER-CONTROL
+
+           EXEC CICS REWRITE FILE('CUSTOMER')
+                FROM (CUSTOMER-CONTROL)
+                RESP(WS-CICS-RESP)
+                RESP2(WS-CICS-RESP2)
+                END-EXEC
+
+           IF WS-CICS-RESP = DFHRESP(SYSIDERR)
+              PERFORM VARYING SYSIDERR-RETRY FROM 1 BY 1
+                 UNTIL SYSIDERR-RETRY > 100
+                 OR WS-CICS-RESP = DFHRESP(NORMAL)
+                 OR WS-CICS-RESP IS NOT EQUAL TO DFHRESP(SYSIDERR)
+                      EXEC CICS DELAY FOR SECONDS(3)
+                           END-EXEC
+
+                      EXEC CICS REWRITE FILE('CUSTOMER')
+                           FROM (CUSTOMER-CONTROL)
+                           RESP(WS-CICS-RESP)
+                           RESP2(WS-CICS-RESP2)
+                           END-EXEC
               END-PERFORM
            ELSE
               IF WS-CICS-RESP IS NOT EQUAL TO DFHRESP(NORMAL)
@@ -1411,8 +1443,10 @@
               END-IF
            END-IF
 
-           MOVE LAST-CUSTOMER-NUMBER OF CUSTOMER-CONTROL  TO
-              COMM-NUMBER CUSTOMER-NUMBER REQUIRED-CUST-NUMBER2
+           MOVE LAST-CUSTOMER-NUMBER OF CUSTOMER-CONTROL TO
+              COMM-NUMBER
+              CUSTOMER-NUMBER
+              REQUIRED-CUST-NUMBER2
               NCS-CUST-NO-VALUE.
 
        GLCV999.
@@ -1443,8 +1477,9 @@
               MOVE 'Y' TO WS-DATE-OF-BIRTH-ERROR
               MOVE 'Z' TO COMM-FAIL-CODE
               DISPLAY 'CEEDAYS failed, FORMAT LENGTH 10 with msg '
-                 MSG-NO OF FC
-                 ' for date YYYYMMDD' DATE-OF-BIRTH-FOR-CEEDAYS
+                      MSG-NO OF FC
+                      ' for date YYYYMMDD'
+                      DATE-OF-BIRTH-FOR-CEEDAYS
               GO TO DOBC999
            END-IF.
 
@@ -1456,7 +1491,7 @@
            IF NOT CEE000 OF FC THEN
               MOVE 'Y' TO WS-DATE-OF-BIRTH-ERROR
               DISPLAY 'CEEDLOCT failed with msg '
-                 MSG-NO OF FC
+                      MSG-NO OF FC
               GO TO DOBC999
            END-IF.
 
@@ -1470,7 +1505,7 @@
            END-IF.
 
            IF WS-TODAY-LILLIAN < WS-DATE-OF-BIRTH-LILLIAN
-                        MOVE 'Y' TO WS-DATE-OF-BIRTH-ERROR
+              MOVE 'Y' TO WS-DATE-OF-BIRTH-ERROR
               MOVE 'Y' TO COMM-FAIL-CODE
            END-IF.
 
@@ -1483,15 +1518,15 @@
       D    DISPLAY 'POPULATE-TIME-DATE2 SECTION'.
 
            EXEC CICS ASKTIME
-              ABSTIME(WS-U-TIME)
-           END-EXEC.
+                ABSTIME(WS-U-TIME)
+                END-EXEC.
 
            EXEC CICS FORMATTIME
-                     ABSTIME(WS-U-TIME)
-                     DDMMYYYY(WS-ORIG-DATE)
-                     TIME(WS-TIME-NOW)
-                     DATESEP
-           END-EXEC.
+                ABSTIME(WS-U-TIME)
+                DDMMYYYY(WS-ORIG-DATE)
+                TIME(WS-TIME-NOW)
+                DATESEP
+                END-EXEC.
 
        PTD2999.
            EXIT.
