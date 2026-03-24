@@ -1,0 +1,21 @@
+# line endings
+* text eol=crlf
+
+*.cpy zos-working-tree-encoding=ibm-1047 git-encoding=utf-8
+*.cbl zos-working-tree-encoding=ibm-1047 git-encoding=utf-8
+*.bms zos-working-tree-encoding=ibm-1047 git-encoding=utf-8
+*.jcl zos-working-tree-encoding=ibm-1047 git-encoding=utf-8
+*.lked zos-working-tree-encoding=ibm-1047 git-encoding=utf-8
+*.xml zos-working-tree-encoding=ibm-1047 git-encoding=utf-8
+*.sh zos-working-tree-encoding=ibm-1047 git-encoding=utf-8
+*.properties zos-working-tree-encoding=ibm-1047 git-encoding=utf-8
+*.asm zos-working-tree-encoding=ibm-1047 git-encoding=utf-8
+*.jcl zos-working-tree-encoding=ibm-1047 git-encoding=utf-8
+*.java zos-working-tree-encoding=ibm-1047 git-encoding=utf-8
+*.yaml zos-working-tree-encoding=ibm-1047 git-encoding=utf-8
+
+
+# binary files
+*.aar binary
+*.sar binary
+*.png binary
