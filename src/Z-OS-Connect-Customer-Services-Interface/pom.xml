@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.12</version>
+		<version>3.5.11</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -42,6 +42,7 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
 			<scope>compile</scope>
+			<version>2.21.1</version>
 		</dependency>
 
 		<dependency>
@@ -52,19 +53,19 @@
 <dependency>
     <groupId>ch.qos.logback</groupId>
     <artifactId>logback-classic</artifactId>
-    <version>1.5.14</version>
+    <version>1.5.25</version>
 </dependency>
 
 <dependency>
     <groupId>ch.qos.logback</groupId>
     <artifactId>logback-core</artifactId>
-    <version>1.5.19</version>
+    <version>1.5.25</version>
 </dependency>
 
 		<dependency>
 			<groupId>io.netty</groupId>
 			<artifactId>netty-codec-http2</artifactId>
-			<version>4.1.125.Final</version>
+			<version>4.1.129.Final</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>commons-logging</artifactId>
@@ -101,7 +102,7 @@
 					<groupId>commons-logging</groupId>
 				</exclusion>
 			</exclusions>
-			<version>4.1.125.Final</version>
+			<version>4.1.129.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>io.netty</groupId>
@@ -151,7 +152,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 			<scope>compile</scope>
-			<version>6.2.0</version>
+			<version>6.2.8</version>
 		</dependency>
 
 		<dependency>
