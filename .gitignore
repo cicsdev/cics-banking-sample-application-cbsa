@@ -25,4 +25,6 @@ src/bank-application-frontend/.whitesource
 CSAR-CBSA.xml
 CSAR-CBSA.xml.out
 appscan-config.xml
-appscan-config.xml
+src/webui/target
+src/Z-OS-Connect-Customer-Services-Interface/target
+src/Z-OS-Connect-Payment-Interface/target
