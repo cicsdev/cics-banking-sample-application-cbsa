@@ -5,7 +5,7 @@
  */
 package com.ibm.cics.cip.bankliberty.api.json;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.FormParam;
 
 /**

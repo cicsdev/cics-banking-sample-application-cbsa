@@ -8,7 +8,7 @@ package com.ibm.cics.cip.bankliberty.api.json;
 import java.math.BigDecimal;
 import java.sql.Date;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.FormParam;
 
 /**
