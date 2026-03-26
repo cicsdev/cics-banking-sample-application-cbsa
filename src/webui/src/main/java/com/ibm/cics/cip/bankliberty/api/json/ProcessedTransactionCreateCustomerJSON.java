@@ -1,6 +1,6 @@
 /*
  *
- *    Copyright IBM Corp. 2023
+ *    Copyright IBM Corp. 2023,2026
  *
  */
 package com.ibm.cics.cip.bankliberty.api.json;
@@ -8,7 +8,7 @@ package com.ibm.cics.cip.bankliberty.api.json;
 import java.sql.Date;
 
 import javax.validation.constraints.NotNull;
-import javax.ws.rs.FormParam;
+import jakarta.ws.rs.FormParam;
 
 /**
  * This class describes the parts of the ProcessedTransactionCreateCustomerJSON
