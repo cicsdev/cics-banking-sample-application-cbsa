@@ -3,7 +3,7 @@
 /*                                                                        */
 package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.createaccount;
 
-import javax.validation.constraints.*;
+import jakarta.validation.constraints.*;
 
 public class CreateAccountForm
 {
