@@ -20,7 +20,9 @@ These instructions detail the steps required to:
 
 5.  Update the JVM Server.
 
-6.  Access the applications.
+6.  Update the server.xml
+
+7.  Access the applications.
 
 ### Assumptions:
 
@@ -121,6 +123,10 @@ Add the two applications by adding these lines:
 >    \<webApplication location=\"customerservices-1.0.war\"/\>
 
 >    \<webApplication location=\"paymentinterface-1.1.war\"/\>
+
+Within the `<featureManager>` tag, add the following line:
+
+`<feature>jakartaee-10.0</feature>`
 
 
 Restart the JVM server to allow these new changes to come into effect.
