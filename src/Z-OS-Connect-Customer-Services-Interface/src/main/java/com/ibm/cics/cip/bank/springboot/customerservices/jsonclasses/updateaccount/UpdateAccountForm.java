@@ -3,7 +3,7 @@
 /*                                                                        */
 package com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.updateaccount;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 import com.ibm.cics.cip.bank.springboot.customerservices.jsonclasses.createaccount.AccountType;
 
