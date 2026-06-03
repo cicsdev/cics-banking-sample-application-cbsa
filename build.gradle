@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+    id 'com.ibm.recgen.gradle' version '1.0.0'
+}
+
+group = 'com.ibm.cics.cip.bank'
+version = '1.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://na.artifactory.swg-devops.com/artifactory/ce-maven-release-local'
+        credentials {
+            username = project.findProperty('artifactoryUser') ?: System.getenv('ARTIFACTORY_USER')
+            password = project.findProperty('artifactoryPassword') ?: System.getenv('ARTIFACTORY_PASSWORD')
+        }
+    }
+}
+
+jar {
+    manifest {
+        attributes(
+            'Implementation-Title': project.name,
+            'Implementation-Version': project.version
+        )
+    }
+}
+
+def adataDir = project.findProperty('adataDir') ?: 'build/adata'
+def jzosJarPath = project.findProperty('jzosJarPath') ?: '/u/in0050/ibm-record-generator/ibm-jzos/ibm.jzos.jar'
+
+// Configure RecordGenerator for single ADATA file
+recordGenerator {
+    packageName = 'com.ibm.cics.example'
+    jzosJar = file(jzosJarPath)
+    
+    // Single ADATA file: ABNDPROC
+    adataFile = "${adataDir}/ABNDPROC.adata"
+    symbols = ['DFHCOMMAREA', 'WS-ORIG-DATE-GRP-X']
+}

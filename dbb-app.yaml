@@ -1,0 +1,107 @@
+---
+#
+# Licensed materials - Property of IBM
+# 5655-AC5 Copyright IBM Corp. 2024, 2025
+# All rights reserved
+# US Government users restricted rights  -  Use, duplication or
+# disclosure restricted by GSA ADP schedule contract with IBM Corp.
+#
+version: 1.0.0
+application:
+  name: cbsa
+  
+  tasks:
+
+    # Variable overrides for the ImpactAnalysis task
+    - task: ImpactAnalysis
+      variables:
+        # Associate dependency files to program types. For more information see 
+        # https://www.ibm.com/docs/en/dbb/3.0?topic=index-task-impactanalysis#defining-impact-query-patterns
+        - name: impactQueryPatterns
+          value:
+            # Cobol program dependency patterns
+            - languageExt: cbl      
+              dependencyPatterns: 
+                - ${APP_DIR_NAME}/src/base/cobol_copy/*.cpy  # Copybook source dependency
+                - ${APP_DIR_NAME}/src/base/bms_src/*.bms        # BMS Map source dependency
+                - ${APP_DIR_NAME}/src/base/cobol_src/*.cbl    # Static link dependency  
+
+    # Variable overrides for the Cobol language task
+    - task: Cobol
+      sources:
+        - "**/src/base/cobol_src/*.cbl"
+      variables:  
+        # default dependency search path for single repository build
+        - name: dependencySearchPath
+          value: search:${WORKSPACE}/?path=${APP_DIR_NAME}/src/base/cobol_copy/*.cpy
+        - name: LOAD_LLQ
+          value: LOADLIB
+        - name: deployType
+          value: LOADLIB
+
+        - name: doLinkEdit
+          value: false
+          forFiles:
+            - "**/cobol_copy/*.cpy"
+            - "**/etc/install/base/*"
+        
+        - name: compileParms
+          value: LIB
+          append:
+            - value: TEST(SOURCE)
+              condition: 1 == 1
+            - value: ADATA
+              condition: 1 == 1
+        
+        # Allow warnings (RC=4) to pass
+        - name: maxRC
+          value: 4
+        - name: additionalCompileLibraries
+          value:
+            - { name: "SYSADATA", dsn: "&&ADATA", options: "new delete" }
+        - name: additionalCreationDatasets
+          value:
+            - name: ${HLQ}.ADATA
+              options: cyl space(50,10) dir(50) dsorg(PO) recfm(V,B) blksize(32760) lrecl(1020)
+        
+        # Copy ADATA from temporary dataset to PDS member
+        - name: additionalOutputDatasets
+          value:
+            - { ddname: "SYSADATA", deployType: "ADATA",
+                output: "${HLQ}.ADATA(${MEMBER})" }
+    
+    # Custom task: StageAdata - Copy ADATA from MVS to USS
+    - task: StageAdata
+      variables:
+        - name: hlq
+          value: ${HLQ}
+        - name: adataDataset
+          value: ${HLQ}.ADATA
+        - name: adataDir
+          value: output
+
+    # Custom task: RunBuildTool - Execute Gradle/Maven for Java generation
+    - task: RunBuildTool
+      variables:
+        - name: buildTool
+          value: gradle
+        - name: buildToolProjectDir
+          value: ${APP_DIR_NAME}
+        - name: buildToolTask
+          value: build
+        - name: adataDir
+          value: output
+        - name: jzosJarPath
+          value: <path-to>/ibm.jzos.jar
+        - name: packageName
+          value: com.ibm.cics.example
+        # Artifactory credentials - set via environment or leave empty to use gradle.properties
+        - name: artifactoryUser
+          value: <ARTIF_USER>
+        - name: artifactoryPassword
+          value: <ARTIF_PASSWORD>
+    
+    - task: ScannerInit
+      variables:
+        - name: loadModuleExcludeList
+          value: "${SCEELKED}.*,${SDFHLOAD}.*"

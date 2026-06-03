@@ -1,0 +1,24 @@
+// Plugin management for RecordGenerator plugin
+// MUST be first block in settings.gradle
+pluginManagement {
+    repositories {
+        mavenLocal()
+        gradlePluginPortal()
+        mavenCentral()
+        maven {
+            url = uri("https://na.artifactory.swg-devops.com/artifactory/ce-maven-release-local")
+            credentials {
+                username = providers.gradleProperty("artifactoryUser").orNull ?:
+                          providers.environmentVariable("ARTIFACTORY_USER").orNull
+                password = providers.gradleProperty("artifactoryPassword").orNull ?:
+                          providers.environmentVariable("ARTIFACTORY_PASSWORD").orNull
+            }
+        }
+    }
+}
+
+rootProject.name = 'cics-banking-sample-application-cbsa'
+
+include 'src:webui'
+include 'src:Z-OS-Connect-Customer-Services-Interface'
+include 'src:Z-OS-Connect-Payment-Interface'
