@@ -1,0 +1,27 @@
+# IBM Record Generator - ADATA to COBOL Symbols Mapping
+#
+# Format:
+#   ADATA_FILENAME:
+#     - 'COBOL-SYMBOL-NAME-1'
+#     - 'COBOL-SYMBOL-NAME-2'
+#
+# Example:
+#   CREACC:
+#     - 'HOST-ACCOUNT-ROW'
+#     - 'RETURN-DATA'
+#
+# This file maps COBOL ADATA files to their COBOL copybook symbols.
+# Each ADATA file can contain multiple symbols that will be generated
+# as separate Java classes.
+
+---
+CREACC:
+  - 'HOST-ACCOUNT-ROW'
+  - 'HOST-PROCTRAN-ROW'
+  - 'HOST-CONTROL-ROW'
+  - 'RETURN-DATA'
+
+INQCUST:
+  - 'ABNDINFO-REC'
+  - 'WS-TIME-DATA'
+  - 'DFHCOMMAREA'

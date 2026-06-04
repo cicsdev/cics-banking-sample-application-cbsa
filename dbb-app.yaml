@@ -1,0 +1,181 @@
+---
+#
+# Licensed materials - Property of IBM
+# 5655-AC5 Copyright IBM Corp. 2024, 2025
+# All rights reserved
+# US Government users restricted rights  -  Use, duplication or
+# disclosure restricted by GSA ADP schedule contract with IBM Corp.
+#
+version: 1.0.0
+application:
+  name: cbsa
+
+  tasks:
+
+    # Variable overrides for the ImpactAnalysis task
+    - task: ImpactAnalysis
+      variables:
+        # Associate dependency files to program types. For more information see
+        # https://www.ibm.com/docs/en/dbb/3.0?topic=index-task-impactanalysis#defining-impact-query-patterns
+        - name: impactQueryPatterns
+          value:
+            # Cobol program dependency patterns
+            - languageExt: cbl
+              dependencyPatterns:
+                - ${APP_DIR_NAME}/src/base/cobol_copy/*.cpy  # Copybook source dependency
+                - ${APP_DIR_NAME}/src/base/bms_src/*.bms        # BMS Map source dependency
+                - ${APP_DIR_NAME}/src/base/cobol_src/*.cbl    # Static link dependency
+
+    # Variable overrides for the Cobol language task
+    - task: Cobol
+      sources:
+        - "**/src/base/cobol_src/*.cbl"
+      variables:
+        # default dependency search path for single repository build
+        - name: dependencySearchPath
+          value: search:${WORKSPACE}/?path=${APP_DIR_NAME}/src/base/cobol_copy/*.cpy
+        - name: LOAD_LLQ
+          value: LOADLIB
+        - name: deployType
+          value: LOADLIB
+
+        - name: doLinkEdit
+          value: false
+          forFiles:
+            - "**/cobol_copy/*.cpy"
+            - "**/etc/install/base/*"
+
+        - name: compileParms
+          value: LIB
+          append:
+            - value: TEST(SOURCE)
+              condition: 1 == 1
+            - value: ADATA
+              condition: 1 == 1
+
+        # Allow warnings (RC=4) to pass
+        - name: maxRC
+          value: 4
+        - name: additionalCompileLibraries
+          value:
+            - { name: "SYSADATA", dsn: "&&ADATA", options: "new delete" }
+        - name: additionalCreationDatasets
+          value:
+            - name: ${HLQ}.ADATA
+              options: cyl space(50,10) dir(50) dsorg(PO) recfm(V,B) blksize(32760) lrecl(1020)
+
+        # Copy ADATA from temporary dataset to PDS member
+        - name: additionalOutputDatasets
+          value:
+            - { ddname: "SYSADATA", deployType: "ADATA",
+                output: "${HLQ}.ADATA(${MEMBER})" }
+
+    # Custom task: StageAdata - Copy ADATA from MVS to USS
+    - task: StageAdata
+      variables:
+        - name: hlq
+          value: ${HLQ}
+        - name: adataDataset
+          value: ${HLQ}.ADATA
+        - name: adataDir
+          value: output
+
+    # Custom task: SetupGradleEnvironment - Generic Gradle environment setup with dynamic build.gradle generation
+    # This task is GENERIC and works with ANY Gradle project!
+    # Now parses symbols.yaml and generates complete build.gradle with recordGenerator configuration
+    - task: SetupGradleEnvironment
+      variables:
+        - name: projectPath
+          value: ${APP_DIR_NAME}
+        - name: gradleVersion
+          value: 8.14
+
+        # symbols.yaml configuration - defines ADATA files and their COBOL symbols
+        - name: symbolsYamlPath
+          value: ${APP_DIR_NAME}/symbols.yaml
+
+        # RecordGenerator configuration (from your build.gradle)
+        - name: packageName
+          value: com.ibm.cics.example
+        - name: jzosJarPath
+          value: /u/in0050/ibm-record-generator/ibm-jzos/ibm.jzos.jar
+        - name: adataDir
+          value: output
+
+        # Java version (from your build.gradle)
+        - name: javaVersion
+          value: VERSION_17
+
+        # Project metadata (from your build.gradle)
+        - name: projectGroup
+          value: com.ibm.cics.cip.bank
+        - name: projectVersion
+          value: "1.0"
+
+        # Repository configuration (JSON array supporting multiple repositories)
+        # Supports: mavenCentral, mavenLocal, gradlePluginPortal, maven (custom)
+        - name: repositories
+          value: |
+            [
+              {
+                "type": "gradlePluginPortal",
+                "name": "Gradle Plugin Portal"
+              },
+              {
+                "type": "mavenCentral",
+                "name": "Maven Central"
+              },
+              {
+                "type": "maven",
+                "name": "IBM Artifactory",
+                "url": "https://na.artifactory.swg-devops.com/artifactory/ce-maven-release-local",
+                "credentialsType": "properties",
+                "usernameProperty": "artifactoryUser",
+                "passwordProperty": "artifactoryPassword",
+                "usernameEnv": "ARTIFACTORY_USER",
+                "passwordEnv": "ARTIFACTORY_PASSWORD"
+              }
+            ]
+
+        # Optional: Create gradle.properties file (set to false since we already have it in project root)
+        - name: createGradleProperties
+          value: false
+
+        # Optional: gradle.properties content (if createGradleProperties=true)
+        # Not needed since gradle.properties already exists in project root
+        - name: gradlePropertiesContent
+          value: ""
+
+        # Optional: Additional settings.gradle content
+        - name: additionalSettingsContent
+          value: |
+            // Custom configuration can go here
+            // Example: include additional subprojects
+            // include 'subproject1', 'subproject2'
+
+    # Custom task: RunBuildTool - Execute Gradle/Maven for Java generation
+    - task: RunBuildTool
+      variables:
+        - name: buildTool
+          value: gradle
+        - name: buildToolProjectDir
+          value: ${APP_DIR_NAME}
+        - name: buildToolTask
+          value: build
+        - name: adataDir
+          value: output
+        - name: jzosJarPath
+          value: /u/in0050/ibm-record-generator/ibm-jzos/ibm.jzos.jar
+        - name: packageName
+          value: com.ibm.cics.example
+        # Artifactory credentials - leave empty to use gradle.properties (recommended)
+        # Or set these to pass credentials via command line
+        - name: artifactoryUser
+          value: ""
+        - name: artifactoryPassword
+          value: ""
+
+    - task: ScannerInit
+      variables:
+        - name: loadModuleExcludeList
+          value: "${SCEELKED}.*,${SDFHLOAD}.*"

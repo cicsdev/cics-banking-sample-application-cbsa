@@ -1,0 +1,142 @@
+---
+#
+# Licensed materials - Property of IBM
+# 5655-AC5 Copyright IBM Corp. 2024, 2025
+# All rights reserved
+# US Government users restricted rights  -  Use, duplication or
+# disclosure restricted by GSA ADP schedule contract with IBM Corp.
+#
+version: 1.0.0
+application:
+  name: cbsa
+
+  tasks:
+
+    # Variable overrides for the ImpactAnalysis task
+    - task: ImpactAnalysis
+      variables:
+        # Associate dependency files to program types. For more information see
+        # https://www.ibm.com/docs/en/dbb/3.0?topic=index-task-impactanalysis#defining-impact-query-patterns
+        - name: impactQueryPatterns
+          value:
+            # Cobol program dependency patterns
+            - languageExt: cbl
+              dependencyPatterns:
+                - ${APP_DIR_NAME}/src/base/cobol_copy/*.cpy  # Copybook source dependency
+                - ${APP_DIR_NAME}/src/base/bms_src/*.bms        # BMS Map source dependency
+                - ${APP_DIR_NAME}/src/base/cobol_src/*.cbl    # Static link dependency
+
+    # Variable overrides for the Cobol language task
+    - task: Cobol
+      sources:
+        - "**/src/base/cobol_src/*.cbl"
+      variables:
+        # default dependency search path for single repository build
+        - name: dependencySearchPath
+          value: search:${WORKSPACE}/?path=${APP_DIR_NAME}/src/base/cobol_copy/*.cpy
+        - name: LOAD_LLQ
+          value: LOADLIB
+        - name: deployType
+          value: LOADLIB
+
+        - name: doLinkEdit
+          value: false
+          forFiles:
+            - "**/cobol_copy/*.cpy"
+            - "**/etc/install/base/*"
+
+        - name: compileParms
+          value: LIB
+          append:
+            - value: TEST(SOURCE)
+              condition: 1 == 1
+            - value: ADATA
+              condition: 1 == 1
+
+        # Allow warnings (RC=4) to pass
+        - name: maxRC
+          value: 4
+        - name: additionalCompileLibraries
+          value:
+            - { name: "SYSADATA", dsn: "&&ADATA", options: "new delete" }
+        - name: additionalCreationDatasets
+          value:
+            - name: ${HLQ}.ADATA
+              options: cyl space(50,10) dir(50) dsorg(PO) recfm(V,B) blksize(32760) lrecl(1020)
+
+        # Copy ADATA from temporary dataset to PDS member
+        - name: additionalOutputDatasets
+          value:
+            - { ddname: "SYSADATA", deployType: "ADATA",
+                output: "${HLQ}.ADATA(${MEMBER})" }
+
+    # Custom task: StageAdata - Copy ADATA from MVS to USS
+    - task: StageAdata
+      variables:
+        - name: hlq
+          value: ${HLQ}
+        - name: adataDataset
+          value: ${HLQ}.ADATA
+        - name: adataDir
+          value: output
+
+    # Custom task: SetupGradleEnvironment - Setup Gradle build files (SKIPPED in generic mode)
+    # This task is required by DBB but will be skipped when using buildTool=generic
+    - task: SetupGradleEnvironment
+      variables:
+        # Skip this task when using generic mode (no Gradle setup needed)
+        - name: skipSetup
+          value: true
+
+    # Custom task: RunBuildTool - Execute Gradle/Maven/Generic for Java generation
+    #
+    # Two modes available:
+    # 1. buildTool: gradle - Full Gradle build (generates Java, compiles, creates JAR)
+    # 2. buildTool: generic - Direct RecordClassGenerator (generates Java only, no compilation)
+    #
+    - task: RunBuildTool
+      variables:
+        # Build tool selection: 'gradle', 'maven', or 'generic'
+        - name: buildTool
+          value: generic
+
+        # Project directory (required for all modes)
+        - name: buildToolProjectDir
+          value: ${APP_DIR_NAME}
+
+        # === GRADLE MODE SETTINGS (when buildTool: gradle) ===
+        # - name: buildToolTask
+        #   value: build
+
+        # === GENERIC MODE SETTINGS (when buildTool: generic) ===
+        # Path to symbols.yaml file (required for generic mode)
+        - name: symbolsYamlPath
+          value: ${APP_DIR_NAME}/symbols.yaml
+
+        # Output directory for generated Java files (required for generic mode)
+        - name: outputDir
+          value: src/main/java
+
+        # === COMMON SETTINGS (all modes) ===
+        # Directory containing ADATA files
+        - name: adataDir
+          value: output
+
+        # Path to functional JZOS JAR (required)
+        - name: jzosJarPath
+          value: /u/in0050/ibm-record-generator/ibm-jzos/ibm.jzos.jar
+
+        # Java package name for generated classes
+        - name: packageName
+          value: com.ibm.cics.example
+
+        # Artifactory credentials (required for generic mode to download ibm-recgen.jar)
+        - name: artifactoryUser
+          value: <ARTIF_USERNAME>
+        - name: artifactoryPassword
+          value: <ARTIF_PASSWORD>
+
+    - task: ScannerInit
+      variables:
+        - name: loadModuleExcludeList
+          value: "${SCEELKED}.*,${SDFHLOAD}.*"
