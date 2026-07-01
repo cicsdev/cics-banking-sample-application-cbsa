@@ -1,6 +1,0 @@
-*
-* Copyright IBM Corp. 2023
-*
-    INCLUDE CBSAMOD(BNK1TFN)
-    ENTRY BNK1TFN
-    NAME BNK1TFN(R)

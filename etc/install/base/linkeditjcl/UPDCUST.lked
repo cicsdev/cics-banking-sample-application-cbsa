@@ -1,6 +1,0 @@
-*
-* Copyright IBM Corp. 2023
-*
-    INCLUDE CBSAMOD(UPDCUST)
-    ENTRY UPDCUST
-    NAME UPDCUST(R)
