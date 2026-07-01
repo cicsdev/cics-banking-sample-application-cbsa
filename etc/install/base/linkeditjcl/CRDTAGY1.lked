@@ -1,6 +1,0 @@
-*
-* Copyright IBM Corp. 2023
-*
-    INCLUDE CBSAMOD(CRDTAGY1)
-    ENTRY CRDTAGY1
-    NAME CRDTAGY1(R)

@@ -1,6 +1,0 @@
-*
-* Copyright IBM Corp. 2023
-*
-    INCLUDE CBSAMOD(BNK1DAC)
-    ENTRY BNK1DAC
-    NAME BNK1DAC(R)

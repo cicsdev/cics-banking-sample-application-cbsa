@@ -1,8 +1,0 @@
-//*
-//* Copyright IBM Corp. 2023
-//*
-//* JCL to compile and link-edit BMS map BNK1TFM
-// JCLLIB ORDER=CBSA.CICSBSA.BUILDJCL
-// INCLUDE MEMBER=DEFAULT
-//BNK1TFM  EXEC PROC=MAPGEN,MEMBER=BNK1TFM,RMODE=ANY,
-//         OUTC='*'
