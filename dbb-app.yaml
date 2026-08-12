@@ -1,0 +1,62 @@
+---
+#
+# Licensed materials - Property of IBM
+# 5655-AC5 Copyright IBM Corp. 2024, 2025
+# All rights reserved
+# US Government users restricted rights  -  Use, duplication or
+# disclosure restricted by GSA ADP schedule contract with IBM Corp.
+#
+version: 1.0.0
+application:
+  name: cbsa
+  tasks:
+
+    # Initialize metadata storage for dependency tracking
+    - task: MetadataInit
+
+    # Variable overrides for the ImpactAnalysis task
+    - task: ImpactAnalysis
+      variables:
+        # Associate dependency files to program types. For more information see 
+        # https://www.ibm.com/docs/en/dbb/3.0?topic=index-task-impactanalysis#defining-impact-query-patterns
+        - name: impactQueryPatterns
+          value:
+            # Cobol program dependency patterns
+            - languageExt: cbl      
+              dependencyPatterns: 
+                - ${APP_DIR_NAME}/src/base/cobol_copy/*.cpy  # Copybook source dependency
+                - ${APP_DIR_NAME}/src/base/bms_src/*.bms        # BMS Map source dependency
+                - ${APP_DIR_NAME}/src/base/cobol_src/*.cbl    # Static link dependency  
+            # Link card dependency patterns
+            - languageExt: lnk                    
+              dependencyPatterns: 
+                - ${APP_DIR_NAME}/src/base/cobol_src/*.cbl      # Static link dependency 
+
+    # Variable overrides for the Cobol language task
+    - task: Cobol
+      sources:
+        - "**/src/base/cobol_src/*.cbl"
+      
+      variables:  
+        - name: doLinkEdit
+          value: true
+
+        # default dependency search path for single repository build
+        - name: dependencySearchPath
+          value: search:${WORKSPACE}/?path=${APP_DIR_NAME}/src/base/cobol_copy/*.cpy
+        - name: LOAD_LLQ
+          value: LOADLIB
+        - name: deployType
+          value: LOADLIB
+    
+    # Variable overrides for the ScanLoadModule task
+    - task: ScanLoadModule
+      sources:
+        - "**/src/base/cobol_copy/*.cpy"
+        - "**/src/base/bms_src/*.bms"
+    
+    - task: ScannerInit
+      variables:
+        - name: loadModuleExcludeList
+          value: "${SCEELKED}.*,${SDFHLOAD}.*"
+            
